@@ -7,24 +7,26 @@ Further based the vimbundle handling on [dotmatrix](https://github.com/hashrocke
 
 1. Check a clone of this repo: `git clone http://github.com/cange/dotfiles.git ~/dotfiles`
 2. Set up [Vundle]:
-
-   $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```shell
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
 
 3. Run (make sure the Ruby is installed)
-
-    ./dotfiles/install
-
+```shell
+./dotfiles/install
+```
 4. Done
 
 ## How to update dotfiles
-
-    ./dotfiles/update
+```shell
+./dotfiles/update
+```
 
 ### Set ZSH as default shell
 Remove/backup all .bash\* files in your user root directory and set then
-
-    chsh -s /usr/bin/zsh
-
+```shell
+chsh -s /usr/bin/zsh
+```
 ## Other useful tools
 
 * [git-extras](https://github.com/visionmedia/git-extras/)
