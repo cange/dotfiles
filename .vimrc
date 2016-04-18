@@ -151,6 +151,7 @@ map <leader>c <C-_><C-_>
 map <CR> :nohlsearch <CR>
 " plugin: NERDTree                  - shortcut: Ctrl+n
 map <leader>e :NERDTreeToggle<CR>
+map <leader>r :NERDTreeFind<CR>
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let NERDTreeDirArrows = 1
