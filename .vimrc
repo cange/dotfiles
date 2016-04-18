@@ -188,11 +188,9 @@ runtime ftplugin/man.vim
 set runtimepath^=~/.vimbundles/ctrlp.vim
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)|sass-cache$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn|)|sass-cache|coverage$',
   \ 'file': '\v\.(scssc)$'
   \ }
-
-set hls                     " highlight search
 
 
 function! NumberToggle()
