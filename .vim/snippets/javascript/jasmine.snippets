@@ -4,74 +4,74 @@
 snippet be # ES5
 	beforeEach(function () {
 		${1}
-	});
+	})
 snippet be # ES6
 	beforeEach(() => {
 		${1}
-	});
+	})
 snippet de # ES5
 	describe('${1}', function () {
 		${2}
-	});
+	})
 snippet de # ES6
 	describe('${1}', () => {
 		${2}
-	});
+	})
 snippet ex
 	expect(${1:actual}).to${2}
 snippet it # ES5
 	it('${1}', function () {
 		${2}
-	});
+	})
 snippet it # ES6
 	it('${1}', () => {
 		${2}
-	});
+	})
 snippet ru
 	runs(function () {
 		${1}
-	});
+	})
 snippet wait
 	waitsFor(function () {
 		${1}
-	});
+	})
 #
 # Jasmine matcher
 #
 snippet to "toHaveBeenCalled"
-	toHaveBeenCalled();
+	toHaveBeenCalled()
 snippet to "toHaveBeenCalledWith"
-	toHaveBeenCalledWith($1);
+	toHaveBeenCalledWith($1)
 snippet to "toEqual"
-	toEqual($1);
+	toEqual($1)
 snippet to "toBe"
-	toBe($1);
+	toBe($1)
 snippet to "toBeTruthy"
-	toBeTruthy();
+	toBeTruthy()
 snippet to "toBeFalsy"
-	toBeFalsy();
+	toBeFalsy()
 snippet to "toBeDefined"
-	toBeDefined();
+	toBeDefined()
 snippet to "toBeUndefined"
-	toBeUndefined();
+	toBeUndefined()
 snippet to "toContain"
-	toContain($1);
+	toContain($1)
 snippet to "toBeNull"
-	toBeNull();
+	toBeNull()
 snippet to "toBeNaN"
-	toBeNaN();
+	toBeNaN()
 snippet to "toMatch"
-	toMatch(/${1:pattern}/);
+	toMatch(/${1:pattern}/)
 snippet to "toThrow"
-	toThrow();
+	toThrow()
 snippet to "toThrowError"
-	toThrowError(${1:matcher});
+	toThrowError(${1:matcher})
 snippet to "toBeLessThan"
-	toBeLessThan($1);
+	toBeLessThan($1)
 snippet to "toBeGreaterThan"
-	toBeGreaterThan($1);
+	toBeGreaterThan($1)
 snippet to "toBeCloseTo"
-	toBeCloseTo($1);
+	toBeCloseTo($1)
 #
 # Jasmine spies
 #
@@ -86,19 +86,19 @@ snippet and "throwError"
 snippet and "callFake"
 	and.callFake(function () {
 		$1
-	});
+	})
 snippet and "stub"
-	and.stub();
+	and.stub()
 snippet and "identity"
-	and.identity();
+	and.identity()
 #
 # Jasmine spy
 #
 snippet spy "spyOn"
-	spyOn(${1:subject}, '${2:method}');
+	spyOn(${1:subject}, '${2:method}')
 snippet spy "Spy"
-	jasmine.createSpy($1);
+	jasmine.createSpy($1)
 snippet spy "SpyObj"
-	jasmine.createSpyObj($1, ['${2:methods}']);
+	jasmine.createSpyObj($1, ['${2:methods}'])
 snippet any
 	jasmine.anything()
