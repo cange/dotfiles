@@ -68,9 +68,9 @@ Plugin 'tpope/vim-haml'                   " Syntax highlighting: Haml
 Plugin 'vim-less'                         " Syntax highlighting: Less
 Plugin 'vim-ruby/vim-ruby'                " Syntax highlighting: Ruby
 " === DEPENDENCIES =============================================================
-Plugin 'L9'                               " Dependency for ?
-Plugin 'MarcWeber/vim-addon-mw-utils'     " Dependency for snipMate
-Plugin 'tlib'                             " Dependency for tmru_vim, snipMate
+Plugin 'L9'                               " requires: ?
+Plugin 'MarcWeber/vim-addon-mw-utils'     " required: snipmate
+Plugin 'tomtom/tlib_vim'                  " required: snipmate
 
 "
 " All of your Plugins must be added before the following line

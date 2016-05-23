@@ -17,9 +17,10 @@ $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 4. Done
 
-## How to update dotfiles
-```shell
-./dotfiles/update
+## How to update vim plugins?
+Call the following in Vi or Vim (Vundle)
+```vi
+:PluginClean
 ```
 
 ### Set ZSH as default shell
