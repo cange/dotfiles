@@ -36,7 +36,7 @@ Plugin 'tpope/vim-unimpaired'             " bubble text lines
 Plugin 'vim-airline/vim-airline'          " Lean & mean status/tabline for vim that’s light as air.
 Plugin 'vim-airline/vim-airline-themes'   " Themes for airline status line
 "" === VIM NAVIGATION ==========================================================
-Plugin 'EvanDotPro/nerdtree-chmod'        " Navigation: This is a plugin for NERDTree to allow for chmod’ing files in Vim
+" Plugin 'EvanDotPro/nerdtree-chmod'        " Navigation: This is a plugin for NERDTree to allow for chmod’ing files in Vim
 Plugin 'kien/ctrlp.vim'                   " Navigation: Quick fuzzy search with Ctrl-P
 Plugin 'majutsushi/tagbar'                " Navigation: provides an easy way to browse the tags of the current file
 Plugin 'rking/ag.vim'                     " Navigation: A code searching tool similar to ack :Ag [options] {pattern} [{directory}]
@@ -49,6 +49,7 @@ Plugin 'garbas/vim-snipmate'              " Syntax helper: Provide support for t
 Plugin 'tComment'                         " Syntax helper: basic comment functionality
 Plugin 'scrooloose/nerdcommenter'         " Syntax helper: advanced comment functionality
 Plugin 'rstacruz/sparkup'                 " Syntax helper: Markup helper div[class=foo]
+Plugin 'othree/csscomplete.vim'           " Syntax helper: bult-in CSS complete function to latest CSS standard.
 " === SYNTAX LINTER ============================================================
 Plugin 'ngmy/vim-rubocop'                 " Syntax linter: Ruby
 Plugin 'scrooloose/syntastic'             " Syntax linter: Checks the syntax basically and displays any resulting errors
