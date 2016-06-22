@@ -171,8 +171,8 @@ nmap gV `[v`]
 " copy all text into the system clipboard
 " set clipboard^=unnamedset
 " set clipboard+=unnamed
-" set clipboard=unnamedplus
-set clipboard=unnamed
+"set clipboard=unnamedplus
+ set clipboard=unnamed
 
 " Load plugins that ship with Vim
 " This is a dependency for vim-textobj-rubyblock
@@ -233,3 +233,8 @@ filetype plugin on
 " JSbeautify setting
 """"""""""""""""""""""
 let s:opt_indent_char = "  "
+
+
+set undodir=~/.vim/.undo//
+set backupdir=~/.vim/.backup//
+set directory=~/.vim/.swp//
