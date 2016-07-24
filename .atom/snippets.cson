@@ -26,6 +26,29 @@
   'Console info':
     'prefix': 'info'
     'body': 'console.info($1)'
+  # Jasmine test framework
+  # ======================
+  'Describe block':
+    'prefix': 'des'
+    'body': "describe('$1', () => {\n\t$2\n})"
+  'It block':
+    'prefix': 'it'
+    'body': "it('$1', () => {\n\t$2\n})"
+  'beforeEach block':
+    'prefix': 'be'
+    'body': "beforeEach(() => {\n\t$1\n})"
+  'expect block':
+    'prefix': 'ex'
+    'body': 'expect(subject.$1).to$2'
+  'toEqual':
+    'prefix': 'toe'
+    'body': 'toEqual($1)'
+  'toBeDefined':
+    'prefix': 'tod'
+    'body': 'toBeDefined()'
+  'toBeNotDefined':
+    'prefix': 'todn'
+    'body': 'toBeNotDefined()'
 
 '.source.php':
   'Debug tag':
