@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+alias dc='docker-compose'
+alias dm='docker-machine'
+# delete wlw name after next docker setup
+alias dc_init='cd ~/workspace/wlw/docker-compose && eval $(docker-machine env)'
+alias dc_start='cd ~/workspace/wlw/docker-compose && docker-machine start && eval $(docker-machine env) && docker-compose up -d'
+alias dc_stop='cd ~/workspace/wlw/docker-compose && docker-compose stop && docker-machine stop'
+alias d_clear='cd ~/workspace/wlw/docker-compose && docker rmi -f $(docker images -a | grep "^<none>" | awk "{print $3}")'
 alias q='exit'
 alias k='clear'
 

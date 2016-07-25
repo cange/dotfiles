@@ -25,5 +25,6 @@ let g:syntastic_javascript_jslint_quiet_messages = { 'level' : [] }
 " disable enoying syntastic error highlighter
 " let loaded_scss_syntax_checker = 1
 " let g:syntastic_aggregate_errors = 1
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_checkers = ['eslint', 'jshint', 'jscs']
 " let g:syntastic_scss_checkers = ['scss_lint']

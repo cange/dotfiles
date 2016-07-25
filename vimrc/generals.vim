@@ -84,3 +84,11 @@ set nofoldenable                    " dont fold by default
 set foldlevel=10                    " this is just what i use
 " ==============================================================================
 "
+" == Buffer ====================================================================
+" see https://coderwall.com/p/sdhfug/vim-swap-backup-and-undo-files
+set undodir=~/.vim/.undo//
+set backupdir=~/.vim/.backup//
+set directory=~/.vim/.swp//
+" or disable
+"set noswapfile
+"set nobackup
