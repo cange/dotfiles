@@ -29,26 +29,38 @@
   # Jasmine test framework
   # ======================
   'Describe block':
-    'prefix': 'des'
-    'body': "describe('$1', () => {\n\t$2\n})"
+    prefix: 'des'
+    body: "describe('${1:description}', () => {\n\t$2\n})$3"
   'It block':
-    'prefix': 'it'
-    'body': "it('$1', () => {\n\t$2\n})"
-  'beforeEach block':
-    'prefix': 'be'
-    'body': "beforeEach(() => {\n\t$1\n})"
-  'expect block':
-    'prefix': 'ex'
-    'body': 'expect(subject.$1).to$2'
-  'toEqual':
-    'prefix': 'toe'
-    'body': 'toEqual($1)'
-  'toBeDefined':
-    'prefix': 'tod'
-    'body': 'toBeDefined()'
-  'toBeNotDefined':
-    'prefix': 'todn'
-    'body': 'toBeNotDefined()'
+    prefix: 'it'
+    body: "it('${1:description}', () => {\n\t$2\n})$3"
+  'After-Each block':
+    prefix: 'aft'
+    body: "afterEach(() => {\n\t$1\n})$2"
+  'Before-Each block':
+    prefix: 'bef'
+    body: "beforeEach(() => {\n\t$1\n})$2"
+  'spyOn':
+    prefix: 'spy'
+    body:   "spyOn(${1:target}, '${2:method}')$3"
+  '.callThrough':
+    prefix: '.call'
+    body:   ".callThrough()$1"
+  '.returnValue':
+    prefix: '.ret'
+    body:   ".returnValue(${1:value})$2"
+  '.callFake':
+    prefix: '.callf'
+    body:   '.callFake(${1:value})$2'
+  '.throwError':
+    prefix: '.thr'
+    body:   ".throwError('${1:error}')$2"
+  'jasmine.createSpy':
+    prefix: 'spy'
+    body:   "${1:target} = jasmine.createSpy('${1:target}')$2"
+  'jasmine.createSpyObj':
+    prefix: 'spy'
+    body:   "${1:obj} = jasmine.createSpyObj('${1:obj}', ['${2:method}'])$3"
 
 '.source.php':
   'Debug tag':
