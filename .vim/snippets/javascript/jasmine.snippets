@@ -1,29 +1,17 @@
 #
 # Jasmine test framework
 #
-snippet be # ES5
-	beforeEach(function () {
-		${1}
-	})
-snippet be # ES6
+snippet be
 	beforeEach(() => {
 		${1}
 	})
-snippet de # ES5
-	describe('${1}', function () {
-		${2}
-	})
-snippet de # ES6
+snippet de
 	describe('${1}', () => {
 		${2}
 	})
 snippet ex
 	expect(${1:actual}).to${2}
-snippet it # ES5
-	it('${1}', function () {
-		${2}
-	})
-snippet it # ES6
+snippet it
 	it('${1}', () => {
 		${2}
 	})
