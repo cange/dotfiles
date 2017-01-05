@@ -9,6 +9,7 @@ Plugin 'VundleVim/Vundle.vim' " let Vundle manage Vundle, required
 " === Vim bundle setup =========================================================
 Plugin 'Gundo'                            " Vim plugin to visualize your Vim undo tree
 Plugin 'airblade/vim-gitgutter'           " shows a git diff in the “gutter” (sign column)
+Plugin 'xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git status flags
 Plugin 'ap/vim-css-color'                 " Highlighting multiple colors on the same line
 Plugin 'cange/vim-theme-bronkow'          " Theme: colorscheme for vim and powerline
 Plugin 'duff/vim-bufonly'                 " plugin to unload all buffers but the current one.
