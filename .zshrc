@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="cange"
+ZSH_THEME="cange_pure"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -74,10 +74,14 @@ if [[ -s $HOME/.ssh/dsa_id ]]; then
   ssh-add
 fi
 
+# nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
-# ---
+# yarn - another  node package manager
+export PATH="$PATH:`yarn global bin`"
+
+
 echo "Now using \"$ZSH_THEME\" as zsh theme"
 sleep 2
 clear
