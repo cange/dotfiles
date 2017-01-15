@@ -61,8 +61,18 @@
   'jasmine.createSpyObj':
     prefix: 'spy'
     body:   "${1:obj} = jasmine.createSpyObj('${1:obj}', ['${2:method}'])$3"
+# React
+  'React Component':
+    prefix: 'react component'
+    body: "import React, { Component } from 'react'\n\nclass $1 extends Component {\n\trender() {\n\t\treturn (\n\t\t\t$2\n\t\t)\n\t}\n}\n\nexport default $1"
+  'Local React Component':
+    prefix: 'react local component'
+    body: 'class $1 extends Component {\n\trender() {\n\t\treturn (\n\t\t\t$2\n\t\t)\n\t}\n}'
+  'React constructor':
+    prefix: 'rconstructor'
+    body: 'constructor(props) {\n\tsuper(props)\n\t$1\n}\n'
 
 '.source.php':
   'Debug tag':
-    'prefix': 'deb'
-    'body': '<debug><?php $1; ?></debug>'
+    prefix: 'deb'
+    body: '<debug><?php $1; ?></debug>'

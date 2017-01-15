@@ -62,12 +62,6 @@ source $ZSH/oh-my-zsh.sh
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -80,37 +74,10 @@ if [[ -s $HOME/.ssh/dsa_id ]]; then
   ssh-add
 fi
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Load RVM, if you are using it (RubyVersionManager)
-if [[ -s $HOME/.rvm/scripts/rvm ]]; then
-  source $HOME/.rvm/scripts/rvm
-  # Add RVM to PATH for scripting Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-  export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-fi
-
-# Load NVM, if you are using it (NodeVersionManager)
 export NVM_DIR="$HOME/.nvm"
-if [[ -s "$NVM_DIR/nvm.sh" ]]; then
- source $NVM_DIR/nvm.sh # This loads nvm
- nvm use default
-fi
-# nvm use default
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
-# key binding
-bindkey '^r' history-incremental-pattern-search-backward
-bindkey '^f' history-incremental-pattern-search-forward
-
-# required by homebrew
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
+# ---
 echo "Now using \"$ZSH_THEME\" as zsh theme"
 sleep 2
 clear
