@@ -36,6 +36,7 @@ Plugin 'tpope/vim-unimpaired'             " bubble text lines
 " === VIM UI ===================================================================
 Plugin 'vim-airline/vim-airline'          " Lean & mean status/tabline for vim that’s light as air.
 Plugin 'vim-airline/vim-airline-themes'   " Themes for airline status line
+Plugin 'kristijanhusak/vim-hybrid-material' " Material design
 "" === VIM NAVIGATION ==========================================================
 " Plugin 'EvanDotPro/nerdtree-chmod'        " Navigation: This is a plugin for NERDTree to allow for chmod’ing files in Vim
 Plugin 'kien/ctrlp.vim'                   " Navigation: Quick fuzzy search with Ctrl-P
