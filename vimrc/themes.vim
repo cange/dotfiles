@@ -18,5 +18,5 @@ if &term =~ "xterm\\|rxvt"
   " use \003]12;gray\007 for gnome-terminal
 endif
 
-colorscheme bronkow
+colorscheme bronkow_material
 " ==============================================================================
