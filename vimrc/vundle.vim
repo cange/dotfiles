@@ -62,7 +62,7 @@ Plugin 'digitaltoad/vim-jade'             " Syntax highlighting: Jade
 Plugin 'elzr/vim-json'                    " Syntax highlighting: JSON
 Plugin 'hail2u/vim-css3-syntax'           " Syntax highlighting: CSS
 Plugin 'mustache/vim-mustache-handlebars' " Syntax highlighting: handlebars
-Plugin 'mxw/vim-jsx'                      " Syntax highlighting: ReactJS JSX
+Plugin 'MaxMEllon/vim-jsx-pretty'         " Syntax highlighting: ReactJS JSX
 Plugin 'pangloss/vim-javascript'          " Syntax highlighting: JavaScript
 Plugin 'php.vim'                          " Syntax highlighting: PHP
 Plugin 'slim-template/vim-slim'           " Syntax highlighting: Slim
