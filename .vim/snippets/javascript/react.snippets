@@ -1,0 +1,64 @@
+#
+# React
+#
+snippet class # react component
+	import React, { Component } from 'react'
+
+	class ${1:classname} extends Component {
+		render() {
+			return (
+				${2}
+			)
+		}
+	}
+
+	export default $1
+snippet class # react prue component
+	const ${1:classname} = (${2:props}) => (
+	  $3
+	)
+
+	export default $1
+snippet const # variable
+	const ${1:key} = ${2:value}
+snippet const # react contructor
+	constructor(props) {
+		super(props)
+		$1
+		}
+	)
+
+snippet comp # componentWillMount
+	componentWillMount() {
+		$1
+	}
+
+snippet comp # componentDidMount
+	componentDidMount() {
+		$1
+	}
+
+snippet comp # componentWillReceiveProps
+	componentWillReceiveProps(${1:nextProps}) {
+		${2}
+	}
+
+snippet comp # shouldComponentUpdate
+	shouldComponentUpdate(${1:nextProps}, ${2:nextState}) {
+		${3}
+	}
+
+snippet comp # componentWillUpdate
+	componentWillUpdate(${1:nextProps}, ${2:nextState}) {
+		${3}
+	}
+
+snippet comp # componentDidUpdate
+	componentDidUpdate(${1:nextProps}, ${2:nextState}) {
+		${3}
+	}
+
+snippet comp # componentWillUnmount
+	componentWillUnmount() {
+		${1}
+	}
