@@ -27,6 +27,7 @@ Plugin 'tpope/vim-abolish'                " easily search for, substitute, and a
 Plugin 'tpope/vim-endwise'                " This is a simple plugin that helps to end certain structures automatically.
 Plugin 'tpope/vim-fugitive'               " Git support in vim
 Plugin 'tpope/vim-git'                    " Vim Git runtime files
+Plugin 'jreybert/vimagit'                 " Git client
 Plugin 'tpope/vim-markdown'               " Vim Markdown runtime files
 Plugin 'tpope/vim-pathogen'               " makes it super easy to install plugins and runtime files in their own private directories.
 Plugin 'tpope/vim-ragtag'                 " ghetto HTML/XML mappings
@@ -62,7 +63,7 @@ Plugin 'digitaltoad/vim-jade'             " Syntax highlighting: Jade
 Plugin 'elzr/vim-json'                    " Syntax highlighting: JSON
 Plugin 'hail2u/vim-css3-syntax'           " Syntax highlighting: CSS
 Plugin 'mustache/vim-mustache-handlebars' " Syntax highlighting: handlebars
-Plugin 'mxw/vim-jsx'                      " Syntax highlighting: ReactJS JSX
+Plugin 'MaxMEllon/vim-jsx-pretty'         " Syntax highlighting: ReactJS JSX
 Plugin 'pangloss/vim-javascript'          " Syntax highlighting: JavaScript
 Plugin 'php.vim'                          " Syntax highlighting: PHP
 Plugin 'slim-template/vim-slim'           " Syntax highlighting: Slim

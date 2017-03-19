@@ -18,6 +18,10 @@ if filereadable(expand('~/dotfiles/vimrc/themes.vim'))
   source ~/dotfiles/vimrc/themes.vim
 endif
 
+if filereadable(expand('~/dotfiles/vimrc/statusline.vim'))
+  source ~/dotfiles/vimrc/statusline.vim
+endif
+
 " == global functions ==========================================================
 " Remove trailing whitespace
 function! <SID>StripTrailingWhitespaces()
