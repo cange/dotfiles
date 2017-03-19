@@ -74,5 +74,14 @@ if [[ -s $HOME/.ssh/dsa_id ]]; then
   ssh-add
 fi
 
+# nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+# yarn - another  node package manager
+export PATH="$PATH:`yarn global bin`"
+
+
+echo "Now using \"$ZSH_THEME\" as zsh theme"
+sleep 2
+clear
