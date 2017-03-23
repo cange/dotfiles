@@ -11,4 +11,3 @@ let g:NERDTreeIndicatorMapCustom = {
   \ 'Ignored'   : '☒',
   \ 'Unknown'   : '⍰'
   \ }
-echo 'nerdtree load'
