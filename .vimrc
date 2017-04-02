@@ -199,9 +199,11 @@ let g:ctrlp_custom_ignore = {
 
 function! NumberToggle()
   if(&relativenumber == 1)
-    set number             " Enable line numbers - incompatibly with relativenumber
+    set nu    " enable number
+    set nornu " disable relativenumber
   else
-    set relativenumber     " current cursor position has always the count of 0
+    set nonu  " disable number
+    set rnu   " enable relativenumber
   endif
 endfunc
 
