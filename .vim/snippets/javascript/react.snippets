@@ -2,9 +2,9 @@
 # React
 #
 snippet class # react component
-	import React, { Component } from 'react'
+	import React from 'react'
 
-	class ${1:classname} extends Component {
+	class ${1:classname} extends React.Component {
 		render() {
 			return (
 				${2}
@@ -13,6 +13,13 @@ snippet class # react component
 	}
 
 	export default $1
+snippet props # react component
+	import PropTypes from 'prop-types'
+
+	const propTypes = {
+	  ${2}
+	}
+	${1:classname}.propTypes = propTypes
 snippet class # react prue component
 	const ${1:classname} = (${2:props}) => (
 	  $3
