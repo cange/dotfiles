@@ -46,6 +46,7 @@ Plugin 'rking/ag.vim'                     " Navigation: A code searching tool si
 Plugin 'scrooloose/nerdtree'              " Navigation: Explore your filesystem and to open files and directories
 Plugin 'tyok/ack.vim'                     " Navigation: Multiple file search :Ack [options] {pattern} [{directory}]
 Plugin 'tyok/nerdtree-ack'                " Navigation: make ack works on nerdtree[options] {pattern} [{directory}]
+Plugin 'RRethy/vim-illuminate'            " Navigation: selectively illuminating other uses of current word under the cursor
 " === SYNTAX HELPER ============================================================
 Plugin 'Raimondi/delimitMate'             " Syntax helper: Automatic closing of quotes, brackets, etc.
 Plugin 'garbas/vim-snipmate'              " Syntax helper: Provide support for textual snippets
