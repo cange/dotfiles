@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-alias dc='docker-compose'
+alias dc='wlw-dc'
+alias dce='wlw-exec'
+
 alias dm='docker-machine'
 # delete wlw name after next docker setup
 alias dc_init='cd ~/workspace/wlw/docker-compose && eval $(docker-machine env)'
