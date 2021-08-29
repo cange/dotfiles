@@ -59,10 +59,25 @@ CASE_SENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  brew git git-extra history node npm nvm rvm docker docker-compose zsh-nvm yarn
+  colored-man-pages
+  docker
+  git
+  gitignore
+  history
+  node
+  npm
+  nvm
+  rvm
+  yarn
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Docker plugin start
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+# Docker plugin end
 
 # User configuration
 
