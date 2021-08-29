@@ -59,10 +59,25 @@ CASE_SENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  brew git git-extra history node npm nvm rvm docker docker-compose zsh-nvm yarn
+  colored-man-pages
+  docker
+  git
+  gitignore
+  history
+  node
+  npm
+  nvm
+  rvm
+  yarn
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Docker plugin start
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+# Docker plugin end
 
 # User configuration
 
@@ -85,8 +100,9 @@ if [[ -s $HOME/.ssh/dsa_id ]]; then
 fi
 
 # node version manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# https://github.com/nvm-sh/nvm#install--update-script
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # homebrew
