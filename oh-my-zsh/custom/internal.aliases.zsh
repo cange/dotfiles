@@ -1,18 +1,24 @@
 #!/usr/bin/env bash
 
-alias dc='wlw-dc'
-alias dce='wlw-exec'
+# git
+alias gl="git pull -p"
+alias gm="git rebase "
+alias yt="yarn test"
+alias ytw="yarn test:watch"
+alias yb="yarn build"
+alias yl="yarn lint"
+alias ybd="yarn build:dev"
 
-alias dm='docker-machine'
-# delete wlw name after next docker setup
-alias dc_init='cd ~/workspace/wlw/docker-compose && eval $(docker-machine env)'
-alias dc_start='cd ~/workspace/wlw/docker-compose && docker-machine start && eval $(docker-machine env) && rake up:all'
-alias dc_stop='cd ~/workspace/wlw/docker-compose && docker-compose stop && docker-machine stop'
-alias d_clear='cd ~/workspace/wlw/docker-compose && docker rmi -f $(docker images -a | grep "^<none>" | awk "{print $3}")'
+# wlw/visbale docker
+alias dc='time wlw-dc'
+alias dce='time wlw-exec'
+alias dcy='time wlw-exec yarn'
+alias dcb='time wlw-exec bundle'
+alias dcrs'=time wlw-restart'
+alias dcrb='time wlw-rebuild'
 alias q='exit'
 alias k='clear'
 
-alias sgrun='cd ~/workspace/wlw/wlw_styleguide/spec/dummy/ && rails s -p 3002'
 # bundle
 alias be='bundle exec'
 alias bi='bundle install'
@@ -36,6 +42,6 @@ if [ $(uname) = "Linux" ]; then
   alias gitx='gitg'
 else
   # mac os specifc
-  alias vim='mvim'
-  alias gitg='gitx'
+  alias vim='vim'
+  alias gitg='fork'
 fi

@@ -67,8 +67,8 @@ plugins=(
   node
   npm
   nvm
-  rvm
   yarn
+  z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -85,33 +85,41 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG="en_US.UTF-8"
-# export LC_ALL="en_US.UTF-8"
+export LANG=en_US.UTF-8
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='atom'
+fi
 
-# ssh
-if [[ -s $HOME/.ssh/dsa_id ]]; then
-  export SSH_KEY_PATH="~/.ssh/dsa_id"
+if [[ -n $HOME/.ssh/id_dsa ]]; then
+  export SSH_KEY_PATH="~/.ssh/id_dsa"
 
   # add my ssh information
   ssh-add
 fi
 
+# homebrew
+source $(brew --prefix nvm)/nvm.sh
 # node version manager
 # https://github.com/nvm-sh/nvm#install--update-script
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# homebrew
-source $(brew --prefix nvm)/nvm.sh
-
 # yarn - node package manager
 export PATH="$PATH:`yarn global bin`"
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-# ruby version manager
-if [[ -s $HOME/.rvm/ ]]; then
-  source ~/.rvm/scripts/rvm
-fi
+# active wlw-devtools/ docker environment
+# https://gitlab.visable.com/webdevs/wlw-devtools#working-with-your-vm-through-docker
+#source wlw-env && eval $(docker-machine env $WLW_VM_NAME)
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+
+# To link Rubies to Homebrew's OpenSSL 1.1
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
