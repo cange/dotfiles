@@ -1,6 +1,6 @@
 [user]
 	name = Christian Angermann
-	email = christian.angermann@wlw.de
+	email = christian.angermann@visable.com
 
 [alias]
 	ci = commit
@@ -25,6 +25,8 @@
 	go = checkout -B
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
+[fetch]
+  prune = true
 
 [pager]
 	color = true
@@ -76,3 +78,5 @@
 	enabled = true
 [push]
 	default = simple
+[pull]
+	rebase = true
