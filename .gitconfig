@@ -1,6 +1,15 @@
 [user]
 	name = Christian Angermann
 	email = christian.angermann@visable.com
+  # GPG signing
+	signingkey = EDD0FFDEFAE157A5
+
+# GPG signing >
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg2
+# < GPG signing
 
 [alias]
 	ci = commit
