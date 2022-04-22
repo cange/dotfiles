@@ -165,7 +165,7 @@ build_prompt() {
   prompt_git
   prompt_dir
   prompt_first_line_end 234
-  prompt_start_command black
+  prompt_start_command red
   prompt_second_line_end
 }
 

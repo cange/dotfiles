@@ -59,6 +59,7 @@ CASE_SENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
   colored-man-pages
   docker
   git
@@ -118,8 +119,11 @@ export PATH="$PATH:`yarn global bin`"
 # https://gitlab.visable.com/webdevs/wlw-devtools#working-with-your-vm-through-docker
 #source wlw-env && eval $(docker-machine env $WLW_VM_NAME)
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
-
 # To link Rubies to Homebrew's OpenSSL 1.1
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# enbale asdf package managersa
+# https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
+. /usr/local/opt/asdf/libexec/asdf.sh

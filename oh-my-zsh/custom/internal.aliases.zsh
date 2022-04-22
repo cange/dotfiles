@@ -36,6 +36,10 @@ alias user='cd ~/workspace/wlw/user'
 alias wlw='cd ~/workspace/wlw/wlw'
 alias work='cd ~/workspace'
 
+# rebase from either master or main branch required
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
+alias grbm='git rebase $(git_main_branch)'
+
 if [ $(uname) = "Linux" ]; then
   # system
   alias vim='gvim'

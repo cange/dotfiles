@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/vim,ruby,rails,sass,macos,node,ssh,zsh
-# Edit at https://www.toptal.com/developers/gitignore?templates=vim,ruby,rails,sass,macos,node,ssh,zsh
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,vim,ruby,rails,sass,macos,node,ssh,zsh
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,vim,ruby,rails,sass,macos,node,ssh,zsh
 
 ### macOS ###
 # General
@@ -9,7 +9,8 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -149,6 +150,10 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+### Node Patch ###
+# Serverless Webpack directories
+.webpack/
 
 ### Rails ###
 *.rbc
@@ -300,6 +305,22 @@ tags
 # Persistent undo
 [._]*.un~
 
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
 ### Zsh ###
 # Zsh compiled script + zrecompile backup
 *.zwc
@@ -330,8 +351,4 @@ zsdoc/data
 /tests/_output/*
 !/tests/_output/.gitkeep
 
-# End of https://www.toptal.com/developers/gitignore/api/vim,ruby,rails,sass,macos,node,ssh,zsh
-
-# Project config
-.vim/
-# Project config end
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,vim,ruby,rails,sass,macos,node,ssh,zsh
