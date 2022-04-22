@@ -127,6 +127,9 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Get access to visables npm packages
+# https://pages.visable.dev/platform/documentation/architecture/GitHub/registries/
+export GITHUB_TOKEN=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
 # Verified git user – Telling Git about your GPG key
 # https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
 export GPG_TTY=$(tty)
