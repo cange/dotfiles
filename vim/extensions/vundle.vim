@@ -49,7 +49,6 @@ Plugin 'tyok/nerdtree-ack'                " Navigation: make ack works on nerdtr
 Plugin 'RRethy/vim-illuminate'            " Navigation: selectively illuminating other uses of current word under the cursor
 " === SYNTAX HELPER ============================================================
 Plugin 'Raimondi/delimitMate'             " Syntax helper: Automatic closing of quotes, brackets, etc.
-Plugin 'garbas/vim-snipmate'              " Syntax helper: Provide support for textual snippets
 Plugin 'tComment'                         " Syntax helper: basic comment functionality
 Plugin 'scrooloose/nerdcommenter'         " Syntax helper: advanced comment functionality
 Plugin 'rstacruz/sparkup'                 " Syntax helper: Markup helper div[class=foo]
@@ -73,8 +72,6 @@ Plugin 'vim-less'                         " Syntax highlighting: Less
 Plugin 'vim-ruby/vim-ruby'                " Syntax highlighting: Ruby
 " === DEPENDENCIES =============================================================
 Plugin 'L9'                               " requires: ?
-Plugin 'MarcWeber/vim-addon-mw-utils'     " required: snipmate
-Plugin 'tomtom/tlib_vim'                  " required: snipmate
 
 "
 " All of your Plugins must be added before the following line
