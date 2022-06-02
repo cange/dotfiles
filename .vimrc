@@ -1,5 +1,5 @@
-if filereadable(expand('~/dotfiles/vim/extensions/vundle.vim'))
-  so ~/dotfiles/vim/extensions/vundle.vim
+if filereadable(expand('~/dotfiles/vim/extensions/vim-plug.vim'))
+  so ~/dotfiles/vim/extensions/vim-plug.vim
 endif
 if filereadable(expand('~/dotfiles/vim/extensions/nerdtree.vim'))
   so ~/dotfiles/vim/extensions/nerdtree.vim
