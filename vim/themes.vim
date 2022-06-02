@@ -7,4 +7,3 @@ else
 endif
 
 colorscheme bronkow
-
