@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 system "~/dotfiles/bin/hlink.rb"
-system "vim +PluginInstall +qall"
+system "vim +PlugInstall +qall"
