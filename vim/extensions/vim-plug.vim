@@ -13,7 +13,8 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'           " shows a git diff in the “gutter” (sign column)
 Plug 'Xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git status flags
 Plug 'ap/vim-css-color'                 " Highlighting multiple colors on the same line
-Plug 'cange/vim-theme-bronkow'          " Theme: colorscheme for vim and powerline
+"Plug 'cange/vim-theme-bronkow'          " Theme: colorscheme for vim and powerline
+Plug 'sainnhe/everforest'               " Theme: colorscheme for vim and powerline
 Plug 'duff/vim-bufonly'                 " plugin to unload all buffers but the current one.
 Plug 'editorconfig/editorconfig-vim'    " syntax helper
 Plug 'ervandew/supertab'                " Supertab is a vim plugin which allows you to use <Tab> for all your insert completion needs (:help ins-completion).
@@ -58,16 +59,8 @@ Plug 'othree/csscomplete.vim'           " Syntax helper: bult-in CSS complete fu
 Plug 'ngmy/vim-rubocop'                 " Syntax linter: Ruby
 Plug 'scrooloose/syntastic'             " Syntax linter: Checks the syntax basically and displays any resulting errors
 " === SYNTAX HIGHLIGHTING ======================================================
-Plug 'othree/html5.vim'                 " Syntax highlighting support for: SVELTE
+Plug 'sheerun/vim-polyglot'             " Collection of language/syntax packs for Vim
 Plug 'evanleck/vim-svelte', {'branch': 'main'} " Syntax highlighting: SVELTE
-Plug 'cange/scss-syntax.vim'            " Syntax highlighting: SCSS
-Plug 'elzr/vim-json'                    " Syntax highlighting: JSON
-Plug 'hail2u/vim-css3-syntax'           " Syntax highlighting: CSS
-Plug 'mustache/vim-mustache-handlebars' " Syntax highlighting: handlebars
-Plug 'MaxMEllon/vim-jsx-pretty'         " Syntax highlighting: ReactJS JSX
-Plug 'pangloss/vim-javascript'          " Syntax highlighting: JavaScript
-Plug 'slim-template/vim-slim'           " Syntax highlighting: Slim
-Plug 'vim-ruby/vim-ruby'                " Syntax highlighting: Ruby
 
 " Initialize plugin system
 call plug#end()
