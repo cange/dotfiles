@@ -2,7 +2,7 @@
 
 # CLI tools
 # https://github.com/sharkdp/bat
-alias cat='bat --paging=never --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo OneHalfDark || echo OneHalfLight)"'
+alias cat="bat --paging=never --style=changes --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo OneHalfDark || echo OneHalfLight)"
 
 # git
 alias gl="git pull -p"
