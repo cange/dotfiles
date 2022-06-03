@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# CLI tools
+# https://github.com/sharkdp/bat
+alias cat='bat --paging=never --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo OneHalfDark || echo OneHalfLight)"'
+
 # git
 alias gl="git pull -p"
 alias gm="git rebase "

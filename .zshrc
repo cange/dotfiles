@@ -131,3 +131,7 @@ export GPG_TTY=$(tty)
 # enbale asdf package managersa
 # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
 . /usr/local/opt/asdf/libexec/asdf.sh
+
+# https://github.com/sharkdp/bat
+export BAT_THEME="OneHalfDark"
+export BAT_STYLE="numbers,changes"
