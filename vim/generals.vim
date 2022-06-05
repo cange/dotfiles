@@ -12,7 +12,7 @@ augroup vimrc
       " Integrating of MacVim with rvm rubies
       set shell=/bin/sh
       " 'MacOS'
-      autocmd GuiEnter * set guifont=Roboto\ Mono\ for\ Powerline:h12 columns=230 lines=80 number
+      autocmd GuiEnter * set guifont=Roboto\ Mono\ for\ Powerline:h14 columns=230 lines=80 number
     elseif s:uname == 'Linux'
       " 'Linux'
       autocmd GuiEnter * set guifont=DejaVu\ Sans\ Mono\ 12 columns=220 lines=70 number
@@ -28,6 +28,7 @@ set showcmd                         " Show incomplete commands
 set autoread                        " Reload files changed outside of vim
 set ttyfast                         " Use a fast terminal connection
 set ruler                           " Show the line and column number of the cursor position
+set number                          " Show line number
 set backspace=indent,eol,start      " Allow backspace in insert mode
 set laststatus=2                    " Always show a status line
 setglobal fileencoding=utf-8        " file should be UTF-8 endcoded be default
