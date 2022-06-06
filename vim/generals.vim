@@ -8,14 +8,15 @@ augroup vimrc
   autocmd!
   if has("unix")
     let s:uname=system("echo -n \"$(uname)\"")
+    set encoding=utf-8 " Default character encoding (required by vim-devicons)
     if s:uname == "Darwin"
       " Integrating of MacVim with rvm rubies
       set shell=/bin/sh
-      " 'MacOS'
-      autocmd GuiEnter * set guifont=Roboto\ Mono\ for\ Powerline:h14 columns=230 lines=80 number
+      " MacOS
+      autocm GuiEnter * set guifont=RobotoMono\ Nerd\ Font\ 14
     elseif s:uname == 'Linux'
-      " 'Linux'
-      autocmd GuiEnter * set guifont=DejaVu\ Sans\ Mono\ 12 columns=220 lines=70 number
+      " Linux
+      autocmd GuiEnter * set guifont=DejaVu\ Sans\ Mono\ 14
     endif
   endif
 augroup END
@@ -32,7 +33,6 @@ set number                          " Show line number
 set backspace=indent,eol,start      " Allow backspace in insert mode
 set laststatus=2                    " Always show a status line
 setglobal fileencoding=utf-8        " file should be UTF-8 endcoded be default
-set encoding=utf-8                  " Default character encoding
 set fileencodings=ucs-bom,utf-8,latin1
 set cursorline                      " Highlight current line
 set gdefault                        " Add the g flag to search/replace by default

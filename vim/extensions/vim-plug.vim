@@ -12,8 +12,9 @@ call plug#begin()
 " === Vim bundle setup =========================================================
 Plug 'airblade/vim-gitgutter'           " shows a git diff in the “gutter” (sign column)
 Plug 'Xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git status flags
+Plug 'preservim/nerdtree'               " Enable vim-devicons
 Plug 'ap/vim-css-color'                 " Highlighting multiple colors on the same line
-"Plug 'cange/vim-theme-bronkow'          " Theme: colorscheme for vim and powerline
+Plug 'cange/vim-theme-bronkow'          " Theme: colorscheme for vim and powerline
 Plug 'sainnhe/everforest'               " Theme: colorscheme for vim and powerline
 Plug 'duff/vim-bufonly'                 " plugin to unload all buffers but the current one.
 Plug 'editorconfig/editorconfig-vim'    " syntax helper
@@ -61,6 +62,9 @@ Plug 'scrooloose/syntastic'             " Syntax linter: Checks the syntax basic
 " === SYNTAX HIGHLIGHTING ======================================================
 Plug 'sheerun/vim-polyglot'             " Collection of language/syntax packs for Vim
 Plug 'evanleck/vim-svelte', {'branch': 'main'} " Syntax highlighting: SVELTE
+" === Very last loading plugs
+Plug 'ryanoasis/vim-devicons'           " icons https://github.com/ryanoasis/vim-devicons
+
 
 " Initialize plugin system
 call plug#end()
