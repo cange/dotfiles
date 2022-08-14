@@ -25,7 +25,7 @@ alias k='clear'
 # bundle
 alias be='bundle exec'
 alias bi='bundle install'
-alias server="sudo python -m SimpleHTTPServer 80"
+alias server="sudo python -m http.server 80"
 
 alias cr='cd ~/workspace/wlw/customer-report-frontend'
 alias lyc='cd ~/workspace/wlw/lyc'
