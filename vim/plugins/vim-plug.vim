@@ -15,7 +15,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'      " A plugin of NERDTree showing git statu
 Plug 'preservim/nerdtree'               " Enable vim-devicons
 Plug 'ap/vim-css-color'                 " Highlighting multiple colors on the same line
 Plug 'cange/vim-theme-bronkow'          " Theme: colorscheme for vim and powerline
-Plug 'sainnhe/everforest'               " Theme: colorscheme for vim and powerline
+Plug 'EdenEast/nightfox.nvim'           " Theme: colorscheme for vim and powerline
 Plug 'duff/vim-bufonly'                 " plugin to unload all buffers but the current one.
 Plug 'editorconfig/editorconfig-vim'    " syntax helper
 Plug 'ervandew/supertab'                " Supertab is a vim plugin which allows you to use <Tab> for all your insert completion needs (:help ins-completion).
@@ -31,7 +31,7 @@ Plug 'tpope/vim-abolish'                " easily search for, substitute, and abb
 Plug 'tpope/vim-endwise'                " This is a simple plugin that helps to end certain structures automatically.
 Plug 'tpope/vim-fugitive'               " Git support in vim
 Plug 'tpope/vim-git'                    " Vim Git runtime files
-Plug 'jreybert/vimagit'                 " Git client
+"Plug 'jreybert/vimagit'                 " Git client ¡ bug in nerdtree !
 Plug 'tpope/vim-markdown'               " Vim Markdown runtime files
 Plug 'tpope/vim-pathogen'               " makes it super easy to install plugins and runtime files in their own private directories.
 Plug 'tpope/vim-ragtag'                 " ghetto HTML/XML mappings

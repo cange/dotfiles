@@ -1,15 +1,15 @@
-if filereadable(expand('~/dotfiles/vim/extensions/vim-plug.vim'))
-  so ~/dotfiles/vim/extensions/vim-plug.vim
+if filereadable(expand('~/dotfiles/vim/plugins/vim-plug.vim'))
+  so ~/dotfiles/vim/plugins/vim-plug.vim
 endif
-if filereadable(expand('~/dotfiles/vim/extensions/nerdtree.vim'))
-  so ~/dotfiles/vim/extensions/nerdtree.vim
+if filereadable(expand('~/dotfiles/vim/plugins/nerdtree.vim'))
+  so ~/dotfiles/vim/plugins/nerdtree.vim
 endif
 
-if filereadable(expand('~/dotfiles/vim/extensions/airline.vim'))
-  so ~/dotfiles/vim/extensions/airline.vim
+if filereadable(expand('~/dotfiles/vim/plugins/airline.vim'))
+  so ~/dotfiles/vim/plugins/airline.vim
 endif
-if filereadable(expand('~/dotfiles/vim/extensions/syntastic.vim'))
-  so ~/dotfiles/vim/extensions/syntastic.vim
+if filereadable(expand('~/dotfiles/vim/plugins/syntastic.vim'))
+  so ~/dotfiles/vim/plugins/syntastic.vim
 endif
 
 if filereadable(expand('~/dotfiles/vim/local.vim'))
