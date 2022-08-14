@@ -43,9 +43,9 @@ alias grbm='git rebase $(git_main_branch)'
 if [ $(uname) = "Linux" ]; then
   # system
   alias vim='gvim'
-  alias gitx='gitg'
+  alias gui='gitg'
 else
   # mac os specifc
   alias vim='vim'
-  alias gitg='fork'
+  alias gui='fork'
 fi
