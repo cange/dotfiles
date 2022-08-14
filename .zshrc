@@ -140,4 +140,11 @@ export GPG_TTY=$(tty)
 
 # https://github.com/sharkdp/bat
 export BAT_THEME="OneHalfDark"
-export BAT_STYLE="numbers,changes"
+export BAT_STYLE="changes"
+
+# bun completions
+[ -s "/Users/angermann/.bun/_bun" ] && source "/Users/angermann/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/Users/angermann/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
