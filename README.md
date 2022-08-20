@@ -31,6 +31,12 @@ Call the following in Vi or Vim (Vundle)
 :PlugClean
 ```
 
+### ZSH Theme
+
+Follow the installation to enable the defined theme `.zshrc` file:
+<https://github.com/spaceship-prompt/spaceship-prompt#oh-my-zsh>
+
+
 ### Set ZSH as default shell
 Remove/backup all .bash\* files in your user root directory and set then
 ```shell
