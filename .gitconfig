@@ -2,9 +2,8 @@
 	name = Christian Angermann
 	email = christian.angermann@visable.com
   # GPG signing
-	signingkey = EDD0FFDEFAE157A5
+	signingkey = 7A4D5A52CD508E5A
 
-# GPG signing >
 [commit]
 	gpgsign = true
 [gpg]
@@ -87,5 +86,6 @@
 	enabled = true
 [push]
 	default = simple
+	gpgsign = false
 [pull]
 	rebase = true
