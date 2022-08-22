@@ -30,11 +30,12 @@ packer.startup(function(use)
 
   use 'numToStr/Comment.nvim' -- comment toggle
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
+  use 'neovim/nvim-lspconfig' -- config Language Server Protocol
+  use 'glepnir/lspsaga.nvim' -- LSP UIs
   use 'L3MON4D3/LuaSnip' -- nvim-cmp snippet engine
   use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
   use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim’s built-in LSP
   use 'hrsh7th/nvim-cmp' -- code completion
-  use 'neovim/nvim-lspconfig' -- config Language Server Protocol
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -47,4 +48,5 @@ packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'mg979/vim-visual-multi' -- multi select search/replace
 
+  use 'norcalli/nvim-colorizer.lua' -- color highlighter
 end)
