@@ -1,8 +1,8 @@
 [user]
 	name = Christian Angermann
-	email = psykmedia@gmail.com
-	# GPG signing
-	signingkey = 4D9D50D088774DFA
+	email = christian.angermann@visable.com
+  # GPG signing
+  signingkey = EDD0FFDEFAE157A5
 
 [commit]
 	gpgsign = false
