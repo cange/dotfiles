@@ -46,6 +46,7 @@ if [ $(uname) = "Linux" ]; then
   alias gui='gitg'
 else
   # mac os specifc
-  alias vim='vim'
+  alias vim='nvim'
+  alias vi='nvim'
   alias gui='fork'
 fi
