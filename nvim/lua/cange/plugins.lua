@@ -42,7 +42,7 @@ packer.startup(function(use)
     run = ':TSUpdate'
   }
 
-  use 'windwp/nvim-autopairs' -- close brackets, quotes etc
+  -- use 'windwp/nvim-autopairs' -- close brackets, quotes etc
   use 'windwp/nvim-ts-autotag' -- autoclose and autorename html tag
 
   use 'kyazdani42/nvim-web-devicons' -- File icons

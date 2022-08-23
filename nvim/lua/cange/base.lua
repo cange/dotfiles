@@ -8,7 +8,7 @@ vim.scriptencoding = 'utf-8'
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 
-wo.number = true
+opt.number = true
 
 opt.title = true
 opt.autoindent = true
