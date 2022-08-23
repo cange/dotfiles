@@ -25,10 +25,16 @@ map('', 'w<left>', '<C-w>h')
 map('', 'w<right>', '<C-w>l')
 map('', 'w<up>', '<C-w>k')
 map('', 'wh', '<C-w>h')
-map('', 'wj', '<C-w>j')
 map('', 'wk', '<C-w>k')
 map('', 'wl', '<C-w>l')
+map('', 'wj', '<C-w>j')
 map('n', '<Space>', '<C-w>w')
+
+-- Resize window
+map('n', '<C-w><left>', '<C-w><8')
+map('n', '<C-w><right>', '<C-w>>8')
+map('n', '<C-w><up>', '<C-w>+8')
+map('n', '<C-w><down>', '<C-w>-8')
 
 -- Moving lines
 map('i', '<C-down>', '<Esc>:m .+1<CR>==gi')
