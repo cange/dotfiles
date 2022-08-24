@@ -42,11 +42,13 @@ packer.startup(function(use)
     run = ':TSUpdate'
   }
 
-  -- use 'windwp/nvim-autopairs' -- close brackets, quotes etc
+  use 'windwp/nvim-autopairs' -- close brackets, quotes etc
   use 'windwp/nvim-ts-autotag' -- autoclose and autorename html tag
 
   use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'mg979/vim-visual-multi' -- multi select search/replace
 
   use 'norcalli/nvim-colorizer.lua' -- color highlighter
+  use 'lewis6991/gitsigns.nvim' -- git highlighter, blame, etc
+  use 'dinhhuy258/git.nvim' -- For git blame & browse
 end)
