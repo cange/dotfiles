@@ -15,18 +15,16 @@ packer.startup(function(use)
   }
   use 'akinsho/nvim-bufferline.lua' -- tab UI
 
+  -- navigation
   use {
     'nvim-telescope/telescope.nvim', -- fuzzy finder over lists
-
     requires = {
       'nvim-lua/plenary.nvim', -- lua comment functions - https://github.com/nvim-lua/plenary.nvim
       'nvim-telescope/telescope-file-browser.nvim', -- browser extension
       'BurntSushi/ripgrep', -- telescope live grep suggestions
-
-      'nvim-telescope/telescope-fzf-native.nvim', -- sorter, for better performance
-      run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
     },
   }
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- telescope , for better performance
 
   use 'numToStr/Comment.nvim' -- comment toggle
   use 'onsails/lspkind-nvim' -- vscode-like pictograms

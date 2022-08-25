@@ -1,4 +1,5 @@
 require('cange.base')
+require('cange.options')
 require('cange.highlights')
 require('cange.maps')
 require('cange.plugins')
