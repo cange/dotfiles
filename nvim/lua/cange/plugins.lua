@@ -25,6 +25,12 @@ packer.startup(function(use)
     },
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- telescope , for better performance
+  -- sidebar nav
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = { 'kyazdani42/nvim-web-devicons' }, -- optional, for file icons
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
 
   use 'numToStr/Comment.nvim' -- comment toggle
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
