@@ -1,6 +1,5 @@
-local loaded, telescope = pcall(require, 'telescope')
-
-if (not loaded) then return end
+local ok, telescope = pcall(require, 'telescope')
+if not ok then return end
 
 -- local actions = require('telescope.actions')
 local themes = require('telescope.themes')

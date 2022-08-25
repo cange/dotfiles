@@ -1,6 +1,5 @@
-local loaded, cmp = pcall(require, 'cmp')
-
-if (not loaded or not cmp) then return end
+local ok, cmp = pcall(require, 'cmp')
+if not ok then return end
 
 local lspkind = require('lspkind')
 

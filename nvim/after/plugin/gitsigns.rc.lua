@@ -1,6 +1,5 @@
-local loaded, gitsigns = pcall(require, 'gitsigns')
-
-if (not loaded) then return end
+local ok, gitsigns = pcall(require, 'gitsigns')
+if not ok then return end
 
 gitsigns.setup({
   signs = {

@@ -1,10 +1,32 @@
-local loaded, packer = pcall(require, 'packer')
-if (not loaded) then
+local ok, packer = pcall(require, 'packer')
+if not ok then
   print('Packer is not installed')
   return
 end
 
-vim.cmd [[packadd packer.nvim]]
+-- Automatically install packer
+local fn = vim.fn
+local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+  PACKER_BOOTSTRAP = fn.system {
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  }
+  print "Installing packer close and reopen Neovim..."
+  vim.cmd [[packadd packer.nvim]]
+end
+
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]]
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- package manager
@@ -55,4 +77,9 @@ packer.startup(function(use)
   use 'norcalli/nvim-colorizer.lua' -- color highlighter
   use 'lewis6991/gitsigns.nvim' -- git highlighter, blame, etc
   use 'dinhhuy258/git.nvim' -- For git blame & browse
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+
+  if PACKER_BOOTSTRAP then require("packer").sync() end
 end)
