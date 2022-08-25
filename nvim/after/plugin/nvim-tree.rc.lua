@@ -1,6 +1,6 @@
 local ok, tree = pcall(require, 'nvim-tree')
 if not ok then return end
-local keymap_opts= { noremap = true, silent = true }
+local keymap_opts = { noremap = true, silent = true }
 
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', keymap_opts)
 vim.keymap.set('n', '<leader>.', ':NvimTreeFindFile<CR>', keymap_opts)
@@ -29,11 +29,16 @@ tree.setup({
   diagnostics = {
     enable = true,
   },
+  actions = {
+    open_file = {
+      quit_on_open = true,
+    },
+  },
   view = {
     mappings = {
       list = {
-      { key = 'v', cb = tree_cb('vsplit') },
-      { key = 'h', cb = tree_cb('split') },
+        { key = 'v', cb = tree_cb('vsplit') },
+        { key = 'h', cb = tree_cb('split') },
       }
     }
   }
@@ -132,7 +137,7 @@ end)
 --         file = true,
 --         folder = true,
 --         folder_arrow = true,
---  /       git = true,
+--         git = true,
 --       },
 --       glyphs = {
 --         default = "",
