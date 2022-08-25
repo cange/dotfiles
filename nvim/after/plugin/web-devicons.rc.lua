@@ -1,7 +1,7 @@
-local loaded, icons = pcall(require, 'nvim-web-devicons')
-if (not loaded) then return end
+local ok, icons = pcall(require, 'nvim-web-devicons')
+if not ok then return end
 
-icons.setup {
+icons.setup({
   -- your personnal icons can go here (to override)
   -- DevIcon will be appended to `name`
   override = {
@@ -9,4 +9,4 @@ icons.setup {
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
   default = true
-}
+})

@@ -1,5 +1,4 @@
-local loaded, colorizer = pcall(require, 'colorizer')
-
-if (not loaded) then return end
+local ok, colorizer = pcall(require, 'colorizer')
+if not ok then return end
 
 colorizer.setup()

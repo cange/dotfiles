@@ -1,7 +1,5 @@
-local loaded, lspkind = pcall(require, 'lspkind')
-
-if (not loaded) then return end
-
+local ok, lspkind = pcall(require, 'lspkind')
+if not ok then return end
 
 lspkind.init({
   -- enables text annotations
