@@ -1,3 +1,4 @@
+-- Use a protected call so we don't error out on first use
 local ok, packer = pcall(require, 'packer')
 if not ok then
   print('Packer is not installed')
@@ -6,17 +7,17 @@ end
 
 -- Automatically install packer
 local fn = vim.fn
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system {
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
+    'git',
+    'clone',
+    '--depth',
+    '1',
+    'https://github.com/wbthomason/packer.nvim',
     install_path,
   }
-  print "Installing packer close and reopen Neovim..."
+  print 'Installing packer close and reopen Neovim...'
   vim.cmd [[packadd packer.nvim]]
 end
 
@@ -27,6 +28,15 @@ vim.cmd [[
     autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
 ]]
+
+-- Have packer use a popup window
+packer.init {
+  display = {
+    open_fn = function()
+      return require('packer.util').float { border = 'rounded' }
+    end,
+  },
+}
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- package manager
@@ -80,6 +90,7 @@ packer.startup(function(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-
-  if PACKER_BOOTSTRAP then require("packer").sync() end
+  if PACKER_BOOTSTRAP then 
+    require('packer').sync() 
+  end
 end)
