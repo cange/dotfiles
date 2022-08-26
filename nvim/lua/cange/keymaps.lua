@@ -38,12 +38,12 @@ map('n', '<C-right>', ':vertical resize +4<CR>', opts)
 map('n', '<C-up>', ':resize -4<CR>', opts)
 
 -- Moving lines up and down
-map('i', '<A-down>', '<Esc>:m .+1<CR>==gi', opts)
-map('i', '<A-up>', '<Esc>:m .-2<CR>==gi', opts)
-map('n', '<A-down>', ':m .+1<CR>==', opts)
-map('n', '<A-up>', ':m .-2<CR>==', opts)
-map('v', '<A-down>', ':m ">+1<CR>gv=gv', opts)
-map('v', '<A-up>', ':m "<-2<CR>gv=gv', opts)
+map('i', '<A-down>', '<Esc>:move .+1<CR>==gi', opts)
+map('i', '<A-up>', '<Esc>:move .-2<CR>==gi', opts)
+map('n', '<A-down>', ':move .+1<CR>==', opts)
+map('n', '<A-up>', ':move .-2<CR>==', opts)
+map('v', '<A-down>', ":move '>+1<CR>gv=gv", opts)
+map('v', '<A-up>', ":move '<-2<CR>gv=gv", opts)
 
 -- switch between the last recent open two files
 map('n', '<leader><leader>', '<C-^>', opts)
