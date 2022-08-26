@@ -1,7 +1,7 @@
 require('cange.base')
 require('cange.options')
 require('cange.highlights')
-require('cange.maps')
+require('cange.keymaps')
 require('cange.plugins')
 
 local has = function(x)
