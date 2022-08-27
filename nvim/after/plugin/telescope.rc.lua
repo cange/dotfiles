@@ -23,6 +23,7 @@ end)
 
 map('n', '<leader>h', function() builtin.help_tags() end)
 map('n', '<leader>r', function() builtin.resume() end)
+map('n', '<leader>f', function() builtin.live_grep() end)
 
 -- extension: file browser
 local function buffer_dir()
