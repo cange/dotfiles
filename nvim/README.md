@@ -12,50 +12,6 @@ The configuration should now be applied to when open NeoVim again.
 
 ### Requriements
 
-#### Syntax completion/disagnotic tooling
-
-The following packages are required to install in order to use this NeoVim setup:
-
-```sh
-brew install tree-sitter
-```
-
-<https://github.com/tree-sitter/tree-sitter>
-
-
-```sh
-brew install lua-language-server
-```
-
-<https://github.com/sumneko/lua-language-server>
-
-
-```sh 
-npm install -g typescript-language-server typescript
-```
-
-<https://github.com/typescript-language-server/typescript-language-server#installing>
-
-#### Telescope
-
-File search
-
-```sh
-brew install ripgrep
-```
-
-<https://github.com/BurntSushi/ripgrep#installation>
-
-#### Basic icons
-
-```sh
-brew tap homebrew/cask-fonts
-brew install --cask font-hack-nerd-font
-```
-
-<https://github.com/ryanoasis/nerd-fonts>
-
-
 #### Package manager for Neovim
 
 ```sh
@@ -64,3 +20,37 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 ```
 
 <https://github.com/wbthomason/packer.nvim>
+
+#### Binaries
+
+Some plugins needs certain tools in order to work properly.
+
+```sh
+touch nvim-deps.txt && echo 'tree-sitter lua-language-server ripgrep font-hack-nerd-font' >> nvim-deps.txt
+xargs brew install < nvim-deps.txt
+rm nvim-deps.txt
+```
+
+The following packages are required to install in order to use this NeoVim setup:
+
+| What| Usage |
+|:---|:---|
+| [tree-sitter]         | Syntax completion/diagnostic tooling  |
+| [lua-language-server] | Syntax auto completion                |
+| [ripgrep]             | Telescope needs it to search in files |
+| [nerd-fonts]          | Font icons                            |
+
+[tree-sitter]: https://github.com/tree-sitter/tree-sitter
+[lua-language-server]: https://github.com/sumneko/lua-language-server
+[ripgrep]: https://github.com/BurntSushi/ripgrep#installation
+[nerd-fonts]: https://github.com/ryanoasis/nerd-fonts
+
+#### JavaScript
+
+Enables auto completion and syntax diagnostic for the language.
+
+```sh 
+npm install -g typescript-language-server typescript
+```
+
+<https://github.com/typescript-language-server/typescript-language-server#installing>
