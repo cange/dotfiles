@@ -36,6 +36,16 @@ npm install -g typescript-language-server typescript
 
 <https://github.com/typescript-language-server/typescript-language-server#installing>
 
+#### Telescope
+
+File search
+
+```sh
+brew install ripgrep
+```
+
+<https://github.com/BurntSushi/ripgrep#installation>
+
 #### Basic icons
 
 ```sh
