@@ -45,3 +45,27 @@ chsh -s /usr/bin/zsh
 ## Other useful tools
 
 * [git-extras](https://github.com/visionmedia/git-extras/)
+
+
+## MacOS Setup
+
+### Homebrew
+
+This allows us to install tools and apps from the command line. Follow the
+installation guide [Homebrew](https://brew.sh/).
+
+This will also install the xcode build tools which is needed by many other
+developer tools.
+
+The following is a list of apps and tools 
+```sh
+brew install \
+alt-tab \                   # tab switch with thumbnail preview
+firefox-developer-edition \ # favorit browser 
+git \                       # latest version of git
+iterm2 \                    # advanced terminal
+neovim \                    # editor
+raycast \                   # advanced system launcher
+stats \                     # menu bar system monitor
+itsycal                     # menu bar calender
+```
