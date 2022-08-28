@@ -9,24 +9,30 @@ Further based the vimbundle handling on
 ## How to install dotfiles
 
 1. Check a clone of this repo:
+
 ```shell
 git clone http://github.com/cange/dotfiles.git ~/dotfiles
 ```
 
 2. Set up [vim-plug](https://github.com/junegunn/vim-plug):
+
 ```shell
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
 3. Run (make sure the Ruby is installed)
+
 ```shell
 ./dotfiles/install
 ```
+
 4. Done
 
 ## How to update vim plugins?
+
 Call the following in Vi or Vim (Vundle)
+
 ```vi
 :PlugClean
 ```
@@ -36,36 +42,63 @@ Call the following in Vi or Vim (Vundle)
 Follow the installation to enable the defined theme `.zshrc` file:
 <https://github.com/spaceship-prompt/spaceship-prompt#oh-my-zsh>
 
-
 ### Set ZSH as default shell
+
 Remove/backup all .bash\* files in your user root directory and set then
+
 ```shell
 chsh -s /usr/bin/zsh
 ```
+
 ## Other useful tools
 
 * [git-extras](https://github.com/visionmedia/git-extras/)
 
-
 ## MacOS Setup
 
-### Homebrew
+### Applications
+
+The following is a list of apps and tools
+| Application | Description  |
+| ---         | ---          |
+| alt-tab                    | tab switch with thumbnail preview |
+| firefox-developer-edition  | preferred web browser  |
+| gimp                       | image editor |
+| git                        | latest version of git |
+| inkscape                   | vector editor |
+| iterm2                     | advanced terminal |
+| itsycal                    | menu bar calender |
+| keepingyouawake            | prevent Max from going to sleep |
+| neovim                     | code editor |
+| raycast                    | advanced quick launcher |
+| stats                      | menu bar system monitor |
+
+#### Homebrew
 
 This allows us to install tools and apps from the command line. Follow the
 installation guide [Homebrew](https://brew.sh/).
 
 This will also install the xcode build tools which is needed by many other
 developer tools.
+Install them in one go by placing them all into a text file and then running
+brew install:
 
-The following is a list of apps and tools 
 ```sh
-brew install \
-alt-tab \                   # tab switch with thumbnail preview
-firefox-developer-edition \ # favorit browser 
-git \                       # latest version of git
-iterm2 \                    # advanced terminal
-neovim \                    # editor
-raycast \                   # advanced system launcher
-stats \                     # menu bar system monitor
-itsycal                     # menu bar calender
+touch apps.txt && echo 'alt-tab firefox-developer-edition gimp git inkscape iterm2 itsycal keepingyouawake neovim raycast stats' >> apps.txt
+xargs brew install < apps.txt
+rm apps.txt
 ```
+
+#### Iterm2
+
+The basic configuration and theme can be found at `~/dotfiles/iterm2`.
+
+### CLI tools
+
+| Tool  | Description |
+| ---   | ---         |
+| [asdf]      | Multiple runtime versions manager |
+| [oh-my-zsh] | zsh configuration framework       |
+
+[asdf]: https://asdf-vm.com/guide/getting-starte.html
+[oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh#basic-installation
