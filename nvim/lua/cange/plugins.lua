@@ -57,7 +57,7 @@ packer.startup(function(use)
     },
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- telescope , for better performance
-  -- sidebar nav
+  -- file explorer
   use {
     'kyazdani42/nvim-tree.lua',
     requires = { 'kyazdani42/nvim-web-devicons' }, -- optional, for file icons
@@ -65,14 +65,27 @@ packer.startup(function(use)
   }
 
   use 'numToStr/Comment.nvim' -- comment toggle
-  use 'onsails/lspkind-nvim' -- vscode-like pictograms
   use 'neovim/nvim-lspconfig' -- config Language Server Protocol
   use 'glepnir/lspsaga.nvim' -- LSP UIs
-  use 'L3MON4D3/LuaSnip' -- nvim-cmp snippet engine
-  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim’s built-in LSP
-  use 'hrsh7th/nvim-cmp' -- code completion
 
+  -- snippets
+  use 'L3MON4D3/LuaSnip' --snippet engine
+  use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
+
+  -- auto completion
+  use {
+    'hrsh7th/nvim-cmp', -- code completion
+    requires = {
+      'hrsh7th/cmp-cmdline', -- cmdline completions
+      'hrsh7th/cmp-path', -- path completions
+      'saadparwaiz1/cmp_luasnip', -- snippet completions
+      'L3MON4D3/LuaSnip', -- snippets
+      'hrsh7th/cmp-buffer', -- source for buffer words
+      'hrsh7th/cmp-nvim-lsp', -- source for neovim’s built-in LSP
+    }
+  }
+
+  -- syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
