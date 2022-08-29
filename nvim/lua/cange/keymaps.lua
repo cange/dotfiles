@@ -18,7 +18,7 @@ map('v', 'p', '"_dP', opts) -- Keep clipboard content instead of overriding it
 map('n', '<C-a>', 'gg<S-v>G', opts)
 
 -- New tab "ctrl+w + t"
-map('n', '<C-w>t', ':tabedit<Return>', opts)
+map('n', '<C-w>t', ':tabedit<CR>', opts)
 
 -- Move window "w+<direction>"
 map('', 'w<down>', '<C-w>j', opts)
@@ -29,7 +29,6 @@ map('', 'wh', '<C-w>h', opts)
 map('', 'wj', '<C-w>j', opts)
 map('', 'wk', '<C-w>k', opts)
 map('', 'wl', '<C-w>l', opts)
-map('n', '<Space>', '<C-w>w', opts)
 
 -- Resize widow swith arrows
 map('n', '<C-down>', ':resize +4<CR>', opts)
