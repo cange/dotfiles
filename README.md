@@ -59,19 +59,21 @@ chsh -s /usr/bin/zsh
 ### Applications
 
 The following is a list of apps and tools
-| Application | Description  |
-| ---         | ---          |
-| alt-tab                    | tab switch with thumbnail preview |
-| firefox-developer-edition  | preferred web browser  |
-| gimp                       | image editor |
-| git                        | latest version of git |
-| inkscape                   | vector editor |
-| iterm2                     | advanced terminal |
-| itsycal                    | menu bar calender |
-| keepingyouawake            | prevent Max from going to sleep |
-| neovim                     | code editor |
-| raycast                    | advanced quick launcher |
-| stats                      | menu bar system monitor |
+| Application | Description   |
+| ---         | ---           |
+| alt-tab                     | tab switch with thumbnail preview |
+| firefox-developer-edition   | preferred web browser  |
+| fork                        | fast and friendly git client |
+| gimp                        | image editor |
+| git                         | latest version of git |
+| gpg-suite                   | protects emails, files and sign Git commits | 
+| inkscape                    | vector editor |
+| iterm2                      | advanced terminal |
+| itsycal                     | menu bar calender |
+| keepingyouawake             | prevent Max from going to sleep |
+| neovim                      | code editor |
+| raycast                     | advanced quick launcher |
+| stats                       | menu bar system monitor |
 
 #### Homebrew
 
@@ -84,7 +86,7 @@ Install them in one go by placing them all into a text file and then running
 brew install:
 
 ```sh
-touch apps.txt && echo 'alt-tab firefox-developer-edition gimp git inkscape iterm2 itsycal keepingyouawake neovim raycast stats' >> apps.txt
+touch apps.txt && echo 'alt-tab firefox-developer-edition fork gimp git gpg-suite inkscape iterm2 itsycal keepingyouawake neovim raycast stats' >> apps.txt
 xargs brew install < apps.txt
 rm apps.txt
 ```
