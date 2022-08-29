@@ -1,14 +1,14 @@
 [user]
 	name = Christian Angermann
 	email = psykmedia@gmail.com
-  # GPG signing
-  signingkey = 4D9D50D088774DFA
+	# GPG signing
+	signingkey = 4D9D50D088774DFA
 
 [commit]
 	gpgsign = true
+
 [gpg]
 	program = /usr/local/MacGPG2/bin/gpg2
-# < GPG signing
 
 [alias]
 	ci = commit
