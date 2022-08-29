@@ -1,3 +1,12 @@
+-- Reloads this file whenever a 'json' file saved in snippet directory to
+-- enable change immediately
+vim.cmd [[
+  augroup cmp_user_config
+    autocmd!
+    autocmd BufWritePost ~/dotfiles/nvim/code-snippets/**/*.json source ~/dotfiles/nvim/after/plugin/cmp.rc.lua
+  augroup end
+]]
+
 local cmp_ok, cmp = pcall(require, "cmp")
 if not cmp_ok then
   return
@@ -8,7 +17,7 @@ if not snip_ok then
   return
 end
 
-require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/code-snippets/vscode" })
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
@@ -43,6 +52,12 @@ local kind_icons = {
   Operator = "",
   TypeParameter = "",
 }
+local source_menu_icons = {
+  luasnip = "",
+  buffer = "﬘",
+  path = "",
+}
+
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 return cmp.setup {
@@ -65,6 +80,22 @@ return cmp.setup {
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm { select = true },
+    ["<down>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<up>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -94,11 +125,8 @@ return cmp.setup {
       -- Kind icons
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-      vim_item.menu = ({
-        luasnip = "",
-        buffer = "﬘",
-        path = "數",
-      })[entry.source.name]
+      -- Source icons
+      vim_item.menu = (source_menu_icons)[entry.source.name]
       return vim_item
     end,
   },
@@ -112,7 +140,6 @@ return cmp.setup {
     select = false,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
   experimental = {

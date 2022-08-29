@@ -1,0 +1,30 @@
+{
+  "name": "luasnip-vscode-bridge",
+  "desription": "Mappting to vscode snippet file",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "javascript",
+          "typescript",
+          "vue",
+          "svelte"
+        ],
+        "path": "./javascript.json"
+      },
+      {
+        "language": [
+          "scss",
+          "css"
+        ],
+        "path": "./css.json"
+      },
+      {
+        "language": [
+          "scss"
+        ],
+        "path": "./scss.json"
+      }
+    ]
+  }
+}

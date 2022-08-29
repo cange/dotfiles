@@ -1,0 +1,138 @@
+{
+  "eslint block": {
+    "prefix": "lintbl",
+    "body": [
+      "/* eslint-disable $1 */",
+      "$2",
+      "/* eslint-enable $1 */"
+    ]
+  },
+  "eslint lint": {
+    "prefix": "lintl",
+    "body": "// eslint-disable-line $1"
+  },
+  "cypress contains": {
+    "prefix": "con - contains [cypress]",
+    "body": "cy.contains('${1:name}')"
+  },
+  "cypress visit": {
+    "prefix": "vis - visit [cypress]",
+    "body": "cy.visit('${1:url}')"
+  },
+  "cypress type": {
+    "prefix": "typ - type [cypress]",
+    "body": "cy.type('${1:content}')"
+  },
+  "cypress should": {
+    "prefix": "sho - should [cypress]",
+    "body": "cy.should('${1:expectation}')"
+  },
+  "Describe init": {
+    "prefix": "desi - describe setup block",
+    "body": [
+      "describe('${1:componentName}', () => {",
+      "  let ${2|wrapper,subject|}",
+      "",
+      "  beforeEach(() => ",
+      "  $3",
+      "  })",
+      "})"
+    ]
+  },
+  "Describe block": {
+    "prefix": "des - describe('...')",
+    "body": "describe('${1:description}', () => {\n\t$2\n})$3"
+  },
+  "Describe when block": {
+    "prefix": "when - describe('when...')",
+    "body": "describe('when ${1:condition}', () => {\n\t$2\n})$3"
+  },
+  "It block": {
+    "prefix": "it - it(...)",
+    "body": [
+      "it('$1', () => {",
+      "  $2",
+      "})"
+    ]
+  },
+  "afterEach block": {
+    "prefix": "af - afterEach",
+    "body": [
+      "afterEach(() => {",
+      "  $1",
+      "})"
+    ]
+  },
+  "beforeEach block": {
+    "prefix": "be - beforeEach",
+    "body": [
+      "beforeEach(() => {",
+      "  $1",
+      "})"
+    ]
+  },
+  "expect subject": {
+    "prefix": "ex - expect(subject",
+    "body": "expect(subject.$1).to$2"
+  },
+  "expect wrapper": {
+    "prefix": "ex - expect(wrapper",
+    "body": "expect(wrapper.$1).to$2"
+  },
+  "vue wrapper debug": {
+    "prefix": "logd - vue wrapper debug",
+    "body": "console.log('--- ${1:wrapper}.html(): %o', $1.html())"
+  },
+  "expect.objectContaining": {
+    "prefix": "exo - expect.objectContaining",
+    "body": "expect.objectContaining({$1})"
+  },
+  "expect.stringContaining": {
+    "prefix": "exsc - expect.stringContaining",
+    "body": "expect.stringContaining('$1')"
+  },
+  "expect.stringMatching": {
+    "prefix": "exsm - expect.stringMatching",
+    "body": "expect.stringMatching(/$1/)"
+  },
+  "toEqual": {
+    "prefix": "toe - toEqual",
+    "body": "toEqual($1)"
+  },
+  "toBe": {
+    "prefix": "tobe - test",
+    "body": "toBe($1)"
+  },
+  "toBeDefined": {
+    "prefix": "tobed",
+    "body": "toBeDefined()"
+  },
+  "toBeUndefined": {
+    "prefix": "tobeu",
+    "body": "toBeUndefined()"
+  },
+  "toBeNull": {
+    "prefix": "toben",
+    "body": "toBeNull()"
+  },
+  "toBeTruthy": {
+    "prefix": "tobet",
+    "body": "toBe(true)"
+  },
+  "toBeFalsy": {
+    "prefix": "tobef",
+    "body": "toBe(false)"
+  },
+  "toBeCalled": {
+    "prefix": "tobc",
+    "body": "toBeCalled()"
+  },
+  "toBeCalledWith": {
+    "prefix": "tobcw",
+    "body": "toBeCalledWith($1)"
+  },
+  "toHaveLength": {
+    "prefix": "tohl",
+    "body": "toHaveLength($1)"
+  }
+}

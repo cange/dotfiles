@@ -1,0 +1,136 @@
+{
+  "outline debug – breakpoint": {
+    "prefix": "outb",
+    "body": "outline: wlw-breakpoint(${1:desktop}, color) 1px dotted;"
+  },
+  "SassDoc – @group": {
+    "prefix": "group",
+    "body": "////\n/// @group $1\n////"
+  },
+  "SassDoc – @param": {
+    "prefix": "param",
+    "body": "/// @param {$1} $2${3:- }"
+  },
+  "SassDoc – @returns": {
+    "prefix": "returns",
+    "body": "/// @returns $1${3:- }"
+  },
+  "SassDoc – @deprecated": {
+    "prefix": "deprecated",
+    "body": "/// @deprecated\n/// @since <unreleased>"
+  },
+  "SassDoc – @since": {
+    "prefix": "since",
+    "body": "/// @since <unreleased>"
+  },
+  "map-get": {
+    "prefix": "mapg",
+    "body": "map-get($${1:props}, ${2:key})"
+  },
+  "map-merge": {
+    "prefix": "mapm",
+    "body": "map-merge($${1:props}, $2)"
+  },
+  "wlw-color(*)": {
+    "prefix": "col",
+    "body": "wlw-color('${1|navy,blue,green,red,orange,yellow|}-${2|1,2,3,4,5,6,7,8,9,10|}0')$3"
+  },
+  "wlw context color": {
+    "prefix": "colc",
+    "body": "wlw-context-color('${1|error,notice,success,warning,action-disable,action-hover,action,text,text-muted,brand|}')"
+  },
+  "wlw breakpoint - function": {
+    "prefix": "brew",
+    "body": "wlw-breakpoint(${1|desktop,tablet,mobile|}$2)$3"
+  },
+  "wlw breakpoint - mixin": {
+    "prefix": "brew",
+    "body": "@include wlw-breakpoint(${1|desktop,tablet,mobile|}, ${2|up,only,down|}) {\n\t$3\n}"
+  },
+  "v-breakpoint - @media query": {
+    "prefix": "bre",
+    "body": "@media ($2-width: v-breakpoint(${1|desktop,tablet,mobile|}, ${2|min,max|})) {\n\t$3\n}"
+  },
+  "designtokens - @use": {
+    "prefix": "@usedt",
+    "body": "@use '@visable-dev/design-tokens/dist/${1|wlw,europages,visable|}/tokens' as *;"
+  },
+  "designtokens - @import": {
+    "prefix": "@impdt",
+    "body": "@import '@visable-dev/design-tokens/dist/${1|wlw,europages,visable|}/tokens';"
+  },
+  "outline debug - breakpoint": {
+    "prefix": "outb",
+    "body": "outline: wlw-breakpoint(${1:desktop}, color) 1px dotted;",
+    "description": "outline debug"
+  },
+  "wlw alpha": {
+    "prefix": "alp",
+    "body": "wlw-alpha($1)"
+  },
+  "wlw border": {
+    "prefix": "bor",
+    "body": "wlw-border($1)"
+  },
+  "wlw border-radius": {
+    "prefix": "bora",
+    "body": "@include wlw-border-radius(${1:value}, ${2:orientation});"
+  },
+  "wlw icon-size": {
+    "prefix": "ico",
+    "body": "wlw-icon-size($1)"
+  },
+  "wlw font-weight": {
+    "prefix": "fw",
+    "body": "wlw-font-weight($1)"
+  },
+  "wlw radius": {
+    "prefix": "rad",
+    "body": "wlw-radius($1)"
+  },
+  "wlw spacing": {
+    "prefix": "spa",
+    "body": "wlw-spacing($1)"
+  },
+  "wlw hover": {
+    "prefix": "hov",
+    "body": "@include wlw-hover {\n\t$1\n}"
+  },
+  "wlw button - full": {
+    "prefix": "btnf",
+    "body": "@include wlw-button(${1:theme}, ${2:size}, ${3:[include-skeleton]});"
+  },
+  "wlw button - theme": {
+    "prefix": "btnt",
+    "body": "@include wlw-button-theme($1);"
+  },
+  "wlw button - size": {
+    "prefix": "btns",
+    "body": "@include wlw-button-size($1);"
+  },
+  "wlw heading 400 - 1000 mixin": {
+    "prefix": "heam",
+    "body": "@include wlw-heading(${1}00);"
+  },
+  "wlw heading 400 - 1000 func": {
+    "prefix": "heaf",
+    "body": "wlw-heading(${1|4,5,6,7,8,9,10|}00)"
+  },
+  "wlw paragraph 100 - 400 mixin": {
+    "prefix": "par",
+    "body": "wlw-paragraph(${1|1,2,3,4|}00);"
+  },
+  "wlw box shadow 100 - 400 func": {
+    "prefix": "sha",
+    "body": "wlw-box-shadow(${1|1,2,3,4|}00)$2"
+  },
+  "wlw speed": {
+    "prefix": "spe",
+    "body": "wlw-speed($1)"
+  },
+  "wlw easing": {
+    "prefix": "eas",
+    "body": "wlw-easing(${1|ease,ease-in,ease-out,ease-in-out,linear,bounce-in,bounce-out,bounce-in-out|})"
+  }
+}
+
