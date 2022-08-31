@@ -1,6 +1,7 @@
 require('cange.base')
 require('cange.options')
 require('cange.colorscheme')
+require('cange.autocommands')
 require('cange.keymaps')
 require('cange.plugins')
 require('cange.luasnip')
