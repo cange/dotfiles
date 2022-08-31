@@ -1,0 +1,111 @@
+{
+  "describe setup block": {
+    "prefix": "desi",
+    "body": [
+      "describe('${1:componentName}', () => {",
+      "  let ${2|wrapper,subject|}",
+      "",
+      "  beforeEach(() => ",
+      "  $3",
+      "  })",
+      "})"
+    ]
+  },
+  "describe(when…)": {
+    "prefix": "when",
+    "body": "describe('when ${1:condition}', () => {\n\t$2\n})$3"
+  },
+  "it(...)": {
+    "prefix": "it",
+    "body": [
+      "it('$1', () => {",
+      "  $2",
+      "})"
+    ]
+  },
+  "afterEach(…)": {
+    "prefix": "af",
+    "body": [
+      "afterEach(() => {",
+      "  $1",
+      "})"
+    ]
+  },
+  "beforeEach(…)": {
+    "prefix": "be",
+    "body": [
+      "beforeEach(() => {",
+      "  $1",
+      "})"
+    ]
+  },
+  "expect(subject…)": {
+    "prefix": "exs",
+    "body": "expect(subject.$1).to$2"
+  },
+  "expect(wrapper…)": {
+    "prefix": "exw",
+    "body": "expect(wrapper.$1).to$2"
+  },
+  "vue wrapper debug": {
+    "prefix": "logd",
+    "body": "console.log('--- ${1:wrapper}.html(): %o', $1.html())"
+  },
+  "expect.objectContaining": {
+    "prefix": "exo",
+    "body": "expect.objectContaining({$1})"
+  },
+  "expect.stringContaining": {
+    "prefix": "exsc",
+    "body": "expect.stringContaining('$1')"
+  },
+  "expect.stringMatching": {
+    "prefix": "exsm",
+    "body": "expect.stringMatching(/$1/)"
+  },
+  "toEqual": {
+    "prefix": "toe",
+    "body": "toEqual($1)"
+  },
+  "toBe": {
+    "prefix": "tobe",
+    "body": "toBe($1)"
+  },
+  "toBeDefined": {
+    "prefix": "tobd",
+    "body": "toBeDefined()"
+  },
+  "toBeUndefined": {
+    "prefix": "tobu",
+    "body": "toBeUndefined()"
+  },
+  "toBeNull": {
+    "prefix": "tobn",
+    "body": "toBeNull()"
+  },
+  "toBeTruthy": {
+    "prefix": "tobt",
+    "body": "toBe(true)"
+  },
+  "toBeFalsy": {
+    "prefix": "tobf",
+    "body": "toBe(false)"
+  },
+  "toBeCalled": {
+    "prefix": "tobc",
+    "body": "toBeCalled()"
+  },
+  "toBeCalledWith": {
+    "prefix": "tobcw",
+    "body": "toBeCalledWith($1)"
+  },
+  "toHaveLength": {
+    "prefix": "tohl",
+    "body": "toHaveLength($1)"
+  },
+  "specHelper skeleton": {
+    "prefix": "spec",
+    "body": "const specHelper = {\n\t$1: ($2) => {\n\t\t$3\n\t}$4\n}"
+  }
+}
+

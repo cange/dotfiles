@@ -1,14 +1,18 @@
+-- Reloads this file whenever a 'json' file saved in snippet directory to
+-- enable change immediately
+vim.cmd [[
+  augroup cmp_autoreload
+  autocmd!
+  autocmd BufWritePost ~/dotfiles/nvim/snippets/**/*.json source ~/dotfiles/nvim/after/plugin/cmp.rc.lua
+  augroup end
+]]
+
 local cmp_ok, cmp = pcall(require, "cmp")
-if not cmp_ok then
-  return
-end
+if not cmp_ok then return end
 
-local snip_ok, luasnip = pcall(require, "luasnip")
-if not snip_ok then
-  return
-end
+local ls_ok, ls = pcall(require, "luasnip")
 
-require("luasnip/loaders/from_vscode").lazy_load()
+if not ls_ok then return end
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
@@ -43,12 +47,45 @@ local kind_icons = {
   Operator = "",
   TypeParameter = "",
 }
+local source_menu_icons = {
+  luasnip = "",
+  buffer = "﬘",
+  path = "",
+}
+
 -- find more here: https://www.nerdfonts.com/cheat-sheet
+
+local handle_next_tab = function(fallback)
+  if cmp.visible() then
+    cmp.select_next_item()
+    -- elseif ls.choice_active() then -- travel forwards within choices
+    --   ls.change_choice(1)
+  elseif ls.expandable() then
+    ls.expand()
+  elseif ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+  elseif check_backspace() then
+    fallback()
+  else
+    fallback()
+  end
+end
+local handle_prev_tab = function(fallback)
+  if cmp.visible() then
+    cmp.select_prev_item()
+    -- elseif ls.choice_active() then -- travel backwards within choices
+    --   ls.change_choice(-1)
+  elseif ls.jumpable(-1) then
+    ls.jump(-1)
+  else
+    fallback()
+  end
+end
 
 return cmp.setup {
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body) -- For `luasnip` users.
+      ls.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
   mapping = {
@@ -58,35 +95,17 @@ return cmp.setup {
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ["<C-e>"] = cmp.mapping {
+    ["<C-e>"] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
-    },
+    }),
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm { select = true },
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+    ["<down>"] = cmp.mapping(handle_next_tab, { "i", "s" }),
+    ["<Tab>"] = cmp.mapping(handle_next_tab, { "i", "s" }),
+    ["<up>"] = cmp.mapping(handle_prev_tab, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(handle_prev_tab, { "i", "s" }),
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
@@ -94,11 +113,8 @@ return cmp.setup {
       -- Kind icons
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-      vim_item.menu = ({
-        luasnip = "",
-        buffer = "﬘",
-        path = "數",
-      })[entry.source.name]
+      -- Source icons
+      vim_item.menu = (source_menu_icons)[entry.source.name]
       return vim_item
     end,
   },
@@ -112,7 +128,6 @@ return cmp.setup {
     select = false,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
   experimental = {

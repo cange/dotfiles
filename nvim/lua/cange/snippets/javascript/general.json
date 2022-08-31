@@ -1,0 +1,66 @@
+{
+  "eslint block": {
+    "prefix": "lintbl",
+    "body": [
+      "/* eslint-disable $1 */",
+      "$2",
+      "/* eslint-enable $1 */"
+    ]
+  },
+  "eslint lint": {
+    "prefix": "lintl",
+    "body": "// eslint-disable-line $1"
+  },
+  "console log": {
+    "prefix": "log",
+    "body": "console.log(\"--- ${1:param}: %o\", $1)"
+  },
+  "console log filename": {
+    "prefix": "logf",
+    "body": "console.log(\"--- ${TM_FILENAME} ${1:param}: %o\", $1)"
+  },
+  "console log({obj})": {
+    "prefix": "log{",
+    "body": "console.log({${1:param}})"
+  },
+  "console debug": {
+    "prefix": "deb",
+    "body": "console.debug(\"=== ${TM_FILENAME/[\\.]/_/} ${1:param}: %o\", $1)"
+  },
+  "console log - event": {
+    "prefix": "loge",
+    "body": "console.debug(\"--- ${1:eventName}: %o\", event$2)"
+  },
+  "console dir - DOM element": {
+    "prefix": "logdr",
+    "body": "console.dir(element)"
+  },
+  "console info": {
+    "prefix": "info",
+    "body": "console.info('---${TM_FILENAME/[\\.]/_/} – $1')"
+  },
+  "import local": {
+    "prefix": "impl",
+    "body": "import ${1:componentName} from './$1'"
+  },
+  "querySelector": {
+    "prefix": "qs",
+    "body": "${1:document.}querySelector('${2:selector}')"
+  },
+  "querySelectorAll": {
+    "prefix": "qsa",
+    "body": "${1:document.}querySelectorAll('${2:selector}')"
+  },
+  "DOM ready": {
+    "prefix": "ready",
+    "body": "document.addEventListener('DOMContentLoaded', () => {\n\t$1\n})"
+  },
+  "addEventListener": {
+    "prefix": "ade",
+    "body": "addEventListener('${1:eventName}', ${2:event} => {\n\t$3\n})"
+  },
+  "createElement": {
+    "prefix": "ce",
+    "body": "const ${1:name} = document.createElement('${2:element}')\n$1.$3"
+  }
+}

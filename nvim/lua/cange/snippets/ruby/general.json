@@ -1,0 +1,10 @@
+{
+  "binding.pry": {
+    "prefix": "pry",
+    "body": "binding.pry"
+  },
+  "puts": {
+    "prefix": "put",
+    "body": "puts \"--- ${1:param}: #{$1}\""
+  }
+}

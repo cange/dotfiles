@@ -13,11 +13,13 @@ local options = {
   guifont = 'monospace:h17', -- the font used in graphical neovim applications
   laststatus = 3, -- show one global statusline for all windows
   mouse = 'a', -- allow the mouse to be used in editor
-  termguicolors = true, -- set term gui colors (most terminals support this)
   number = true, -- set numbered lines
   numberwidth = 3, -- set number column width to 2 {default 4}
+  pumblend = 2, -- transparency of popup-menus 0 (none) to 100 (full)
   relativenumber = false, -- set relative numbered lines
+  termguicolors = true, -- set term gui colors (most terminals support this)
   title = true, -- Update terminal window title
+  winblend = 2, -- transparency of popup-menus 0 (none) to 100 (full)
 
   -- backup handling
   backup = false, -- creates a backup file
