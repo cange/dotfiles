@@ -1,0 +1,30 @@
+{
+  "wlw_alert_block(…)": {
+    "prefix": "ale",
+    "body": "wlw_alert_block(${1:message}, type: ${2|info,success,warning,danger|})$3"
+  },
+  "wlw_icon_tag(…)": {
+    "prefix": "ico",
+    "body": "wlw_icon_tag('${1:name})"
+  },
+  "wlw_icon_tag(size, …)": {
+    "prefix": "icos",
+    "body": "wlw_icon_tag('${1:name}', size: ${2:size})"
+  },
+  "wlw_icon_tag(class, …)": {
+    "prefix": "icoc",
+    "body": "wlw_icon_tag('${1:name}', class '${2:classname}')"
+  },
+  "wlw_button_tag(…)": {
+    "prefix": "btn",
+    "body": "wlw_button_tag($1)"
+  },
+  "wlw_button_tag(href…)": {
+    "prefix": "btnl",
+    "body": "wlw_button_tag(href: '${1:url}', $1)"
+  },
+  "wlw_button_tag(theme…)": {
+    "prefix": "btnt",
+    "body": "wlw_button_tag(theme: :${1|link,negative,secondary,primary|}, $2)"
+  }
+}

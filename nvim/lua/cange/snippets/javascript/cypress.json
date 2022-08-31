@@ -1,0 +1,30 @@
+{
+  "eslint block": {
+    "prefix": "lintbl",
+    "body": [
+      "/* eslint-disable $1 */",
+      "$2",
+      "/* eslint-enable $1 */"
+    ]
+  },
+  "eslint lint": {
+    "prefix": "lintl",
+    "body": "// eslint-disable-line $1"
+  },
+  "cypress contains": {
+    "prefix": "con - contains [cypress]",
+    "body": "cy.contains('${1:name}')"
+  },
+  "cypress visit": {
+    "prefix": "vis - visit [cypress]",
+    "body": "cy.visit('${1:url}')"
+  },
+  "cypress type": {
+    "prefix": "typ - type [cypress]",
+    "body": "cy.type('${1:content}')"
+  },
+  "cypress should": {
+    "prefix": "sho - should [cypress]",
+    "body": "cy.should('${1:expectation}')"
+  }
+}
