@@ -65,8 +65,16 @@ packer.startup(function(use)
   }
 
   use 'numToStr/Comment.nvim' -- comment toggle
-  use 'neovim/nvim-lspconfig' -- config Language Server Protocol
-  use 'glepnir/lspsaga.nvim' -- LSP UIs
+
+  -- LSP
+  use {
+    'neovim/nvim-lspconfig', -- enable LSP
+    requires = {
+      'williamboman/mason.nvim', -- simple to use language server installer
+      'WhoIsSethDaniel/mason-tool-installer.nvim' -- Mason that allow you to automatically install/update
+      -- 'glepnir/lspsaga.nvim', -- LSP UIs
+    }
+  }
 
   -- snippets
   use 'L3MON4D3/LuaSnip' --snippet engine
@@ -82,6 +90,7 @@ packer.startup(function(use)
       'L3MON4D3/LuaSnip', -- snippets
       'hrsh7th/cmp-buffer', -- source for buffer words
       'hrsh7th/cmp-nvim-lsp', -- source for neovim’s built-in LSP
+      'hrsh7th/cmp-nvim-lua',
     }
   }
 

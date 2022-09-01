@@ -1,10 +1,11 @@
-require('cange.base')
-require('cange.options')
-require('cange.colorscheme')
 require('cange.autocommands')
+require('cange.base')
+require('cange.colorscheme')
 require('cange.keymaps')
-require('cange.plugins')
+require('cange.lsp')
 require('cange.luasnip')
+require('cange.options')
+require('cange.plugins')
 
 local has = function(x)
   return vim.fn.has(x) == 1

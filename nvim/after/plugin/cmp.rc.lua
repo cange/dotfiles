@@ -19,7 +19,7 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
---   פּ ﯟ   some other good icons
+--    ﯟ   some other good icons
 local kind_icons = {
   Text = "",
   Method = "m",
@@ -47,7 +47,9 @@ local kind_icons = {
   Operator = "",
   TypeParameter = "",
 }
+
 local source_menu_icons = {
+  nvim_lsp = "",
   luasnip = "",
   buffer = "﬘",
   path = "",
@@ -119,6 +121,7 @@ return cmp.setup {
     end,
   },
   sources = {
+    { name = "nvim_lsp" }, -- we want to LSP suggestion first
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
