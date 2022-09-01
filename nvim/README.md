@@ -15,8 +15,7 @@ The configuration should now be applied to when open NeoVim again.
 #### Package manager for Neovim
 
 ```sh
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
 
 <https://github.com/wbthomason/packer.nvim>
@@ -26,7 +25,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 Some plugins needs certain tools in order to work properly.
 
 ```sh
-touch nvim-deps.txt && echo 'tree-sitter lua-language-server ripgrep font-hack-nerd-font' >> nvim-deps.txt
+touch nvim-deps.txt && echo 'tree-sitter lua-language-server ripgrep font-hack-nerd-font wget' >> nvim-deps.txt
 xargs brew install < nvim-deps.txt
 rm nvim-deps.txt
 ```
@@ -39,6 +38,7 @@ The following packages are required to install in order to use this NeoVim setup
 | [lua-language-server] | Syntax auto completion                |
 | [ripgrep]             | Telescope needs it to search in files |
 | [nerd-fonts]          | Font icons                            |
+| wget                  | required by LSP mason client          |
 
 [tree-sitter]: https://github.com/tree-sitter/tree-sitter
 [lua-language-server]: https://github.com/sumneko/lua-language-server
