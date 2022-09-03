@@ -6,6 +6,7 @@ vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', keymap_opts)
 vim.keymap.set('n', '<leader>.', ':NvimTreeFindFile<CR>', keymap_opts)
 
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
+local icons = require('cange.icons')
 
 tree.setup({
   renderer = {
@@ -14,15 +15,7 @@ tree.setup({
         folder = false,
       },
       glyphs = {
-        git = {
-          unstaged = "",
-          staged = "",
-          unmerged = "",
-          renamed = "",
-          untracked = "★",
-          deleted = "",
-          ignored = "",
-        },
+        git = icons.git_states,
       },
     },
   },
