@@ -11,6 +11,7 @@ local cmp_ok, cmp = pcall(require, "cmp")
 if not cmp_ok then return end
 
 local ls_ok, ls = pcall(require, "luasnip")
+local icon_ok, icons = pcall(require, "cange.icons")
 
 if not ls_ok then return end
 
@@ -18,42 +19,6 @@ local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
-
---    ﯟ   some other good icons
-local kind_icons = {
-  Text = "",
-  Method = "m",
-  Function = "",
-  Constructor = "",
-  Field = "ﰠ",
-  Variable = "",
-  Class = "ﴯ",
-  Interface = "",
-  Module = "",
-  Property = "ﰠ",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
-}
-
-local source_menu_icons = {
-  nvim_lsp = "",
-  luasnip = "",
-  buffer = "﬘",
-  path = "",
-}
 
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
@@ -113,10 +78,10 @@ return cmp.setup {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
       -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+      vim_item.kind = string.format("%s ", icons.kind[vim_item.kind])
+      -- vim_item.kind = string.format('%s %s', icons.kind[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       -- Source icons
-      vim_item.menu = (source_menu_icons)[entry.source.name]
+      vim_item.menu = (icons.source_menu)[entry.source.name]
       return vim_item
     end,
   },
