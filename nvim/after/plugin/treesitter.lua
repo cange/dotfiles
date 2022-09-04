@@ -1,37 +1,27 @@
-local ok, _ = pcall(require, 'nvim-treesitter')
-if not ok then return end
+local tsconfigs_ok, tsconfigs = pcall(require, 'nvim-treesitter.configs')
+if not tsconfigs_ok then return end
 
-require('nvim-treesitter.configs').setup({
+-- https://github.com/p00f/nvim-ts-rainbow#installation-and-setup
+local rainbow_ok, _ = pcall(require, 'nvim-ts-rainbow')
+local rainbow_settings = {}
+if rainbow_ok then
+  rainbow_settings.enable = true
+  rainbow_settings.extended_mode = true -- highlight non-bracket tags like html
+end
+
+tsconfigs.setup({
+  ensure_installed = 'all',  -- A list of parser names, or "all"
+  ignore_install = {}, -- List of parsers to ignore installing (for "all")
   highlight = {
-    enable = true,
-    disable = {},
+    enable = true,  -- `false` will disable the whole extension
+    additional_vim_regex_highlighting = true,
   },
   indent = {
-    enable = true,
-    disable = {},
+    enable = true, -- Indentation based on treesitter for the = operator
   },
-  ensure_installed = {
-    'bash',
-    'css',
-    'dockerfile',
-    'html',
-    'javascript',
-    'jsdoc',
-    'json',
-    'lua',
-    'markdown',
-    'ruby',
-    'scss',
-    'svelte',
-    'tsx',
-    'typescript',
-    'vim',
-    'vue',
-    'yaml',
-  },
-  autotag = {
-    enable = true,
-  },
+  rainbow = rainbow_settings, -- enable parentheses rainbow highlighting
 })
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-parser_config.tsx.filetype_to_parsername = { 'javascript', 'typescript.tsx' }
+
+-- Enable tree-sitter based folding
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'

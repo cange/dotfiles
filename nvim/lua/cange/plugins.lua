@@ -100,8 +100,15 @@ packer.startup(function(use)
     run = ':TSUpdate'
   }
 
+  -- brackets
   use 'windwp/nvim-autopairs' -- close brackets, quotes etc
   use 'windwp/nvim-ts-autotag' -- autoclose and autorename html tag
+  use {
+    'p00f/nvim-ts-rainbow', -- Rainbow parentheses 
+    requires = {
+      'nvim-treesitter/nvim-treesitter'
+    }
+  }
 
   use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'mg979/vim-visual-multi' -- multi select search/replace
