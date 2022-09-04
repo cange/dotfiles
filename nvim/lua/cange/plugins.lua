@@ -8,6 +8,7 @@ end
 -- Automatically install packer
 local fn = vim.fn
 local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+
 if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system {
     'git',
@@ -67,16 +68,17 @@ packer.startup(function(use)
 
   use 'numToStr/Comment.nvim' -- comment toggle
 
-  -- LSP
+  -- IDE: syntax highlighting
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  -- IDE: LSP
   use {
-    'neovim/nvim-lspconfig', -- enable LSP
-    requires = {
-      'williamboman/mason.nvim', -- simple to use language server installer
-      'WhoIsSethDaniel/mason-tool-installer.nvim' -- Mason that allow you to automatically install/update
-      -- 'glepnir/lspsaga.nvim', -- LSP UIs
+    'williamboman/mason.nvim', -- simple to use language server installer
+    requires= {
+      'williamboman/mason-lspconfig.nvim',
+      'neovim/nvim-lspconfig', -- enable LSP
     }
   }
-
+  use { 'b0o/SchemaStore.nvim' }
   -- snippets
   use 'L3MON4D3/LuaSnip' --snippet engine
   use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
@@ -85,20 +87,14 @@ packer.startup(function(use)
   use {
     'hrsh7th/nvim-cmp', -- code completion
     requires = {
-      'hrsh7th/cmp-cmdline', -- cmdline completions
-      'hrsh7th/cmp-path', -- path completions
-      'saadparwaiz1/cmp_luasnip', -- snippet completions
       'L3MON4D3/LuaSnip', -- snippets
       'hrsh7th/cmp-buffer', -- source for buffer words
+      'hrsh7th/cmp-cmdline', -- cmdline completions
       'hrsh7th/cmp-nvim-lsp', -- source for neovim’s built-in LSP
       'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-path', -- path completions
+      'saadparwaiz1/cmp_luasnip', -- snippet completions
     }
-  }
-
-  -- syntax highlighting
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
   }
 
   -- Icon
@@ -115,7 +111,7 @@ packer.startup(function(use)
   use 'windwp/nvim-autopairs' -- close brackets, quotes etc
   use 'windwp/nvim-ts-autotag' -- autoclose and autorename html tag
   use {
-    'p00f/nvim-ts-rainbow', -- Rainbow parentheses 
+    'p00f/nvim-ts-rainbow', -- Rainbow parentheses
     requires = {
       'nvim-treesitter/nvim-treesitter'
     }
@@ -125,6 +121,6 @@ packer.startup(function(use)
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
-    require('packer').sync()
+    packer.sync()
   end
 end)
