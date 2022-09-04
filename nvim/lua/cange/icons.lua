@@ -69,6 +69,11 @@ return {
     unstaged = "",
     untracked = "ﱡ",
   },
+  mason = {
+    package_installed = "",
+    package_pending = "",
+    package_uninstalled = "",
+  },
   ui = {
     ArrowClosed = "",
     ArrowOpen = "",

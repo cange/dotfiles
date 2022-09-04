@@ -7,20 +7,19 @@ vim.cmd [[
   augroup end
 ]]
 
-local cmp_ok, cmp = pcall(require, "cmp")
+local cmp_ok, cmp = pcall(require, 'cmp')
 if not cmp_ok then return end
 
-local ls_ok, ls = pcall(require, "luasnip")
-local icon_ok, icons = pcall(require, "cange.icons")
-
+local ls_ok, ls = pcall(require, 'luasnip')
 if not ls_ok then return end
 
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
+local icons_ok, icons = pcall(require, 'cange.icons')
+if not icons_ok then return end
 
--- find more here: https://www.nerdfonts.com/cheat-sheet
+local check_backspace = function()
+  local col = vim.fn.col '.' - 1
+  return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
+end
 
 local handle_next_tab = function(fallback)
   if cmp.visible() then
@@ -37,6 +36,7 @@ local handle_next_tab = function(fallback)
     fallback()
   end
 end
+
 local handle_prev_tab = function(fallback)
   if cmp.visible() then
     cmp.select_prev_item()
@@ -49,36 +49,36 @@ local handle_prev_tab = function(fallback)
   end
 end
 
-return cmp.setup {
+return cmp.setup({
   snippet = {
     expand = function(args)
       ls.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
   mapping = {
-    ["<C-up>"] = cmp.mapping.select_prev_item(),
-    ["<C-down>"] = cmp.mapping.select_next_item(),
-    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ["<C-e>"] = cmp.mapping({
+    ['<C-up>'] = cmp.mapping.select_prev_item(),
+    ['<C-down>'] = cmp.mapping.select_next_item(),
+    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    ['<C-e>'] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
-    ["<CR>"] = cmp.mapping.confirm { select = true },
-    ["<down>"] = cmp.mapping(handle_next_tab, { "i", "s" }),
-    ["<Tab>"] = cmp.mapping(handle_next_tab, { "i", "s" }),
-    ["<up>"] = cmp.mapping(handle_prev_tab, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(handle_prev_tab, { "i", "s" }),
+    ['<CR>'] = cmp.mapping.confirm { select = true },
+    ['<down>'] = cmp.mapping(handle_next_tab, { 'i', 's' }),
+    ['<Tab>'] = cmp.mapping(handle_next_tab, { 'i', 's' }),
+    ['<up>'] = cmp.mapping(handle_prev_tab, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(handle_prev_tab, { 'i', 's' }),
   },
   formatting = {
-    fields = { "kind", "abbr", "menu" },
+    fields = { 'kind', 'abbr', 'menu' },
     format = function(entry, vim_item)
       -- Kind icons
-      vim_item.kind = string.format("%s ", icons.kind[vim_item.kind])
+      vim_item.kind = string.format('%s ', icons.kind[vim_item.kind])
       -- vim_item.kind = string.format('%s %s', icons.kind[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       -- Source icons
       vim_item.menu = (icons.source_menu)[entry.source.name]
@@ -86,10 +86,10 @@ return cmp.setup {
     end,
   },
   sources = {
-    { name = "nvim_lsp" }, -- we want to LSP suggestion first
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "path" },
+    { name = 'nvim_lsp' }, -- we want to LSP suggestion first
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
@@ -102,4 +102,4 @@ return cmp.setup {
     ghost_text = true,
     native_menu = false,
   },
-}
+})
