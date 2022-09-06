@@ -96,6 +96,7 @@ packer.startup(function(use)
       'saadparwaiz1/cmp_luasnip', -- snippet completions
     }
   }
+  use { 'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp' }
 
   -- Icon
   use 'kyazdani42/nvim-web-devicons' -- File icons
