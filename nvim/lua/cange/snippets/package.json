@@ -55,6 +55,12 @@
           "ruby"
         ],
         "path": "./ruby/general.json"
+      },
+      {
+        "language": [
+          "lua"
+        ],
+        "path": "./lua.json"
       }
     ]
   }

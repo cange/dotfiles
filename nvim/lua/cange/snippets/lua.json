@@ -1,0 +1,22 @@
+{
+  "pretty_print(…)": {
+    "prefix": "pre",
+    "body": "vim.pretty_print($1)"
+  },
+  "print(…)": {
+    "prefix": "pri",
+    "body": "print('--- $1:', $1)"
+  },
+  "notify(…)": {
+    "prefix": "inf",
+    "body": "vim.notify('--- $1')"
+  },
+  "pcall(…)": {
+    "prefix": "pcall",
+    "body": [
+      "local $3_ok, $2 = pcall(require, '$1')",
+      "if not $3_ok then return end",
+      "$4"
+    ]
+  }
+}
