@@ -40,6 +40,7 @@ packer.init {
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- package manager
+
   use 'EdenEast/nightfox.nvim' -- theme
   use {
     'nvim-lualine/lualine.nvim', -- status line
@@ -80,7 +81,7 @@ packer.startup(function(use)
   use 'L3MON4D3/LuaSnip' --snippet engine
   use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
 
-  -- auto completion
+  -- Completion
   use {
     'hrsh7th/nvim-cmp', -- code completion
     requires = {
@@ -100,7 +101,17 @@ packer.startup(function(use)
     run = ':TSUpdate'
   }
 
-  -- brackets
+  -- Icon
+  use 'kyazdani42/nvim-web-devicons' -- File icons
+
+  -- Color
+  use 'norcalli/nvim-colorizer.lua' -- color highlighter
+
+  -- Git
+  use 'lewis6991/gitsigns.nvim' -- git highlighter, blame, etc
+  use 'dinhhuy258/git.nvim' -- For git blame & browse
+
+  -- Editing support
   use 'windwp/nvim-autopairs' -- close brackets, quotes etc
   use 'windwp/nvim-ts-autotag' -- autoclose and autorename html tag
   use {
@@ -109,13 +120,7 @@ packer.startup(function(use)
       'nvim-treesitter/nvim-treesitter'
     }
   }
-
-  use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'mg979/vim-visual-multi' -- multi select search/replace
-
-  use 'norcalli/nvim-colorizer.lua' -- color highlighter
-  use 'lewis6991/gitsigns.nvim' -- git highlighter, blame, etc
-  use 'dinhhuy258/git.nvim' -- For git blame & browse
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
