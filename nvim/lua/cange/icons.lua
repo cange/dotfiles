@@ -34,6 +34,7 @@ return {
   cmp_source = {
     buffer = '﬘',
     nvim_lsp = '',
+    nvim_lua = '',
     path = '',
   },
   type = {
