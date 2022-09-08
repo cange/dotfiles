@@ -47,13 +47,6 @@ local function handle_prev_item(fallback)
   end
 end
 
-local buffer_ignore = {
-  'json',
-  'markdown',
-  'toml',
-  'txt',
-  'yaml',
-}
 
 local found_tabnine, _ = pcall(require, 'cmp_tabnine.config')
 if not found_tabnine then
@@ -62,55 +55,48 @@ if not found_tabnine then
 end
 
 local source_types = {
-  buffer =      { icon = icons.cmp_source.buffer,   color = '#F4A261', group = 'CmpItemKindBuffer' },
-  nvim_lsp =    { icon = icons.cmp_source.nvim_lsp, color = '#DBC074', group = 'CmpItemKindLSP' },
-  cmp_tabnine = { icon = icons.misc.Robot,          color = '#81B29A', group = 'CmpItemKindAI' },
-  luasnip =     { icon = icons.kind.Snippet,        color = '#AEAFB0', group = 'CmpItemKindSnippet' },
-  path =        { icon = icons.cmp_source.path,     color = '#71839B', group = 'CmpItemKindPath' },
+  buffer =      { icon = icons.cmp_source.buffer,   fg = '#587b7b', group_name = 'CmpItemKindBuffer' },
+  nvim_lsp =    { icon = icons.cmp_source.nvim_lsp, fg = '#587b7b', group_name = 'CmpItemKindLSP' },
+  nvim_lua =    { icon = icons.cmp_source.nvim_lua, fg = '#587b7b', group_name = 'CmpItemKindLua' },
+  cmp_tabnine = { icon = icons.misc.Robot,          fg = '#587b7b', group_name = 'CmpItemKindAI' },
+  luasnip =     { icon = ' ',                       fg = '#587b7b', group_name = 'CmpItemKindSnippet' },
+  path =        { icon = icons.cmp_source.path,     fg = '#587b7b', group_name = 'CmpItemKindPath' },
 }
+
 for _, type in pairs(source_types) do
-  vim.api.nvim_set_hl(0, type.group, { fg = type.color })
+  vim.api.nvim_set_hl(0, type.group_name, { fg = type.fg })
 end
 
 local function menu_item_format(entry, vim_item)
   local name = entry.source.name
   if table.contains_key(source_types, name) then
     vim_item.menu = source_types[name].icon
-    vim_item.menu_hl_group = source_types[name].group
+    vim_item.menu_hl_group = source_types[name].group_name
   end
-  if vim_item.kind == 'Snippet' then -- keep empty on certain type
-    vim_item.kind = '  '
-  else
-    vim_item.kind = string.format('%s ', icons.kind[vim_item.kind])
-  end
+  vim_item.kind = icons.kind[vim_item.kind]
   return vim_item
 end
 
+local ignore_filetypes = {
+  'json',
+  'markdown',
+  'toml',
+  'txt',
+  'yaml',
+}
 local sources = {
-  {
-    name = 'nvim_lsp',
-    filter = function(entry, ctx)
-      local kind = require('cmp.types.lsp').CompletionItemKind[entry:get_kind()]
-      if kind == 'Snippet' and ctx.prev_context.filetype == 'java' then
-        return true
-      end
-
-      if kind == 'Text' then
-        return true
-      end
-    end,
-    group_index = 2,
-  },
+  { name = 'nvim_lsp', group_index = 1 },
+  { name = 'nvim_lua', group_index = 1 },
   { name = 'luasnip', group_index = 2 },
+  { name = 'cmp_tabnine', group_index = 2 },
+  { name = 'path', group_index = 3 },
   {
     name = 'buffer',
     group_index = 2,
     filter = function(_, ctx)
-      return not table.contains(buffer_ignore, ctx.prev_context.filetype)
+      return not table.contains(ignore_filetypes, ctx.prev_context.filetype)
     end,
   },
-  { name = 'cmp_tabnine', group_index = 2 },
-  { name = 'path', group_index = 2 },
 }
 
 return {
@@ -124,7 +110,11 @@ return {
     prev_item = handle_prev_item,
   },
   formatting = {
-    fields = { 'abbr', 'kind', 'menu' }, -- order within a menu item
+    fields = { -- order within a menu item
+      'abbr',
+      'kind',
+      'menu',
+    },
     format = menu_item_format,
   },
   sources = sources,

@@ -23,12 +23,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
+-- vim.cmd [[
+--   augroup packer_user_config
+--   autocmd!
+--   autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]]
 
 -- Have packer use a popup window
 packer.init {
@@ -78,7 +78,9 @@ packer.startup(function(use)
       'neovim/nvim-lspconfig', -- enable LSP
     }
   }
-  use { 'b0o/SchemaStore.nvim' }
+  use { 'b0o/SchemaStore.nvim' } -- json/yaml schema support
+  use { 'jose-elias-alvarez/null-ls.nvim' } -- syntax formatting
+
   -- snippets
   use 'L3MON4D3/LuaSnip' --snippet engine
   use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
@@ -91,7 +93,7 @@ packer.startup(function(use)
       'hrsh7th/cmp-buffer', -- source for buffer words
       'hrsh7th/cmp-cmdline', -- cmdline completions
       'hrsh7th/cmp-nvim-lsp', -- source for neovim’s built-in LSP
-      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-nvim-lua', -- Neovim's Lua API
       'hrsh7th/cmp-path', -- path completions
       'saadparwaiz1/cmp_luasnip', -- snippet completions
     }
