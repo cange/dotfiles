@@ -47,10 +47,13 @@ The following packages are required to install in order to use this NeoVim setup
 
 #### JavaScript
 
-Enables auto completion and syntax diagnostic for the language.
+This binaries are needed to enables auto completion, diagnostics and fromatting
+for the language.
 
-```sh 
-npm install -g typescript-language-server typescript
+```sh
+npm i -g typescript-language-server typescript @fsouza/prettierd eslint_d
 ```
+
+> LSP, null-ls, treesitter
 
 <https://github.com/typescript-language-server/typescript-language-server#installing>
