@@ -51,3 +51,6 @@ keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
 keymap('v', '<Tab>', '>gv', opts)
 keymap('v', '<S-Tab>', '<gv', opts)
+
+-- Formatting with LSP power
+  keymap('n', '=', ':lua vim.lsp.buf.formatting_sync()<CR>', opts)

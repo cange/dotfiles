@@ -15,12 +15,6 @@ autocmd('BufWritePre', {
   command = ':%s/\\s\\+$//e'
 })
 
-augroup('cange_autoindent_on_save', opts)
-autocmd('BufWritePre', {
-  pattern = '*',
-  command = ':normal migg=G`i'
-})
-
 -- augroup('cange_eslint_autofix_on_save', opts)
 -- -- EslintFixAll: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.txt#eslint
 -- autocmd('BufWritePre', {
