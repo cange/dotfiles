@@ -15,11 +15,15 @@ local options = {
   mouse = 'a', -- allow the mouse to be used in editor
   number = true, -- set numbered lines
   numberwidth = 3, -- set number column width to 2 {default 4}
-  pumblend = 2, -- transparency of popup-menus 0 (none) to 100 (full)
+  pumblend = 8, -- transparency of popup-menus 0 (none) to 100 (full)
   relativenumber = true, -- set relative numbered lines
   termguicolors = true, -- set term gui colors (most terminals support this)
   title = true, -- Update terminal window title
   winblend = 2, -- transparency of popup-menus 0 (none) to 100 (full)
+
+  --
+  spell = false, -- enable spell checking if this is true
+  spelllang = { 'en_us' }, -- spellchecking will be done for these languages
 
   -- backup handling
   backup = false, -- creates a backup file
@@ -27,7 +31,7 @@ local options = {
   writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
   -- command prompt
-  cmdheight = 2, -- space ofthe command line for displaying messages
+  cmdheight = 1, -- space ofthe command line for displaying messages
   showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
   showcmd = true, -- show incomplete commands
 

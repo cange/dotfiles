@@ -14,8 +14,11 @@
   "pcall(…)": {
     "prefix": "pcall",
     "body": [
-      "local $3_ok, $2 = pcall(require, '$1')",
-      "if not $3_ok then return end",
+      "local found_$2, $2 = pcall(require, '$1')",
+      "if not found_$2 then",
+      "  vim.notify('${3:context}: \"$1\" could not be found')",
+      "  return",
+      "end",
       "$4"
     ]
   }
