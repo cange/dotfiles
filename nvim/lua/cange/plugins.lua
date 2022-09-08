@@ -73,13 +73,17 @@ packer.startup(function(use)
   -- IDE: LSP
   use {
     'williamboman/mason.nvim', -- simple to use language server installer
-    requires= {
+    requires = {
       'williamboman/mason-lspconfig.nvim',
       'neovim/nvim-lspconfig', -- enable LSP
     }
   }
-  use { 'b0o/SchemaStore.nvim' } -- json/yaml schema support
-  use { 'jose-elias-alvarez/null-ls.nvim' } -- syntax formatting
+  use 'b0o/SchemaStore.nvim' -- json/yaml schema support
+  use 'jose-elias-alvarez/null-ls.nvim' -- syntax formatting
+  use {
+    'MunifTanjim/prettier.nvim', -- JS formatter
+    requires = 'jose-elias-alvarez/null-ls.nvim'
+  }
 
   -- snippets
   use 'L3MON4D3/LuaSnip' --snippet engine
@@ -98,7 +102,10 @@ packer.startup(function(use)
       'saadparwaiz1/cmp_luasnip', -- snippet completions
     }
   }
-  use { 'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp' }
+  use {
+    'tzachar/cmp-tabnine', -- AI code suggestions
+    run = './install.sh', requires = 'hrsh7th/nvim-cmp'
+  }
 
   -- Icon
   use 'kyazdani42/nvim-web-devicons' -- File icons

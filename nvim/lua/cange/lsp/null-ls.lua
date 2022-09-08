@@ -1,41 +1,39 @@
-local null_ls_ok, null_ls = pcall(require, 'null-ls')
-if not null_ls_ok then return end
+local found_null_ls, null_ls = pcall(require, 'null-ls')
+if not found_null_ls then return end
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/
-
-local code_actions = null_ls.builtins.code_actions
 local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
-local completion = null_ls.builtins.completion
--- https://github.com/prettier-solidity/prettier-plugin-solidity
--- npm install --save-dev prettier prettier-plugin-solidity
+local function formatting_handler()
+  local timeout = 10000 -- milliseconds
+  vim.lsp.buf.formatting_seq_sync({}, timeout)
+end
+
 local settings = {
   debug = true,
+  on_attach = function()
+    vim.keymap.set('n', '=', formatting_handler, { noremap = true, silent = true })
+  end,
   sources = {
-    formatting.esint_d, -- Injects actions to fix ESLint is_success, faster the regular eslint
+    -- formatting
+    formatting.eslint_d, -- fast eslint
     formatting.markdownlint, -- style and syntax checker
-    formatting.prettier,
+    formatting.prettierd, -- pretty fast prettier
     formatting.shfmt,
     formatting.stylelint,
-    formatting.stylua,
     formatting.yamlfmt,
 
-    diagnostics.codespell, -- finds common misspellings
-    diagnostics.eslint,
+    -- diagnostics/linter
+    diagnostics.eslint_d.with({
+      diagnostics_format = '[eslint] #{m}\n(#{c})'
+    }),
     diagnostics.jsonlint,
-    diagnostics.luacheck,
-    diagnostics.misspell,
     diagnostics.rubocop,
     diagnostics.shellcheck,
+    diagnostics.markdownlint, -- markdown style and syntax checker
     diagnostics.stylelint,
     diagnostics.yamllint,
     diagnostics.zsh,
-
-    completion.luasnip,
-    completion.spell,
-
-    code_actions.git_signs,
   },
 }
-
 null_ls.setup(settings)
