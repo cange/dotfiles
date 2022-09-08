@@ -1,6 +1,8 @@
 -- Contains table of language servers
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
-local lsp = {
+M = {}
+
+M.lsp = {
   -- 'solargraph', -- ruby
   'emmet_ls', -- html
   'bashls', -- bash
@@ -22,21 +24,20 @@ local lsp = {
   'volar', --vue 3
   'yamlls' , -- yaml
 }
-local linter = {
+
+M.linter = {
+  'eslint_d' , -- javascript
   'shfmt', -- shell
   'prettier', -- javascript, typepscript, etc
   'luaformatter', -- lua
   -- 'rubocop', --ruby
   'yamlfmt', -- yaml
 }
-local formatter = {
+
+M.formatter = {
   'stylua', -- lua
   'markdownlint', -- markdown
   'yamllint', -- yaml
 }
 
-return {
-  lsp = lsp,
-  linter = linter,
-  formatter = formatter,
-}
+return M

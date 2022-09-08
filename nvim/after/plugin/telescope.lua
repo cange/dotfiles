@@ -26,9 +26,9 @@ telescope.setup({
 
 keymap('n', '<leader>p', function() builtin.find_files() end)
 keymap('n', '<leader>h', function() builtin.help_tags() end)
-keymap('n', '<leader>lv', function() builtin.live_grep() end)
+keymap('n', '<leader>lg', function() builtin.live_grep() end)
 keymap('n', '<leader>gs', function() builtin.grep_string() end)
-keymap('n', '<leader>g', function() builtin.git_commits() end)
+keymap('n', '<leader>gc', function() builtin.git_commits() end)
 
 -- extension: file browser
 local function buffer_dir()
