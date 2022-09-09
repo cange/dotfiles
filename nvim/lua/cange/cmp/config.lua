@@ -84,15 +84,17 @@ local ignore_filetypes = {
   'txt',
   'yaml',
 }
+local max_item_count = 3
 local sources = {
-  { name = 'nvim_lsp', group_index = 1 },
-  { name = 'nvim_lua', group_index = 1 },
-  { name = 'luasnip', group_index = 2 },
-  { name = 'cmp_tabnine', group_index = 2 },
-  { name = 'path', group_index = 3 },
+  { name = 'nvim_lsp', group_index = 1, max_item_count = max_item_count },
+  { name = 'nvim_lua', group_index = 2, max_item_count = max_item_count },
+  { name = 'luasnip', group_index = 1, max_item_count = max_item_count },
+  { name = 'cmp_tabnine', group_index = 3, max_item_count = max_item_count },
+  { name = 'path', group_index = 4, max_item_count = max_item_count },
   {
     name = 'buffer',
-    group_index = 2,
+    max_item_count = max_item_count,
+    group_index = 3,
     filter = function(_, ctx)
       return not table.contains(ignore_filetypes, ctx.prev_context.filetype)
     end,
