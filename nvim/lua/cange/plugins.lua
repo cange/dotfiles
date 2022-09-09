@@ -132,6 +132,7 @@ packer.startup(function(use)
     }
   }
   use 'mg979/vim-visual-multi' -- multi select search/replace
+  use 'johmsalas/text-case.nvim' -- text case converter (camel casecamel, snake, constant, kepab case converter etc.)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
