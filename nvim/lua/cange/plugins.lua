@@ -39,13 +39,24 @@ packer.init {
   },
 }
 
+local function instant_setup(pack_name)
+  local found, pack = pcall(require, pack_name)
+  if not found then
+    vim.notify('packer: "'..pack_name..'" could not be found')
+    return
+  end
+
+  return pack.setup()
+end
+
 packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- package manager
 
   use 'EdenEast/nightfox.nvim' -- theme
   use {
     'nvim-lualine/lualine.nvim', -- status line
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = instant_setup('lualine'),
   }
   use 'akinsho/nvim-bufferline.lua' -- tab UI
 
@@ -53,7 +64,7 @@ packer.startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', -- fuzzy finder over lists
     requires = {
-      'nvim-lua/plenary.nvim', -- lua comment functions - https://github.com/nvim-lua/plenary.nvim
+      'nvim-lua/plenary.nvim', -- common lua functions - https://github.com/nvim-lua/plenary.nvim
       'nvim-telescope/telescope-file-browser.nvim', -- browser extension
       'BurntSushi/ripgrep', -- telescope live grep suggestions
     },
@@ -66,8 +77,9 @@ packer.startup(function(use)
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
-  use 'numToStr/Comment.nvim' -- comment toggle
-
+  use { 'numToStr/Comment.nvim', -- comment toggle
+    config = instant_setup('Comment'),
+  }
   -- IDE: syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   -- IDE: LSP
@@ -116,7 +128,10 @@ packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons' -- File icons
 
   -- Color
-  use 'norcalli/nvim-colorizer.lua' -- color highlighter
+  use {
+    'norcalli/nvim-colorizer.lua', -- color highlighter
+    config = instant_setup('colorizer'),
+  }
 
   -- Git
   use 'lewis6991/gitsigns.nvim' -- git highlighter, blame, etc
@@ -124,15 +139,21 @@ packer.startup(function(use)
 
   -- Editing support
   use 'windwp/nvim-autopairs' -- close brackets, quotes etc
-  use 'windwp/nvim-ts-autotag' -- autoclose and autorename html tag
+  use {
+    'windwp/nvim-ts-autotag', -- autoclose and autorename html tags
+    config = instant_setup('nvim-ts-autotag'),
+  }
   use {
     'p00f/nvim-ts-rainbow', -- Rainbow parentheses
     requires = {
       'nvim-treesitter/nvim-treesitter'
     }
   }
-  use 'mg979/vim-visual-multi' -- multi select search/replace
-  use 'johmsalas/text-case.nvim' -- text case converter (camel casecamel, snake, constant, kepab case converter etc.)
+  use {
+    'mg979/vim-visual-multi', -- multi select search/replace
+    -- config = instant_setup('vim-visual-multi'),
+  }
+  use 'johmsalas/text-case.nvim' -- text case converter (camel case, etc.)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
