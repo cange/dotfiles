@@ -20,14 +20,14 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvi
 
 <https://github.com/wbthomason/packer.nvim>
 
-#### Requriements
+#### JavaScript Binaries
 
 Ensure [Node.js] has been installed in order run dependency management via
 "npm".
 
 [Node.js]: https://nodejs.org
 
-#### Binaries
+#### Other Binaries
 
 Some plugins needs certain tools in order to work properly.
 
@@ -52,15 +52,13 @@ The following packages are required to install in order to use this NeoVim setup
 [ripgrep]: https://github.com/BurntSushi/ripgrep#installation
 [nerd-fonts]: https://github.com/ryanoasis/nerd-fonts
 
-#### JavaScript
+### Ready
 
-This binaries are needed to enables auto completion, diagnostics and fromatting
-for the language.
+Open neovim and run package manager
 
-```sh
-npm i -g typescript-language-server typescript @fsouza/prettierd eslint_d
+```vim
+:PackerInstall
 ```
 
-> LSP, null-ls, treesitter
-
-<https://github.com/typescript-language-server/typescript-language-server#installing>
+**Note:** You might run it more the once if some packages fail to install on
+the first run.

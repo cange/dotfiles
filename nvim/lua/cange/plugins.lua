@@ -9,19 +9,19 @@ end
 local fn = vim.fn
 local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path,
-  }
-  print 'Installing packer close and reopen Neovim...'
-  vim.cmd [[packadd packer.nvim]]
-end
-
+-- if fn.empty(fn.glob(install_path)) > 0 then
+--   PACKER_BOOTSTRAP = fn.system {
+--     'git',
+--     'clone',
+--     '--depth',
+--     '1',
+--     'https://github.com/wbthomason/packer.nvim',
+--     install_path,
+--   }
+--   print 'Installing packer close and reopen Neovim...'
+--   vim.cmd [[packadd packer.nvim]]
+-- end
+--
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 -- vim.cmd [[
 --   augroup packer_user_config
@@ -47,6 +47,9 @@ local function instant_setup(pack_name)
   end
 
   return pack.setup()
+end
+local function npm_install(packages, description)
+  return 'echo "  installing '..description..' JavaScript binaries" && npm install --global --force '.. packages
 end
 
 packer.startup(function(use)
@@ -82,7 +85,7 @@ packer.startup(function(use)
   }
   -- IDE: syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  -- IDE: LSP
+  -- LSP
   use {
     'williamboman/mason.nvim', -- simple to use language server installer
     requires = {
@@ -90,16 +93,17 @@ packer.startup(function(use)
       'neovim/nvim-lspconfig', -- enable LSP
     },
     -- install JavaScript related dependencies
-    run = 'npm i -g typescript-language-server typescript'
+    run = npm_install('typescript-language-server typescript', 'LSP')
   }
   use 'b0o/SchemaStore.nvim' -- json/yaml schema support
-
-  use 'jose-elias-alvarez/null-ls.nvim' -- syntax formatting
+  use {
+    'jose-elias-alvarez/null-ls.nvim', -- syntax formatting
+    -- install JavaScript related dependencies
+    run = npm_install('@fsouza/prettierd eslint_d', 'null-ls')
+  }
   use {
     'MunifTanjim/prettier.nvim', -- JS formatter
     requires = 'jose-elias-alvarez/null-ls.nvim',
-    -- install JavaScript related dependencies
-    run = 'npm i -g @fsouza/prettierd eslint_d'
   }
 
   -- snippets
@@ -149,15 +153,12 @@ packer.startup(function(use)
       'nvim-treesitter/nvim-treesitter'
     }
   }
-  use {
-    'mg979/vim-visual-multi', -- multi select search/replace
-    -- config = instant_setup('vim-visual-multi'),
-  }
+  use 'mg979/vim-visual-multi' -- multi select search/replace
   use 'johmsalas/text-case.nvim' -- text case converter (camel case, etc.)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    packer.sync()
-  end
+  -- if PACKER_BOOTSTRAP then
+  --   packer.sync()
+  -- end
 end)

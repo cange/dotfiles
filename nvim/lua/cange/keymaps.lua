@@ -1,6 +1,9 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+-- Set leader key
+vim.g.mapleader = ' '
+
 -- Do not yank x
 keymap('n', 'x', '"_x', opts)
 
