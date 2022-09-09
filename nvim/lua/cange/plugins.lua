@@ -76,13 +76,18 @@ packer.startup(function(use)
     requires = {
       'williamboman/mason-lspconfig.nvim',
       'neovim/nvim-lspconfig', -- enable LSP
-    }
+    },
+    -- install JavaScript related dependencies
+    run = 'npm i -g typescript-language-server typescript'
   }
   use 'b0o/SchemaStore.nvim' -- json/yaml schema support
+
   use 'jose-elias-alvarez/null-ls.nvim' -- syntax formatting
   use {
     'MunifTanjim/prettier.nvim', -- JS formatter
-    requires = 'jose-elias-alvarez/null-ls.nvim'
+    requires = 'jose-elias-alvarez/null-ls.nvim',
+    -- install JavaScript related dependencies
+    run = 'npm i -g @fsouza/prettierd eslint_d'
   }
 
   -- snippets
