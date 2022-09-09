@@ -63,7 +63,10 @@ packer.startup(function(use)
   }
   use 'akinsho/nvim-bufferline.lua' -- tab UI
 
-  -- navigation
+  -- Project
+  use 'ahmedkhalf/project.nvim'
+
+  -- Fuzzy Finder
   use {
     'nvim-telescope/telescope.nvim', -- fuzzy finder over lists
     requires = {
@@ -83,8 +86,14 @@ packer.startup(function(use)
   use { 'numToStr/Comment.nvim', -- comment toggle
     config = instant_setup('Comment'),
   }
-  -- IDE: syntax highlighting
+
+  -- Syntax
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+  -- Snippets
+  use 'L3MON4D3/LuaSnip' --snippet engine
+  use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
+
   -- LSP
   use {
     'williamboman/mason.nvim', -- simple to use language server installer
@@ -105,10 +114,6 @@ packer.startup(function(use)
     'MunifTanjim/prettier.nvim', -- JS formatter
     requires = 'jose-elias-alvarez/null-ls.nvim',
   }
-
-  -- snippets
-  use 'L3MON4D3/LuaSnip' --snippet engine
-  use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
 
   -- Completion
   use {

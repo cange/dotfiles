@@ -25,6 +25,14 @@ local config = require('nvim-tree.config').nvim_tree_callback
 local icons = require('cange.icons')
 
 tree.setup({
+  -- project plugin related
+  sync_root_with_cwd = true,
+  respect_buf_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_root = true
+  },
+  -- common
   renderer = {
     icons = {
       show = {
