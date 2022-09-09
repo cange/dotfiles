@@ -24,7 +24,7 @@ telescope.setup({
   }
 })
 
-keymap('n', '<leader>p', function() builtin.find_files() end)
+keymap('n', '<leader>p', function() builtin.find_files({ hidden = true }) end)
 keymap('n', '<leader>h', function() builtin.help_tags() end)
 keymap('n', '<leader>lg', function() builtin.live_grep() end)
 keymap('n', '<leader>gs', function() builtin.grep_string() end)
@@ -42,15 +42,30 @@ keymap('n', '<leader>s', function()
     theme = 'ivy',
     -- disables netrw and use telescope-file-browser in its place
     hijack_netrw = true,
+    hidden = true, -- show hidden files when this is true
     mappings = {
       -- your custom insert mode mappings
       -- ['i'] = {},
       -- your custom normal mode mappings
       -- ['n'] = {},
     },
-    path = '%:p:h',
     cwd = buffer_dir(),
-    respect_gitignore = false,
     grouped = true,
+    path = '%:p:h',
+    respect_gitignore = false,
   })
 end)
+
+-- Text case converter
+
+local found_textcase, textcase = pcall(require, 'textcase')
+if not found_textcase then
+  return
+  vim.notify('telescope: "textcase" could not be found')
+end
+
+textcase.setup({})
+telescope.load_extension('textcase')
+
+keymap('n', '<leader>cc', '<cmd>TextCaseOpenTelescope<CR>', { desc = 'Telescope' })
+keymap('v', '<leader>cc', '<cmd>TextCaseOpenTelescope<CR>', { desc = 'Telescope' })
