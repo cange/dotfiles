@@ -4,10 +4,16 @@ if not found then
   return
 end
 
+local found_settings, settings = pcall(require, 'cange.settings')
+if not found_settings then
+  vim.notify('treesitter: "cange.settings" could not be found')
+  return
+end
+
+
 treesitter_config.setup({
-  ensure_installed = 'all', -- A list of parser names, or 'all'
-  ignore_install = {}, -- List of parsers to ignore installing (for 'all')
-  highlight = {
+ ensure_installed = settings.treesitter.parsers, -- A list of parser names, or "all"
+ highlight = {
     enable = true, -- `false` will disable the whole extension
     additional_vim_regex_highlighting = true,
   },
@@ -22,9 +28,5 @@ treesitter_config.setup({
     -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings}
   },
+
 })
-
--- Enable tree-sitter based folding
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-

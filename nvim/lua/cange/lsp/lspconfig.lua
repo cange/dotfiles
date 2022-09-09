@@ -1,8 +1,5 @@
-local lspconfig_ok, lspconfig = pcall(require, 'lspconfig')
-if not lspconfig_ok then
-  vim.notify('lspconfig not found')
-  return
-end
+local found, lspconfig = pcall(require, 'lspconfig')
+if not found then return end
 
 local function on_attach(_, bufnr)
   -- Set up attach options
@@ -28,8 +25,8 @@ local function on_attach(_, bufnr)
 end
 
 -- Set up lsp cmp (completion)
-local cmp_lsp_ok, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
-if not cmp_lsp_ok then return end
+local found_cmp_lsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+if not found_cmp_lsp then return end
 
 local capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -44,18 +41,18 @@ local lsp_opts = {
   flags = lsp_flags,
 }
 
-local providers_ok, providers = pcall(require, 'cange.lsp.providers')
-if not providers_ok then
-  vim.notify 'lspconfig: LSP provider could not be found'
+local found_settings, settings = pcall(require, 'cange.settings')
+if not found_settings then
+  vim.notify 'lspconfig: "cange.settings" could not be found'
   return
 end
 
 -- iterate through provider push settings if given and initiate them
-for _, provider in pairs(providers.lsp) do
-  local settings_ok, settings = pcall(require, 'cange.lsp.providers.' .. provider)
+for _, provider in pairs(settings.lsp.providers.lsp) do
+  local found_provider_opts, provider_opts = pcall(require, 'cange.lsp.providers.' .. provider)
 
-  if settings_ok then
-    lsp_opts = vim.tbl_deep_extend('force', settings, lsp_opts)
+  if found_provider_opts then
+    lsp_opts = vim.tbl_deep_extend('force', provider_opts, lsp_opts)
   end
 
   lspconfig[provider].setup(lsp_opts)

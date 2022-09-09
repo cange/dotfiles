@@ -64,7 +64,7 @@ local options = {
 
   -- folding settings
   foldlevel = 10, -- this is just what i use
-  foldmethod = 'indent', -- fold based on indent
+  foldmethod = 'indent', -- groups of lines with the same indent form a fold
   foldnestmax = 10, -- deepest fold is 10 levels
 }
 

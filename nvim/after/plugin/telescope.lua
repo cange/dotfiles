@@ -60,8 +60,8 @@ end)
 
 local found_textcase, textcase = pcall(require, 'textcase')
 if not found_textcase then
-  return
   vim.notify('telescope: "textcase" could not be found')
+  return
 end
 
 textcase.setup({})
