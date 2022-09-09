@@ -20,6 +20,13 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvi
 
 <https://github.com/wbthomason/packer.nvim>
 
+#### Requriements
+
+Ensure [Node.js] has been installed in order run dependency management via
+"npm".
+
+[Node.js]: https://nodejs.org
+
 #### Binaries
 
 Some plugins needs certain tools in order to work properly.
