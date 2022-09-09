@@ -1,10 +1,6 @@
 local found, treesitter_config = pcall(require, 'nvim-treesitter.configs')
-if not found then return end
-
--- https://github.com/p00f/nvim-ts-rainbow#installation-and-setup
-local found_rainbo, _ = pcall(require, 'nvim-ts-rainbow')
-if not found_rainbo then
-  vim.notify('treesitter: "nvim-ts-rainbow" could not be found.')
+if not found then
+  vim.notify('treesitter_config has not been found')
   return
 end
 
@@ -18,18 +14,14 @@ treesitter_config.setup({
   indent = {
     enable = true, -- Indentation based on treesitter for the = operator
   },
-  rainbow = {
+  rainbow = { -- https://github.com/p00f/nvim-ts-rainbow
     enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
     extended_mode = true, -- highlight non-bracket tags like html
-    colors = {
-      '#FF0000',
-      '#0000FF',
-      '#FFFF00',
-      '#00FF00',
-      '#00FFFF',
-      '#FF00FF',
-    }
-  }
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings}
+  },
 })
 
 -- Enable tree-sitter based folding
