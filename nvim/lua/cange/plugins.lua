@@ -73,6 +73,11 @@ packer.startup(function(use)
     'rcarriga/nvim-notify', -- popover notification
     config = function() vim.notify = require('notify') end,
   }
+  use {
+    'mvllow/modes.nvim', -- Prismatic line decorations
+    config = instant_setup('modes'),
+  }
+
   -- Project
   use 'ahmedkhalf/project.nvim'
 
