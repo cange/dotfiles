@@ -2,14 +2,22 @@
 local colorscheme = 'nightfox'
 local theme = 'terafox'
 
-local ok, _ = pcall(require, colorscheme)
-if not ok then
-  print('colorscheme ' .. colorscheme .. ' not found!')
+local found, _ = pcall(require, colorscheme)
+if not found then
+  vim.notify('colorscheme '..colorscheme..' not found!')
   return
 end
 
-local theme_ok, _ = pcall(vim.cmd, 'colorscheme ' .. theme)
-if not theme_ok then
-  print('Theme "' .. theme .. '" of "' .. colorscheme .. '" colorscheme not found!')
+local found_theme, _ = pcall(vim.cmd, 'colorscheme '..theme)
+if not found_theme then
+  vim.notify('Theme "'..theme..'" of "'..colorscheme..'" colorscheme not found!')
   return
 end
+
+local found_modes, modes = pcall(require, 'modes')
+if not found_modes then
+  vim.notify('nightfox: "modes" could not be found')
+  return
+end
+-- needs to been calld after colorscheme is established
+modes.setup()
