@@ -4,7 +4,7 @@ if not found then
   return
 end
 
-local found_settings, settings = pcall(require, 'cange.settings')
+local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
 if not found_settings then
   vim.notify('treesitter: "cange.settings" could not be found')
   return
@@ -12,7 +12,7 @@ end
 
 
 treesitter_config.setup({
- ensure_installed = settings.treesitter.parsers, -- A list of parser names, or "all"
+ ensure_installed = editor_settings.treesitter.parsers, -- A list of parser names, or "all"
  highlight = {
     enable = true, -- `false` will disable the whole extension
     additional_vim_regex_highlighting = true,

@@ -1,8 +1,15 @@
+--- Provides the editors icons
+local M = {}
 -- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts
 -- go to the above and then enter <c-v>u<unicode> and the symbold should appear
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
-M = {}
+
+M.which_key = {
+  breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
+  separator = '➜ ', -- symbol used between a key and it's label
+  group = '+', -- symbol prepended to a group
+}
 
 M.kind = {
   Text = '',
