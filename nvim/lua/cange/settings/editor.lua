@@ -1,11 +1,13 @@
--- This file contains general settings
-M = {}
+--- Provides general settings
+local M = {}
 
+--- Lists of providers for certain language_server, linter, and formatter
+-- @table lsp
 M.lsp = {
   -- Contains table of language servers
   -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
   providers = {
-    lsp = {
+    language_servers = {
       -- 'solargraph', -- ruby
       'emmet_ls', -- html
       'bashls', -- bash
@@ -27,7 +29,7 @@ M.lsp = {
       'volar', --vue 3
       'yamlls' , -- yaml
     },
-    linter = {
+    linters = {
       'eslint_d' , -- javascript
       'shfmt', -- shell
       'prettier', -- javascript, typepscript, etc
@@ -35,7 +37,7 @@ M.lsp = {
       -- 'rubocop', --ruby
       'yamlfmt', -- yaml
     },
-    formatter = {
+    formatters = {
       'stylua', -- lua
       'markdownlint', -- markdown
       'yamllint', -- yaml
@@ -43,7 +45,8 @@ M.lsp = {
   },
 }
 
--- Treesitter parser list_extend
+--- List of Treesitters support parsers
+-- @table treesitter
 M.treesitter = {
   parsers = { ---- A list of parser names, or "all"
     'bash',
@@ -86,7 +89,8 @@ M.treesitter = {
   }
 }
 
--- formatter
+--- Settings for prettier formatter
+-- @table prettier
 M.prettier = {
   filetypes = {
     'css',

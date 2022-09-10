@@ -26,7 +26,7 @@ telescope.setup({
 
 keymap('n', '<leader>p', function() builtin.find_files({ hidden = true }) end)
 keymap('n', '<leader>P', ':Telescope projects<CR>')
-keymap('n', '<leader>h', function() builtin.help_tags() end)
+keymap('n', '<leader>fh', function() builtin.help_tags() end)
 keymap('n', '<leader>lg', function() builtin.live_grep() end)
 keymap('n', '<leader>gs', function() builtin.grep_string() end)
 keymap('n', '<leader>gc', function() builtin.git_commits() end)
