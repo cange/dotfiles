@@ -6,6 +6,7 @@ local options = {
   timeoutlen = 600, -- max delay until execute command of a key sequence
   ttimeoutlen = 50, -- max time unti next key of a key sequence is expected
   list = true, -- show hidden characters
+  updatetime = 300, -- faster completion (4000ms default)
 
   -- UI
   colorcolumn = '80,120', -- highlight optimal end line¬
