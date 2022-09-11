@@ -45,8 +45,7 @@ packer.startup(function(use)
   -- Statusline
   use {
     'nvim-lualine/lualine.nvim', -- status line
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = instant_setup('lualine'),
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
   -- Tabline
@@ -138,8 +137,10 @@ packer.startup(function(use)
     'tzachar/cmp-tabnine', -- AI code suggestions
     run = './install.sh', requires = 'hrsh7th/nvim-cmp'
   }
-  -- Sesssion
+
+  -- Session
   use 'rmagatti/auto-session' -- small automated session manager
+  use 'rmagatti/session-lens' -- extends auto-session through Telescope
 
   -- Icon
   use 'kyazdani42/nvim-web-devicons' -- File icons
