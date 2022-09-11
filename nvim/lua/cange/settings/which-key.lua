@@ -32,6 +32,13 @@ end
 M.mappings = {
   -- ['/'] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', 'Comment' },
   ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
+
+  s = mapping_by_block('session', 'Session'),
+  g = mapping_by_block('git', 'Git'),
+  l = mapping_by_block('lsp', 'LSP'),
+  p = mapping_by_block('packer', 'Packer'),
+  f = mapping_by_block('telescope', 'Search'),
+
   ['b'] = {
     '<cmd>lua require("telescope.builtin").buffers(require(:telescope.themes").get_dropdown{previewer = false})<cr>',
     'Buffers',
@@ -40,12 +47,7 @@ M.mappings = {
   ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
   ['w'] = { '<cmd>w!<CR>', 'Save' },
   ['q'] = { '<cmd>q!<CR>', 'Quit' },
-  --   ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
   --
-  g = mapping_by_block('git', 'Git'),
-  l = mapping_by_block('lsp', 'LSP'),
-  p = mapping_by_block('packer', 'Packer'),
-  s = mapping_by_block('telescope', 'Search'),
   --   t = {
   --     name = 'Terminal',
   --     n = { '<cmd>lua _NODE_TOGGLE()<cr>', 'Node' },
