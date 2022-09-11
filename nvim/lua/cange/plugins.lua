@@ -32,7 +32,7 @@ end
 --- @param packages string Withspace separated list of npm packages to install
 --- @param description string Hint of the purpose of dependencies
 local function npm_install(packages, description)
-  return 'echo "  installing '..description..' JavaScript binaries" && npm install --global --force '..packages
+  return 'npm install --global --force '..packages..' && echo "  installing '..description..' JavaScript binaries"'
 end
 
 packer.startup(function(use)
@@ -138,6 +138,8 @@ packer.startup(function(use)
     'tzachar/cmp-tabnine', -- AI code suggestions
     run = './install.sh', requires = 'hrsh7th/nvim-cmp'
   }
+  -- Sesssion
+  use 'rmagatti/auto-session' -- small automated session manager
 
   -- Icon
   use 'kyazdani42/nvim-web-devicons' -- File icons

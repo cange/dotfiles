@@ -22,35 +22,38 @@ if not tabnine_found then
   return
 end
 
+vim.keymap.set({ 'i', 's' }, '<C-p>', '<Plug>luasnip-prev-choice')
+vim.keymap.set({ 'i', 's' }, '<C-n>', '<Plug>luasnip-next-choice')
+
+local mapping = cmp.mapping
+
 return cmp.setup({
-  snippet = config.snippet,
+  snippet = config.props.snippet,
   mapping = {
-    ['<C-up>'] = cmp.mapping.select_prev_item(),
-    ['<C-down>'] = cmp.mapping.select_next_item(),
-    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-Space>'] = mapping(mapping.complete(), { 'i', 'c' }),
+    ['<C-b>'] = mapping(mapping.scroll_docs(-1), { 'i', 'c' }),
+    ['<C-f>'] = mapping(mapping.scroll_docs(1), { 'i', 'c' }),
+    ['<C-up>'] = mapping.select_prev_item(),
+    ['<C-down>'] = mapping.select_next_item(),
     ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ['<C-e>'] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
+    ['<ESC>'] = mapping({
+      i = mapping.abort(),
+      c = mapping.close(),
+    }),
+    ['<C-e>'] = mapping({
+      i = mapping.abort(),
+      c = mapping.close(),
     }),
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
-    ['<CR>'] = cmp.mapping.confirm { select = true },
-    ['<down>'] = cmp.mapping(config.handlers.next_item, { 'i', 's' }),
-    ['<Tab>'] = cmp.mapping(config.handlers.next_item, { 'i', 's' }),
-    ['<up>'] = cmp.mapping(config.handlers.prev_item, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(config.handlers.prev_item, { 'i', 's' }),
+    ['<CR>'] = mapping.confirm({ select = true }),
+    ['<down>'] = mapping(config.next_item, { 'i', 's' }),
+    ['<Tab>'] = mapping(config.next_item, { 'i', 's' }),
+    ['<up>'] = mapping(config.prev_item, { 'i', 's' }),
+    ['<S-Tab>'] = mapping(config.prev_item, { 'i', 's' }),
   },
-  formatting = config.formatting,
-  sources = config.sources,
-  -- sources = {
-  --   { name = 'nvim_lsp' }, -- we want to LSP suggestion first
-  --   { name = 'luasnip' },
-  --   { name = 'buffer' },
-  --   { name = 'path' },
-  -- },
+  formatting = config.props.formatting,
+  sources = config.props.sources,
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,

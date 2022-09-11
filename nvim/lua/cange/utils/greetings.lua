@@ -22,17 +22,18 @@ local function greeting_by_day_time()
   if h > 12 or h < 18 then day_time = 'afternoon'
   elseif h < 5 or h > 18 then day_time = 'evening'
   end
-  print('--- day_time:', day_time)
   return 'Good '..day_time
 end
 
 --- @table greetings
+local greeting_by_day_time_with_name = greeting_by_day_time()..' ${name}!'
 local greetings = {
   'What’s going on ${name}?',
-  'Its been a while ${name}!',
-  'Good to see you ${name}!',
+  '${name}, its been a while!',
+  'Good to see you, ${name}!',
   'Hello ${name}!',
   'Hey ${name}!',
+  'Howdy, ${name}!',
   'Hi ${name}',
   'How are you ${name}?',
   'How’s it going ${name}?',
@@ -41,14 +42,19 @@ local greetings = {
   'Sup ${name}?',
   'Wazzup ${name}?',
   'Yo ${name}!',
-  greeting_by_day_time()..' ${name}!',
+  greeting_by_day_time_with_name, -- prio this greeting by adding it multipe times
+  greeting_by_day_time_with_name,
+  greeting_by_day_time_with_name,
+  greeting_by_day_time_with_name,
+  greeting_by_day_time_with_name,
 }
 
 ---Provides greeting functionalities.
---- @alias M table
+---@class Greetings
 local M = {}
 
 ---Generates random gretting with given name and day time.
+--- @type function
 --- @param name string
 --- @return string
 M.random_with_name = function(name)
