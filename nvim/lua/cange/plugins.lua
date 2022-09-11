@@ -68,6 +68,9 @@ packer.startup(function(use)
   -- Project
   use 'ahmedkhalf/project.nvim'
 
+  -- Keybinding
+  use 'folke/which-key.nvim'
+
   -- Fuzzy Finder
   use {
     'nvim-telescope/telescope.nvim', -- fuzzy finder over lists
