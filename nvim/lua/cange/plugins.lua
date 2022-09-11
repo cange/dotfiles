@@ -169,4 +169,5 @@ packer.startup(function(use)
   }
   use 'mg979/vim-visual-multi' -- multi select search/replace
   use 'johmsalas/text-case.nvim' -- text case converter (camel case, etc.)
+  use 'folke/zen-mode.nvim' -- Distraction-free coding
 end)

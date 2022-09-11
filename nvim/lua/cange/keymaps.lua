@@ -54,3 +54,6 @@ keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
 keymap('v', '<Tab>', '>gv', opts)
 keymap('v', '<S-Tab>', '<gv', opts)
+
+-- Reload current file
+keymap('n', '<leader>r', ':source %<CR>', opts)
