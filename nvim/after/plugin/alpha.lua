@@ -27,16 +27,16 @@ if not found_greetings then
 end
 
 section.buttons.val = {
-  button('f', icons.ui.Search ..        '  Find file',        ':Telescope find_files<CR>'),
-  button('p', icons.git.Repo ..         '  Find project',     ':lua require("telescope").extensions.projects.projects()<CR>'),
-  button('h', icons.ui.History ..       '  Recent files',     ':Telescope oldfiles <CR>'),
-  button('r', icons.ui.History ..       '  Recent session',   '<cmd>RestoreSession<CR>'),
-  button('e', icons.ui.NewFile ..       '  New file',         ':ene <BAR> startinsert <CR>'),
-  button('s', icons.ui.SignIn ..        '  Find session',     ':SearchSession<CR>'),
-  button('t', icons.ui.List ..          '  Find text',        ':Telescope live_grep <CR>'),
-  button('c', icons.ui.Gear ..          '  Config',           ':e ~/.config/nvim/init.lua <CR>'),
-  button('u', icons.ui.CloudDownload .. '  Update plugin',     ':PackerSync<CR>'),
-  button('q', icons.ui.SignOut ..       '  Quit',             ':qa<CR>'),
+  button('r', icons.ui.History ..       '  Recent session', '<cmd>RestoreSession<CR>'),
+  button('h', icons.ui.History ..       '  Recent files',   ':Telescope oldfiles <CR>'),
+  button('f', icons.ui.Search ..        '  Open file',                ':Telescope find_files<CR>'),
+  button('p', icons.git.Repo ..         '  Open project',        ':lua require("telescope").extensions.projects.projects()<CR>'),
+  button('e', icons.ui.NewFile ..       '  New file',            ':ene <BAR> startinsert <CR>'),
+  button('s', icons.ui.SignIn ..        '  Open session',        ':SearchSession<CR>'),
+  button('t', icons.ui.List ..          '  Find text',           ':Telescope live_grep <CR>'),
+  button('c', icons.ui.Gear ..          '  Config',              ':e ~/.config/nvim/init.lua <CR>'),
+  button('u', icons.ui.CloudDownload .. '  Update plugin',       ':PackerSync<CR>'),
+  button('q', icons.ui.SignOut ..       '  Quit',                ':qa<CR>'),
 }
 
 section.footer.val = greetings.random_with_name(meta.author.display_name)
