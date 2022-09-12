@@ -46,10 +46,10 @@ if not found_settings then
   return
 end
 
-local subleader = 'f'
+local subleader = editor_settings.telescope.meta.subleader
 for key, props in pairs(editor_settings.telescope.mappings) do
   -- i.e. '<leader>sp'
-  vim.keymap.set('n', '<leader>'..subleader..key, props.command, keymap_opts)
+  vim.keymap.set('n', subleader..key, props.command, keymap_opts)
 end
 
-vim.keymap.set('n', '<leader>'..subleader..'b', browse_files, keymap_opts)
+vim.keymap.set('n', subleader..'b', browse_files, keymap_opts)

@@ -16,6 +16,14 @@ keymap('n', '-', '<C-x>', opts)
 
 keymap('v', 'p', '"_dP', opts) -- Keep clipboard content instead of overriding it
 
+-- greatest remap ever
+-- keymap('x', '<leader>p', '\"_dP', opts)
+--
+-- -- next greatest remap ever : asbjornHaland
+-- keymap({ 'n', 'v' }, '<leader>y', '"+y', opts)
+-- keymap({ 'n', 'v' }, '<leader>d', '"_d', opts)
+-- keymap('n', '<leader>Y', '"+Y', { noremap = false })
+
 -- Select all content
 keymap('n', '<C-a>', 'gg<S-v>G', opts)
 
@@ -60,3 +68,11 @@ keymap('n', '<leader>r', ':source %<CR>:lua vim.notify("Reload current file")<CR
 
 -- Formatting
 keymap({ 'n', 'v' }, '=', ':lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
+
+-- Plugins/worklfows
+local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
+if found_settings then
+  editor_settings.keymaps.setup()
+else
+  vim.notify('keymaps: "cange.settings.editor" could not be found')
+end
