@@ -4,15 +4,17 @@ if not found_null_ls then return end
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/
 local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
-local function formatting_handler()
-  local timeout = 10000 -- milliseconds
-  vim.lsp.buf.formatting_seq_sync({}, timeout)
-end
+-- local function formatting_handler()
+--   local timeout = 10000 -- milliseconds
+--   print('Formatting…')
+--   vim.lsp.buf.formatting_seq_sync({}, timeout)
+--   vim.notify('Formatting…')
+-- end
 
 local settings = {
   debug = true,
   on_attach = function()
-    vim.keymap.set('n', '=', formatting_handler, { noremap = true, silent = true })
+    vim.keymap.set({ 'n', 'v' }, '=', ':lua vim.lsp.buf.formatting_seq_sync()<CR>', { noremap = true, silent = true })
   end,
   sources = {
     -- formatting

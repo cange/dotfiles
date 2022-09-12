@@ -3,8 +3,8 @@ local options = {
   completeopt = { 'menuone', 'noselect' }, -- mostly just for cmp
   conceallevel = 0, -- so that `` is visible in markdown files
   fileencoding = 'utf-8', -- the encoding written to a file
-  timeoutlen = 600, -- max delay until execute command of a key sequence
-  ttimeoutlen = 50, -- max time unti next key of a key sequence is expected
+  timeoutlen = 300, -- max delay until execute command of a key sequence
+  ttimeoutlen = 50, -- max time until next key of a key sequence is expected
   list = true, -- show hidden characters
   updatetime = 300, -- faster completion (4000ms default)
 

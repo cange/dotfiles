@@ -44,6 +44,7 @@ M.mappings = {
     'Buffers',
   },
   ['c'] = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
+  ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
   ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
   ['w'] = { '<cmd>w!<CR>', 'Save' },
   ['q'] = { '<cmd>q!<CR>', 'Quit' },

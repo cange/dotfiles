@@ -56,4 +56,7 @@ keymap('v', '<Tab>', '>gv', opts)
 keymap('v', '<S-Tab>', '<gv', opts)
 
 -- Reload current file
-keymap('n', '<leader>r', ':source %<CR>', opts)
+keymap('n', '<leader>r', ':source %<CR>:lua vim.notify("Reload current file")<CR>', opts)
+
+-- Formatting
+keymap({ 'n', 'v' }, '=', ':lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
