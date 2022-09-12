@@ -13,11 +13,11 @@
   },
   "console log": {
     "prefix": "log",
-    "body": "console.log(\"--- ${1:param}: %o\", $1)"
+    "body": "console.log('--- ${1:param}: %o', $1)"
   },
   "console log filename": {
     "prefix": "logf",
-    "body": "console.log(\"--- ${TM_FILENAME} ${1:param}: %o\", $1)"
+    "body": "console.log('--- ${TM_FILENAME} ${1:param}: %o', $1)"
   },
   "console log({obj})": {
     "prefix": "log{",
@@ -25,11 +25,11 @@
   },
   "console debug": {
     "prefix": "deb",
-    "body": "console.debug(\"=== ${TM_FILENAME/[\\.]/_/} ${1:param}: %o\", $1)"
+    "body": "console.debug('=== ${TM_FILENAME/[\\.]/_/} ${1:param}: %o', $1)"
   },
   "console log - event": {
     "prefix": "loge",
-    "body": "console.debug(\"--- ${1:eventName}: %o\", event$2)"
+    "body": "console.debug('--- ${1:eventName}: %o', event$2)"
   },
   "console dir - DOM element": {
     "prefix": "logdr",
