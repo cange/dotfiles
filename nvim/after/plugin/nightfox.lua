@@ -2,7 +2,7 @@
 local colorscheme = 'nightfox'
 local theme = 'terafox'
 
-local found, _ = pcall(require, colorscheme)
+local found, palette = pcall(require, colorscheme..'.palette')
 if not found then
   vim.notify('colorscheme '..colorscheme..' not found!')
   return
@@ -21,3 +21,10 @@ if not found_modes then
 end
 -- needs to been calld after colorscheme is established
 modes.setup()
+
+local color = palette.load(theme)
+-- inspect available colors
+-- vim.pretty_print('color:', color)
+
+-- adjust colors
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = color.bg1 }) -- disable default color
