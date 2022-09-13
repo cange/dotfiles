@@ -1,3 +1,7 @@
+---Settings for cpm setup
+---@class CmpConfig
+local M = {}
+
 -- enable change immediately
 local found_cmp, cmp = pcall(require, 'cmp')
 if not found_cmp then return end
@@ -19,10 +23,6 @@ if not found_tabnine then
   vim.notify('cmp: "cmp_tabnine.config" could not be found')
   return
 end
-
----Settings for cpm setup
----@class CmpConfig
-local M = {}
 
 local function check_backspace()
   local col = vim.fn.col '.' - 1
@@ -69,7 +69,6 @@ local function menu_item_format(entry, vim_item)
     vim_item.menu_hl_group = 'Comment' -- asign appropriate theme color
   end
   vim_item.kind = icons.kind[vim_item.kind]
-  vim_item.kind_hl_group = 'Comment' -- asign appropriate theme color
   return vim_item
 end
 

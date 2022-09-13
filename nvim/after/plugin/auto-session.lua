@@ -31,6 +31,7 @@ vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 telescope.load_extension('session-lens')
 
 session_lens.setup({
+  path_display = { 'shorten' },
   previewer = true,
   prompt_title = 'Sessions',
 })
