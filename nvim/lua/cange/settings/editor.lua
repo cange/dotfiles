@@ -176,6 +176,7 @@ M.packer = {
     i = { command = '<cmd>PackerInstall<CR>', label = 'Install' },
     s = { command = '<cmd>PackerSync<CR>',    label = 'Sync' },
     u = { command = '<cmd>PackerUpdate<CR>',  label = 'Update' },
+    C = { command = '<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>',  label = 'Config' },
   },
 }
 M.session = {

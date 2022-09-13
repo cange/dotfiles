@@ -28,13 +28,6 @@ local function instant_setup(pack_name)
   return pack.setup()
 end
 
----Install npp packages wrapper
---- @param packages string Withspace separated list of npm packages to install
---- @param description string Hint of the purpose of dependencies
-local function npm_install(packages, description)
-  return 'echo "  installing '..description..' JavaScript binaries" && npm install --global --force '..packages..''
-end
-
 packer.startup(function(use)
   -- Plugin Manager
   use 'wbthomason/packer.nvim' -- package manager
@@ -94,31 +87,27 @@ packer.startup(function(use)
 
   -- Syntax
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/playground' -- inspect syntax node anatomy
 
   -- Snippets
   use 'L3MON4D3/LuaSnip' --snippet engine
   use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
 
   -- LSP
-  use {
+  use { -- (requires additional npm packages)
     'williamboman/mason.nvim', -- simple to use language server installer
     requires = {
       'williamboman/mason-lspconfig.nvim',
       'neovim/nvim-lspconfig', -- enable LSP
     },
-    -- install JavaScript related dependencies
-    run = npm_install('typescript-language-server typescript', 'LSP')
   }
   use 'b0o/SchemaStore.nvim' -- json/yaml schema support
-  use {
-    'jose-elias-alvarez/null-ls.nvim', -- syntax formatting
-    -- install JavaScript related dependencies
-    run = npm_install('@fsouza/prettierd eslint_d jsonlint', 'null-ls')
-  }
+  use 'jose-elias-alvarez/null-ls.nvim' -- syntax formatting, diagnostics (requires npm pacakges)
   use {
     'MunifTanjim/prettier.nvim', -- JS formatter
     requires = 'jose-elias-alvarez/null-ls.nvim',
   }
+  use 'onsails/lspkind.nvim' -- plugin adds vscode-like icons
 
   -- Completion
   use {

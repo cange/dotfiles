@@ -52,7 +52,21 @@ The following packages are required to install in order to use this NeoVim setup
 [ripgrep]: https://github.com/BurntSushi/ripgrep#installation
 [nerd-fonts]: https://github.com/ryanoasis/nerd-fonts
 
-### Ready
+#### Install JavaScript Binaries
+
+The following npm packages needs to install in order to enable syntax
+diagnostics and formatting:
+
+```sh
+npm install --global typescript-language-server \
+typescript \
+@fsouza/prettierd \
+eslint_d \
+jsonlint \
+@johnnymorganz/stylua-bin
+```
+
+### First Start
 
 Open neovim and run package manager
 
