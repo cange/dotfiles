@@ -127,6 +127,9 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Get access to visables npm packages
+# https://pages.visable.dev/platform/documentation/architecture/GitHub/registries/
+export GITHUB_TOKEN=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
 # Verified git user – Telling Git about your GPG key
 # https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
 export GPG_TTY=$(tty)
@@ -137,4 +140,11 @@ export GPG_TTY=$(tty)
 
 # https://github.com/sharkdp/bat
 export BAT_THEME="OneHalfDark"
-export BAT_STYLE="numbers,changes"
+export BAT_STYLE="changes"
+
+# bun completions
+[ -s "/Users/angermann/.bun/_bun" ] && source "/Users/angermann/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/Users/angermann/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

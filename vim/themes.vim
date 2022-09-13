@@ -1,5 +1,6 @@
 " == define colorscheme ========================================================
 "
+"
 if has("gui_running")
   set guioptions-=r                 " remove Right-hand scrollbar
 else
@@ -15,4 +16,3 @@ set background=dark
 
 " set nighfox sub theme
 colorscheme terafox
-
