@@ -20,12 +20,12 @@ keymap('n', '-', '<C-x>')
 keymap('v', 'p', '"_dP') -- Keep clipboard content instead of overriding it
 
 -- greatest remap ever
--- keymap('x', '<leader>p', '\"_dP')
+keymap('x', '<leader>p', '"_dP')
 --
 -- -- next greatest remap ever : asbjornHaland
--- keymap({ 'n', 'v' }, '<leader>y', '"+y')
--- keymap({ 'n', 'v' }, '<leader>d', '"_d')
--- keymap('n', '<leader>Y', '"+Y', { noremap = false })
+keymap({ 'n', 'v' }, '<leader>y', '"+y')
+keymap({ 'n', 'v' }, '<leader>d', '"_d')
+keymap('n', '<leader>Y', '"+Y', { noremap = false })
 
 -- Select all content
 keymap('n', '<C-a>', 'gg<S-v>G')
