@@ -1,5 +1,7 @@
 local found, telescope = pcall(require, 'telescope')
-if not found then return end
+if not found then
+  return
+end
 
 local actions = require('telescope.actions')
 local keymap_opts = { noremap = true, silent = true }
@@ -9,24 +11,31 @@ local picker_opts = {
 }
 telescope.setup({
   defaults = {
+    path_display = {
+      'shorten',
+      'absolute',
+    },
     mappings = {
       i = {
         ['<C-n>'] = actions.cycle_history_next,
         ['<C-p>'] = actions.cycle_history_prev,
       },
-   },
+    },
   },
   pickers = {
     find_files = picker_opts,
     grep_string = picker_opts,
-  }
+  },
 })
 
 -- File browser
 local file_browser = telescope.load_extension('file_browser')
 
 local function browse_files()
-  local function buffer_dir() return vim.fn.expand('%:p:h') end
+  local function buffer_dir()
+    return vim.fn.expand('%:p:h')
+  end
+
   file_browser.file_browser({
     theme = 'dropdown',
     hijack_netrw = true, -- true disables netrw and uses the file browser here
@@ -37,6 +46,7 @@ local function browse_files()
     respect_gitignore = false,
   })
 end
+
 --
 -- keybindings assignment
 --
@@ -49,7 +59,7 @@ end
 local subleader = editor_settings.telescope.meta.subleader
 for key, props in pairs(editor_settings.telescope.mappings) do
   -- i.e. '<leader>sp'
-  vim.keymap.set('n', subleader..key, props.command, keymap_opts)
+  vim.keymap.set('n', subleader .. key, props.command, keymap_opts)
 end
 
-vim.keymap.set('n', subleader..'b', browse_files, keymap_opts)
+vim.keymap.set('n', subleader .. 'b', browse_files, keymap_opts)

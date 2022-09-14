@@ -10,10 +10,9 @@ if not found_settings then
   return
 end
 
-
 treesitter_config.setup({
- ensure_installed = editor_settings.treesitter.parsers, -- A list of parser names, or "all"
- highlight = {
+  ensure_installed = editor_settings.treesitter.parsers, -- A list of parser names, or "all"
+  highlight = {
     enable = true, -- `false` will disable the whole extension
     additional_vim_regex_highlighting = true,
   },
@@ -28,5 +27,5 @@ treesitter_config.setup({
     -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings}
   },
-
+  playground = { enable = true },
 })

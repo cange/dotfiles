@@ -1,6 +1,12 @@
 -- enable change immediately
 local found_cmp, cmp = pcall(require, 'cmp')
-if not found_cmp then return end
+if not found_cmp then
+  return
+end
+
+---Settings for cpm setup
+---@class CmpConfig
+local M = {}
 
 local found_ls, ls = pcall(require, 'luasnip')
 if not found_ls then
@@ -20,13 +26,9 @@ if not found_tabnine then
   return
 end
 
----Settings for cpm setup
----@class CmpConfig
-local M = {}
-
 local function check_backspace()
-  local col = vim.fn.col '.' - 1
-  return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
+  local col = vim.fn.col('.') - 1
+  return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
 end
 
 M.next_item = function(fallback)
@@ -43,7 +45,7 @@ M.next_item = function(fallback)
   end
 end
 
-M.prev_item = function (fallback)
+M.prev_item = function(fallback)
   if cmp.visible() then
     cmp.select_prev_item()
   elseif ls.jumpable(-1) then
@@ -69,7 +71,6 @@ local function menu_item_format(entry, vim_item)
     vim_item.menu_hl_group = 'Comment' -- asign appropriate theme color
   end
   vim_item.kind = icons.kind[vim_item.kind]
-  vim_item.kind_hl_group = 'Comment' -- asign appropriate theme color
   return vim_item
 end
 
@@ -79,21 +80,33 @@ M.props = {
       ls.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
+  experimental = {
+    ghost_text = true,
+    native_menu = false,
+  },
+  window = {
+    completion = {
+      col_offset = -2, -- align abbr text with kind icons in prefix
+    },
+  },
   formatting = {
     fields = { -- order within a menu item
-      'abbr',
       'kind',
+      'abbr',
       'menu',
     },
     format = menu_item_format,
   },
   sources = {
-    { name = 'nvim_lsp',    group_index = 1, max_item_count = 5 },
-    { name = 'luasnip',     group_index = 1, max_item_count = 5 },
-    { name = 'nvim_lua',    group_index = 2, max_item_count = 5 },
     { name = 'cmp_tabnine', group_index = 3, max_item_count = 5 },
+    { name = 'luasnip',     group_index = 1, max_item_count = 5 },
+    { name = 'nvim_lsp',    group_index = 1, max_item_count = 5 },
+    { name = 'nvim_lua',    group_index = 2, max_item_count = 5 },
     { name = 'path',        group_index = 4, max_item_count = 5 },
-    { name = 'buffer',      group_index = 3, max_item_count = 5,
+    {
+      name = 'buffer',
+      group_index = 3,
+      max_item_count = 5,
       filter = function(_, ctx)
         local ignore_filetypes = {
           'json',

@@ -44,7 +44,7 @@ M.lsp = {
     },
   },
   meta = {
-    subleader = 'l'
+    subleader = 'l',
   },
   mappings = {
     I = { command = '<cmd>LspInstallInfo<CR>',                          label = 'Installer Info' },
@@ -104,8 +104,8 @@ M.treesitter = {
     'typescript',
     'vim',
     'vue',
-    'yaml'
-  }
+    'yaml',
+  },
 }
 
 --- Settings for prettier formatter
@@ -139,7 +139,7 @@ M.telescope = {
     C = { command = '<cmd>Telescope commands<CR>',    label = 'Commands' },
     F = { command = '<cmd>Telescope live_grep<CR>',   label = 'Find text' },
     M = { command = '<cmd>Telescope man_pages<CR>',   label = 'Man pages' },
-    P = { command = '<cmd>Telescope projects<CR>',    label = 'Projects' },
+    P = { command = '<cmd>Telescope projects<CR>',    label = 'Open projects' },
     c = { command = '<cmd>Telescope colorscheme<CR>', label = 'Change colorscheme' },
     h = { command = '<cmd>Telescope help_tags<CR>',   label = 'Find help' },
     k = { command = '<cmd>Telescope keymaps<CR>',     label = 'Keymaps' },
@@ -148,7 +148,6 @@ M.telescope = {
 }
 M.git = {
   meta = {
-    leader = '<leader>',
     subleader = 'g',
   },
   mappings = {
@@ -177,11 +176,12 @@ M.packer = {
     i = { command = '<cmd>PackerInstall<CR>', label = 'Install' },
     s = { command = '<cmd>PackerSync<CR>',    label = 'Sync' },
     u = { command = '<cmd>PackerUpdate<CR>',  label = 'Update' },
+    C = { command = '<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>',  label = 'Config' },
   },
 }
 M.session = {
   meta = {
-    subleader = 's'
+    subleader = 's',
   },
   mappings = {
     R = { command = '<cmd>RestoreSession<CR>',      label = 'Recent session' },
@@ -190,7 +190,7 @@ M.session = {
     r = { command = '<cmd>Telescope oldfiles<CR>',  label = 'Recent files' },
     s = { command = '<cmd>SaveSession<CR>',         label = 'Save session' },
     x = { command = '<cmd>DeleteSession<CR>',       label = 'Delete session' },
-  }
+  },
 }
 
 ---Defines global keybindings by certain worklows like Git
@@ -199,18 +199,19 @@ local function keymaps_setup()
   local opts = { noremap = true, silent = true }
 
   for _, workflow_settings in pairs(M) do
-
-    if not vim.tbl_contains(vim.tbl_keys(workflow_settings), 'mappings') then return end
+    if not vim.tbl_contains(vim.tbl_keys(workflow_settings), 'mappings') then
+      return
+    end
     for key, mapping in pairs(workflow_settings.mappings) do
       local leader = workflow_settings.meta and workflow_settings.meta.leader or ''
       local subleader = workflow_settings.meta and workflow_settings.meta.subleader or ''
 
-      keymap('n', leader .. subleader .. key, mapping.command, opts)
+      keymap('n', '<leader>' .. subleader .. key, mapping.command, opts)
     end
   end
 end
 
 M.keymaps = {
-  setup = keymaps_setup
+  setup = keymaps_setup,
 }
 return M

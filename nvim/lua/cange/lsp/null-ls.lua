@@ -1,5 +1,7 @@
 local found_null_ls, null_ls = pcall(require, 'null-ls')
-if not found_null_ls then return end
+if not found_null_ls then
+  return
+end
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/
 local diagnostics = null_ls.builtins.diagnostics
@@ -21,13 +23,14 @@ local settings = {
     formatting.eslint_d, -- fast eslint
     formatting.markdownlint, -- style and syntax checker
     formatting.prettierd, -- pretty fast prettier
-    formatting.shfmt,
-    formatting.stylelint,
-    formatting.yamlfmt,
+    formatting.shfmt, -- shell
+    formatting.stylelint, -- CSS
+    formatting.stylua, -- lua
+    formatting.yamlfmt, -- yaml
 
     -- diagnostics/linter
     diagnostics.eslint_d.with({
-      diagnostics_format = '[eslint] #{m}\n(#{c})'
+      diagnostics_format = '[eslint] #{m}\n(#{c})',
     }),
     diagnostics.jsonlint,
     diagnostics.rubocop,
