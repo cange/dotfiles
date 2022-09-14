@@ -58,7 +58,8 @@ local default_mappings = {
   --   },
 }
 
-M.mappings = vim.tbl_deep_extend('keep',
+M.mappings = vim.tbl_deep_extend(
+  'keep',
   default_mappings,
   workflow_section('session', 'Session'),
   workflow_section('git', 'Git'),
@@ -75,7 +76,6 @@ M.vopts = {
   noremap = true, -- use `noremap` when creating keymaps
   nowait = true, -- use `nowait` when creating keymaps
 }
-M.vmappings = {
-}
+M.vmappings = {}
 
 return M

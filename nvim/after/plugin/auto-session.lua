@@ -1,5 +1,7 @@
 local found, auto_session = pcall(require, 'auto-session')
-if not found then return end
+if not found then
+  return
+end
 
 local found_telescope, telescope = pcall(require, 'telescope')
 if not found_telescope then
@@ -16,7 +18,7 @@ end
 local opts = {
   log_level = 'info',
   auto_session_enable_last_session = false,
-  auto_session_root_dir = vim.fn.stdpath 'data' .. '/sessions/',
+  auto_session_root_dir = vim.fn.stdpath('data') .. '/sessions/',
   auto_session_enabled = true,
   auto_save_enabled = nil,
   auto_restore_enabled = nil,

@@ -3,15 +3,17 @@
 --- @param tbl table
 --- @return string
 local function interp(str, tbl)
-  return (str:gsub('($%b{})', function(word) return tbl[word:sub(3, -2)] or word end))
+  return (str:gsub('($%b{})', function(word)
+    return tbl[word:sub(3, -2)] or word
+  end))
 end
 
 ---Generates random number between given min max
 --- @param min integer
 --- @param max integer
 --- @return integer
-local function random_range (min, max)
-  return  math.floor(math.random() * (max - min)) + min
+local function random_range(min, max)
+  return math.floor(math.random() * (max - min)) + min
 end
 
 ---Generate day time related greeting
@@ -19,10 +21,12 @@ end
 local function greeting_by_day_time()
   local h = tonumber(vim.fn.strftime('%k', vim.fn.localtime()))
   local day_time = 'morning'
-  if h > 12 and h <= 18 then day_time = 'afternoon'
-  elseif h >= 18 or h < 5 then day_time = 'evening'
+  if h > 12 and h <= 18 then
+    day_time = 'afternoon'
+  elseif h >= 18 or h < 5 then
+    day_time = 'evening'
   end
-  return 'Good '..day_time
+  return 'Good ' .. day_time
 end
 
 ---Repeat string as many as given count
@@ -33,9 +37,9 @@ local function repeat_string(str, count)
   local i = 1
   local result = {}
   repeat
-    result[i] = str;
+    result[i] = str
     i = i + 1
-  until(i > count)
+  until i > count
   return result
 end
 
@@ -68,7 +72,7 @@ local function greetings_and_weights()
     { 'Sup ${name}?', 1 },
     { 'Wazzup ${name}?', 1 },
     { 'Yo ${name}!', 1 },
-    { greeting_by_day_time()..' ${name}!', 6 }, -- prio this greeting by adding it multipe times
+    { greeting_by_day_time() .. ' ${name}!', 6 }, -- prio this greeting by adding it multipe times
   })
 end
 

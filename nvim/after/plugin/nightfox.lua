@@ -2,15 +2,15 @@
 local colorscheme = 'nightfox'
 local theme = 'terafox'
 
-local found, palette = pcall(require, colorscheme..'.palette')
+local found, palette = pcall(require, colorscheme .. '.palette')
 if not found then
-  vim.notify('colorscheme '..colorscheme..' not found!')
+  vim.notify('colorscheme ' .. colorscheme .. ' not found!')
   return
 end
 
-local found_theme, _ = pcall(vim.cmd, 'colorscheme '..theme)
+local found_theme, _ = pcall(vim.cmd, 'colorscheme ' .. theme)
 if not found_theme then
-  vim.notify('Theme "'..theme..'" of "'..colorscheme..'" colorscheme not found!')
+  vim.notify('Theme "' .. theme .. '" of "' .. colorscheme .. '" colorscheme not found!')
   return
 end
 

@@ -1,5 +1,7 @@
 local found, ls = pcall(require, 'luasnip')
-if not found then return end
+if not found then
+  return
+end
 
 local found_from_vscode, from_vscode = pcall(require, 'luasnip.loaders.from_vscode')
 if not found_from_vscode then
@@ -12,7 +14,7 @@ from_vscode.lazy_load()
 local found_snippets, snippets = pcall(require, 'cange.snippets')
 if found_snippets then
   from_vscode.load({ paths = snippets.paths })
-  else
+else
   vim.notify('luasnip: "cange.snippets" could not be found')
 end
 

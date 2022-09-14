@@ -1,15 +1,14 @@
 return {
-  cmd = {'typescript-language-server', '--stdio' }
+  cmd = { 'typescript-language-server', '--stdio' },
   filetypes = {
     'javascript',
     'javascript.jsx',
     'javascriptreact',
     'typescript',
     'typescript.tsx',
-    'typescriptreact'
+    'typescriptreact',
   },
   init_options = {
-    hostInfo = 'neovim'
-  }
+    hostInfo = 'neovim',
+  },
 }
-

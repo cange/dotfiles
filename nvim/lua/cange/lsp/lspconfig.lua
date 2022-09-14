@@ -1,5 +1,7 @@
 local found, lspconfig = pcall(require, 'lspconfig')
-if not found then return end
+if not found then
+  return
+end
 
 local function lsp_on_attach(_, bufnr)
   -- Set up attach options
@@ -26,7 +28,9 @@ end
 
 -- Set up lsp cmp (completion)
 local found_cmp_lsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
-if not found_cmp_lsp then return end
+if not found_cmp_lsp then
+  return
+end
 
 local function lsp_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -48,7 +52,7 @@ local lsp_opts = {
 
 local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
 if not found_settings then
-  vim.notify 'lspconfig: "cange.settings.lsp" could not be found'
+  vim.notify('lspconfig: "cange.settings.lsp" could not be found')
   return
 end
 

@@ -1,9 +1,11 @@
 local found, mason_lspconfig = pcall(require, 'mason-lspconfig')
-if not found then return end
+if not found then
+  return
+end
 
 local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
 if not found_settings then
-  vim.notify 'mason-lspconfig: "cange.settings" could not be found'
+  vim.notify('mason-lspconfig: "cange.settings" could not be found')
   return
 end
 

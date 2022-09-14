@@ -1,7 +1,9 @@
 local found, tree = pcall(require, 'nvim-tree')
-if not found then return end
+if not found then
+  return
+end
 local keymap_opts = { noremap = true, silent = true }
-local keymap =vim.keymap.set
+local keymap = vim.keymap.set
 
 keymap('n', '<leader>e', ':NvimTreeToggle<CR>', keymap_opts)
 keymap('n', '<leader>.', ':NvimTreeFindFile<CR>', keymap_opts)
@@ -30,7 +32,7 @@ tree.setup({
   respect_buf_cwd = true,
   update_focused_file = {
     enable = true,
-    update_root = true
+    update_root = true,
   },
   -- common
   renderer = {
@@ -56,7 +58,7 @@ tree.setup({
       list = {
         { key = 'v', cb = config('vsplit') },
         { key = 'h', cb = config('split') },
-      }
-    }
-  }
+      },
+    },
+  },
 })

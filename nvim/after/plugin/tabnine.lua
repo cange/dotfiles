@@ -1,5 +1,7 @@
 local found, tabnine = pcall(require, 'cmp_tabnine.config')
-if not found then return end
+if not found then
+  return
+end
 -- https://github.com/tzachar/cmp-tabnine#install
 tabnine.setup({
   max_lines = 1000,
@@ -12,5 +14,5 @@ tabnine.setup({
     -- uncomment to ignore in lua:
     -- lua = true
   },
-  show_prediction_strength = false
+  show_prediction_strength = false,
 })

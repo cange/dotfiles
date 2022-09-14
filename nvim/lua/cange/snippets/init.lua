@@ -3,7 +3,7 @@
 ---@class Snippets
 ---@type table<string, string>
 local M = {
-  paths = './lua/cange/snippets'
+  paths = './lua/cange/snippets',
 }
 
 return M

@@ -1,5 +1,7 @@
 local found, which_key = pcall(require, 'which-key')
-if not found then return end
+if not found then
+  return
+end
 
 local found_icons, icons = pcall(require, 'cange.icons')
 if not found_icons then

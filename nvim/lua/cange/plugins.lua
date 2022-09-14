@@ -9,7 +9,7 @@ end
 packer.init({
   display = {
     open_fn = function()
-      return require('packer.util').float { border = 'rounded' }
+      return require('packer.util').float({ border = 'rounded' })
     end,
   },
 })
@@ -21,7 +21,7 @@ packer.init({
 local function instant_setup(pack_name)
   local found, pack = pcall(require, pack_name)
   if not found then
-    vim.notify('plugins: "'..pack_name..'" could not be found')
+    vim.notify('plugins: "' .. pack_name .. '" could not be found')
     return
   end
 
@@ -30,87 +30,90 @@ end
 
 packer.startup(function(use)
   -- Plugin Manager
-  use 'wbthomason/packer.nvim' -- package manager
+  use('wbthomason/packer.nvim') -- package manager
 
   -- UI
-  use 'EdenEast/nightfox.nvim' -- theme
+  use('EdenEast/nightfox.nvim') -- theme
 
   -- Statusline
-  use {
+  use({
     'nvim-lualine/lualine.nvim', -- status line
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+  })
 
   -- Tabline
-  use 'akinsho/nvim-bufferline.lua' -- tab UI
+  use('akinsho/nvim-bufferline.lua') -- tab UI
 
   -- Startup
-  use {
+  use({
     'goolord/alpha-nvim', -- startup screen
     requires = { 'kyazdani42/nvim-web-devicons' },
-  }
+  })
 
   -- Utility
-  use {
+  use({
     'rcarriga/nvim-notify', -- popover notification
-    config = function() vim.notify = require('notify') end,
-  }
-  use 'mvllow/modes.nvim' -- Prismatic line decorations
+    config = function()
+      vim.notify = require('notify')
+    end,
+  })
+  use('mvllow/modes.nvim') -- Prismatic line decorations
 
   -- Project
-  use 'ahmedkhalf/project.nvim'
+  use('ahmedkhalf/project.nvim')
 
   -- Keybinding
-  use 'folke/which-key.nvim'
+  use('folke/which-key.nvim')
 
   -- Fuzzy Finder
-  use {
+  use({
     'nvim-telescope/telescope.nvim', -- fuzzy finder over lists
     requires = {
       'nvim-lua/plenary.nvim', -- common lua functions - https://github.com/nvim-lua/plenary.nvim
       'nvim-telescope/telescope-file-browser.nvim', -- browser extension
       'BurntSushi/ripgrep', -- telescope live grep suggestions
     },
-  }
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- telescope , for better performance
+  })
+  use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }) -- telescope , for better performance
 
   -- File explorer
-  use {
+  use({
     'kyazdani42/nvim-tree.lua',
     requires = { 'kyazdani42/nvim-web-devicons' }, -- optional, for file icons
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
-  }
+    tag = 'nightly', -- optional, updated every week. (see issue #1193)
+  })
 
-  use { 'numToStr/Comment.nvim', -- comment toggle
+  use({
+    'numToStr/Comment.nvim', -- comment toggle
     config = instant_setup('Comment'),
-  }
+  })
 
   -- Syntax
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'nvim-treesitter/playground' -- inspect syntax node anatomy
+  use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+  use('nvim-treesitter/playground') -- inspect syntax node anatomy
 
   -- Snippets
-  use 'L3MON4D3/LuaSnip' --snippet engine
-  use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
+  use('L3MON4D3/LuaSnip') --snippet engine
+  use('rafamadriz/friendly-snippets') -- a bunch of snippets to use
 
   -- LSP
-  use { -- (requires additional npm packages)
+  use({ -- (requires additional npm packages)
     'williamboman/mason.nvim', -- simple to use language server installer
     requires = {
       'williamboman/mason-lspconfig.nvim',
       'neovim/nvim-lspconfig', -- enable LSP
     },
-  }
-  use 'b0o/SchemaStore.nvim' -- json/yaml schema support
-  use 'jose-elias-alvarez/null-ls.nvim' -- syntax formatting, diagnostics (requires npm pacakges)
-  use {
+  })
+  use('b0o/SchemaStore.nvim') -- json/yaml schema support
+  use('jose-elias-alvarez/null-ls.nvim') -- syntax formatting, diagnostics (requires npm pacakges)
+  use({
     'MunifTanjim/prettier.nvim', -- JS formatter
     requires = 'jose-elias-alvarez/null-ls.nvim',
-  }
-  use 'onsails/lspkind.nvim' -- plugin adds vscode-like icons
+  })
+  use('onsails/lspkind.nvim') -- plugin adds vscode-like icons
 
   -- Completion
-  use {
+  use({
     'hrsh7th/nvim-cmp', -- code completion
     requires = {
       'L3MON4D3/LuaSnip', -- snippets
@@ -120,43 +123,44 @@ packer.startup(function(use)
       'hrsh7th/cmp-nvim-lua', -- Neovim's Lua API
       'hrsh7th/cmp-path', -- path completions
       'saadparwaiz1/cmp_luasnip', -- snippet completions
-    }
-  }
-  use {
+    },
+  })
+  use({
     'tzachar/cmp-tabnine', -- AI code suggestions
-    run = './install.sh', requires = 'hrsh7th/nvim-cmp'
-  }
+    run = './install.sh',
+    requires = 'hrsh7th/nvim-cmp',
+  })
 
   -- Session
-  use 'rmagatti/auto-session' -- small automated session manager
-  use 'rmagatti/session-lens' -- extends auto-session through Telescope
+  use('rmagatti/auto-session') -- small automated session manager
+  use('rmagatti/session-lens') -- extends auto-session through Telescope
 
   -- Icon
-  use 'kyazdani42/nvim-web-devicons' -- File icons
+  use('kyazdani42/nvim-web-devicons') -- File icons
 
   -- Color
-  use {
+  use({
     'norcalli/nvim-colorizer.lua', -- color highlighter
     config = instant_setup('colorizer'),
-  }
+  })
 
   -- Git
-  use 'lewis6991/gitsigns.nvim' -- git highlighter, blame, etc
-  use 'dinhhuy258/git.nvim' -- For git blame & browse
+  use('lewis6991/gitsigns.nvim') -- git highlighter, blame, etc
+  use('dinhhuy258/git.nvim') -- For git blame & browse
 
   -- Editing support
-  use 'windwp/nvim-autopairs' -- close brackets, quotes etc
-  use {
+  use('windwp/nvim-autopairs') -- close brackets, quotes etc
+  use({
     'windwp/nvim-ts-autotag', -- autoclose and autorename html tags
     config = instant_setup('nvim-ts-autotag'),
-  }
-  use {
+  })
+  use({
     'p00f/nvim-ts-rainbow', -- Rainbow parentheses
     requires = {
-      'nvim-treesitter/nvim-treesitter'
-    }
-  }
-  use 'mg979/vim-visual-multi' -- multi select search/replace
-  use 'johmsalas/text-case.nvim' -- text case converter (camel case, etc.)
-  use 'folke/zen-mode.nvim' -- Distraction-free coding
+      'nvim-treesitter/nvim-treesitter',
+    },
+  })
+  use('mg979/vim-visual-multi') -- multi select search/replace
+  use('johmsalas/text-case.nvim') -- text case converter (camel case, etc.)
+  use('folke/zen-mode.nvim') -- Distraction-free coding
 end)

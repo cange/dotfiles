@@ -1,5 +1,7 @@
 local found, alpha = pcall(require, 'alpha')
-if not found then return end
+if not found then
+  return
+end
 
 local dashboard = require('alpha.themes.dashboard')
 local section = dashboard.section

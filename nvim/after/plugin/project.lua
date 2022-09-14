@@ -1,5 +1,7 @@
 local found, project = pcall(require, 'project_nvim')
-if not found then return end
+if not found then
+  return
+end
 
 project.setup({
   ---@usage set to false to disable project.nvim.

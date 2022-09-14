@@ -82,16 +82,24 @@ vim.opt.path:append({ '**' }) -- Finding files - Search down into subfolders
 vim.opt.wildignore:append({ -- stuff to ignore when tab completing
   '*.o',
   '*.obj',
-  '*.png', '*.jpg', '*.gif', '*.pdf', '*.psd',
+  '*.png',
+  '*.jpg',
+  '*.gif',
+  '*.pdf',
+  '*.psd',
   '*/node_modules/*',
-  '*/tmp/*', '*.scssc', '*.so', '*.swp', '*.zip',
+  '*/tmp/*',
+  '*.scssc',
+  '*.so',
+  '*.swp',
+  '*.zip',
   '*DS_Store*',
   '*~',
 })
 
 -- vim.opt.whichwrap:append({ '<', '>', '[', ']', 'h', 'l' })
 vim.opt.listchars:append({
-  eol = "",
-  nbsp = "_",
-  tab = " ",
+  eol = '',
+  nbsp = '_',
+  tab = ' ',
 })

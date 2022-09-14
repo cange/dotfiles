@@ -1,5 +1,7 @@
 local found_prettier, prettier = pcall(require, 'prettier')
-if not found_prettier then return end
+if not found_prettier then
+  return
+end
 
 local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
 if not found_settings then
