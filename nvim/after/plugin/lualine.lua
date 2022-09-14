@@ -14,7 +14,7 @@ local theme = lualine.get_config().options.theme
 
 local found_theme, theme_palette = pcall(require, 'nightfox.palette')
 if found_theme then
-  local color = theme_palette.load('terafox')
+  local color = theme_palette.load(vim.g.colors_name)
   -- vim.pretty_print(color.green)
   -- vim.pretty_print(vim.tbl_keys(color))
   theme = {
