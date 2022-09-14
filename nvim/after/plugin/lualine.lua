@@ -8,6 +8,13 @@ if not found_icons then
   vim.notify('lualine: "cange.icons" could not be found')
   return
 end
+local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
+if not found_settings then
+  vim.notify('lualine: "cange.settings.editor" could not be found')
+  return
+end
+local colorscheme = editor_settings.colorscheme
+
 local found_auto_session, auto_session = pcall(require, 'auto-session-library')
 if not found_auto_session then
   vim.notify('lualine: "auto-session-library" could not be found')
@@ -16,9 +23,9 @@ end
 
 local theme = lualine.get_config().options.theme
 
-local found_theme, theme_palette = pcall(require, 'nightfox.palette')
+local found_theme, theme_palette = pcall(require, colorscheme.name .. '.palette')
 if found_theme then
-  local color = theme_palette.load(vim.g.colors_name)
+  local color = theme_palette.load(vim.g.colors_name or colorscheme.theme)
   -- vim.pretty_print(color.green)
   -- vim.pretty_print(vim.tbl_keys(color))
   theme = {
