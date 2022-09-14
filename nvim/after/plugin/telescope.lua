@@ -11,6 +11,10 @@ local picker_opts = {
 }
 telescope.setup({
   defaults = {
+    path_display = {
+      'shorten',
+      'absolute',
+    },
     mappings = {
       i = {
         ['<C-n>'] = actions.cycle_history_next,
