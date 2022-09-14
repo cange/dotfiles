@@ -1,5 +1,5 @@
-local ok, git = pcall(require, 'git')
-if not ok then
+local found_git, git = pcall(require, 'git')
+if not found_git then
   return
 end
 

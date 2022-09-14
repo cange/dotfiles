@@ -1,5 +1,5 @@
-local ok, autopairs = pcall(require, 'nvim-autopairs')
-if not ok then
+local found, autopairs = pcall(require, 'nvim-autopairs')
+if not found then
   return
 end
 
@@ -9,8 +9,8 @@ autopairs.setup({
 
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local cmp_ok, cmp = pcall(require, 'cmp')
-if not cmp_ok then
+local found_cmp, cmp = pcall(require, 'cmp')
+if not found_cmp then
   return
 end
 

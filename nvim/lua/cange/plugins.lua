@@ -1,6 +1,6 @@
 -- Use a protected call so we don't error out on first use
-local ok, packer = pcall(require, 'packer')
-if not ok then
+local found, packer = pcall(require, 'packer')
+if not found then
   vim.notify('plugins: Packer is not installed')
   return
 end

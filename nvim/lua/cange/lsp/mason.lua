@@ -1,10 +1,10 @@
-local ok, mason = pcall(require, 'mason')
-if not ok then
+local found, mason = pcall(require, 'mason')
+if not found then
   return
 end
 
-local icons_ok, icons = pcall(require, 'cange.icons')
-if not icons_ok then
+local found_icons, icons = pcall(require, 'cange.icons')
+if not found_icons then
   return
 end
 
