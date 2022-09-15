@@ -2,7 +2,19 @@
 
 ## Installation
 
-Link the `nvim` config directory to enable the configurations in NeoVim setup.
+First install NeoVim itself:
+
+```sh
+brew install neovim
+```
+
+See also <https://neovim.io/>
+
+### NeoVim Configuration
+
+The config is located in `dotfiles/nvim` and needs to symlink to the  actual
+OS direcotry.
+Use the command below to achieve this:
 
 ```sh
 ln -s "$HOME/dotfiles/nvim" "$HOME/.config/"

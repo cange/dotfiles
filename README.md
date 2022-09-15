@@ -14,28 +14,15 @@ Further based the vimbundle handling on
 git clone http://github.com/cange/dotfiles.git ~/dotfiles
 ```
 
-2. Set up [vim-plug](https://github.com/junegunn/vim-plug):
-
-```shell
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-
-3. Run (make sure the Ruby is installed)
+2. Run (make sure the Ruby is installed)
 
 ```shell
 ./dotfiles/install
 ```
 
+3. Follow the NeoVim set up guide [./nvim/](./nvim/)
+
 4. Done
-
-## How to update vim plugins?
-
-Call the following in Vi or Vim (Vundle)
-
-```vi
-:PlugClean
-```
 
 ### ZSH Theme
 
@@ -66,7 +53,7 @@ The following is a list of apps and tools
 | fork                        | fast and friendly git client |
 | gimp                        | image editor |
 | git                         | latest version of git |
-| gpg-suite                   | protects emails, files and sign Git commits | 
+| gpg-suite                   | protects emails, files and sign Git commits |
 | inkscape                    | vector editor |
 | iterm2                      | advanced terminal |
 | itsycal                     | menu bar calender |

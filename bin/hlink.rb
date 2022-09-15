@@ -3,7 +3,7 @@
 require 'fileutils'
 # require 'colorize'
 
-EXCLUDES = %w(. .. .git .gitignore .vim vimrc oh-my-zsh bin README.md install update)
+EXCLUDES = %w(. .. .git .gitignore .oh-my-zsh bin README.md install)
 
 def cwd
   @cwd ||= File.expand_path(File.dirname(__FILE__))

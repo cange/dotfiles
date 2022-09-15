@@ -47,6 +47,5 @@ if [ $(uname) = "Linux" ]; then
 else
   # mac os specifc
   alias vim='nvim'
-  alias vi='nvim'
   alias gui='fork'
 fi
