@@ -1,6 +1,12 @@
+local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
+if not found_settings then
+  vim.notify('lualine: "cange.settings.editor" could not be found')
+  return
+end
+
 -- theme https://github.com/EdenEast/nightfox.nvim#usage
-local colorscheme = 'nightfox'
-local theme = 'terafox'
+local colorscheme = editor_settings.colorscheme.name
+local theme = editor_settings.colorscheme.theme or 'terafox'
 
 local found, palette = pcall(require, colorscheme .. '.palette')
 if not found then

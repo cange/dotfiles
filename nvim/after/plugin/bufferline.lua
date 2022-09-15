@@ -1,6 +1,6 @@
 local found, bufferline = pcall(require, 'bufferline')
-local found_themfound, _ = pcall(require, 'nightfox')
-if not found or not found_themfound then
+local found_theme, _ = pcall(require, 'nightfox')
+if not found or not found_theme then
   return
 end
 

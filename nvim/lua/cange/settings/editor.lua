@@ -211,6 +211,12 @@ local function keymaps_setup()
   end
 end
 
+---@param table<string, string>
+M.colorscheme = {
+  name = 'nightfox',
+  theme = 'terafox',
+}
+
 M.keymaps = {
   setup = keymaps_setup,
 }

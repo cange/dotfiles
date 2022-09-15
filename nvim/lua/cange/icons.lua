@@ -94,6 +94,14 @@ M.git_states = {
   unstaged = '',
   untracked = 'ﱡ',
 }
+
+---@type table<string, string>
+M.lualine = {
+  unnamed = '', -- Text to show for unnamed buffers.
+  readonly = '', -- Text to show when the file is non-modifiable or readonly.
+  modified = '', -- Text to show when the file is modified.
+  newfile = 'ﱐ', -- Text to show for new created file before first writting
+}
 ---Mason LSP language server plugin
 ---@type table<string, string>
 M.mason = {
