@@ -48,18 +48,6 @@ local function browse_files()
 end
 
 --
--- keybindings assignment
+-- additional keybindings assignment
 --
-local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
-if not found_settings then
-  vim.notify('telescope: "cange.settings.editor" could not be found')
-  return
-end
-
-local subleader = editor_settings.telescope.meta.subleader
-for key, props in pairs(editor_settings.telescope.mappings) do
-  -- i.e. '<leader>sp'
-  vim.keymap.set('n', subleader .. key, props.command, keymap_opts)
-end
-
-vim.keymap.set('n', subleader .. 'b', browse_files, keymap_opts)
+vim.keymap.set('n', 'fb', browse_files, keymap_opts)

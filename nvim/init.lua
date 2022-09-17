@@ -1,4 +1,5 @@
 require('cange.autocommands')
+require('cange.keybindings')
 require('cange.keymaps')
 require('cange.cmp')
 require('cange.lsp')

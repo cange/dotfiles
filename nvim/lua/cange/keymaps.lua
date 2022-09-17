@@ -73,9 +73,9 @@ keymap('n', '<C-R>', ':write<CR>:source %<CR>:lua vim.notify("File saved and exe
 keymap({ 'n', 'v' }, '=', ':lua vim.lsp.buf.formatting_seq_sync({}, 10000)<CR>')
 
 -- Plugins/worklfows
-local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
-if found_settings then
-  editor_settings.keymaps.setup()
-else
-  vim.notify('keymaps: "cange.settings.editor" could not be found')
+local found_keybindings, keybindings = pcall(require, 'cange.keybindings')
+if not found_keybindings then
+  print('[keymaps] "cange.settings.editor" not found')
 end
+
+keybindings.setup()
