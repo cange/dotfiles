@@ -50,18 +50,18 @@ local lsp_opts = {
   flags = lsp_flags,
 }
 
-local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
-if not found_settings then
-  vim.notify('lspconfig: "cange.settings.lsp" could not be found')
+local found_providers, providers = pcall(require, 'cange.lsp.providers')
+if not found_providers then
+  print('[lspconfig] "cange.lsp.providers" not found')
   return
 end
 
--- iterate through provider push settings if given and initiate them
-for _, provider in pairs(editor_settings.lsp.providers.language_servers) do
-  local found_provider_opts, provider_opts = pcall(require, 'cange.lsp.providers.' .. provider)
+-- iterate through print()rovider push settings if given and initiate them
+for _, provider in pairs(providers.language_servers) do
+  local found_provider_config, provider_config = pcall(require, 'cange.lsp.provider_configs.' .. provider)
 
-  if found_provider_opts then
-    lsp_opts = vim.tbl_deep_extend('force', provider_opts, lsp_opts)
+  if found_provider_config then
+    lsp_opts = vim.tbl_deep_extend('force', provider_config, lsp_opts)
   end
 
   lspconfig[provider].setup(lsp_opts)

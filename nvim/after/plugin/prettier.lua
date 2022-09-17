@@ -3,13 +3,13 @@ if not found_prettier then
   return
 end
 
-local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
-if not found_settings then
-  vim.notify('prettier: "cange.settings" could not be found')
+local found_prettier, prettier_config = pcall(require, 'cange.prettier')
+if not found_prettier then
+  print('[prettier] "cange.prettier" not found')
   return
 end
 
 prettier.setup({
   bin = 'prettierd', -- pretty fast prettier version
-  filetypes = editor_settings.prettier.filetypes,
+  filetypes = prettier_config.filetypes,
 })
