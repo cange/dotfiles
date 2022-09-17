@@ -36,11 +36,6 @@ end
 
 local default_mappings = {
   ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
-  ['b'] = {
-    '<cmd>lua require("telescope.builtin").buffers(require(:telescope.themes").get_dropdown{previewer = false})<CR>',
-    'Buffers',
-  },
-  ['c'] = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
   ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
   ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
   ['w'] = { '<cmd>w!<CR>', 'Save' },
@@ -54,6 +49,7 @@ local mappings = vim.tbl_deep_extend(
   workflow_mappings('language', 'LSP'),
   workflow_mappings('packer', 'Packer'),
   workflow_mappings('search', 'Search'),
+  workflow_mappings('config', 'Editor config'),
   -- workflow_mappings('terminal', 'Terminal'),
   workflow_mappings('session', 'Session')
 )

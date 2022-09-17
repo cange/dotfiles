@@ -7,6 +7,11 @@ local M = {}
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
+--[[
+
+Essential icons
+
+]]
 ---@type table<string, string>
 M.ui = {
   ArrowClosed = '',
@@ -51,8 +56,43 @@ M.misc = {
   Smiley = 'ﲃ',
   Package = '',
   CircuitBoard = '',
+  Workspace = '',
 }
 
+---Language types
+---@type table<string, string>
+M.type = {
+  Array = '',
+  Number = '',
+  String = '',
+  Boolean = '蘒',
+  Object = '',
+}
+
+---@type table<string, string>
+M.documents = {
+  File = '',
+  Files = '',
+  Folder = '',
+  OpenFolder = '',
+}
+
+---@type table<string, string>
+M.git = {
+  Add = '',
+  Mod = '',
+  Remove = '',
+  Ignore = '',
+  Rename = '',
+  Diff = '',
+  Repo = '',
+  Octoface = '',
+}
+--[[
+
+Plugin related icons
+
+]]
 ---@type table<string, string>
 M.diagnostics = {
   Error = '',
@@ -61,6 +101,7 @@ M.diagnostics = {
   Question = '',
   Hint = '',
 }
+
 ---Which-key plugin
 ---@type table<string, string>
 M.which_key = {
@@ -103,39 +144,9 @@ M.kind = {
 ---@type table<string, string>
 M.cmp_source = {
   buffer = '﬘',
-  nvim_lsp = '',
+  nvim_lsp = '',
   nvim_lua = '',
-  path = '',
-}
-
----Language types
----@type table<string, string>
-M.type = {
-  Array = '',
-  Number = '',
-  String = '',
-  Boolean = '蘒',
-  Object = '',
-}
-
----@type table<string, string>
-M.documents = {
-  File = '',
-  Files = '',
-  Folder = '',
-  OpenFolder = '',
-}
-
----@type table<string, string>
-M.git = {
-  Add = '',
-  Mod = '',
-  Remove = '',
-  Ignore = '',
-  Rename = '',
-  Diff = '',
-  Repo = '',
-  Octoface = '',
+  path = M.documents.Folder,
 }
 
 ---@type table<string, string>

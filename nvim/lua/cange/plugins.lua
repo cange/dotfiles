@@ -29,6 +29,7 @@ local function instant_setup(pack_name)
 end
 
 packer.startup(function(use)
+  local web_icons = 'kyazdani42/nvim-web-devicons'
   -- Plugin Manager
   use('wbthomason/packer.nvim') -- package manager
 
@@ -38,7 +39,7 @@ packer.startup(function(use)
   -- Statusline
   use({
     'nvim-lualine/lualine.nvim', -- status line
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    requires = { web_icons, opt = true },
   })
 
   -- Tabline
@@ -47,7 +48,7 @@ packer.startup(function(use)
   -- Startup
   use({
     'goolord/alpha-nvim', -- startup screen
-    requires = { 'kyazdani42/nvim-web-devicons' },
+    requires = { web_icons },
   })
 
   -- Utility
@@ -74,7 +75,7 @@ packer.startup(function(use)
   -- File explorer
   use({
     'kyazdani42/nvim-tree.lua',
-    requires = { 'kyazdani42/nvim-web-devicons' }, -- optional, for file icons
+    requires = { web_icons }, -- optional, for file icons
     tag = 'nightly', -- optional, updated every week. (see issue #1193)
   })
 
@@ -131,7 +132,7 @@ packer.startup(function(use)
   use('rmagatti/session-lens') -- extends auto-session through Telescope
 
   -- Icon
-  use('kyazdani42/nvim-web-devicons') -- File icons
+  use(web_icons) -- File icons
 
   -- Color
   use({
