@@ -29,10 +29,12 @@ if not found_choice_popop then
   return
 end
 
--- local found_theme, _ = pcall(require, 'nightfox')
--- if not found_theme then return end
---
--- local color = require('nightfox.palette').load('terafox')
+-- local found_colorscheme, colorscheme = pcall(require, 'cange.colorscheme')
+-- if not found_colorscheme then
+--   vim.notify('colorscheme: "cange.colorscheme" could not be found')
+--   return
+-- end
+-- local color = colorscheme.palette()
 -- local types = require('luasnip.util.types')
 -- Adds a dot to the end of the line to show if inside a choices insert mode
 -- local insert_or_choice_indicator = {
