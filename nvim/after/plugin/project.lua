@@ -43,7 +43,7 @@ project.setup({
 
 local found_telecscope, telescope = pcall(require, 'telescope')
 if not found_telecscope then
-  vim.notify('project: "telescope" could not be found')
+  print('[project] "telescope" not found')
   return
 end
 

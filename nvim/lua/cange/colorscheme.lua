@@ -9,7 +9,7 @@ M.variation = 'terafox'
 M.palette = function()
   local found_palette, palette = pcall(require, M.theme .. '.palette')
   if not found_palette then
-    vim.notify('colorscheme: "' .. M.theme .. '.palette" could not be found')
+    print('colorscheme: "' .. M.theme .. '.palette" not found')
     return
   end
 

@@ -10,19 +10,19 @@ local M = {}
 
 local found_ls, ls = pcall(require, 'luasnip')
 if not found_ls then
-  vim.notify('cmp.config: "luasnip" could not be found')
+  print('[cmp.config] "luasnip" not found')
   return
 end
 
 local found_icons, icons = pcall(require, 'cange.icons')
 if not found_icons then
-  vim.notify('cmp.config: "cange.icons" could not be found')
+  print('[cmp.config] "cange.icons" not found')
   return
 end
 
 local found_tabnine, _ = pcall(require, 'cmp_tabnine.config')
 if not found_tabnine then
-  vim.notify('cmp: "cmp_tabnine.config" could not be found')
+  print('[com.config] "cmp_tabnine.config" not found')
   return
 end
 

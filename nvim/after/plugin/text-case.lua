@@ -7,7 +7,7 @@ textcase.setup({})
 
 local found_telescope, telescope = pcall(require, 'telescope')
 if not found_telescope then
-  vim.notify('textcase: "telescope" could not be found')
+  vim.notify('[textcase] "telescope" not found')
   return
 end
 

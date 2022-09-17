@@ -5,7 +5,7 @@ end
 
 local found_icons, icons = pcall(require, 'cange.icons')
 if not found_icons then
-  vim.notify('lualine: "cange.icons" could not be found')
+  print('[lualine] "cange.icons" not found')
   return
 end
 

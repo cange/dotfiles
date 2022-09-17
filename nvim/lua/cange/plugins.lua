@@ -1,7 +1,7 @@
 -- Use a protected call so we don't error out on first use
 local found, packer = pcall(require, 'packer')
 if not found then
-  vim.notify('plugins: Packer is not installed')
+  print('[plugins] Packer is not installed')
   return
 end
 
@@ -21,7 +21,7 @@ packer.init({
 local function instant_setup(pack_name)
   local found, pack = pcall(require, pack_name)
   if not found then
-    vim.notify('plugins: "' .. pack_name .. '" could not be found')
+    print('[plugins] "' .. pack_name .. '" not found')
     return
   end
 
@@ -51,12 +51,7 @@ packer.startup(function(use)
   })
 
   -- Utility
-  use({
-    'rcarriga/nvim-notify', -- popover notification
-    config = function()
-      vim.notify = require('notify')
-    end,
-  })
+  use('rcarriga/nvim-notify') -- popover notification
   use('mvllow/modes.nvim') -- Prismatic line decorations
 
   -- Project
