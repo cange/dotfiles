@@ -1,14 +1,13 @@
-*intro.txt*     Nvim
+                                                                          *top*
 
 
-                          CANGES NVIM SETTINGS MANUAL
+
+                         CANGES NVIM SETTINGS MANUAL
 
 
-Nvim                                                    *ref* *reference*
-
-                                      Type |gO| to see the table of contents.
 
 
+                                       Type |gO| to see the table of contents.
 
 
 ================================================================================
@@ -37,7 +36,8 @@ a limitidate amount been done it.
 
 
 ================================================================================
-Colorscheme                                                  cange.colorscheme
+                                                           *cange.colorscheme*
+Colorscheme
 
 Provides basic information of the current use theme. The information here are
 used in other plugin configurations. Changing the values will impact the color
@@ -47,8 +47,14 @@ appearance if the colorscheme is installed.
 
 
 ================================================================================
-Keybindings                                                  cange.keybindings
+                                                           *cange.keybindings*
+Keybindings
 
 Provides information of most common keymappings like open search dialog or
 similar. Depending on the plugin, there are also some individual setups in the
 plugins configuration file.
+
+
+
+
+vim:tw=78:ts=8:ft=help:norl:
