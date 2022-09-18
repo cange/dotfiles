@@ -7,6 +7,101 @@ local M = {}
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
+--[[
+
+Essential icons
+
+]]
+---@type table<string, string>
+M.ui = {
+  ArrowClosed = '',
+  ArrowOpen = '',
+  Lock = '',
+  Circle = '',
+  BigCircle = '',
+  BigUnfilledCircle = '',
+  Close = '',
+  NewFile = '',
+  Search = '',
+  Lightbulb = '',
+  Project = '',
+  Dashboard = '',
+  History = '',
+  Comment = '',
+  Bug = '',
+  Code = '',
+  Telescope = '',
+  Gear = '',
+  Package = '',
+  List = '',
+  SignIn = '',
+  SignOut = '',
+  Check = '',
+  Fire = '',
+  Note = '',
+  BookMark = '',
+  Pencil = '',
+  ChevronRight = '',
+  Table = '',
+  Calendar = '',
+  CloudDownload = '',
+}
+
+---@type table<string, string>
+M.misc = {
+  Robot = 'ﮧ',
+  Squirrel = '',
+  Tag = '',
+  Watch = '',
+  Smiley = 'ﲃ',
+  Package = '',
+  CircuitBoard = '',
+  Workspace = '',
+}
+
+---Language types
+---@type table<string, string>
+M.type = {
+  Array = '',
+  Number = '',
+  String = '',
+  Boolean = '蘒',
+  Object = '',
+}
+
+---@type table<string, string>
+M.documents = {
+  File = '',
+  Files = '',
+  Folder = '',
+  OpenFolder = '',
+}
+
+---@type table<string, string>
+M.git = {
+  Add = '',
+  Mod = '',
+  Remove = '',
+  Ignore = '',
+  Rename = '',
+  Diff = '',
+  Repo = '',
+  Octoface = '',
+}
+--[[
+
+Plugin related icons
+
+]]
+---@type table<string, string>
+M.diagnostics = {
+  Error = '',
+  Warning = '',
+  Information = '',
+  Question = '',
+  Hint = '',
+}
+
 ---Which-key plugin
 ---@type table<string, string>
 M.which_key = {
@@ -49,120 +144,36 @@ M.kind = {
 ---@type table<string, string>
 M.cmp_source = {
   buffer = '﬘',
-  nvim_lsp = '',
+  nvim_lsp = '',
   nvim_lua = '',
-  path = '',
-}
-
----Language types
----@type table<string, string>
-M.type = {
-  Array = '',
-  Number = '',
-  String = '',
-  Boolean = '蘒',
-  Object = '',
-}
-
----@type table<string, string>
-M.documents = {
-  File = '',
-  Files = '',
-  Folder = '',
-  OpenFolder = '',
-}
-
----@type table<string, string>
-M.git = {
-  Add = '',
-  Mod = '',
-  Remove = '',
-  Ignore = '',
-  Rename = '',
-  Diff = '',
-  Repo = '',
-  Octoface = '',
+  path = M.documents.Folder,
 }
 
 ---@type table<string, string>
 M.git_states = {
   staged = '',
-  deleted = '',
-  ignored = '',
-  renamed = '',
+  deleted = M.git.Remove,
+  ignored = M.git.Ignore,
+  renamed = M.git.Rename,
   unmerged = 'ﱵ',
-  unstaged = '',
+  unstaged = M.git.Mod,
   untracked = 'ﱡ',
 }
 
 ---@type table<string, string>
 M.lualine = {
-  unnamed = '', -- Text to show for unnamed buffers.
-  readonly = '', -- Text to show when the file is non-modifiable or readonly.
-  modified = '', -- Text to show when the file is modified.
-  newfile = 'ﱐ', -- Text to show for new created file before first writting
+  unnamed = M.documents.File, -- Text to show for unnamed buffers.
+  readonly = M.ui.lock, -- Text to show when the file is non-modifiable or readonly.
+  modified = M.ui.Circle, -- Text to show when the file is modified.
+  newfile = '', -- Text to show for new created file before first writting
 }
----Mason LSP language server plugin
+
+---Mason LSP local anguage server plugin
 ---@type table<string, string>
 M.mason = {
   package_installed = '',
   package_pending = '',
   package_uninstalled = '',
-}
-
----@type table<string, string>
-M.ui = {
-  ArrowClosed = '',
-  ArrowOpen = '',
-  Lock = '',
-  Circle = '',
-  BigCircle = '',
-  BigUnfilledCircle = '',
-  Close = '',
-  NewFile = '',
-  Search = '',
-  Lightbulb = '',
-  Project = '',
-  Dashboard = '',
-  History = '',
-  Comment = '',
-  Bug = '',
-  Code = '',
-  Telescope = '',
-  Gear = '',
-  Package = '',
-  List = '',
-  SignIn = '',
-  SignOut = '',
-  Check = '',
-  Fire = '',
-  Note = '',
-  BookMark = '',
-  Pencil = '',
-  ChevronRight = '',
-  Table = '',
-  Calendar = '',
-  CloudDownload = '',
-}
-
----@type table<string, string>
-M.diagnostics = {
-  Error = '',
-  Warning = '',
-  Information = '',
-  Question = '',
-  Hint = '',
-}
-
----@type table<string, string>
-M.misc = {
-  Robot = 'ﮧ',
-  Squirrel = '',
-  Tag = '',
-  Watch = '',
-  Smiley = 'ﲃ',
-  Package = '',
-  CircuitBoard = '',
 }
 
 return M

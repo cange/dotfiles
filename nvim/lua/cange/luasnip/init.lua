@@ -5,7 +5,7 @@ end
 
 local found_from_vscode, from_vscode = pcall(require, 'luasnip.loaders.from_vscode')
 if not found_from_vscode then
-  vim.notify('luasnip: "luasnip.loaders.from_vscode" could not be found')
+  print('[luasnip] "luasnip.loaders.from_vscode" not found')
   return
 end
 
@@ -15,7 +15,7 @@ local found_snippets, snippets = pcall(require, 'cange.snippets')
 if found_snippets then
   from_vscode.load({ paths = snippets.paths })
 else
-  vim.notify('luasnip: "cange.snippets" could not be found')
+  print('[luasnip] "cange.snippets" not found')
 end
 
 ls.config.setup({
@@ -25,14 +25,16 @@ ls.config.setup({
 -- Activate ChoiceNode popup
 local found_choice_popop, _ = pcall(require, 'cange.luasnip.choice-popup')
 if not found_choice_popop then
-  vim.notify('luasnip: "cange.luasnip.choice-popup" could not be found')
+  print('[luasnip] "cange.luasnip.choice-popup" not found')
   return
 end
 
--- local found_theme, _ = pcall(require, 'nightfox')
--- if not found_theme then return end
---
--- local color = require('nightfox.palette').load('terafox')
+-- local found_colorscheme, colorscheme = pcall(require, 'cange.colorscheme')
+-- if not found_colorscheme then
+--   print('[luasnip] "cange.colorscheme" not found')
+--   return
+-- end
+-- local color = colorscheme.palette()
 -- local types = require('luasnip.util.types')
 -- Adds a dot to the end of the line to show if inside a choices insert mode
 -- local insert_or_choice_indicator = {

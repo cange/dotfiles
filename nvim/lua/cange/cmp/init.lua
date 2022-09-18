@@ -14,13 +14,13 @@ end
 
 local found_config, config = pcall(require, 'cange.cmp.config')
 if not found_config then
-  vim.notify('cmp: "cange.cmp.config" could not be found')
+  print('[cmp.init] "cange.cmp.config" not found')
   return
 end
 
 local tabnine_found, _ = pcall(require, 'cmp_tabnine.config')
 if not tabnine_found then
-  vim.notify('cmp: "cmp_tabnine.config" could not be found')
+  print('[cmp.init] "cmp_tabnine.config" not found')
   return
 end
 

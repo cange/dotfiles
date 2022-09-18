@@ -40,11 +40,3 @@ project.setup({
   ---@usage path to store the project history for use in telescope
   datapath = vim.fn.stdpath('data'),
 })
-
-local found_telecscope, telescope = pcall(require, 'telescope')
-if not found_telecscope then
-  vim.notify('project: "telescope" could not be found')
-  return
-end
-
-telescope.load_extension('projects')

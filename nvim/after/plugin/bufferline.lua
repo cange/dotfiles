@@ -1,11 +1,10 @@
 local found, bufferline = pcall(require, 'bufferline')
-local found_theme, _ = pcall(require, 'nightfox')
+local found_theme, colors = pcall(require, 'colorscheme.palette')
 if not found or not found_theme then
   return
 end
 
-local color = require('nightfox.palette').load('terafox')
--- print(vim.inspect(color))
+-- print(vim.inspect(colors)
 
 bufferline.setup({
   options = {
@@ -18,8 +17,8 @@ bufferline.setup({
   },
   highlights = {
     fill = {
-      fg = color.magenta.base,
-      bg = color.green.base,
+      fg = colors.magenta.base,
+      bg = colors.green.base,
     },
     separator = {
       fg = '#073642',
@@ -33,7 +32,7 @@ bufferline.setup({
       bg = '#002b36',
     },
     buffer_selected = {
-      fg = color.fg2,
+      fg = colors.fg2,
       bold = false,
       italic = false,
     },

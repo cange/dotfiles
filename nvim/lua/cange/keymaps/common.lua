@@ -4,9 +4,6 @@ local function keymap(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
--- Set leader key
-vim.g.mapleader = ' '
-
 -- Do not yank x
 keymap('n', 'x', '"_x')
 
@@ -67,15 +64,7 @@ keymap('v', '<Tab>', '>gv')
 keymap('v', '<S-Tab>', '<gv')
 
 -- Reload current file
-keymap('n', '<leader><leader>x', ':write<CR>:source %<CR>:lua vim.notify("File saved and executed")<CR>')
+keymap('n', '<C-R>', ':write<CR>:source %<CR>:lua vim.notify("File saved and executed")<CR>')
 
 -- Formatting
 keymap({ 'n', 'v' }, '=', ':lua vim.lsp.buf.formatting_seq_sync({}, 10000)<CR>')
-
--- Plugins/worklfows
-local found_settings, editor_settings = pcall(require, 'cange.settings.editor')
-if found_settings then
-  editor_settings.keymaps.setup()
-else
-  vim.notify('keymaps: "cange.settings.editor" could not be found')
-end

@@ -1,0 +1,60 @@
+                                                                          *top*
+
+
+
+                         CANGES NVIM SETTINGS MANUAL
+
+
+
+
+                                       Type |gO| to see the table of contents.
+
+
+================================================================================
+Introduction                                                             intro
+
+This are some basic information how this NeoVim setup works.
+
+
+
+
+================================================================================
+Files structure
+
+Files structures follows the module guide by nvim-lua-guide:
+https://github.com/nanotee/nvim-lua-guide.
+
+The namespace is 'cange'. All specific settings are in this namespace
+directory.
+
+The settings are used in the specific plugin configurations, which are mainly
+done the 'after/plugin/' directory. Each plugin has its onw named file.
+Sometimes, plugins needs to set up other plugins to configure, which is to
+a limitidate amount been done it.
+
+
+
+
+================================================================================
+                                                           *cange.colorscheme*
+Colorscheme
+
+Provides basic information of the current use theme. The information here are
+used in other plugin configurations. Changing the values will impact the color
+appearance if the colorscheme is installed.
+
+
+
+
+================================================================================
+                                                           *cange.keybindings*
+Keybindings
+
+Provides information of most common keymappings like open search dialog or
+similar. Depending on the plugin, there are also some individual setups in the
+plugins configuration file.
+
+
+
+
+vim:tw=78:ts=8:ft=help:norl:

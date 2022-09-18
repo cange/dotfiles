@@ -14,17 +14,17 @@ end
 
 local found_icons, icons = pcall(require, 'cange.icons')
 if not found_icons then
-  vim.notify('alpha: "cange.icons" could not be found')
+  print('[alpha] "cange.icons" not found')
   return
 end
-local found_meta, meta = pcall(require, 'cange.settings.meta')
+local found_meta, meta = pcall(require, 'cange.meta')
 if not found_meta then
-  vim.notify('alpha: "cange.settings.meta" could not be found')
+  print('[alpha] "cange.meta" not found')
   return
 end
 local found_greetings, greetings = pcall(require, 'cange.utils.greetings')
 if not found_greetings then
-  vim.notify('alpha: "cange.utils.greetings" could not be found')
+  print('[alpha] "cange.utils.greetings" not found')
   return
 end
 
@@ -32,7 +32,7 @@ section.buttons.val = {
   button('R', icons.ui.History ..       '  Recent session', '<cmd>RestoreSession<CR>'),
   button('r', icons.ui.History ..       '  Recent files',   ':Telescope oldfiles<CR>'),
   button('o', icons.ui.Search ..        '  Open file',      ':Telescope find_files<CR>'),
-  button('O', icons.git.Repo ..         '  Open project',   ':lua require("telescope").extensions.projects.projects()<CR>'),
+  button('O', icons.ui.Project ..       '  Open project',   ':lua require("telescope").extensions.projects.projects()<CR>'),
   button('e', icons.ui.NewFile ..       '  New file',       ':ene <BAR> startinsert <CR>'),
   button('s', icons.ui.SignIn ..        '  Open session',   ':SearchSession<CR>'),
   button('t', icons.ui.List ..          '  Find text',      ':Telescope live_grep <CR>'),
