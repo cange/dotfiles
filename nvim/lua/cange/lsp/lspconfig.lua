@@ -1,68 +1,30 @@
-local found, lspconfig = pcall(require, 'lspconfig')
-if not found then
-  return
-end
+local lsp = BULK_LOADER('lsp', {
+  { 'lspconfig', 'lspconfig' },
+  { 'cmp_nvim_lsp', 'cmp_lsp' },
+  { 'cange.lsp.custom', 'custom' },
+  { 'cange.lsp.providers', 'providers' },
+})
 
-local function lsp_on_attach(_, bufnr)
-  -- Set up attach options
-  local keymap = vim.api.nvim_buf_set_keymap
-  local opts = { noremap = true, silent = true }
-  keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
-  keymap(bufnr, 'n', 'gD', '<cmd>Telescope lsp_declarations<CR>', opts)
-  keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  keymap(bufnr, 'n', 'gI', '<cmd>Telescope lsp_implementations<CR>', opts)
-  keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  keymap(bufnr, 'n', '<A-f>', '<cmd>Format<cr>', opts)
-  keymap(bufnr, 'n', '<A-a>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-
-  -- keymap(bufnr, 'n', '<M-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  -- keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  -- keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ border = 'rounded' })<CR>', opts)
-  -- keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next({ border = 'rounded' })<CR>', opts)
-  -- keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-end
-
--- Set up lsp cmp (completion)
-local found_cmp_lsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
-if not found_cmp_lsp then
-  return
-end
-
-local function lsp_capabilities()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = cmp_lsp.update_capabilities(capabilities)
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  return capabilities
-end
-
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
-
-local lsp_opts = {
-  on_attach = lsp_on_attach,
-  capabilities = lsp_capabilities(),
-  flags = lsp_flags,
-}
-
-local found_providers, providers = pcall(require, 'cange.lsp.providers')
-if not found_providers then
-  print('[lspconfig] "cange.lsp.providers" not found')
-  return
-end
-
--- iterate through print()rovider push settings if given and initiate them
-for _, provider in pairs(providers.language_servers) do
-  local found_provider_config, provider_config = pcall(require, 'cange.lsp.provider_configs.' .. provider)
-
-  if found_provider_config then
-    lsp_opts = vim.tbl_deep_extend('force', provider_config, lsp_opts)
+local function setup_server(provider, lspconfig)
+  local found_settings, settings = pcall(require, 'cange.lsp.provider_settings.' .. provider)
+  local default_settings = {
+    on_attach = lsp.custom.on_attach,
+    capabilities = lsp.custom.capabilities(),
+    name = provider, -- Name in log messageis
+    -- flags = {
+    --   debounce_text_changes = 250, -- server debounce didChange in milliseconds
+    -- }
+  }
+  if found_settings then
+    settings = vim.tbl_deep_extend('force', settings, default_settings)
+  else
+    settings = default_settings
   end
+  -- vim.pretty_print(provider, 'config', vim.tbl_keys(settings))
 
-  lspconfig[provider].setup(lsp_opts)
+  lspconfig[provider].setup(settings)
+end
+
+for _, provider in pairs(lsp.providers.language_servers) do
+  setup_server(provider, lsp.lspconfig)
 end

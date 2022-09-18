@@ -1,18 +1,12 @@
-local found, mason_lspconfig = pcall(require, 'mason-lspconfig')
-if not found then
-  return
-end
+local lsp = BULK_LOADER('mason-lspconfig', {
+  { 'mason-lspconfig', 'mason_lspconfig' },
+  { 'cange.lsp.providers', 'providers' },
+})
 
-local found_providers, providers = pcall(require, 'cange.lsp.providers')
-if not found_providers then
-  print('[mason-lspconfig] "cange.lsp.providers" not found')
-  return
-end
-
-mason_lspconfig.setup({
+lsp.mason_lspconfig.setup({
   -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
   -- This setting has no relation with the `automatic_installation` setting.
-  ensure_installed = providers,
+  ensure_installed = lsp.providers,
   -- A list of provide to automatically install if they're not already
   -- installed. Example: { "rust_analyzer@nightly", "sumneko_lua" } This
   -- setting has no relation with the `automatic_installation` setting.

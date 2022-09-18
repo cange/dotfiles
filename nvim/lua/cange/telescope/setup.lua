@@ -1,24 +1,26 @@
-local found, telescope = pcall(require, 'telescope')
-if not found then
-  return
-end
+local telescope = BULK_LOADER('telescope', {
+  { 'telescope', 'telescope' },
+  { 'telescope.actions', 'actions' },
+})
 
-local actions = require('telescope.actions')
-local keymap_opts = { noremap = true, silent = true }
 local picker_opts = {
   theme = 'dropdown',
   previewer = false,
 }
-telescope.setup({
+telescope.telescope.setup({
   defaults = {
     path_display = {
       'shorten',
       'absolute',
     },
+    layout_config = {
+      prompt_position = 'top',
+    },
+    sorting_strategy = 'ascending',
     mappings = {
       i = {
-        ['<C-n>'] = actions.cycle_history_next,
-        ['<C-p>'] = actions.cycle_history_prev,
+        ['<C-n>'] = telescope.actions.cycle_history_next,
+        ['<C-p>'] = telescope.actions.cycle_history_prev,
       },
     },
   },

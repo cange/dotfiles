@@ -2,10 +2,13 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2020",
-    "checkJs": true,
-    "jsx": "preserve
+    "checkJs": true
   },
+  "allowJs": true,
   "exclude": [
     "node_modules"
+  ],
+  "include": [
+    "./**/*"
   ]
 }

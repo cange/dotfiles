@@ -1,8 +1,12 @@
-local M = {}
+local telescope = BULK_LOADER('telescope', {
+  { 'telescope.actions', 'actions' },
+  { 'telescope.actions.state', 'actions_state' },
+  { 'telescope.builtin', 'builtin' },
+  { 'cange.icons', 'icons' },
+})
 
-local action_state = require('telescope.actions.state')
-local builtin = require('telescope.builtin')
-local icons = require('cange.icons')
+local M = {}
+local icons = telescope.icons
 --[[
 lua require('plenary.reload').reload_module("my_user.tele")
 nnoremap <leader>en <cmd>lua require('my_user.tele').edit_neovim()<CR>
@@ -15,7 +19,6 @@ function M.find_neovim()
     shorten_path = false,
     cwd = '~/.config/nvim',
 
-    -- layout_strategy = 'flex',
     layout_config = {
       prompt_position = 'top',
       horizontal = {
@@ -30,11 +33,11 @@ function M.find_neovim()
     },
 
     attach_mappings = function(_, map)
-      map('i', '<c-y>', set_prompt_to_entry_value)
+      -- map('i', '<c-y>', set_prompt_to_entry_value)
       map('i', '<M-c>', function(prompt_bufnr)
-        actions.close(prompt_bufnr)
+        telescope.actions.close(prompt_bufnr)
         vim.schedule(function()
-          builtin.find_files(opts_without_preview)
+          telescope.builtin.find_files(opts_without_preview)
         end)
       end)
 
@@ -45,12 +48,11 @@ function M.find_neovim()
   opts_without_preview = vim.deepcopy(opts_with_preview)
   opts_without_preview.previewer = false
 
-  builtin.find_files(opts_with_preview)
+  telescope.builtin.find_files(opts_with_preview)
 end
 
 -- File browser
 function M.file_browser()
-  local file_browser = telescope.load_extension('file_browser')
   local opts
 
   opts = {
@@ -61,7 +63,7 @@ function M.file_browser()
     },
 
     attach_mappings = function(prompt_bufnr, map)
-      local current_picker = action_state.get_current_picker(prompt_bufnr)
+      local current_picker = telescope.action_state.get_current_picker(prompt_bufnr)
 
       local modify_cwd = function(new_cwd)
         local finder = current_picker.finder
@@ -80,7 +82,7 @@ function M.file_browser()
       end)
 
       map('n', 'yy', function()
-        local entry = action_state.get_selected_entry()
+        local entry = telescope.action_state.get_selected_entry()
         vim.fn.setreg('+', entry.value)
       end)
 
@@ -92,10 +94,10 @@ function M.file_browser()
 end
 
 function M.find_workspace()
-  builtin.find_files({
+  telescope.builtin.find_files({
     shorten_path = false,
     cwd = '~/workspace/',
-    prompt = '~ workspace  ~',
+    prompt_title = icons.misc.Workspace .. ' Workspace',
     hidden = true,
 
     layout_strategy = 'horizontal',
