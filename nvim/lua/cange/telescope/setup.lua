@@ -4,7 +4,6 @@ if not found then
 end
 
 local actions = require('telescope.actions')
-local builtin = require('telescope.builtin')
 local keymap_opts = { noremap = true, silent = true }
 local picker_opts = {
   theme = 'dropdown',

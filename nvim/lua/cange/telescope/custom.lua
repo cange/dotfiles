@@ -1,8 +1,3 @@
-local found, telescope = pcall(require, 'telescope')
-if not found then
-  return
-end
-
 local M = {}
 
 local action_state = require('telescope.actions.state')
@@ -16,7 +11,7 @@ function M.find_neovim()
   local opts_with_preview, opts_without_preview
 
   opts_with_preview = {
-    prompt_title = icons.ui.Gear ..' NeoVim Config',
+    prompt_title = icons.ui.Gear .. ' NeoVim Config',
     shorten_path = false,
     cwd = '~/.config/nvim',
 
@@ -83,7 +78,6 @@ function M.file_browser()
       map('i', '~', function()
         modify_cwd(vim.fn.expand('~'))
       end)
-
 
       map('n', 'yy', function()
         local entry = action_state.get_selected_entry()

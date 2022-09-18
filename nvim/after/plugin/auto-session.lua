@@ -3,12 +3,6 @@ if not found then
   return
 end
 
-local found_telescope, telescope = pcall(require, 'telescope')
-if not found_telescope then
-  print('[auto-session] "telescope" not found')
-  return
-end
-
 local found_lens, session_lens = pcall(require, 'session-lens')
 if not found_lens then
   print('[auto-session] "session-lens" not found')
@@ -24,7 +18,6 @@ local settings = {
 -- better experience with the plugin overall using this config for sessionoptions is recommended.
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal'
 
-telescope.load_extension('session-lens')
 session_lens.setup({
   path_display = { 'shorten' },
   previewer = true,
