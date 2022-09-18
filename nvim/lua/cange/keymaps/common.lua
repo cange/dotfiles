@@ -1,8 +1,14 @@
 ---Shorthand for vim.keymap.set(mode, lhs, rhs, [opts={}])
-local function keymap(mode, lhs, rhs, opts)
+local ocal function keymap(mode, lhs, rhs, opts)
   opts = opts or { noremap = true, silent = true }
   vim.keymap.set(mode, lhs, rhs, opts)
 end
+
+--[[
+  FIRST: Set leader key
+  Leader needs to be defined before any other keymaps definintions
+]]--
+vim.g.mapleader = ' '
 
 -- Do not yank x
 keymap('n', 'x', '"_x')

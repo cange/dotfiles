@@ -1,9 +1,9 @@
 local modules = BULK_LOADER('telescope', {
-  'telescope',
+  { 'telescope', 'telescope' },
   'cange.telescope.setup',
   'cange.telescope.custom',
 })
-local telescope = modules[1]
+local telescope = modules.telescope
 
 telescope.load_extension('textcase')
 telescope.load_extension('session-lens')

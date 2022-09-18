@@ -83,23 +83,6 @@ local function workflow_mappings(config)
   return section
 end
 
--- local wk_mappings = {
---   ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
---   ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
---   ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
---   -- ['w'] = { '<cmd>w!<CR>', 'Save' },
---   -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
---   ['<leader>'] = vim.tbl_deep_extend('force', {}, {
---     workflow_mappings(keymaps.mappings.bookmarks),
---     workflow_mappings(keymaps.mappings.config),
---     workflow_mappings(keymaps.mappings.git),
---     workflow_mappings(keymaps.mappings.language),
---     workflow_mappings(keymaps.mappings.packer),
---     workflow_mappings(keymaps.mappings.search),
---     -- workflow_mappings(keymaps.mappings.terminal),
---     workflow_mappings(keymaps.mappings.session),
---   }),
--- }
 local default_mappings = {
   ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
   ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
@@ -113,7 +96,7 @@ local wk_mappings = vim.tbl_deep_extend(
     workflow_mappings(keymaps.mappings.bookmarks),
     workflow_mappings(keymaps.mappings.config),
     workflow_mappings(keymaps.mappings.git),
-    workflow_mappings(keymaps.mappings.language),
+    workflow_mappings(keymaps.mappings.lsp),
     workflow_mappings(keymaps.mappings.packer),
     workflow_mappings(keymaps.mappings.search),
     -- workflow_mappings(keymaps.mappings.terminal),

@@ -47,12 +47,31 @@ appearance if the colorscheme is installed.
 
 
 ================================================================================
-                                                           *cange.keybindings*
-Keybindings
+                                                               *cange.keymaps*
+Keymaps
 
 Provides information of most common keymappings like open search dialog or
 similar. Depending on the plugin, there are also some individual setups in the
 plugins configuration file.
+
+
+
+
+================================================================================
+                                                               *cange.globals*
+Globals
+
+The setup provides some minimalistic convenience helper function.
+
+|BULK_LOADER| is used to load modules sercurly. It logs when modules could not be
+found and stops execution of certain code.
+>
+>
+    local loaded = BULK_LOADER('any_label', {
+        'module_a',
+        { 'module-b', 'module_b' }, -- second param enables easy calling later on
+    })
+    loaded.module_b... -- call it
 
 
 

@@ -15,13 +15,14 @@ M.bookmarks = {
     s = { command = '<cmd>lua require("nvim-tree.api").marks.navigate.select()<CR>', title = 'Select bookmark' },
   },
 }
-M.language = {
+M.lsp = {
   subleader = 'l',
-  title = 'Language',
+  title = 'Language (LSP)',
   mappings = {
-    I = { command = '<cmd>LspInstallInfo<CR>', title = 'Installer Info' },
+    I = { command = '<cmd>LspInfo<CR>', title = 'LSP Info' },
     S = { command = '<cmd>Telescope local sp_dynamic_workspace_symbols<CR>', title = 'Workspace Symbols' },
     a = { command = '<cmd>lua vim.lsp.buf.code_action()<CR>', title = 'Code Action' },
+    c = { command = '<cmd>lua vim.lsp.buf_get_clients()<CR>', title = 'LSP clients' },
     d = { command = '<cmd>Telescope lsp_document_diagnostics<CR>', title = 'Document Diagnostics' },
     f = { command = '<cmd>lua vim.lsp.buf.formatting()<CR>', title = 'Format' },
     i = { command = '<cmd>LspInfo<CR>', title = 'Info' },
@@ -37,18 +38,19 @@ M.search = {
   subleader = 'f',
   title = 'Search',
   mappings = {
-    o = { command = '<cmd>Telescope oldfiles<CR>', title = 'Recent files' },
     C = { command = '<cmd>Telescope commands<CR>', title = 'Commands' },
     F = { command = '<cmd>Telescope live_grep<CR>', title = 'Find text' },
     M = { command = '<cmd>Telescope man_pages<CR>', title = 'Man pages' },
+    N = { command = '<cmd>Telescope notify<CR>', title = 'Browse notifications' },
+    b = { command = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', title = 'Browse files' },
     c = { command = '<cmd>Telescope colorscheme<CR>', title = 'Change colorscheme' },
     f = { command = '<cmd>Telescope find_files<CR>', title = 'Find files' },
     h = { command = '<cmd>Telescope help_tags<CR>', title = 'Find help' },
     k = { command = '<cmd>Telescope keymaps<CR>', title = 'Keymaps' },
+    n = { command = '<cmd>lua require("cange.telescope.custom").find_neovim()<CR>', title = 'Browse Neovim' },
+    o = { command = '<cmd>Telescope oldfiles<CR>', title = 'Recent files' },
     p = { command = '<cmd>Telescope projects<CR>', title = 'Open projects' },
-    w = { command = '<cmd>lua require("cange.telescope.custom").find_workspace()<CR>', title = 'Workspace' },
-    n = { command = '<cmd>lua require("cange.telescope.custom").find_neovim()<CR>', title = 'Neovim' },
-    b = { command = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', title = 'Browse files' },
+    w = { command = '<cmd>lua require("cange.telescope.custom").find_workspace()<CR>', title = 'Browse workspace' },
   },
 }
 
@@ -56,7 +58,7 @@ M.config = {
   subleader = 'c',
   title = 'Editor config',
   mappings = {
-    k = { command = '<cmd>e ~/.config/nvim/lua/cange/keymaps/keybinding.lua<CR>', title = 'Edit keybindings' },
+    k = { command = '<cmd>e ~/.config/nvim/lua/cange/keymaps/mappings.lua<CR>', title = 'Edit keybindings' },
     m = { command = '<cmd>e ~/.config/nvim/lua/cange/meta.lua<CR>', title = 'Edit meta information' },
     o = { command = '<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>', title = 'Edit options' },
     p = { command = '<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>', title = 'Edit plugins' },
