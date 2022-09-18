@@ -1,70 +1,10 @@
-local found, which_key = pcall(require, 'which-key')
-if not found then
-  return
-end
+local keymaps = BULK_LOADER('keymaps', {
+  { 'cange.icons', 'icons' },
+  { 'cange.keymaps.mappings', 'mappings' },
+  { 'which-key', 'which_key' },
+})
 
-local found_icons, icons = pcall(require, 'cange.icons')
-if not found_icons then
-  print('[which-key] "cange.icons" not found')
-  return
-end
-
-local found_keybindings, keybindings = pcall(require, 'cange.keybindings')
-if not found_keybindings then
-  print('[which-key] "cange.keybindings" not found')
-  return
-end
----Generates a which-key table form mappings
--- @param section_key string Key of a keybinding block
--- @param block_name string Name of block name
--- @return table<string, table> mappings bock i.e. { leader: { name: 'foo', a: b } }
-local function workflow_mappings(section_key, block_name)
-  local section = {}
-  local section_bindings = keybindings.mappings[section_key]
-  local leader = section_bindings.leader
-
-  section[leader] = { name = block_name }
-
-  local section_mappings = section[leader]
-
-  for key, props in pairs(section_bindings.mappings) do
-    section_mappings[key] = { props.command, props.label }
-  end
-
-  return section
-end
-
-local default_mappings = {
-  ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
-  ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
-  ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
-  ['w'] = { '<cmd>w!<CR>', 'Save' },
-  ['q'] = { '<cmd>q!<CR>', 'Quit' },
-}
-
-local mappings = vim.tbl_deep_extend(
-  'keep',
-  default_mappings,
-  workflow_mappings('git', 'Git'),
-  workflow_mappings('language', 'LSP'),
-  workflow_mappings('packer', 'Packer'),
-  workflow_mappings('search', 'Search'),
-  workflow_mappings('config', 'Editor config'),
-  -- workflow_mappings('terminal', 'Terminal'),
-  workflow_mappings('session', 'Session')
-)
-
-local opts = {
-  mode = 'n', -- NORMAL mode
-  prefix = '<leader>',
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer M.mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
-
-
-which_key.setup({
+keymaps.which_key.setup({
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
     registers = true, -- shows your registers on ' in NORMAL or <C-r> in INSERT mode
@@ -94,7 +34,7 @@ which_key.setup({
     -- ['<cr>'] = 'RET',
     -- ['<tab>'] = 'TAB',
   },
-  icons = icons.which_key,
+  icons = keymaps.icons.which_key,
   popup_mappings = {
     scroll_down = '<c-d>', -- binding to scroll down inside the popup
     scroll_up = '<c-u>', -- binding to scroll up inside the popup
@@ -125,4 +65,66 @@ which_key.setup({
   },
 })
 
-which_key.register(mappings, opts)
+---Generates a which-key table form mappings
+-- @param section_key string Key of a keybinding block
+-- @return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
+local function workflow_mappings(config)
+  local section = {}
+	-- vim.pretty_print(vim.tbl_keys(config))
+  section[config.subleader] = { name = config.title }
+
+  local section_mappings = section[config.subleader]
+
+  for key, m in pairs(config.mappings) do
+    section_mappings[key] = { m.command, m.title }
+  end
+
+	-- vim.pretty_print('section',section)
+  return section
+end
+
+-- local wk_mappings = {
+--   ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
+--   ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
+--   ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
+--   -- ['w'] = { '<cmd>w!<CR>', 'Save' },
+--   -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
+--   ['<leader>'] = vim.tbl_deep_extend('force', {}, {
+--     workflow_mappings(keymaps.mappings.bookmarks),
+--     workflow_mappings(keymaps.mappings.config),
+--     workflow_mappings(keymaps.mappings.git),
+--     workflow_mappings(keymaps.mappings.language),
+--     workflow_mappings(keymaps.mappings.packer),
+--     workflow_mappings(keymaps.mappings.search),
+--     -- workflow_mappings(keymaps.mappings.terminal),
+--     workflow_mappings(keymaps.mappings.session),
+--   }),
+-- }
+local default_mappings = {
+  ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
+  ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
+  ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
+  ['w'] = { '<cmd>w!<CR>', 'Save' },
+  ['q'] = { '<cmd>q!<CR>', 'Quit' },
+}
+local wk_mappings = vim.tbl_deep_extend(
+  'keep',
+  default_mappings,
+    workflow_mappings(keymaps.mappings.bookmarks),
+    workflow_mappings(keymaps.mappings.config),
+    workflow_mappings(keymaps.mappings.git),
+    workflow_mappings(keymaps.mappings.language),
+    workflow_mappings(keymaps.mappings.packer),
+    workflow_mappings(keymaps.mappings.search),
+    -- workflow_mappings(keymaps.mappings.terminal),
+    workflow_mappings(keymaps.mappings.session)
+)
+
+keymaps.which_key.register(wk_mappings, {
+  mode = 'n', -- NORMAL mode
+  prefix = '<leader>',
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer M.mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+})

@@ -3,6 +3,10 @@
     "prefix": "pre",
     "body": "vim.pretty_print($1)"
   },
+  "pretty_print('…',…)": {
+    "prefix": "prel",
+    "body": "vim.pretty_print('$1', $1)"
+  },
   "print(…)": {
     "prefix": "pri",
     "body": "print('--- $1:', $1)"

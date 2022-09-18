@@ -1,7 +1,6 @@
 require('cange.autocommands')
 require('cange.cmp')
 require('cange.globals')
-require('cange.keybindings')
 require('cange.keymaps')
 require('cange.lsp')
 require('cange.luasnip')

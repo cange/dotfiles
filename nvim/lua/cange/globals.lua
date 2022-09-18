@@ -21,19 +21,26 @@ end
 ---Loads mutiple modules at ones and catches loading errors in reports
 -- them if given.
 -- @param context_label string Indicate of loading location for error reporting.
--- @param module_names table<string,...> List of modules i.e {'a','b'}
+-- @param module_names table<string|table> List of modules i.e {'a','b'}
+-- @param method function Determines which method is called internallly by `pcall`. (default: require)
 -- @return table<string,string> List of loaded modules or if loading
 -- error an incomplete list on last successful ones.
-function BULK_LOADER(context_label, module_name)
+-- @usage local m = BULK_LOADER('ctx', { 'module_a', 'ns.module_b', 'my_m' }); m.my_m()
+function BULK_LOADER(context_label, module_names, method)
   local loaded = {}
-  for i, module_name in pairs(module_name) do
-    local found, module = pcall(require, module_name)
+  method = method or require
+  for i, name_or_table in pairs(module_names) do
+    local is_list = vim.tbl_islist(name_or_table)
+    local module_name = is_list and name_or_table[1] or name_or_table
+    local register_name = is_list and name_or_table[2] or i
+
+    local found, module = pcall(method, module_name)
 
     if not found then
       print('[' .. context_label .. '] "' .. module_name .. '" not found')
       return loaded
     end
-    loaded[i] = module
+    loaded[register_name] = module
   end
 
   return loaded

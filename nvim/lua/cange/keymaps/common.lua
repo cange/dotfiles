@@ -4,9 +4,6 @@ local function keymap(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
--- Set leader key
-vim.g.mapleader = ' '
-
 -- Do not yank x
 keymap('n', 'x', '"_x')
 
@@ -71,11 +68,3 @@ keymap('n', '<C-R>', ':write<CR>:source %<CR>:lua vim.notify("File saved and exe
 
 -- Formatting
 keymap({ 'n', 'v' }, '=', ':lua vim.lsp.buf.formatting_seq_sync({}, 10000)<CR>')
-
--- Plugins/worklfows
-local found_keybindings, keybindings = pcall(require, 'cange.keybindings')
-if not found_keybindings then
-  print('[keymaps] "cange.keybindings" not found')
-end
-
-keybindings.setup()
