@@ -1,20 +1,13 @@
-local found_null_ls, null_ls = pcall(require, 'null-ls')
-if not found_null_ls then
-  return
-end
+local lsp = BULK_LOADER('null-ls', {
+  { 'null-ls', 'null_ls' },
+})
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/
-local diagnostics = null_ls.builtins.diagnostics
-local completion = null_ls.builtins.completion
-local formatting = null_ls.builtins.formatting
--- local function formatting_handler()
---   local timeout = 10000 -- milliseconds
---   print('Formatting…')
---   vim.lsp.buf.formatting_seq_sync({}, timeout)
---   vim.notify('Formatting…')
--- end
+local diagnostics = lsp.null_ls.builtins.diagnostics
+local completion = lsp.null_ls.builtins.completion
+local formatting = lsp.null_ls.builtins.formatting
 
-local settings = {
+lsp.null_ls.setup({
   debug = true,
   on_attach = function()
     vim.keymap.set({ 'n', 'v' }, '=', ':lua vim.lsp.buf.formatting_seq_sync()<CR>', { noremap = true, silent = true })
@@ -37,5 +30,4 @@ local settings = {
     -- completion
     completion.luasnip, -- snippets
   },
-}
-null_ls.setup(settings)
+})

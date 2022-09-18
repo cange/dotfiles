@@ -1,9 +1,9 @@
 local modules = BULK_LOADER('lsp', {
   { 'cange.icons', 'icons' },
-  -- { 'cange.lsp.mason', 'mason' }, --[[ 1 ]]
-  -- { 'cange.lsp.mason-lspconfig', 'mason_lspconfig' }, --[[ 2 ]]
+  { 'cange.lsp.mason', 'mason' }, --[[ 1 ]]
+  { 'cange.lsp.mason-lspconfig', 'mason_lspconfig' }, --[[ 2 ]]
   { 'cange.lsp.lspconfig', 'lspconfig' }, --[[ 3 ]]
-  -- { 'cange.lsp.null-ls', 'null_ls' }, --[[ 4 ]]
+  { 'cange.lsp.null-ls', 'null_ls' }, --[[ 4 ]]
 })
 
 

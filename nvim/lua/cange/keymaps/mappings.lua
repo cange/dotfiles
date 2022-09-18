@@ -28,7 +28,7 @@ M.lsp = {
     i = { command = '<cmd>LspInfo<CR>', title = 'Info' },
     l = { command = '<cmd>lua vim.lsp.codelens.run()<CR>', title = 'CodeLens Action' },
     m = { command = '<cmd>Mason<CR>', title = 'Update LSP services' },
-    q = { command = '<cmd>lua vim.diagnostic.setloclist()<CR>', title = 'Quickfix' },
+    p = { command = '<cmd>lua vim.diagnostic.setloclist()<CR>', title = 'Show problem' },
     r = { command = '<cmd>lua vim.lsp.buf.rename()<CR>', title = 'Rename' },
   },
 }
