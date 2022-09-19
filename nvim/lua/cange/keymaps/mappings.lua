@@ -26,9 +26,8 @@ M.lsp = {
     d = { command = '<cmd>Telescope lsp_document_diagnostics<CR>', title = 'Document Diagnostics' },
     f = { command = '<cmd>lua vim.lsp.buf.formatting()<CR>', title = 'Format' },
     i = { command = '<cmd>LspInfo<CR>', title = 'Info' },
-    l = { command = '<cmd>lua vim.lsp.codelens.run()<CR>', title = 'CodeLens Action' },
+    l = { command = '<cmd>lua vim.diagnostic.setloclist()<CR>', title = 'Problems log' },
     m = { command = '<cmd>Mason<CR>', title = 'Update LSP services' },
-    p = { command = '<cmd>lua vim.diagnostic.setloclist()<CR>', title = 'Show problem' },
     r = { command = '<cmd>lua vim.lsp.buf.rename()<CR>', title = 'Rename' },
   },
 }
@@ -47,10 +46,11 @@ M.search = {
     f = { command = '<cmd>Telescope find_files<CR>', title = 'Find files' },
     h = { command = '<cmd>Telescope help_tags<CR>', title = 'Find help' },
     k = { command = '<cmd>Telescope keymaps<CR>', title = 'Keymaps' },
-    n = { command = '<cmd>lua require("cange.telescope.custom").find_neovim()<CR>', title = 'Browse Neovim' },
+    B = { command = '<cmd>Telescope buffers previewer=false<CR>', title = 'Buffers' },
+    n = { command = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', title = 'Browse nvim' },
     o = { command = '<cmd>Telescope oldfiles<CR>', title = 'Recent files' },
     p = { command = '<cmd>Telescope projects<CR>', title = 'Open projects' },
-    w = { command = '<cmd>lua require("cange.telescope.custom").find_workspace()<CR>', title = 'Browse workspace' },
+    w = { command = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', title = 'Browse workspace' },
   },
 }
 

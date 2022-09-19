@@ -2,10 +2,18 @@ local telescope = BULK_LOADER('telescope', {
   { 'telescope', 'telescope' },
   { 'telescope.actions', 'actions' },
 })
+local utils = BULK_LOADER('mappings', {
+  { 'cange.icons', 'icons' },
+})
 
-local picker_opts = {
+local default_opts = {
   theme = 'dropdown',
   previewer = false,
+}
+local lsp_opts = {
+  initial_mode = 'normal',
+  previewer = false,
+  theme = 'dropdown',
 }
 telescope.telescope.setup({
   defaults = {
@@ -13,6 +21,9 @@ telescope.telescope.setup({
       'shorten',
       'absolute',
     },
+    prompt_prefix = ' ' .. utils.icons.ui.Search .. ' ',
+    selection_caret = ' ' .. utils.icons.ui.ChevronRight .. ' ',
+    entry_prefix = '   ',
     layout_config = {
       prompt_position = 'top',
     },
@@ -25,7 +36,13 @@ telescope.telescope.setup({
     },
   },
   pickers = {
-    find_files = picker_opts,
-    grep_string = picker_opts,
+    buffers = default_opts,
+    colorscheme = default_opts,
+    find_files = default_opts,
+    live_grep = { theme = default_opts.theme },
+    grep_string = default_opts,
+    lsp_references = lsp_opts,
+    lsp_declarations = lsp_opts,
+    lsp_definitions = lsp_opts,
   },
 })
