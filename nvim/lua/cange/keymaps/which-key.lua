@@ -1,8 +1,8 @@
 local keymaps = BULK_LOADER('keymaps', {
-  { 'cange.icons', 'icons' },
   { 'cange.keymaps.mappings', 'mappings' },
   { 'which-key', 'which_key' },
 })
+local utils = BULK_LOADER('keymaps', { { 'cange.icons', 'icons' } })
 
 keymaps.which_key.setup({
   plugins = {
@@ -34,7 +34,7 @@ keymaps.which_key.setup({
     -- ['<cr>'] = 'RET',
     -- ['<tab>'] = 'TAB',
   },
-  icons = keymaps.icons.which_key,
+  icons = utils.icons.which_key,
   popup_mappings = {
     scroll_down = '<c-d>', -- binding to scroll down inside the popup
     scroll_up = '<c-u>', -- binding to scroll up inside the popup
@@ -70,7 +70,7 @@ keymaps.which_key.setup({
 -- @return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
 local function workflow_mappings(config)
   local section = {}
-	-- vim.pretty_print(vim.tbl_keys(config))
+  -- vim.pretty_print(vim.tbl_keys(config))
   section[config.subleader] = { name = config.title }
 
   local section_mappings = section[config.subleader]
@@ -79,28 +79,26 @@ local function workflow_mappings(config)
     section_mappings[key] = { m.command, m.title }
   end
 
-	-- vim.pretty_print('section',section)
   return section
 end
 
-local default_mappings = {
-  ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
-  ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
-  ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
-  ['w'] = { '<cmd>w!<CR>', 'Save' },
-  ['q'] = { '<cmd>q!<CR>', 'Quit' },
-}
 local wk_mappings = vim.tbl_deep_extend(
   'keep',
-  default_mappings,
-    workflow_mappings(keymaps.mappings.bookmarks),
-    workflow_mappings(keymaps.mappings.config),
-    workflow_mappings(keymaps.mappings.git),
-    workflow_mappings(keymaps.mappings.lsp),
-    workflow_mappings(keymaps.mappings.packer),
-    workflow_mappings(keymaps.mappings.search),
-    -- workflow_mappings(keymaps.mappings.terminal),
-    workflow_mappings(keymaps.mappings.session)
+  {
+    ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
+    ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
+    ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
+    ['w'] = { '<cmd>w!<CR>', 'Save' },
+    ['q'] = { '<cmd>q!<CR>', 'Quit' },
+  },
+  workflow_mappings(keymaps.mappings.bookmarks),
+  workflow_mappings(keymaps.mappings.config),
+  workflow_mappings(keymaps.mappings.git),
+  workflow_mappings(keymaps.mappings.lsp),
+  workflow_mappings(keymaps.mappings.packer),
+  workflow_mappings(keymaps.mappings.search),
+  -- workflow_mappings(keymaps.mappings.terminal),
+  workflow_mappings(keymaps.mappings.session)
 )
 
 keymaps.which_key.register(wk_mappings, {
