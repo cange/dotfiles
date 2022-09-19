@@ -1,17 +1,15 @@
-local modules = BULK_LOADER('lsp', {
-  { 'cange.icons', 'icons' },
+BULK_LOADER('lsp', {
   { 'cange.lsp.mason', 'mason' }, --[[ 1 ]]
   { 'cange.lsp.mason-lspconfig', 'mason_lspconfig' }, --[[ 2 ]]
   { 'cange.lsp.lspconfig', 'lspconfig' }, --[[ 3 ]]
   { 'cange.lsp.null-ls', 'null_ls' }, --[[ 4 ]]
 })
-
-
+local utils = BULK_LOADER('lsp', { { 'cange.icons', 'icons' } })
 local signs = {
-  { name = 'DiagnosticSignError', text = modules.icons.diagnostics.Error },
-  { name = 'DiagnosticSignWarn', text = modules.icons.diagnostics.Warning },
-  { name = 'DiagnosticSignHint', text = modules.icons.diagnostics.Hint },
-  { name = 'DiagnosticSignInfo', text = modules.icons.diagnostics.Information },
+  { name = 'DiagnosticSignError', text = utils.icons.diagnostics.Error },
+  { name = 'DiagnosticSignWarn', text = utils.icons.diagnostics.Warning },
+  { name = 'DiagnosticSignHint', text = utils.icons.diagnostics.Hint },
+  { name = 'DiagnosticSignInfo', text = utils.icons.diagnostics.Information },
 }
 
 for _, sign in ipairs(signs) do
