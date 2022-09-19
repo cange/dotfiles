@@ -25,5 +25,14 @@
       "end",
       "$4"
     ]
+  },
+  "BULK_LOADER(ctx, {…})": {
+    "prefix": "bul",
+    "body": [
+      "local ${1:context} = BULK_LOADER('$1', {",
+      "  { '${2:module_name}', '${3:handle}' },",
+      "  $4",
+      "})"
+    ]
   }
 }

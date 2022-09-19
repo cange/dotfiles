@@ -353,3 +353,4 @@ zsdoc/data
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,vim,ruby,rails,sass,macos,node,ssh,zsh
 packer_compiled.lua
+nvim/nvim-macos/

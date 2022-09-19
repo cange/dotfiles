@@ -13,6 +13,7 @@ local options = {
   cursorline = true, -- highlight the current line
   guifont = 'monospace:h17', -- the font used in graphical neovim applications
   laststatus = 1, -- show one global statusline for all windows
+  showtabline = 1, -- always show tabs
   mouse = 'a', -- allow the mouse to be used in editor
   number = true, -- set numbered lines
   numberwidth = 3, -- set number column width to 2 {default 4}
@@ -43,7 +44,6 @@ local options = {
 
   -- tabs
   expandtab = true, -- convert tabs to spaces
-  showtabline = 2, -- always show tabs
   tabstop = 2, -- number of spaces for a tab
 
   -- indentation
