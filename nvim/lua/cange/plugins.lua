@@ -107,6 +107,7 @@ packer.startup(function(use)
     requires = 'jose-elias-alvarez/null-ls.nvim',
   })
   use('onsails/lspkind.nvim') -- plugin adds vscode-like icons
+  use('j-hui/fidget.nvim') -- shows LSP initialization progress
 
   -- Completion
   use({
