@@ -62,11 +62,11 @@ M.misc = {
 ---Language types
 ---@type table<string, string>
 M.type = {
-  Array = '',
-  Number = '',
-  String = '',
-  Boolean = '蘒',
-  Object = '',
+  Array   = '',
+  Boolean = '◩',
+  Number  = '',
+  Object  = '',
+  String  = '',
 }
 
 ---@type table<string, string>
