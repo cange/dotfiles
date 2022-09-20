@@ -7,11 +7,8 @@ local M = {}
 M.language_servers = {
   -- 'solargraph', -- ruby
   'emmet_ls', -- html
-  'bashls', -- bash
   'cssls', -- css
   'cssmodules_ls', -- css
-  'tailwindcss', -- css
-  'cucumber_language_server', -- cucumber, ruby
   'dockerls', -- docker
   'eslint', -- javascript
   'html', -- html
@@ -21,9 +18,8 @@ M.language_servers = {
   'marksman', -- markdown
   'stylelint_lsp', -- stylelint
   'svelte', -- svelte
-  'vimls', -- vim
   'vuels', -- vue
-  'volar', --vue 3
+  -- 'volar', --vue 3
   'yamlls', -- yaml
 }
 
