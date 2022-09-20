@@ -31,7 +31,7 @@ local function check_backspace()
   return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
 end
 
-M.next_item = function(fallback)
+function M.next_item(fallback)
   if cmp.visible() then
     cmp.select_next_item()
   elseif ls.expandable() then
@@ -45,7 +45,7 @@ M.next_item = function(fallback)
   end
 end
 
-M.prev_item = function(fallback)
+function M.prev_item(fallback)
   if cmp.visible() then
     cmp.select_prev_item()
   elseif ls.jumpable(-1) then
@@ -98,11 +98,11 @@ M.props = {
     format = menu_item_format,
   },
   sources = {
-    { name = 'cmp_tabnine', group_index = 3, max_item_count = 5 },
+    { name = 'cmp_tabnine', group_index = 3, max_item_count = 3 },
     { name = 'luasnip',     group_index = 1, max_item_count = 5 },
     { name = 'nvim_lsp',    group_index = 1, max_item_count = 5 },
     { name = 'nvim_lua',    group_index = 2, max_item_count = 5 },
-    { name = 'path',        group_index = 4, max_item_count = 5 },
+    { name = 'path',        group_index = 4, max_item_count = 3 },
     {
       name = 'buffer',
       group_index = 3,

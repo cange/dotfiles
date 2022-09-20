@@ -24,8 +24,8 @@ if not tabnine_found then
   return
 end
 
-vim.keymap.set({ 'i', 's' }, '<C-p>', '<Plug>luasnip-prev-choice')
-vim.keymap.set({ 'i', 's' }, '<C-n>', '<Plug>luasnip-next-choice')
+vim.keymap.set({ 'i', 's' }, '<C-]>', '<Plug>luasnip-prev-choice')
+vim.keymap.set({ 'i', 's' }, '<C-[>', '<Plug>luasnip-next-choice')
 
 local mapping = cmp.mapping
 local settings = vim.tbl_extend('keep', config.props, {
