@@ -1,4 +1,4 @@
-local lsp = BULK_LOADER('lsp', {
+local lsp = _G.bulk_loader('lsp', {
   { 'nvim-navic', 'nvim_navic' },
   { 'cmp_nvim_lsp', 'cmp_nvim_lsp' },
 })

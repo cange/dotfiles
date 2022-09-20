@@ -1,4 +1,4 @@
-local modules = BULK_LOADER('telescope', {
+local modules = _G.bulk_loader('telescope', {
   { 'telescope', 'telescope' },
   'cange.telescope.setup',
   'cange.telescope.custom',

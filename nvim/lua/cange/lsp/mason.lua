@@ -1,5 +1,5 @@
-local lsp = BULK_LOADER('mason', { { 'mason', 'mason' } })
-local utils = BULK_LOADER('mason', { { 'cange.icons', 'icons' } })
+local lsp = _G.bulk_loader('mason', { { 'mason', 'mason' } })
+local utils = _G.bulk_loader('mason', { { 'cange.icons', 'icons' } })
 
 lsp.mason.setup({
   ui = {

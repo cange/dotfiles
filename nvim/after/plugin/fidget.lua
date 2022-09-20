@@ -3,7 +3,7 @@ if not found_fidget then
   return
 end
 
-local utils = BULK_LOADER('utils', { { 'cange.icons', 'icons' } })
+local utils = _G.bulk_loader('utils', { { 'cange.icons', 'icons' } })
 local function spinner_by_day_time()
   local h = tonumber(vim.fn.strftime('%k', vim.fn.localtime()))
   return h > 8 and h < 20 and 'earth' or 'moon'

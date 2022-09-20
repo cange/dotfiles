@@ -26,10 +26,10 @@
       "$4"
     ]
   },
-  "BULK_LOADER(ctx, {…})": {
+  "bulk_loader(ctx, {…})": {
     "prefix": "bul",
     "body": [
-      "local ${1:context} = BULK_LOADER('$1', {",
+      "local ${1:context} = _G.bulk_loader('$1', {",
       "  { '${2:module_name}', '${3:handle}' },",
       "  $4",
       "})"

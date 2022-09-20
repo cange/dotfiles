@@ -1,9 +1,9 @@
-local telescope = BULK_LOADER('telescope', {
+local telescope = _G.bulk_loader('telescope', {
   { 'telescope.actions', 'actions' },
   { 'telescope.actions.state', 'actions_state' },
   { 'telescope.builtin', 'builtin' },
 })
-local utils = BULK_LOADER('telescope', { { 'cange.icons', 'icons' } })
+local utils = _G.bulk_loader('telescope', { { 'cange.icons', 'icons' } })
 
 local M = {}
 --[[

@@ -26,7 +26,7 @@ end
 -- @return table<string,string> List of loaded modules or if loading
 -- error an incomplete list on last successful ones.
 -- @usage local m = BULK_LOADER('ctx', { 'module_a', 'ns.module_b', 'my_m' }); m.my_m()
-function BULK_LOADER(context_label, module_names, method)
+function _G.bulk_loader(context_label, module_names, method)
   local loaded = {}
   method = method or require
   for i, name_or_table in pairs(module_names) do
@@ -34,9 +34,9 @@ function BULK_LOADER(context_label, module_names, method)
     local module_name = is_list and name_or_table[1] or name_or_table
     local register_name = is_list and name_or_table[2] or i
 
-    local found, module = pcall(method, module_name)
+    local found_module, module = pcall(method, module_name)
 
-    if not found then
+    if not found_module then
       print('[' .. context_label .. '] "' .. module_name .. '" not found')
       return loaded
     end
