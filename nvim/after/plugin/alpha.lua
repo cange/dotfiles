@@ -33,7 +33,7 @@ section.buttons.val = {
   button('r', icons.ui.History ..       '  Recent files',   ':Telescope oldfiles<CR>'),
   button('o', icons.ui.Search ..        '  Open file',      ':Telescope find_files<CR>'),
   button('O', icons.ui.Project ..       '  Open project',   ':lua require("telescope").extensions.projects.projects()<CR>'),
-  button('e', icons.ui.NewFile ..       '  New file',       ':ene <BAR> startinsert <CR>'),
+  button('e', icons.documents.File ..   '  New file',       ':ene <BAR> startinsert <CR>'),
   button('s', icons.ui.SignIn ..        '  Open session',   ':SearchSession<CR>'),
   button('t', icons.ui.List ..          '  Find text',      ':Telescope live_grep <CR>'),
   button('c', icons.ui.Gear ..          '  Config',         ':e ~/.config/nvim/init.lua <CR>'),

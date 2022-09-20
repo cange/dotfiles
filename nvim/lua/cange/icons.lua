@@ -16,35 +16,34 @@ Essential icons
 M.ui = {
   ArrowClosed = '',
   ArrowOpen = '',
-  Lock = '',
+  Lock = '',
   Circle = '',
   BigCircle = '',
   BigUnfilledCircle = '',
-  Close = '',
-  NewFile = '',
+  Close = '',
   Search = '',
-  Lightbulb = '',
-  Project = '',
-  Dashboard = '',
-  History = '',
-  Comment = '',
-  Bug = '',
+  Lightbulb = '',
+  Project ='',
+  Dashboard = '',
+  History = '',
+  Comment = '',
+  Bug = '',
   Code = '',
-  Telescope = '',
-  Gear = '',
+  Telescope = '',
+  Gear = '',
   Package = '',
-  List = '',
-  SignIn = '',
-  SignOut = '',
+  List = '',
+  SignIn = '',
+  SignOut = '',
   Check = '',
   Fire = '',
-  Note = '',
+  Note = '',
   BookMark = '',
   Pencil = '',
   ChevronRight = '',
   Table = '',
   Calendar = '',
-  CloudDownload = '',
+  CloudDownload = '',
 }
 
 ---@type table<string, string>
@@ -64,6 +63,7 @@ M.misc = {
 M.type = {
   Array = '',
   Boolean = '◩',
+  Function = '',
   Number = '',
   Object = '',
   String = '',
@@ -95,18 +95,18 @@ Plugin related icons
 ]]
 ---@type table<string, string>
 M.diagnostics = {
-  Error = '',
-  Warning = '',
-  Information = '',
-  Question = '',
-  Hint = '',
+  Error = '',
+  Warning = '',
+  Information = '',
+  Question = '',
+  Hint = '',
 }
 
 ---Which-key plugin
 ---@type table<string, string>
 M.which_key = {
   breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
-  separator = '➜ ', -- symbol used between a key and it's label
+  separator = '', -- symbol used between a key and it's label
   group = '+', -- symbol prepended to a group
 }
 
@@ -138,13 +138,13 @@ M.kind = {
   Event = '',
   Operator = '',
   TypeParameter = '',
-}
 
+}
 ---Completion sources
 ---@type table<string, string>
 M.cmp_source = {
   buffer = '﬘',
-  nvim_lsp = '',
+  nvim_lsp = 'ﮂ',
   nvim_lua = '',
   path = M.documents.Folder,
 }
