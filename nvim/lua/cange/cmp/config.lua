@@ -68,9 +68,9 @@ local function menu_item_format(entry, vim_item)
   local name = entry.source.name
   if vim.tbl_contains(vim.tbl_keys(source_types), name) then
     vim_item.menu = source_types[name].icon
-    vim_item.menu_hl_group = 'Comment' -- asign appropriate theme color
+    vim_item.menu_hl_group = 'Comment' -- assign appropriate theme color
   end
-  vim_item.kind = icons.kind[vim_item.kind]
+  vim_item.kind = icons.kind[vim_item.kind] .. ' '
   return vim_item
 end
 
@@ -86,7 +86,7 @@ M.props = {
   },
   window = {
     completion = {
-      col_offset = -2, -- align abbr text with kind icons in prefix
+      col_offset = -3, -- align abbr text with kind icons in prefix
     },
   },
   formatting = {
@@ -99,10 +99,10 @@ M.props = {
   },
   sources = {
     { name = 'cmp_tabnine', group_index = 3, max_item_count = 3 },
-    { name = 'luasnip',     group_index = 1, max_item_count = 5 },
-    { name = 'nvim_lsp',    group_index = 1, max_item_count = 5 },
-    { name = 'nvim_lua',    group_index = 2, max_item_count = 5 },
-    { name = 'path',        group_index = 4, max_item_count = 3 },
+    -- { name = 'luasnip',     group_index = 1, max_item_count = 5 },
+    { name = 'nvim_lsp', group_index = 1, max_item_count = 5 },
+    { name = 'nvim_lua', group_index = 2, max_item_count = 5 },
+    { name = 'path', group_index = 4, max_item_count = 3 },
     {
       name = 'buffer',
       group_index = 3,

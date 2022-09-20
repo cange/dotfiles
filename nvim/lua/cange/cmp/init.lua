@@ -18,12 +18,6 @@ if not found_config then
   return
 end
 
-local tabnine_found, _ = pcall(require, 'cmp_tabnine.config')
-if not tabnine_found then
-  print('[cmp.init] "cmp_tabnine.config" not found')
-  return
-end
-
 vim.keymap.set({ 'i', 's' }, '<C-]>', '<Plug>luasnip-prev-choice')
 vim.keymap.set({ 'i', 's' }, '<C-[>', '<Plug>luasnip-next-choice')
 
@@ -53,4 +47,5 @@ local settings = vim.tbl_extend('keep', config.props, {
     ['<S-Tab>'] = mapping(config.prev_item, { 'i', 's' }),
   },
 })
-return cmp.setup(settings)
+
+cmp.setup(settings)
