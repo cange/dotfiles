@@ -30,8 +30,8 @@ telescope.telescope.setup({
     sorting_strategy = 'ascending',
     mappings = {
       i = {
-        ['<C-n>'] = telescope.actions.cycle_history_next,
-        ['<C-p>'] = telescope.actions.cycle_history_prev,
+        ['<C-]>'] = telescope.actions.cycle_history_next,
+        ['<C-[>'] = telescope.actions.cycle_history_prev,
       },
     },
   },

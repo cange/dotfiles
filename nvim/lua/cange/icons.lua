@@ -22,7 +22,7 @@ M.ui = {
   BigUnfilledCircle = '',
   Close = '',
   NewFile = '',
-  Search = '',
+  Search = '',
   Lightbulb = '',
   Project = '',
   Dashboard = '',
@@ -41,7 +41,7 @@ M.ui = {
   Note = '',
   BookMark = '',
   Pencil = '',
-  ChevronRight = '',
+  ChevronRight = '',
   Table = '',
   Calendar = '',
   CloudDownload = '',
@@ -62,11 +62,11 @@ M.misc = {
 ---Language types
 ---@type table<string, string>
 M.type = {
-  Array   = '',
+  Array = '',
   Boolean = '◩',
-  Number  = '',
-  Object  = '',
-  String  = '',
+  Number = '',
+  Object = '',
+  String = '',
 }
 
 ---@type table<string, string>
