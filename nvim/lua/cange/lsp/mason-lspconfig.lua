@@ -1,4 +1,4 @@
-local lsp = BULK_LOADER('mason-lspconfig', {
+local lsp = _G.bulk_loader('mason-lspconfig', {
   { 'mason-lspconfig', 'mason_lspconfig' },
   { 'cange.lsp.providers', 'providers' },
 })

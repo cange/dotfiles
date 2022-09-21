@@ -1,4 +1,4 @@
-BULK_LOADER('keymaps', {
+_G.bulk_loader('keymaps', {
   'cange.keymaps.common',
   'cange.keymaps.which-key',
 })

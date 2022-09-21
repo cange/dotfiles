@@ -1,10 +1,10 @@
-BULK_LOADER('lsp', {
+_G.bulk_loader('lsp', {
   { 'cange.lsp.mason', 'mason' }, --[[ 1 ]]
   { 'cange.lsp.mason-lspconfig', 'mason_lspconfig' }, --[[ 2 ]]
   { 'cange.lsp.lspconfig', 'lspconfig' }, --[[ 3 ]]
   { 'cange.lsp.null-ls', 'null_ls' }, --[[ 4 ]]
 })
-local utils = BULK_LOADER('lsp', { { 'cange.icons', 'icons' } })
+local utils = _G.bulk_loader('lsp', { { 'cange.icons', 'icons' } })
 local signs = {
   { name = 'DiagnosticSignError', text = utils.icons.diagnostics.Error },
   { name = 'DiagnosticSignWarn', text = utils.icons.diagnostics.Warning },

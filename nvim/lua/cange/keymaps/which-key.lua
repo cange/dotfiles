@@ -1,8 +1,8 @@
-local keymaps = BULK_LOADER('keymaps', {
+local keymaps = _G.bulk_loader('keymaps', {
   { 'cange.keymaps.mappings', 'mappings' },
   { 'which-key', 'which_key' },
 })
-local utils = BULK_LOADER('keymaps', { { 'cange.icons', 'icons' } })
+local utils = _G.bulk_loader('keymaps', { { 'cange.icons', 'icons' } })
 
 keymaps.which_key.setup({
   plugins = {

@@ -14,7 +14,6 @@ return {
           'R',
           'P',
           'RELOAD',
-          'BULK_LOADER',
         },
       },
       workspace = {

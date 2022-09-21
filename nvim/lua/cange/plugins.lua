@@ -19,8 +19,9 @@ packer.init({
 --- @param pack_name string The packages module name to call for setup
 --- @return {}|nil
 local function instant_setup(pack_name)
-  local found, pack = pcall(require, pack_name)
-  if not found then
+
+  local found_pack, pack = pcall(require, pack_name)
+  if not found_pack then
     print('[plugins] "' .. pack_name .. '" not found')
     return
   end

@@ -63,11 +63,11 @@ Globals
 
 The setup provides some minimalistic convenience helper function.
 
-|BULK_LOADER| is used to load modules sercurly. It logs when modules could not be
-found and stops execution of certain code.
+|_G.bulk_loader| is used to load modules sercurly. It logs when modules could
+not be found and stops execution of certain code.
 >
 >
-    local loaded = BULK_LOADER('any_label', {
+    local loaded = _G.bulk_loader('any_label', {
         'module_a',
         { 'module-b', 'module_b' }, -- second param enables easy calling later on
     })

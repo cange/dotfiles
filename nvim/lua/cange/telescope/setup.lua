@@ -1,14 +1,13 @@
-local telescope = BULK_LOADER('telescope', {
+local telescope = _G.bulk_loader('telescope', {
   { 'telescope', 'telescope' },
   { 'telescope.actions', 'actions' },
 })
-local utils = BULK_LOADER('mappings', {
+local utils = _G.bulk_loader('mappings', {
   { 'cange.icons', 'icons' },
 })
-
 local default_opts = {
-  theme = 'dropdown',
   previewer = false,
+  theme = 'dropdown',
 }
 local lsp_opts = {
   initial_mode = 'normal',

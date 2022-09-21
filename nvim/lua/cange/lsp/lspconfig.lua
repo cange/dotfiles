@@ -1,4 +1,4 @@
-local lsp = BULK_LOADER('lsp', {
+local lsp = _G.bulk_loader('lsp', {
   { 'lspconfig', 'lspconfig' },
   { 'cmp_nvim_lsp', 'cmp_lsp' },
   { 'cange.lsp.custom', 'custom' },

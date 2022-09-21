@@ -1,4 +1,4 @@
-local lsp = BULK_LOADER('null-ls', { { 'null-ls', 'null_ls' } })
+local lsp = _G.bulk_loader('null-ls', { { 'null-ls', 'null_ls' } })
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/
 local diagnostics = lsp.null_ls.builtins.diagnostics

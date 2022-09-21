@@ -1,5 +1,5 @@
 ---Provdes meta information of the current colorscheme
-M = {}
+local M = {}
 
 M.theme = 'nightfox'
 M.variation = 'terafox'
