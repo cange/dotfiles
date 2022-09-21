@@ -22,9 +22,6 @@ end
 
 function M.diagnostics_log()
   telescope.builtin.diagnostics(telescope.themes.get_ivy({
-    layout_config = {
-      prompt_position = 'top',
-    },
     bufnr = 0,
     initial_mode = 'normal',
     no_listed = true, -- if true show only listed buffersw

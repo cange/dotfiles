@@ -19,16 +19,14 @@ M.lsp = {
   subleader = 'l',
   title = 'Language (LSP)',
   mappings = {
-    I = { command = '<cmd>LspInfo<CR>', title = 'LSP Info' },
-    d = { command = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', title = 'Diagnostics hints' },
-    S = { command = '<cmd>Telescope local sp_dynamic_workspace_symbols<CR>', title = 'Workspace Symbols' },
-    i = { command = '<cmd>LspInfo<CR>', title = 'Info' },
+    F = { command = '<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 10000)()<CR>', title = 'Format' },
     a = { command = '<cmd>lua vim.lsp.buf.code_action()<CR>', title = 'Code Action' },
     c = { command = '<cmd>lua vim.lsp.buf_get_clients()<CR>', title = 'LSP clients' },
-    f = { command = '<cmd>lua vim.lsp.buf.formatting()<CR>', title = 'Format' },
+    d = { command = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', title = 'Diagnostics log' },
+    f = { command = '<cmd>NullLsInfo<CR>', title = 'Info Formatters' },
+    i = { command = '<cmd>LspInfo<CR>', title = 'Info LSP' },
     l = { command = '<cmd>lua vim.diagnostic.setloclist()<CR>', title = 'Problems log' },
-    m = { command = '<cmd>Mason<CR>', title = 'Update LSP services' },
-    r = { command = '<cmd>lua vim.lsp.buf.rename()<CR>', title = 'Rename' },
+    s = { command = '<cmd>Mason<CR>', title = 'Sync LSP' },
   },
 }
 
