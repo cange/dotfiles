@@ -17,6 +17,13 @@ if not found_theme then
   return
 end
 
+local c = palette.load(colorscheme.variation)
+-- vim.pretty_print('color:', c)
+
+-- adjust colors
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = nil }) -- disable default c
+vim.api.nvim_set_hl(0, 'Folded', { bg = nil, fg = c.bg4 }) -- reduces folding noise
+
 local found_modes, modes = pcall(require, 'modes')
 if not found_modes then
   print('[nightfox] "modes" module not found')
@@ -25,9 +32,3 @@ end
 -- needs to been calld after colorscheme is established
 modes.setup()
 
-local color = palette.load(colorscheme.variation)
--- inspect available colors
--- vim.pretty_print('color:', color)
-
--- adjust colors
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = color.bg1 }) -- disable default color
