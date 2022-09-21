@@ -98,16 +98,21 @@ M.props = {
     format = menu_item_format,
   },
   sources = {
+    { name = 'luasnip', group_index = 1, max_item_count = 5 },
+    { name = 'nvim_lsp', group_index = 2, max_item_count = 5,
+      -- entry_filter = function(entry, ctx)
+      --   vim.pretty_print('cmp.config: LSP ctx', ctx)
+      --   return true
+      -- end,
+    },
     { name = 'cmp_tabnine', group_index = 3, max_item_count = 3 },
-    -- { name = 'luasnip',     group_index = 1, max_item_count = 5 },
-    { name = 'nvim_lsp', group_index = 1, max_item_count = 5 },
-    { name = 'nvim_lua', group_index = 2, max_item_count = 5 },
+    { name = 'nvim_lua', group_index = 3, max_item_count = 5 },
     { name = 'path', group_index = 4, max_item_count = 3 },
     {
       name = 'buffer',
-      group_index = 3,
+      group_index = 2,
       max_item_count = 5,
-      filter = function(_, ctx)
+      entry_filter = function(_, ctx)
         local ignore_filetypes = {
           'json',
           'markdown',
