@@ -1,5 +1,6 @@
 local telescope = _G.bulk_loader('telescope', {
   { 'telescope.actions', 'actions' },
+  { 'telescope.themes', 'themes' },
   { 'telescope.actions.state', 'actions_state' },
   { 'telescope.builtin', 'builtin' },
 })
@@ -19,6 +20,16 @@ function M.browse_nvim()
   })
 end
 
+function M.diagnostics_log()
+  telescope.builtin.diagnostics(telescope.themes.get_ivy({
+    bufnr = 0,
+    initial_mode = 'normal',
+    no_listed = true, -- if true show only listed buffersw
+    previewer = false,
+    prompt_title = utils.icons.misc.Stethoscope .. ' Diagnostics Log',
+  }))
+end
+
 function M.browse_workspace()
   telescope.builtin.find_files({
     cwd = '~/workspace/',
@@ -30,15 +41,12 @@ end
 
 -- File browser
 function M.file_browser()
-  local opts
-
-  opts = {
+  local opts = {
     sorting_strategy = 'ascending',
     scroll_strategy = 'cycle',
     layout_config = {
       prompt_position = 'top',
     },
-
     attach_mappings = function(prompt_bufnr, map)
       local current_picker = telescope.actions_state.get_current_picker(prompt_bufnr)
 

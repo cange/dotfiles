@@ -38,7 +38,7 @@ section.buttons.val = {
   button('t', icons.ui.List ..          '  Find text',      ':Telescope live_grep <CR>'),
   button('c', icons.ui.Gear ..          '  Config',         ':e ~/.config/nvim/init.lua <CR>'),
   button('u', icons.ui.CloudDownload .. '  Update plugin',  ':PackerSync<CR>'),
-  button('q', icons.ui.SignOut ..       '  Quit',           ':qa<CR>'),
+  button('q', icons.ui.SignOut ..       '  Quit',           ':qa!<CR>'),
 }
 
 section.footer.val = greetings.random_with_name(meta.author.display_name)

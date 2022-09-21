@@ -86,8 +86,8 @@ local wk_mappings = vim.tbl_deep_extend(
   'keep',
   {
     ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
-    ['='] = { ':lua vim.lsp.buf.formatting_seq_sync()<CR>', 'File formatting' },
-    ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
+    ['F'] = { ':lua vim.lsp.buf.formatting_seq_sync(_, 10000)<CR>', 'File Format' },
+    ['e'] = { '<cmd>NvimTreeToggle<cr>', 'File Explorer' },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     ['q'] = { '<cmd>q!<CR>', 'Quit' },
   },

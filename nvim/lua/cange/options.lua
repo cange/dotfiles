@@ -64,8 +64,8 @@ local options = {
   wrap = false, -- display lines as one long line
 
   -- folding settings
-  foldlevel = 1, -- zero will close all folds
-  foldlevelstart = 2, -- -1 always start editing with all folds closed
+  foldlevel = 0, -- zero will close all folds
+  foldlevelstart = 4, -- -1 always start editing with all folds closed
   foldmethod = 'indent', -- groups of lines with the same indent form a fold
   foldnestmax = 10, -- deepest fold is 10 levels
 }

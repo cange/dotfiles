@@ -48,13 +48,14 @@ M.ui = {
 
 ---@type table<string, string>
 M.misc = {
+  CircuitBoard = '',
+  Package = '',
   Robot = 'ﮧ',
+  Smiley = 'ﲃ',
   Squirrel = '',
+  Stethoscope = '',
   Tag = '',
   Watch = '',
-  Smiley = 'ﲃ',
-  Package = '',
-  CircuitBoard = '',
   Workspace = '',
 }
 
