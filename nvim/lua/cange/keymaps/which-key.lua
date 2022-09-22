@@ -4,6 +4,40 @@ local keymaps = _G.bulk_loader('keymaps', {
 })
 local utils = _G.bulk_loader('keymaps', { { 'cange.icons', 'icons' } })
 
+---Generates a which-key table form mappings
+-- @param section_key string Key of a keybinding block
+-- @return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
+local function workflow_mappings(config)
+  local section = {}
+  -- vim.pretty_print(vim.tbl_keys(config))
+  section[config.subleader] = { name = config.title }
+
+  local section_mappings = section[config.subleader]
+
+  for key, m in pairs(config.mappings) do
+    section_mappings[key] = { m.command, m.title }
+  end
+
+  return section
+end
+
+local custom_mappings = {}
+for i, m in pairs(keymaps.mappings) do
+  custom_mappings=vim.tbl_extend('keep', custom_mappings, workflow_mappings(m))
+end
+
+local wk_mappings = vim.tbl_deep_extend(
+  'keep',
+  {
+    ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
+    ['F'] = { ':lua vim.lsp.buf.formatting_seq_sync(_, 10000)<CR>', 'File Format' },
+    ['e'] = { '<cmd>NvimTreeToggle<cr>', 'File Explorer' },
+    ['w'] = { '<cmd>w!<CR>', 'Save' },
+    ['q'] = { '<cmd>q!<CR>', 'Quit' },
+  },
+  custom_mappings
+)
+
 keymaps.which_key.setup({
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
@@ -64,42 +98,6 @@ keymaps.which_key.setup({
     v = { 'j', 'k' },
   },
 })
-
----Generates a which-key table form mappings
--- @param section_key string Key of a keybinding block
--- @return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
-local function workflow_mappings(config)
-  local section = {}
-  -- vim.pretty_print(vim.tbl_keys(config))
-  section[config.subleader] = { name = config.title }
-
-  local section_mappings = section[config.subleader]
-
-  for key, m in pairs(config.mappings) do
-    section_mappings[key] = { m.command, m.title }
-  end
-
-  return section
-end
-
-local wk_mappings = vim.tbl_deep_extend(
-  'keep',
-  {
-    ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
-    ['F'] = { ':lua vim.lsp.buf.formatting_seq_sync(_, 10000)<CR>', 'File Format' },
-    ['e'] = { '<cmd>NvimTreeToggle<cr>', 'File Explorer' },
-    ['w'] = { '<cmd>w!<CR>', 'Save' },
-    ['q'] = { '<cmd>q!<CR>', 'Quit' },
-  },
-  workflow_mappings(keymaps.mappings.bookmarks),
-  workflow_mappings(keymaps.mappings.config),
-  workflow_mappings(keymaps.mappings.git),
-  workflow_mappings(keymaps.mappings.lsp),
-  workflow_mappings(keymaps.mappings.packer),
-  workflow_mappings(keymaps.mappings.search),
-  -- workflow_mappings(keymaps.mappings.terminal),
-  workflow_mappings(keymaps.mappings.session)
-)
 
 keymaps.which_key.register(wk_mappings, {
   mode = 'n', -- NORMAL mode

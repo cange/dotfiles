@@ -108,16 +108,29 @@ M.session = {
     x = { command = '<cmd>DeleteSession<CR>', title = 'Delete session' },
   },
 }
--- M.terminal = {
---   subleader = 't',
---   mappings = {
---     n = { command = '<cmd>lua _NODE_TOGGLE()<CR>',                      title = 'Node' },
---     u = { command = '<cmd>lua _NCDU_TOGGLE()<CR>',                      title = 'NCDU' },
---     t = { command = '<cmd>lua _HTOP_TOGGLE()<CR>',                      title = 'Htop' },
---     p = { command = '<cmd>lua _PYTHON_TOGGLE()<CR>',                    title = 'Python' },
---     f = { command = '<cmd>ToggleTerm direction=float<CR>',              title = 'Float' },
---     h = { command = '<cmd>ToggleTerm size=10 direction=horizontal<CR>', title = 'Horizontal' },
---     v = { command = '<cmd>ToggleTerm size=80 direction=vertical<CR>',   title = 'Vertical' },
---   },
+
+M.terminal = {
+  subleader = 't',
+  title = 'Terminal',
+  mappings = {
+    ['1'] = { command = ':1ToggleTerm size=80 direction=vertical<CR>', title = 'VTerminal 1' },
+    ['2'] = { command = ':2ToggleTerm size=80 direction=vertical<CR>', title = 'VTerminal 2' },
+    ['3'] = { command = ':3ToggleTerm<CR>', title = 'HTerminal 1' },
+    ['4'] = { command = ':4ToggleTerm<CR>', title = 'HTerminal 2' },
+    f = { command = '<cmd>ToggleTerm direction=float<CR>', title = 'Float' },
+    h = { command = '<cmd>ToggleTerm size=10 direction=horizontal<CR>', title = 'Horizontal' },
+    v = { command = '<cmd>ToggleTerm size=80 direction=vertical<CR>', title = 'Vertical' },
+  },
+}
+
+M.treesitter = {
+  subleader = 'T',
+  title = 'Treesitter (syntax)',
+  mappings = {
+    h = { command = '<cmd>TSHighlightCapturesUnderCursor<cr>', title = 'Highlight' },
+    p = { command = '<cmd>TSPlaygroundToggle<cr>', title = 'Playground' },
+    r = { command = '<cmd>TSToggle rainbow<cr>', title = 'Rainbow' },
+  },
+}
 
 return M
