@@ -23,9 +23,10 @@ M.lsp = {
     a = { command = '<cmd>lua vim.lsp.buf.code_action()<CR>', title = 'Code Action' },
     c = { command = '<cmd>lua vim.lsp.buf_get_clients()<CR>', title = 'LSP clients' },
     d = { command = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', title = 'Diagnostics log' },
-    f = { command = '<cmd>NullLsInfo<CR>', title = 'Info Formatters' },
+    f = { command = '<cmd>lua vim.diagnostic.open_float()<CR>', title = 'Diagnostics under cursor' },
     i = { command = '<cmd>LspInfo<CR>', title = 'Info LSP' },
     l = { command = '<cmd>lua vim.diagnostic.setloclist()<CR>', title = 'Problems log' },
+    n = { command = '<cmd>NullLsInfo<CR>', title = 'Info Formatters' },
     s = { command = '<cmd>Mason<CR>', title = 'Sync LSP' },
   },
 }

@@ -2,7 +2,7 @@
 local M = {}
 
 M.theme = 'nightfox'
-M.variation = 'terafox'
+M.variation = 'nordfox'
 
 ---Color palette of current used colorscheme.
 -- @return table<string, string>

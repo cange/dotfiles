@@ -46,10 +46,10 @@ keymap('', 'wk', '<C-w>k')
 keymap('', 'wl', '<C-w>l')
 
 -- Resize widow swith arrows
-keymap('n', '<C-down>', ':resize +4<CR>')
-keymap('n', '<C-left>', ':vertical resize -4<CR>')
-keymap('n', '<C-right>', ':vertical resize +4<CR>')
-keymap('n', '<C-up>', ':resize -4<CR>')
+keymap('n', '<S-down>', ':resize +4<CR>')
+keymap('n', '<S-left>', ':vertical resize -4<CR>')
+keymap('n', '<S-right>', ':vertical resize +4<CR>')
+keymap('n', '<S-up>', ':resize -4<CR>')
 
 -- Moving lines up and down
 keymap('i', '<A-down>', '<Esc>:move .+1<CR>==gi')

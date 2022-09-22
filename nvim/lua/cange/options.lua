@@ -11,7 +11,7 @@ local options = {
   -- UI
   colorcolumn = '80,120', -- highlight optimal end line¬
   cursorline = true, -- highlight the current line
-  guifont = 'monospace:h17', -- the font used in graphical neovim applications
+  guifont = 'monospace:h16', -- the font used in graphical neovim applications
   laststatus = 1, -- show one global statusline for all windows
   showtabline = 1, -- always show tabs
   mouse = 'a', -- allow the mouse to be used in editor

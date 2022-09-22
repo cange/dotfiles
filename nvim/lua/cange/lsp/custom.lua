@@ -17,9 +17,11 @@ local function attach_keymaps(_, bufnr)
   end
 
   keymap('<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+  keymap('K', '<cmd>lua vim.lsp.buf.hover()<CR>')
   keymap('gI', '<cmd>Telescope lsp_implementations<CR>')
   keymap('gd', '<cmd>Telescope lsp_definitions<CR>')
   keymap('gf', '<cmd>lua vim.diagnostic.open_float()<CR>')
+  keymap('gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   keymap('gl', '<cmd>lua vim.diagnostic.setloclist()<CR>')
   keymap('gr', '<cmd>Telescope lsp_references<CR>')
 
@@ -27,11 +29,7 @@ local function attach_keymaps(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
 
   -- keymap('<A-a>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-  -- keymap('<M-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   -- keymap('<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-  -- keymap('K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-  -- keymap('gl', '<cmd>lua vim.diagnostic.open_float()<CR>')
-  -- keymap('gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
 end
 
 M = {}

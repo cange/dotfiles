@@ -48,11 +48,11 @@ M.ui = {
 
 ---@type table<string, string>
 M.misc = {
-  CircuitBoard = '',
+  CircuitBoard = '',
   Package = '',
   Robot = 'ﮧ',
   Smiley = 'ﲃ',
-  Squirrel = '',
+  Squirrel = '',
   Stethoscope = '',
   Tag = '',
   Watch = '',
@@ -86,7 +86,7 @@ M.git = {
   Ignore = '',
   Rename = '',
   Diff = '',
-  Repo = '',
+  Repo = '',
   Octoface = '',
 }
 --[[
