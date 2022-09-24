@@ -32,6 +32,9 @@ done the 'after/plugin/' directory. Each plugin has its onw named file.
 Sometimes, plugins needs to set up other plugins to configure, which is to
 a limitidate amount been done it.
 
+The lua documentation anontation based on sumneko:
+https://github.com/sumneko/lua-language-server/wiki/Annotations
+
 
 
 
@@ -47,10 +50,10 @@ appearance if the colorscheme is installed.
 
 
 ================================================================================
-                                                               *cange.keymaps*
-Keymaps
+                                                           *cange.keybindings*
+Keybindings
 
-Provides information of most common keymappings like open search dialog or
+Provides information of most common keybindings like open search dialog or
 similar. Depending on the plugin, there are also some individual setups in the
 plugins configuration file.
 
@@ -67,13 +70,19 @@ The setup provides some minimalistic convenience helper function.
 not be found and stops execution of certain code.
 >
 >
-    local loaded = _G.bulk_loader('any_label', {
+|bulk_loader|
+>
+    local loaded = _G.bulk_loader('any_context_name', {
         'module_a',
         { 'module-b', 'module_b' }, -- second param enables easy calling later on
     })
-    loaded.module_b... -- call it
+    -- the named module can the called by the defined namespace
+    loaded.module_b()
 
 
-
+|load|
+>
+    local my_module = _G.load('context_name', 'module')
+<
 
 vim:tw=78:ts=8:ft=help:norl:

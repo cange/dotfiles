@@ -12,7 +12,7 @@ local M = {}
 Essential icons
 
 ]]
----@type table<string, string>
+---@enum ui
 M.ui = {
   ArrowClosed = '',
   ArrowOpen = '',
@@ -46,7 +46,7 @@ M.ui = {
   CloudDownload = '',
 }
 
----@type table<string, string>
+---@enum misc
 M.misc = {
   CircuitBoard = '',
   Package = '',
@@ -60,7 +60,7 @@ M.misc = {
 }
 
 
----@type table<string, string>
+---@enum documents
 M.documents = {
   File = '',
   Files = '',
@@ -68,7 +68,7 @@ M.documents = {
   OpenFolder = '',
 }
 
----@type table<string, string>
+---@enum git
 M.git = {
   Add = '',
   Mod = '',
@@ -84,7 +84,7 @@ M.git = {
 Plugin related icons
 
 ]]
----@type table<string, string>
+---@enum diagnostics
 M.diagnostics = {
   Error = '',
   Warning = '',
@@ -93,8 +93,7 @@ M.diagnostics = {
   Hint = '',
 }
 
----Which-key plugin
----@type table<string, string>
+---@enum which_key
 M.which_key = {
   breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
   separator = '', -- symbol used between a key and it's label
@@ -102,7 +101,7 @@ M.which_key = {
 }
 
 ---Language types
----@type table<string, string>
+---@enum type
 M.type = {
   Array = '',
   Boolean = '◩',
@@ -113,7 +112,7 @@ M.type = {
 }
 
 ---Language symbols
----@type table<string, string>
+---@enum kind
 M.kind = {
   Text = '',
   Method = 'm',
@@ -141,8 +140,8 @@ M.kind = {
   Operator = '',
   TypeParameter = '',
 }
----Completion sources
----@type table<string, string>
+
+---@enum cmp_source
 M.cmp_source = {
   buffer = '﬘',
   nvim_lsp = 'ﮂ',
@@ -150,7 +149,7 @@ M.cmp_source = {
   path = M.documents.Folder,
 }
 
----@type table<string, string>
+---@enum git_states
 M.git_states = {
   staged = '',
   deleted = M.git.Remove,
@@ -161,7 +160,7 @@ M.git_states = {
   untracked = 'ﱡ',
 }
 
----@type table<string, string>
+---@enum lualine
 M.lualine = {
   unnamed = M.documents.File, -- Text to show for unnamed buffers.
   readonly = M.ui.lock, -- Text to show when the file is non-modifiable or readonly.
@@ -170,7 +169,7 @@ M.lualine = {
 }
 
 ---Mason LSP local anguage server plugin
----@type table<string, string>
+---@enum mason
 M.mason = {
   package_installed = '',
   package_pending = '',

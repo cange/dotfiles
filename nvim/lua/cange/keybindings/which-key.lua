@@ -1,20 +1,19 @@
-local keymaps = _G.bulk_loader('keymaps', {
-  { 'cange.keymaps.mappings', 'mappings' },
+local keybindings = _G.bulk_loader('keybindings.which-key', {
   { 'which-key', 'which_key' },
+  { 'cange.icons', 'icons' },
+  { 'cange.keybindings.workflows', 'workflows' },
 })
-local utils = _G.bulk_loader('keymaps', { { 'cange.icons', 'icons' } })
-
 ---Generates a which-key table form mappings
 -- @param section_key string Key of a keybinding block
 -- @return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
-local function workflow_mappings(config)
+local function workflow_mappings(workflow)
   local section = {}
-  -- vim.pretty_print(vim.tbl_keys(config))
-  section[config.subleader] = { name = config.title }
+  -- vim.pretty_print(vim.tbl_keys(workflow))
+  section[workflow.subleader] = { name = workflow.title }
 
-  local section_mappings = section[config.subleader]
+  local section_mappings = section[workflow.subleader]
 
-  for key, m in pairs(config.mappings) do
+  for key, m in pairs(workflow.mappings) do
     section_mappings[key] = { m.command, m.title }
   end
 
@@ -22,23 +21,19 @@ local function workflow_mappings(config)
 end
 
 local custom_mappings = {}
-for i, m in pairs(keymaps.mappings) do
-  custom_mappings=vim.tbl_extend('keep', custom_mappings, workflow_mappings(m))
+for _, m in pairs(keybindings.workflows) do
+  custom_mappings = vim.tbl_extend('keep', custom_mappings, workflow_mappings(m))
 end
 
-local wk_mappings = vim.tbl_deep_extend(
-  'keep',
-  {
-    ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
-    ['F'] = { ':lua vim.lsp.buf.formatting_seq_sync(_, 10000)<CR>', 'File Format' },
-    ['e'] = { '<cmd>NvimTreeToggle<cr>', 'File Explorer' },
-    ['w'] = { '<cmd>w!<CR>', 'Save' },
-    ['q'] = { '<cmd>q!<CR>', 'Quit' },
-  },
-  custom_mappings
-)
+local wk_mappings = vim.tbl_deep_extend('keep', {
+  ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
+  ['F'] = { ':lua vim.lsp.buf.formatting_seq_sync(_, 10000)<CR>', 'File Format' },
+  ['e'] = { '<cmd>NvimTreeToggle<cr>', 'File Explorer' },
+  ['w'] = { '<cmd>w!<CR>', 'Save' },
+  ['q'] = { '<cmd>q!<CR>', 'Quit' },
+}, custom_mappings)
 
-keymaps.which_key.setup({
+keybindings.which_key.setup({
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
     registers = true, -- shows your registers on ' in NORMAL or <C-r> in INSERT mode
@@ -68,7 +63,7 @@ keymaps.which_key.setup({
     -- ['<cr>'] = 'RET',
     -- ['<tab>'] = 'TAB',
   },
-  icons = utils.icons.which_key,
+  icons = keybindings.icons.which_key,
   popup_mappings = {
     scroll_down = '<c-d>', -- binding to scroll down inside the popup
     scroll_up = '<c-u>', -- binding to scroll up inside the popup
@@ -99,7 +94,7 @@ keymaps.which_key.setup({
   },
 })
 
-keymaps.which_key.register(wk_mappings, {
+keybindings.which_key.register(wk_mappings, {
   mode = 'n', -- NORMAL mode
   prefix = '<leader>',
   buffer = nil, -- Global mappings. Specify a buffer number for buffer M.mappings

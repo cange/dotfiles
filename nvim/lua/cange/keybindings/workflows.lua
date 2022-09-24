@@ -1,11 +1,11 @@
---- Provides general settings
+---Provides general settings
 local M = {}
 
 ---Mappings tries to organise global used keybindings on one place
---- Pattern: <block_key> = { { <key> = { command = '...', title = '...' } } }
---- @table mappings
+---Pattern: <block_key> = { { <key> = { command = '...', title = '...' } } }
+---@table mappings
 
---- Language related syntax analytics
+---Language related syntax analytics
 M.bookmarks = {
   subleader = 'b',
   title = 'Bookmarks',
