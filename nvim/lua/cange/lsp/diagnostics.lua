@@ -7,8 +7,8 @@ local signs = {
   { name = 'DiagnosticSignInfo', text = icons.diagnostics.Information },
 }
 
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
+for _, s in ipairs(signs) do
+  vim.fn.sign_define(s.name, { texthl = s.name, text = s.text, numhl = '' })
 end
 
 vim.diagnostic.config({

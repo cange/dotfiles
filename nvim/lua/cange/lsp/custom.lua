@@ -9,6 +9,9 @@ local function attach_navic(client, bufnr)
 end
 
 local function attach_keymaps(_, bufnr)
+  -- Use LSP as the handler for formatexpr.
+  vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+
   local function keymap(lhs, rhs)
     local mode = 'n'
     local opts = { noremap = true, silent = true }
@@ -19,17 +22,12 @@ local function attach_keymaps(_, bufnr)
   keymap('<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
   keymap('K', '<cmd>lua vim.lsp.buf.hover()<CR>')
   keymap('gI', '<cmd>Telescope lsp_implementations<CR>')
+  keymap('gT', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
   keymap('gd', '<cmd>Telescope lsp_definitions<CR>')
   keymap('gf', '<cmd>lua vim.diagnostic.open_float()<CR>')
-  keymap('gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   keymap('gl', '<cmd>lua vim.diagnostic.setloclist()<CR>')
   keymap('gr', '<cmd>Telescope lsp_references<CR>')
-
-  -- Use LSP as the handler for formatexpr.
-  vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
-
-  -- keymap('<A-a>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-  -- keymap('<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+  keymap('gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
 end
 
 M = {}
