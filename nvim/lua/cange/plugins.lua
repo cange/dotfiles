@@ -81,6 +81,7 @@ packer.startup(function(use)
     requires = { web_icons }, -- optional, for file icons
     tag = 'nightly', -- optional, updated every week. (see issue #1193)
   })
+  use('simrat39/symbols-outline.nvim') -- tree like view for symbols-outline
 
   use({
     'numToStr/Comment.nvim', -- comment toggle

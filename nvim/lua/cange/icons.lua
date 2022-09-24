@@ -23,7 +23,7 @@ M.ui = {
   Close = '',
   Search = '',
   Lightbulb = '',
-  Project ='',
+  Project = '',
   Dashboard = '',
   History = '',
   Comment = '',
@@ -59,16 +59,6 @@ M.misc = {
   Workspace = '',
 }
 
----Language types
----@type table<string, string>
-M.type = {
-  Array = '',
-  Boolean = '◩',
-  Function = '',
-  Number = '',
-  Object = '',
-  String = '',
-}
 
 ---@type table<string, string>
 M.documents = {
@@ -111,7 +101,18 @@ M.which_key = {
   group = '+', -- symbol prepended to a group
 }
 
----Language node items
+---Language types
+---@type table<string, string>
+M.type = {
+  Array = '',
+  Boolean = '◩',
+  Function = '',
+  Number = '',
+  Object = '',
+  String = '',
+}
+
+---Language symbols
 ---@type table<string, string>
 M.kind = {
   Text = '',
@@ -139,7 +140,6 @@ M.kind = {
   Event = '',
   Operator = '',
   TypeParameter = '',
-
 }
 ---Completion sources
 ---@type table<string, string>
