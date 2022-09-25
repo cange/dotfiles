@@ -36,7 +36,7 @@ function M.next_item(fallback)
     cmp.select_next_item()
   elseif ls.expandable() then
     ls.expand()
-  elseif ls.expand_or_jumpable() then
+  elseif ls.expand_or_locally_jumpable() then
     ls.expand_or_jump()
   elseif check_backspace() then
     fallback()
