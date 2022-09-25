@@ -17,6 +17,7 @@ if not found_theme then
   return
 end
 
+vim.notify('Theme: "' .. colorscheme.theme .. '" in "' .. colorscheme.variation .. '" variation')
 local c = palette.load(colorscheme.variation)
 -- vim.pretty_print('color:', c)
 
@@ -31,4 +32,3 @@ if not found_modes then
 end
 -- needs to been calld after colorscheme is established
 modes.setup()
-
