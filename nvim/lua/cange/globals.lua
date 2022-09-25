@@ -57,7 +57,7 @@ end
 ---@param context_name string Indicate of loading location for error reporting.
 ---@param module_name string Name of the module which should be loaded
 ---@return table|function|nil Loaded module if successful or nil in error case
-function _G.load(context_name, module_name)
+function Cange.load(context_name, module_name)
   if pcall(require, module_name) then
     return require(module_name)
   end

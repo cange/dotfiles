@@ -66,13 +66,13 @@ Globals
 
 The setup provides some minimalistic convenience helper function.
 
-|_G.bulk_loader| is used to load modules sercurly. It logs when modules could
+|Cange.bulk_loader| is used to load modules sercurly. It logs when modules could
 not be found and stops execution of certain code.
 >
 >
 |bulk_loader|
 >
-    local loaded = _G.bulk_loader('any_context_name', {
+    local loaded = Cange.bulk_loader('any_context_name', {
         'module_a',
         { 'module-b', 'module_b' }, -- second param enables easy calling later on
     })
@@ -82,7 +82,7 @@ not be found and stops execution of certain code.
 
 |load|
 >
-    local my_module = _G.load('context_name', 'module')
+    local my_module = Cange.load('context_name', 'module')
 <
 
 vim:tw=78:ts=8:ft=help:norl:

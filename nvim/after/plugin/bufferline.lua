@@ -1,11 +1,15 @@
 local found, bufferline = pcall(require, 'bufferline')
-local found_theme, colors = pcall(require, 'colorscheme.palette')
-if not found or not found_theme then
+if not found then
   return
 end
 
--- print(vim.inspect(colors)
-
+-- local utils = Cange.bulk_loader('bufferline', {
+--   { 'cange.colorscheme', 'colorscheme' },
+-- })
+-- local c = utils.colorscheme.palette()
+--
+-- -- vim.pretty_print('colors', c)
+--
 bufferline.setup({
   options = {
     mode = 'tabs',
@@ -15,29 +19,26 @@ bufferline.setup({
     show_close_icon = false,
     color_icons = true,
   },
-  highlights = {
-    fill = {
-      fg = colors.magenta.base,
-      bg = colors.green.base,
-    },
-    separator = {
-      fg = '#073642',
-      bg = '#002b36',
-    },
-    separator_selected = {
-      fg = '#073642',
-    },
-    background = {
-      fg = '#657b83',
-      bg = '#002b36',
-    },
-    buffer_selected = {
-      fg = colors.fg2,
-      bold = false,
-      italic = false,
-    },
-  },
+  -- highlights = {
+  --   fill = {
+  --     fg = c.magenta.base,
+  --     bg = c.bg0,
+  --   },
+  --   separator = {
+  --     fg = c.bg2,
+  --     bg = c.bg0,
+  --   },
+  --   separator_selected = {
+  --     fg = c.bg1,
+  --   },
+  --   background = {
+  --     fg = c.fg1,
+  --     bg = c.bg0,
+  --   },
+  --   buffer_selected = {
+  --     fg = c.fg2,
+  --     bold = false,
+  --     italic = false,
+  --   },
+  -- },
 })
-
-vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>', {})
-vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', {})

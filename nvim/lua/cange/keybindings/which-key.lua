@@ -1,4 +1,4 @@
-local keybindings = _G.bulk_loader('keybindings.which-key', {
+local keybindings = Cange.bulk_loader('keybindings.which-key', {
   { 'which-key', 'which_key' },
   { 'cange.icons', 'icons' },
   { 'cange.keybindings.workflows', 'workflows' },
@@ -27,7 +27,7 @@ end
 
 local wk_mappings = vim.tbl_deep_extend('keep', {
   ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
-  ['F'] = { ':lua vim.lsp.buf.formatting_seq_sync(_, 10000)<CR>', 'File Format' },
+  ['<F2>'] = { ':lua vim.lsp.buf.formatting_seq_sync(_, 10000)<CR>', 'File Format' },
   ['e'] = { '<cmd>NvimTreeToggle<cr>', 'File Explorer' },
   ['w'] = { '<cmd>w!<CR>', 'Save' },
   ['q'] = { '<cmd>q!<CR>', 'Quit' },

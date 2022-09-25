@@ -2,7 +2,7 @@ local found, tree = pcall(require, 'nvim-tree')
 if not found then
   return
 end
-local k = _G.load('toggleterm', 'cange.utils.keymaps')
+local k = Cange.load('toggleterm', 'cange.utils.keymaps')
 
 k.nmap('<leader>e', ':NvimTreeToggle<CR>')
 k.nmap('<leader>.', ':NvimTreeFindFile<CR>')

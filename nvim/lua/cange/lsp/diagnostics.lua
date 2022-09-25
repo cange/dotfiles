@@ -1,4 +1,4 @@
-local utils = _G.bulk_loader('lsp', { { 'cange.icons', 'icons' } })
+local utils = Cange.bulk_loader('lsp', { { 'cange.icons', 'icons' } })
 local icons = utils.icons
 local signs = {
   { name = 'DiagnosticSignError', text = icons.diagnostics.Error },

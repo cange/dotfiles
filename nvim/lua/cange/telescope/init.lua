@@ -5,7 +5,7 @@ if not found_telescope then
   return
 end
 
-_G.bulk_loader(ns, { 'cange.telescope.setup', 'cange.telescope.custom' })
+Cange.bulk_loader(ns, { 'cange.telescope.setup', 'cange.telescope.custom' })
 
 telescope.load_extension('textcase')
 telescope.load_extension('session-lens')
