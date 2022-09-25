@@ -21,7 +21,6 @@ k.nmap(toggle_help_key, '<Nop>')
 api.events.subscribe(Event.TreeClose, function() end)
 
 local config = require('nvim-tree.config').nvim_tree_callback
-local icons = require('cange.icons')
 
 tree.setup({
   -- project plugin related
@@ -38,7 +37,7 @@ tree.setup({
         folder = false,
       },
       glyphs = {
-        git = icons.git_states,
+        git = Cange.icons.git_states,
       },
     },
   },

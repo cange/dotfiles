@@ -7,11 +7,7 @@ end
 local builtin = require('telescope.builtin')
 local actions_state = require('telescope.actions.state')
 local themes = require('telescope.themes')
-local found_icons, icons = pcall(require, 'cange.icons')
-if not found_icons then
-  print('[' .. ns .. '] "cange.icons" not found')
-  return
-end
+local icons = Cange.icons
 
 local M = {}
 

@@ -3,11 +3,7 @@ if not found_lualine then
   return
 end
 
-local found_icons, icons = pcall(require, 'cange.icons')
-if not found_icons then
-  print('[lualine] "cange.icons" not found')
-  return
-end
+local icons = Cange.icons
 
 lualine.setup({
   options = {

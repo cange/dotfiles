@@ -3,7 +3,7 @@ if not found then
   return
 end
 
-local icons = require('cange.icons')
+local icons = Cange.icons
 
 notify.setup({
   -- Animation style (see below for details)

@@ -1,10 +1,13 @@
-local lsp = Cange.bulk_loader('mason', { { 'mason', 'mason' } })
-local utils = Cange.bulk_loader('mason', { { 'cange.icons', 'icons' } })
+local found, mason = pcall(require, 'mason')
+if not found then
+  print('[cange.lsp.mason] "mason" not found')
+  return
+end
 
-lsp.mason.setup({
+mason.setup({
   ui = {
     border = 'rounded',
-    icons = utils.icons.mason,
+    icons = Cange.icons.mason,
   },
   log_level = vim.log.levels.INFO,
   max_concurrent_installers = 4,

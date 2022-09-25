@@ -5,10 +5,7 @@ if not found_telescope then
   return
 end
 local actions = require('telescope.actions')
-local found_icons, icons = pcall(require, 'cange.icons')
-if not found_icons then
-  print('[' .. ns .. '] "cange.icons" not found')
-end
+local icons = Cange.icons
 -- config
 local default_opts = {
   previewer = false,

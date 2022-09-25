@@ -12,11 +12,7 @@ local function button(sc, txt, keybind, keybind_opts)
   return btn
 end
 
-local found_icons, icons = pcall(require, 'cange.icons')
-if not found_icons then
-  print('[alpha] "cange.icons" not found')
-  return
-end
+local icons = Cange.icons
 local found_meta, meta = pcall(require, 'cange.meta')
 if not found_meta then
   print('[alpha] "cange.meta" not found')

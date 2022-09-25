@@ -1,6 +1,5 @@
 local keybindings = Cange.bulk_loader('keybindings.which-key', {
   { 'which-key', 'which_key' },
-  { 'cange.icons', 'icons' },
   { 'cange.keybindings.workflows', 'workflows' },
 })
 ---Generates a which-key table form mappings
@@ -63,7 +62,7 @@ keybindings.which_key.setup({
     -- ['<cr>'] = 'RET',
     -- ['<tab>'] = 'TAB',
   },
-  icons = keybindings.icons.which_key,
+  icons = Cange.icons.which_key,
   popup_mappings = {
     scroll_down = '<c-d>', -- binding to scroll down inside the popup
     scroll_up = '<c-u>', -- binding to scroll up inside the popup
