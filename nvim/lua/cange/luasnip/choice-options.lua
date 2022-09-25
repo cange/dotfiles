@@ -48,8 +48,8 @@ local function create_window(choice_node)
   return { win_id = win_id, extmark = extmark, buf = buffer }
 end
 
-function CHOICE_POPUP()
-  local choice_node =luasnip.session.event_node
+function CangeSnippetChoiceOpen()
+  local choice_node = luasnip.session.event_node
   -- build stack for nested choiceNodes.
   if win then
     win_close(win.win_id, true)
@@ -65,7 +65,7 @@ function CHOICE_POPUP()
   }
 end
 
-function UPDATE_CHOICE_POPUP()
+function CangeSnippetChoiceUpdate()
   local choice_node = luasnip.session.event_node
   win_close(win.win_id, true)
   del_extmark(win.buf, ns_id, win.extmark)
@@ -75,7 +75,8 @@ function UPDATE_CHOICE_POPUP()
   win.buf = created_win.buf
 end
 
-function CHOICE_POPUP_CLOSE()
+function CangeSnippetChoiceClose()
+  -- vim.pretty_print('window id', win.win_id)
   win_close(win.win_id, true)
   del_extmark(win.buf, ns_id, win.extmark)
   -- now we are checking if we still have previous choice we were in after exit nested choice
@@ -88,26 +89,29 @@ function CHOICE_POPUP_CLOSE()
     win.buf = created_win.buf
   end
 end
+
 -- Autocommands
 local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd
 
-augroup('luasnip_choice_popup', { clear = true })
+augroup('luasnip_choice_options', { clear = true })
 autocmd('User', {
   pattern = 'LuasnipChoiceNodeEnter',
-  callback = function()
-    CHOICE_POPUP()
-  end,
+  callback = CangeSnippetChoiceOpen,
 })
 autocmd('User', {
   pattern = 'LuasnipChoiceNodeLeave',
-  callback = function()
-    CHOICE_POPUP_CLOSE()
-  end,
+  callback = CangeSnippetChoiceClose,
 })
 autocmd('User', {
   pattern = 'LuasnipChangeChoice',
-  callback = function()
-    UPDATE_CHOICE_POPUP()
-  end,
+  callback = CangeSnippetChoiceUpdate,
+})
+autocmd('User', {
+  pattern = {
+    'LuasnipCleanup',
+    'LuasnipDynamicNodeLeave',
+    'LuasnipInsertNodeLeave',
+  },
+  callback = CangeSnippetChoiceClose,
 })

@@ -19,6 +19,7 @@ M.lsp = {
   subleader = 'l',
   title = 'Language (LSP)',
   mappings = {
+    C = { command = '<cmd>lua require("luasnip").cleanup()<CR>', title = 'Reset snippets UI' },
     F = { command = '<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 10000)()<CR>', title = 'Format' },
     a = { command = '<cmd>lua vim.lsp.buf.code_action()<CR>', title = 'Code Action' },
     c = { command = '<cmd>lua vim.lsp.buf_get_clients()<CR>', title = 'LSP clients' },

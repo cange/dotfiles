@@ -1,5 +1,5 @@
 local ns = 'luasnip.init'
-local found_luasnip, _ = pcall(require, 'luasnip')
+local found_luasnip, luasnip = pcall(require, 'luasnip')
 if not found_luasnip then
   print('[' .. ns .. '] "luasnip" not found')
   return
@@ -11,28 +11,15 @@ if found_snippets then
 else
   print('[' .. ns .. '] "cange.snippets" not found')
 end
-local found_popup, _ = pcall(require, 'cange.luasnip.choice-popup')
-if not found_popup then
-  print('[' .. ns .. '] "cange.luasnip.choice-popup" not found')
+local found_options, _ = pcall(require, 'cange.luasnip.choice-options')
+if not found_options then
+  print('[' .. ns .. '] "cange.luasnip.choice-options" not found')
   return
 end
 
 vscode_loader.lazy_load()
 
 -- -- Adds a dot to the end of the line to show if inside a choices insert mode
--- local insert_or_choice_indicator = {
---   [types.choiceNode] = {
---     active = {
---       virt_text = { { '●', color.orange.base } }
---     },
---   },
---   [types.insertNode] = {
---     active = {
---       virt_text = { { '●', color.blue.base } }
---     },
---   },
--- }
---
 -- local keymap = vim.api.nvim_set_keymap
 -- local keymap = vim.keymap.set
 -- local opts = {
