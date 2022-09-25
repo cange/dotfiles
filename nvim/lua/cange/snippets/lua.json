@@ -15,6 +15,10 @@
     "prefix": "not",
     "body": "vim.notify('--- $1')"
   },
+  "tbl_keys(…)": {
+    "prefix": "tblk",
+    "body": "vim.tbl_keys($1)"
+  },
   "pcall(…)": {
     "prefix": "pca",
     "body": [

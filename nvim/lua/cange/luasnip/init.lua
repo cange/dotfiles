@@ -1,42 +1,25 @@
-local found, ls = pcall(require, 'luasnip')
-if not found then
+local ns = 'luasnip.init'
+local found_luasnip, _ = pcall(require, 'luasnip')
+if not found_luasnip then
+  print('[' .. ns .. '] "luasnip" not found')
   return
 end
-
-local found_from_vscode, from_vscode = pcall(require, 'luasnip.loaders.from_vscode')
-if not found_from_vscode then
-  print('[luasnip] "luasnip.loaders.from_vscode" not found')
-  return
-end
-
-from_vscode.lazy_load()
-
+local vscode_loader = require('luasnip.loaders.from_vscode')
 local found_snippets, snippets = pcall(require, 'cange.snippets')
 if found_snippets then
-  from_vscode.load({ paths = snippets.paths })
+  vscode_loader.load({ paths = snippets.paths })
 else
-  print('[luasnip] "cange.snippets" not found')
+  print('[' .. ns .. '] "cange.snippets" not found')
 end
-
-ls.config.setup({
-  -- ext_opts = insert_or_choice_indicator,
-})
-
--- Activate ChoiceNode popup
-local found_choice_popop, _ = pcall(require, 'cange.luasnip.choice-popup')
-if not found_choice_popop then
-  print('[luasnip] "cange.luasnip.choice-popup" not found')
+local found_popup, _ = pcall(require, 'cange.luasnip.choice-popup')
+if not found_popup then
+  print('[' .. ns .. '] "cange.luasnip.choice-popup" not found')
   return
 end
 
--- local found_colorscheme, colorscheme = pcall(require, 'cange.colorscheme')
--- if not found_colorscheme then
---   print('[luasnip] "cange.colorscheme" not found')
---   return
--- end
--- local color = colorscheme.palette()
--- local types = require('luasnip.util.types')
--- Adds a dot to the end of the line to show if inside a choices insert mode
+vscode_loader.lazy_load()
+
+-- -- Adds a dot to the end of the line to show if inside a choices insert mode
 -- local insert_or_choice_indicator = {
 --   [types.choiceNode] = {
 --     active = {
@@ -49,7 +32,7 @@ end
 --     },
 --   },
 -- }
-
+--
 -- local keymap = vim.api.nvim_set_keymap
 -- local keymap = vim.keymap.set
 -- local opts = {
@@ -58,12 +41,12 @@ end
 -- }
 -- keymap('i', '<C-up>', '<Plug>luasnip-prev-choice', opts)
 -- keymap('i', '<C-down>', '<Plug>luasnip-next-choice', opts)
--- TODOs
--- - jump to opposite edge when at end/beginning of list
--- - detect when popup choices available
+-- -- TODOs
+-- -- - jump to opposite edge when at end/beginning of list
+-- -- - detect when popup choices available
 -- keymap('i', '<down>', function()
---   if ls.choice_active() then -- travel forwards within choices
---     print('DOWN: get_current_choices: ' .. vim.inspect(ls.get_current_choices()))
+--   if luasnip.choice_active() then -- travel forwards within choices
+--     print('DOWN: get_current_choices: ' .. vim.inspect(luasnip.get_current_choices()))
 --     return '<Plug>luasnip-next-choice'
 --     -- return ls.change_choice(1)
 --   else
@@ -72,8 +55,8 @@ end
 -- end, opts)
 --
 -- keymap('i', '<up>', function()
---   if ls.choice_active() then -- travel forwards within choices
---     print('UP: get_current_choices: ' .. vim.inspect(ls.get_current_choices()))
+--   if luasnip.choice_active() then -- travel forwards within choices
+--     print('UP: get_current_choices: ' .. vim.inspect(luasnip.get_current_choices()))
 --     return '<Plug>luasnip-prev-choice'
 --     -- return ls.change_choice(-1)
 --   else

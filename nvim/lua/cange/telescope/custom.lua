@@ -1,73 +1,60 @@
-local telescope = _G.bulk_loader('telescope', {
-  { 'telescope.actions', 'actions' },
-  { 'telescope.themes', 'themes' },
-  { 'telescope.actions.state', 'actions_state' },
-  { 'telescope.builtin', 'builtin' },
-})
-local utils = _G.bulk_loader('telescope', { { 'cange.icons', 'icons' } })
+local found_telescope, _ = pcall(require, 'telescope')
+if not found_telescope then
+  print('[telescope.custom] "telescope" not found')
+  return
+end
+local builtin = require('telescope.builtin')
+local themes = require('telescope.themes')
+local actions_state = require('telescope.actions.state')
+local found_icons, icons = pcall(require, 'cange.icons')
+if not found_icons then
+  print('[icons.custom] "cange.icons" not found')
+  return
+end
 
 local M = {}
---[[
-lua require('plenary.reload').reload_module("my_user.tele")
-nnoremap <leader>en <cmd>lua require('my_user.tele').edit_neovim()<CR>
---]]
+
 function M.browse_nvim()
-  telescope.builtin.find_files({
+  builtin.find_files({
     cwd = '~/.config/nvim',
     previewer = false,
-    prompt_title = utils.icons.ui.Gear .. ' NeoVim Config',
+    prompt_title = icons.ui.Gear .. ' NeoVim Config',
     shorten_path = false,
   })
 end
 
 function M.diagnostics_log()
-  telescope.builtin.diagnostics(telescope.themes.get_ivy({
+  builtin.diagnostics(themes.get_ivy({
     bufnr = 0,
     initial_mode = 'normal',
     no_listed = true, -- if true show only listed buffersw
     previewer = false,
-    prompt_title = utils.icons.misc.Stethoscope .. ' Diagnostics Log',
+    prompt_title = icons.misc.Stethoscope .. ' Diagnostics Log',
   }))
 end
 
 function M.browse_workspace()
-  telescope.builtin.find_files({
+  builtin.find_files({
     cwd = '~/workspace/',
     hidden = true,
-    prompt_title = utils.icons.misc.Workspace .. ' Workspace',
+    prompt_title = icons.misc.Workspace .. ' Workspace',
     shorten_path = false,
   })
 end
 
 -- File browser
 function M.file_browser()
+  local path = '%:p:h'
   local opts = {
+    cwd = vim.fn.expand(path),
+    path = path,
     sorting_strategy = 'ascending',
     scroll_strategy = 'cycle',
     layout_config = {
       prompt_position = 'top',
     },
-    attach_mappings = function(prompt_bufnr, map)
-      local current_picker = telescope.actions_state.get_current_picker(prompt_bufnr)
-
-      local modify_cwd = function(new_cwd)
-        local finder = current_picker.finder
-
-        finder.path = new_cwd
-        finder.files = true
-        current_picker:refresh(false, { reset_prompt = true })
-      end
-
-      map('i', '-', function()
-        modify_cwd(current_picker.cwd .. '/..')
-      end)
-
-      map('i', '~', function()
-        modify_cwd(vim.fn.expand('~'))
-      end)
-
+    attach_mappings = function(_, map)
       map('n', 'yy', function()
-        local entry = telescope.actions_state.get_selected_entry()
         vim.fn.setreg('+', entry.value)
       end)
 

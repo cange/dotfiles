@@ -1,16 +1,19 @@
 -- https://github.com/L3MON4D3/LuaSnip/wiki/Misc#choicenode-popup
-local found, ls = pcall(require, 'luasnip')
+local found, luasnip = pcall(require, 'luasnip')
 if not found then
   return
 end
 
-local current_nsid = vim.api.nvim_create_namespace('LuaSnipChoiceListSelections')
-local current_win = nil
+local ns_id = vim.api.nvim_create_namespace('LuasnipChoiceListSelections')
+local win = nil
+local win_close = vim.api.nvim_win_close
+local del_extmark = vim.api.nvim_buf_del_extmark
 
-local function window_for_choice_node(choice_node)
-  local buf = vim.api.nvim_create_buf(false, true)
+local function create_window(choice_node)
+  local buffer = vim.api.nvim_create_buf(false, true)
   local buf_text = {}
-  local row_selection = 0
+  local option_row = 0
+  local option_col = 0
   local row_offset = 0
   local text
   for _, node in ipairs(choice_node.choices) do
@@ -18,82 +21,93 @@ local function window_for_choice_node(choice_node)
     -- find one that is currently showing
     if node == choice_node.active_choice then
       -- current line is starter from buffer list which is length usually
-      row_selection = #buf_text
+      option_row = #buf_text
       -- finding how many lines total within a choice selection
       row_offset = #text
     end
     vim.list_extend(buf_text, text)
   end
 
-  vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, buf_text)
-  local w, h = vim.lsp.util._make_floating_popup_size(buf_text)
+  vim.api.nvim_buf_set_text(buffer, 0, 0, 0, 0, buf_text)
+  local width, height = vim.lsp.util._make_floating_popup_size(buf_text, {})
 
   -- adding highlight so we can see which one is been selected.
-  local extmark = vim.api.nvim_buf_set_extmark(
-    buf,
-    current_nsid,
-    row_selection,
-    0,
-    { hl_group = 'incsearch', end_line = row_selection + row_offset }
-  )
+  local extmark_opts = { hl_group = 'incsearch', end_line = option_row + row_offset }
+  local extmark = vim.api.nvim_buf_set_extmark(buffer, ns_id, option_row, option_col, extmark_opts)
 
   -- shows window at a beginning ofchoice_node.
-  local win = vim.api.nvim_open_win(buf, false, {
+  local win_id = vim.api.nvim_open_win(buffer, false, {
     relative = 'win',
-    width = w,
-    height = h,
+    width = width,
+    height = height,
     bufpos = choice_node.mark:pos_begin_end(),
     style = 'minimal',
     border = 'none', -- none, single, double, rounded, solid, shadow
   })
   -- return with 3 main important so we can use them again
-  return { win_id = win, extmark = extmark, buf = buf }
+  return { win_id = win_id, extmark = extmark, buf = buffer }
 end
 
-function CHOICE_POPUP(choice_node)
+function CHOICE_POPUP()
+  local choice_node =luasnip.session.event_node
   -- build stack for nested choiceNodes.
-  if current_win then
-    vim.api.nvim_win_close(current_win.win_id, true)
-    vim.api.nvim_buf_del_extmark(current_win.buf, current_nsid, current_win.extmark)
+  if win then
+    win_close(win.win_id, true)
+    del_extmark(win.buf, ns_id, win.extmark)
   end
-  local create_win = window_for_choice_node(choice_node)
-  current_win = {
+  local create_win = create_window(choice_node)
+  win = {
     win_id = create_win.win_id,
-    prev = current_win,
+    prev_win = win,
     node = choice_node,
     extmark = create_win.extmark,
     buf = create_win.buf,
   }
 end
 
-function UPDATE_CHOICE_POPUP(choice_node)
-  vim.api.nvim_win_close(current_win.win_id, true)
-  vim.api.nvim_buf_del_extmark(current_win.buf, current_nsid, current_win.extmark)
-  local create_win = window_for_choice_node(choice_node)
-  current_win.win_id = create_win.win_id
-  current_win.extmark = create_win.extmark
-  current_win.buf = create_win.buf
+function UPDATE_CHOICE_POPUP()
+  local choice_node = luasnip.session.event_node
+  win_close(win.win_id, true)
+  del_extmark(win.buf, ns_id, win.extmark)
+  local created_win = create_window(choice_node)
+  win.win_id = created_win.win_id
+  win.extmark = created_win.extmark
+  win.buf = created_win.buf
 end
 
 function CHOICE_POPUP_CLOSE()
-  vim.api.nvim_win_close(current_win.win_id, true)
-  vim.api.nvim_buf_del_extmark(current_win.buf, current_nsid, current_win.extmark)
+  win_close(win.win_id, true)
+  del_extmark(win.buf, ns_id, win.extmark)
   -- now we are checking if we still have previous choice we were in after exit nested choice
-  current_win = current_win.prev
-  if current_win then
+  win = win.prev_win
+  if win then
     -- reopen window further down in the stack.
-    local create_win = window_for_choice_node(current_win.node)
-    current_win.win_id = create_win.win_id
-    current_win.extmark = create_win.extmark
-    current_win.buf = create_win.buf
+    local created_win = create_window(win.node)
+    win.win_id = created_win.win_id
+    win.extmark = created_win.extmark
+    win.buf = created_win.buf
   end
 end
+-- Autocommands
+local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
+local autocmd = vim.api.nvim_create_autocmd
 
-vim.cmd([[
-  augroup luasnip_choice_popup
-  au!
-  au User LuasnipChoiceNodeEnter lua CHOICE_POPUP(require('luasnip').session.event_node)
-  au User LuasnipChoiceNodeLeave lua CHOICE_POPUP_CLOSE()
-  au User LuasnipChangeChoice lua UPDATE_CHOICE_POPUP(require('luasnip').session.event_node)
-  augroup END
-]])
+augroup('luasnip_choice_popup', { clear = true })
+autocmd('User', {
+  pattern = 'LuasnipChoiceNodeEnter',
+  callback = function()
+    CHOICE_POPUP()
+  end,
+})
+autocmd('User', {
+  pattern = 'LuasnipChoiceNodeLeave',
+  callback = function()
+    CHOICE_POPUP_CLOSE()
+  end,
+})
+autocmd('User', {
+  pattern = 'LuasnipChangeChoice',
+  callback = function()
+    UPDATE_CHOICE_POPUP()
+  end,
+})

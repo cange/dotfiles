@@ -99,12 +99,7 @@ M.props = {
   },
   sources = {
     { name = 'luasnip', group_index = 1, max_item_count = 5 },
-    { name = 'nvim_lsp', group_index = 2, max_item_count = 5,
-      -- entry_filter = function(entry, ctx)
-      --   vim.pretty_print('cmp.config: LSP ctx', ctx)
-      --   return true
-      -- end,
-    },
+    { name = 'nvim_lsp', group_index = 2 , max_item_count = 10 },
     { name = 'cmp_tabnine', group_index = 3, max_item_count = 3 },
     { name = 'nvim_lua', group_index = 3, max_item_count = 5 },
     { name = 'path', group_index = 4, max_item_count = 3 },
