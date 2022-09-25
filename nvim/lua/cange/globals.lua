@@ -4,9 +4,12 @@ if found then
   reloader = plenary_reload.reload_module
 end
 
-function P(v)
-  print(vim.inspect(v))
-  return v
+---Pretty print shorthand
+---@param value any
+---@return any Returns passt value in order to allow chaining
+function P(value)
+  vim.pretty_print(value)
+  return value
 end
 
 function RELOAD(...)
@@ -18,6 +21,10 @@ function R(name)
   return require(name)
 end
 
+---table Gobal convenience helper
+---@module 'Cange'
+Cange = Cange or {}
+
 ---Loads mutiple modules at ones and catches loading errors in reports
 ---them if given.
 ---@param context_name string Indicate of loading location for error reporting.
@@ -26,7 +33,7 @@ end
 ---@return table<string,string> List of loaded modules or if loading
 ---error an incomplete list on last successful ones.
 ---@usage local m = BULK_LOADER('ctx', { 'module_a', 'ns.module_b', 'my_m' }); m.my_m()
-function _G.bulk_loader(context_name, module_names, method)
+function Cange.bulk_loader(context_name, module_names, method)
   local loaded = {}
   method = method or require
   for i, name_or_table in pairs(module_names) do
@@ -57,4 +64,3 @@ function _G.load(context_name, module_name)
   print('[' .. context_name .. '] "' .. module_name .. '" not found')
   return nil
 end
-

@@ -1,26 +1,29 @@
-local found_telescope, _ = pcall(require, 'telescope')
+local ns = 'telescope.custom'
+local found_telescope, telescope = pcall(require, 'telescope')
 if not found_telescope then
-  print('[telescope.custom] "telescope" not found')
+  print('[' .. ns .. '] "telescope" not found')
   return
 end
 local builtin = require('telescope.builtin')
-local themes = require('telescope.themes')
 local actions_state = require('telescope.actions.state')
+local themes = require('telescope.themes')
 local found_icons, icons = pcall(require, 'cange.icons')
 if not found_icons then
-  print('[icons.custom] "cange.icons" not found')
+  print('[' .. ns .. '] "cange.icons" not found')
   return
 end
 
 local M = {}
 
 function M.browse_nvim()
-  builtin.find_files({
+  local opts = {
     cwd = '~/.config/nvim',
     previewer = false,
     prompt_title = icons.ui.Gear .. ' NeoVim Config',
     shorten_path = false,
-  })
+  }
+
+  builtin.find_files(opts)
 end
 
 function M.diagnostics_log()
@@ -48,21 +51,31 @@ function M.file_browser()
   local opts = {
     cwd = vim.fn.expand(path),
     path = path,
-    sorting_strategy = 'ascending',
-    scroll_strategy = 'cycle',
-    layout_config = {
-      prompt_position = 'top',
-    },
-    attach_mappings = function(_, map)
-      map('n', 'yy', function()
-        vim.fn.setreg('+', entry.value)
+    attach_mappings = function(prompt_bufnr, map)
+      local current_picker = actions_state.get_current_picker(prompt_bufnr)
+
+      local modify_cwd = function(new_cwd)
+        local finder = current_picker.finder
+
+        finder.path = new_cwd
+        finder.files = true
+        current_picker:refresh(false, { reset_prompt = true })
+      end
+
+      -- navigate up in dir tree
+      map('i', '-', function()
+        modify_cwd(current_picker.cwd .. '/..')
+      end)
+      -- up to user root
+      map('i', '~', function()
+        modify_cwd(vim.fn.expand('~'))
       end)
 
       return true
     end,
   }
 
-  require('telescope').extensions.file_browser.file_browser(opts)
+  telescope.extensions.file_browser.file_browser(opts)
 end
 
 return M

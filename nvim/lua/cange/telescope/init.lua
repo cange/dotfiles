@@ -1,9 +1,11 @@
-local modules = _G.bulk_loader('telescope', {
-  { 'telescope', 'telescope' },
-  'cange.telescope.setup',
-  'cange.telescope.custom',
-})
-local telescope = modules.telescope
+local ns = 'telescope.init'
+local found_telescope, telescope = pcall(require, 'telescope')
+if not found_telescope then
+  print('[' .. ns .. '] "telescope" not found')
+  return
+end
+
+_G.bulk_loader(ns, { 'cange.telescope.setup', 'cange.telescope.custom' })
 
 telescope.load_extension('textcase')
 telescope.load_extension('session-lens')

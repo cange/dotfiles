@@ -1,10 +1,15 @@
-local telescope = _G.bulk_loader('telescope', {
-  { 'telescope', 'telescope' },
-  { 'telescope.actions', 'actions' },
-})
-local utils = _G.bulk_loader('mappings', {
-  { 'cange.icons', 'icons' },
-})
+local ns = 'telescope.setup'
+local found_telescope, telescope = pcall(require, 'telescope')
+if not found_telescope then
+  print('[' .. ns .. '] "telescope" not found')
+  return
+end
+local actions = require('telescope.actions')
+local found_icons, icons = pcall(require, 'cange.icons')
+if not found_icons then
+  print('[' .. ns .. '] "cange.icons" not found')
+end
+-- config
 local default_opts = {
   previewer = false,
   theme = 'dropdown',
@@ -14,23 +19,28 @@ local lsp_opts = {
   previewer = false,
   theme = 'dropdown',
 }
-telescope.telescope.setup({
+-- setup
+telescope.setup({
   defaults = {
     path_display = {
-      'shorten',
+      'smart', -- shows only the difference between the displayed paths
       'absolute',
     },
-    prompt_prefix = ' ' .. utils.icons.ui.Search .. ' ',
-    selection_caret = ' ' .. utils.icons.ui.ChevronRight .. ' ',
+    prompt_prefix = ' ' .. icons.ui.Search .. ' ',
+    selection_caret = ' ' .. icons.ui.ChevronRight .. ' ',
     entry_prefix = '   ',
     layout_config = {
-      prompt_position = 'top',
+      horizontal = {
+        preview_width = 80,
+        prompt_position = 'top',
+      },
     },
+    scroll_strategy = 'cycle',
     sorting_strategy = 'ascending',
     mappings = {
       i = {
-        ['<C-s>'] = telescope.actions.cycle_history_next,
-        ['<C-a>'] = telescope.actions.cycle_history_prev,
+        ['<C-s>'] = actions.cycle_history_next,
+        ['<C-a>'] = actions.cycle_history_prev,
       },
     },
   },
@@ -38,6 +48,7 @@ telescope.telescope.setup({
     buffers = default_opts,
     colorscheme = default_opts,
     find_files = default_opts,
+    quickfix = default_opts,
     live_grep = { theme = default_opts.theme },
     grep_string = default_opts,
     lsp_references = lsp_opts,
