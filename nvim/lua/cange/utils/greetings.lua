@@ -76,17 +76,17 @@ local function greetings_and_weights()
   })
 end
 
+---Provides greeting functionalities.
+---@module 'greetings'
+local M = {}
+
 ---Generates random gretting with given name and day time.
 --- @param name string
 --- @return string
-local function random_with_name(name)
+function M.random_with_name(name)
   local greetings = greetings_and_weights()
   local greeting = greetings[random_range(1, vim.tbl_count(greetings))]
   return interp(greeting, { name = name })
 end
 
----Provides greeting functionalities.
----@class Greetings
-local M = {}
-M.random_with_name = random_with_name
 return M
