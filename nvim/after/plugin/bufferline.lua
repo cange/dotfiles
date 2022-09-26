@@ -3,13 +3,6 @@ if not found then
   return
 end
 
--- local utils = Cange.bulk_loader('bufferline', {
---   { 'cange.colorscheme', 'colorscheme' },
--- })
--- local c = utils.colorscheme.palette()
---
--- -- vim.pretty_print('colors', c)
---
 bufferline.setup({
   options = {
     mode = 'tabs',
