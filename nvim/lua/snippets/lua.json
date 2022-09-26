@@ -21,7 +21,7 @@
   },
   "tbl_keys(…)": {
     "prefix": "tblk",
-    "body": "vim.tbl_keys($1)"
+    "body": "vim.tbl_${1|extend,keys,deep_extend|}($2)"
   },
   "pcall(…)": {
     "prefix": "pca",
@@ -32,15 +32,6 @@
       "  return",
       "end",
       "$4"
-    ]
-  },
-  "bulk_loader(ctx, {…})": {
-    "prefix": "bul",
-    "body": [
-      "local ${1:context} = Cange.bulk_loader('$1', {",
-      "  { '${2:module_name}', '${3:handle}' },",
-      "  $4",
-      "})"
     ]
   }
 }
