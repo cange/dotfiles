@@ -15,6 +15,10 @@
     "prefix": "not",
     "body": "vim.notify('--- $1')"
   },
+  "local func(…)": {
+    "prefix": "lf",
+    "body": "local function $1($2)\n\t$0\nend"
+  },
   "tbl_keys(…)": {
     "prefix": "tblk",
     "body": "vim.tbl_keys($1)"
