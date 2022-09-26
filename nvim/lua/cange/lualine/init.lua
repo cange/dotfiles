@@ -11,8 +11,8 @@ end
 -- config
 lualine.setup({
   options = {
-    component_separators = { left = '⏽', right = '⏽' },
-    section_separators = { left = '', right = '' },
+    component_separators = config.separators.strong,
+    section_separators = config.separators.none,
   },
   sections = {
     lualine_b = {
@@ -21,7 +21,11 @@ lualine.setup({
       'diagnostics',
     },
     lualine_c = {},
-    lualine_x = { 'filetype' },
+    lualine_x = {
+      components.lsp,
+      'filetype',
+      'fileformat',
+    },
     lualine_y = { 'encoding' },
     lualine_z = {
       'progress',
