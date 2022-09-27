@@ -24,6 +24,6 @@ return {
   bulk_loader = loaders.bulk_loader,
   greetings = greetings,
   icons = icons,
-  keymaps = keymaps,
+  keymap = keymaps.keymap,
   load = loaders.load,
 }

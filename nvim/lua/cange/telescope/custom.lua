@@ -47,7 +47,7 @@ function M.file_browser()
   local opts = {
     cwd = vim.fn.expand(path),
     path = path,
-    attach_mappings = function(prompt_bufnr, map)
+    attach_mappings = function(prompt_bufnr, keymap)
       local current_picker = actions_state.get_current_picker(prompt_bufnr)
 
       local modify_cwd = function(new_cwd)
@@ -59,11 +59,11 @@ function M.file_browser()
       end
 
       -- navigate up in dir tree
-      map('i', '-', function()
+      keymap('i', '-', function()
         modify_cwd(current_picker.cwd .. '/..')
       end)
       -- up to user root
-      map('i', '~', function()
+      keymap('i', '~', function()
         modify_cwd(vim.fn.expand('~'))
       end)
 
