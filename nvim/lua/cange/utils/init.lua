@@ -4,26 +4,24 @@ if not found_greetings then
   print('[' .. ns .. '] "cange.utils.greetings" not found')
   return
 end
-local found_loaders, loaders = pcall(require, 'cange.utils.loaders')
-if not found_loaders then
-  print('[' .. ns .. '] "cange.utils.loaders" not found')
-  return
-end
 local found_icons, icons = pcall(require, 'cange.utils.icons')
 if not found_icons then
   print('[' .. ns .. '] "cange.utils.icons" not found')
   return
 end
-local found_keymaps, keymaps = pcall(require, 'cange.utils.keymaps')
-if not found_keymaps then
-  print('[' .. ns .. '] "cange.utils.keymaps" not found')
-  return
+---@module 'utils'
+
+---Provides keymap convenience helpers
+local M = {}
+
+---@see vim.keymap.set()
+function M.keymap(mode, lhs, rhs, opts)
+  opts = opts or {}
+  opts = vim.tbl_extend('force', { noremap = true, silent = true }, opts)
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-return {
-  bulk_loader = loaders.bulk_loader,
-  greetings = greetings,
-  icons = icons,
-  keymap = keymaps.keymap,
-  load = loaders.load,
-}
+M.greetings = greetings
+M.icons = icons
+
+return M

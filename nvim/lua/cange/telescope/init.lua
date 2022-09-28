@@ -1,12 +1,20 @@
-local ns = 'telescope.init'
+local ns = 'cange.telescope.init'
 local found_telescope, telescope = pcall(require, 'telescope')
 if not found_telescope then
   print('[' .. ns .. '] "telescope" not found')
   return
 end
-
-Cange.bulk_loader(ns, { 'cange.telescope.setup', 'cange.telescope.custom' })
-
+local found_setup, setup = pcall(require, 'cange.telescope.setup')
+if not found_setup then
+  print('[' .. ns .. '] "cange.telescope.setup" not found')
+  return
+end
+local found_custom, custom = pcall(require, 'cange.telescope.custom')
+if not found_custom then
+  print('[' .. ns .. '] "cange.telescope.custom" not found')
+  return
+end
+-- config
 telescope.load_extension('textcase')
 telescope.load_extension('session-lens')
 telescope.load_extension('notify')

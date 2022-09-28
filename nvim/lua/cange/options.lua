@@ -17,7 +17,7 @@ local options = {
   mouse = 'a', -- allow the mouse to be used in editor
   number = true, -- set numbered lines
   numberwidth = 3, -- set number column width to 2 {default 4}
-  pumblend = 8, -- transparency of popup-menus 0 (none) to 100 (full)
+  pumblend = 10, -- transparency of popup-menus 0 (none) to 100 (full)
   -- relativenumber = true, -- set relative numbered lines
   termguicolors = true, -- set term gui colors (most terminals support this)
   title = true, -- Update terminal window title
@@ -64,7 +64,7 @@ local options = {
   wrap = false, -- display lines as one long line
 
   -- folding settings
-  foldlevel = 0, -- zero will close all folds
+  foldlevel = 1, -- zero will close all folds
   foldlevelstart = 4, -- -1 always start editing with all folds closed
   foldmethod = 'indent', -- groups of lines with the same indent form a fold
   foldnestmax = 10, -- deepest fold is 10 levels
@@ -100,7 +100,7 @@ vim.opt.wildignore:append({ -- stuff to ignore when tab completing
 
 -- vim.opt.whichwrap:append({ '<', '>', '[', ']', 'h', 'l' })
 vim.opt.listchars:append({
-  eol = '',
+  eol = '↵',
   nbsp = '_',
-  tab = ' ',
+  tab = '⇥ ',
 })

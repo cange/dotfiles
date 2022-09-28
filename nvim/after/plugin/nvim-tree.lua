@@ -1,11 +1,17 @@
+local ns = 'nvim-tree'
 local found, tree = pcall(require, 'nvim-tree')
 if not found then
   return
 end
-local keymap = Cange.keymap
-
+local found_utils, utils = pcall(require, 'cange.utils')
+if not found_utils then
+  print('[' .. ns .. '] "cange.utils" not found')
+  return
+end
+local keymap = utils.keymap
 keymap('n', '<leader>e', ':NvimTreeToggle<CR>')
 keymap('n', '<leader>.', ':NvimTreeFindFile<CR>')
+
 local api = require('nvim-tree.api')
 local Event = api.events.Event
 local toggle_help_key = '<leader>eh'
@@ -37,7 +43,7 @@ tree.setup({
         folder = false,
       },
       glyphs = {
-        git = Cange.icons.git_states,
+        git = utils.icons.git_states,
       },
     },
   },

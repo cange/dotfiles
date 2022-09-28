@@ -1,4 +1,5 @@
-local found, alpha = pcall(require, 'alpha')
+local ns = 'alpha'
+local found, alpha = pcall(require, ns)
 if not found then
   return
 end
@@ -12,15 +13,19 @@ local function button(sc, txt, keybind, keybind_opts)
   return btn
 end
 
-local icons = Cange.icons
+local found_icons, icons = pcall(require, 'cange.utils.icons')
+if not found_icons then
+  print('[' .. ns .. '] "cange.utils.icons" not found')
+  return
+end
 local found_meta, meta = pcall(require, 'cange.meta')
 if not found_meta then
-  print('[alpha] "cange.meta" not found')
+  print('[' .. ns .. '] "cange.meta" not found')
   return
 end
 local found_greetings, greetings = pcall(require, 'cange.utils.greetings')
 if not found_greetings then
-  print('[alpha] "cange.utils.greetings" not found')
+  print('[' .. ns .. '] "cange.utils.greetings" not found')
   return
 end
 

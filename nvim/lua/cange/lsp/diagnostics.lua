@@ -1,4 +1,10 @@
-local icons = Cange.icons
+local ns = 'cange.lsp.diagnostics'
+local found_icons, icons = pcall(require, 'cange.utils.icons')
+if not found_icons then
+  print('[' .. ns .. '] "cange.utils.icons" not found')
+  return
+end
+-- config
 local signs = {
   { name = 'DiagnosticSignError', text = icons.diagnostics.Error },
   { name = 'DiagnosticSignWarn', text = icons.diagnostics.Warning },
