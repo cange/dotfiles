@@ -47,7 +47,6 @@ keymap('n', '<A-down>', ':move .+1<CR>==')
 keymap('n', '<A-up>', ':move .-2<CR>==')
 keymap('v', '<A-down>', ":move '>+1<CR>gv=gv")
 keymap('v', '<A-up>', ":move '<-2<CR>gv=gv")
-
 -- switch between the last recent open two files
 keymap('n', '<leader><leader>', '<C-^>')
 
