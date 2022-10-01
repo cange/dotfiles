@@ -5,9 +5,9 @@ if not found_whichkey then
   print('[' .. ns .. '] "which-key" not found')
   return
 end
-local found_workflows, workflows = pcall(require, 'cange.keybindings.workflows')
+local found_workflows, wk_groups = pcall(require, 'cange.keybindings.whichkey_groups')
 if not found_workflows then
-  print('[' .. ns .. '] "cange.keybindings.workflows" not found')
+  print('[' .. ns .. '] "cange.keybindings.whichkey_groups" not found')
   return
 end
 local found_utils, utils = pcall(require, 'cange.utils')
@@ -17,16 +17,16 @@ if not found_utils then
 end
 
 ---Generates a which-key table form mappings
--- @param section_key string Key of a keybinding block
+-- @param group string Key of a keybinding block
 -- @return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
-local function workflow_mappings(workflow)
+local function group_mappings(group)
   local section = {}
-  -- vim.pretty_print(vim.tbl_keys(workflow))
-  section[workflow.subleader] = { name = workflow.title }
+  -- vim.pretty_print(vim.tbl_keys(group))
+  section[group.subleader] = { name = group.title }
 
-  local section_mappings = section[workflow.subleader]
+  local section_mappings = section[group.subleader]
 
-  for key, m in pairs(workflow.mappings) do
+  for key, m in pairs(group.mappings) do
     section_mappings[key] = { m.command, m.title }
   end
 
@@ -34,13 +34,12 @@ local function workflow_mappings(workflow)
 end
 
 local custom_mappings = {}
-for _, m in pairs(workflows) do
-  custom_mappings = vim.tbl_extend('keep', custom_mappings, workflow_mappings(m))
+for _, m in pairs(wk_groups) do
+  custom_mappings = vim.tbl_extend('keep', custom_mappings, group_mappings(m))
 end
 
 local wk_mappings = vim.tbl_deep_extend('keep', {
   ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
-  ['F'] = { ':lua vim.lsp.buf.formatting_seq_sync(_, 10000)<CR>', 'File Format' },
   ['f'] = { '<cmd>Telescope find_files<CR>', 'Find files' },
   ['e'] = { '<cmd>NvimTreeToggle<cr>', 'File Explorer' },
   ['w'] = { '<cmd>w!<CR>', 'Save' },
