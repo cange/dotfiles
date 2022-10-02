@@ -47,6 +47,12 @@ packer.startup(function(use)
   -- UI: Tabline
   use('akinsho/nvim-bufferline.lua') -- tab UI
 
+  -- UI: winbar
+  use({
+    'SmiteshP/nvim-navic', -- A statusline/winbar component
+    requires = 'neovim/nvim-lspconfig',
+  })
+
   -- Terminal
   use('akinsho/toggleterm.nvim') -- inline Terminal
 
@@ -83,7 +89,6 @@ packer.startup(function(use)
     requires = { web_icons }, -- optional, for file icons
     tag = 'nightly', -- optional, updated every week. (see issue #1193)
   })
-  use('simrat39/symbols-outline.nvim') -- tree like view for symbols-outline
 
   use({
     'numToStr/Comment.nvim', -- comment toggle

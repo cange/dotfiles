@@ -22,6 +22,10 @@ local options = {
   termguicolors = true, -- set term gui colors (most terminals support this)
   title = true, -- Update terminal window title
   winblend = 2, -- transparency of popup-menus 0 (none) to 100 (full)
+  -- UI - command prompt
+  cmdheight = 0, -- space ofthe command line for displaying messages
+  showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
+  showcmd = true, -- show incomplete commands
 
   --
   spell = false, -- enable spell checking if this is true
@@ -31,11 +35,6 @@ local options = {
   backup = false, -- creates a backup file
   backupskip = '/tmp/*,/private/tmp/*',
   writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-
-  -- command prompt
-  cmdheight = 1, -- space ofthe command line for displaying messages
-  showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
-  showcmd = true, -- show incomplete commands
 
   -- search
   hlsearch = true, -- highlight all matches on previous search pattern

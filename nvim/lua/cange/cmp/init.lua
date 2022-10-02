@@ -31,8 +31,8 @@ keymap('<C-down>', '<Plug>luasnip-next-choice')
 local settings = vim.tbl_extend('keep', config.props, {
   mapping = {
     ['<C-Space>'] = mapping(mapping.complete(), { 'i', 'c' }),
-    ['<C-a>'] = mapping(mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-s>'] = mapping(mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-s>'] = mapping(mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-a>'] = mapping(mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ['<CR>'] = mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     ['<ESC>'] = mapping({
