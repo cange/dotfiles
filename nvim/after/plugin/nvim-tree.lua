@@ -29,6 +29,9 @@ api.events.subscribe(Event.TreeClose, function() end)
 local config = require('nvim-tree.config').nvim_tree_callback
 
 tree.setup({
+  live_filter = {
+    prefix = utils.icons.ui.Search .. '  ',
+  },
   -- project plugin related
   sync_root_with_cwd = true,
   respect_buf_cwd = true,
@@ -42,6 +45,7 @@ tree.setup({
       show = {
         folder = false,
       },
+      git_placement = 'after',
       glyphs = {
         git = utils.icons.git_states,
       },

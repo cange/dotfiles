@@ -150,13 +150,13 @@ M.cmp_source = {
 
 ---@enum git_states
 M.git_states = {
+  unstaged = M.git.Mod,
   staged = '',
+  unmerged = 'ﱵ',
+  renamed = M.git.Rename,
+  untracked = 'ﱡ',
   deleted = M.git.Remove,
   ignored = M.git.Ignore,
-  renamed = M.git.Rename,
-  unmerged = 'ﱵ',
-  unstaged = M.git.Mod,
-  untracked = 'ﱡ',
 }
 
 ---@enum lualine
