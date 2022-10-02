@@ -1,6 +1,10 @@
+local found_cmp, cmp = pcall(require, 'cmp')
+if not found_cmp then
+  return
+end
 local found_luasnip, luasnip = pcall(require, 'luasnip')
 if not found_luasnip then
-  return false
+  return
 end
 
 local win_get_cursor = vim.api.nvim_win_get_cursor
@@ -80,15 +84,15 @@ local function seek_luasnip_cursor_node()
   return false
 end
 
----@type table
+---@module 'cmp.utils'
 local M = {}
 
 ---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable
----@param dir number 1 for forward, -1 for backward; defaults to 1
+---@param direction number 1 for forward, -1 for backward; defaults to 1
 ---@source https://github.com/LunarVim/LunarVim/blob/master/lua/lvim/core/cmp.lua
 ---@return boolean true if a jumpable luasnip field is found while inside a snippet
-function M.jumpable(dir)
-  if dir == -1 then
+function M.jumpable(direction)
+  if direction == -1 then
     return luasnip.in_snippet() and luasnip.jumpable(-1)
   else
     return luasnip.in_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable(1)
@@ -97,7 +101,7 @@ end
 
 function M.has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
 return M
