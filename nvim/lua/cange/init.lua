@@ -1,6 +1,3 @@
----Global helper collection
-
--- rest
 require('cange.autocommands')
 require('cange.cmp')
 require('cange.globals')
@@ -12,3 +9,4 @@ require('cange.options')
 require('cange.os')
 require('cange.plugins')
 require('cange.telescope')
+require('cange.winbar')

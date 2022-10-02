@@ -20,13 +20,7 @@ lualine.setup({
       'diff',
       'diagnostics',
     },
-    lualine_c = {
-      {
-        'filename',
-        path = 1, -- 1: Relative path
-        symbols = icons.lualine,
-      },
-    },
+    lualine_c = {},
     lualine_x = { 'filetype' },
     lualine_y = { 'encoding' },
     lualine_z = {

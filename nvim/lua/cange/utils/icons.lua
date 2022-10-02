@@ -48,6 +48,7 @@ M.ui = {
 
 ---@enum misc
 M.misc = {
+  ArrowRight = '',
   CircuitBoard = '',
   Package = '',
   Robot = 'ﮧ',
@@ -100,45 +101,48 @@ M.which_key = {
 }
 
 ---Language types
----@enum type
 M.type = {
   Array = '',
   Boolean = '◩',
-  Function = '',
+  Function = '', -- '',
   Number = '',
+  Null = ' ',
   Object = '',
   String = '',
 }
 
 ---Language symbols
 ---@enum kind
-M.kind = {
-  Text = '',
-  Method = 'm',
-  Function = '',
-  Constructor = '',
-  Field = 'ﰠ',
-  Variable = '',
-  Class = '',
-  Interface = '',
+M.kind = vim.tbl_extend('keep', M.type, {
+  File = ' ',
   Module = '',
+  Namespace = ' ',
+  Package = ' ',
+  Class = ' ',
+  Method = 'm',
   Property = '',
+  Field = 'ﰠ',
+  Constructor = '',
+  Enum = ' ',
+  Interface = ' ',
+  Variable = ' ',
+  Constant = ' ',
+  Key = '',
+  EnumMember = ' ',
+  Struct = ' ',
+  Event = ' ',
+  Operator = ' ',
+  TypeParameter = ' ',
+  -- others
+  Color = '',
+  Folder = '',
+  Keyword = ' ',
+  Reference = '',
+  Snippet = '',
+  Text = '',
   Unit = '',
   Value = '',
-  Enum = '',
-  Keyword = '',
-  Snippet = '',
-  Color = '',
-  File = '',
-  Reference = '',
-  Folder = '',
-  EnumMember = '',
-  Constant = '',
-  Struct = '',
-  Event = '',
-  Operator = '',
-  TypeParameter = '',
-}
+})
 
 ---@enum cmp_source
 M.cmp_source = {
