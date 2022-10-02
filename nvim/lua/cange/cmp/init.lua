@@ -1,69 +1,73 @@
 -- Reloads this file whenever a 'json' file saved in snippet directory to
 -- enable change immediately
-vim.cmd([[
-  augroup cmp_autoreload
-  autocmd!
-  autocmd BufWritePost ~/dotfiles/nvim/snippets/**/*.json source ~/dotfiles/nvim/after/plugin/cmp.rc.lua
-  augroup end
-]])
-
+local ns = 'cange.cmp.init'
 local found_cmp, cmp = pcall(require, 'cmp')
 if not found_cmp then
   return
 end
-
-local found_config, config = pcall(require, 'cange.cmp.config')
-if not found_config then
-  print('[cmp.init] "cange.cmp.config" not found')
-  return
-end
-local found_methods, custom_methods = pcall(require, 'cange.cmp.methods')
-if not found_methods then
-  print('[cmp.init] "cange.cmp.methods" not found')
-  return
-end
 local found_luasnip, luasnip = pcall(require, 'luasnip')
 if not found_luasnip then
-  print('[cmp.init] "luasnip" not found')
+  print('[' .. ns .. '] "luasnip" not found')
   return
 end
-local function keymap(lhs, rhs)
-  vim.keymap.set({ 'i', 's' }, lhs, rhs, { noremap = true, silent = true })
+local found_config_luasnip, config_luasnip = pcall(require, 'cange.cmp.luasnip')
+if not found_config_luasnip then
+  print('[' .. ns .. '] "cange.cmp.luasnip" not found')
+  return
 end
+local found_utils, utils = pcall(require, 'cange.utils')
+if not found_utils then
+  print('[' .. ns .. '] "cange.utils" not found')
+  return
+end
+local found_cmp_utils, cmp_utils = pcall(require, 'cange.cmp.utils')
+if not found_cmp_utils then
+  print('[' .. ns .. '] "cange.cmp.utils" not found')
+  return
+end
+local function menu_item_format(entry, vim_item)
+  local icons = require('cange.utils.icons')
+  local source_types = {
+    buffer = { icon = icons.cmp_source.buffer },
+    nvim_lsp = { icon = icons.cmp_source.nvim_lsp },
+    nvim_lua = { icon = icons.cmp_source.nvim_lua },
+    cmp_tabnine = { icon = icons.misc.Robot },
+    luasnip = { icon = ' ' },
+    path = { icon = icons.cmp_source.path },
+  }
 
--- config
-keymap('<C-[>', '<Plug>luasnip-prev-choice')
-keymap('<C-]>', '<Plug>luasnip-next-choice')
-keymap('<C-up>', '<Plug>luasnip-prev-choice')
-keymap('<C-down>', '<Plug>luasnip-next-choice')
+  local name = entry.source.name
+  if vim.tbl_contains(vim.tbl_keys(source_types), name) then
+    vim_item.menu = source_types[name].icon
+    vim_item.menu_hl_group = 'Comment' -- assign appropriate theme color
+  end
+  vim_item.kind = icons.kind[vim_item.kind] .. ' '
+  return vim_item
+end
+--config
+config_luasnip.setup()
+local keymap = utils.keymap
+keymap({ 'i', 's' }, '<C-[>', '<Plug>luasnip-prev-choice')
+keymap({ 'i', 's' }, '<C-]>', '<Plug>luasnip-next-choice')
 
-local settings = vim.tbl_extend('keep', config.props, {
+cmp.setup({
   mapping = cmp.mapping.preset.insert({
-    ['<C-up>'] = cmp.mapping.select_prev_item(),
-    ['<C-down>'] = cmp.mapping.select_next_item(),
-    ['<C-s>'] = mapping(mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-a>'] = mapping(mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { 'i' }),
-    ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { 'i' }),
-    ['<C-y>'] = cmp.mapping({
-      i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
-      c = function(fallback)
-        if cmp.visible() then
-          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-        else
-          fallback()
-        end
-      end,
-    }),
+    ['<C-s>'] = cmp.mapping.scroll_docs(4),
+    ['<C-a>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-c>'] = cmp.mapping.abort(),
+    ['<ESC>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confi
+    ['<S-CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confi
+
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
-      elseif custom_methods.jumpable(1) then
+      elseif cmp_utils.jumpable(1) then
         luasnip.jump(1)
-      elseif custom_methods.has_words_before() then
-        -- cmp.complete()
+      elseif cmp_utils.has_words_before() then
         fallback()
       else
         fallback()
@@ -78,31 +82,40 @@ local settings = vim.tbl_extend('keep', config.props, {
         fallback()
       end
     end, { 'i', 's' }),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        local confirm_opts = { -- avoid mutating the original opts below
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = false,
-        }
-        local is_insert_mode = function()
-          return vim.api.nvim_get_mode().mode:sub(1, 1) == 'i'
-        end
-        if is_insert_mode() then -- prevent overwriting brackets
-          confirm_opts.behavior = cmp.ConfirmBehavior.Insert
-        end
-        if cmp.confirm(confirm_opts) then
-          return -- success, exit early
-        end
-      end
-
-      if custom_methods.jumpable(1) and luasnip.jump(1) then
-        return -- success, exit early
-      end
-      fallback() -- if not exited early, always fallback
-    end),
   }),
+  sources = {
+    {
+      name = 'luasnip',
+      keyword_length = 2,
+      max_item_count = 5,
+      option = { use_show_condition = false },
+    },
+    { name = 'buffer', keyword_length = 3, max_item_count = 5 },
+    { name = 'nvim_lsp', keyword_length = 3, max_item_count = 9 },
+    { name = 'cmp_tabnine', keyword_length = 3, max_item_count = 3 },
+    { name = 'nvim_lua', keyword_length = 3, max_item_count = 5 },
+    { name = 'path', keyword_length = 3, max_item_count = 3 },
+  },
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body) -- For `luasnip` users.
+    end,
+  },
+  experimental = {
+    ghost_text = true,
+    native_menu = false,
+  },
+  formatting = {
+    fields = { -- order within a menu item
+      'kind',
+      'abbr',
+      'menu',
+    },
+    format = menu_item_format,
+  },
+  window = {
+    completion = {
+      col_offset = -3, -- align abbr text with kind icons in prefix
+    },
+  },
 })
-
-cmp.setup(settings)

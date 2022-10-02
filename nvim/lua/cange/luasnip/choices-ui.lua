@@ -95,8 +95,6 @@ end
 
 local M = {}
 
-M._win = nil
-
 M.close = CangeSnippetChoiceClose
 
 function M.setup()
