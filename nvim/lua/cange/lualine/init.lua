@@ -8,6 +8,11 @@ if not found_icons then
   print('[' .. ns .. '] "cange.utils.icons" not found')
   return
 end
+local found_config, config = pcall(require, 'cange.lualine.config')
+if not found_config then
+  print('[' .. ns .. '] "cange.lualine.config" not found')
+  return
+end
 -- config
 lualine.setup({
   options = {
@@ -22,7 +27,6 @@ lualine.setup({
     },
     lualine_c = {},
     lualine_x = {
-      components.lsp,
       'filetype',
       'fileformat',
     },
