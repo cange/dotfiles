@@ -1,23 +1,29 @@
+local ns = 'nvim-tree'
 local found, tree = pcall(require, 'nvim-tree')
 if not found then
   return
 end
-local k = Cange.load('toggleterm', 'cange.utils.keymaps')
+local found_utils, utils = pcall(require, 'cange.utils')
+if not found_utils then
+  print('[' .. ns .. '] "cange.utils" not found')
+  return
+end
+local keymap = utils.keymap
+keymap('n', '<leader>e', ':NvimTreeToggle<CR>')
+keymap('n', '<leader>.', ':NvimTreeFindFile<CR>')
 
-k.nmap('<leader>e', ':NvimTreeToggle<CR>')
-k.nmap('<leader>.', ':NvimTreeFindFile<CR>')
 local api = require('nvim-tree.api')
 local Event = api.events.Event
 local toggle_help_key = '<leader>eh'
 
 -- enable help toggle when tree open
 api.events.subscribe(Event.TreeOpen, function()
-  k.nmap(toggle_help_key, function()
+  keymap('n', toggle_help_key, function()
     api.tree.toggle_help()
   end)
 end)
 
-k.nmap(toggle_help_key, '<Nop>')
+keymap('n', toggle_help_key, '<Nop>')
 api.events.subscribe(Event.TreeClose, function() end)
 
 local config = require('nvim-tree.config').nvim_tree_callback
@@ -37,7 +43,7 @@ tree.setup({
         folder = false,
       },
       glyphs = {
-        git = Cange.icons.git_states,
+        git = utils.icons.git_states,
       },
     },
   },

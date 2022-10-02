@@ -1,14 +1,18 @@
-local ns = 'telescope.custom'
+local ns = 'cange.telescope.custom'
 local found_telescope, telescope = pcall(require, 'telescope')
 if not found_telescope then
   print('[' .. ns .. '] "telescope" not found')
   return
 end
+local found_icons, icons = pcall(require, 'cange.utils.icons')
+if not found_icons then
+  print('[' .. ns .. '] "cange.utils.icons" not found')
+  return
+end
 local builtin = require('telescope.builtin')
 local actions_state = require('telescope.actions.state')
 local themes = require('telescope.themes')
-local icons = Cange.icons
-
+-- config
 local M = {}
 
 function M.browse_nvim()
@@ -47,7 +51,7 @@ function M.file_browser()
   local opts = {
     cwd = vim.fn.expand(path),
     path = path,
-    attach_mappings = function(prompt_bufnr, map)
+    attach_mappings = function(prompt_bufnr, keymap)
       local current_picker = actions_state.get_current_picker(prompt_bufnr)
 
       local modify_cwd = function(new_cwd)
@@ -59,11 +63,11 @@ function M.file_browser()
       end
 
       -- navigate up in dir tree
-      map('i', '-', function()
+      keymap('i', '-', function()
         modify_cwd(current_picker.cwd .. '/..')
       end)
       -- up to user root
-      map('i', '~', function()
+      keymap('i', '~', function()
         modify_cwd(vim.fn.expand('~'))
       end)
 

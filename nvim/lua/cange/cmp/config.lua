@@ -1,3 +1,4 @@
+local ns = 'cmp.config'
 -- enable change immediately
 local found_cmp, cmp = pcall(require, 'cmp')
 if not found_cmp then
@@ -10,17 +11,22 @@ local M = {}
 
 local found_ls, ls = pcall(require, 'luasnip')
 if not found_ls then
-  print('[cmp.config] "luasnip" not found')
+  print('[' .. ns .. '] "luasnip" not found')
   return
 end
 
 local found_tabnine, _ = pcall(require, 'cmp_tabnine.config')
 if not found_tabnine then
-  print('[com.config] "cmp_tabnine.config" not found')
+  print('[' .. ns .. '] "cmp_tabnine.config" not found')
+  return
+end
+local found_utils, utils = pcall(require, 'cange.utils')
+if not found_utils then
+  print('[' .. ns .. '] "cange.utils" not found')
   return
 end
 
-local icons = Cange.icons
+local icons = utils.icons
 
 local function check_backspace()
   local col = vim.fn.col('.') - 1

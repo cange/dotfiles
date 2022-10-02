@@ -1,4 +1,5 @@
 ---Provides general settings
+---@enum mappings
 local M = {}
 
 ---Mappings tries to organise global used keybindings on one place
@@ -6,15 +7,6 @@ local M = {}
 ---@table mappings
 
 ---Language related syntax analytics
-M.bookmarks = {
-  subleader = 'b',
-  title = 'Bookmarks',
-  mappings = {
-    n = { command = '<cmd>lua require("nvim-tree.api").marks.navigate.next()<CR>', title = 'Next bookmark' },
-    p = { command = '<cmd>lua require("nvim-tree.api").marks.navigate.prev()<CR>', title = 'Prev bookmark' },
-    s = { command = '<cmd>lua require("nvim-tree.api").marks.navigate.select()<CR>', title = 'Select bookmark' },
-  },
-}
 M.lsp = {
   subleader = 'l',
   title = 'Language (LSP)',
@@ -35,7 +27,7 @@ M.lsp = {
 
 ---Finding stuff
 M.search = {
-  subleader = 'f',
+  subleader = 's',
   title = 'Search',
   mappings = {
     C = { command = '<cmd>Telescope commands<CR>', title = 'Commands' },
@@ -100,8 +92,8 @@ M.packer = {
   },
 }
 M.session = {
-  subleader = 's',
-  title = 'Sessions',
+  subleader = 'b',
+  title = 'Sessions/Buffers',
   mappings = {
     R = { command = '<cmd>RestoreSession<CR>', title = 'Recent session' },
     d = { command = '<cmd>Autosession delete<CR>', title = 'Find delete session' },

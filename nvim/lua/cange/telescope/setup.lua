@@ -1,11 +1,15 @@
-local ns = 'telescope.setup'
+local ns = 'cange.telescope.setup'
 local found_telescope, telescope = pcall(require, 'telescope')
 if not found_telescope then
   print('[' .. ns .. '] "telescope" not found')
   return
 end
+local found_icons, icons = pcall(require, 'cange.utils.icons')
+if not found_icons then
+  print('[' .. ns .. '] "cange.utils.icons" not found')
+  return
+end
 local actions = require('telescope.actions')
-local icons = Cange.icons
 -- config
 local default_opts = {
   previewer = false,

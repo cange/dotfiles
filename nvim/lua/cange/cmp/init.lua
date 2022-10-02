@@ -20,6 +20,7 @@ end
 local function keymap(lhs, rhs)
   vim.keymap.set({ 'i', 's' }, lhs, rhs, { noremap = true, silent = true })
 end
+
 local mapping = cmp.mapping
 -- config
 keymap('<C-[>', '<Plug>luasnip-prev-choice')

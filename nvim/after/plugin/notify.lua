@@ -1,9 +1,13 @@
-local found, notify = pcall(require, 'notify')
+local ns = 'notify'
+local found, notify = pcall(require, ns)
 if not found then
   return
 end
-
-local icons = Cange.icons
+local found_icons, icons = pcall(require, 'cange.utils.icons')
+if not found_icons then
+  print('[' .. ns .. '] "cange.utils.icons" not found')
+  return
+end
 
 notify.setup({
   -- Animation style (see below for details)

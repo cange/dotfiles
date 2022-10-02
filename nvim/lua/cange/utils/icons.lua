@@ -59,7 +59,6 @@ M.misc = {
   Workspace = '',
 }
 
-
 ---@enum documents
 M.documents = {
   File = '',
