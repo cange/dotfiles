@@ -60,4 +60,4 @@ keymap('v', '<S-Tab>', '<gv')
 keymap('n', '<leader><leader>x', ':write<CR>:luafile %<CR>:lua vim.notify("File saved and executed")<CR>')
 
 -- Format
-keymap('n', '<leader><leader>f', ':lua vim.lsp.buf.formatting_seq_sync(_, 10000)<CR>', { desc = 'File Format' })
+keymap('n', '<leader><leader>f', ':lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>')

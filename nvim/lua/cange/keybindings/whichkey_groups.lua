@@ -12,16 +12,16 @@ M.lsp = {
   title = 'Language (LSP)',
   mappings = {
     C = { command = '<cmd>lua require("luasnip").cleanup()<CR>', title = 'Reset snippets UI' },
-    F = { command = '<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 10000)()<CR>', title = 'Format' },
+    F = { command = '<cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>', title = 'Format' },
     a = { command = '<cmd>lua vim.lsp.buf.code_action()<CR>', title = 'Code Action' },
     c = { command = '<cmd>lua vim.lsp.buf_get_clients()<CR>', title = 'LSP clients' },
     d = { command = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', title = 'Diagnostics log' },
     f = { command = '<cmd>lua vim.diagnostic.open_float()<CR>', title = 'Diagnostics under cursor' },
     l = { command = '<cmd>lua vim.diagnostic.setloclist()<CR>', title = 'Problems log' },
     o = { command = '<cmd>SymbolsOutline<CR>', title = 'Symbols Outline' },
-    n = { command = '<cmd>NullLsInfo<CR>', title = 'Info Formatters' },
+    n = { command = '<cmd>NullLsInfo<CR>', title = 'Info Null-ls' },
     i = { command = '<cmd>LspInfo<CR>', title = 'Info LSP' },
-    s = { command = '<cmd>Mason<CR>', title = 'Sync LSP' },
+    s = { command = '<cmd>Mason<CR>', title = 'Sync LSP (Mason)' },
   },
 }
 
