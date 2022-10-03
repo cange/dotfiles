@@ -37,13 +37,14 @@ packer.startup(function(use)
   -- UI
   use('EdenEast/nightfox.nvim') -- theme
 
-  -- Statusline
+  -- UI: Statusline
   use({
     'nvim-lualine/lualine.nvim', -- status line
     requires = { web_icons, opt = true },
   })
-
-  -- Tabline
+  -- UI: Cursorline
+  use('RRethy/vim-illuminate') -- Highlight the word under the cursor
+  -- UI: Tabline
   use('akinsho/nvim-bufferline.lua') -- tab UI
 
   -- Terminal

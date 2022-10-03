@@ -22,8 +22,17 @@ local c = palette.load(colorscheme.variation)
 -- vim.pretty_print('color:', c)
 
 -- adjust colors
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = nil }) -- disable default c
-vim.api.nvim_set_hl(0, 'Folded', { bg = nil, fg = c.bg4 }) -- reduces folding noise
+local function hl(name, val)
+  local ns_id = 0
+  return vim.api.nvim_set_hl(ns_id, name, val)
+end
+
+hl('CursorLine', { bg = nil }) -- disable default c
+hl('Folded', { bg = nil, fg = c.bg4 }) -- reduces folding noise
+-- Highlighting relates words under cursor
+hl('IlluminatedWordText', { bg = c.bg1 }) -- Default for references if no kind information is available
+hl('IlluminatedWordRead', { bg = c.bg2 }) -- for references of kind read
+hl('IlluminatedWordWrite', { bg = c.bg2, bold = true }) -- for references of kind write
 
 local found_modes, modes = pcall(require, 'modes')
 if not found_modes then
