@@ -32,10 +32,11 @@ end
 navic.setup({
   icons = formatted_location_icons(icons.kind),
   highlight = false,
-  separator = ' ' .. icons.misc.ArrowRight .. ' ',
+  separator = ' » ',
   depth_limit = 0,
   depth_limit_indicator = '..',
 })
+
 -- Config
 local function str_is_empty(s)
   return s == nil or s == ''

@@ -18,7 +18,6 @@ M.lsp = {
     d = { command = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', title = 'Diagnostics log' },
     f = { command = '<cmd>lua vim.diagnostic.open_float()<CR>', title = 'Diagnostics under cursor' },
     l = { command = '<cmd>lua vim.diagnostic.setloclist()<CR>', title = 'Problems log' },
-    o = { command = '<cmd>SymbolsOutline<CR>', title = 'Symbols Outline' },
     n = { command = '<cmd>NullLsInfo<CR>', title = 'Info Null-ls' },
     i = { command = '<cmd>LspInfo<CR>', title = 'Info LSP' },
     s = { command = '<cmd>Mason<CR>', title = 'Sync LSP (Mason)' },
