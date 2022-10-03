@@ -100,7 +100,7 @@ packer.startup(function(use)
   use('nvim-treesitter/playground') -- inspect syntax node anatomy
 
   -- Snippets
-  use({ 'L3MON4D3/LuaSnip', tag = 'v1.*' }) --snippet engine
+  use({ 'L3MON4D3/LuaSnip' }) --snippet engine
   use('rafamadriz/friendly-snippets') -- a bunch of snippets to use
 
   -- LSP

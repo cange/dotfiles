@@ -44,6 +44,7 @@ local function menu_item_format(entry, vim_item)
   vim_item.kind = icons.kind[vim_item.kind] .. ' '
   return vim_item
 end
+
 --config
 config_luasnip.setup()
 local keymap = utils.keymap

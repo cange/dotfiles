@@ -52,6 +52,10 @@ end
 
 local function load_sources()
   local vscode_loader = require('luasnip.loaders.from_vscode')
+  local found_snippets, snippets = pcall(require, 'cange.snippets')
+  if not found_snippets then
+    print('[' .. ns .. '] "cange.snippets" not found')
+  end
   vscode_loader.lazy_load()
   vscode_loader.lazy_load({ paths = './lua/snippets' })
 end
