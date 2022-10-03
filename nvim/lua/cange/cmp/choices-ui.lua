@@ -6,6 +6,7 @@ end
 
 local ns_id = vim.api.nvim_create_namespace('LuasnipChoiceListSelections')
 local win_close = vim.api.nvim_win_close
+local win = nil
 local del_extmark = vim.api.nvim_buf_del_extmark
 
 local function create_window(choice_node)
@@ -48,7 +49,6 @@ local function create_window(choice_node)
 end
 
 function CangeSnippetChoiceOpen()
-  local win = M._win
   local choice_node = luasnip.session.event_node
   -- build stack for nested choiceNodes.
   if win then
@@ -67,7 +67,6 @@ end
 
 function CangeSnippetChoiceUpdate()
   local choice_node = luasnip.session.event_node
-  local win = M._win
   win_close(win.win_id, true)
   del_extmark(win.buf, ns_id, win.extmark)
   local created_win = create_window(choice_node)
@@ -77,13 +76,11 @@ function CangeSnippetChoiceUpdate()
 end
 
 function CangeSnippetChoiceClose()
-  local win = M._win
   -- vim.pretty_print('window id', win.win_id)
   win_close(win.win_id, true)
   del_extmark(win.buf, ns_id, win.extmark)
   -- now we are checking if we still have previous choice we were in after exit nested choice
-  M._win = win.prev_win
-  win = M._win
+  win = win.prev_win
   if win then
     -- reopen window further down in the stack.
     local created_win = create_window(win.node)
