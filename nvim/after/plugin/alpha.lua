@@ -13,9 +13,9 @@ local function button(sc, txt, keybind, keybind_opts)
   return btn
 end
 
-local found_icons, icons = pcall(require, 'cange.utils.icons')
-if not found_icons then
-  print('[' .. ns .. '] "cange.utils.icons" not found')
+local found_utils, utils = pcall(require, 'cange.utils')
+if not found_utils then
+  print('[' .. ns .. '] "cange.utils" not found')
   return
 end
 local found_meta, meta = pcall(require, 'cange.meta')
@@ -30,16 +30,16 @@ if not found_greetings then
 end
 
 section.buttons.val = {
-  button('R', icons.ui.History ..       '  Recent session', '<cmd>RestoreSession<CR>'),
-  button('r', icons.ui.History ..       '  Recent files',   ':Telescope oldfiles<CR>'),
-  button('o', icons.ui.Search ..        '  Open file',      ':Telescope find_files<CR>'),
-  button('O', icons.ui.Project ..       '  Open project',   ':lua require("telescope").extensions.projects.projects()<CR>'),
-  button('e', icons.documents.File ..   '  New file',       ':ene <BAR> startinsert <CR>'),
-  button('s', icons.ui.SignIn ..        '  Open session',   ':SearchSession<CR>'),
-  button('t', icons.ui.List ..          '  Find text',      ':Telescope live_grep <CR>'),
-  button('c', icons.ui.Gear ..          '  Config',         ':e ~/.config/nvim/init.lua <CR>'),
-  button('u', icons.ui.CloudDownload .. '  Update plugin',  ':PackerSync<CR>'),
-  button('q', icons.ui.SignOut ..       '  Quit',           ':qa!<CR>'),
+  button('R', utils.icons.ui.History ..       '  Recent session', '<cmd>RestoreSession<CR>'),
+  button('r', utils.icons.ui.History ..       '  Recent files',   ':Telescope oldfiles<CR>'),
+  button('o', utils.icons.ui.Search ..        '  Open file',      ':Telescope find_files<CR>'),
+  button('O', utils.icons.ui.Project ..       '  Open project',   ':lua require("telescope").extensions.projects.projects()<CR>'),
+  button('e', utils.icons.documents.File ..   '  New file',       ':ene <BAR> startinsert <CR>'),
+  button('s', utils.icons.ui.SignIn ..        '  Open session',   ':SearchSession<CR>'),
+  button('t', utils.icons.ui.List ..          '  Find text',      ':Telescope live_grep <CR>'),
+  button('c', utils.icons.ui.Gear ..          '  Config',         ':e ~/.config/nvim/init.lua <CR>'),
+  button('u', utils.icons.ui.CloudDownload .. '  Update plugin',  ':PackerSync<CR>'),
+  button('q', utils.icons.ui.SignOut ..       '  Quit',           ':qa!<CR>'),
 }
 
 section.footer.val = greetings.random_with_name(meta.author.display_name)

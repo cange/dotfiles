@@ -7,55 +7,43 @@ local M = {}
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
---[[
-
-Essential icons
-
-]]
+---Generic icons for general purposes
 ---@enum ui
 M.ui = {
-  ArrowClosed = '',
-  ArrowOpen = '',
-  Lock = '',
-  Circle = '',
   BigCircle = '',
   BigUnfilledCircle = '',
-  Close = '',
-  Search = '',
-  Lightbulb = '',
-  Project = '',
-  Dashboard = '',
-  History = '',
-  Comment = '',
+  BookMark = '',
   Bug = '',
+  Calendar = '',
+  Check = '',
+  ChevronDown = '',
+  ChevronRight = '',
+  Circle = '',
+  Close = '',
+  CloudDownload = '',
   Code = '',
-  Telescope = '',
+  Comment = '',
+  Dashboard = '',
+  Fire = '',
   Gear = '',
-  Package = '',
+  History = '',
+  Lightbulb = '',
   List = '',
+  Lock = '',
+  Note = '',
+  Package = '',
+  Pencil = '',
+  Project = '',
+  Robot = 'ﮧ',
+  Search = '',
   SignIn = '',
   SignOut = '',
-  Check = '',
-  Fire = '',
-  Note = '',
-  BookMark = '',
-  Pencil = '',
-  ChevronRight = '',
-  Table = '',
-  Calendar = '',
-  CloudDownload = '',
-}
-
----@enum misc
-M.misc = {
-  ArrowRight = '',
-  CircuitBoard = '',
-  Package = '',
-  Robot = 'ﮧ',
   Smiley = 'ﲃ',
   Squirrel = '',
   Stethoscope = '',
+  Table = '',
   Tag = '',
+  Telescope = '',
   Watch = '',
   Workspace = '',
 }
@@ -79,11 +67,7 @@ M.git = {
   Repo = '',
   Octoface = '',
 }
---[[
 
-Plugin related icons
-
-]]
 ---@enum diagnostics
 M.diagnostics = {
   Error = '',
@@ -96,59 +80,62 @@ M.diagnostics = {
 ---@enum which_key
 M.which_key = {
   breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
-  separator = '', -- symbol used between a key and it's label
+  separator = M.ui.ChevronRight, -- symbol used between a key and it's label
   group = '+', -- symbol prepended to a group
-}
-
----Language types
-M.type = {
-  Array = '',
-  Boolean = '◩',
-  Function = '', -- '',
-  Number = '', -- '',
-  Null = ' ',
-  Object = '',
-  String = '', -- '',
 }
 
 ---Language symbols
 ---@enum kind
-M.kind = vim.tbl_extend('keep', M.type, {
+M.kind = {
   File = ' ',
-  Module = '',
+  Module = ' ',
   Namespace = ' ',
   Package = ' ',
   Class = ' ',
-  Method = '',
-  Property = '',
-  Field = '',
-  Constructor = '',
+  Method = ' ',
+  Property = ' ',
+  Field = ' ',
+  Constructor = ' ',
   Enum = ' ',
   Interface = ' ',
+  Function = ' ',
   Variable = ' ',
   Constant = ' ',
-  Key = '',
-  EnumMember = '',
-  Struct = '',
-  Event = '',
-  Operator = '',
-  TypeParameter = '',
-  Color = '',
-  Folder = M.documents.Folder,
-  Keyword = '',
-  Reference = '',
-  Snippet = '',
-  Text = '',
-  Unit = '',
-  Value = '',
+  String = ' ',
+  Number = ' ',
+  Boolean = ' ',
+  Array = ' ',
+  Object = ' ',
+  Key = ' ',
+  Null = ' ',
+  EnumMember = ' ',
+  Struct = ' ',
+  Event = ' ',
+  Operator = ' ',
+  TypeParameter = ' ',
+}
+
+---Completion kinds
+---@enum cmp_kind
+M.cmp_kind = vim.tbl_extend('keep', M.kind, {
+  Color = ' ',
+  Folder = M.documents.Folder .. ' ',
+  Keyword = ' ',
+  Reference = ' ',
+  Snippet = ' ',
+  Text = ' ',
+  Unit = ' ',
+  Value = ' ',
 })
 
 ---@enum cmp_source
 M.cmp_source = {
-  buffer = '﬘',
-  nvim_lsp = 'ﮂ',
-  nvim_lua = '',
-  path = M.documents.Folder,
+  buffer = '﬘ ',
+  luasnip = '  ',
+  nvim_lsp = 'ﮂ ',
+  nvim_lua = ' ',
+  path = M.documents.Folder .. ' ',
+  tabnine = M.ui.Robot .. ' ',
 }
 
 ---@enum git_states

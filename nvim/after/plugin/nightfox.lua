@@ -19,7 +19,7 @@ end
 
 vim.notify('Theme: "' .. colorscheme.theme .. '" in "' .. colorscheme.variation .. '" variation')
 local c = palette.load(colorscheme.variation)
--- vim.pretty_print('color:', c)
+-- vim.pretty_print('color:', vim.tbl_keys(c))
 
 -- adjust colors
 local function hl(name, val)
@@ -27,12 +27,20 @@ local function hl(name, val)
   return vim.api.nvim_set_hl(ns_id, name, val)
 end
 
-hl('CursorLine', { bg = nil }) -- disable default c
-hl('Folded', { bg = nil, fg = c.bg4 }) -- reduces folding noise
--- Highlighting relates words under cursor
-hl('IlluminatedWordText', { bg = c.bg1 }) -- Default for references if no kind information is available
-hl('IlluminatedWordRead', { bg = c.bg2 }) -- for references of kind read
-hl('IlluminatedWordWrite', { bg = c.bg2, bold = true }) -- for references of kind write
+local highlights = {
+  -- defaults override
+  CursorLine = { bg = nil }, -- disable default
+  Folded = { bg = nil, fg = c.bg4 }, -- reduces folding noise
+  -- illuminate
+  IlluminatedWordText = { bg = c.bg1 }, -- Default for references if no kind information is available
+  IlluminatedWordRead = { bg = c.bg2 }, -- for references of kind read
+  IlluminatedWordWrite = { bg = c.bg2, bold = true }, -- for references of kind write
+}
+
+for name, val in pairs(highlights) do
+  -- vim.pretty_print('name', name, 'val', val)
+  hl(name, val) -- for references of kind write
+end
 
 local found_modes, modes = pcall(require, 'modes')
 if not found_modes then

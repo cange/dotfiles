@@ -15,24 +15,13 @@ if not found_utils then
   print('[' .. ns .. '] "cange.utils" not found')
   return
 end
-local icons = utils.icons
+local separator = utils.icons.ui.ChevronRight
 -- Setup
 
----@param icons table
-local function formatted_location_icons(icons)
-  local formatted_icons = {}
-
-  for k, v in pairs(icons) do
-    formatted_icons[k] = v .. ' '
-  end
-
-  return formatted_icons
-end
-
 navic.setup({
-  icons = formatted_location_icons(icons.kind),
-  highlight = false,
-  separator = ' » ',
+  icons = utils.icons.kind,
+  highlight = true,
+  separator = ' ' .. separator .. ' ',
   depth_limit = 0,
   depth_limit_indicator = '..',
 })
@@ -45,6 +34,7 @@ end
 local function get_filename()
   local filename = vim.fn.expand('%:t')
   local extension = vim.fn.expand('%:e')
+  local filepath = vim.fn.pathshorten(vim.fn.expand('%:h'), 1) .. '/' .. filename
 
   if not str_is_empty(filename) then
     local file_icon, file_icon_color = web_devicons.get_icon_color(filename, extension, { default = true })
@@ -59,7 +49,7 @@ local function get_filename()
     local navic_text = vim.api.nvim_get_hl_by_name('Normal', true)
     vim.api.nvim_set_hl(0, 'Winbar', { fg = navic_text.foreground })
 
-    return ' ' .. '%#' .. hl_group .. '#' .. file_icon .. '%*' .. ' ' .. '%#Winbar#' .. filename .. '%*'
+    return ' ' .. '%#' .. hl_group .. '#' .. file_icon .. '%*' .. ' ' .. '%#Winbar#' .. filepath .. '%*'
   end
 end
 
@@ -73,8 +63,7 @@ local function get_location()
     return ''
   end
 
-  -- vim.pretty_print(ns .. '-location', navic.get_location(), '-available', navic.is_available())
-  return icons.misc.ArrowRight .. ' ' .. location
+  return separator .. ' ' .. location
 end
 
 local function is_excluded()
@@ -116,7 +105,7 @@ function WinbarBreadcrumbRedraw()
   end
 
   if not str_is_empty(value) and get_buf_option('mod') then
-    local mod = '%#LspCodeLens#' .. icons.ui.Circle .. '%*'
+    local mod = '%#LspCodeLens#' .. utils.icons.ui.Circle .. '%*'
     if location_added then
       value = value .. ' ' .. mod
     else
@@ -137,10 +126,43 @@ function WinbarBreadcrumbRedraw()
     return
   end
 end
+local highlights = {
+  -- local navic_icons = {
+  NavicIconsFile = { link = 'CmpItemKindFile' },
+  NavicIconsModule = { link = 'CmpItemKindModule' },
+  NavicIconsNamespace = { link = 'CmpItemKindModuleFunctionC' },
+  NavicIconsPackage = { link = 'CmpItemKindModule' },
+  NavicIconsClass = { link = 'CmpItemKindClass' },
+  NavicIconsMethod = { link = 'CmpItemKindMethod' },
+  NavicIconsProperty = { link = 'CmpItemKindProperty' },
+  NavicIconsField = { link = 'CmpItemKindField' },
+  NavicIconsConstructor = { link = 'CmpItemKindConstructor' },
+  NavicIconsEnum = { link = 'CmpItemKindEnum' },
+  NavicIconsInterface = { link = 'CmpItemKindInterface' },
+  NavicIconsFunction = { link = 'Function' },
+  NavicIconsVariable = { link = 'CmpItemKindVariable' },
+  NavicIconsConstant = { link = 'Constant' },
+  NavicIconsString = { link = 'String' },
+  NavicIconsNumber = { link = 'Number' },
+  NavicIconsBoolean = { link = 'Boolean' },
+  NavicIconsArray = { link = 'CmpItemKindClass' },
+  NavicIconsObject = { link = 'CmpItemKindClass' },
+  NavicIconsKey = { link = 'CmpItemKindKeyword' },
+  NavicIconsKeyword = { link = 'CmpItemKindKeyword' },
+  NavicIconsNull = { link = 'Constant' },
+  NavicIconsEnumMember = { link = 'CmpItemKindEnumMember' },
+  NavicIconsStruct = { link = 'CmpItemKindStruct' },
+  NavicIconsEvent = { link = 'CmpItemKindEvent' },
+  NavicIconsOperator = { link = 'Operator' },
+  NavicIconsTypeParameter = { link = 'CmpItemKindTypeParameter' },
+  NavicText = { link = 'Normal' },
+  NavicSeparator = { link = 'Comment' },
+}
 
-if not found_navic then
-  return
+for name, val in pairs(highlights) do
+  vim.api.nvim_set_hl(0, name, val)
 end
+
 -- Autocommands
 local events = {
   'BufFilePost',
