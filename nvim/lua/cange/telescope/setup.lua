@@ -50,7 +50,7 @@ telescope.setup({
     colorscheme = default_opts,
     find_files = default_opts,
     quickfix = default_opts,
-    live_grep = { theme = default_opts.theme },
+    live_grep = { theme = 'ivy' },
     grep_string = default_opts,
     lsp_references = lsp_opts,
     lsp_declarations = lsp_opts,
