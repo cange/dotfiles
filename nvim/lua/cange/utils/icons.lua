@@ -28,6 +28,7 @@ M.ui = {
   Gear = "",
   History = "",
   Lightbulb = "",
+  LineLeft = "▏",
   List = "",
   Lock = "",
   Note = "",

@@ -21,6 +21,15 @@ function M.keymap(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+---Set highlight group by given table.
+---@param highlights table<string,table>
+---@see vim.api.nvim_set_hl
+function M.set_hls(highlights)
+  for name, val in pairs(highlights) do
+    vim.api.nvim_set_hl(0, name, val)
+  end
+end
+
 M.greetings = greetings
 M.icons = icons
 

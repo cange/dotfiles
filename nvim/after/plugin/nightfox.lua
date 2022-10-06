@@ -4,6 +4,11 @@ if not found_colorscheme then
   print("[" .. ns .. '] "cange.colorscheme" module not found')
   return
 end
+local found_utils, utils = pcall(require, "cange.utils")
+if not found_utils then
+  print("[" .. ns .. '] "cange.utils" module not found')
+  return
+end
 
 -- theme https://github.com/EdenEast/nightfox.nvim#usage
 local found, palette = pcall(require, colorscheme.theme .. ".palette")
@@ -22,13 +27,7 @@ end
 local c = palette.load(colorscheme.variation)
 -- vim.pretty_print('color:', vim.tbl_keys(c))
 
--- adjust colors
-local function hl(name, val)
-  local ns_id = 0
-  return vim.api.nvim_set_hl(ns_id, name, val)
-end
-
-local highlights = {
+utils.set_hls({
   -- defaults override
   CursorLine = { bg = nil }, -- disable default
   Folded = { bg = nil, fg = c.bg4 }, -- reduces folding noise
@@ -36,12 +35,7 @@ local highlights = {
   IlluminatedWordText = { bg = c.bg1 }, -- Default for references if no kind information is available
   IlluminatedWordRead = { bg = c.bg2 }, -- for references of kind read
   IlluminatedWordWrite = { bg = c.bg2, bold = true }, -- for references of kind write
-}
-
-for name, val in pairs(highlights) do
-  -- vim.pretty_print('name', name, 'val', val)
-  hl(name, val) -- for references of kind write
-end
+})
 
 local found_modes, modes = pcall(require, "modes")
 if not found_modes then

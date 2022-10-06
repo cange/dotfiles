@@ -90,17 +90,21 @@ packer.startup(function(use)
     tag = "nightly", -- optional, updated every week. (see issue #1193)
   })
 
+  -- Comment
   use({
     "numToStr/Comment.nvim", -- comment toggle
     config = instant_setup("Comment"),
   })
+
+  -- Indent
+  use("lukas-reineke/indent-blankline.nvim")
 
   -- Syntax
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use("nvim-treesitter/playground") -- inspect syntax node anatomy
 
   -- Snippets
-  use({ "L3MON4D3/LuaSnip" }) --snippet engine
+  use("L3MON4D3/LuaSnip") --snippet engine
   use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
   -- LSP

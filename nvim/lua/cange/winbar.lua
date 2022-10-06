@@ -126,8 +126,8 @@ function WinbarBreadcrumbRedraw()
     return
   end
 end
-local highlights = {
-  -- local navic_icons = {
+
+utils.set_hls({
   NavicIconsFile = { link = "CmpItemKindFile" },
   NavicIconsModule = { link = "CmpItemKindModule" },
   NavicIconsNamespace = { link = "CmpItemKindModuleFunctionC" },
@@ -157,11 +157,7 @@ local highlights = {
   NavicIconsTypeParameter = { link = "CmpItemKindTypeParameter" },
   NavicText = { link = "Normal" },
   NavicSeparator = { link = "Comment" },
-}
-
-for name, val in pairs(highlights) do
-  vim.api.nvim_set_hl(0, name, val)
-end
+})
 
 -- Autocommands
 local events = {
