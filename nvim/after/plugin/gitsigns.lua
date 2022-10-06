@@ -18,7 +18,7 @@ gitsigns.setup({
     delay = 800,
     ignore_whitespace = false,
   },
-  current_line_blame_formatter = ' <author>, <author_time:%Y-%m-%d> • <summary>',
+  current_line_blame_formatter = '\t\t<author>, <author_time:%Y-%m-%d> • <summary>',
 })
 -- increase contrast
 -- vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { link = 'Comment' })
