@@ -5,10 +5,11 @@ if found then
 end
 
 ---Pretty print shorthand
+---@param value any
 ---@param ... any
 ---@return any Returns passt value in order to allow chaining
-function P(...)
-  vim.pretty_print(...)
+function P(value, ...)
+  vim.pretty_print(value, ...)
   return value
 end
 
