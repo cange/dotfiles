@@ -1,4 +1,4 @@
-local found_zen, zen = pcall(require, 'zen-mode')
+local found_zen, zen = pcall(require, "zen-mode")
 if not found_zen then
   return
 end
@@ -33,4 +33,4 @@ zen.setup({
   -- on_close = function() end,
 })
 
-vim.keymap.set({ 'n', 'i' }, '<leader>z', ':ZenMode<CR>', {})
+vim.keymap.set({ "n", "i" }, "<leader>z", ":ZenMode<CR>", {})

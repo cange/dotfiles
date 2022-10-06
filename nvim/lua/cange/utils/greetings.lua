@@ -3,7 +3,7 @@
 --- @param tbl table
 --- @return string
 local function interp(str, tbl)
-  return (str:gsub('($%b{})', function(word)
+  return (str:gsub("($%b{})", function(word)
     return tbl[word:sub(3, -2)] or word
   end))
 end
@@ -19,14 +19,14 @@ end
 ---Generate day time related greeting
 --- @return string
 local function greeting_by_day_time()
-  local h = tonumber(vim.fn.strftime('%k', vim.fn.localtime()))
-  local day_time = 'morning'
+  local h = tonumber(vim.fn.strftime("%k", vim.fn.localtime()))
+  local day_time = "morning"
   if h > 12 and h <= 18 then
-    day_time = 'afternoon'
+    day_time = "afternoon"
   elseif h >= 18 or h < 5 then
-    day_time = 'evening'
+    day_time = "evening"
   end
-  return 'Good ' .. day_time
+  return "Good " .. day_time
 end
 
 ---Repeat string as many as given count
@@ -58,21 +58,21 @@ end
 ---@return table<string>
 local function greetings_and_weights()
   return generate_by_weight({
-    { 'What’s going on ${name}?', 1 },
-    { '${name}, its been a while!', 1 },
-    { 'Good to see you, ${name}!', 1 },
-    { 'Hello ${name}!', 1 },
-    { 'Hey ${name}!', 1 },
-    { 'Howdy, ${name}!', 1 },
-    { 'Hi ${name}', 1 },
-    { 'How are you ${name}?', 1 },
-    { 'How’s it going ${name}?', 1 },
-    { 'Long time no see ${name}!', 1 },
-    { 'Nice to see you ${name}!', 1 },
-    { 'Sup ${name}?', 1 },
-    { 'Wazzup ${name}?', 1 },
-    { 'Yo ${name}!', 1 },
-    { greeting_by_day_time() .. ' ${name}!', 6 }, -- prio this greeting by adding it multipe times
+    { "What’s going on ${name}?", 1 },
+    { "${name}, its been a while!", 1 },
+    { "Good to see you, ${name}!", 1 },
+    { "Hello ${name}!", 1 },
+    { "Hey ${name}!", 1 },
+    { "Howdy, ${name}!", 1 },
+    { "Hi ${name}", 1 },
+    { "How are you ${name}?", 1 },
+    { "How’s it going ${name}?", 1 },
+    { "Long time no see ${name}!", 1 },
+    { "Nice to see you ${name}!", 1 },
+    { "Sup ${name}?", 1 },
+    { "Wazzup ${name}?", 1 },
+    { "Yo ${name}!", 1 },
+    { greeting_by_day_time() .. " ${name}!", 6 }, -- prio this greeting by adding it multipe times
   })
 end
 

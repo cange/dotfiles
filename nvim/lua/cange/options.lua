@@ -1,20 +1,20 @@
 local options = {
-  backspace = 'start,eol,indent', -- allow backspace in insert mode
-  completeopt = { 'menuone', 'noselect' }, -- mostly just for cmp
+  backspace = "start,eol,indent", -- allow backspace in insert mode
+  completeopt = { "menuone", "noselect" }, -- mostly just for cmp
   conceallevel = 0, -- so that `` is visible in markdown files
-  fileencoding = 'utf-8', -- the encoding written to a file
+  fileencoding = "utf-8", -- the encoding written to a file
   timeoutlen = 300, -- max delay until execute command of a key sequence
   ttimeoutlen = 50, -- max time until next key of a key sequence is expected
   list = true, -- show hidden characters
   updatetime = 50, -- faster completion (4000ms default), delays and poor user experience
 
   -- UI
-  colorcolumn = '80,120', -- highlight optimal end line¬
+  colorcolumn = "80,120", -- highlight optimal end line¬
   cursorline = true, -- highlight the current line
-  guifont = 'monospace:h16', -- the font used in graphical neovim applications
+  guifont = "monospace:h16", -- the font used in graphical neovim applications
   laststatus = 1, -- show one global statusline for all windows
   showtabline = 1, -- always show tabs
-  mouse = 'a', -- allow the mouse to be used in editor
+  mouse = "a", -- allow the mouse to be used in editor
   number = true, -- set numbered lines
   numberwidth = 3, -- set number column width to 2 {default 4}
   pumblend = 10, -- transparency of popup-menus 0 (none) to 100 (full)
@@ -29,11 +29,11 @@ local options = {
 
   --
   spell = false, -- enable spell checking if this is true
-  spelllang = { 'en_us' }, -- spellchecking will be done for these languages
+  spelllang = { "en_us" }, -- spellchecking will be done for these languages
 
   -- backup handling
   backup = false, -- creates a backup file
-  backupskip = '/tmp/*,/private/tmp/*',
+  backupskip = "/tmp/*,/private/tmp/*",
   writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
   -- search
@@ -58,14 +58,14 @@ local options = {
   --
   scrolloff = 8, -- scroll offset horizontal
   sidescrolloff = 8, -- scroll offset vertical
-  signcolumn = 'yes', -- always show the sign column, otherwise it would shift the text each time
+  signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
   undofile = true, -- enable persistent undo
   wrap = false, -- display lines as one long line
 
   -- folding settings
   foldlevel = 1, -- zero will close all folds
   foldlevelstart = 4, -- -1 always start editing with all folds closed
-  foldmethod = 'indent', -- groups of lines with the same indent form a fold
+  foldmethod = "indent", -- groups of lines with the same indent form a fold
   foldnestmax = 10, -- deepest fold is 10 levels
 }
 
@@ -74,32 +74,32 @@ for k, v in pairs(options) do
 end
 
 --
-vim.opt.iskeyword:append({ '-' })
-vim.opt.formatoptions:remove({ 'cro' }) -- adjust automatic formatting
-vim.opt.formatoptions:append({ 'r' }) -- Add asterisks in block comments
+vim.opt.iskeyword:append({ "-" })
+vim.opt.formatoptions:remove({ "cro" }) -- adjust automatic formatting
+vim.opt.formatoptions:append({ "r" }) -- Add asterisks in block comments
 vim.opt.shortmess:append({ c = true }) -- don't give |ins-completion-menu| messages
-vim.opt.path:append({ '**' }) -- Finding files - Search down into subfolders
+vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
 vim.opt.wildignore:append({ -- stuff to ignore when tab completing
-  '*.o',
-  '*.obj',
-  '*.png',
-  '*.jpg',
-  '*.gif',
-  '*.pdf',
-  '*.psd',
-  '*/node_modules/*',
-  '*/tmp/*',
-  '*.scssc',
-  '*.so',
-  '*.swp',
-  '*.zip',
-  '*DS_Store*',
-  '*~',
+  "*.o",
+  "*.obj",
+  "*.png",
+  "*.jpg",
+  "*.gif",
+  "*.pdf",
+  "*.psd",
+  "*/node_modules/*",
+  "*/tmp/*",
+  "*.scssc",
+  "*.so",
+  "*.swp",
+  "*.zip",
+  "*DS_Store*",
+  "*~",
 })
 
 -- vim.opt.whichwrap:append({ '<', '>', '[', ']', 'h', 'l' })
 vim.opt.listchars:append({
-  eol = '↵',
-  nbsp = '_',
-  tab = '⇥ ',
+  eol = "↵",
+  nbsp = "_",
+  tab = "⇥ ",
 })

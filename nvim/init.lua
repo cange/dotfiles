@@ -1,1 +1,1 @@
-require('cange')
+require("cange")

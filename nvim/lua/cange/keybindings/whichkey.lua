@@ -1,18 +1,18 @@
-local ns = 'cange.keybindings.whichkey'
+local ns = "cange.keybindings.whichkey"
 
-local found_whichkey, whichkey = pcall(require, 'which-key')
+local found_whichkey, whichkey = pcall(require, "which-key")
 if not found_whichkey then
-  print('[' .. ns .. '] "which-key" not found')
+  print("[" .. ns .. '] "which-key" not found')
   return
 end
-local found_workflows, wk_groups = pcall(require, 'cange.keybindings.whichkey_groups')
+local found_workflows, wk_groups = pcall(require, "cange.keybindings.whichkey_groups")
 if not found_workflows then
-  print('[' .. ns .. '] "cange.keybindings.whichkey_groups" not found')
+  print("[" .. ns .. '] "cange.keybindings.whichkey_groups" not found')
   return
 end
-local found_utils, utils = pcall(require, 'cange.utils')
+local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print('[' .. ns .. '] "cange.utils" not found')
+  print("[" .. ns .. '] "cange.utils" not found')
   return
 end
 
@@ -35,15 +35,15 @@ end
 
 local custom_mappings = {}
 for _, m in pairs(wk_groups) do
-  custom_mappings = vim.tbl_extend('keep', custom_mappings, group_mappings(m))
+  custom_mappings = vim.tbl_extend("keep", custom_mappings, group_mappings(m))
 end
 
-local wk_mappings = vim.tbl_deep_extend('keep', {
-  ['a'] = { '<cmd>Alpha<CR>', 'Start screen' },
-  ['f'] = { '<cmd>Telescope find_files<CR>', 'Find files' },
-  ['e'] = { '<cmd>NvimTreeToggle<cr>', 'File Explorer' },
-  ['w'] = { '<cmd>w!<CR>', 'Save' },
-  ['q'] = { '<cmd>q!<CR>', 'Quit' },
+local wk_mappings = vim.tbl_deep_extend("keep", {
+  ["a"] = { "<cmd>Alpha<CR>", "Start screen" },
+  ["f"] = { "<cmd>Telescope find_files<CR>", "Find files" },
+  ["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
+  ["w"] = { "<cmd>w!<CR>", "Save" },
+  ["q"] = { "<cmd>q!<CR>", "Quit" },
 }, custom_mappings)
 
 local M = {}
@@ -81,11 +81,11 @@ function M.setup()
     },
     icons = utils.icons.which_key,
     popup_mappings = {
-      scroll_down = '<c-d>', -- binding to scroll down inside the popup
-      scroll_up = '<c-u>', -- binding to scroll up inside the popup
+      scroll_down = "<c-d>", -- binding to scroll down inside the popup
+      scroll_up = "<c-u>", -- binding to scroll up inside the popup
     },
     window = {
-      border = 'rounded', -- none, single, double, rounded, shadow
+      border = "rounded", -- none, single, double, rounded, shadow
       margin = { 0, 8, 2, 8 }, -- extra window margin [top, right, bottom, left]
       padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
       winblend = 2,
@@ -94,25 +94,25 @@ function M.setup()
       height = { min = 4, max = 25 }, -- min and max height of the columns
       width = { min = 20, max = 50 }, -- min and max width of the columns
       spacing = 3, -- spacing between columns
-      align = 'left', -- align columns left, center or right
+      align = "left", -- align columns left, center or right
     },
     ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-    hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ' }, -- hide mapping boilerplate
+    hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
-    triggers = 'auto', -- automatically setup triggers
+    triggers = "auto", -- automatically setup triggers
     -- triggers = {'<leader>'} -- or specify a list manually
     triggers_blacklist = {
       -- list of mode / prefixes that should never be hooked by WhichKey
       -- this is mostly relevant for key maps that start with a native binding
       -- most people should not need to change this
-      i = { 'j', 'k' },
-      v = { 'j', 'k' },
+      i = { "j", "k" },
+      v = { "j", "k" },
     },
   })
 
   whichkey.register(wk_mappings, {
-    mode = 'n', -- NORMAL mode
-    prefix = '<leader>',
+    mode = "n", -- NORMAL mode
+    prefix = "<leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer M.mappings
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps

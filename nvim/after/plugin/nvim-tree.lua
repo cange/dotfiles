@@ -1,36 +1,36 @@
-local ns = 'nvim-tree'
-local found, tree = pcall(require, 'nvim-tree')
+local ns = "nvim-tree"
+local found, tree = pcall(require, "nvim-tree")
 if not found then
   return
 end
-local found_utils, utils = pcall(require, 'cange.utils')
+local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print('[' .. ns .. '] "cange.utils" not found')
+  print("[" .. ns .. '] "cange.utils" not found')
   return
 end
 local keymap = utils.keymap
-keymap('n', '<leader>e', ':NvimTreeToggle<CR>')
-keymap('n', '<leader>.', ':NvimTreeFindFile<CR>')
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>")
+keymap("n", "<leader>.", ":NvimTreeFindFile<CR>")
 
-local api = require('nvim-tree.api')
+local api = require("nvim-tree.api")
 local Event = api.events.Event
-local toggle_help_key = '<leader>eh'
+local toggle_help_key = "<leader>eh"
 
 -- enable help toggle when tree open
 api.events.subscribe(Event.TreeOpen, function()
-  keymap('n', toggle_help_key, function()
+  keymap("n", toggle_help_key, function()
     api.tree.toggle_help()
   end)
 end)
 
-keymap('n', toggle_help_key, '<Nop>')
+keymap("n", toggle_help_key, "<Nop>")
 api.events.subscribe(Event.TreeClose, function() end)
 
-local config = require('nvim-tree.config').nvim_tree_callback
+local config = require("nvim-tree.config").nvim_tree_callback
 
 tree.setup({
   live_filter = {
-    prefix = utils.icons.ui.Search .. '  ',
+    prefix = utils.icons.ui.Search .. "  ",
   },
   -- project plugin related
   sync_root_with_cwd = true,
@@ -45,7 +45,7 @@ tree.setup({
       show = {
         folder = false,
       },
-      git_placement = 'after',
+      git_placement = "after",
       glyphs = {
         git = utils.icons.git_states,
       },
@@ -62,8 +62,8 @@ tree.setup({
   view = {
     mappings = {
       list = {
-        { key = 'v', cb = config('vsplit') },
-        { key = 'h', cb = config('split') },
+        { key = "v", cb = config("vsplit") },
+        { key = "h", cb = config("split") },
       },
     },
   },

@@ -1,4 +1,4 @@
-local found, plenary_reload = pcall(require, 'plenary.reload')
+local found, plenary_reload = pcall(require, "plenary.reload")
 local reloader = require
 if found then
   reloader = plenary_reload.reload_module

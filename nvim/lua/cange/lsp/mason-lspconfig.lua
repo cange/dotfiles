@@ -1,12 +1,12 @@
-local ns =  'cange.lsp.mason-lspconfig'
-local found_lspconfig, mason_lspconfig = pcall(require, 'mason-lspconfig')
+local ns = "cange.lsp.mason-lspconfig"
+local found_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not found_lspconfig then
-  print('[' .. ns .. '] "mason-lspconfig" not found')
+  print("[" .. ns .. '] "mason-lspconfig" not found')
   return
 end
-local found_providers, providers = pcall(require, 'cange.lsp.providers')
+local found_providers, providers = pcall(require, "cange.lsp.providers")
 if not found_providers then
-  print('[' .. ns .. '] "cange.utils.providers" not found')
+  print("[" .. ns .. '] "cange.utils.providers" not found')
   return
 end
 -- config

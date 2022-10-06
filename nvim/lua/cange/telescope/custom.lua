@@ -1,25 +1,25 @@
-local ns = 'cange.telescope.custom'
-local found_telescope, telescope = pcall(require, 'telescope')
+local ns = "cange.telescope.custom"
+local found_telescope, telescope = pcall(require, "telescope")
 if not found_telescope then
-  print('[' .. ns .. '] "telescope" not found')
+  print("[" .. ns .. '] "telescope" not found')
   return
 end
-local found_icons, icons = pcall(require, 'cange.utils.icons')
+local found_icons, icons = pcall(require, "cange.utils.icons")
 if not found_icons then
-  print('[' .. ns .. '] "cange.utils.icons" not found')
+  print("[" .. ns .. '] "cange.utils.icons" not found')
   return
 end
-local builtin = require('telescope.builtin')
-local actions_state = require('telescope.actions.state')
-local themes = require('telescope.themes')
+local builtin = require("telescope.builtin")
+local actions_state = require("telescope.actions.state")
+local themes = require("telescope.themes")
 -- config
 local M = {}
 
 function M.browse_nvim()
   local opts = {
-    cwd = '~/.config/nvim',
+    cwd = "~/.config/nvim",
     previewer = false,
-    prompt_title = icons.ui.Gear .. ' NeoVim Config',
+    prompt_title = icons.ui.Gear .. " NeoVim Config",
     shorten_path = false,
   }
 
@@ -29,25 +29,25 @@ end
 function M.diagnostics_log()
   builtin.diagnostics(themes.get_ivy({
     bufnr = 0,
-    initial_mode = 'normal',
+    initial_mode = "normal",
     no_listed = true, -- if true show only listed buffersw
     previewer = false,
-    prompt_title = icons.misc.Stethoscope .. ' Diagnostics Log',
+    prompt_title = icons.misc.Stethoscope .. " Diagnostics Log",
   }))
 end
 
 function M.browse_workspace()
   builtin.find_files({
-    cwd = '~/workspace/',
+    cwd = "~/workspace/",
     hidden = true,
-    prompt_title = icons.misc.Workspace .. ' Workspace',
+    prompt_title = icons.misc.Workspace .. " Workspace",
     shorten_path = false,
   })
 end
 
 -- File browser
 function M.file_browser()
-  local path = '%:p:h'
+  local path = "%:p:h"
   local opts = {
     cwd = vim.fn.expand(path),
     path = path,
@@ -63,12 +63,12 @@ function M.file_browser()
       end
 
       -- navigate up in dir tree
-      keymap('i', '-', function()
-        modify_cwd(current_picker.cwd .. '/..')
+      keymap("i", "-", function()
+        modify_cwd(current_picker.cwd .. "/..")
       end)
       -- up to user root
-      keymap('i', '~', function()
-        modify_cwd(vim.fn.expand('~'))
+      keymap("i", "~", function()
+        modify_cwd(vim.fn.expand("~"))
       end)
 
       return true

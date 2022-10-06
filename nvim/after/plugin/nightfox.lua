@@ -1,20 +1,20 @@
-local ns = 'nightfox'
-local found_colorscheme, colorscheme = pcall(require, 'cange.colorscheme')
+local ns = "nightfox"
+local found_colorscheme, colorscheme = pcall(require, "cange.colorscheme")
 if not found_colorscheme then
-  print('[' .. ns .. '] "cange.colorscheme" module not found')
+  print("[" .. ns .. '] "cange.colorscheme" module not found')
   return
 end
 
 -- theme https://github.com/EdenEast/nightfox.nvim#usage
-local found, palette = pcall(require, colorscheme.theme .. '.palette')
+local found, palette = pcall(require, colorscheme.theme .. ".palette")
 if not found then
-  print('[' .. ns .. '] colorscheme "' .. colorscheme.theme .. '.palette" module not found')
+  print("[" .. ns .. '] colorscheme "' .. colorscheme.theme .. '.palette" module not found')
   return
 end
 
-local found_theme, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme.variation)
+local found_theme, _ = pcall(vim.cmd, "colorscheme " .. colorscheme.variation)
 if not found_theme then
-  print('[' .. ns .. '] "' .. colorscheme.variation .. '" of "' .. colorscheme.theme .. '" colorscheme not found!')
+  print("[" .. ns .. '] "' .. colorscheme.variation .. '" of "' .. colorscheme.theme .. '" colorscheme not found!')
   return
 end
 
@@ -43,9 +43,9 @@ for name, val in pairs(highlights) do
   hl(name, val) -- for references of kind write
 end
 
-local found_modes, modes = pcall(require, 'modes')
+local found_modes, modes = pcall(require, "modes")
 if not found_modes then
-  print('[' .. ns .. '] "modes" module not found')
+  print("[" .. ns .. '] "modes" module not found')
   return
 end
 -- needs to been calld after colorscheme is established

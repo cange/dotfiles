@@ -1,22 +1,22 @@
-local ns =  'cange.lsp.lspconfig'
-local found_lspconfig, lspconfig = pcall(require, 'lspconfig')
+local ns = "cange.lsp.lspconfig"
+local found_lspconfig, lspconfig = pcall(require, "lspconfig")
 if not found_lspconfig then
-  print('[' .. ns .. '] "lspconfig" not found')
+  print("[" .. ns .. '] "lspconfig" not found')
   return
 end
-local found_custom, custom = pcall(require, 'cange.lsp.custom')
+local found_custom, custom = pcall(require, "cange.lsp.custom")
 if not found_custom then
-  print('[' .. ns .. '] "cange.utils.custom" not found')
+  print("[" .. ns .. '] "cange.utils.custom" not found')
   return
 end
-local found_providers, providers = pcall(require, 'cange.lsp.providers')
+local found_providers, providers = pcall(require, "cange.lsp.providers")
 if not found_providers then
-  print('[' .. ns .. '] "cange.utils.providers" not found')
+  print("[" .. ns .. '] "cange.utils.providers" not found')
   return
 end
 -- config
 local function setup_server(provider, p_lspconfig)
-  local found_settings, settings = pcall(require, 'cange.lsp.provider_settings.' .. provider)
+  local found_settings, settings = pcall(require, "cange.lsp.provider_settings." .. provider)
   local default_settings = {
     on_attach = custom.on_attach,
     capabilities = custom.capabilities(),
@@ -26,7 +26,7 @@ local function setup_server(provider, p_lspconfig)
     -- }
   }
   if found_settings then
-    settings = vim.tbl_deep_extend('force', settings, default_settings)
+    settings = vim.tbl_deep_extend("force", settings, default_settings)
   else
     settings = default_settings
   end

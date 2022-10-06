@@ -1,4 +1,4 @@
-local config = require('cange.lualine.config')
+local config = require("cange.lualine.config")
 
 local conditions = {
   hide_in_width = function()
@@ -11,12 +11,12 @@ local M = {}
 
 M.lsp = {
   function(msg)
-    msg = msg or 'LS Inactive'
+    msg = msg or "LS Inactive"
     local buf_clients = vim.lsp.buf_get_clients()
     if next(buf_clients) == nil then
       -- TODO: clean up this if statement
-      if type(msg) == 'boolean' or #msg == 0 then
-        return 'LS Inactive'
+      if type(msg) == "boolean" or #msg == 0 then
+        return "LS Inactive"
       end
       return msg
     end
@@ -25,7 +25,7 @@ M.lsp = {
 
     -- add client
     for _, client in pairs(buf_clients) do
-      if client.name ~= 'null-ls' then
+      if client.name ~= "null-ls" then
         table.insert(buf_client_names, client.name)
       end
     end
@@ -33,21 +33,21 @@ M.lsp = {
     -- add formatter
     -- local formatters = require('lvim.lsp.null-ls.formatters')
     -- - local supported_formatters = formatters.list_registered(buf_ft)
-    local supported_formatters = require('cange.lsp.providers.formatters')
+    local supported_formatters = require("cange.lsp.providers.formatters")
     vim.list_extend(buf_client_names, supported_formatters)
 
     -- add linter
     -- local linters = require('lvim.lsp.null-ls.linters')
     -- local supported_linters = linters.list_registered(buf_ft)
-    local supported_linters = require('cange.lsp.providers.linters')
+    local supported_linters = require("cange.lsp.providers.linters")
     vim.list_extend(buf_client_names, supported_linters)
 
     local unique_client_names = vim.fn.uniq(buf_client_names)
-    return table.concat(unique_client_names, ', ')
+    return table.concat(unique_client_names, ", ")
   end,
 
-  separator = '',
-  color = { gui = 'bold' },
+  separator = "",
+  color = { gui = "bold" },
   cond = conditions.hide_in_width,
 }
 

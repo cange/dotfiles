@@ -1,10 +1,10 @@
 -- https://github.com/L3MON4D3/LuaSnip/wiki/Misc#choicenode-popup
-local found, luasnip = pcall(require, 'luasnip')
+local found, luasnip = pcall(require, "luasnip")
 if not found then
   return
 end
 
-local ns_id = vim.api.nvim_create_namespace('LuasnipChoiceListSelections')
+local ns_id = vim.api.nvim_create_namespace("LuasnipChoiceListSelections")
 local win_close = vim.api.nvim_win_close
 local win = nil
 local del_extmark = vim.api.nvim_buf_del_extmark
@@ -32,17 +32,17 @@ local function create_window(choice_node)
   local width, height = vim.lsp.util._make_floating_popup_size(buf_text, {})
 
   -- adding highlight so we can see which one is been selected.
-  local extmark_opts = { hl_group = 'incsearch', end_line = option_row + row_offset }
+  local extmark_opts = { hl_group = "incsearch", end_line = option_row + row_offset }
   local extmark = vim.api.nvim_buf_set_extmark(buffer, ns_id, option_row, option_col, extmark_opts)
 
   -- shows window at a beginning ofchoice_node.
   local win_id = vim.api.nvim_open_win(buffer, false, {
-    relative = 'win',
+    relative = "win",
     width = width,
     height = height,
     bufpos = choice_node.mark:pos_begin_end(),
-    style = 'minimal',
-    border = 'none', -- none, single, double, rounded, solid, shadow
+    style = "minimal",
+    border = "none", -- none, single, double, rounded, solid, shadow
   })
   -- return with 3 main important so we can use them again
   return { win_id = win_id, extmark = extmark, buf = buffer }
@@ -99,24 +99,24 @@ function M.setup()
   local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
   local autocmd = vim.api.nvim_create_autocmd
 
-  augroup('luasnip_choice_options', { clear = true })
-  autocmd('User', {
-    pattern = 'LuasnipChoiceNodeEnter',
+  augroup("luasnip_choice_options", { clear = true })
+  autocmd("User", {
+    pattern = "LuasnipChoiceNodeEnter",
     callback = CangeSnippetChoiceOpen,
   })
-  autocmd('User', {
-    pattern = 'LuasnipChoiceNodeLeave',
+  autocmd("User", {
+    pattern = "LuasnipChoiceNodeLeave",
     callback = CangeSnippetChoiceClose,
   })
-  autocmd('User', {
-    pattern = 'LuasnipChangeChoice',
+  autocmd("User", {
+    pattern = "LuasnipChangeChoice",
     callback = CangeSnippetChoiceUpdate,
   })
-  autocmd('User', {
+  autocmd("User", {
     pattern = {
-      'LuasnipCleanup',
-      'LuasnipDynamicNodeLeave',
-      'LuasnipInsertNodeLeave',
+      "LuasnipCleanup",
+      "LuasnipDynamicNodeLeave",
+      "LuasnipInsertNodeLeave",
     },
     callback = CangeSnippetChoiceClose,
   })

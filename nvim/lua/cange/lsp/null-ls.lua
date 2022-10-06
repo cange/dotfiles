@@ -1,7 +1,7 @@
-local ns = 'cange.lsp.null-ls'
-local found_null_ls, null_ls = pcall(require, 'null-ls')
+local ns = "cange.lsp.null-ls"
+local found_null_ls, null_ls = pcall(require, "null-ls")
 if not found_null_ls then
-  print('[' .. ns .. '] "null-ls" not found')
+  print("[" .. ns .. '] "null-ls" not found')
   return
 end
 -- config

@@ -1,4 +1,4 @@
-local found, icons = pcall(require, 'nvim-web-devicons')
+local found, icons = pcall(require, "nvim-web-devicons")
 if not found then
   return
 end
