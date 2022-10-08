@@ -33,4 +33,28 @@ end
 M.greetings = greetings
 M.icons = icons
 
+---Ensures that the icons of given parts exists
+---@param ... string List of parts the actual icon path
+---@return string|table|nil The icon symbol or nil if not found
+function M.get_icon(...)
+  local icon = icons
+  local parts = { ... }
+  local function get_icon(name)
+    return icon[name]
+  end
+
+  for _, name in ipairs(parts) do
+    local found_icon, _icon = pcall(get_icon, name)
+    if not found_icon then
+      vim.pretty_print("[" .. ns .. "] icon for " .. vim.inspect(parts) .. " not found")
+      return nil
+    end
+
+    icon = _icon
+  end
+
+  -- vim.pretty_print("icon", icon)
+  return icon
+end
+
 return M

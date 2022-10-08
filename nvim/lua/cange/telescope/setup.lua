@@ -4,11 +4,12 @@ if not found_telescope then
   print("[" .. ns .. '] "telescope" not found')
   return
 end
-local found_icons, icons = pcall(require, "cange.utils.icons")
-if not found_icons then
-  print("[" .. ns .. '] "cange.utils.icons" not found')
+local found_utils, utils = pcall(require, "cange.utils")
+if not found_utils then
+  print("[" .. ns .. '] "cange.utils" not found')
   return
 end
+local icon = utils.get_icon
 local actions = require("telescope.actions")
 -- config
 local default_opts = {
@@ -27,9 +28,9 @@ telescope.setup({
       "smart", -- shows only the difference between the displayed paths
       "absolute",
     },
-    prompt_prefix = " " .. icons.ui.Search .. " ",
-    selection_caret = " " .. icons.ui.ChevronRight .. " ",
-    entry_prefix = "   ",
+    prompt_prefix = " " .. icon("ui", "Search") .. " ",
+    selection_caret = " " .. icon("ui", "ChevronRight") .. " ",
+    entry_prefix = "    ",
     layout_config = {
       horizontal = {
         preview_width = 80,

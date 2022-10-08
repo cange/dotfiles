@@ -26,13 +26,13 @@ if not found_cmp_utils then
   return
 end
 local function menu_item_format(entry, vim_item)
-  local source_types = utils.icons.cmp_source
+  local source_types = utils.get_icon("cmp_source")
   local name = entry.source.name
   if vim.tbl_contains(vim.tbl_keys(source_types), name) then
     vim_item.menu = source_types[name].icon
     vim_item.menu_hl_group = "Comment" -- assign appropriate theme color
   end
-  vim_item.kind = utils.icons.cmp_kind[vim_item.kind]
+  vim_item.kind = utils.get_icon("cmp_kind", vim_item.kind)
   return vim_item
 end
 

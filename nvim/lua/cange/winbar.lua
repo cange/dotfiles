@@ -15,11 +15,12 @@ if not found_utils then
   print("[" .. ns .. '] "cange.utils" not found')
   return
 end
-local separator = utils.icons.ui.ChevronRight
+local icon = utils.get_icon
+local separator = icon("ui", "ChevronRight")
 -- Setup
 
 navic.setup({
-  icons = utils.icons.kind,
+  icons = icon("kind"),
   highlight = true,
   separator = " " .. separator .. " ",
   depth_limit = 0,
@@ -45,7 +46,7 @@ local function get_filename()
 
     vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
     if str_is_empty(file_icon) then
-      file_icon = utils.icons.kind.File
+      file_icon = icon("kind", "File")
     end
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
@@ -107,7 +108,7 @@ function WinbarBreadcrumbRedraw()
   end
 
   if not str_is_empty(value) and get_buf_option("mod") then
-    local mod = "%#LspCodeLens#" .. utils.icons.ui.Circle .. "%*"
+    local mod = "%#LspCodeLens#" .. icon("ui", "Circle") .. "%*"
     if location_added then
       value = value .. " " .. mod
     else

@@ -8,6 +8,7 @@ if not found_utils then
   print("[" .. ns .. '] "cange.utils" not found')
   return
 end
+local icon = utils.get_icon
 local found_colorscheme, colorscheme = pcall(require, "cange.colorscheme")
 if not found_colorscheme then
   print("[" .. ns .. '] "cange.colorscheme" not found')
@@ -25,8 +26,8 @@ indent_blankline.setup({
     "Trouble",
     "text",
   },
-  char = utils.icons.ui.LineLeft,
-  context_char = utils.icons.ui.LineLeft,
+  char = icon("ui", "LineLeft"),
+  context_char = icon("ui", "LineLeft"),
   show_current_context = true,
   show_current_context_start = true,
   use_treesitter = true,

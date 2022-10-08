@@ -8,6 +8,7 @@ if not found_utils then
   print("[" .. ns .. '] "cange.utils" not found')
   return
 end
+local icon = utils.get_icon
 local keymap = utils.keymap
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>")
 keymap("n", "<leader>.", ":NvimTreeFindFile<CR>")
@@ -27,10 +28,9 @@ keymap("n", toggle_help_key, "<Nop>")
 api.events.subscribe(Event.TreeClose, function() end)
 
 local config = require("nvim-tree.config").nvim_tree_callback
-local icons = utils.icons
 tree.setup({
   live_filter = {
-    prefix = icons.ui.Search .. "  ",
+    prefix = icon("ui", "Search") .. "  ",
   },
   -- project plugin related
   sync_root_with_cwd = true,
@@ -47,20 +47,20 @@ tree.setup({
       },
       git_placement = "after",
       glyphs = {
-        default = icons.documents.File,
-        bookmark = icons.ui.Bookmark,
-        symlink = icons.documents.SymlinkFile,
+        default = icon("documents", "File"),
+        bookmark = icon("ui", "Bookmark"),
+        symlink = icon("documents", "SymlinkFile"),
         folder = {
-          arrow_closed = icons.ui.ChevronRight,
-          arrow_open = icons.ui.ChevronDown,
-          default = icons.documents.Folder,
-          empty = icons.documents.EmptyFolder,
-          empty_open = icons.documents.EmptyOpenFolder,
-          open = icons.documents.OpenFolder,
-          symlink = icons.documents.SymlinkFolder,
-          symlink_open = icons.documents.SymlinkFolder,
+          arrow_closed = icon("ui", "ChevronRight"),
+          arrow_open = icon("ui", "ChevronDown"),
+          default = icon("documents", "Folder"),
+          empty = icon("documents", "EmptyFolder"),
+          empty_open = icon("documents", "EmptyOpenFolder"),
+          open = icon("documents", "OpenFolder"),
+          symlink = icon("documents", "SymlinkFolder"),
+          symlink_open = icon("documents", "SymlinkFolde"),
         },
-        git = icons.git_states,
+        git = icon("git_states"),
       },
     },
   },

@@ -3,11 +3,12 @@ local found, notify = pcall(require, ns)
 if not found then
   return
 end
-local found_icons, icons = pcall(require, "cange.utils.icons")
-if not found_icons then
-  print("[" .. ns .. '] "cange.utils.icons" not found')
+local found_utils, utils = pcall(require, "cange.utils")
+if not found_utils then
+  print("[" .. ns .. '] "cange.utils" not found')
   return
 end
+local icon= utils.get_icon
 
 notify.setup({
   -- Animation style (see below for details)
@@ -34,11 +35,11 @@ notify.setup({
 
   -- Icons for the different levels
   icons = {
-    ERROR = icons.diagnostics.Error,
-    WARN = icons.diagnostics.Warning,
-    INFO = icons.diagnostics.Information,
-    DEBUG = icons.ui.Bug,
-    TRACE = icons.ui.Pencil,
+    ERROR = icon('diagnostics','Error'),
+    WARN = icon('diagnostics','Warning'),
+    INFO = icon('diagnostics','Information'),
+    DEBUG = icon('ui','Bug'),
+    TRACE = icon('ui','Pencil'),
   },
 })
 

@@ -1,15 +1,15 @@
 local ns = "cange.lsp.diagnostics"
-local found_icons, icons = pcall(require, "cange.utils.icons")
-if not found_icons then
-  print("[" .. ns .. '] "cange.utils.icons" not found')
+local found_utils, utils = pcall(require, "cange.utils")
+if not found_utils then
+  print("[" .. ns .. '] "cange.utils" not found)')
   return
 end
 -- config
 local signs = {
-  { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-  { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-  { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-  { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+  { name = "DiagnosticSignError", text = utils.get_icon("diagnostics", "Error") },
+  { name = "DiagnosticSignWarn", text = utils.get_icon("diagnostics", "Warning") },
+  { name = "DiagnosticSignHint", text = utils.get_icon("diagnostics", "Hint") },
+  { name = "DiagnosticSignInfo", text = utils.get_icon("diagnostics", "Information") },
 }
 
 for _, s in ipairs(signs) do
@@ -26,6 +26,3 @@ vim.diagnostic.config({
   virtual_text = false, -- disable inline text
 })
 
-local handlers_opts = { border = "rounded" }
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, handlers_opts)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, handlers_opts)

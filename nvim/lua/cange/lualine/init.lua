@@ -3,9 +3,9 @@ local found_lualine, lualine = pcall(require, "lualine")
 if not found_lualine then
   return
 end
-local found_icons, icons = pcall(require, "cange.utils.icons")
-if not found_icons then
-  print("[" .. ns .. '] "cange.utils.icons" not found')
+local found_utils, utils = pcall(require, "cange.utils")
+if not found_utils then
+  print("[" .. ns .. '] "cange.utils" not found')
   return
 end
 local found_config, config = pcall(require, "cange.lualine.config")
@@ -21,7 +21,7 @@ lualine.setup({
   },
   sections = {
     lualine_b = {
-      { "branch", icon = icons.git.Repo },
+      { "branch", icon = utils.get_icon("git", "Repo") },
       "diff",
       "diagnostics",
     },

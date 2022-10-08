@@ -79,7 +79,7 @@ function M.setup()
       -- ['<cr>'] = 'RET',
       -- ['<tab>'] = 'TAB',
     },
-    icons = utils.icons.which_key,
+    icons = utils.get_icon("which_key"),
     popup_mappings = {
       scroll_down = "<c-d>", -- binding to scroll down inside the popup
       scroll_up = "<c-u>", -- binding to scroll up inside the popup
