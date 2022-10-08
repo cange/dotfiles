@@ -44,8 +44,6 @@ packer.startup(function(use)
   })
   -- UI: Cursorline
   use("RRethy/vim-illuminate") -- Highlight the word under the cursor
-  -- UI: Tabline
-  use("akinsho/nvim-bufferline.lua") -- tab UI
 
   -- UI: winbar
   use({
