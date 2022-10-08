@@ -99,7 +99,7 @@ vim.opt.wildignore:append({ -- stuff to ignore when tab completing
 
 -- vim.opt.whichwrap:append({ '<', '>', '[', ']', 'h', 'l' })
 vim.opt.listchars:append({
-  eol = "↵",
+  eol = "",
   nbsp = "_",
   tab = "⇥ ",
 })

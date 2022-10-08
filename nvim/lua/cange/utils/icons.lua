@@ -10,79 +10,81 @@ local M = {}
 ---Generic icons for general purposes
 ---@enum ui
 M.ui = {
-  BigCircle = "",
-  BigUnfilledCircle = "",
-  BookMark = "",
-  Bug = "",
-  Calendar = "",
-  Check = "",
-  ChevronDown = "",
-  ChevronRight = "",
-  Circle = "",
-  Close = "",
-  CloudDownload = "",
-  Code = "",
-  Comment = "",
-  Dashboard = "",
-  Fire = "",
-  Gear = "",
-  History = "",
-  Lightbulb = "",
+  BigCircle = " ",
+  BigUnfilledCircle = " ",
+  Bookmark = " ",
+  Bug = " ",
+  Calendar = " ",
+  Check = " ",
+  ChevronDown = " ",
+  ChevronRight = " ",
+  Circle = " ",
+  Close = " ",
+  Code = " ",
+  Comment = " ",
+  Dashboard = " ",
+  Fire = " ",
+  Gear = " ",
+  History = " ",
+  Lightbulb = " ",
   LineLeft = "▏",
-  List = "",
-  Lock = "",
-  Note = "",
-  Package = "",
-  Pencil = "",
-  Project = "",
-  Robot = "ﮧ",
-  Search = "",
-  SignIn = "",
-  SignOut = "",
-  Smiley = "ﲃ",
-  Squirrel = "",
-  Stethoscope = "",
-  Table = "",
-  Tag = "",
-  Telescope = "",
-  Watch = "",
-  Workspace = "",
+  List = " ",
+  Lock = " ",
+  Note = " ",
+  Package = " ",
+  Pencil = " ",
+  Project = " ",
+  Robot = "ﮧ ",
+  Search = " ",
+  SignIn = " ",
+  SignOut = " ",
+  Stethoscope = " ",
+  Sync = " ",
+  Tag = " ",
+  Telescope = " ",
+  Watch = " ",
+  Workspace = " ",
 }
 
 ---@enum documents
 M.documents = {
-  File = "",
-  Files = "",
-  Folder = "",
-  OpenFolder = "",
+  NewFile = " ",
+  EmptyFolder = " ",
+  EmptyOpenFolder = " ",
+  File = " ",
+  Files = " ",
+  Folder = " ",
+  OpenFolder = " ",
+  SymlinkFile = " ",
+  SymlinkFolder = " ",
 }
 
 ---@enum git
 M.git = {
-  Add = "",
-  Mod = "",
-  Remove = "",
-  Ignore = "",
-  Rename = "",
-  Diff = "",
-  Repo = "",
-  Octoface = "",
+  Add = " ",
+  Mod = " ",
+  Remove = " ",
+  Ignore = " ",
+  Rename = " ",
+  Diff = " ",
+  Repo = " ",
+  Octoface = " ",
 }
 
 ---@enum diagnostics
 M.diagnostics = {
-  Error = "",
-  Warning = "",
-  Information = "",
-  Question = "",
-  Hint = "",
+  Error = " ",
+  Warning = " ",
+  Information = " ",
+  Question = " ",
+  Hint = " ",
 }
 
 ---@enum which_key
 M.which_key = {
-  breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+  breadcrumb = "» ", -- symbol used in the command line area that shows your active key combo
   separator = M.ui.ChevronRight, -- symbol used between a key and it's label
-  group = "+", -- symbol prepended to a group
+  group = "+ ", -- symbol prepended to a group
 }
 
 ---Language symbols
@@ -133,7 +135,7 @@ M.cmp_kind = vim.tbl_extend("keep", M.kind, {
 M.cmp_source = {
   buffer = "﬘ ",
   luasnip = "  ",
-  nvim_lsp = "ﮂ ",
+  nvim_lsp = " ",
   nvim_lua = " ",
   path = M.documents.Folder .. " ",
   tabnine = M.ui.Robot .. " ",
@@ -152,18 +154,18 @@ M.git_states = {
 
 ---@enum lualine
 M.lualine = {
-  unnamed = M.documents.File, -- Text to show for unnamed buffers.
-  readonly = M.ui.lock, -- Text to show when the file is non-modifiable or readonly.
   modified = M.ui.Circle, -- Text to show when the file is modified.
-  newfile = "", -- Text to show for new created file before first writting
+  newfile = M.documents.NewFile, -- Text to show for new created file before first writting
+  readonly = M.ui.lock, -- Text to show when the file is non-modifiable or readonly.
+  unnamed = M.documents.File, -- Text to show for unnamed buffers.
 }
 
 ---Mason LSP local anguage server plugin
 ---@enum mason
 M.mason = {
-  package_installed = "",
-  package_pending = "",
-  package_uninstalled = "",
+  package_installed = M.ui.Check,
+  package_pending = M.ui.Sync,
+  package_uninstalled = M.ui.Close,
 }
 
 return M

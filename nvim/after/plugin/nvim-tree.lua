@@ -27,10 +27,10 @@ keymap("n", toggle_help_key, "<Nop>")
 api.events.subscribe(Event.TreeClose, function() end)
 
 local config = require("nvim-tree.config").nvim_tree_callback
-
+local icons = utils.icons
 tree.setup({
   live_filter = {
-    prefix = utils.icons.ui.Search .. "  ",
+    prefix = icons.ui.Search .. "  ",
   },
   -- project plugin related
   sync_root_with_cwd = true,
@@ -47,7 +47,20 @@ tree.setup({
       },
       git_placement = "after",
       glyphs = {
-        git = utils.icons.git_states,
+        default = icons.documents.File,
+        bookmark = icons.ui.Bookmark,
+        symlink = icons.documents.SymlinkFile,
+        folder = {
+          arrow_closed = icons.ui.ChevronRight,
+          arrow_open = icons.ui.ChevronDown,
+          default = icons.documents.Folder,
+          empty = icons.documents.EmptyFolder,
+          empty_open = icons.documents.EmptyOpenFolder,
+          open = icons.documents.OpenFolder,
+          symlink = icons.documents.SymlinkFolder,
+          symlink_open = icons.documents.SymlinkFolder,
+        },
+        git = icons.git_states,
       },
     },
   },

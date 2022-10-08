@@ -28,22 +28,22 @@ if not found_greetings then
   print("[" .. ns .. '] "cange.utils.greetings" not found')
   return
 end
-
+local icons = utils.icons
 section.buttons.val = {
-  button("R", utils.icons.ui.History .. "  Recent session", "<cmd>RestoreSession<CR>"),
-  button("r", utils.icons.ui.History .. "  Recent files", ":Telescope oldfiles<CR>"),
-  button("o", utils.icons.ui.Search .. "  Open file", ":Telescope find_files<CR>"),
+  button("R", icons.ui.Calendar .. "Recent session", "<cmd>RestoreSession<CR>"),
+  button("r", icons.ui.Calendar .. " Recent files", ":Telescope oldfiles<CR>"),
+  button("e", icons.documents.NewFile .. " New file", ":ene <BAR> startinsert <CR>"),
+  button("o", icons.ui.Search .. " Open file", ":Telescope find_files<CR>"),
   button(
     "O",
-    utils.icons.ui.Project .. "  Open project",
+    icons.ui.Project .. " Open project",
     ':lua require("telescope").extensions.projects.projects()<CR>'
   ),
-  button("e", utils.icons.documents.File .. "  New file", ":ene <BAR> startinsert <CR>"),
-  button("s", utils.icons.ui.SignIn .. "  Open session", ":SearchSession<CR>"),
-  button("t", utils.icons.ui.List .. "  Find text", ":Telescope live_grep <CR>"),
-  button("c", utils.icons.ui.Gear .. "  Config", ":e ~/.config/nvim/init.lua <CR>"),
-  button("u", utils.icons.ui.CloudDownload .. "  Update plugin", ":PackerSync<CR>"),
-  button("q", utils.icons.ui.SignOut .. "  Quit", ":qa!<CR>"),
+  button("s", icons.ui.SignIn .. " Open session", ":SearchSession<CR>"),
+  button("t", icons.ui.List .. " Find text", ":Telescope live_grep <CR>"),
+  button("c", icons.ui.Gear .. " Config", ":e ~/.config/nvim/init.lua <CR>"),
+  button("u", icons.ui.Sync .. " Update plugin", ":PackerSync<CR>"),
+  button("q", icons.ui.SignOut .. " Quit", ":qa!<CR>"),
 }
 
 section.footer.val = greetings.random_with_name(meta.author.display_name)
