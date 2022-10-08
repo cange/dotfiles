@@ -34,7 +34,9 @@ end
 local function get_filename()
   local filename = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
-  local filepath = vim.fn.pathshorten(vim.fn.expand("%:h"), 1) .. "/" .. filename
+  local dir_parts = vim.split(vim.fn.expand("%:h"), "/", true)
+  local parent_dir = dir_parts[#dir_parts] or ""
+  local filepath = parent_dir .. "/" .. filename
 
   if not str_is_empty(filename) then
     local file_icon, file_icon_color = web_devicons.get_icon_color(filename, extension, { default = true })
