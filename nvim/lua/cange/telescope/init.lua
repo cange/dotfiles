@@ -4,12 +4,12 @@ if not found_telescope then
   print("[" .. ns .. '] "telescope" not found')
   return
 end
-local found_setup, setup = pcall(require, "cange.telescope.setup")
+local found_setup, _ = pcall(require, "cange.telescope.setup")
 if not found_setup then
   print("[" .. ns .. '] "cange.telescope.setup" not found')
   return
 end
-local found_custom, custom = pcall(require, "cange.telescope.custom")
+local found_custom, _ = pcall(require, "cange.telescope.custom")
 if not found_custom then
   print("[" .. ns .. '] "cange.telescope.custom" not found')
   return

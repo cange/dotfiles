@@ -15,22 +15,23 @@ local function attach_keymaps(_, bufnr)
   -- Use LSP as the handler for formatexpr.
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
-  local function keymap(lhs, rhs)
+  local function keymap(lhs, rhs, desc)
     local mode = "n"
-    local opts = { noremap = true, silent = true }
-    -- See `:help nvim_buf_set_keymap()` for more information
-    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+    desc = desc or ""
+    local opts = { desc = desc, noremap = true, silent = true, buffer = bufnr }
+    vim.keymap.set(mode, lhs, rhs, opts)
   end
 
-  keymap("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-  keymap("K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-  keymap("gI", "<cmd>Telescope lsp_implementations<CR>")
-  keymap("gT", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-  keymap("gd", "<cmd>Telescope lsp_definitions<CR>")
-  keymap("gf", "<cmd>lua vim.diagnostic.open_float()<CR>")
-  keymap("gl", "<cmd>lua vim.diagnostic.setloclist()<CR>")
+  keymap("K", vim.lsp.buf.hover, "hover (LSP)")
+  keymap("gD", vim.lsp.buf.declaration, "go to declaration (LSP)")
+  keymap("gT", vim.lsp.buf.type_definition, "go to type (LSP)")
+  keymap("gd", vim.lsp.buf.definition, "go to definition (LSP)")
+  keymap("gI", "<cmd>Telescope lsp_implementations<CR>", "go to implementation (LSP)")
+  keymap("gf", vim.diagnostic.goto_next, "go to next issue (LSP)")
+  keymap("<leader>wd", "<cmd>Telescope lsp_document_symbols<CR>", "show symbols (LSP)")
+  keymap("<leader>rn", vim.lsp.buf.rename, "rename symbol (LSP)")
   keymap("gr", "<cmd>Telescope lsp_references<CR>")
-  keymap("gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+  keymap("gs", vim.lsp.buf.signature_help, "info about symbol (LSP)")
 end
 
 ---@module 'custom'

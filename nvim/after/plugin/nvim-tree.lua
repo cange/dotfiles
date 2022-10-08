@@ -66,6 +66,12 @@ tree.setup({
   },
   diagnostics = {
     enable = true,
+    icons = {
+      error = icon("diagnostics", "Error"),
+      warning = icon("diagnostics", "Warning"),
+      hint = icon("diagnostics", "Hint"),
+      info = icon("diagnostics", "Information"),
+    },
   },
   actions = {
     open_file = {
