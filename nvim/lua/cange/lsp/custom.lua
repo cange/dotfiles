@@ -24,17 +24,19 @@ local function attach_keymaps(_, bufnr)
 
   keymap("K", vim.lsp.buf.hover, "hover (LSP)")
   keymap("gD", vim.lsp.buf.declaration, "go to declaration (LSP)")
+  keymap("gI", "<cmd>Telescope lsp_implementations<CR>", "go to implementation (LSP)")
   keymap("gT", vim.lsp.buf.type_definition, "go to type (LSP)")
   keymap("gd", vim.lsp.buf.definition, "go to definition (LSP)")
-  keymap("gI", "<cmd>Telescope lsp_implementations<CR>", "go to implementation (LSP)")
-  keymap("gf", vim.diagnostic.goto_next, "go to next issue (LSP)")
+  keymap("gj", vim.diagnostic.goto_next, "go to next issue (LSP)")
+  keymap("gk", vim.diagnostic.goto_prev, "go to previous issue (LSP)")
+  keymap("gs", vim.lsp.buf.signature_help, "info about symbol (LSP)")
   keymap("<leader>wd", "<cmd>Telescope lsp_document_symbols<CR>", "show symbols (LSP)")
   keymap("<leader>rn", vim.lsp.buf.rename, "rename symbol (LSP)")
-  keymap("gr", "<cmd>Telescope lsp_references<CR>")
-  keymap("gs", vim.lsp.buf.signature_help, "info about symbol (LSP)")
+  keymap("<leader>dr", "<cmd>Telescope lsp_references<CR>")
+  keymap("<leader>dd", "<cmd>Telescope diagnostics<CR>", "List of issues")
 end
 
----@module 'custom'
+---@module 'cange.lsp.custom'
 local M = {}
 
 function M.capabilities()

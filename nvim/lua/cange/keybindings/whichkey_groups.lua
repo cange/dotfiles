@@ -1,5 +1,4 @@
 ---Provides general settings
----@enum mappings
 local M = {}
 
 ---Mappings tries to organise global used keybindings on one place

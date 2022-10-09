@@ -37,6 +37,9 @@ local function menu_item_format(entry, vim_item)
 end
 
 --config
+
+vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode completion
+
 config_luasnip.setup()
 local keymap = utils.keymap
 keymap({ "i", "s" }, "<C-[>", "<Plug>luasnip-prev-choice")
