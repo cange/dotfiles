@@ -67,7 +67,7 @@ M.git = {
   Ignore = " ",
   Rename = " ",
   Diff = " ",
-  Repo = " ",
+  Branch = " ",
   Octoface = " ",
 }
 

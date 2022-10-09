@@ -30,7 +30,7 @@ if not found_greetings then
 end
 local icon = utils.get_icon
 section.buttons.val = {
-  button("R", icon("ui", "Calendar") .. "Recent session", "<cmd>RestoreSession<CR>"),
+  button("R", icon("ui", "Calendar") .. " Recent session", "<cmd>RestoreSession<CR>"),
   button("r", icon("ui", "Calendar") .. " Recent files", ":Telescope oldfiles<CR>"),
   button("e", icon("documents", "NewFile") .. " New file", ":ene <BAR> startinsert <CR>"),
   button("o", icon("ui", "Search") .. " Open file", ":Telescope find_files<CR>"),

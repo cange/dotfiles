@@ -21,7 +21,7 @@ lualine.setup({
   },
   sections = {
     lualine_b = {
-      { "branch", icon = utils.get_icon("git", "Repo") },
+      { "branch", icon = utils.get_icon("git", "Branch") },
       "diff",
       "diagnostics",
     },

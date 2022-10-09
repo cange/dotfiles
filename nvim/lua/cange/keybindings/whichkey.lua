@@ -81,8 +81,8 @@ function M.setup()
     },
     icons = utils.get_icon("which_key"),
     popup_mappings = {
-      scroll_down = "<c-d>", -- binding to scroll down inside the popup
-      scroll_up = "<c-u>", -- binding to scroll up inside the popup
+      scroll_down = "<C-d>", -- binding to scroll down inside the popup
+      scroll_up = "<C-u>", -- binding to scroll up inside the popup
     },
     window = {
       border = "rounded", -- none, single, double, rounded, shadow
