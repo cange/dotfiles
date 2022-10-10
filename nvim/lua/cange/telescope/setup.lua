@@ -43,6 +43,9 @@ telescope.setup({
       i = {
         ["<C-s>"] = actions.cycle_history_next,
         ["<C-a>"] = actions.cycle_history_prev,
+
+        ["<C-c>"] = actions.close,
+        ["<ESC>"] = actions.close,
       },
     },
   },

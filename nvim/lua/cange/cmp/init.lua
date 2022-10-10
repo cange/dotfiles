@@ -20,7 +20,7 @@ if not found_utils then
   print("[" .. ns .. '] "cange.utils" not found')
   return
 end
-local found_cmp_utils, cmp_utils = pcall(require, "cange.cmp.utils")
+local found_cmp_utils, _ = pcall(require, "cange.cmp.utils")
 if not found_cmp_utils then
   print("[" .. ns .. '] "cange.cmp.utils" not found')
   return
@@ -29,6 +29,7 @@ local function menu_item_format(entry, vim_item)
   local source_types = utils.get_icon("cmp_source")
   local name = entry.source.name
   if vim.tbl_contains(vim.tbl_keys(source_types), name) then
+    ---@diagnostic disable-next-line: need-check-nil
     vim_item.menu = source_types[name].icon
     vim_item.menu_hl_group = "Comment" -- assign appropriate theme color
   end
@@ -37,7 +38,6 @@ local function menu_item_format(entry, vim_item)
 end
 
 --config
-
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode completion
 
 config_luasnip.setup()
@@ -49,25 +49,17 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-c>"] = cmp.mapping.abort(),
-    ["<ESC>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confi
-    ["<S-CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confi
 
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      elseif cmp_utils.jumpable(1) then
-        luasnip.jump(1)
-      elseif cmp_utils.has_words_before() then
-        fallback()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+    -- Cancelations
+    ["<C-c>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
+    ["<ESC>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
+
+    -- Confirmations
+    ["<CR>"] = cmp.mapping.confirm({ select = false }), -- `false` to confirm explicitly selected items only
+    ["<C-Space>"] = cmp.mapping.complete(),
+
+    -- Selection
+    ["<Tab>"] = cmp.mapping(function(fallback) end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
