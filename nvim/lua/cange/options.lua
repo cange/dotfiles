@@ -9,7 +9,7 @@ local options = {
   updatetime = 50, -- faster completion (4000ms default), delays and poor user experience
 
   -- UI
-  colorcolumn = "80,120", -- highlight optimal end line¬
+  -- colorcolumn = "80,120", -- highlight optimal end line¬
   cursorline = true, -- highlight the current line
   guifont = "monospace:h16", -- the font used in graphical neovim applications
   laststatus = 3, -- show one global statusline for all windows
