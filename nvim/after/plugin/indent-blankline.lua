@@ -32,10 +32,14 @@ indent_blankline.setup({
   show_current_context_start = true,
   use_treesitter = true,
 })
-
-local c = colorscheme.palette()
+local found_palette, c = pcall(colorscheme.palette, nil)
+if not found_palette or c == nil then
+  return
+end
 utils.set_hls({
   IndentBlanklineChar = { fg = c.bg2 },
   IndentBlanklineContextChar = { fg = c.fg3 },
   IndentBlanklineContextStart = { sp = c.fg3, underline = true },
+  IndentBlanklineSpaceChar= { fg = c.bg3 },
+  IndentBlanklineSpaceCharBlankline = { fg = c.red.base },
 })
