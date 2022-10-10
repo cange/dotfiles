@@ -20,7 +20,7 @@ if not found_utils then
   print("[" .. ns .. '] "cange.utils" not found')
   return
 end
-local found_cmp_utils, _ = pcall(require, "cange.cmp.utils")
+local found_cmp_utils, cmp_utils = pcall(require, "cange.cmp.utils")
 if not found_cmp_utils then
   print("[" .. ns .. '] "cange.cmp.utils" not found')
   return
@@ -59,7 +59,19 @@ cmp.setup({
     ["<C-Space>"] = cmp.mapping.complete(),
 
     -- Selection
-    ["<Tab>"] = cmp.mapping(function(fallback) end, { "i", "s" }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_locally_jumpable() then
+        luasnip.expand_or_jump()
+      elseif cmp_utils.jumpable(1) then
+        luasnip.jump(1)
+      elseif cmp_utils.has_words_before() then
+        fallback()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
