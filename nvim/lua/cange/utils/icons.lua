@@ -57,7 +57,6 @@ icons.ui = {
   Watch = " ",
   Workspace = " ",
 }
-
 icons.documents = {
   NewFile = " ",
   EmptyFolder = " ",
@@ -69,7 +68,6 @@ icons.documents = {
   SymlinkFile = " ",
   SymlinkFolder = " ",
 }
-
 icons.git = {
   Add = " ",
   Mod = " ",
@@ -80,7 +78,6 @@ icons.git = {
   Branch = " ",
   Octoface = " ",
 }
-
 icons.diagnostics = {
   Error = " ",
   Warning = " ",
@@ -88,13 +85,11 @@ icons.diagnostics = {
   Question = " ",
   Hint = " ",
 }
-
 icons.which_key = {
   breadcrumb = "» ", -- symbol used in the command line area that shows your active key combo
   separator = icons.ui.ChevronRight, -- symbol used between a key and it's label
   group = "+ ", -- symbol prepended to a group
 }
-
 icons.kind = {
   File = " ",
   Module = " ",
@@ -123,7 +118,6 @@ icons.kind = {
   Operator = " ",
   TypeParameter = " ",
 }
-
 icons.cmp_kind = vim.tbl_extend("keep", icons.kind, {
   Color = " ",
   Folder = icons.documents.Folder .. " ",
@@ -134,7 +128,6 @@ icons.cmp_kind = vim.tbl_extend("keep", icons.kind, {
   Unit = " ",
   Value = " ",
 })
-
 icons.cmp_source = {
   buffer = "﬘ ",
   luasnip = "  ",
@@ -143,7 +136,6 @@ icons.cmp_source = {
   path = icons.documents.Folder .. " ",
   tabnine = icons.ui.Robot .. " ",
 }
-
 icons.git_states = {
   unstaged = icons.git.Mod,
   staged = "",
@@ -153,14 +145,12 @@ icons.git_states = {
   deleted = icons.git.Remove,
   ignored = icons.git.Ignore,
 }
-
 icons.lualine = {
   modified = icons.ui.Circle, -- Text to show when the file is modified.
   newfile = icons.documents.NewFile, -- Text to show for new created file before first writting
   readonly = icons.ui.lock, -- Text to show when the file is non-modifiable or readonly.
   unnamed = icons.documents.File, -- Text to show for unnamed buffers.
 }
-
 icons.mason = {
   package_installed = icons.ui.Check,
   package_pending = icons.ui.Sync,
@@ -168,7 +158,6 @@ icons.mason = {
 }
 
 ---Provides the editors icons
----@class Icons
 local M = {}
 
 ---Ensures that the icons of given parts exists
@@ -184,7 +173,7 @@ function M.get_icon(...)
   for _, name in ipairs(parts) do
     local found_icon, _icon = pcall(get_icon, name)
     if not found_icon then
-      vim.pretty_print("[" .. ns .. "] icon for " .. vim.inspect(parts) .. " not found")
+      vim.pretty_print("[cange.utils.icons] icon for " .. vim.inspect(parts) .. " not found")
       return nil
     end
 
