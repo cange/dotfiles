@@ -1,128 +1,149 @@
+--#region Types
+
+---@class MappingTree
+---@field desc string
+---@field cmd string
+
+---@enum mappings <string, MappingTree>
+
+---@class Mapping
+---@field subleader string Additional key to enter the certain group
+---@field title string Is displayed as group name
+---@field mappings mappings The actual key bindings
+
+--#endregion
+
 ---Provides general settings
 local M = {}
 
 ---Mappings tries to organise global used keybindings on one place
----Pattern: <block_key> = { { <key> = { command = '...', title = '...' } } }
+---Pattern: <block_key> = { { <key> = { cmd = '...', desc = '...' } } }
 ---@table mappings
 
----Language related syntax analytics
+---@alias lsp Mapping Language related syntax analytics
 M.lsp = {
   subleader = "l",
   title = "Language (LSP)",
   mappings = {
-    C = { command = '<cmd>lua require("luasnip").cleanup()<CR>', title = "Reset snippets UI" },
-    F = { command = "<cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>", title = "Format" },
-    N = { command = "<cmd>NullLsInfo<CR>", title = "Info Null-ls" },
-    c = { command = vim.lsp.buf_get_clients, title = "LSP clients" },
-    d = { command = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', title = "Diagnostics log" },
-    i = { command = "<cmd>LspInfo<CR>", title = "Info LSP" },
-    q = { command = vim.lsp.buf.code_action, title = "Quickfix issue" },
-    l = { command = vim.diagnostic.setloclist, title = "Show current issues" },
-    n = { command = vim.diagnostic.goto_next, title = "Go to next issue" },
-    p = { command = vim.diagnostic.goto_prev, title = "Go to previous issue" },
-    s = { command = "<cmd>Mason<CR>", title = "Sync LSP (Mason)" },
+    C = { cmd = '<cmd>lua require("luasnip").cleanup()<CR>', desc = "Reset snippets UI" },
+    F = { cmd = "<cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>", desc = "Format" },
+    N = { cmd = "<cmd>NullLsInfo<CR>", desc = "Info Null-ls" },
+    c = { cmd = vim.lsp.buf_get_clients, desc = "LSP clients" },
+    d = { cmd = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', desc = "Diagnostics log" },
+    i = { cmd = "<cmd>LspInfo<CR>", desc = "Info LSP" },
+    q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
+    l = { cmd = vim.diagnostic.setloclist, desc = "Show current issues" },
+    n = { cmd = vim.diagnostic.goto_next, desc = "Go to next issue" },
+    p = { cmd = vim.diagnostic.goto_prev, desc = "Go to previous issue" },
+    s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
   },
 }
 
----Finding stuff
+---@alias search Mapping Finding stuff
 M.search = {
   subleader = "s",
   title = "Search",
   mappings = {
-    B = { command = "<cmd>Telescope buffers previewer=false<CR>", title = "Buffers" },
-    C = { command = "<cmd>Telescope commands<CR>", title = "Commands" },
-    M = { command = "<cmd>Telescope man_pages<CR>", title = "Man pages" },
-    N = { command = "<cmd>Telescope notify<CR>", title = "Notifications" },
-    b = { command = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', title = "Browse files" },
-    c = { command = "<cmd>Telescope colorscheme<CR>", title = "Change theme" },
-    f = { command = "<cmd>Telescope find_files<CR>", title = "Find files" },
-    h = { command = "<cmd>Telescope help_tags<CR>", title = "Find help" },
-    k = { command = "<cmd>Telescope keymaps<CR>", title = "Keymaps" },
-    n = { command = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', title = "Browse nvim" },
-    r = { command = "<cmd>Telescope oldfiles<CR>", title = "Recent files" },
-    p = { command = "<cmd>Telescope projects<CR>", title = "Projects" },
-    s = { command = "<cmd>Telescope live_grep<CR>", title = "Find text" },
-    w = { command = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', title = "Browse workspace" },
+    B = { cmd = "<cmd>Telescope buffers previewer=false<CR>", desc = "Buffers" },
+    C = { cmd = "<cmd>Telescope cmds<CR>", desc = "cmds" },
+    M = { cmd = "<cmd>Telescope man_pages<CR>", desc = "Man pages" },
+    N = { cmd = "<cmd>Telescope notify<CR>", desc = "Notifications" },
+    b = { cmd = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', desc = "Browse files" },
+    c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "Change theme" },
+    f = { cmd = "<cmd>Telescope find_files<CR>", desc = "Find files" },
+    h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "Find help" },
+    k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
+    n = { cmd = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', desc = "Browse nvim" },
+    r = { cmd = "<cmd>Telescope oldfiles<CR>", desc = "Recent files" },
+    p = { cmd = "<cmd>Telescope projects<CR>", desc = "Projects" },
+    s = { cmd = "<cmd>Telescope live_grep<CR>", desc = "Find text" },
+    w = { cmd = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', desc = "Browse workspace" },
   },
 }
 
+---@alias config Mapping
 M.config = {
   subleader = "c",
   title = "Editor config",
   mappings = {
-    k = { command = "<cmd>e ~/.config/nvim/lua/cange/keymaps/mappings.lua<CR>", title = "Edit keybindings" },
-    m = { command = "<cmd>e ~/.config/nvim/lua/cange/meta.lua<CR>", title = "Edit meta information" },
-    o = { command = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", title = "Edit options" },
-    p = { command = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>", title = "Edit plugins" },
+    k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/mappings.lua<CR>", desc = "Edit keybindings" },
+    m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/meta.lua<CR>", desc = "Edit meta information" },
+    o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit options" },
+    p = { cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>", desc = "Edit plugins" },
   },
 }
 
+---@alias git Mapping
 M.git = {
   subleader = "g",
   title = "Git",
   mappings = {
-    l = { command = "<cmd>Gitsigns toggle_current_line_blame<CR>", title = "Line blame" },
-    R = { command = "<cmd>Gitsigns reset_buffer<CR>", title = "Reset buffer" },
-    B = { command = "<cmd>Telescope git_branches<CR>", title = "Checkout branch" },
-    C = { command = "<cmd>Telescope git_commits<CR>", title = "Checkout commit" },
-    d = { command = "<cmd>Gitsigns diffthis HEAD<CR>", title = "Diff" },
-    g = { command = "<cmd>lua CangeLazygitToggle()<CR>", title = "Lazygit" },
-    o = { command = "<cmd>Telescope git_status<CR>", title = "Open changed file" },
-    j = { command = '<cmd>lua require("gitsigns").next_hunk()<CR>', title = "Next hunk" },
-    k = { command = '<cmd>lua require("gitsigns").prev_hunk()<CR>', title = "Prev hunk" },
-    p = { command = '<cmd>lua require("gitsigns").preview_hunk()<CR>', title = "Preview hunk" },
-    r = { command = '<cmd>lua require("gitsigns").reset_hunk()<CR>', title = "Reset hunk" },
-    s = { command = '<cmd>lua require("gitsigns").stage_hunk()<CR>', title = "Stage hunk" },
-    u = { command = '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', title = "Undo stage hunk" },
+    l = { cmd = "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "Line blame" },
+    R = { cmd = "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset buffer" },
+    B = { cmd = "<cmd>Telescope git_branches<CR>", desc = "Checkout branch" },
+    C = { cmd = "<cmd>Telescope git_commits<CR>", desc = "Checkout commit" },
+    d = { cmd = "<cmd>Gitsigns diffthis HEAD<CR>", desc = "Diff" },
+    g = { cmd = "<cmd>lua CangeLazygitToggle()<CR>", desc = "Lazygit" },
+    o = { cmd = "<cmd>Telescope git_status<CR>", desc = "Open changed file" },
+    j = { cmd = '<cmd>lua require("gitsigns").next_hunk()<CR>', desc = "Next hunk" },
+    k = { cmd = '<cmd>lua require("gitsigns").prev_hunk()<CR>', desc = "Prev hunk" },
+    p = { cmd = '<cmd>lua require("gitsigns").preview_hunk()<CR>', desc = "Preview hunk" },
+    r = { cmd = '<cmd>lua require("gitsigns").reset_hunk()<CR>', desc = "Reset hunk" },
+    s = { cmd = '<cmd>lua require("gitsigns").stage_hunk()<CR>', desc = "Stage hunk" },
+    u = { cmd = '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', desc = "Undo stage hunk" },
   },
 }
 
----Install, update neovims plugins
+---@alias paccker Mapping Install, update neovims plugins
 M.packer = {
   subleader = "p",
   title = "Plugin management",
   mappings = {
-    S = { command = "<cmd>PackerStatus<CR>", title = "Status" },
-    c = { command = "<cmd>PackerCompile<CR>", title = "Compile" },
-    i = { command = "<cmd>PackerInstall<CR>", title = "Install" },
-    s = { command = "<cmd>PackerSync<CR>", title = "Sync" },
-    u = { command = "<cmd>PackerUpdate<CR>", title = "Update" },
-    C = { command = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>", title = "Config" },
+    S = { cmd = "<cmd>PackerStatus<CR>", desc = "Status" },
+    c = { cmd = "<cmd>PackerCompile<CR>", desc = "Compile" },
+    i = { cmd = "<cmd>PackerInstall<CR>", desc = "Install" },
+    s = { cmd = "<cmd>PackerSync<CR>", desc = "Sync" },
+    u = { cmd = "<cmd>PackerUpdate<CR>", desc = "Update" },
+    C = { cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>", desc = "Config" },
   },
 }
+
+---@alias session Mapping
 M.session = {
   subleader = "b",
   title = "Sessions/Buffers",
   mappings = {
-    R = { command = "<cmd>RestoreSession<CR>", title = "Recent session" },
-    d = { command = "<cmd>Autosession delete<CR>", title = "Find delete session" },
-    f = { command = "<cmd>SearchSession<CR>", title = "Find session" },
-    s = { command = "<cmd>SaveSession<CR>", title = "Save session" },
-    x = { command = "<cmd>DeleteSession<CR>", title = "Delete session" },
+    R = { cmd = "<cmd>RestoreSession<CR>", desc = "Recent session" },
+    d = { cmd = "<cmd>Autosession delete<CR>", desc = "Find delete session" },
+    f = { cmd = "<cmd>SearchSession<CR>", desc = "Find session" },
+    s = { cmd = "<cmd>SaveSession<CR>", desc = "Save session" },
+    x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete session" },
   },
 }
 
+---@alias terminal Mapping
 M.terminal = {
   subleader = "t",
   title = "Terminal",
   mappings = {
-    ["1"] = { command = ":1ToggleTerm size=80 direction=vertical<CR>", title = "VTerminal 1" },
-    ["2"] = { command = ":2ToggleTerm size=80 direction=vertical<CR>", title = "VTerminal 2" },
-    ["3"] = { command = ":3ToggleTerm<CR>", title = "HTerminal 1" },
-    ["4"] = { command = ":4ToggleTerm<CR>", title = "HTerminal 2" },
-    f = { command = "<cmd>ToggleTerm direction=float<CR>", title = "Float" },
-    h = { command = "<cmd>ToggleTerm size=10 direction=horizontal<CR>", title = "Horizontal" },
-    v = { command = "<cmd>ToggleTerm size=80 direction=vertical<CR>", title = "Vertical" },
+    ["1"] = { cmd = ":1ToggleTerm size=80 direction=vertical<CR>", desc = "VTerminal 1" },
+    ["2"] = { cmd = ":2ToggleTerm size=80 direction=vertical<CR>", desc = "VTerminal 2" },
+    ["3"] = { cmd = ":3ToggleTerm<CR>", desc = "HTerminal 1" },
+    ["4"] = { cmd = ":4ToggleTerm<CR>", desc = "HTerminal 2" },
+    f = { cmd = "<cmd>ToggleTerm direction=float<CR>", desc = "Float" },
+    h = { cmd = "<cmd>ToggleTerm size=10 direction=horizontal<CR>", desc = "Horizontal" },
+    v = { cmd = "<cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "Vertical" },
   },
 }
 
+---@alias treesitter Mapping
 M.treesitter = {
   subleader = "T",
   title = "Treesitter (syntax)",
   mappings = {
-    h = { command = "<cmd>TSHighlightCapturesUnderCursor<cr>", title = "Highlight" },
-    p = { command = "<cmd>TSPlaygroundToggle<cr>", title = "Playground" },
-    r = { command = "<cmd>TSToggle rainbow<cr>", title = "Rainbow" },
+    h = { cmd = "<cmd>TSHighlightCapturesUnderCursor<cr>", desc = "Highlight" },
+    p = { cmd = "<cmd>TSPlaygroundToggle<cr>", desc = "Playground" },
+    r = { cmd = "<cmd>TSToggle rainbow<cr>", desc = "Rainbow" },
   },
 }
 

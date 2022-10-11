@@ -27,7 +27,7 @@ local function group_mappings(group)
   local section_mappings = section[group.subleader]
 
   for key, m in pairs(group.mappings) do
-    section_mappings[key] = { m.command, m.title }
+    section_mappings[key] = { m.cmd, m.desc }
   end
 
   return section
