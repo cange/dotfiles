@@ -12,16 +12,7 @@ autocmd("BufWritePre", {
   pattern = "*",
   command = ":%s/\\s\\+$//e",
 })
--- autoload
-autocmd("BufWritePost", {
-  group = augroup("cange_auto_reload_luasnip", { clear = true }),
-  pattern = "*.json",
-  callback = function()
-    local filename = "cange.luasnip"
-    R(filename)
-    vim.notify('"' .. filename .. '" reloaded')
-  end,
-})
+
 autocmd({ "VimEnter" }, {
   group = augroup("cange_highlight_word_under_cursor", { clear = true }),
   callback = function()
