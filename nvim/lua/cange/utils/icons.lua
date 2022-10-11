@@ -169,7 +169,6 @@ icons.mason = {
 
 ---Provides the editors icons
 ---@class Icons
----@type table<string, table>
 local M = {}
 
 ---Ensures that the icons of given parts exists
