@@ -30,7 +30,7 @@ local function menu_item_format(entry, vim_item)
   local name = entry.source.name
   if vim.tbl_contains(vim.tbl_keys(source_types), name) then
     ---@diagnostic disable-next-line: need-check-nil
-    vim_item.menu = source_types[name].icon
+    vim_item.menu = source_types[name]
     vim_item.menu_hl_group = "Comment" -- assign appropriate theme color
   end
   vim_item.kind = utils.get_icon("cmp_kind", vim_item.kind)
