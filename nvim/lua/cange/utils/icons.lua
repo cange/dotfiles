@@ -1,15 +1,27 @@
----Provides the editors icons
+--#region Types
+
 ---@class Icons
----@type table<string, table>
-local M = {}
+---@field ui table Generic icons for general purposes
+---@filed documents table
+---@field git table
+---@field diagnostics table
+---@field which_key table
+---@field kind table Language symbols
+---@field cmp_kind table Completion kinds
+---@field cmp_source table
+---@field git_states table
+---@field lualine table
+---@field mason table Mason LSP local anguage server plugin
+
+--#endregion
+
+local icons = {}
 -- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts
 -- go to the above and then enter <c-v>u<unicode> and the symbold should appear
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
----Generic icons for general purposes
----@enum ui
-M.ui = {
+icons.ui = {
   BigCircle = " ",
   BigUnfilledCircle = " ",
   Bookmark = " ",
@@ -46,8 +58,7 @@ M.ui = {
   Workspace = " ",
 }
 
----@enum documents
-M.documents = {
+icons.documents = {
   NewFile = " ",
   EmptyFolder = " ",
   EmptyOpenFolder = " ",
@@ -59,8 +70,7 @@ M.documents = {
   SymlinkFolder = " ",
 }
 
----@enum git
-M.git = {
+icons.git = {
   Add = " ",
   Mod = " ",
   Remove = " ",
@@ -71,8 +81,7 @@ M.git = {
   Octoface = " ",
 }
 
----@enum diagnostics
-M.diagnostics = {
+icons.diagnostics = {
   Error = " ",
   Warning = " ",
   Information = " ",
@@ -80,16 +89,13 @@ M.diagnostics = {
   Hint = " ",
 }
 
----@enum which_key
-M.which_key = {
+icons.which_key = {
   breadcrumb = "» ", -- symbol used in the command line area that shows your active key combo
-  separator = M.ui.ChevronRight, -- symbol used between a key and it's label
+  separator = icons.ui.ChevronRight, -- symbol used between a key and it's label
   group = "+ ", -- symbol prepended to a group
 }
 
----Language symbols
----@enum kind
-M.kind = {
+icons.kind = {
   File = " ",
   Module = " ",
   Namespace = " ",
@@ -118,11 +124,9 @@ M.kind = {
   TypeParameter = " ",
 }
 
----Completion kinds
----@enum cmp_kind
-M.cmp_kind = vim.tbl_extend("keep", M.kind, {
+icons.cmp_kind = vim.tbl_extend("keep", icons.kind, {
   Color = " ",
-  Folder = M.documents.Folder .. " ",
+  Folder = icons.documents.Folder .. " ",
   Keyword = " ",
   Reference = " ",
   Snippet = " ",
@@ -131,41 +135,65 @@ M.cmp_kind = vim.tbl_extend("keep", M.kind, {
   Value = " ",
 })
 
----@enum cmp_source
-M.cmp_source = {
+icons.cmp_source = {
   buffer = "﬘ ",
   luasnip = "  ",
   nvim_lsp = " ",
   nvim_lua = " ",
-  path = M.documents.Folder .. " ",
-  tabnine = M.ui.Robot .. " ",
+  path = icons.documents.Folder .. " ",
+  tabnine = icons.ui.Robot .. " ",
 }
 
----@enum git_states
-M.git_states = {
-  unstaged = M.git.Mod,
+icons.git_states = {
+  unstaged = icons.git.Mod,
   staged = "",
   unmerged = "ﱵ",
-  renamed = M.git.Rename,
+  renamed = icons.git.Rename,
   untracked = "ﱡ",
-  deleted = M.git.Remove,
-  ignored = M.git.Ignore,
+  deleted = icons.git.Remove,
+  ignored = icons.git.Ignore,
 }
 
----@enum lualine
-M.lualine = {
-  modified = M.ui.Circle, -- Text to show when the file is modified.
-  newfile = M.documents.NewFile, -- Text to show for new created file before first writting
-  readonly = M.ui.lock, -- Text to show when the file is non-modifiable or readonly.
-  unnamed = M.documents.File, -- Text to show for unnamed buffers.
+icons.lualine = {
+  modified = icons.ui.Circle, -- Text to show when the file is modified.
+  newfile = icons.documents.NewFile, -- Text to show for new created file before first writting
+  readonly = icons.ui.lock, -- Text to show when the file is non-modifiable or readonly.
+  unnamed = icons.documents.File, -- Text to show for unnamed buffers.
 }
 
----Mason LSP local anguage server plugin
----@enum mason
-M.mason = {
-  package_installed = M.ui.Check,
-  package_pending = M.ui.Sync,
-  package_uninstalled = M.ui.Close,
+icons.mason = {
+  package_installed = icons.ui.Check,
+  package_pending = icons.ui.Sync,
+  package_uninstalled = icons.ui.Close,
 }
+
+---Provides the editors icons
+---@class Icons
+---@type table<string, table>
+local M = {}
+
+---Ensures that the icons of given parts exists
+---@param ... string List of parts the actual icon path
+---@return string|table|nil The icon symbol or nil if not found
+function M.get_icon(...)
+  local icon = icons
+  local parts = { ... }
+  local function get_icon(name)
+    return icon[name]
+  end
+
+  for _, name in ipairs(parts) do
+    local found_icon, _icon = pcall(get_icon, name)
+    if not found_icon then
+      vim.pretty_print("[" .. ns .. "] icon for " .. vim.inspect(parts) .. " not found")
+      return nil
+    end
+
+    icon = _icon
+  end
+
+  -- vim.pretty_print("icon", icon)
+  return icon
+end
 
 return M
