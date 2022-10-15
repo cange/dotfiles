@@ -9,6 +9,7 @@ local servers = {
   "sumneko_lua", -- lua
   "stylelint_lsp", -- stylelint
   "svelte", -- svelte
+  "volar", --vue 3 and 2
 }
 
 return servers

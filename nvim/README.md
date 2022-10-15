@@ -12,7 +12,7 @@ See also <https://neovim.io/>
 
 ### NeoVim Configuration
 
-The config is located in `dotfiles/nvim` and needs to symlink to the  actual
+The config is located in `dotfiles/nvim` and needs to symlink to the actual
 OS direcotry.
 Use the command below to achieve this:
 
@@ -37,7 +37,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvi
 Ensure [Node.js] has been installed in order run dependency management via
 "npm".
 
-[Node.js]: https://nodejs.org
+[node.js]: https://nodejs.org
 
 #### Other Binaries
 
@@ -51,18 +51,22 @@ rm nvim-deps.txt
 
 The following packages are required to install in order to use this NeoVim setup:
 
-| What| Usage |
-|:---|:---|
+| What                  | Usage                                 |
+| :-------------------- | :------------------------------------ |
 | [tree-sitter]         | Syntax completion/diagnostic tooling  |
 | [lua-language-server] | Syntax auto completion                |
+| [vue-language-server] | Vue 3 and 2 support                   |
+| [stylelint-lsp]       | CSS support                           |
 | [ripgrep]             | Telescope needs it to search in files |
 | [nerd-fonts]          | Font icons                            |
 | wget                  | required by LSP mason client          |
 
-[tree-sitter]: https://github.com/tree-sitter/tree-sitter
 [lua-language-server]: https://github.com/sumneko/lua-language-server
-[ripgrep]: https://github.com/BurntSushi/ripgrep#installation
 [nerd-fonts]: https://github.com/ryanoasis/nerd-fonts
+[ripgrep]: https://github.com/BurntSushi/ripgrep#installation
+[stylelint-lsp]: https://github.com/bmatcuk/stylelint-lsp
+[tree-sitter]: https://github.com/tree-sitter/tree-sitter
+[vue-language-server]: https://github.com/neovim/nvim-lspconfigblob/master/doc/server_configurations.md#volar
 
 #### Install JavaScript Binaries
 
@@ -71,20 +75,20 @@ diagnostics and formatting:
 
 ```sh
 npm install --global typescript-language-server \
-typescript \
 @fsouza/prettierd \
+@johnnymorganz/stylua-bin \
+@volar/vue-language-server \
 eslint_d \
 jsonlint \
-@johnnymorganz/stylua-bin
+stylelint-lsp \
+typescript
 ```
 
 ### First Start
 
-Open neovim and run package manager
-
-```vim
-:PackerInstall
-```
+Open neovim and run package manager `:PackerInstall`
 
 **Note:** You might run it more the once if some packages fail to install on
 the first run.
+
+Make sure that all LSP source installed and up to date. Check with `:Mason` and update/install in dialog.
