@@ -9,32 +9,29 @@ if not found_custom then
   print("[" .. ns .. '] "cange.utils.custom" not found')
   return
 end
-local found_providers, providers = pcall(require, "cange.lsp.providers")
-if not found_providers then
-  print("[" .. ns .. '] "cange.utils.providers" not found')
+local found_servers, servers = pcall(require, "cange.lsp.servers")
+if not found_servers then
+  print("[" .. ns .. '] "cange.utils.servers" not found')
   return
 end
--- config
-local function setup_server(provider, p_lspconfig)
-  local found_settings, settings = pcall(require, "cange.lsp.provider_settings." .. provider)
-  local default_settings = {
+
+local function setup_server(server, p_lspconfig)
+  local found_config, config = pcall(require, "cange.lsp.server_configurations." .. server)
+  local default_config = {
     on_attach = custom.on_attach,
     capabilities = custom.capabilities(),
-    name = provider, -- Name in log messageis
-    -- flags = {
-    --   debounce_text_changes = 250, -- server debounce didChange in milliseconds
-    -- }
+    name = server, -- for log messages
   }
-  if found_settings then
-    settings = vim.tbl_deep_extend("force", settings, default_settings)
+  if found_config then
+    config = vim.tbl_deep_extend("force", config, default_config)
   else
-    settings = default_settings
+    config = default_config
   end
-  -- vim.pretty_print(provider, 'config', vim.tbl_keys(settings))
+  -- vim.pretty_print(provider, 'config', vim.tbl_keys(config))
 
-  p_lspconfig[provider].setup(settings)
+  p_lspconfig[server].setup(config)
 end
 
-for _, provider in pairs(providers.language_servers) do
-  setup_server(provider, lspconfig)
+for _, server in pairs(servers) do
+  setup_server(server, lspconfig)
 end

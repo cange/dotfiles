@@ -33,13 +33,23 @@ M.lsp = {
     -- add formatter
     -- local formatters = require('lvim.lsp.null-ls.formatters')
     -- - local supported_formatters = formatters.list_registered(buf_ft)
-    local supported_formatters = require("cange.lsp.providers.formatters")
+    local supported_formatters = {
+      "stylua", -- lua
+      "markdownlint", -- markdown
+      "yamllint", -- yaml
+    }
     vim.list_extend(buf_client_names, supported_formatters)
 
     -- add linter
     -- local linters = require('lvim.lsp.null-ls.linters')
     -- local supported_linters = linters.list_registered(buf_ft)
-    local supported_linters = require("cange.lsp.providers.linters")
+    local supported_linters = {
+      "eslint_d", -- javascript
+      "shfmt", -- shell
+      "prettier", -- javascript, typepscript, etc
+      "luaformatter", -- lua
+      "yamlfmt", -- yaml
+    }
     vim.list_extend(buf_client_names, supported_linters)
 
     local unique_client_names = vim.fn.uniq(buf_client_names)
