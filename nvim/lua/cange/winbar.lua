@@ -1,4 +1,3 @@
--- Requirements
 local ns = "cange.winbar"
 local found_navic, navic = pcall(require, "nvim-navic")
 if not found_navic then
@@ -22,7 +21,7 @@ local separator = icon("ui", "ChevronRight")
 navic.setup({
   icons = icon("kind"),
   highlight = true,
-  separator = " " .. separator .. " ",
+  separator = " " .. separator,
   depth_limit = 0,
   depth_limit_indicator = "..",
 })
@@ -32,12 +31,17 @@ local function str_is_empty(s)
   return s == nil or s == ""
 end
 
-local function get_filename()
+local function get_filename(opts)
+  local opts = opts or { path = 0 }
   local filename = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
-  local dir_parts = vim.split(vim.fn.expand("%:h"), "/", true)
-  local parent_dir = dir_parts[#dir_parts] or ""
-  local filepath = parent_dir .. "/" .. filename
+  local filepath = filename
+
+  if opts.path == 1 then
+    local dir_parts = vim.split(vim.fn.expand("%:h"), "/", { plain = true })
+    local parent_dir = dir_parts[#dir_parts] or ""
+    filepath = parent_dir .. "/" .. filepath
+  end
 
   if not str_is_empty(filename) then
     local file_icon, file_icon_color = web_devicons.get_icon_color(filename, extension, { default = true })
@@ -66,7 +70,7 @@ local function get_location()
     return ""
   end
 
-  return separator .. " " .. location
+  return separator .. location
 end
 
 local function is_excluded()

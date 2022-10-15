@@ -34,7 +34,13 @@ lualine.setup({
         },
       },
     },
-    lualine_c = {},
+    lualine_c = {
+      {
+        "filename",
+        path = 1, -- 1: Relative path
+        symbols = icon("lualine"),
+      },
+    },
     lualine_x = {
       "filetype",
       "fileformat",
