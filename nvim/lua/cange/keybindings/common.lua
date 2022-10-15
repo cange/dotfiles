@@ -47,6 +47,13 @@ keymap("n", "<A-down>", ":move .+1<CR>==")
 keymap("n", "<A-up>", ":move .-2<CR>==")
 keymap("v", "<A-down>", ":move '>+1<CR>gv=gv")
 keymap("v", "<A-up>", ":move '<-2<CR>gv=gv")
+keymap("i", "<A-j>", "<Esc>:move .+1<CR>==gi")
+keymap("i", "<A-k>", "<Esc>:move .-2<CR>==gi")
+keymap("n", "<A-j>", ":move .+1<CR>==")
+keymap("n", "<A-k>", ":move .-2<CR>==")
+keymap("v", "<A-j>", ":move '>+1<CR>gv=gv")
+keymap("v", "<A-k>", ":move '<-2<CR>gv=gv")
+
 -- switch between the last recent open two files
 keymap("n", "<leader><leader>", "<C-^>")
 
