@@ -33,9 +33,10 @@ null_ls.setup({
     }),
 
     diagnostics.stylelint,
-    diagnostics.eslint_d.with({
-      method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-    }),
+    diagnostics.eslint_d,
+    -- diagnostics.eslint_d.with({
+    --   method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+    -- }),
     diagnostics.jsonlint,
 
     code_actions.eslint_d,
