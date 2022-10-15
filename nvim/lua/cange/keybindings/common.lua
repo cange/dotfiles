@@ -61,3 +61,9 @@ keymap("n", "<leader><leader>x", ':write<CR>:luafile %<CR>:lua vim.notify("File 
 
 -- Format
 keymap("n", "<leader><leader>f", ":lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>")
+
+--- Resize window with arrows
+keymap("n", "<C-down>", ":resize +4<CR>")
+keymap("n", "<C-left>", ":vertical resize -4<CR>")
+keymap("n", "<C-right>", ":vertical resize +4<CR>")
+keymap("n", "<C-up>", ":resize -4<CR>")

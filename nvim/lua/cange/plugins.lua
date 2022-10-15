@@ -170,7 +170,6 @@ packer.startup(function(use)
       "nvim-treesitter/nvim-treesitter",
     },
   })
-  use("mg979/vim-visual-multi") -- multi select search/replace
   use("johmsalas/text-case.nvim") -- text case converter (camel case, etc.)
   use("folke/zen-mode.nvim") -- Distraction-free coding
 end)
