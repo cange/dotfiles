@@ -19,6 +19,17 @@ local function lsp_formatting(bufnr)
     bufnr = bufnr,
   })
 end
+local function on_save_formatting(bufnr)
+  local group = vim.api.nvim_create_augroup("cange_lsp_formatting", { clear = true })
+  vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = group,
+    buffer = bufnr,
+    callback = function()
+      lsp_formatting(bufnr)
+    end,
+  })
+end
 
 null_ls.setup({
   update_in_insert = false, -- if true, it runs diagnostics in insert mode, which impacts performance
@@ -43,15 +54,7 @@ null_ls.setup({
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
-      local augroup = vim.api.nvim_create_augroup("CangeLspFormatting", {})
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          lsp_formatting(bufnr)
-        end,
-      })
+      on_save_formatting(bufnr)
     end
   end,
 })

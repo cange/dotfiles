@@ -26,10 +26,10 @@ if not found_cmp_utils then
   return
 end
 local function menu_item_format(entry, vim_item)
-  local source_types = utils.get_icon("cmp_source")
+  local source_types = utils.get_icon("cmp_source") or {}
   local name = entry.source.name
+  ---@diagnostic disable-next-line: param-type-mismatch
   if vim.tbl_contains(vim.tbl_keys(source_types), name) then
-    ---@diagnostic disable-next-line: need-check-nil
     vim_item.menu = source_types[name]
     vim_item.menu_hl_group = "Comment" -- assign appropriate theme color
   end
@@ -50,7 +50,7 @@ cmp.setup({
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
 
-    -- Cancelations
+    -- Cancellations
     ["<C-c>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
     ["<ESC>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
 

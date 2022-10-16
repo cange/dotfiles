@@ -23,7 +23,7 @@ local options = {
   title = true, -- Update terminal window title
   winblend = 2, -- transparency of popup-menus 0 (none) to 100 (full)
   -- UI - command prompt
-  cmdheight = 0, -- space ofthe command line for displaying messages
+  cmdheight = 0, -- space of the command line for displaying messages
   showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
   showcmd = true, -- show incomplete commands
 
