@@ -100,6 +100,10 @@ packer.startup(function(use)
   -- Syntax
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use("nvim-treesitter/playground") -- inspect syntax node anatomy
+  use({
+    "m-demare/hlargs.nvim", -- highlight arguments' definitions
+    requires = { "nvim-treesitter/nvim-treesitter" },
+  })
 
   -- Snippets
   use("L3MON4D3/LuaSnip") --snippet engine
