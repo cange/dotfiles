@@ -5,11 +5,13 @@
 local servers = {
   "eslint", -- javascript
   "html", -- html
-  "tsserver", -- javascript, typepscript, etc.
-  "sumneko_lua", -- lua
+  "ruby_ls", -- ruby
   "stylelint_lsp", -- stylelint
+  "sumneko_lua", -- lua
   "svelte", -- svelte
+  "tsserver", -- javascript, typepscript, etc.
   "volar", --vue 3 and 2
+  "yamlls", -- yaml
 }
 
 return servers

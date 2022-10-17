@@ -34,23 +34,35 @@ end
 null_ls.setup({
   update_in_insert = false, -- if true, it runs diagnostics in insert mode, which impacts performance
   sources = {
-    formatting.stylua,
+    -- Multi-Languages
     formatting.prettierd.with({ -- pretty fast prettier
       command = vim.fn.expand("$HOME/.asdf/shims/prettierd"),
     }),
-    formatting.stylelint,
-    formatting.eslint_d.with({
-      command = vim.fn.expand("$HOME/.asdf/shims/eslint_d"),
-    }),
 
+    -- CSS
     diagnostics.stylelint,
+    formatting.stylelint,
+
+    -- JS
+    code_actions.eslint_d,
     diagnostics.eslint_d,
     -- diagnostics.eslint_d.with({
     --   method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
     -- }),
+
+    -- JSON
     diagnostics.jsonlint,
 
-    code_actions.eslint_d,
+    -- LUA
+    formatting.stylua,
+
+    -- RUBY
+    diagnostics.rubocop,
+    formatting.rubocop,
+
+    -- YAML
+    formatting.yamlfmt,
+    diagnostics.yamllint,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
