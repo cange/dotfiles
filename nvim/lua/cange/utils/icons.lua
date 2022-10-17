@@ -138,10 +138,10 @@ icons.cmp_source = {
 }
 icons.git_states = {
   unstaged = icons.git.Mod,
-  staged = "",
-  unmerged = "ﱵ",
+  staged = " ",
+  unmerged = "ﱵ ",
   renamed = icons.git.Rename,
-  untracked = "ﱡ",
+  untracked = "ﱡ ",
   deleted = icons.git.Remove,
   ignored = icons.git.Ignore,
 }
