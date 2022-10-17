@@ -25,6 +25,8 @@ if not found_cmp_utils then
   print("[" .. ns .. '] "cange.cmp.utils" not found')
   return
 end
+
+-- Config
 local function menu_item_format(entry, vim_item)
   local source_types = utils.get_icon("cmp_source") or {}
   local name = entry.source.name
@@ -37,14 +39,14 @@ local function menu_item_format(entry, vim_item)
   return vim_item
 end
 
---config
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode completion
 
-config_luasnip.setup()
 local keymap = utils.keymap
 keymap({ "i", "s" }, "<C-[>", "<Plug>luasnip-prev-choice")
 keymap({ "i", "s" }, "<C-]>", "<Plug>luasnip-next-choice")
 
+-- Setup
+config_luasnip.setup()
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
@@ -52,10 +54,9 @@ cmp.setup({
 
     -- Cancellations
     ["<C-c>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
-    ["<ESC>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
 
     -- Confirmations
-    ["<CR>"] = cmp.mapping.confirm({ select = false }), -- `false` to confirm explicitly selected items only
+    ["<CR>"] = cmp.mapping.confirm({ select = true }), -- `false` to confirm explicitly selected items only
     ["<C-Space>"] = cmp.mapping.complete(),
 
     -- Selection
