@@ -7,29 +7,9 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="spaceship"
-
-# theme spaceship icons
-SPACESHIP_AWS_SYMBOL=" "
-SPACESHIP_CHAR_SYMBOL=" "
-SPACESHIP_DOCKER_SYMBOL=" "
-SPACESHIP_NODE_SYMBOL=" "
-SPACESHIP_PACKAGE_SYMBOL=" "
-SPACESHIP_ELIXIR_SYMBOL=" "
-SPACESHIP_PYENV_SYMBOL=" "
-SPACESHIP_RUBY_SYMBOL=" "
-SPACESHIP_RUST_SYMBOL=" "
-SPACESHIP_GIT_STATUS_ADDED=" "
-SPACESHIP_GIT_STATUS_DELETED=" "
-SPACESHIP_GIT_STATUS_MODIFIED=" "
-SPACESHIP_GIT_STATUS_RENAMED=" "
-SPACESHIP_GIT_STATUS_STASHED=" "
-SPACESHIP_GIT_STATUS_UNMERGED="ﱵ "
-SPACESHIP_GIT_STATUS_PREFIX=" " # hide icon
-SPACESHIP_GIT_STATUS_SUFFIX="" # hide icon
-SPACESHIP_GIT_STATUS_COLOR="magenta" # hide icon
-SPACESHIP_GIT_SYMBOL=" "
-# end theme spaceship icons
+# ZSH_THEME="spaceship"
+# https://github.com/spaceship-prompt/spaceship-prompt
+source /usr/local/opt/spaceship/spaceship.zsh
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -91,6 +71,7 @@ plugins=(
   npm
   nvm
   yarn
+  zsh-autosuggestions
   zsh-z
 )
 
