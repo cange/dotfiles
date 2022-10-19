@@ -53,7 +53,7 @@ def install(file, sub_dir=nil)
       puts "#{colorize('failed to symlinked', :red)} #{sub_dir} #{colorize(file_name, :white_bold)}"
     end
   elsif
-    puts "#{colorize('please execute this file into this directory', :red)} #{colorize('dotfiles/', :white_bold)}"
+    puts "#{colorize('please execute command in', :red)} #{colorize('dotfiles/', :white_bold)}"
   end
 end
 
@@ -88,7 +88,12 @@ if ARGV.include?('-h')
   exit 0
 end
 
-def install_shell_framework(framework_name)
+def setup_neovim
+  FileUtils.ln_sf("#{home}/dotfiles/nvim", "#{home}/.config/nvim")
+end
+
+def setup_zshell
+  framework_name = 'oh-my-zsh'
   # check for updates, store local changes, fetch updates and add local changes
   if File.exist?("#{home}/.#{framework_name}")
     Dir.chdir("#{home}/.#{framework_name}")
@@ -102,28 +107,15 @@ def install_shell_framework(framework_name)
   # travel back to dotfiles/ directory
   Dir.chdir("#{home}/dotfiles")
 
+  # ZSH additional custom config
+  FileUtils.ln_sf("#{home}/dotfiles/zsh", "#{home}/.config/zsh")
+
   get_dir_files(File.join(root, "#{framework_name}")).each do |dir|
     framework_path = "#{framework_name}/#{File.basename(dir)}"
     destination_path = ".#{framework_path}"
     get_dir_files(File.join(root, "#{framework_name}/#{dir}")).each do |file|
       install("#{framework_path}/#{file}", destination_path)
     end
-  end
-end
-
-def install_terminal_config
-  sub_dir              = ".config"
-  terminal_path        = "#{home}/#{sub_dir}/terminator"
-  terminal_backup_path = "#{terminal_path}-backup"
-  terminal_new_path    = "terminator"
-
-  if File.exist?(terminal_path) && !File.symlink?(terminal_path)
-    system("mv -f #{terminal_path} #{terminal_backup_path}")
-    puts "#{colorize('created backup', :green)} #{colorize(terminal_backup_path, :white_bold)}"
-    install(terminal_new_path, sub_dir)
-  else
-    FileUtils.ln_sf "#{ home }/dotfiles/#{ terminal_new_path }", "#{ home }/#{ sub_dir }/#{ terminal_new_path }"
-    puts "#{colorize('successfully symlinked', :green)} #{sub_dir} #{colorize('terminator', :white_bold)}"
   end
 end
 #
@@ -134,5 +126,5 @@ get_dir_files(root).each do |file|
   uninstall? ? uninstall(file) : install(file)
 end
 
-install_terminal_config
-install_shell_framework('oh-my-zsh')
+setup_neovim
+setup_zshell

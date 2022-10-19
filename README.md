@@ -91,3 +91,13 @@ The basic configuration and theme can be found at `~/dotfiles/iterm2`.
 
 [asdf]: https://asdf-vm.com/guide/getting-starte.html
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh#basic-installation
+
+### ZSH Setup
+
+Install zsh plugins:
+
+```sh
+touch zsh_plugins.txt && echo 'zsh-async zsh-autosuggestions zsh-syntax-highlighting' >> zsh_plugins.txt
+xargs brew install < zsh_plugins.txt
+rm zsh_plugins.txt
+```
