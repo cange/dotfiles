@@ -1,98 +1,44 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# ZSH custom config (without oh-my-zsh)
+# inspired by https://github.com/ChristianChiarulli/Machfiles/tree/master/zsh
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Path to custom zsh config
+export ZDOTDIR=$HOME/.config/zsh
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="spaceship"
-# https://github.com/spaceship-prompt/spaceship-prompt
-source /usr/local/opt/spaceship/spaceship.zsh
+# Useful Functions
+source "$ZDOTDIR/functions.zsh"
 
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Normal files to source
+zsh_add_file "exports.zsh"
+zsh_add_file "oh-my-zsh.zsh"
+zsh_add_file "prompt.zsh"
+zsh_add_file 'aliases.zsh'
 
-# Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
+# Plugins
+zsh_add_plugin "zsh-users/zsh-autosuggestions"
+zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
+# start: Spaceship prompt config
+zsh_add_plugin "spaceship-prompt/spaceship-prompt"
+# end: Spaceship prompt config
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# start: z navigation config
+zsh_add_plugin "agkozak/zsh-z"
+autoload -U compinit && compinit
+# prettify z menu
+zstyle ':completion:*' menu select
+# end: z navigation config
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  asdf
-  colored-man-pages
-  docker
-  git
-  gitignore
-  history
-  node
-  npm
-  nvm
-  yarn
-  zsh-autosuggestions
-  zsh-z
-)
-
-source $ZSH/oh-my-zsh.sh
-
-# Docker plugin start
+#
+###############################################################################
+#
+# start: Docker plugin
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
-# Docker plugin end
-
-# User configuration
+# end: Docker plugin
 
 # ZSH https://github.com/zsh-users/zsh-completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -110,44 +56,26 @@ fi
 
 # homebrew
 source $(brew --prefix nvm)/nvm.sh
+
 # node version manager
 # https://github.com/nvm-sh/nvm#install--update-script
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# yarn - node package manager
-export PATH="$PATH:`yarn global bin`"
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# active wlw-devtools/ docker environment
-# https://gitlab.visable.com/webdevs/wlw-devtools#working-with-your-vm-through-docker
-#source wlw-env && eval $(docker-machine env $WLW_VM_NAME)
-
-# To link Rubies to Homebrew's OpenSSL 1.1
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# Verified git user – Telling Git about your GPG key
-# https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
-export GPG_TTY=$(tty)
-
-# enbale asdf package managersa
+# enable asdf package managersa
 # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
 . /usr/local/opt/asdf/libexec/asdf.sh
 
-# https://github.com/sharkdp/bat
-export BAT_THEME="OneHalfDark"
-export BAT_STYLE="changes"
+# active wlw-devtools/ docker environment
+# https://github.com/visable-dev/wlw-devtools#working-with-your-vm-through-docker
+[ -s "${HOME}/.iterm2_shell_integration.zsh" ] && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # bun completions
-[ -s "${HOME}/.bun/_bun" ] && source "${HOME}/.bun/_bun"
-
-# Bun
 export BUN_INSTALL="${HOME}/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "${HOME}/.bun/_bun" ] && source "${HOME}/.bun/_bun"
 
 # Secrets token etc.
-[ -s "${HOME}/.config/secrets.sh" ] && source "${HOME}/.config/secrets.sh"
+[ -s "${HOME}/.config/secrets" ] && source "${HOME}/.config/secrets"
+
