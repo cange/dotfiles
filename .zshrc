@@ -148,3 +148,6 @@ export BAT_STYLE="changes"
 # Bun
 export BUN_INSTALL="${HOME}/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Secrets token etc.
+[ -s "${HOME}/.config/secrets.sh" ] && source "${HOME}/.config/secrets.sh"
