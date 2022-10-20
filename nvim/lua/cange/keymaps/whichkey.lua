@@ -1,13 +1,13 @@
-local ns = "cange.keybindings.whichkey"
+local ns = "cange.keymaps.whichkey"
 
 local found_whichkey, whichkey = pcall(require, "which-key")
 if not found_whichkey then
   print("[" .. ns .. '] "which-key" not found')
   return
 end
-local found_workflows, wk_groups = pcall(require, "cange.keybindings.whichkey_groups")
+local found_workflows, keymaps_groups = pcall(require, "cange.keymaps.groups")
 if not found_workflows then
-  print("[" .. ns .. '] "cange.keybindings.whichkey_groups" not found')
+  print("[" .. ns .. '] "cange.keymaps.groups" not found')
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
@@ -34,7 +34,7 @@ local function group_mappings(group)
 end
 
 local custom_mappings = {}
-for _, m in pairs(wk_groups) do
+for _, m in pairs(keymaps_groups) do
   custom_mappings = vim.tbl_extend("keep", custom_mappings, group_mappings(m))
 end
 
@@ -44,6 +44,7 @@ local wk_mappings = vim.tbl_deep_extend("keep", {
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
+  ["r"] = { "<cmd>Recent files<CR>", "Buffers" },
 }, custom_mappings)
 
 local M = {}

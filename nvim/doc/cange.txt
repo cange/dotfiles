@@ -50,8 +50,8 @@ appearance if the colorscheme is installed.
 
 
 ================================================================================
-                                                           *cange.keybindings*
-Keybindings
+                                                               *cange.keymaps*
+Keymaps
 
 Provides information of most common keybindings like open search dialog or
 similar. Depending on the plugin, there are also some individual setups in the
