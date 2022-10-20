@@ -11,14 +11,16 @@ local code_actions = null_ls.builtins.code_actions
 local formatting = null_ls.builtins.formatting
 -- local code_actions = null_ls.builtins.code_actions
 
-local function lsp_formatting(bufnr)
+local function lsp_format(bufnr)
   vim.lsp.buf.format({
     filter = function(client)
       return client.name == "null-ls"
     end,
     bufnr = bufnr,
+    async = true, -- do not block if true
   })
 end
+
 local function on_save_formatting(bufnr)
   local group = vim.api.nvim_create_augroup("cange_lsp_formatting", { clear = true })
   vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
@@ -26,7 +28,7 @@ local function on_save_formatting(bufnr)
     group = group,
     buffer = bufnr,
     callback = function()
-      lsp_formatting(bufnr)
+      lsp_format(bufnr)
     end,
   })
 end
@@ -41,7 +43,7 @@ null_ls.setup({
 
     -- CSS
     diagnostics.stylelint,
-    formatting.stylelint,
+    -- formatting.stylelint,
 
     -- JS
     code_actions.eslint_d,
@@ -49,6 +51,9 @@ null_ls.setup({
     -- diagnostics.eslint_d.with({
     --   method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
     -- }),
+    formatting.eslint_d.with({
+      command = vim.fn.expand("$HOME/.asdf/shims/eslint_d"),
+    }),
 
     -- JSON
     diagnostics.jsonlint,
@@ -61,8 +66,11 @@ null_ls.setup({
     formatting.rubocop,
 
     -- YAML
-    formatting.yamlfmt,
     diagnostics.yamllint,
+    formatting.yamlfmt,
+
+    -- ZSH
+    diagnostics.zsh,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then

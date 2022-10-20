@@ -70,6 +70,12 @@ packer.startup(function(use)
   -- Keybinding
   use("folke/which-key.nvim")
 
+  -- Scrolling
+  use({
+    "karb94/neoscroll.nvim", -- smooth scrolling
+    config = instant_setup("neoscroll"),
+  })
+
   -- Fuzzy Finder
   use({
     "nvim-telescope/telescope.nvim", -- fuzzy finder over lists
@@ -104,6 +110,7 @@ packer.startup(function(use)
     "m-demare/hlargs.nvim", -- highlight arguments' definitions
     requires = { "nvim-treesitter/nvim-treesitter" },
   })
+  use("slim-template/vim-slim") -- slim language support (Vim Script)
 
   -- Snippets
   use("L3MON4D3/LuaSnip") --snippet engine
@@ -121,7 +128,10 @@ packer.startup(function(use)
   use("jose-elias-alvarez/null-ls.nvim") -- syntax formatting, diagnostics (requires npm pacakges)
   use({
     "MunifTanjim/prettier.nvim", -- JS formatter
-    requires = "jose-elias-alvarez/null-ls.nvim",
+    requires = {
+      "jose-elias-alvarez/null-ls.nvim",
+      "neovim/nvim-lspconfig",
+    },
   })
   use("onsails/lspkind.nvim") -- plugin adds vscode-like icons
   use("j-hui/fidget.nvim") -- shows LSP initialization progress
