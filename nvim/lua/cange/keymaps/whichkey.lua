@@ -17,8 +17,8 @@ if not found_utils then
 end
 
 ---Generates a which-key table form mappings
--- @param group string Key of a keybinding block
--- @return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
+---@param group KeymapsGroup Key of a keybinding block
+---@return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
 local function group_mappings(group)
   local section = {}
   -- vim.pretty_print(vim.tbl_keys(group))
@@ -27,25 +27,41 @@ local function group_mappings(group)
   local section_mappings = section[group.subleader]
 
   for key, m in pairs(group.mappings) do
+    -- Ignore primary keys
+    if m.primary then
+      goto skip
+    end
     section_mappings[key] = { m.cmd, m.desc }
+    ::skip::
   end
 
   return section
 end
 
-local custom_mappings = {}
-for _, m in pairs(keymaps_groups) do
-  custom_mappings = vim.tbl_extend("keep", custom_mappings, group_mappings(m))
+---Generates a which-key primary mapping table
+---@param group KeymapsGroup Key of a keybinding block
+---@param mappings table List to store mappings
+local function primary_mappings(group, mappings)
+  -- vim.pretty_print(vim.tbl_keys(group))
+  for key, m in pairs(group.mappings) do
+    -- Primary keys only
+    if not m.primary then
+      goto skip
+    end
+    mappings[key] = { m.cmd, m.desc }
+    ::skip::
+  end
 end
 
-local wk_mappings = vim.tbl_deep_extend("keep", {
-  ["a"] = { "<cmd>Alpha<CR>", "Start screen" },
-  ["f"] = { "<cmd>Telescope find_files<CR>", "Find files" },
-  ["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
-  ["w"] = { "<cmd>w!<CR>", "Save" },
-  ["q"] = { "<cmd>q!<CR>", "Quit" },
-  ["r"] = { "<cmd>Recent files<CR>", "Buffers" },
-}, custom_mappings)
+local primary_keymaps = {}
+local secondary_keymaps = {}
+-- execute
+for _, g in pairs(keymaps_groups) do
+  secondary_keymaps = vim.tbl_extend("keep", secondary_keymaps, group_mappings(g))
+  primary_mappings(g, primary_keymaps)
+end
+
+local wk_mappings = vim.tbl_deep_extend("keep", primary_keymaps, secondary_keymaps)
 
 local M = {}
 

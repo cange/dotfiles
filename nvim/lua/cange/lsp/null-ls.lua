@@ -32,13 +32,17 @@ local function on_save_formatting(bufnr)
     end,
   })
 end
+local function execute_path(shim)
+  ---@see https://asdf-vm.com/manage/versions.html#shims
+  return vim.fn.expand("$HOME/.asdf/shims/" .. shim)
+end
 
 null_ls.setup({
   update_in_insert = false, -- if true, it runs diagnostics in insert mode, which impacts performance
   sources = {
     -- Multi-Languages
     formatting.prettierd.with({ -- pretty fast prettier
-      command = vim.fn.expand("$HOME/.asdf/shims/prettierd"),
+      command = execute_path("prettierd"),
     }),
 
     -- CSS
@@ -52,7 +56,7 @@ null_ls.setup({
     --   method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
     -- }),
     formatting.eslint_d.with({
-      command = vim.fn.expand("$HOME/.asdf/shims/eslint_d"),
+      command = execute_path("eslint_d"),
     }),
 
     -- JSON
@@ -63,7 +67,10 @@ null_ls.setup({
 
     -- RUBY
     diagnostics.rubocop,
-    formatting.rubocop,
+    formatting.rubocop.with({
+      command = execute_path("rubocop"),
+      method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+    }),
 
     -- YAML
     diagnostics.yamllint,
