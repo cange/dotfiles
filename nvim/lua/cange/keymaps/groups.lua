@@ -1,5 +1,5 @@
 ---Represents the most global keymaps mainly used in which-key and alpha (dasboard) plugins.
-local ns = 'cange.keymaps.groups'
+local ns = "cange.keymaps.groups"
 
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
@@ -60,15 +60,15 @@ M.search = {
     C = { cmd = "<cmd>Telescope cmds<CR>", desc = "cmds" },
     M = { cmd = "<cmd>Telescope man_pages<CR>", desc = "Man pages" },
     N = { cmd = "<cmd>Telescope notify<CR>", desc = "Notifications" },
+    P = { cmd = "<cmd>Telescope projects<CR>", desc = "Projects", dashboard = true, icon = icon("ui", "Project") },
+    S = { cmd = "<cmd>Telescope live_grep<CR>", desc = "Find text", dashboard = true, icon = icon("ui", "List") },
     b = { cmd = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', desc = "Browse files" },
     c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "Change theme" },
-    f = { cmd = "<cmd>Telescope find_files<CR>", desc = "Find files" },
+    f = { cmd = "<cmd>Telescope find_files<CR>", desc = "Find files", dashboard = true, icon = icon("ui", "Search") },
     h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "Find help" },
     k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
     n = { cmd = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', desc = "Browse nvim" },
-    r = { cmd = "<cmd>Telescope oldfiles<CR>", desc = "Old files", dashboard = true },
-    p = { cmd = "<cmd>Telescope projects<CR>", desc = "Projects", dashboard = true },
-    s = { cmd = "<cmd>Telescope live_grep<CR>", desc = "Find text" },
+    r = { cmd = "<cmd>Telescope oldfiles<CR>", desc = "Old files", dashboard = true, icon = icon("ui", "Calendar") },
     w = { cmd = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', desc = "Browse workspace" },
   },
 }
@@ -76,12 +76,18 @@ M.search = {
 ---@alias config Mapping
 M.config = {
   subleader = "c",
-  title = "Editor settings",
+  title = "Editor",
   mappings = {
+    e = {
+      cmd = "<cmd>enew <BAR>startinsert<CR>",
+      desc = "New File",
+      dashboard = true,
+      icon = icon("documents", "NewFile"),
+    },
     k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/groups.lua<CR>", desc = "Edit keymaps" },
     m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/meta.lua<CR>", desc = "Edit meta information" },
     o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit options" },
-    p = { cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>", desc = "Edit plugins" },
+    q = { cmd = "<cmd>quitall!<CR>", desc = "Quit", dashboard = true, icon = icon("ui", "SignOut") },
   },
 }
 
@@ -106,30 +112,33 @@ M.git = {
   },
 }
 
----@alias paccker Mapping Install, update neovims plugins
+---@alias packer Mapping Install, update neovims plugins
 M.packer = {
   subleader = "p",
   title = "Plugin management",
   mappings = {
+    C = { cmd = "<cmd>PackerCompile<CR>", desc = "Compile" },
     S = { cmd = "<cmd>PackerStatus<CR>", desc = "Status" },
-    c = { cmd = "<cmd>PackerCompile<CR>", desc = "Compile" },
+    c = {
+      cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>",
+      desc = "Edit plugins",
+      dashboard = true,
+      icon = icon("ui", "Gear"),
+    },
     i = { cmd = "<cmd>PackerInstall<CR>", desc = "Install" },
-    s = { cmd = "<cmd>PackerSync<CR>", desc = "Sync" },
-    u = { cmd = "<cmd>PackerUpdate<CR>", desc = "Update" },
-    C = { cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>", desc = "Config" },
+    u = { cmd = "<cmd>PackerSync<CR>", desc = "Update plugins", dashboard = true, icon = icon("ui", "Sync") },
   },
 }
 
 ---@alias session Mapping
 M.session = {
   subleader = "b",
-  title = "Sessions/Buffers",
+  title = "Sessions",
   mappings = {
-    R = { cmd = "<cmd>RestoreSession<CR>", desc = "Recent session" },
-    d = { cmd = "<cmd>Autosession delete<CR>", desc = "Find delete session" },
-    f = { cmd = "<cmd>SearchSession<CR>", desc = "Find session" },
-    s = { cmd = "<cmd>SaveSession<CR>", desc = "Save session" },
-    x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete session" },
+    F = { cmd = "<cmd>SearchSession<CR>", desc = "Find Session", dashboard = true, icon = icon("ui", "SignIn") },
+    R = { cmd = "<cmd>RestoreSession<CR>", desc = "Recent Project", dashboard = true, icon = icon("ui", "Calendar") },
+    s = { cmd = "<cmd>SaveSession<CR>", desc = "Save Session" },
+    x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
   },
 }
 
