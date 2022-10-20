@@ -1,4 +1,4 @@
-local ns = "cange.keybindings.common"
+local ns = "cange.keymaps.common"
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
   print("[" .. ns .. '] "cange.utils" not found')

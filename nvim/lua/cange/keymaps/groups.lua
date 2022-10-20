@@ -1,8 +1,20 @@
+---Represents the most global keymaps mainly used in which-key and alpha (dasboard) plugins.
+local ns = 'cange.keymaps.groups'
+
+local found_utils, utils = pcall(require, "cange.utils")
+if not found_utils then
+  print("[" .. ns .. '] "cange.utils" not found')
+  return
+end
+local icon = utils.get_icon
+
 --#region Types
 
 ---@class MappingTree
 ---@field desc string
 ---@field cmd string
+---@field dashboard? boolean
+---@field icon? string
 
 ---@enum mappings <string, MappingTree>
 
@@ -44,7 +56,7 @@ M.search = {
   subleader = "s",
   title = "Search",
   mappings = {
-    B = { cmd = "<cmd>Telescope buffers previewer=false<CR>", desc = "Buffers" },
+    B = { cmd = "<cmd>Telescope buffers<CR>", desc = "Recent files" },
     C = { cmd = "<cmd>Telescope cmds<CR>", desc = "cmds" },
     M = { cmd = "<cmd>Telescope man_pages<CR>", desc = "Man pages" },
     N = { cmd = "<cmd>Telescope notify<CR>", desc = "Notifications" },
@@ -54,8 +66,8 @@ M.search = {
     h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "Find help" },
     k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
     n = { cmd = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', desc = "Browse nvim" },
-    r = { cmd = "<cmd>Telescope oldfiles<CR>", desc = "Recent files" },
-    p = { cmd = "<cmd>Telescope projects<CR>", desc = "Projects" },
+    r = { cmd = "<cmd>Telescope oldfiles<CR>", desc = "Old files", dashboard = true },
+    p = { cmd = "<cmd>Telescope projects<CR>", desc = "Projects", dashboard = true },
     s = { cmd = "<cmd>Telescope live_grep<CR>", desc = "Find text" },
     w = { cmd = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', desc = "Browse workspace" },
   },
@@ -64,9 +76,9 @@ M.search = {
 ---@alias config Mapping
 M.config = {
   subleader = "c",
-  title = "Editor config",
+  title = "Editor settings",
   mappings = {
-    k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/mappings.lua<CR>", desc = "Edit keybindings" },
+    k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/groups.lua<CR>", desc = "Edit keymaps" },
     m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/meta.lua<CR>", desc = "Edit meta information" },
     o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit options" },
     p = { cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>", desc = "Edit plugins" },
