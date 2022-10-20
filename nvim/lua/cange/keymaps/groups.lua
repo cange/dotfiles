@@ -10,15 +10,16 @@ local icon = utils.get_icon
 
 --#region Types
 
----@class MappingTree
----@field desc string
----@field cmd string
----@field dashboard? boolean
----@field icon? string
+---@class KeymapsCommand
+---@field desc string Description of the keybinding
+---@field cmd string Command of the keybinding
+---@field dashboard? boolean Determines whether or not to on "alpha" start page
+---@field icon? string The icon which shown on "alpha" start page
+---@field primary? boolean Determines whether or not to show a on inital "which-key" window
 
----@enum mappings <string, MappingTree>
+---@enum mappings <string, KeymapsCommand>
 
----@class Mapping
+---@class KeymapsGroup
 ---@field subleader string Additional key to enter the certain group
 ---@field title string Is displayed as group name
 ---@field mappings mappings The actual key bindings
@@ -32,10 +33,10 @@ local M = {}
 ---Pattern: <block_key> = { { <key> = { cmd = '...', desc = '...' } } }
 ---@table mappings
 
----@alias lsp Mapping Language related syntax analytics
+---@alias lsp KeymapsGroup Language related syntax analytics
 M.lsp = {
   subleader = "l",
-  title = "Language (LSP)",
+  title = "LSP Feature",
   mappings = {
     C = { cmd = '<cmd>lua require("luasnip").cleanup()<CR>', desc = "Reset snippets UI" },
     F = { cmd = "<cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>", desc = "Format" },
@@ -51,20 +52,32 @@ M.lsp = {
   },
 }
 
----@alias search Mapping Finding stuff
+---@alias search KeymapsGroup Finding stuff
 M.search = {
   subleader = "s",
   title = "Search",
   mappings = {
-    B = { cmd = "<cmd>Telescope buffers<CR>", desc = "Recent files" },
-    C = { cmd = "<cmd>Telescope cmds<CR>", desc = "cmds" },
-    M = { cmd = "<cmd>Telescope man_pages<CR>", desc = "Man pages" },
+    B = { cmd = "<cmd>Telescope buffers<CR>", desc = "Recent Files", primary = true },
+    C = { cmd = "<cmd>Telescope commands<CR>", desc = "Commands" },
+    M = { cmd = "<cmd>Telescope man_pages<CR>", desc = "Man Pages" },
     N = { cmd = "<cmd>Telescope notify<CR>", desc = "Notifications" },
     P = { cmd = "<cmd>Telescope projects<CR>", desc = "Projects", dashboard = true, icon = icon("ui", "Project") },
-    S = { cmd = "<cmd>Telescope live_grep<CR>", desc = "Find text", dashboard = true, icon = icon("ui", "List") },
+    F = {
+      cmd = "<cmd>Telescope live_grep<CR>",
+      desc = "Find Text",
+      primary = true,
+      dashboard = true,
+      icon = icon("ui", "List"),
+    },
     b = { cmd = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', desc = "Browse files" },
     c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "Change theme" },
-    f = { cmd = "<cmd>Telescope find_files<CR>", desc = "Find files", dashboard = true, icon = icon("ui", "Search") },
+    f = {
+      cmd = "<cmd>Telescope find_files<CR>",
+      desc = "Find files",
+      primary = true,
+      dashboard = true,
+      icon = icon("ui", "Search"),
+    },
     h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "Find help" },
     k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
     n = { cmd = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', desc = "Browse nvim" },
@@ -73,25 +86,28 @@ M.search = {
   },
 }
 
----@alias config Mapping
+---@alias config KeymapsGroup
 M.config = {
   subleader = "c",
   title = "Editor",
   mappings = {
-    e = {
+    E = {
       cmd = "<cmd>enew <BAR>startinsert<CR>",
       desc = "New File",
       dashboard = true,
       icon = icon("documents", "NewFile"),
     },
+    a = { cmd = "<cmd>Alpha<CR>", desc = "Start Screen", primary = true },
+    e = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
     k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/groups.lua<CR>", desc = "Edit keymaps" },
     m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/meta.lua<CR>", desc = "Edit meta information" },
     o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit options" },
-    q = { cmd = "<cmd>quitall!<CR>", desc = "Quit", dashboard = true, icon = icon("ui", "SignOut") },
+    q = { cmd = "<cmd>quitall!<CR>", desc = "Quit", primary = true, dashboard = true, icon = icon("ui", "SignOut") },
+    w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
   },
 }
 
----@alias git Mapping
+---@alias git KeymapsGroup
 M.git = {
   subleader = "g",
   title = "Git",
@@ -112,7 +128,7 @@ M.git = {
   },
 }
 
----@alias packer Mapping Install, update neovims plugins
+---@alias packer KeymapsGroup Install, update neovims plugins
 M.packer = {
   subleader = "p",
   title = "Plugin management",
@@ -130,7 +146,7 @@ M.packer = {
   },
 }
 
----@alias session Mapping
+---@alias session KeymapsGroup
 M.session = {
   subleader = "b",
   title = "Sessions",
@@ -142,7 +158,7 @@ M.session = {
   },
 }
 
----@alias terminal Mapping
+---@alias terminal KeymapsGroup
 M.terminal = {
   subleader = "t",
   title = "Terminal",
@@ -151,16 +167,16 @@ M.terminal = {
     ["2"] = { cmd = ":2ToggleTerm size=80 direction=vertical<CR>", desc = "VTerminal 2" },
     ["3"] = { cmd = ":3ToggleTerm<CR>", desc = "HTerminal 1" },
     ["4"] = { cmd = ":4ToggleTerm<CR>", desc = "HTerminal 2" },
-    f = { cmd = "<cmd>ToggleTerm direction=float<CR>", desc = "Float" },
-    h = { cmd = "<cmd>ToggleTerm size=10 direction=horizontal<CR>", desc = "Horizontal" },
-    v = { cmd = "<cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "Vertical" },
+    f = { cmd = "<cmd>ToggleTerm direction=float<CR>", desc = "Float Terminal" },
+    h = { cmd = "<cmd>ToggleTerm size=10 direction=horizontal<CR>", desc = "Horizontal Terminal" },
+    v = { cmd = "<cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "Vertical Terminal" },
   },
 }
 
----@alias treesitter Mapping
+---@alias treesitter KeymapsGroup
 M.treesitter = {
   subleader = "T",
-  title = "Treesitter (syntax)",
+  title = "Tree-sitter",
   mappings = {
     h = { cmd = "<cmd>TSHighlightCapturesUnderCursor<cr>", desc = "Highlight" },
     p = { cmd = "<cmd>TSPlaygroundToggle<cr>", desc = "Playground" },
