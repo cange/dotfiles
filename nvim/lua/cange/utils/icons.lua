@@ -134,7 +134,7 @@ icons.cmp_source = {
   nvim_lsp = " ",
   nvim_lua = " ",
   path = icons.documents.Folder .. " ",
-  tabnine = icons.ui.Robot .. " ",
+  cmp_tabnine = icons.ui.Robot .. " ",
 }
 icons.git_states = {
   unstaged = icons.git.Mod,
