@@ -8,7 +8,7 @@ SPACESHIP_TIME_SHOW=true
 # SPACESHIP_USER_SHOW=always
 
 # Do not truncate path in repos
-SPACESHIP_DIR_TRUNC_REPO=false
+SPACESHIP_DIR_TRUNC_REPO=true
 
 # https://spaceship-prompt.sh/config/prompt/
 # Prompt - left
