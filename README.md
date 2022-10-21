@@ -1,10 +1,6 @@
 # Dotfiles setting
 
-This *dotfiles* contains the [bash-it](https://github.com/revans/bash-it)
-framework, which brings the following functionality: autocompletion, themes,
-aliases, custom functions.
-Further based the vimbundle handling on
-[dotmatrix](https://github.com/hashrocket/dotmatrix).
+These are basic configurations of my working environment like editor, shell and terminal.
 
 ## How to install dotfiles
 
@@ -17,25 +13,12 @@ git clone http://github.com/cange/dotfiles.git ~/dotfiles
 2. Run (make sure the Ruby is installed)
 
 ```shell
-./dotfiles/install
+cd ./dotfiles/ && ./install # set up symlinks
 ```
 
 3. Follow the NeoVim set up guide [./nvim/](./nvim/)
 
 4. Done
-
-### ZSH Theme
-
-Follow the installation to enable the defined theme `.zshrc` file:
-<https://github.com/spaceship-prompt/spaceship-prompt#oh-my-zsh>
-
-### Set ZSH as default shell
-
-Remove/backup all .bash\* files in your user root directory and set then
-
-```shell
-chsh -s /usr/bin/zsh
-```
 
 ## Other useful tools
 
