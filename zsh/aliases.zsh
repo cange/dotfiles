@@ -17,6 +17,11 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
+# Convenient helper to search history
+alias h='history'
+alias hs='history | grep'
+alias hsi='history | grep -i'
+
 # git
 alias gl="git pull -p"
 alias gm="git rebase "

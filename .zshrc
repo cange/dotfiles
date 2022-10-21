@@ -4,22 +4,20 @@
 # Path to custom zsh config
 export ZDOTDIR=$HOME/.config/zsh
 
-# Useful Functions
+# Helper functions
 source "$ZDOTDIR/functions.zsh"
 
-# Normal files to source
-zsh_add_file "exports.zsh"
-zsh_add_file "oh-my-zsh.zsh"
-zsh_add_file "prompt.zsh"
-zsh_add_file 'aliases.zsh'
-
-# Plugins
+# Order #1: Plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
-
-# start: Spaceship prompt config
 zsh_add_plugin "spaceship-prompt/spaceship-prompt"
-# end: Spaceship prompt config
+
+# Order #2: additional files
+zsh_add_file "aliases.zsh"
+zsh_add_file "exports.zsh"
+zsh_add_file "history.zsh"
+zsh_add_file "oh-my-zsh.zsh"
+zsh_add_file "prompt.zsh"
 
 # start: z navigation config
 zsh_add_plugin "agkozak/zsh-z"
@@ -31,6 +29,17 @@ zstyle ':completion:*' menu select
 #
 ###############################################################################
 #
+
+### Order is important
+
+# Source secrets first since other servcies could depend on it
+# Secrets token etc.
+if [[ -s "${HOME}/.config/secrets" ]]; then
+  source "${HOME}/.config/secrets"
+else
+  echo 'ℹ︎ [zshrc] no secrets file found'
+fi
+
 # start: Docker plugin
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
 zstyle ':completion:*:*:docker:*' option-stacking yes
@@ -75,7 +84,3 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export BUN_INSTALL="${HOME}/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 [ -s "${HOME}/.bun/_bun" ] && source "${HOME}/.bun/_bun"
-
-# Secrets token etc.
-[ -s "${HOME}/.config/secrets" ] && source "${HOME}/.config/secrets"
-
