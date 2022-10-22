@@ -15,7 +15,9 @@ if not found_custom then
   return
 end
 -- config
+telescope.load_extension("fzf")
 telescope.load_extension("textcase")
 telescope.load_extension("session-lens")
 telescope.load_extension("notify")
-telescope.load_extension("projects")
+telescope.load_extension("project")
+telescope.load_extension("ui-select")

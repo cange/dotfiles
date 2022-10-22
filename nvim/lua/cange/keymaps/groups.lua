@@ -1,4 +1,6 @@
----Represents the most global keymaps mainly used in which-key and alpha (dasboard) plugins.
+---All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
+---each plugin by it self.
+
 local ns = "cange.keymaps.groups"
 
 local found_utils, utils = pcall(require, "cange.utils")
@@ -61,7 +63,12 @@ M.search = {
     C = { cmd = "<cmd>Telescope commands<CR>", desc = "Commands" },
     M = { cmd = "<cmd>Telescope man_pages<CR>", desc = "Man Pages" },
     N = { cmd = "<cmd>Telescope notify<CR>", desc = "Notifications" },
-    P = { cmd = "<cmd>Telescope projects<CR>", desc = "Projects", dashboard = true, icon = icon("ui", "Project") },
+    P = {
+      cmd = "<cmd>lua require('telescope').extensions.project.project()<CR>",
+      desc = "Projects",
+      dashboard = true,
+      icon = icon("ui", "Project"),
+    },
     F = {
       cmd = "<cmd>Telescope live_grep<CR>",
       desc = "Find Text",

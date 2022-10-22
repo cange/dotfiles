@@ -21,6 +21,7 @@ local lsp_opts = {
   previewer = false,
   theme = "dropdown",
 }
+
 -- setup
 telescope.setup({
   defaults = {
@@ -43,16 +44,17 @@ telescope.setup({
       i = {
         ["<C-s>"] = actions.cycle_history_next,
         ["<C-a>"] = actions.cycle_history_prev,
-
         ["<C-c>"] = actions.close,
-        ["<ESC>"] = actions.close,
       },
     },
   },
   pickers = {
     buffers = default_opts,
     colorscheme = default_opts,
-    find_files = default_opts,
+    find_files = vim.tbl_extend("force", default_opts, {
+      -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+      find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+    }),
     grep_string = default_opts,
     live_grep = { theme = "ivy" },
     help_tags = { theme = "ivy" },

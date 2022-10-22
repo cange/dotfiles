@@ -64,9 +64,6 @@ packer.startup(function(use)
   use("rcarriga/nvim-notify") -- popover notification
   use("mvllow/modes.nvim") -- Prismatic line decorations
 
-  -- Project
-  use("ahmedkhalf/project.nvim")
-
   -- Keybinding
   use("folke/which-key.nvim")
 
@@ -85,7 +82,9 @@ packer.startup(function(use)
       "BurntSushi/ripgrep", -- telescope live grep suggestions
     },
   })
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- telescope , for better performance
+  use("nvim-telescope/telescope-project.nvim") -- switch between projects
+  use("nvim-telescope/telescope-ui-select.nvim") -- improved select UI
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- improves search performance
 
   -- File explorer
   use({
