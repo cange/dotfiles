@@ -19,8 +19,8 @@ alias fgrep='fgrep --color=auto'
 
 # Convenient helper to search history
 alias h='history'
-alias hs='history | grep'
-alias hsi='history | grep -i'
+alias hg='history | grep'
+alias hgi='history | grep -i'
 
 # git
 alias gl="git pull -p"

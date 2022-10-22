@@ -1,7 +1,16 @@
 # ZSH custom config (without oh-my-zsh)
 # inspired by https://github.com/ChristianChiarulli/Machfiles/tree/master/zsh
 
-# Path to custom zsh config
+### Order is important
+# Source secrets first since other servcies could depend on it
+# Secrets token etc.
+if [[ -s "${HOME}/.config/secrets" ]]; then
+  source "${HOME}/.config/secrets"
+else
+  echo '    zshrc: no secrets file found'
+fi
+
+###
 export ZDOTDIR=$HOME/.config/zsh
 
 # Helper functions
@@ -29,16 +38,6 @@ zstyle ':completion:*' menu select
 #
 ###############################################################################
 #
-
-### Order is important
-
-# Source secrets first since other servcies could depend on it
-# Secrets token etc.
-if [[ -s "${HOME}/.config/secrets" ]]; then
-  source "${HOME}/.config/secrets"
-else
-  echo 'ℹ︎ [zshrc] no secrets file found'
-fi
 
 # start: Docker plugin
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
