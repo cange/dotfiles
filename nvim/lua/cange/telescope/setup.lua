@@ -11,6 +11,7 @@ if not found_utils then
 end
 local icon = utils.get_icon
 local actions = require("telescope.actions")
+local themes = require("telescope.themes")
 -- config
 local default_opts = {
   previewer = false,
@@ -46,6 +47,11 @@ telescope.setup({
         ["<C-a>"] = actions.cycle_history_prev,
         ["<C-c>"] = actions.close,
       },
+    },
+  },
+  extensions = {
+    ["ui-select"] = { --https://github.com/nvim-telescope/telescope-ui-select.nvim#telescope-setup-and-configuration
+      themes.get_cursor(),
     },
   },
   pickers = {
