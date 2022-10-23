@@ -9,7 +9,6 @@ end
 local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
 local formatting = null_ls.builtins.formatting
--- local code_actions = null_ls.builtins.code_actions
 
 local function lsp_format(bufnr)
   vim.lsp.buf.format({
@@ -40,24 +39,17 @@ end
 null_ls.setup({
   update_in_insert = false, -- if true, it runs diagnostics in insert mode, which impacts performance
   sources = {
-    -- Multi-Languages
-    formatting.prettierd.with({ -- pretty fast prettier
-      command = execute_path("prettierd"),
-    }),
+    -- JS and more
+    formatting.prettierd.with({ command = execute_path("prettierd") }),
 
     -- CSS
     diagnostics.stylelint,
-    -- formatting.stylelint,
+    formatting.stylelint,
 
     -- JS
     code_actions.eslint_d,
     diagnostics.eslint_d,
-    -- diagnostics.eslint_d.with({
-    --   method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-    -- }),
-    formatting.eslint_d.with({
-      command = execute_path("eslint_d"),
-    }),
+    formatting.eslint_d.with({ command = execute_path("eslint_d") }),
 
     -- JSON
     diagnostics.jsonlint,
@@ -67,10 +59,7 @@ null_ls.setup({
 
     -- RUBY
     diagnostics.rubocop,
-    formatting.rubocop.with({
-      command = execute_path("rubocop"),
-      method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-    }),
+    formatting.rubocop.with({ command = execute_path("rubocop") }),
 
     -- YAML
     diagnostics.yamllint,

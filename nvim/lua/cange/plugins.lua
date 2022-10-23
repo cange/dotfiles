@@ -124,7 +124,10 @@ packer.startup(function(use)
     },
   })
   use("b0o/SchemaStore.nvim") -- json/yaml schema support
-  use("jose-elias-alvarez/null-ls.nvim") -- syntax formatting, diagnostics (requires npm pacakges)
+  use({
+    "jose-elias-alvarez/null-ls.nvim", -- syntax formatting, diagnostics (requires npm pacakges)
+    requires = "nvim-lua/plenary.nvim",
+  })
   use({
     "MunifTanjim/prettier.nvim", -- JS formatter
     requires = {
