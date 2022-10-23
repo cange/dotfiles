@@ -11,31 +11,35 @@
     "prefix": "lintl",
     "body": "// eslint-disable-line $1"
   },
-  "console log": {
+  "log": {
     "prefix": "log",
     "body": "console.log('--- ${1:param}: %o', $1)"
   },
-  "console log filename": {
+  "log obj keys": {
+    "prefix": "logk",
+    "body": "console.log('--- ${1:param} keys: %o', Object.keys($1))"
+  },
+  "log filename": {
     "prefix": "logf",
     "body": "console.log('--- ${TM_FILENAME} ${1:param}: %o', $1)"
   },
-  "console log({obj})": {
+  "log({obj})": {
     "prefix": "log{",
     "body": "console.log({${1:param}})"
   },
-  "console debug": {
+  "debug": {
     "prefix": "deb",
     "body": "console.debug('=== ${TM_FILENAME/[\\.]/_/} ${1:param}: %o', $1)"
   },
-  "console log - event": {
+  "log - event": {
     "prefix": "loge",
     "body": "console.debug('--- ${1:eventName}: %o', event$2)"
   },
-  "console dir - DOM element": {
+  "dir - DOM element": {
     "prefix": "logdr",
     "body": "console.dir(element)"
   },
-  "console info": {
+  "info": {
     "prefix": "info",
     "body": "console.info('---${TM_FILENAME/[\\.]/_/} – $1')"
   },
