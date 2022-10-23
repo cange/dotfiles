@@ -9,6 +9,11 @@ if not found_icons then
   print("[" .. ns .. '] "cange.utils.icons" not found')
   return
 end
+local found_config, config = pcall(require, "cange.config")
+if not found_config then
+  print("[" .. ns .. '] "cange.config" not found')
+  return
+end
 ---@module 'utils'
 
 ---Provides keymap convenience helpers
@@ -32,5 +37,6 @@ end
 
 M.greetings = greetings
 M.get_icon = icons.get_icon
+M.get_config = config.get_config
 
 return M

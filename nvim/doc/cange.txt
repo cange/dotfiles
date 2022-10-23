@@ -39,6 +39,20 @@ https://github.com/sumneko/lua-language-server/wiki/Annotations
 
 
 ================================================================================
+                                                                *cange.config*
+Config
+
+Some main configurations can be done in the `config.lua` file if the
+respective keys already exist there. This offers a convenient option for
+certain settings that are otherwise hidden deep in the setup. The keys can be
+access via:
+>
+    require("cange.config").get_config("path.to.setting.key")
+<
+
+
+
+================================================================================
                                                            *cange.colorscheme*
 Colorscheme
 
@@ -59,30 +73,5 @@ plugins configuration file.
 
 
 
-
-================================================================================
-                                                               *cange.globals*
-Globals
-
-The setup provides some minimalistic convenience helper function.
-
-|Cange.bulk_loader| is used to load modules sercurly. It logs when modules could
-not be found and stops execution of certain code.
->
->
-|bulk_loader|
->
-    local loaded = Cange.bulk_loader('any_context_name', {
-        'module_a',
-        { 'module-b', 'module_b' }, -- second param enables easy calling later on
-    })
-    -- the named module can the called by the defined namespace
-    loaded.module_b()
-
-
-|load|
->
-    local my_module = Cange.load('context_name', 'module')
-<
 
 vim:tw=78:ts=8:ft=help:norl:

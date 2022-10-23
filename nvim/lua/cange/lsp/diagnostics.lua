@@ -23,6 +23,5 @@ vim.diagnostic.config({
   signs = {
     active = signs,
   },
-  virtual_text = false, -- disable inline text
+  virtual_text = utils.get_config("lsp.diagnostic.virtual_text") or false,
 })
-
