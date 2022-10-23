@@ -7,7 +7,7 @@
 if [[ -s "${HOME}/.config/secrets" ]]; then
   source "${HOME}/.config/secrets"
 else
-  echo '    zshrc: no secrets file found'
+  echo '   zshrc: no secrets file found'
 fi
 
 ###
