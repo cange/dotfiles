@@ -12,42 +12,55 @@ local function mappings()
   end
   local keymap = utils.keymap
 
-  -- -Expansion key
-  -- -this will expand the current item or jump to the next item within the snippet.
-  -- Mappings
-  keymap({ "i", "s" }, "<C-k>", function()
-    if luasnip.expand_or_jumpable() then
-      luasnip.expand_or_jump()
-    end
-  end)
-
-  ---Jump backwards key.
-  ---this always moves to the previous item within the snippet
-  keymap({ "i", "s" }, "<C-j>", function()
-    if luasnip.jumpable(-1) then
-      luasnip.jump(-1)
-    end
-  end)
-
-  ---Selecting within a list of options.
-  ---This is useful for choice nodes (introduced in the forthcoming episode 2)
-  ---Go forwards within choice options
-  keymap("i", "<C-]>", function()
+  -- For changing choices in choiceNodes (not strictly necessary for a basic setup).
+  keymap({ "i", "s" }, "<C-[>", function()
     if luasnip.choice_active() then
       luasnip.change_choice(1)
     end
   end)
-  ---Go backwards within coice options
-  keymap("i", "<C-[>", function()
+
+  keymap({ "i", "s" }, "<C-]>", function()
     if luasnip.choice_active() then
       luasnip.change_choice(-1)
     end
   end)
 
-  keymap("i", "<C-u>", require("luasnip.extras.select_choice"))
+  -- -Expansion key
+  -- -this will expand the current item or jump to the next item within the snippet.
+  -- Mappings
+  -- keymap({ "i", "s" }, "<C-k>", function()
+  --   if luasnip.expand_or_jumpable() then
+  --     luasnip.expand_or_jump()
+  --   end
+  -- end)
+
+  ---Jump backwards key.
+  ---this always moves to the previous item within the snippet
+  -- keymap({ "i", "s" }, "<C-j>", function()
+  --   if luasnip.jumpable(-1) then
+  --     luasnip.jump(-1)
+  --   end
+  -- end)
+
+  ---Selecting within a list of options.
+  ---This is useful for choice nodes (introduced in the forthcoming episode 2)
+  ---Go forwards within choice options
+  -- keymap("i", "<C-]>", function()
+  --   if luasnip.choice_active() then
+  --     luasnip.change_choice(1)
+  --   end
+  -- end)
+  ---Go backwards within coice options
+  -- keymap("i", "<C-[>", function()
+  --   if luasnip.choice_active() then
+  --     luasnip.change_choice(-1)
+  --   end
+  -- end)
+
+  -- keymap("i", "<C-u>", require("luasnip.extras.select_choice"))
 
   -- shorcut to source my luasnips file again, which will reload my snippets
-  keymap("n", "<leader><leader>s", ":luafile ~/.config/nvim/lua/cange/luasnip/init.lua<CR>")
+  -- keymap("n", "<leader><leader>s", ":luafile ~/.config/nvim/lua/cange/luasnip/init.lua<CR>")
 end
 
 local function load_sources()
@@ -71,7 +84,7 @@ local M = {}
 function M.setup()
   -- choices()
   load_sources()
-  -- mappings()
+  mappings()
 end
 
 return M

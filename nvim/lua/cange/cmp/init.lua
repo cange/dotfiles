@@ -41,10 +41,6 @@ end
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode completion
 
-local keymap = utils.keymap
-keymap({ "i", "s" }, "<C-[>", "<Plug>luasnip-prev-choice")
-keymap({ "i", "s" }, "<C-]>", "<Plug>luasnip-next-choice")
-
 -- Setup
 config_luasnip.setup()
 cmp.setup({
@@ -54,6 +50,7 @@ cmp.setup({
 
     -- Cancellations
     ["<C-c>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
+    ["<ESC>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
 
     -- Confirmations
     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- `false` to confirm explicitly selected items only
