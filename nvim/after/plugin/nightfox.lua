@@ -26,16 +26,21 @@ end
 
 -- vim.notify('Theme: "' .. colorscheme.theme .. '" in "' .. colorscheme.variation .. '" variation')
 local c = palette.load(colorscheme.variation)
--- vim.pretty_print('color:', vim.tbl_keys(c))
+-- vim.pretty_print("color:", vim.tbl_keys(c))
 
 utils.set_hls({
   -- defaults override
-  CursorLine = { bg = nil }, -- disable default
+  CursorLine = { bg = c.bg2 }, -- disable default
   Folded = { bg = nil, fg = c.bg4 }, -- reduces folding noise
   -- illuminate
   IlluminatedWordText = { bg = c.bg1 }, -- Default for references if no kind information is available
   IlluminatedWordRead = { bg = c.bg2 }, -- for references of kind read
   IlluminatedWordWrite = { bg = c.bg2, bold = true }, -- for references of kind write
+
+  -- telescope
+  TelescopeMatching = { fg = c.yellow.bright, bold = true },
+  TelescopeSelection = { bg = c.sel0 },
+  TelescopeSelectionCaret = { fg = c.white.base, bg = c.sel0 },
 })
 
 local found_modes, modes = pcall(require, "modes")
