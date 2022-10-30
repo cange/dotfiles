@@ -14,11 +14,16 @@ if not found_config then
   print("[" .. ns .. '] "cange.config" not found')
   return
 end
----@module 'utils'
+---@module 'cange.utils'
 
 ---Provides keymap convenience helpers
 local M = {}
 
+---Keymap with preconfigured noremap
+---@param mode string|table
+---@param lhs string
+---@param rhs string|function
+---@param opts? table
 ---@see vim.keymap.set()
 function M.keymap(mode, lhs, rhs, opts)
   opts = opts or {}

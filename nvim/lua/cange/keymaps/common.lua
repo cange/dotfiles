@@ -54,8 +54,11 @@ keymap("n", "<A-k>", ":move .-2<CR>==")
 keymap("v", "<A-j>", ":move '>+1<CR>gv=gv")
 keymap("v", "<A-k>", ":move '<-2<CR>gv=gv")
 
--- switch between the last recent open two files
-keymap("n", "<leader><leader>", "<C-^>")
+--- Resize window with arrows
+keymap("n", "<C-down>", ":resize +4<CR>")
+keymap("n", "<C-left>", ":vertical resize -4<CR>")
+keymap("n", "<C-right>", ":vertical resize +4<CR>")
+keymap("n", "<C-up>", ":resize -4<CR>")
 
 -- Keep selection marked when indenting
 keymap("v", "<", "<gv")
@@ -63,14 +66,11 @@ keymap("v", ">", ">gv")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 
+-- switch between the last recent open two files
+keymap("n", "<leader><leader>", "<C-^>")
+
 -- Reload current file
 keymap("n", "<leader><leader>x", ':write<CR>:luafile %<CR>:lua vim.notify("File saved and executed")<CR>')
 
 -- Format
 keymap("n", "<leader><leader>f", ":lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>")
-
---- Resize window with arrows
-keymap("n", "<C-down>", ":resize +4<CR>")
-keymap("n", "<C-left>", ":vertical resize -4<CR>")
-keymap("n", "<C-right>", ":vertical resize +4<CR>")
-keymap("n", "<C-up>", ":resize -4<CR>")

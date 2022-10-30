@@ -69,7 +69,7 @@ M.search = {
       dashboard = true,
       icon = icon("ui", "Project"),
     },
-    F = {
+    ['ff']= {
       cmd = "<cmd>Telescope live_grep<CR>",
       desc = "Find Text",
       primary = true,

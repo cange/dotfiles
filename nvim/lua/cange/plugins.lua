@@ -6,6 +6,11 @@ if not found then
   return
 end
 
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = vim.api.nvim_create_augroup("cange_compile_packer", { clear = true }),
+  pattern = "plugins.lua",
+  command = "source <afile> | PackerCompile",
+})
 -- Have packer use a print()opup window
 packer.init({
   display = {
@@ -116,13 +121,15 @@ packer.startup(function(use)
   use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
   -- LSP
-  use({ -- (requires additional npm packages)
-    "williamboman/mason.nvim", -- simple to use language server installer
+  use({
+    "williamboman/mason.nvim", -- managing & installing LSP servers
     requires = {
-      "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig", -- enable LSP
+      "williamboman/mason-lspconfig.nvim", -- bridge to lspconfig
+      "neovim/nvim-lspconfig",
     },
   })
+  use("neovim/nvim-lspconfig") -- configure LSP servers
+
   use("b0o/SchemaStore.nvim") -- json/yaml schema support
   use({
     "jose-elias-alvarez/null-ls.nvim", -- syntax formatting, diagnostics (requires npm pacakges)

@@ -9,7 +9,7 @@ local options = {
   updatetime = 50, -- faster completion (4000ms default), delays and poor user experience
 
   -- UI
-  -- colorcolumn = "80,120", -- highlight optimal end line¬
+  colorcolumn = "80,120", -- highlight optimal end line¬
   cursorline = true, -- highlight the current line
   guifont = "monospace:h16", -- the font used in graphical neovim applications
   laststatus = 3, -- show one global statusline for all windows
@@ -26,6 +26,7 @@ local options = {
   cmdheight = 0, -- space of the command line for displaying messages
   showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
   showcmd = true, -- show incomplete commands
+  signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
 
   --
   spell = false, -- enable spell checking if this is true
@@ -50,17 +51,17 @@ local options = {
   breakindent = true, -- indentation when wrapping text
   shiftwidth = 2, -- number of spaces inserted for each indentation
   smartindent = true, -- make indenting smarter again
-
-  splitbelow = true, -- force all horizontal splits to go below current window
-  splitright = true, -- force all vertical splits to go to the right of current window
   swapfile = false, -- creates a swapfile
 
-  --
+  -- behaviour
   scrolloff = 8, -- scroll offset horizontal
   sidescrolloff = 8, -- scroll offset vertical
-  signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
   undofile = true, -- enable persistent undo
   wrap = false, -- display lines as one long line
+
+  -- split windows
+  splitbelow = true, -- force all horizontal splits to go below current window
+  splitright = true, -- force all vertical splits to go to the right of current window
 
   -- folding settings
   foldlevel = 1, -- zero will close all folds
@@ -74,7 +75,7 @@ for k, v in pairs(options) do
 end
 
 --
-vim.opt.iskeyword:append({ "-" })
+vim.opt.iskeyword:append({ "-" }) --  considers dash "-" as part of a keyword
 vim.opt.formatoptions:remove({ "cro" }) -- adjust automatic formatting
 vim.opt.formatoptions:append({ "r" }) -- Add asterisks in block comments
 vim.opt.shortmess:append({ c = true }) -- don't give |ins-completion-menu| messages

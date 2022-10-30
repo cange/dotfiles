@@ -24,8 +24,9 @@ api.events.subscribe(Event.TreeOpen, function()
   end)
 end)
 
-keymap("n", toggle_help_key, "<Nop>")
-api.events.subscribe(Event.TreeClose, function() end)
+api.events.subscribe(Event.TreeClose, function()
+  keymap("n", toggle_help_key, "<Nop>")
+end)
 
 local config = require("nvim-tree.config").nvim_tree_callback
 tree.setup({
@@ -43,7 +44,7 @@ tree.setup({
   renderer = {
     icons = {
       show = {
-        folder = false,
+        folder_arrow = false,
       },
       git_placement = "after",
       glyphs = {

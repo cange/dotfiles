@@ -17,6 +17,7 @@ if not found then
   return
 end
 
+---@diagnostic disable-next-line: param-type-mismatch
 local found_theme, _ = pcall(vim.cmd, "colorscheme " .. colorscheme.variation)
 if not found_theme then
   print("[" .. ns .. '] "' .. colorscheme.variation .. '" of "' .. colorscheme.theme .. '" colorscheme not found!')
