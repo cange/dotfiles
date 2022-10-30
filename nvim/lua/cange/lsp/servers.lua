@@ -3,10 +3,10 @@
 ---List of LSP servers
 ---@type table<string, string>
 local servers = {
+  "cssls", -- css
   "eslint", -- javascript
   "html", -- html
   "ruby_ls", -- ruby
-  "stylelint_lsp", -- stylelint
   "sumneko_lua", -- lua
   "svelte", -- svelte
   "tsserver", -- javascript, typepscript, etc.

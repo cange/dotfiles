@@ -6,11 +6,6 @@ if not found then
   return
 end
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  group = vim.api.nvim_create_augroup("cange_compile_packer", { clear = true }),
-  pattern = "plugins.lua",
-  command = "source <afile> | PackerCompile",
-})
 -- Have packer use a popup window
 packer.init({
   display = {
@@ -33,6 +28,26 @@ local function instant_setup(pack_name)
 
   return pack.setup()
 end
+
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = vim.api.nvim_create_augroup("cange_compile_packer", { clear = true }),
+  pattern = "plugins.lua",
+  command = "source <afile> | PackerSync",
+})
+
+-- Packer bootstrap
+local ensure_packer = function()
+  local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
 
 packer.startup(function(use)
   local web_icons = "kyazdani42/nvim-web-devicons"
@@ -122,23 +137,25 @@ packer.startup(function(use)
 
   -- LSP
   use({
-    "williamboman/mason.nvim", -- managing & installing LSP servers
+    "neovim/nvim-lspconfig", -- configure LSP servers
     requires = {
+      "williamboman/mason.nvim", -- managing & installing LSP servers, linters & formatters
       "williamboman/mason-lspconfig.nvim", -- bridge to lspconfig
-      "neovim/nvim-lspconfig",
     },
   })
-  use("neovim/nvim-lspconfig") -- configure LSP servers
+  use({
+    "jose-elias-alvarez/null-ls.nvim", -- syntax formatting, diagnostics (requires npm pacakges)
+    requires = {
+      "williamboman/mason.nvim", -- managing & installing LSP servers, linters & formatters
+      "jayp0521/mason-null-ls.nvim", -- bridge to null-ls
+    },
+  })
   use({
     "jose-elias-alvarez/typescript.nvim", -- enables LSP features for TS/JS
     requires = "neovim/nvim-lspconfig",
   })
 
   use("b0o/SchemaStore.nvim") -- json/yaml schema support
-  use({
-    "jose-elias-alvarez/null-ls.nvim", -- syntax formatting, diagnostics (requires npm pacakges)
-    requires = "nvim-lua/plenary.nvim",
-  })
   use({
     "MunifTanjim/prettier.nvim", -- JS formatter
     requires = {
@@ -199,4 +216,10 @@ packer.startup(function(use)
   })
   use("johmsalas/text-case.nvim") -- text case converter (camel case, etc.)
   use("folke/zen-mode.nvim") -- Distraction-free coding
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require("packer").sync()
+  end
 end)

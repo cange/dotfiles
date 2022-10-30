@@ -4,6 +4,11 @@ if not found_null_ls then
   print("[" .. ns .. '] "null-ls" not found')
   return
 end
+-- local found_null_ls, null_ls = pcall(require, "null-ls")
+-- if not found_null_ls then
+--   print("[" .. ns .. '] "null-ls" not found')
+--   return
+-- end
 -- config
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/
 local diagnostics = null_ls.builtins.diagnostics
@@ -39,33 +44,27 @@ end
 null_ls.setup({
   update_in_insert = false, -- if true, it runs diagnostics in insert mode, which impacts performance
   sources = {
-    -- JS and more
+    -- js, ts, vue, css, html, json, yaml, md etc.
     formatting.prettierd.with({ command = execute_path("prettierd") }),
 
-    -- CSS
-    diagnostics.stylelint,
-    formatting.stylelint,
+    -- js
+    code_actions.eslint_d.with({ command = execute_path("eslint_d") }),
+    diagnostics.eslint_d.with({ command = execute_path("eslint_d") }),
 
-    -- JS
-    code_actions.eslint_d,
-    diagnostics.eslint_d,
-    formatting.eslint_d.with({ command = execute_path("eslint_d") }),
-
-    -- JSON
+    -- json
     diagnostics.jsonlint,
 
-    -- LUA
+    -- lua
     formatting.stylua,
 
-    -- RUBY
-    diagnostics.rubocop,
+    -- ruby
+    diagnostics.rubocop.with({ command = execute_path("rubocop") }),
     formatting.rubocop.with({ command = execute_path("rubocop") }),
 
-    -- YAML
+    -- yaml
     diagnostics.yamllint,
-    formatting.yamlfmt,
 
-    -- ZSH
+    -- zsh
     diagnostics.zsh,
   },
   on_attach = function(client, bufnr)

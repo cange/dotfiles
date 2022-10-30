@@ -56,7 +56,6 @@ The following packages are required to install in order to use this NeoVim setup
 | [tree-sitter]         | Syntax completion/diagnostic tooling  |
 | [lua-language-server] | Syntax auto completion                |
 | [vue-language-server] | Vue 3 and 2 support                   |
-| [stylelint-lsp]       | CSS support                           |
 | [ripgrep]             | Telescope needs it to search in files |
 | [nerd-fonts]          | Font icons                            |
 | wget                  | required by LSP mason client          |
@@ -64,7 +63,6 @@ The following packages are required to install in order to use this NeoVim setup
 [lua-language-server]: https://github.com/sumneko/lua-language-server
 [nerd-fonts]: https://github.com/ryanoasis/nerd-fonts
 [ripgrep]: https://github.com/BurntSushi/ripgrep#installation
-[stylelint-lsp]: https://github.com/bmatcuk/stylelint-lsp
 [tree-sitter]: https://github.com/tree-sitter/tree-sitter
 [vue-language-server]: https://github.com/neovim/nvim-lspconfigblob/master/doc/server_configurations.md#volar
 
@@ -80,7 +78,6 @@ npm install --global typescript-language-server \
 @volar/vue-language-server \
 eslint_d \
 jsonlint \
-stylelint-lsp \
 typescript
 ```
 

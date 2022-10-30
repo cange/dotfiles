@@ -11,10 +11,14 @@ if not found_winbar then
   return
 end
 
-local function attach_keymaps(_, bufnr)
+local function attach_keymaps(client, bufnr)
   -- Use LSP as the handler for formatexpr.
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
+  ---Preconfigured keymap
+  ---@param lhs string
+  ---@param rhs string|function
+  ---@param desc? string
   local function keymap(lhs, rhs, desc)
     local mode = "n"
     desc = desc or ""
@@ -22,19 +26,27 @@ local function attach_keymaps(_, bufnr)
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 
-  keymap("K", vim.lsp.buf.hover, "hover (LSP)")
-  keymap("gD", vim.lsp.buf.declaration, "go to declaration (LSP)")
-  keymap("gI", "<cmd>Telescope lsp_implementations<CR>", "go to implementation (LSP)")
-  keymap("gT", vim.lsp.buf.type_definition, "Go to type (LSP)")
-  keymap("gd", vim.lsp.buf.definition, "Go to definition (LSP)")
-  keymap("gj", vim.diagnostic.goto_next, "Go to next issue (LSP)")
-  keymap("gk", vim.diagnostic.goto_prev, "Go to previous issue (LSP)")
-  keymap("gs", vim.lsp.buf.signature_help, "info about symbol (LSP)")
-  keymap("qf", vim.lsp.buf.code_action, "QuickFix issue (LSP)")
-  keymap("<leader>wd", "<cmd>Telescope lsp_document_symbols<CR>", "show symbols (LSP)")
-  keymap("<leader>rn", vim.lsp.buf.rename, "rename symbol (LSP)")
+  keymap("K", vim.lsp.buf.hover, "LSP Hover")
+  keymap("gD", vim.lsp.buf.declaration, "LSP Go to Declaration")
+  keymap("gI", "<cmd>Telescope lsp_implementations<CR>", "LSP Go to Implementation")
+  keymap("gT", vim.lsp.buf.type_definition, "LSP Go to Type")
+  keymap("gd", vim.lsp.buf.definition, "LSP Go to Definition")
+  keymap("gj", vim.diagnostic.goto_next, "LSP Next Issue")
+  keymap("gk", vim.diagnostic.goto_prev, "LSP Previous Issue")
+  keymap("gs", vim.lsp.buf.signature_help, "LSP Symbol Info")
+  keymap("qf", vim.lsp.buf.code_action, "LSP QuickFix issue")
+  keymap("<leader>wd", "<cmd>Telescope lsp_document_symbols<CR>", "LSP Show Symbols")
+  keymap("<leader>rn", vim.lsp.buf.rename, "LSP Rename Symbol")
   keymap("<leader>dr", "<cmd>Telescope lsp_references<CR>")
-  keymap("<leader>dd", "<cmd>Telescope diagnostics<CR>", "List of issues")
+  keymap("<leader>dd", "<cmd>Telescope diagnostics<CR>", "LSP List of Issues")
+
+  -- typescript specific keymaps (e.g. rename file and update imports)
+  if client.name == "tsserver" then
+    keymap("qfa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
+    keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "LSP Rename file and update imports")
+    keymap("<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", "LSP Organize imports")
+    keymap("<leader>ru", "<cmd>TypescriptRemoveUnused<CR>", "LSP remove unused variables")
+  end
 end
 
 ---@module 'cange.lsp.custom'
