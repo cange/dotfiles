@@ -11,7 +11,7 @@
 
 
 ================================================================================
-Introduction                                                             intro
+Introduction                                                           intro
 
 This are some basic information how this NeoVim setup works.
 
@@ -39,22 +39,20 @@ https://github.com/sumneko/lua-language-server/wiki/Annotations
 
 
 ================================================================================
-                                                                *cange.config*
-Config
+Config                                                          *cange.config*
 
 Some main configurations can be done in the `config.lua` file if the
 respective keys already exist there. This offers a convenient option for
 certain settings that are otherwise hidden deep in the setup. The keys can be
 access via:
 >
-    require("cange.config").get_config("path.to.setting.key")
+    require("cange.utils").get_config("path.to.setting.key")
 <
 
 
 
 ================================================================================
-                                                           *cange.colorscheme*
-Colorscheme
+Colorscheme                                                *cange.colorscheme*
 
 Provides basic information of the current use theme. The information here are
 used in other plugin configurations. Changing the values will impact the color
@@ -64,8 +62,7 @@ appearance if the colorscheme is installed.
 
 
 ================================================================================
-                                                               *cange.keymaps*
-Keymaps
+Keymaps                                                        *cange.keymaps*
 
 Provides information of most common keybindings like open search dialog or
 similar. Depending on the plugin, there are also some individual setups in the

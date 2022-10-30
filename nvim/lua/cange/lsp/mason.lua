@@ -25,19 +25,11 @@ if not found_lspconfig then
   print("[" .. ns .. '] "mason-lspconfig" not found')
   return
 end
-local found_servers, servers = pcall(require, "cange.lsp.servers")
-if not found_servers then
-  print("[" .. ns .. '] "cange.utils.servers" not found')
-  return
-end
+
 -- config
+-- https://github.com/williamboman/mason-lspconfig.nvim#default-configuration
 mason_lspconfig.setup({
-  -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
-  -- This setting has no relation with the `automatic_installation` setting.
-  ensure_installed = servers,
-  -- A list of provide to automatically install if they're not already
-  -- installed. Example: { "rust_analyzer@nightly", "sumneko_lua" } This
-  -- setting has no relation with the `automatic_installation` setting.
+  ensure_installed = utils.get_config("lsp.server.sources") or {},
   automatic_installation = true,
 })
 --
@@ -47,21 +39,10 @@ if not found_mason_null_ls then
   print("[" .. ns .. '] "mason-null-ls" not found')
   return
 end
+
 -- config
+-- https://github.com/jayp0521/mason-null-ls.nvim#default-configuration
 mason_null_ls.setup({
-  -- A list of sources to install if they're not already installed.
-  -- This setting has no relation with the `automatic_installation` setting.
-  ensure_installed = {
-    "eslint_d",
-    "jsonlint",
-    "prettierd",
-    "rubocop",
-    "stylua",
-    "yamllint",
-    "zsh",
-  },
-  -- Will automatically install masons tools based on selected sources in `null-ls`.
-  -- Can also be an exclusion list.
-  -- Example: `automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }`
+  ensure_installed = utils.get_config("lsp.null_ls.sources") or {},
   automatic_installation = true,
 })

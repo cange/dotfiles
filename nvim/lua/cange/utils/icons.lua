@@ -1,6 +1,4 @@
---#region Types
-
----@class Icons
+---@class cange.Icons
 ---@field ui table Generic icons for general purposes
 ---@filed documents table
 ---@field git table
@@ -12,8 +10,6 @@
 ---@field git_states table
 ---@field lualine table
 ---@field mason table Mason LSP local anguage server plugin
-
---#endregion
 
 local icons = {}
 -- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts
@@ -69,9 +65,9 @@ icons.documents = {
   SymlinkFolder = " ",
 }
 icons.git = {
-  Add = " ",
+  Add = " ",
   Mod = " ",
-  Remove = " ",
+  Remove = " ",
   Ignore = " ",
   Rename = " ",
   Diff = " ",

@@ -9,9 +9,9 @@ if not found_custom then
   print("[" .. ns .. '] "cange.utils.custom" not found')
   return
 end
-local found_servers, servers = pcall(require, "cange.lsp.servers")
-if not found_servers then
-  print("[" .. ns .. '] "cange.utils.servers" not found')
+local found_utils, utils = pcall(require, "cange.utils")
+if not found_utils then
+  print("[" .. ns .. '] "cange.utils" not found')
   return
 end
 
@@ -32,6 +32,7 @@ local function setup_server(server, server_config)
   server_config[server].setup(config)
 end
 
+local servers = utils.get_config("lsp.server.sources") or {}
 for _, server in pairs(servers) do
   setup_server(server, lspconfig)
 end

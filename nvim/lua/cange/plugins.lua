@@ -140,14 +140,14 @@ packer.startup(function(use)
     "neovim/nvim-lspconfig", -- configure LSP servers
     requires = {
       "williamboman/mason.nvim", -- managing & installing LSP servers, linters & formatters
-      "williamboman/mason-lspconfig.nvim", -- bridge to lspconfig
+      "williamboman/mason-lspconfig.nvim", -- bridges mason.nvim with the lspconfig plugin
     },
   })
   use({
     "jose-elias-alvarez/null-ls.nvim", -- syntax formatting, diagnostics (requires npm pacakges)
     requires = {
       "williamboman/mason.nvim", -- managing & installing LSP servers, linters & formatters
-      "jayp0521/mason-null-ls.nvim", -- bridge to null-ls
+      "jayp0521/mason-null-ls.nvim", -- bridges mason.nvim with the null-ls plugin
     },
   })
   use({
