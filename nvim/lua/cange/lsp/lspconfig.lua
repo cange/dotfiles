@@ -15,7 +15,7 @@ if not found_servers then
   return
 end
 
-local function setup_server(server, p_lspconfig)
+local function setup_server(server, server_config)
   local found_config, config = pcall(require, "cange.lsp.server_configurations." .. server)
   local default_config = {
     on_attach = custom.on_attach,
@@ -29,9 +29,24 @@ local function setup_server(server, p_lspconfig)
   end
   -- vim.pretty_print(provider, 'config', vim.tbl_keys(config))
 
-  p_lspconfig[server].setup(config)
+  server_config[server].setup(config)
 end
 
 for _, server in pairs(servers) do
   setup_server(server, lspconfig)
 end
+
+-- Enable TypeScript/JS basic LSP feature via plugin
+-- https://github.com/jose-elias-alvarez/typescript.nvim#setup
+local found_typescript, typescript = pcall(require, "typescript")
+if not found_typescript then
+  print("[" .. ns .. '] "typescript" not found')
+  return
+end
+
+typescript.setup({
+  server = {
+    capabilities = custom.capabilities(),
+    on_attach = custom.on_attach,
+  },
+})

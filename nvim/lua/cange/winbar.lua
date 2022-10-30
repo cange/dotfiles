@@ -31,8 +31,11 @@ local function str_is_empty(s)
   return s == nil or s == ""
 end
 
+---Identified name and path of the given file.
+---@param opts? table
+---@return string
 local function get_filename(opts)
-  local opts = opts or { path = 0 }
+  opts = opts or { path = 0 }
   local filename = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
   local filepath = filename
@@ -45,7 +48,6 @@ local function get_filename(opts)
 
   if not str_is_empty(filename) then
     local file_icon, file_icon_color = web_devicons.get_icon_color(filename, extension, { default = true })
-
     local hl_group = "FileIconColor" .. extension
 
     vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
@@ -58,6 +60,8 @@ local function get_filename(opts)
 
     return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#Winbar#" .. filepath .. "%*"
   end
+
+  return ""
 end
 
 local function get_location()

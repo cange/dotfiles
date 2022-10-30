@@ -27,6 +27,7 @@ local options = {
   showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
   showcmd = true, -- show incomplete commands
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
+  termguicolors = true, -- enable terminal color system
 
   --
   spell = false, -- enable spell checking if this is true

@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "plugins.lua",
   command = "source <afile> | PackerCompile",
 })
--- Have packer use a print()opup window
+-- Have packer use a popup window
 packer.init({
   display = {
     open_fn = function()
@@ -23,7 +23,7 @@ packer.init({
 
 ---Simplified setup method
 --- @param pack_name string The packages module name to call for setup
---- @return {}|nil
+--- @return table|nil
 local function instant_setup(pack_name)
   local found_pack, pack = pcall(require, pack_name)
   if not found_pack then
@@ -129,6 +129,10 @@ packer.startup(function(use)
     },
   })
   use("neovim/nvim-lspconfig") -- configure LSP servers
+  use({
+    "jose-elias-alvarez/typescript.nvim", -- enables LSP features for TS/JS
+    requires = "neovim/nvim-lspconfig",
+  })
 
   use("b0o/SchemaStore.nvim") -- json/yaml schema support
   use({
@@ -142,7 +146,7 @@ packer.startup(function(use)
       "neovim/nvim-lspconfig",
     },
   })
-  use("onsails/lspkind.nvim") -- plugin adds vscode-like icons
+
   use("j-hui/fidget.nvim") -- shows LSP initialization progress
 
   -- Completion
