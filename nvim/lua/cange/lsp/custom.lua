@@ -1,13 +1,13 @@
-local ns = "cange.lsp.custom"
+local ns = "[cange.lsp.custom]"
 local found_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not found_cmp then
-  print("[" .. ns .. '] "cmp_nvim_lsp" not found')
+  print(ns, '"cmp_nvim_lsp" not found')
   return
 end
 
-local found_winbar, winbar = pcall(require, "cange.winbar")
+local found_winbar, winbar = pcall(require, "cange.core.winbar")
 if not found_winbar then
-  print("[" .. ns .. '] "cange.winbar" not found')
+  print(ns, '"cange.core.winbar" not found')
   return
 end
 

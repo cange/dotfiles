@@ -1,17 +1,17 @@
-local ns = "cange.lsp.lspconfig"
+local ns = "[cange.lsp.lspconfig]"
 local found_lspconfig, lspconfig = pcall(require, "lspconfig")
 if not found_lspconfig then
-  print("[" .. ns .. '] "lspconfig" not found')
+  print(ns, '"lspconfig" not found')
   return
 end
 local found_custom, custom = pcall(require, "cange.lsp.custom")
 if not found_custom then
-  print("[" .. ns .. '] "cange.utils.custom" not found')
+  print(ns, '"cange.lsp.custom" not found')
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
 
@@ -41,7 +41,7 @@ end
 -- https://github.com/jose-elias-alvarez/typescript.nvim#setup
 local found_typescript, typescript = pcall(require, "typescript")
 if not found_typescript then
-  print("[" .. ns .. '] "typescript" not found')
+  print(ns, ' "typescript" not found')
   return
 end
 

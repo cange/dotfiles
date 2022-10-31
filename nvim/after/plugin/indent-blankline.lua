@@ -1,17 +1,17 @@
-local ns = "indent_blankline"
+local ns = "[after/plugin/indent_blankline]"
 local found_indent_blankline, indent_blankline = pcall(require, "indent_blankline")
 if not found_indent_blankline then
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
 local icon = utils.get_icon
-local found_colorscheme, colorscheme = pcall(require, "cange.colorscheme")
+local found_colorscheme, colorscheme = pcall(require, "cange.core.colorscheme")
 if not found_colorscheme then
-  print("[" .. ns .. '] "cange.colorscheme" not found')
+  print(ns, '"cange.core.colorscheme" not found')
   return
 end
 

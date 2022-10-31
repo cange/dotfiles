@@ -1,4 +1,4 @@
-local ns = "alpha"
+local ns = "[after/plugin/alpha]"
 local found, alpha = pcall(require, ns)
 if not found then
   return
@@ -14,20 +14,14 @@ local function button(key, label, cmd)
   return btn
 end
 
-local found_meta, meta = pcall(require, "cange.meta")
-if not found_meta then
-  print("[" .. ns .. '] "cange.meta" not found')
+local found_utils, utils = pcall(require, "cange.utils")
+if not found_utils then
+  print(ns, '"cange.utils" not found')
   return
 end
-local found_greetings, greetings = pcall(require, "cange.utils.greetings")
-if not found_greetings then
-  print("[" .. ns .. '] "cange.utils.greetings" not found')
-  return
-end
-
 local found_keymap_groups, keymap_groups = pcall(require, "cange.keymaps.groups")
 if not found_keymap_groups then
-  print("[" .. ns .. ']"cange.keymaps.groups" not found')
+  print(ns, '"cange.keymaps.groups" not found')
   return
 end
 
@@ -46,7 +40,7 @@ local function buttons()
 end
 
 section.buttons.val = buttons()
-section.footer.val = greetings.random_with_name(meta.author.display_name)
+section.footer.val = utils.greetings.random_with_name(utils.get_config('author.display_name'))
 section.header.opts.hl = "Include"
 section.buttons.opts.hl = "Macro"
 section.footer.opts.hl = "Type"

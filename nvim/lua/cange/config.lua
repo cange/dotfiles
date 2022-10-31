@@ -7,19 +7,21 @@ local ns = "[cange.config]"
 ---| "lsp.format_on_save" # Boolean to toggle on/off auto formatting on save
 ---| "lsp.null_ls_sources" # List of supported formatter, diagnostics servers
 
+---@alias cange.config.author
+---| 'author.display_name' # Name to personalise editor session
+
 ---@alias cange.config.treesitter
 ---| "treesitter.sources" # List of supported language parser
 
----@alias cange.config (cange.config.lsp|cange.config.treesitter)
+---@alias cange.config (cange.config.lsp|cange.config.treesitter|cange.config.author)
 
 --#endregion
 
 local config = {}
 
+config["author.display_name"] = "Christian"
 config["lsp.diagnostic_virtual_text"] = true
-
 config["lsp.format_on_save"] = true
-
 config["lsp.server_sources"] = {
   "cssls", -- css
   "eslint", -- javascript
@@ -31,7 +33,6 @@ config["lsp.server_sources"] = {
   "volar", --vue 3 and 2
   "yamlls", -- yaml
 }
-
 config["lsp.null_ls_sources"] = {
   "eslint_d",
   "jsonlint",
@@ -41,7 +42,6 @@ config["lsp.null_ls_sources"] = {
   "yamllint",
   "zsh",
 }
-
 config["treesitter.sources"] = {
   "bash",
   "css",

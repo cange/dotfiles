@@ -1,12 +1,9 @@
-require("cange.autocommands")
+-- order is important
+require("cange.core") -- #1
+require("cange.plugins") -- #2
+-- secondary
 require("cange.cmp")
-require("cange.globals")
 require("cange.keymaps")
 require("cange.lsp")
 require("cange.lualine")
-require("cange.meta")
-require("cange.options")
-require("cange.os")
-require("cange.plugins")
 require("cange.telescope")
-require("cange.winbar")
