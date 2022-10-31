@@ -1,5 +1,5 @@
 local function variation_by_day_time()
-  local h = tonumber(vim.fn.strftime("%k", vim.fn.localtime()))
+  -- local h = tonumber(vim.fn.strftime("%k", vim.fn.localtime()))
   local dark = "terafox"
   -- local dark = h >= 8 and h <= 18 and 'nordfox' or 'terafox'
   -- local light = h >= 8 and h <= 12 and 'dayfox' or 'dawnfox'

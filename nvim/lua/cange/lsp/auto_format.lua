@@ -46,9 +46,7 @@ end
 ---Auto formats codebase on save if format toggle is active
 ---@param bufnr? integer Identifier of buffer what should be formatted
 function auto_format.on_save(bufnr)
-  vim.pretty_print(ns, "on save formatting has been called, -bufnr:", bufnr)
   if auto_format.is_active == false then
-    print(ns, "formatter is not active!")
     return
   end
   auto_format.bufnr = bufnr or auto_format.bufnr

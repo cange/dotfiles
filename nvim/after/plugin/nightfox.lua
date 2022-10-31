@@ -41,6 +41,12 @@ utils.set_hls({
   TelescopeMatching = { fg = c.yellow.bright, bold = true },
   TelescopeSelection = { bg = c.sel0 },
   TelescopeSelectionCaret = { fg = c.white.base, bg = c.sel0 },
+  TelescopePromptNormal = { bg = c.bg },
+  TelescopeSelectionNormal = { bg = c.bg0 },
+  TelescopePromptBorder = { fg = c.bg0, bg = c.bg0 },
+  TelescopePromptTitle = { fg = c.bg4 },
+  TelescopeBorder = { fg = c.bg0, bg = c.bg0 },
+  TelescopeResultsNormal = { bg = c.bg0 },
 })
 
 local found_modes, modes = pcall(require, "modes")
