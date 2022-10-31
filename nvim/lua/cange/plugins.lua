@@ -156,14 +156,6 @@ packer.startup(function(use)
   })
 
   use("b0o/SchemaStore.nvim") -- json/yaml schema support
-  use({
-    "MunifTanjim/prettier.nvim", -- JS formatter
-    requires = {
-      "jose-elias-alvarez/null-ls.nvim",
-      "neovim/nvim-lspconfig",
-    },
-  })
-
   use("j-hui/fidget.nvim") -- shows LSP initialization progress
 
   -- Completion
