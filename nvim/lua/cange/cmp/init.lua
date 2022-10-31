@@ -1,28 +1,28 @@
 -- Reloads this file whenever a 'json' file saved in snippet directory to
 -- enable change immediately
-local ns = "cange.cmp.init"
+local ns = "[cange.cmp.init]"
 local found_cmp, cmp = pcall(require, "cmp")
 if not found_cmp then
   return
 end
 local found_luasnip, luasnip = pcall(require, "luasnip")
 if not found_luasnip then
-  print("[" .. ns .. '] "luasnip" not found')
+  print(ns, '"luasnip" not found')
   return
 end
 local found_config_luasnip, config_luasnip = pcall(require, "cange.cmp.luasnip")
 if not found_config_luasnip then
-  print("[" .. ns .. '] "cange.cmp.luasnip" not found')
+  print(ns, '"cange.cmp.luasnip" not found')
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
 local found_cmp_utils, cmp_utils = pcall(require, "cange.cmp.utils")
 if not found_cmp_utils then
-  print("[" .. ns .. '] "cange.cmp.utils" not found')
+  print(ns, '"cange.cmp.utils" not found')
   return
 end
 
@@ -55,6 +55,23 @@ cmp.setup({
     -- Confirmations
     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- `false` to confirm explicitly selected items only
     ["<C-Space>"] = cmp.mapping.complete(),
+
+    -- Choice
+    ["<C-]>"] = cmp.mapping(function(fallback)
+      if luasnip.choice_active() then
+        print("has choice")
+        luasnip.change_choice(1)
+      else
+        fallback()
+      end
+    end, { "i" }),
+    ["<C-[>"] = cmp.mapping(function(fallback)
+      if luasnip.choice_active() then
+        luasnip.change_choice(-1)
+      else
+        fallback()
+      end
+    end, { "i" }),
 
     -- Selection
     ["<Tab>"] = cmp.mapping(function(fallback)
