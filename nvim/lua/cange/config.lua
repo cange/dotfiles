@@ -1,15 +1,26 @@
-local ns = "cange.config"
+local ns = "[cange.config]"
+--#region
 
--- Allows to configurate hidden items on a global stage.
----@class cange.Config
----@field "lsp.diagnostic.virtual_text" boolean Shows inline hint text if true
----@field "lsp.server.sources" table List of LSP servers
----@field "lsp.null_ls.sources" table List of supported formatter, diagnostics
----@field "treesitter.sources" table List of supported language parser
+---@alias cange.config.lsp
+---| "lsp.diagnostic_virtual_text" # Boolean to show or hide inline hint text
+---| "lsp.server_sources" # List of LSP servers
+---| "lsp.format_on_save" # Boolean to toggle on/off auto formatting on save
+---| "lsp.null_ls_sources" # List of supported formatter, diagnostics servers
+
+---@alias cange.config.treesitter
+---| "treesitter.sources" # List of supported language parser
+
+---@alias cange.config (cange.config.lsp|cange.config.treesitter)
+
+--#endregion
 
 local config = {}
-config["lsp.diagnostic.virtual_text"] = true
-config["lsp.server.sources"] = {
+
+config["lsp.diagnostic_virtual_text"] = true
+
+config["lsp.format_on_save"] = true
+
+config["lsp.server_sources"] = {
   "cssls", -- css
   "eslint", -- javascript
   "html", -- html
@@ -20,7 +31,8 @@ config["lsp.server.sources"] = {
   "volar", --vue 3 and 2
   "yamlls", -- yaml
 }
-config["lsp.null_ls.sources"] = {
+
+config["lsp.null_ls_sources"] = {
   "eslint_d",
   "jsonlint",
   "prettierd",
@@ -29,6 +41,7 @@ config["lsp.null_ls.sources"] = {
   "yamllint",
   "zsh",
 }
+
 config["treesitter.sources"] = {
   "bash",
   "css",
@@ -60,12 +73,12 @@ local M = {}
 
 ---Get certain config attributes
 ---
----@param key ("lsp.diagnostics.virtual_text"|"lsp.server.sources"|"lsp.null_ls.sources"|"treesitter.sources") Path of a certain configguation key
+---@param key cange.config Path of a certain configuation key
 ---@return any Value of given key or nil if not found.
 function M.get_config(key)
-  local c = config[key] or nil
-  if not c then
-    print("[" .. ns .. "] of " .. key .. " key is not configured!")
+  local c = config[key]
+  if c == nil then
+    print(ns, 'of "' .. key .. '" key is not configured!')
   end
   return c
 end

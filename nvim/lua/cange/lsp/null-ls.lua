@@ -1,41 +1,21 @@
-local ns = "cange.lsp.null-ls"
+local ns = "[cange.lsp.null-ls]"
 local found_null_ls, null_ls = pcall(require, "null-ls")
 if not found_null_ls then
-  print("[" .. ns .. '] "null-ls" not found')
+  print(ns, '"null-ls" not found')
   return
 end
--- local found_null_ls, null_ls = pcall(require, "null-ls")
--- if not found_null_ls then
---   print("[" .. ns .. '] "null-ls" not found')
---   return
--- end
+local found_auto_format, auto_format = pcall(require, "cange.lsp.auto_format")
+if not found_auto_format then
+  print(ns, '"cange.lsp.auto_format" not found')
+  return
+end
+
 -- config
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/
 local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
 local formatting = null_ls.builtins.formatting
 
-local function lsp_format(bufnr)
-  vim.lsp.buf.format({
-    filter = function(client)
-      return client.name == "null-ls"
-    end,
-    bufnr = bufnr,
-    async = true, -- do not block if true
-  })
-end
-
-local function on_save_formatting(bufnr)
-  local group = vim.api.nvim_create_augroup("cange_lsp_formatting", { clear = true })
-  vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    group = group,
-    buffer = bufnr,
-    callback = function()
-      lsp_format(bufnr)
-    end,
-  })
-end
 local function execute_path(shim)
   ---@see https://asdf-vm.com/manage/versions.html#shims
   return vim.fn.expand("$HOME/.asdf/shims/" .. shim)
@@ -69,7 +49,7 @@ null_ls.setup({
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
-      on_save_formatting(bufnr)
+      auto_format.on_save(bufnr)
     end
   end,
 })

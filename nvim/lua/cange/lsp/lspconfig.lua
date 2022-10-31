@@ -32,7 +32,7 @@ local function setup_server(server, server_config)
   server_config[server].setup(config)
 end
 
-local servers = utils.get_config("lsp.server.sources") or {}
+local servers = utils.get_config("lsp.server_sources") or {}
 for _, server in pairs(servers) do
   setup_server(server, lspconfig)
 end

@@ -23,5 +23,5 @@ vim.diagnostic.config({
   signs = {
     active = signs,
   },
-  virtual_text = utils.get_config("lsp.diagnostic.virtual_text") or false,
+  virtual_text = utils.get_config("lsp.diagnostic_virtual_text") or false,
 })

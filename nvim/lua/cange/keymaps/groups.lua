@@ -45,6 +45,7 @@ M.lsp = {
     N = { cmd = "<cmd>NullLsInfo<CR>", desc = "Info Null-ls" },
     c = { cmd = vim.lsp.buf_get_clients, desc = "LSP clients" },
     d = { cmd = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', desc = "Diagnostics log" },
+    f = { cmd = "<cmd>CangeLSPToggleAutoFormat<CR>", desc = "Toggle Auto Formatting" },
     i = { cmd = "<cmd>LspInfo<CR>", desc = "Info LSP" },
     q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     l = { cmd = vim.diagnostic.setloclist, desc = "Show current issues" },
@@ -69,7 +70,7 @@ M.search = {
       dashboard = true,
       icon = icon("ui", "Project"),
     },
-    ['ff']= {
+    ["ff"] = {
       cmd = "<cmd>Telescope live_grep<CR>",
       desc = "Find Text",
       primary = true,
