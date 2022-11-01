@@ -1,21 +1,18 @@
 local ns = "[cange.config]"
---#region
 
 ---@alias cange.config.lsp
 ---| "lsp.diagnostic_virtual_text" # Boolean to show or hide inline hint text
 ---| "lsp.server_sources" # List of LSP servers
 ---| "lsp.format_on_save" # Boolean to toggle on/off auto formatting on save
 ---| "lsp.null_ls_sources" # List of supported formatter, diagnostics servers
-
+---
 ---@alias cange.config.author
----| 'author.display_name' # Name to personalise editor session
-
+---| "author.display_name" # Name to personalise editor session
+---
 ---@alias cange.config.treesitter
 ---| "treesitter.sources" # List of supported language parser
-
+---
 ---@alias cange.config (cange.config.lsp|cange.config.treesitter|cange.config.author)
-
---#endregion
 
 local config = {}
 

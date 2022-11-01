@@ -1,41 +1,41 @@
----All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
----each plugin by it self.
+-- All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
+-- each plugin by it self.
+--
+---@class cange.keymaps.Command
+---@field desc string Description of the keybinding
+---@field cmd string Command of the keybinding
+---@field dashboard? boolean Determines whether or not to on "alpha" start page
+---@field icon? cange.utils.Icons The icon which shown on "alpha" start page
+---@field primary? boolean Determines whether or not to show a on inital "which-key" window
+--
+---@class cange.keymaps.Group
+---@field subleader string Additional key to enter the certain group
+---@field title string Is displayed as group name
+---@field mappings table<string, cange.keymaps.Command> The actual key bindings
+--
+---@class cange.keymaps.Groups
+---@field config cange.keymaps.Group
+---@field git cange.keymaps.Group
+---@field lsp cange.keymaps.Group Language related syntax analytics
+---@field packer cange.keymaps.Group Install, update neovims plugins
+---@field search cange.keymaps.Group Finding stuff
+---@field session cange.keymaps.Group
+---@field terminal cange.keymaps.Group
+---@field treesitter cange.keymaps.Group
 
-local ns = "cange.keymaps.groups"
+local ns = "[cange.keymaps.groups]"
 
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
 local icon = utils.get_icon
 
---#region Types
-
----@class KeymapsCommand
----@field desc string Description of the keybinding
----@field cmd string Command of the keybinding
----@field dashboard? boolean Determines whether or not to on "alpha" start page
----@field icon? string The icon which shown on "alpha" start page
----@field primary? boolean Determines whether or not to show a on inital "which-key" window
-
----@enum mappings <string, KeymapsCommand>
-
----@class KeymapsGroup
----@field subleader string Additional key to enter the certain group
----@field title string Is displayed as group name
----@field mappings mappings The actual key bindings
-
---#endregion
-
 ---Provides general settings
+---@type cange.keymaps.Groups
 local M = {}
 
----Mappings tries to organise global used keybindings on one place
----Pattern: <block_key> = { { <key> = { cmd = '...', desc = '...' } } }
----@table mappings
-
----@alias lsp KeymapsGroup Language related syntax analytics
 M.lsp = {
   subleader = "l",
   title = "LSP Feature",
@@ -54,10 +54,8 @@ M.lsp = {
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
   },
 }
-
----@alias search KeymapsGroup Finding stuff
 M.search = {
-  subleader = "s",
+  subleade = "s",
   title = "Search",
   mappings = {
     B = { cmd = "<cmd>Telescope buffers<CR>", desc = "Recent Files", primary = true },
@@ -93,8 +91,6 @@ M.search = {
     w = { cmd = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', desc = "Browse workspace" },
   },
 }
-
----@alias config KeymapsGroup
 M.config = {
   subleader = "c",
   title = "Editor",
@@ -114,8 +110,6 @@ M.config = {
     w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
   },
 }
-
----@alias git KeymapsGroup
 M.git = {
   subleader = "g",
   title = "Git",
@@ -135,8 +129,6 @@ M.git = {
     u = { cmd = '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', desc = "Undo stage hunk" },
   },
 }
-
----@alias packer KeymapsGroup Install, update neovims plugins
 M.packer = {
   subleader = "p",
   title = "Plugin management",
@@ -153,8 +145,6 @@ M.packer = {
     u = { cmd = "<cmd>PackerSync<CR>", desc = "Update plugins", dashboard = true, icon = icon("ui", "Sync") },
   },
 }
-
----@alias session KeymapsGroup
 M.session = {
   subleader = "b",
   title = "Sessions",
@@ -165,8 +155,6 @@ M.session = {
     x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
   },
 }
-
----@alias terminal KeymapsGroup
 M.terminal = {
   subleader = "t",
   title = "Terminal",
@@ -180,8 +168,6 @@ M.terminal = {
     v = { cmd = "<cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "Vertical Terminal" },
   },
 }
-
----@alias treesitter KeymapsGroup
 M.treesitter = {
   subleader = "T",
   title = "Tree-sitter",

@@ -202,12 +202,11 @@ packer.startup(function(use)
   })
   use({
     "p00f/nvim-ts-rainbow", -- Rainbow parentheses
-    requires = {
-      "nvim-treesitter/nvim-treesitter",
-    },
+    requires = { "nvim-treesitter/nvim-treesitter" },
   })
   use("johmsalas/text-case.nvim") -- text case converter (camel case, etc.)
   use("folke/zen-mode.nvim") -- Distraction-free coding
+  use("mg979/vim-visual-multi") -- multi search and replace
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

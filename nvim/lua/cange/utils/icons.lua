@@ -1,15 +1,15 @@
----@class cange.Icons
----@field ui table Generic icons for general purposes
----@filed documents table
----@field git table
----@field diagnostics table
----@field which_key table
----@field kind table Language symbols
+---@class cange.utils.Icons
 ---@field cmp_kind table Completion kinds
 ---@field cmp_source table
+---@field diagnostics table
+---@field git table
 ---@field git_states table
+---@field kind table Language symbols
 ---@field lualine table
 ---@field mason table Mason LSP local anguage server plugin
+---@field ui table Generic icons for general purposes
+---@field which_key table
+---@filed documents table
 
 local icons = {}
 -- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts

@@ -26,7 +26,6 @@ local M = {
 ---Enables active flag
 function M.enable()
   M.is_active = true
-  M.on_save()
   notify("Enabled auto format on save")
 end
 
