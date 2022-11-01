@@ -30,9 +30,9 @@ telescope.setup({
       "smart", -- shows only the difference between the displayed paths
       "absolute",
     },
+    entry_prefix = "    ",
     prompt_prefix = " " .. icon("ui", "Search") .. " ",
     selection_caret = " " .. icon("ui", "ChevronRight") .. " ",
-    entry_prefix = "    ",
     layout_config = {
       horizontal = {
         preview_width = 80,

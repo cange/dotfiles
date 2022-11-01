@@ -1,5 +1,5 @@
 local ns = "[after/plugin/alpha]"
-local found, alpha = pcall(require, ns)
+local found, alpha = pcall(require, "alpha")
 if not found then
   return
 end
@@ -40,7 +40,7 @@ local function buttons()
 end
 
 section.buttons.val = buttons()
-section.footer.val = utils.greetings.random_with_name(utils.get_config('author.display_name'))
+section.footer.val = utils.greetings.random_with_name(utils.get_config("author.display_name"))
 section.header.opts.hl = "Include"
 section.buttons.opts.hl = "Macro"
 section.footer.opts.hl = "Type"
