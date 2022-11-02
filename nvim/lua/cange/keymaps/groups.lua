@@ -55,7 +55,7 @@ M.lsp = {
   },
 }
 M.search = {
-  subleade = "s",
+  subleader = "s",
   title = "Search",
   mappings = {
     B = { cmd = "<cmd>Telescope buffers<CR>", desc = "Recent Files", primary = true },
