@@ -1,66 +1,13 @@
-# https://spaceship-prompt.sh/getting-started/#installing
-source "$ZDOTDIR/plugins/spaceship-prompt/spaceship.zsh"
+# https://github.com/romkatv/powerlevel10k/blob/master/README.md#manual
+# Enable theme
+source "$ZDOTDIR/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 
-# Display time
-SPACESHIP_TIME_SHOW=true
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# Display username always
-# SPACESHIP_USER_SHOW=always
-
-# Do not truncate path in repos
-SPACESHIP_DIR_TRUNC_REPO=true
-
-# https://spaceship-prompt.sh/config/prompt/
-# Prompt - left
-SPACESHIP_PROMPT_ORDER=(
-  dir
-  git
-  package
-  node
-  ruby
-  lua
-  rust
-  docker
-  aws
-  python
-  terraform
-  exec_time
-  async
-  line_sep
-  battery
-  jobs
-  exit_code
-  char
-)
-
-# Rprompt - right
-SPACESHIP_RPROMPT_ORDER=(
-  user
-  time
-)
-
-# Lang/service icons
-SPACESHIP_AWS_SYMBOL=" "
-SPACESHIP_CHAR_SYMBOL=" "
-SPACESHIP_DOCKER_SYMBOL=" "
-SPACESHIP_ELIXIR_SYMBOL=" "
-SPACESHIP_LUA_SYMBOL=" "
-SPACESHIP_NODE_SYMBOL=" "
-SPACESHIP_PACKAGE_SYMBOL=" "
-SPACESHIP_PYTHON_SYMBOL=" "
-SPACESHIP_RUBY_SYMBOL=" "
-SPACESHIP_RUST_SYMBOL=" "
-# Git icons
-SPACESHIP_GIT_BRANCH_PREFIX=" "
-SPACESHIP_GIT_STATUS_COLOR="${SPACESHIP_GIT_BRANCH_COLOR}"
-SPACESHIP_GIT_STATUS_ADDED=" "
-SPACESHIP_GIT_STATUS_PREFIX=" "
-SPACESHIP_GIT_STATUS_SUFFIX=""
-SPACESHIP_GIT_STATUS_MODIFIED=" "
-SPACESHIP_GIT_STATUS_RENAMED=" "
-SPACESHIP_GIT_STATUS_DELETED=" "
-SPACESHIP_GIT_STATUS_STASHED=" "
-SPACESHIP_GIT_STATUS_UNMERGED="ﱵ "
-SPACESHIP_GIT_STATUS_AHEAD=" "
-SPACESHIP_GIT_STATUS_BEHIND=" "
-SPACESHIP_GIT_STATUS_DIVERGED=" "
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh

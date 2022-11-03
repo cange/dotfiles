@@ -7,7 +7,7 @@
 if [[ -s "${HOME}/.config/secrets" ]]; then
   source "${HOME}/.config/secrets"
 else
-  echo '   zshrc: no secrets file found'
+  echo '  zshrc: no secrets file found'
 fi
 
 ###
@@ -19,7 +19,7 @@ source "$ZDOTDIR/functions.zsh"
 # Order #1: Plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
-zsh_add_plugin "spaceship-prompt/spaceship-prompt"
+zsh_add_plugin "romkatv/powerlevel10k"
 
 # Order #2: additional files
 zsh_add_file "aliases.zsh"
@@ -28,12 +28,12 @@ zsh_add_file "history.zsh"
 zsh_add_file "oh-my-zsh.zsh"
 zsh_add_file "prompt.zsh"
 
-# start: z navigation config
+# >>> z navigation config
 zsh_add_plugin "agkozak/zsh-z"
 autoload -U compinit && compinit
 # prettify z menu
 zstyle ':completion:*' menu select
-# end: z navigation config
+# <<< z navigation config
 
 #
 ###############################################################################
