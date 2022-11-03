@@ -84,6 +84,9 @@ packer.startup(function(use)
   use("rcarriga/nvim-notify") -- popover notification
   use("mvllow/modes.nvim") -- Prismatic line decorations
 
+  -- Motion
+  use({ "ggandor/leap.nvim", run = require("leap").add_default_mappings() }) -- moving fast to a certain location
+
   -- Keybinding
   use("folke/which-key.nvim")
 
