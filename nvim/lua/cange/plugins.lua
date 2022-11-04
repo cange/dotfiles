@@ -50,7 +50,7 @@ end
 local packer_bootstrap = ensure_packer()
 
 packer.startup(function(use)
-  local web_icons = "kyazdani42/nvim-web-devicons"
+  local devicons = "kyazdani42/nvim-web-devicons"
   -- Plugin Manager
   use("wbthomason/packer.nvim") -- package manager
 
@@ -58,27 +58,18 @@ packer.startup(function(use)
   use("EdenEast/nightfox.nvim") -- theme
 
   -- UI: Statusline
-  use({
-    "nvim-lualine/lualine.nvim", -- status line
-    requires = { web_icons, opt = true },
-  })
+  use({ "nvim-lualine/lualine.nvim", requires = { devicons, opt = true } })
   -- UI: Cursorline
   use("RRethy/vim-illuminate") -- Highlight the word under the cursor
 
   -- UI: winbar
-  use({
-    "SmiteshP/nvim-navic", -- A statusline/winbar component
-    requires = "neovim/nvim-lspconfig",
-  })
+  use({ "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" }) -- A statusline/winbar component
 
   -- Terminal
   use("akinsho/toggleterm.nvim") -- inline Terminal
 
   -- Startup
-  use({
-    "goolord/alpha-nvim", -- startup screen
-    requires = { web_icons },
-  })
+  use({ "goolord/alpha-nvim", requires = devicons }) -- startup screen
 
   -- Utility
   use("rcarriga/nvim-notify") -- popover notification
@@ -91,10 +82,7 @@ packer.startup(function(use)
   use("folke/which-key.nvim")
 
   -- Scrolling
-  use({
-    "karb94/neoscroll.nvim", -- smooth scrolling
-    config = instant_setup("neoscroll"),
-  })
+  use({ "karb94/neoscroll.nvim", config = instant_setup("neoscroll") }) -- smooth scrolling
 
   -- Fuzzy Finder
   use({
@@ -110,17 +98,10 @@ packer.startup(function(use)
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- improves search performance
 
   -- File explorer
-  use({
-    "kyazdani42/nvim-tree.lua",
-    requires = { web_icons }, -- optional, for file icons
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
-  })
+  use({ "kyazdani42/nvim-tree.lua", requires = devicons, tag = "nightly" })
 
   -- Comment
-  use({
-    "numToStr/Comment.nvim", -- comment toggle
-    config = instant_setup("Comment"),
-  })
+  use({ "numToStr/Comment.nvim", config = instant_setup("Comment") }) -- comment toggle
 
   -- Indent
   use("lukas-reineke/indent-blankline.nvim")
@@ -128,10 +109,7 @@ packer.startup(function(use)
   -- Syntax
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use("nvim-treesitter/playground") -- inspect syntax node anatomy
-  use({
-    "m-demare/hlargs.nvim", -- highlight arguments' definitions
-    requires = { "nvim-treesitter/nvim-treesitter" },
-  })
+  use({ "m-demare/hlargs.nvim", requires = { "nvim-treesitter/nvim-treesitter" } }) -- highlight arguments' definitions
   use("slim-template/vim-slim") -- slim language support (Vim Script)
 
   -- Snippets
@@ -153,10 +131,7 @@ packer.startup(function(use)
       "jayp0521/mason-null-ls.nvim", -- bridges mason.nvim with the null-ls plugin
     },
   })
-  use({
-    "jose-elias-alvarez/typescript.nvim", -- enables LSP features for TS/JS
-    requires = "neovim/nvim-lspconfig",
-  })
+  use({ "jose-elias-alvarez/typescript.nvim", requires = "neovim/nvim-lspconfig" }) -- enables LSP features for TS/JS
 
   use("b0o/SchemaStore.nvim") -- json/yaml schema support
   use("j-hui/fidget.nvim") -- shows LSP initialization progress
@@ -174,24 +149,17 @@ packer.startup(function(use)
       "saadparwaiz1/cmp_luasnip", -- snippet completions
     },
   })
-  use({
-    "tzachar/cmp-tabnine", -- AI code suggestions
-    run = "./install.sh",
-    requires = "hrsh7th/nvim-cmp",
-  })
+  use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" }) -- AI code suggestions
 
   -- Session
   use("rmagatti/auto-session") -- small automated session manager
   use("rmagatti/session-lens") -- extends auto-session through Telescope
 
   -- Icon
-  use(web_icons) -- File icons
+  use(devicons) -- File icons
 
   -- Color
-  use({
-    "norcalli/nvim-colorizer.lua", -- color highlighter
-    config = instant_setup("colorizer"),
-  })
+  use({ "norcalli/nvim-colorizer.lua", config = instant_setup("colorizer") }) -- color highlighter
 
   -- Git
   use("lewis6991/gitsigns.nvim") -- git highlighter, blame, etc
@@ -199,14 +167,9 @@ packer.startup(function(use)
 
   -- Editing support
   use("windwp/nvim-autopairs") -- close brackets, quotes etc
-  use({
-    "windwp/nvim-ts-autotag", -- autoclose and autorename html tags
-    config = instant_setup("nvim-ts-autotag"),
-  })
-  use({
-    "p00f/nvim-ts-rainbow", -- Rainbow parentheses
-    requires = { "nvim-treesitter/nvim-treesitter" },
-  })
+  use({ "windwp/nvim-ts-autotag", config = instant_setup("nvim-ts-autotag") }) -- autoclose and autorename html tags
+  use({ "p00f/nvim-ts-rainbow", requires = { "nvim-treesitter/nvim-treesitter" } }) -- Rainbow parentheses
+
   use("johmsalas/text-case.nvim") -- text case converter (camel case, etc.)
   use("folke/zen-mode.nvim") -- Distraction-free coding
   use("mg979/vim-visual-multi") -- multi search and replace
