@@ -12,6 +12,7 @@
 ---@filed documents table
 
 local icons = {}
+-- Icons works best with "FiraCode Nerd Font"
 -- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts
 -- go to the above and then enter <c-v>u<unicode> and the symbold should appear
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
@@ -20,36 +21,36 @@ local icons = {}
 icons.ui = {
   BigCircle = " ",
   BigUnfilledCircle = " ",
-  Bookmark = " ",
-  Bug = " ",
-  Calendar = " ",
-  Check = " ",
-  ChevronDown = " ", -- nf-fa-chevron_down
-  ChevronRight = " ", -- nf-fa-chevron_right
-  Circle = " ",
-  Close = " ",
-  Code = " ",
-  Comment = " ",
-  Dashboard = " ",
-  Gear = " ",
-  History = " ",
+  Bookmark = " ", -- nf-oct-bookmark
+  Bug = " ", -- nf-oct-bug
+  Calendar = " ", -- nf-oct-calendar
+  Check = " ", -- nf-oct-check
+  ChevronDown = " ", -- nf-oct-chevron_down
+  ChevronRight = " ", -- nf-oct-chevron_right
+  Circle = " ", -- nf-oct-primitive_dot
+  Close = " ", -- nf-oct-x
+  Code = " ", -- nf-oct-code
+  Comment = " ", -- nf-oct-comment
+  Dashboard = " ", -- nf-oct-dashboard
+  Gear = " ", -- nf-oct-gear
+  History = " ", -- nf-oct-history
   LineLeft = "▏",
-  List = " ",
-  Lock = " ",
+  List = " ", -- nf-oct-list_unordered
+  Lock = " ", -- nf-oct-lock
   Note = " ",
-  Package = " ",
-  Pencil = " ",
-  Project = " ",
-  Robot = "ﮧ ",
-  Search = "", -- nf-fa-search
-  SignIn = " ",
-  SignOut = " ",
+  Package = " ", -- nf-oct-package
+  Pencil = " ", -- nf-oct-pencil
+  Project = " ", -- nf-oct-repo
+  Robot = "ﮧ ", -- nf-mdi-robot
+  Search = " ", -- nf-oct-search
+  SignIn = " ", -- nf-oct-sign_in
+  SignOut = " ", -- nf-oct-sign_out
   Stethoscope = " ",
-  Sync = " ",
-  Tag = " ",
-  Telescope = " ",
-  Watch = " ",
-  Workspace = " ",
+  Sync = " ", -- nf-oct-sync
+  Tag = " ", -- nf-oct-tag
+  Telescope = " ", -- nf-oct-telescope
+  Watch = " ", -- nf-oct-clock
+  Workspace = " ", -- nf-oct-briefcase
 }
 icons.documents = {
   NewFile = " ",
@@ -63,26 +64,26 @@ icons.documents = {
   SymlinkFolder = " ",
 }
 icons.git = {
-  Add = " ",
-  Mod = " ",
-  Remove = " ",
-  Ignore = " ",
-  Rename = " ",
-  Diff = " ",
-  Branch = " ",
-  Octoface = " ",
+  Add = " ", -- nf-oct-diff_added,
+  Mod = " ", -- nf-oct-diff_modified
+  Remove = " ", -- nf-oct-diff_removed
+  Ignore = " ", -- nf-oct-diff_ignored
+  Rename = " ", -- nf-oct-diff_renamed
+  Diff = " ", -- nf-oct-diff
+  Branch = " ", --nf-oct-git_branch
+  Octoface = " ", -- nf-oct-octoface
 }
 icons.diagnostics = {
-  Error = " ",
-  Warning = " ",
-  Information = " ",
-  Question = " ",
-  Hint = " ",
+  Error = " ", -- nf-mdi-close_circle
+  Warning = " ", -- nf-mdi-information_outline
+  Information = " ", -- nf-mdi-information
+  Question = "ﬤ ", -- nf-mdi-help_circle_outline
+  Hint = " ", -- nf-mdi-lightbulb
 }
 icons.which_key = {
-  breadcrumb = "» ", -- symbol used in the command line area that shows your active key combo
+  breadcrumb = " ", -- nf-oct-arrow_right
   separator = icons.ui.ChevronRight, -- symbol used between a key and it's label
-  group = "+ ", -- symbol prepended to a group
+  group = " ", -- nf-oct-plus_small
 }
 icons.kind = {
   File = " ",
