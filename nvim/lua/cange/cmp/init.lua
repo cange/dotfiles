@@ -50,7 +50,6 @@ cmp.setup({
 
     -- Cancellations
     ["<C-c>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
-    ["<ESC>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
 
     -- Confirmations
     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- `false` to confirm explicitly selected items only
@@ -82,7 +81,7 @@ cmp.setup({
       elseif cmp_utils.jumpable(1) then
         luasnip.jump(1)
       elseif cmp_utils.has_words_before() then
-        fallback()
+        cmp.mapping.complete()
       else
         fallback()
       end
