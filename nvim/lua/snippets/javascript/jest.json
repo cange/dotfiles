@@ -17,27 +17,15 @@
   },
   "it(...)": {
     "prefix": "it",
-    "body": [
-      "it('$1', () => {",
-      "  $2",
-      "})"
-    ]
+    "body": ["it('$1', () => {", "  $2", "})"]
   },
   "afterEach(…)": {
     "prefix": "af",
-    "body": [
-      "afterEach(() => {",
-      "  $1",
-      "})"
-    ]
+    "body": ["afterEach(() => {", "  $1", "})"]
   },
   "beforeEach(…)": {
     "prefix": "be",
-    "body": [
-      "beforeEach(() => {",
-      "  $1",
-      "})"
-    ]
+    "body": ["beforeEach(() => {", "  $1", "})"]
   },
   "expect(subject…)": {
     "prefix": "exs",
@@ -49,7 +37,7 @@
   },
   "vue wrapper debug": {
     "prefix": "logd",
-    "body": "console.log('--- ${1:wrapper}.html(): %o', $1.html())"
+    "body": "console.log('--- ${1:wrapper}$2.html(): %o', $1$2.html())"
   },
   "expect.objectContaining": {
     "prefix": "exo",
@@ -108,4 +96,3 @@
     "body": "const specHelper = {\n\t$1: ($2) => {\n\t\t$3\n\t}$4\n}"
   }
 }
-
