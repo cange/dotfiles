@@ -135,6 +135,7 @@ packer.startup(function(use)
 
   use("b0o/SchemaStore.nvim") -- json/yaml schema support
   use("j-hui/fidget.nvim") -- shows LSP initialization progress
+  use("simrat39/symbols-outline.nvim") -- a tree like view for symbols
 
   -- Completion
   use({

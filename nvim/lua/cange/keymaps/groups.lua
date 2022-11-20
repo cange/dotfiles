@@ -47,10 +47,11 @@ M.lsp = {
     d = { cmd = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', desc = "Diagnostics log" },
     f = { cmd = "<cmd>CangeLSPToggleAutoFormat<CR>", desc = "Toggle Auto Formatting" },
     i = { cmd = "<cmd>LspInfo<CR>", desc = "Info LSP" },
-    q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     l = { cmd = vim.diagnostic.setloclist, desc = "Show current issues" },
     n = { cmd = vim.diagnostic.goto_next, desc = "Go to next issue" },
+    o = { cmd = "<cmd>SymbolsOutline<CR>", desc = "Symbols Outline" },
     p = { cmd = vim.diagnostic.goto_prev, desc = "Go to previous issue" },
+    q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
   },
 }
