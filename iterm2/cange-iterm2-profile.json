@@ -1,20 +1,4 @@
 {
-  "Scrollback With Status Bar" : false,
-  "Ansi 15 Color (Dark)" : {
-    "Red Component" : 0.81259751319885254,
-    "Color Space" : "P3",
-    "Blue Component" : 0.89333051443099976,
-    "Alpha Component" : 1,
-    "Green Component" : 0.84941822290420532
-  },
-  "Non-ASCII Anti Aliased" : false,
-  "Ansi 12 Color (Light)" : {
-    "Red Component" : 0.49169248342514038,
-    "Color Space" : "P3",
-    "Blue Component" : 0.97641593217849731,
-    "Alpha Component" : 1,
-    "Green Component" : 0.70640081167221069
-  },
   "Foreground Color (Dark)" : {
     "Red Component" : 0.47234123945236206,
     "Color Space" : "P3",
@@ -22,6 +6,22 @@
     "Alpha Component" : 1,
     "Green Component" : 0.51210027933120728
   },
+  "Ansi 15 Color (Dark)" : {
+    "Red Component" : 0.81259751319885254,
+    "Color Space" : "P3",
+    "Blue Component" : 0.89333051443099976,
+    "Alpha Component" : 1,
+    "Green Component" : 0.84941822290420532
+  },
+  "Ansi 0 Color" : {
+    "Red Component" : 0.33603328466415405,
+    "Color Space" : "P3",
+    "Blue Component" : 0.40375781059265137,
+    "Alpha Component" : 1,
+    "Green Component" : 0.3635745644569397
+  },
+  "Close Sessions On End" : true,
+  "Badge Max Width" : 0.10000000000000001,
   "Cursor Text Color" : {
     "Red Component" : 0.47234123945236206,
     "Color Space" : "P3",
@@ -92,7 +92,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.3635745644569397
   },
-  "Transparency" : 0.081473319898785604,
+  "Transparency" : 0.16147331989878561,
   "Tab Color (Dark)" : {
     "Red Component" : 0.11353255063295364,
     "Color Space" : "P3",
@@ -254,8 +254,8 @@
   },
   "Semantic History" : {
     "editor" : "com.sublimetext.3",
-    "action" : "best editor",
-    "text" : ""
+    "text" : "",
+    "action" : "best editor"
   },
   "Ansi 9 Color (Dark)" : {
     "Red Component" : 0.94259506464004517,
@@ -288,7 +288,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.60099536180496216
   },
-  "Custom Command" : "No",
+  "Custom Command" : "Yes",
   "Jobs to Ignore" : [
     "rlogin",
     "ssh",
@@ -387,7 +387,7 @@
       "precision" : "very_high"
     }
   ],
-  "Blur Radius" : 23.682346684881985,
+  "Blur Radius" : 16.100000000000001,
   "Rows" : 25,
   "Background Color (Light)" : {
     "Red Component" : 0.058823529630899429,
@@ -451,7 +451,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.76017302274703979
   },
-  "Normal Font" : "FiraCodeNerdFontCompleteM-Regular 14",
+  "Normal Font" : "FiraCodeNerdFontComplete-Regular 14",
   "Triggers" : [
 
   ],
@@ -462,7 +462,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.51210027933120728
   },
-  "Command" : "",
+  "Command" : "\/bin\/zsh",
   "Minimum Contrast (Light)" : 0,
   "Blend" : 0.30000001192092896,
   "Character Encoding" : 4,
@@ -895,13 +895,13 @@
     "Alpha Component" : 1,
     "Green Component" : 0.51257830858230591
   },
-  "Ansi 0 Color" : {
-    "Red Component" : 0.33603328466415405,
+  "Non-ASCII Anti Aliased" : false,
+  "Ansi 12 Color (Light)" : {
+    "Red Component" : 0.49169248342514038,
     "Color Space" : "P3",
-    "Blue Component" : 0.40375781059265137,
+    "Blue Component" : 0.97641593217849731,
     "Alpha Component" : 1,
-    "Green Component" : 0.3635745644569397
+    "Green Component" : 0.70640081167221069
   },
-  "Close Sessions On End" : true,
-  "Badge Max Width" : 0.10000000000000001
+  "Scrollback With Status Bar" : false
 }
