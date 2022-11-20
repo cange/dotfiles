@@ -41,7 +41,7 @@ M.lsp = {
   title = "LSP Feature",
   mappings = {
     C = { cmd = '<cmd>lua require("luasnip").cleanup()<CR>', desc = "Reset snippets UI" },
-    F = { cmd = "<cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>", desc = "Format" },
+    ["<F2>"] = { cmd = "<cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>", desc = "Format" },
     N = { cmd = "<cmd>NullLsInfo<CR>", desc = "Info Null-ls" },
     c = { cmd = vim.lsp.buf_get_clients, desc = "LSP clients" },
     d = { cmd = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', desc = "Diagnostics log" },
@@ -61,6 +61,13 @@ M.search = {
   mappings = {
     B = { cmd = "<cmd>Telescope buffers<CR>", desc = "Recent Files", primary = true },
     C = { cmd = "<cmd>Telescope commands<CR>", desc = "Commands" },
+    F = {
+      cmd = "<cmd>Telescope live_grep<CR>",
+      desc = "Find Text",
+      primary = true,
+      dashboard = true,
+      icon = icon("ui", "List"),
+    },
     M = { cmd = "<cmd>Telescope man_pages<CR>", desc = "Man Pages" },
     N = { cmd = "<cmd>Telescope notify<CR>", desc = "Notifications" },
     P = {
@@ -68,13 +75,6 @@ M.search = {
       desc = "Projects",
       dashboard = true,
       icon = icon("ui", "Project"),
-    },
-    ["ff"] = {
-      cmd = "<cmd>Telescope live_grep<CR>",
-      desc = "Find Text",
-      primary = true,
-      dashboard = true,
-      icon = icon("ui", "List"),
     },
     b = { cmd = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', desc = "Browse files" },
     c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "Change theme" },

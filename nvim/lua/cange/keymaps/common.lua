@@ -31,6 +31,10 @@ keymap("n", "<C-a>", "gg<S-v>G")
 keymap("n", "<C-w>t", ":tabedit<CR>")
 
 -- Move window "w+<direction>"
+keymap("", "w<left>", "<C-w>h")
+keymap("", "w<down>", "<C-w>j")
+keymap("", "w<up>", "<C-w>k")
+keymap("", "w<right>", "<C-w>l")
 keymap("", "wh", "<C-w>h")
 keymap("", "wj", "<C-w>j")
 keymap("", "wk", "<C-w>k")
@@ -60,7 +64,13 @@ keymap("v", "<S-Tab>", "<gv")
 keymap("n", "<leader><leader>", "<C-^>")
 
 -- Reload current file
-keymap("n", "<leader><leader>x", ':write<CR>:luafile %<CR>:lua vim.notify("File saved and executed")<CR>')
+keymap(
+  "n",
+  "<leader><leader>x",
+  ':write<CR>:luafile %<CR>:lua vim.notify("File saved and executed", '
+    .. vim.log.levels.INFO
+    .. ', { title = "Executed!" })<CR>'
+)
 
 -- Format
-keymap("n", "<leader><leader>f", ":lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>")
+keymap("n", "<F2>", ":lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>")

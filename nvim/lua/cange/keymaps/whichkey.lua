@@ -1,23 +1,23 @@
-local ns = "cange.keymaps.whichkey"
+local ns = "[cange.keymaps.whichkey]"
 
 local found_whichkey, whichkey = pcall(require, "which-key")
 if not found_whichkey then
-  print("[" .. ns .. '] "which-key" not found')
+  print(ns, '"which-key" not found')
   return
 end
 local found_workflows, keymaps_groups = pcall(require, "cange.keymaps.groups")
 if not found_workflows then
-  print("[" .. ns .. '] "cange.keymaps.groups" not found')
+  print(ns, '"cange.keymaps.groups" not found')
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
 
 ---Generates a which-key table form mappings
----@param group KeymapsGroup Key of a keybinding block
+---@param group cange.keymaps.Group Key of a keybinding block
 ---@return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
 local function group_mappings(group)
   local section = {}
@@ -39,7 +39,7 @@ local function group_mappings(group)
 end
 
 ---Generates a which-key primary mapping table
----@param group KeymapsGroup Key of a keybinding block
+---@param group cange.keymaps.Group Key of a keybinding block
 ---@param mappings table List to store mappings
 local function primary_mappings(group, mappings)
   -- vim.pretty_print(vim.tbl_keys(group))
@@ -77,8 +77,8 @@ function M.setup()
       -- the presets plugin, adds help for a bunch of default keybindings in Neovim
       -- No actual key bindings are created
       presets = {
-        operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-        motions = false, -- adds help for motions
+        operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+        motions = true, -- adds help for motions
         text_objects = false, -- help for text objects triggered after entering an operator
         windows = true, -- default bindings on <c-w>
         nav = true, -- misc bindings to work with windows

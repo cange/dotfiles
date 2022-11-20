@@ -125,7 +125,7 @@ icons.cmp_kind = vim.tbl_extend("keep", icons.kind, {
 })
 icons.cmp_source = {
   buffer = "﬘ ",
-  luasnip = "  ",
+  luasnip = " ", -- nf-fa-cut
   nvim_lsp = " ",
   nvim_lua = " ",
   path = icons.documents.Folder .. " ",
@@ -157,7 +157,7 @@ local M = {}
 
 ---Ensures that the icons of given parts exists
 ---@param ... string List of parts the actual icon path
----@return string|table|nil The icon symbol or nil if not found
+---@return table|string|nil The icon symbol or nil if not found
 function M.get_icon(...)
   local icon = icons
   local parts = { ... }
