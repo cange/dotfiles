@@ -92,7 +92,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.3635745644569397
   },
-  "Transparency" : 0.16147331989878561,
+  "Transparency" : 0.081473319898785604,
   "Tab Color (Dark)" : {
     "Red Component" : 0.11353255063295364,
     "Color Space" : "P3",
@@ -254,8 +254,8 @@
   },
   "Semantic History" : {
     "editor" : "com.sublimetext.3",
-    "text" : "",
-    "action" : "best editor"
+    "action" : "best editor",
+    "text" : ""
   },
   "Ansi 9 Color (Dark)" : {
     "Red Component" : 0.94259506464004517,
@@ -451,7 +451,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.76017302274703979
   },
-  "Normal Font" : "FiraCodeNerdFontComplete-Regular 14",
+  "Normal Font" : "FiraCodeNerdFontComplete-Regular 16",
   "Triggers" : [
 
   ],
