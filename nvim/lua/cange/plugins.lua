@@ -65,9 +65,6 @@ packer.startup(function(use)
   -- UI: winbar
   use({ "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" }) -- A statusline/winbar component
 
-  -- Terminal
-  use("akinsho/toggleterm.nvim") -- inline Terminal
-
   -- Startup
   use({ "goolord/alpha-nvim", requires = devicons }) -- startup screen
 

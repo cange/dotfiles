@@ -21,7 +21,6 @@ local ns = "[cange.keymaps.groups]"
 ---@field packer cange.keymaps.Group Install, update neovims plugins
 ---@field search cange.keymaps.Group Finding stuff
 ---@field session cange.keymaps.Group
----@field terminal cange.keymaps.Group
 ---@field treesitter cange.keymaps.Group
 
 local found_utils, utils = pcall(require, "cange.utils")
@@ -153,19 +152,6 @@ M.session = {
     R = { cmd = "<cmd>RestoreSession<CR>", desc = "Recent Project", dashboard = true, icon = utils.get_icon("ui", "Calendar") },
     s = { cmd = "<cmd>SaveSession<CR>", desc = "Save Session" },
     x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
-  },
-}
-M.terminal = {
-  subleader = "t",
-  title = "Terminal",
-  mappings = {
-    ["1"] = { cmd = ":1ToggleTerm size=80 direction=vertical<CR>", desc = "VTerminal 1" },
-    ["2"] = { cmd = ":2ToggleTerm size=80 direction=vertical<CR>", desc = "VTerminal 2" },
-    ["3"] = { cmd = ":3ToggleTerm<CR>", desc = "HTerminal 1" },
-    ["4"] = { cmd = ":4ToggleTerm<CR>", desc = "HTerminal 2" },
-    f = { cmd = "<cmd>ToggleTerm direction=float<CR>", desc = "Float Terminal" },
-    h = { cmd = "<cmd>ToggleTerm size=10 direction=horizontal<CR>", desc = "Horizontal Terminal" },
-    v = { cmd = "<cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "Vertical Terminal" },
   },
 }
 M.treesitter = {
