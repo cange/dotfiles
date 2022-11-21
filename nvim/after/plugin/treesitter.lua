@@ -1,11 +1,11 @@
-local ns = "after.plugins.treesitter"
+local ns = "[plugin/treesitter]"
 local found, treesitter_config = pcall(require, "nvim-treesitter.configs")
 if not found then
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found)')
+  print(ns, '"cange.utils" not found)')
   return
 end
 treesitter_config.setup({

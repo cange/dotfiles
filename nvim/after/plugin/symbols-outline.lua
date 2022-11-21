@@ -1,4 +1,4 @@
-local ns = "[symbols-outline]"
+local ns = "[plugin/symbols-outline]"
 local found_outline, outline = pcall(require, "symbols-outline")
 if not found_outline then
   return

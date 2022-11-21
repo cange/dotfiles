@@ -1,4 +1,4 @@
-local ns = "[after/plugin/alpha]"
+local ns = "[plugin/alpha]"
 local found, alpha = pcall(require, "alpha")
 if not found then
   return

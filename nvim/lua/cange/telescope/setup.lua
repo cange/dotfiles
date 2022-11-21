@@ -1,15 +1,14 @@
-local ns = "cange.telescope.setup"
+local ns = "[cange.telescope.setup]"
 local found_telescope, telescope = pcall(require, "telescope")
 if not found_telescope then
-  print("[" .. ns .. '] "telescope" not found')
+  print(ns, '"telescope" not found')
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
-local icon = utils.get_icon
 local actions = require("telescope.actions")
 local themes = require("telescope.themes")
 -- config
@@ -31,8 +30,8 @@ telescope.setup({
       "absolute",
     },
     entry_prefix = "    ",
-    prompt_prefix = " " .. icon("ui", "Search") .. " ",
-    selection_caret = " " .. icon("ui", "ChevronRight") .. " ",
+    prompt_prefix = " " .. utils.get_icon("ui", "Search") .. " ",
+    selection_caret = " " .. utils.get_icon("ui", "ChevronRight") .. " ",
     layout_config = {
       horizontal = {
         preview_width = 80,

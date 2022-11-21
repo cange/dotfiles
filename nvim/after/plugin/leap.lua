@@ -1,4 +1,4 @@
-local ns = "[after/plugin/leap]"
+local ns = "[plugin/leap]"
 local found_leap, leap = pcall(require, "leap")
 if not found_leap then
   print(ns, '"leap" not found')
@@ -11,5 +11,5 @@ leap.add_default_mappings()
 -- than `x`, and even has a better mnemonic.
 -- If you still desperately want your old `x` back, then just delete these
 -- mappings set by Leap:
-vim.keymap.del({'x', 'o'}, 'x')
-vim.keymap.del({'x', 'o'}, 'X')
+vim.keymap.del({ "x", "o" }, "x")
+vim.keymap.del({ "x", "o" }, "X")

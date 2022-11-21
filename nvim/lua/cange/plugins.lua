@@ -1,8 +1,8 @@
-local ns = "cange.plugins"
+local ns = "[cange.plugins]"
 -- Use a protected call so we don't error out on first use
 local found, packer = pcall(require, "packer")
 if not found then
-  print("[" .. ns .. "] Packer is not installed")
+  print(ns, "Packer is not installed")
   return
 end
 
@@ -22,7 +22,7 @@ packer.init({
 local function instant_setup(pack_name)
   local found_pack, pack = pcall(require, pack_name)
   if not found_pack then
-    print("[" .. ns .. '] "' .. pack_name .. '" not found')
+    print(ns, '"' .. pack_name .. '" not found')
     return
   end
 

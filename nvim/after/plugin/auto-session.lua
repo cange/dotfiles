@@ -1,3 +1,4 @@
+local ns = "[plugin/auto-session]"
 local found, auto_session = pcall(require, "auto-session")
 if not found then
   return
@@ -5,7 +6,7 @@ end
 
 local found_lens, session_lens = pcall(require, "session-lens")
 if not found_lens then
-  print('[auto-session] "session-lens" not found')
+  print(ns, '"session-lens" not found')
   return
 end
 

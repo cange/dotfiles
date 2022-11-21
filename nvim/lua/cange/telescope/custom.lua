@@ -1,15 +1,14 @@
-local ns = "cange.telescope.custom"
+local ns = "[cange.telescope.custom]"
 local found_telescope, telescope = pcall(require, "telescope")
 if not found_telescope then
-  print("[" .. ns .. '] "telescope" not found')
+  print(ns, '"telescope" not found')
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
-local icon = utils.get_icon
 local builtin = require("telescope.builtin")
 local actions_state = require("telescope.actions.state")
 local themes = require("telescope.themes")
@@ -20,7 +19,7 @@ function M.browse_nvim()
   local opts = {
     cwd = "~/.config/nvim",
     previewer = false,
-    prompt_title = icon("ui", "Gear") .. " NeoVim Config",
+    prompt_title = utils.get_icon("ui", "Gear") .. " NeoVim Config",
     shorten_path = false,
   }
 
@@ -33,7 +32,7 @@ function M.diagnostics_log()
     initial_mode = "normal",
     no_listed = true, -- if true show only listed buffersw
     previewer = false,
-    prompt_title = icon("ui", "Stethoscope") .. " Diagnostics Log",
+    prompt_title = utils.get_icon("ui", "Stethoscope") .. " Diagnostics Log",
   }))
 end
 
@@ -41,7 +40,7 @@ function M.browse_workspace()
   builtin.find_files({
     cwd = "~/workspace/",
     hidden = true,
-    prompt_title = icon("ui", "Workspace") .. " Workspace",
+    prompt_title = utils.get_icon("ui", "Workspace") .. " Workspace",
     shorten_path = false,
   })
 end
