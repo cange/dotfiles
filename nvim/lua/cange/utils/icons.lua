@@ -156,23 +156,26 @@ icons.mason = {
 local M = {}
 
 ---Ensures that the icons of given parts exists
+---@param group_id string Identifier of the icon group
 ---@param ... string List of parts the actual icon path
----@return table|string|nil The icon symbol or nil if not found
-function M.get_icon(...)
+---@return string|nil The icon symbol or nil if not found
+function M.get(group_id, ...)
   local icon = icons
   local parts = { ... }
   local function get_icon(name)
-    return icon[name]
-  end
-
-  for _, name in ipairs(parts) do
-    local found_icon, _icon = pcall(get_icon, name)
-    if not found_icon then
-      vim.pretty_print("[cange.utils.icons] icon for " .. vim.inspect(parts) .. " not found")
+    local result = icon[name]
+    if not result then
+      vim.pretty_print("[cange.utils.icons] icon for " .. name .. " not found")
       return nil
     end
+    return result
+  end
 
-    icon = _icon
+  icon = get_icon(group_id)
+  if #parts > 0 then
+    for _, name in ipairs(parts) do
+      icon = get_icon(name)
+    end
   end
 
   -- vim.pretty_print("icon", icon)

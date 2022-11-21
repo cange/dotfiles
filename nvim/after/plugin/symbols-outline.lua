@@ -10,11 +10,10 @@ if not found_utils then
   return
 end
 
-local symbol_icons = utils.get_icon("kind")
 local symbols = {}
 
-for name, i in pairs(symbol_icons) do
-  symbols[name] = { icon = i }
+for name, i in pairs(utils.get_icon("kind")) do
+  symbols[name] = { icon = i, hl = utils.get_symbol_kind_hl(name).link }
 end
 
 outline.setup({

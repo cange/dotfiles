@@ -1,19 +1,25 @@
-local ns = "cange.utils.init"
+local ns = "[cange.utils.init]"
 local found_greetings, greetings = pcall(require, "cange.utils.greetings")
 if not found_greetings then
-  print("[" .. ns .. '] "cange.utils.greetings" not found')
+  print(ns, '"cange.utils.greetings" not found')
   return
 end
 local found_icons, icons = pcall(require, "cange.utils.icons")
 if not found_icons then
-  print("[" .. ns .. '] "cange.utils.icons" not found')
+  print(ns, '"cange.utils.icons" not found')
   return
 end
 local found_config, config = pcall(require, "cange.config")
 if not found_config then
-  print("[" .. ns .. '] "cange.config" not found')
+  print(ns, '"cange.config" not found')
   return
 end
+local found_symbols, symbols = pcall(require, "cange.utils.symbols")
+if not found_symbols then
+  print(ns, '"cange.utils.symbols" not found')
+  return
+end
+
 ---@module 'cange.utils'
 
 ---Provides keymap convenience helpers
@@ -32,7 +38,7 @@ function M.keymap(mode, lhs, rhs, opts)
 end
 
 ---Set highlight group by given table.
----@param highlights table<string,table>
+---@param highlights table<string, table>
 ---@see vim.api.nvim_set_hl
 function M.set_hls(highlights)
   for name, val in pairs(highlights) do
@@ -41,7 +47,8 @@ function M.set_hls(highlights)
 end
 
 M.greetings = greetings
-M.get_icon = icons.get_icon
-M.get_config = config.get_config
+M.get_symbol_kind_hl = symbols.get_kind_hl
+M.get_icon = icons.get
+M.get_config = config.get
 
 return M
