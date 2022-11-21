@@ -1,4 +1,4 @@
-local ns = "[after/plugin/nightfox]"
+local ns = "[plugin/nightfox]"
 local found_colorscheme, colorscheme = pcall(require, "cange.core.colorscheme")
 if not found_colorscheme then
   print(ns, '"cange.core.colorscheme" module not found')

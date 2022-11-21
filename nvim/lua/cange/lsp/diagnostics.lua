@@ -1,7 +1,7 @@
-local ns = "cange.lsp.diagnostics"
+local ns = "[cange.lsp.diagnostics]"
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found)')
+  print(ns, '"cange.utils" not found)')
   return
 end
 -- config

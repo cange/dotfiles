@@ -1,3 +1,4 @@
+local ns = "[cange.keymaps.groups]"
 -- All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
 -- each plugin by it self.
 --
@@ -22,8 +23,6 @@
 ---@field session cange.keymaps.Group
 ---@field terminal cange.keymaps.Group
 ---@field treesitter cange.keymaps.Group
-
-local ns = "[cange.keymaps.groups]"
 
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
@@ -66,7 +65,7 @@ M.search = {
       desc = "Find Text",
       primary = true,
       dashboard = true,
-      icon = icon("ui", "List"),
+      icon = utils.get_icon("ui", "List"),
     },
     M = { cmd = "<cmd>Telescope man_pages<CR>", desc = "Man Pages" },
     N = { cmd = "<cmd>Telescope notify<CR>", desc = "Notifications" },
@@ -74,7 +73,7 @@ M.search = {
       cmd = "<cmd>lua require('telescope').extensions.project.project()<CR>",
       desc = "Projects",
       dashboard = true,
-      icon = icon("ui", "Project"),
+      icon = utils.get_icon("ui", "Project"),
     },
     b = { cmd = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', desc = "Browse files" },
     c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "Change theme" },
@@ -83,12 +82,12 @@ M.search = {
       desc = "Find files",
       primary = true,
       dashboard = true,
-      icon = icon("ui", "Search"),
+      icon = utils.get_icon("ui", "Search"),
     },
     h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "Find help" },
     k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
     n = { cmd = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', desc = "Browse nvim" },
-    r = { cmd = "<cmd>Telescope oldfiles<CR>", desc = "Old files", dashboard = true, icon = icon("ui", "Calendar") },
+    r = { cmd = "<cmd>Telescope oldfiles<CR>", desc = "Old files", dashboard = true, icon = utils.get_icon("ui", "Calendar") },
     w = { cmd = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', desc = "Browse workspace" },
   },
 }
@@ -100,14 +99,14 @@ M.config = {
       cmd = "<cmd>enew <BAR>startinsert<CR>",
       desc = "New File",
       dashboard = true,
-      icon = icon("documents", "NewFile"),
+      icon = utils.get_icon("documents", "NewFile"),
     },
     a = { cmd = "<cmd>Alpha<CR>", desc = "Start Screen", primary = true },
     e = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
     k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/groups.lua<CR>", desc = "Edit Keymaps" },
     m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
     o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit Options" },
-    q = { cmd = "<cmd>quitall!<CR>", desc = "Quit", primary = true, dashboard = true, icon = icon("ui", "SignOut") },
+    q = { cmd = "<cmd>quitall!<CR>", desc = "Quit", primary = true, dashboard = true, icon = utils.get_icon("ui", "SignOut") },
     w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
   },
 }
@@ -140,18 +139,18 @@ M.packer = {
       cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>",
       desc = "Edit plugins",
       dashboard = true,
-      icon = icon("ui", "Gear"),
+      icon = utils.get_icon("ui", "Gear"),
     },
     i = { cmd = "<cmd>PackerInstall<CR>", desc = "Install" },
-    u = { cmd = "<cmd>PackerSync<CR>", desc = "Update plugins", dashboard = true, icon = icon("ui", "Sync") },
+    u = { cmd = "<cmd>PackerSync<CR>", desc = "Update plugins", dashboard = true, icon = utils.get_icon("ui", "Sync") },
   },
 }
 M.session = {
   subleader = "b",
   title = "Sessions",
   mappings = {
-    F = { cmd = "<cmd>SearchSession<CR>", desc = "Find Session", dashboard = true, icon = icon("ui", "SignIn") },
-    R = { cmd = "<cmd>RestoreSession<CR>", desc = "Recent Project", dashboard = true, icon = icon("ui", "Calendar") },
+    F = { cmd = "<cmd>SearchSession<CR>", desc = "Find Session", dashboard = true, icon = utils.get_icon("ui", "SignIn") },
+    R = { cmd = "<cmd>RestoreSession<CR>", desc = "Recent Project", dashboard = true, icon = utils.get_icon("ui", "Calendar") },
     s = { cmd = "<cmd>SaveSession<CR>", desc = "Save Session" },
     x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
   },

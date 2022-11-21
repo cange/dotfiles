@@ -1,14 +1,13 @@
-local ns = "nvim-tree"
+local ns = "[plugin/nvim-tree]"
 local found, tree = pcall(require, "nvim-tree")
 if not found then
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
-local icon = utils.get_icon
 local keymap = utils.keymap
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>")
 keymap("n", "<leader>.", ":NvimTreeFindFile<CR>")
@@ -31,7 +30,7 @@ end)
 local config = require("nvim-tree.config").nvim_tree_callback
 tree.setup({
   live_filter = {
-    prefix = icon("ui", "Search") .. "  ",
+    prefix = utils.get_icon("ui", "Search") .. "  ",
   },
   -- project plugin related
   sync_root_with_cwd = true,
@@ -48,30 +47,30 @@ tree.setup({
       },
       git_placement = "after",
       glyphs = {
-        default = icon("documents", "File"),
-        bookmark = icon("ui", "Bookmark"),
-        symlink = icon("documents", "SymlinkFile"),
+        default = utils.get_icon("documents", "File"),
+        bookmark = utils.get_icon("ui", "Bookmark"),
+        symlink = utils.get_icon("documents", "SymlinkFile"),
         folder = {
-          arrow_closed = icon("ui", "ChevronRight"),
-          arrow_open = icon("ui", "ChevronDown"),
-          default = icon("documents", "Folder"),
-          empty = icon("documents", "EmptyFolder"),
-          empty_open = icon("documents", "EmptyOpenFolder"),
-          open = icon("documents", "OpenFolder"),
-          symlink = icon("documents", "SymlinkFolder"),
-          symlink_open = icon("documents", "SymlinkFolde"),
+          arrow_closed = utils.get_icon("ui", "ChevronRight"),
+          arrow_open = utils.get_icon("ui", "ChevronDown"),
+          default = utils.get_icon("documents", "Folder"),
+          empty = utils.get_icon("documents", "EmptyFolder"),
+          empty_open = utils.get_icon("documents", "EmptyOpenFolder"),
+          open = utils.get_icon("documents", "OpenFolder"),
+          symlink = utils.get_icon("documents", "SymlinkFolder"),
+          symlink_open = utils.get_icon("documents", "SymlinkFolder"),
         },
-        git = icon("git_states"),
+        git = utils.get_icon("git_states"),
       },
     },
   },
   diagnostics = {
     enable = true,
     icons = {
-      error = icon("diagnostics", "Error"),
-      warning = icon("diagnostics", "Warning"),
-      hint = icon("diagnostics", "Hint"),
-      info = icon("diagnostics", "Information"),
+      error = utils.get_icon("diagnostics", "Error"),
+      warning = utils.get_icon("diagnostics", "Warning"),
+      hint = utils.get_icon("diagnostics", "Hint"),
+      info = utils.get_icon("diagnostics", "Information"),
     },
   },
   actions = {

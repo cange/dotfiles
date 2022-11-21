@@ -1,4 +1,4 @@
-local ns = "[after/plugin/indent_blankline]"
+local ns = "[plugin/indent_blankline]"
 local found_indent_blankline, indent_blankline = pcall(require, "indent_blankline")
 if not found_indent_blankline then
   return

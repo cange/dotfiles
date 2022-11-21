@@ -1,4 +1,4 @@
-local ns = "[cange.utils.init]"
+local ns = "[cange.utils]"
 local found_greetings, greetings = pcall(require, "cange.utils.greetings")
 if not found_greetings then
   print(ns, '"cange.utils.greetings" not found')
