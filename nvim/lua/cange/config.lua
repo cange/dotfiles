@@ -72,7 +72,7 @@ local M = {}
 ---
 ---@param key cange.config Path of a certain configuation key
 ---@return any Value of given key or nil if not found.
-function M.get_config(key)
+function M.get(key)
   local c = config[key]
   if c == nil then
     print(ns, 'of "' .. key .. '" key is not configured!')

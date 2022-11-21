@@ -1,25 +1,24 @@
-local ns = "cange.winbar"
+local ns = "[cange.core.winbar]"
 local found_navic, navic = pcall(require, "nvim-navic")
 if not found_navic then
-  print("[" .. ns .. '] "nvim-navic" not found')
+  print(ns, '"nvim-navic" not found')
   return
 end
 local found_web_devicons, web_devicons = pcall(require, "nvim-web-devicons")
 if not found_web_devicons then
-  print("[" .. ns .. '] "nvim-web-devicons" not found')
+  print(ns, '"nvim-web-devicons" not found')
   return
 end
 local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print("[" .. ns .. '] "cange.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
-local icon = utils.get_icon
-local separator = icon("ui", "ChevronRight")
+local separator = utils.get_icon("ui", "ChevronRight")
 -- Setup
 
 navic.setup({
-  icons = icon("kind"),
+  icons = utils.get_icon("kind"),
   highlight = true,
   separator = " " .. separator,
   depth_limit = 0,
@@ -52,7 +51,7 @@ local function get_filename(opts)
 
     vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
     if str_is_empty(file_icon) then
-      file_icon = icon("kind", "File")
+      file_icon = utils.get_icon("kind", "File")
     end
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
@@ -116,7 +115,7 @@ function WinbarBreadcrumbRedraw()
   end
 
   if not str_is_empty(value) and get_buf_option("mod") then
-    local mod = "%#LspCodeLens#" .. icon("ui", "Circle") .. "%*"
+    local mod = "%#LspCodeLens#" .. utils.get_icon("ui", "Circle") .. "%*"
     if location_added then
       value = value .. " " .. mod
     else
@@ -138,37 +137,16 @@ function WinbarBreadcrumbRedraw()
   end
 end
 
-utils.set_hls({
-  NavicIconsFile = { link = "CmpItemKindFile" },
-  NavicIconsModule = { link = "CmpItemKindModule" },
-  NavicIconsNamespace = { link = "CmpItemKindModuleFunctionC" },
-  NavicIconsPackage = { link = "CmpItemKindModule" },
-  NavicIconsClass = { link = "CmpItemKindClass" },
-  NavicIconsMethod = { link = "CmpItemKindMethod" },
-  NavicIconsProperty = { link = "CmpItemKindProperty" },
-  NavicIconsField = { link = "CmpItemKindField" },
-  NavicIconsConstructor = { link = "CmpItemKindConstructor" },
-  NavicIconsEnum = { link = "CmpItemKindEnum" },
-  NavicIconsInterface = { link = "CmpItemKindInterface" },
-  NavicIconsFunction = { link = "Function" },
-  NavicIconsVariable = { link = "CmpItemKindVariable" },
-  NavicIconsConstant = { link = "Constant" },
-  NavicIconsString = { link = "String" },
-  NavicIconsNumber = { link = "Number" },
-  NavicIconsBoolean = { link = "Boolean" },
-  NavicIconsArray = { link = "CmpItemKindClass" },
-  NavicIconsObject = { link = "CmpItemKindClass" },
-  NavicIconsKey = { link = "CmpItemKindKeyword" },
-  NavicIconsKeyword = { link = "CmpItemKindKeyword" },
-  NavicIconsNull = { link = "Constant" },
-  NavicIconsEnumMember = { link = "CmpItemKindEnumMember" },
-  NavicIconsStruct = { link = "CmpItemKindStruct" },
-  NavicIconsEvent = { link = "CmpItemKindEvent" },
-  NavicIconsOperator = { link = "Operator" },
-  NavicIconsTypeParameter = { link = "CmpItemKindTypeParameter" },
+local highlight_links = {
   NavicText = { link = "Normal" },
   NavicSeparator = { link = "Comment" },
-})
+}
+
+for name, highlight_link in pairs(utils.get_symbol_kind_hl()) do
+  highlight_links["NavicIcons" .. name] = highlight_link
+end
+
+utils.set_hls(highlight_links)
 
 -- Autocommands
 local events = {
