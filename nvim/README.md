@@ -59,9 +59,12 @@ The following packages are required to install in order to use this NeoVim setup
 | [ripgrep]             | Telescope needs it to search in files |
 | [nerd-fonts]          | Font icons                            |
 | wget                  | required by LSP mason client          |
+| [deno]                | required by [peek] markdow-previewer  |
 
+[deno]: https://deno.land/
 [lua-language-server]: https://github.com/sumneko/lua-language-server
 [nerd-fonts]: https://github.com/ryanoasis/nerd-fonts
+[peek]: https://github.com/toppair/peek.nvim
 [ripgrep]: https://github.com/BurntSushi/ripgrep#installation
 [tree-sitter]: https://github.com/tree-sitter/tree-sitter
 [vue-language-server]: https://github.com/neovim/nvim-lspconfigblob/master/doc/server_configurations.md#volar
