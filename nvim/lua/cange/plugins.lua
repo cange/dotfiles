@@ -172,6 +172,9 @@ packer.startup(function(use)
   use("folke/zen-mode.nvim") -- Distraction-free coding
   use("mg979/vim-visual-multi") -- multi search and replace
 
+  -- Markdown
+  use({ "toppair/peek.nvim", run = "deno task --quiet build:fast" })
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
