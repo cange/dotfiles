@@ -6,6 +6,7 @@ terminal.
 ## Installing
 
 Clone of this repo:
+
 ```shell
 git clone http://github.com/cange/dotfiles.git && cd dotfiles
 ./install
@@ -59,16 +60,16 @@ See _NeoVim_ set up [README](./nvim/README.md).
 
 The following is a list of apps and tools
 
-| Application               | Description |
-| ---                       | ---         |
-| asdf                      | Multiple runtime versions manager |
-| firefox-developer-edition | preferred web browser  |
-| fork                      | fast and friendly git client |
-| git                       | latest version of git |
+| Application               | Description                                 |
+| ------------------------- | ------------------------------------------- |
+| asdf                      | Multiple runtime versions manager           |
+| firefox-developer-edition | preferred web browser                       |
+| fork                      | fast and friendly git client                |
+| git                       | latest version of git                       |
 | gpg-suite                 | protects emails, files and sign Git commits |
-| iterm2                    | advanced terminal |
-| itsycal                   | menu bar calender |
-| keepingyouawake           | prevent Max from going to sleep |
-| neovim                    | code editor |
-| raycast                   | advanced quick launcher |
-| stats                     | menu bar system monitor |
+| iterm2                    | advanced terminal                           |
+| itsycal                   | menu bar calender                           |
+| keepingyouawake           | prevent Max from going to sleep             |
+| neovim                    | code editor                                 |
+| raycast                   | advanced quick launcher                     |
+| stats                     | menu bar system monitor                     |
