@@ -76,12 +76,12 @@ diagnostics and formatting:
 
 ```sh
 npm install --global typescript-language-server \
-@fsouza/prettierd \
-@johnnymorganz/stylua-bin \
-@volar/vue-language-server \
-eslint_d \
-jsonlint \
-typescript
+            @fsouza/prettierd \
+            @johnnymorganz/stylua-bin \
+            @volar/vue-language-server \
+            eslint_d \
+            jsonlint \
+            typescript
 ```
 
 ### First Start
