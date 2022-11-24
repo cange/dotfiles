@@ -1,17 +1,13 @@
 {
   "eslint block": {
     "prefix": "lintbl",
-    "body": [
-      "/* eslint-disable $1 */",
-      "$2",
-      "/* eslint-enable $1 */"
-    ]
+    "body": ["/* eslint-disable $1 */", "$2", "/* eslint-enable $1 */"]
   },
   "eslint lint": {
     "prefix": "lintl",
     "body": "// eslint-disable-line $1"
   },
-  "log": {
+  "console.log(...)": {
     "prefix": "log",
     "body": "console.log('--- ${1:param}: %o', $1)"
   },
