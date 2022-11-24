@@ -20,7 +20,7 @@ local separator = utils.get_icon("ui", "ChevronRight")
 navic.setup({
   icons = utils.get_icon("kind"),
   highlight = true,
-  separator = " " .. separator,
+  separator = " ",
   depth_limit = 0,
   depth_limit_indicator = "..",
 })
