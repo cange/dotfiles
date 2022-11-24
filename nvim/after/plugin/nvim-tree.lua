@@ -47,9 +47,9 @@ tree.setup({
       },
       git_placement = "after",
       glyphs = {
-        default = utils.get_icon("documents", "File"),
-        bookmark = utils.get_icon("ui", "Bookmark"),
-        symlink = utils.get_icon("documents", "SymlinkFile"),
+        default =  vim.trim(utils.get_icon("documents", "File")),
+        bookmark =  vim.trim(utils.get_icon("ui", "Bookmark")),
+        symlink =  vim.trim(utils.get_icon("documents", "SymlinkFile")),
         folder = {
           arrow_closed = utils.get_icon("ui", "ChevronRight"),
           arrow_open = utils.get_icon("ui", "ChevronDown"),
