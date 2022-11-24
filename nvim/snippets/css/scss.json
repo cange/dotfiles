@@ -38,17 +38,17 @@
   "wlw-context-color(…)": {
     "prefix": "colc",
     "body": "wlw-context-color('${1|error,notice,success,warning,action-disable,action-hover,action,text,text-muted,brand|}')"
-  }, 
+  },
   "wlw-breakpoint(…)": {
     "prefix": "brew",
     "body": "wlw-breakpoint(${1|desktop,tablet,mobile|}$2)$3"
   },
-  "@include wlw-breakpoint(…)": {
-    "prefix": "brew",
-    "body": "@include wlw-breakpoint(${1|desktop,tablet,mobile|}, ${2|up,only,down|}) {\n\t$3\n}"
+  "v-breakpoint(…) - mixin": {
+    "prefix": "brem",
+    "body": "@include v-breakpoint(${1|desktop,tablet,mobile|}, ${2|up,only,down|}) {\n\t$3\n}"
   },
-  "v-breakpoint(…) - @media query": {
-    "prefix": "bre",
+  "v-breakpoint(…) - function": {
+    "prefix": "bref",
     "body": "@media ($2-width: v-breakpoint(${1|desktop,tablet,mobile|}, ${2|min,max|})) {\n\t$3\n}"
   },
   "@use - design-tokens": {
