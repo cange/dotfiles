@@ -267,7 +267,7 @@
   # directory will be shortened only when prompt doesn't fit or when other parameters demand it
   # (see POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS and POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT below).
   # If set to `0`, directory will always be shortened to its minimum length.
-  typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=80
+  typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=0
   # When `dir` segment is on the last prompt line, try to shorten it enough to leave at least this
   # many columns for typing commands.
   typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS=40
@@ -329,7 +329,7 @@
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND=4
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_SHORTENED_FOREGROUND=4
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_ANCHOR_FOREGROUND=4#
+  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_ANCHOR_FOREGROUND=4
   #
   #   Styling for WORK_NON_EXISTENT.
   #   typeset -g POWERLEVEL9K_DIR_WORK_NON_EXISTENT_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -348,7 +348,7 @@
 
   #####################################[ vcs: git status ]######################################
   # Branch icon. Set this parameter to '\UE0A0 ' for the popular Powerline branch icon.
-  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
+  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=' '
 
   # Untracked files icon. It's really a question mark, your font isn't broken.
   # Change the value of this parameter to show a different icon.
