@@ -25,7 +25,7 @@ local keymap = utils.keymap
 
 local function toggle_markdown_preview()
   local method = peek.is_open() and "close" or "open"
-  print(ns, method)
+  vim.notify(method .. " markdown preview", vim.log.levels.INFO, { title = ns })
   peek[method]()
 end
 
