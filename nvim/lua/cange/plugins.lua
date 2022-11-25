@@ -70,7 +70,6 @@ packer.startup(function(use)
 
   -- Utility
   use("rcarriga/nvim-notify") -- popover notification
-  use("mvllow/modes.nvim") -- Prismatic line decorations
 
   -- Motion
   use("ggandor/leap.nvim") -- moving fast to a certain location
