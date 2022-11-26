@@ -38,6 +38,7 @@ icons.ui = {
   List = " ", -- nf-oct-list_unordered
   Lock = " ", -- nf-oct-lock
   Note = " ",
+  Multiline = " ", -- nf-seti-project
   Package = " ", -- nf-oct-package
   Pencil = " ", -- nf-oct-pencil
   Project = " ", -- nf-oct-repo

@@ -22,15 +22,54 @@ if not found_utils then
 end
 
 -- Config
+
+---@param value string|nil
+---@param percentage? string
+---@return string # Icon corresponding of percentage or whitespace if no percentage given
+local function accuracy_indicator(value, percentage)
+  local function item(icon)
+    return (icon or "  ") .. (value or "")
+  end
+  percentage = percentage or nil
+
+  if percentage and percentage ~= "" then
+    local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
+    local icons = "         "
+    local icon = vim.split(icons, " ")[fraction_num] .. " "
+    -- vim.pretty_print(ns .. " accuracy:", percentage, icon)
+    return item(icon)
+  end
+
+  return item()
+end
+
 local function menu_item_format(entry, vim_item)
-  local source_types = utils.get_icon("cmp_source") or {}
+  local maxwidth = 80
+  local source_icons = utils.get_icon("cmp_source") or {}
   local name = entry.source.name
+  local percentage = ""
+
   ---@diagnostic disable-next-line: param-type-mismatch
-  if vim.tbl_contains(vim.tbl_keys(source_types), name) then
-    vim_item.menu = source_types[name]
+  if vim.tbl_contains(vim.tbl_keys(source_icons), name) then
+    vim_item.menu = vim.trim(source_icons[name])
     vim_item.menu_hl_group = "Comment" -- assign appropriate theme color
   end
+
+  if entry.source.name == "cmp_tabnine" then
+    local cmp_data = (entry.completion_item.data or {})
+    if cmp_data.detail and cmp_data.detail:find(".*%%.*") then
+      percentage = cmp_data.detail
+    end
+
+    if cmp_data.multiline then
+      vim_item.kind = vim_item.kind .. " " .. utils.get_icon("ui", "Multiline")
+    end
+  end
+
   vim_item.kind = utils.get_icon("cmp_kind", vim_item.kind)
+  vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+  vim_item.menu = accuracy_indicator(vim_item.menu, percentage)
+
   return vim_item
 end
 
@@ -38,7 +77,7 @@ end
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode completion
 
 require("luasnip.loaders.from_vscode").lazy_load({ paths = "./snippets" })
-require("luasnip.loaders.from_vscode").lazy_load()
+-- require("luasnip.loaders.from_vscode").lazy_load() -- community snippets (create noise)
 
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
@@ -95,16 +134,11 @@ cmp.setup({
     end, { "i", "s" }),
   }),
   sources = {
-    {
-      name = "luasnip",
-      keyword_length = 2,
-      max_item_count = 5,
-      option = { use_show_condition = false },
-    },
-    { name = "buffer", keyword_length = 3, max_item_count = 5 },
-    { name = "nvim_lsp", keyword_length = 3 },
     { name = "cmp_tabnine", keyword_length = 3, max_item_count = 3 },
-    { name = "nvim_lua", keyword_length = 3, max_item_count = 5 },
+    { name = "nvim_lua", keyword_length = 3, max_item_count = 2 },
+    { name = "luasnip", keyword_length = 2, max_item_count = 3 },
+    { name = "nvim_lsp", keyword_length = 3, max_item_count = 5 },
+    { name = "buffer", keyword_length = 3, max_item_count = 3 },
     { name = "path", keyword_length = 3, max_item_count = 3 },
   },
   snippet = {
@@ -129,4 +163,23 @@ cmp.setup({
       col_offset = -3, -- align abbr text with kind icons in prefix
     },
   },
+})
+
+-- https://github.com/hrsh7th/cmp-cmdline
+
+-- `/` cmdline setup.
+cmp.setup.cmdline("/", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = "buffer" },
+  },
+})
+
+-- `:` cmdline setup.
+cmp.setup.cmdline(":", {
+  sources = cmp.config.sources({
+    { name = "path" },
+  }, {
+    { name = "cmdline" },
+  }),
 })
