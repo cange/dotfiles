@@ -1,7 +1,10 @@
----@class cange.utils.Symbols
+---This highlights groups relates to syntactic fragments also known kinds
+---@class cange.core.HighlightGroups
+---@field kinds table Completion kinds Highlight definition map
+---@field other_kinds table Completion kinds Highlight definition map
 local M = {}
 
-local kind_hls = {
+M.kinds = {
   Text = { link = "CmpItemKindText" },
   Method = { link = "CmpItemKindMethod" },
   Function = { link = "CmpItemKindFunction" },
@@ -28,7 +31,7 @@ local kind_hls = {
   Operator = { link = "CmpItemKindOperator" },
   TypeParameter = { link = "CmpItemKindTypeParameter" },
 }
-local other_kind_hls = {
+M.other_kinds = {
   Namespace = { link = "@namespace" },
   Package = { link = "@namespace" },
   String = { link = "@string" },
@@ -40,13 +43,4 @@ local other_kind_hls = {
   Null = { link = "@keyword" },
 }
 
----Provides mapping for highlight groups of symbol items.
----@param id? string|nil
----@return table A certain highlight group or all if identifier is nil
-function M.get_kind_hl(id)
-  id = id or nil
-  local hls = vim.tbl_extend("keep", kind_hls, other_kind_hls)
-
-  return id and hls[id] or hls
-end
 return M

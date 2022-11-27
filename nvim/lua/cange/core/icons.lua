@@ -1,24 +1,26 @@
----@class cange.utils.Icons
----@field cmp_kind table Completion kinds
----@field cmp_source table
----@field diagnostics table
----@field git table
----@field git_states table
----@field kind table Language symbols
----@field lualine table
----@field mason table Mason LSP local anguage server plugin
----@field ui table Generic icons for general purposes
----@field which_key table
----@filed documents table
+---@alias cange.core.Icon string A single character of a certain shape
 
-local icons = {}
+---@class cange.core.Icons
+---@field cmp_kind table<cange.core.Icon> Completion kinds
+---@field cmp_source table<cange.core.Icon>
+---@field diagnostics table<cange.core.Icon>
+---@field git table<cange.core.Icon>
+---@field git_states table<cange.core.Icon>
+---@field kind table<cange.core.Icon> Language symbols
+---@field lualine table<cange.core.Icon>
+---@field mason table<cange.core.Icon> Mason LSP local anguage server plugin
+---@field ui table Generic icons for general purposes
+---@field which_key table<cange.core.Icon>
+---@field documents table<cange.core.Icon>
+
+local M = {}
 -- Icons works best with "FiraCode Nerd Font"
 -- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts
 -- go to the above and then enter <c-v>u<unicode> and the symbold should appear
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
-icons.ui = {
+M.ui = {
   BigCircle = " ",
   BigUnfilledCircle = " ",
   Bookmark = " ", -- nf-oct-bookmark
@@ -53,7 +55,7 @@ icons.ui = {
   Watch = " ", -- nf-oct-clock
   Workspace = " ", -- nf-oct-briefcase
 }
-icons.documents = {
+M.documents = {
   NewFile = " ",
   EmptyFolder = " ",
   EmptyOpenFolder = " ",
@@ -64,7 +66,7 @@ icons.documents = {
   SymlinkFile = " ",
   SymlinkFolder = " ",
 }
-icons.git = {
+M.git = {
   Add = " ", -- nf-oct-diff_added,
   Mod = " ", -- nf-oct-diff_modified
   Remove = " ", -- nf-oct-diff_removed
@@ -74,19 +76,19 @@ icons.git = {
   Branch = " ", --nf-oct-git_branch
   Octoface = " ", -- nf-oct-octoface
 }
-icons.diagnostics = {
+M.diagnostics = {
   Error = " ", -- nf-mdi-close_circle
   Warning = " ", -- nf-mdi-information_outline
   Information = " ", -- nf-mdi-information
   Question = "ﬤ ", -- nf-mdi-help_circle_outline
   Hint = " ", -- nf-mdi-lightbulb
 }
-icons.which_key = {
+M.which_key = {
   breadcrumb = " ", -- nf-oct-arrow_right
-  separator = icons.ui.ChevronRight, -- symbol used between a key and it's label
+  separator = M.ui.ChevronRight, -- symbol used between a key and it's label
   group = " ", -- nf-oct-plus_small
 }
-icons.kind = {
+M.kind = {
   File = " ",
   Module = " ",
   Namespace = " ",
@@ -114,9 +116,9 @@ icons.kind = {
   Operator = " ",
   TypeParameter = " ",
 }
-icons.cmp_kind = vim.tbl_extend("keep", icons.kind, {
+M.cmp_kind = vim.tbl_extend("keep", M.kind, {
   Color = " ",
-  Folder = icons.documents.Folder .. " ",
+  Folder = M.documents.Folder .. " ",
   Keyword = " ",
   Reference = " ",
   Snippet = " ",
@@ -124,63 +126,33 @@ icons.cmp_kind = vim.tbl_extend("keep", icons.kind, {
   Unit = " ",
   Value = " ",
 })
-icons.cmp_source = {
+M.cmp_source = {
   buffer = "﬘ ",
   luasnip = " ", -- nf-fa-cut
   nvim_lsp = " ",
   nvim_lua = " ",
-  path = icons.documents.Folder .. " ",
-  cmp_tabnine = icons.ui.Robot .. " ",
+  path = M.documents.Folder .. " ",
+  cmp_tabnine = M.ui.Robot .. " ",
 }
-icons.git_states = {
-  unstaged = icons.git.Mod,
+M.git_states = {
+  unstaged = M.git.Mod,
   staged = " ",
   unmerged = "ﱵ ",
-  renamed = icons.git.Rename,
+  renamed = M.git.Rename,
   untracked = "ﱡ ",
-  deleted = icons.git.Remove,
-  ignored = icons.git.Ignore,
+  deleted = M.git.Remove,
+  ignored = M.git.Ignore,
 }
-icons.lualine = {
-  modified = icons.ui.Circle, -- Text to show when the file is modified.
-  newfile = icons.documents.NewFile, -- Text to show for new created file before first writting
-  readonly = icons.ui.lock, -- Text to show when the file is non-modifiable or readonly.
-  unnamed = icons.documents.File, -- Text to show for unnamed buffers.
+M.lualine = {
+  modified = M.ui.Circle, -- Text to show when the file is modified.
+  newfile = M.documents.NewFile, -- Text to show for new created file before first writting
+  readonly = M.ui.lock, -- Text to show when the file is non-modifiable or readonly.
+  unnamed = M.documents.File, -- Text to show for unnamed buffers.
 }
-icons.mason = {
-  package_installed = icons.ui.Check,
-  package_pending = icons.ui.Sync,
-  package_uninstalled = icons.ui.Close,
+M.mason = {
+  package_installed = M.ui.Check,
+  package_pending = M.ui.Sync,
+  package_uninstalled = M.ui.Close,
 }
-
----Provides the editors icons
-local M = {}
-
----Ensures that the icons of given parts exists
----@param group_id string Identifier of the icon group
----@param ... string List of parts the actual icon path
----@return string|nil The icon symbol or nil if not found
-function M.get(group_id, ...)
-  local icon = icons
-  local parts = { ... }
-  local function get_icon(name)
-    local result = icon[name]
-    if not result then
-      vim.pretty_print("[cange.utils.icons] icon for " .. name .. " not found")
-      return nil
-    end
-    return result
-  end
-
-  icon = get_icon(group_id)
-  if #parts > 0 then
-    for _, name in ipairs(parts) do
-      icon = get_icon(name)
-    end
-  end
-
-  -- vim.pretty_print("icon", icon)
-  return icon
-end
 
 return M

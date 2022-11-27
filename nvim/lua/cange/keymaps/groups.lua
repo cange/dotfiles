@@ -28,7 +28,6 @@ if not found_utils then
   print(ns, '"cange.utils" not found')
   return
 end
-local icon = utils.get_icon
 
 ---Provides general settings
 ---@type cange.keymaps.Groups
@@ -86,7 +85,12 @@ M.search = {
     h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "Find help" },
     k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
     n = { cmd = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', desc = "Browse nvim" },
-    r = { cmd = "<cmd>Telescope oldfiles<CR>", desc = "Old files", dashboard = true, icon = utils.get_icon("ui", "Calendar") },
+    r = {
+      cmd = "<cmd>Telescope oldfiles<CR>",
+      desc = "Old files",
+      dashboard = true,
+      icon = utils.get_icon("ui", "Calendar"),
+    },
     w = { cmd = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', desc = "Browse workspace" },
   },
 }
@@ -105,7 +109,13 @@ M.config = {
     k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/groups.lua<CR>", desc = "Edit Keymaps" },
     m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
     o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit Options" },
-    q = { cmd = "<cmd>quitall!<CR>", desc = "Quit", primary = true, dashboard = true, icon = utils.get_icon("ui", "SignOut") },
+    q = {
+      cmd = "<cmd>quitall!<CR>",
+      desc = "Quit",
+      primary = true,
+      dashboard = true,
+      icon = utils.get_icon("ui", "SignOut"),
+    },
     w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
   },
 }
@@ -148,8 +158,18 @@ M.session = {
   subleader = "b",
   title = "Sessions",
   mappings = {
-    F = { cmd = "<cmd>SearchSession<CR>", desc = "Find Session", dashboard = true, icon = utils.get_icon("ui", "SignIn") },
-    R = { cmd = "<cmd>RestoreSession<CR>", desc = "Recent Project", dashboard = true, icon = utils.get_icon("ui", "Calendar") },
+    F = {
+      cmd = "<cmd>SearchSession<CR>",
+      desc = "Find Session",
+      dashboard = true,
+      icon = utils.get_icon("ui", "SignIn"),
+    },
+    R = {
+      cmd = "<cmd>RestoreSession<CR>",
+      desc = "Recent Project",
+      dashboard = true,
+      icon = utils.get_icon("ui", "Calendar"),
+    },
     s = { cmd = "<cmd>SaveSession<CR>", desc = "Save Session" },
     x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
   },

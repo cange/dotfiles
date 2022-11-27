@@ -10,6 +10,7 @@ if not found_luasnip then
   print(ns, '"luasnip" not found')
   return
 end
+
 local found_cmp_utils, cmp_utils = pcall(require, "cange.cmp.utils")
 if not found_cmp_utils then
   print(ns, '"cange.cmp.utils" not found')
@@ -26,7 +27,7 @@ end
 ---@param value string|nil
 ---@param percentage? string
 ---@return string # Icon corresponding of percentage or whitespace if no percentage given
-local function accuracy_indicator(value, percentage)
+local function prediction_strength_indicator(value, percentage)
   local function item(icon)
     return (icon or "  ") .. (value or "")
   end
@@ -34,20 +35,20 @@ local function accuracy_indicator(value, percentage)
 
   if percentage and percentage ~= "" then
     local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
-    local icons = "         "
-    local icon = vim.split(icons, " ")[fraction_num] .. " "
-    -- vim.pretty_print(ns .. " accuracy:", percentage, icon)
+    local icon = vim.split("         ", " ")[fraction_num] .. " "
+    -- vim.pretty_print(ns .. " strength:", percentage, icon)
     return item(icon)
   end
 
   return item()
 end
 
+---@see cmp.FormattingConfig
 local function menu_item_format(entry, vim_item)
   local maxwidth = 80
   local source_icons = utils.get_icon("cmp_source") or {}
   local name = entry.source.name
-  local percentage = ""
+  local strength = ""
 
   ---@diagnostic disable-next-line: param-type-mismatch
   if vim.tbl_contains(vim.tbl_keys(source_icons), name) then
@@ -55,20 +56,15 @@ local function menu_item_format(entry, vim_item)
     vim_item.menu_hl_group = "Comment" -- assign appropriate theme color
   end
 
-  if entry.source.name == "cmp_tabnine" then
-    local cmp_data = (entry.completion_item.data or {})
-    if cmp_data.detail and cmp_data.detail:find(".*%%.*") then
-      percentage = cmp_data.detail
-    end
-
-    if cmp_data.multiline then
-      vim_item.kind = vim_item.kind .. " " .. utils.get_icon("ui", "Multiline")
-    end
+  ---@see https://github.com/tzachar/cmp-tabnine#show_prediction_strength
+  local tabnine_detail = (entry.completion_item.data or {}).detail
+  if tabnine_detail and tabnine_detail:find(".*%%.*") then
+    strength = tabnine_detail
   end
 
   vim_item.kind = utils.get_icon("cmp_kind", vim_item.kind)
   vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
-  vim_item.menu = accuracy_indicator(vim_item.menu, percentage)
+  vim_item.menu = prediction_strength_indicator(vim_item.menu, strength)
 
   return vim_item
 end

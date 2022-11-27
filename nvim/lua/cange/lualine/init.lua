@@ -21,7 +21,7 @@ lualine.setup({
   },
   sections = {
     lualine_b = {
-      { "branch", icon = vim.trim(utils.get_icon("git", "Branch")) },
+      { "branch", icon = utils.get_icon("git", "Branch", { trim = true }) },
       "diff",
       {
         "diagnostics",
