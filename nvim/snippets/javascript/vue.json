@@ -10,5 +10,132 @@
   "<template v-slot": {
     "prefix": "<template v-slot",
     "body": "<template v-slot:$1>\n\t$2\n</template>"
+  },
+  "component skeleton": {
+    "prefix": "template v2",
+    "body": [
+      "<template>",
+      "",
+      "</template>",
+      "",
+      "<script>",
+      "\texport default {",
+      "\t\t${0}",
+      "\t}",
+      "</script>",
+      "",
+      "<style scoped>",
+      "",
+      "</style>"
+    ]
+  },
+  "component skeleton TypeScript": {
+    "prefix": "template v2 TS",
+    "body": [
+      "<template>",
+      "",
+      "</template>",
+      "",
+      "<script lang=\"ts\">",
+      "\timport Vue from 'vue'",
+      "",
+      "\texport default Vue.extend({",
+      "\t\t${0}",
+      "\t})",
+      "</script>",
+      "",
+      "<style scoped>",
+      "",
+      "</style>"
+    ],
+    "description": "Base for Vue File with Typescript"
+  },
+  "Component composition API v2": {
+    "prefix": "template comp v2",
+    "body": [
+      "<template>",
+      "",
+      "</template>",
+      "",
+      "<script>",
+      "export default {",
+      "\tsetup () {",
+      "\t\t${0}",
+      "",
+      "\t\treturn {}",
+      "\t}",
+      "}",
+      "</script>",
+      "",
+      "<style scoped>",
+      "",
+      "</style>"
+    ]
+  },
+  "Component composition API v3": {
+    "prefix": "template comp v3",
+    "body": [
+      "<template>",
+      "",
+      "</template>",
+      "",
+      "<script setup>",
+      "",
+      "</script>",
+      "",
+      "<style scoped>",
+      "",
+      "</style>"
+    ]
+  },
+  "Component composition API reactive": {
+    "prefix": "reactive",
+    "body": [
+      "import { reactive, toRefs } from 'vue'",
+      "",
+      "export default {",
+      "\tsetup () {",
+      "\t\tconst state = reactive({",
+      "\t\t\t${0:count}: ${1:0},",
+      "\t\t})",
+      "\t",
+      "\t\treturn {",
+      "\t\t\t...toRefs(state),",
+      "\t\t}",
+      "\t}",
+      "}"
+    ]
+  },
+  "Component composition API with TypeScript": {
+    "prefix": "reactive TS",
+    "body": [
+      "<script lang=\"ts\">",
+      "import { defineComponent } from 'vue'",
+      "",
+      "export default defineComponent({",
+      "\tsetup () {",
+      "\t\t${0}\n",
+      "\t\treturn {}",
+      "\t}",
+      "})",
+      "</script>"
+    ]
+  },
+  "Component TS setup": {
+    "prefix": "setup v3 TS",
+    "body": "<script setup lang=\"ts\">\n\n</script>"
+  },
+  "Component TS class": {
+    "prefix": "class v3 TS",
+    "body": [
+      "<script lang=\"ts\">",
+      "\timport { Component, Vue } from 'vue-property-decorator';",
+      "",
+      "\t@Component",
+      "\texport default class ${0} extends Vue {",
+      "\t\t",
+      "\t}",
+      "</script>"
+    ]
   }
 }

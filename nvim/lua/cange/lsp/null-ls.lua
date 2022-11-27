@@ -16,6 +16,11 @@ local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
 local formatting = null_ls.builtins.formatting
 
+local found_ts_code_actions, ts_code_actions = pcall(require, "typescript.extensions.null-ls.code-actions")
+if not found_ts_code_actions then
+  print(ns, '"typescript.extensions.null-ls.code-actions" not found')
+end
+
 local function execute_path(shim)
   ---@see https://asdf-vm.com/manage/versions.html#shims
   return vim.fn.expand("$HOME/.asdf/shims/" .. shim)
@@ -30,6 +35,7 @@ null_ls.setup({
     -- js
     code_actions.eslint_d.with({ command = execute_path("eslint_d") }),
     diagnostics.eslint_d.with({ command = execute_path("eslint_d") }),
+    ts_code_actions,
 
     -- json
     diagnostics.jsonlint,

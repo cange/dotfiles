@@ -22,7 +22,7 @@ M["lsp.server_sources"] = {
   "ruby_ls", -- ruby
   "sumneko_lua", -- lua
   "svelte", -- svelte
-  "tsserver", -- javascript, typepscript, etc.
+  "tsserver", -- javascript, typescript, etc.
   "volar", --vue 3 and 2
   "yamlls", -- yaml
 }
