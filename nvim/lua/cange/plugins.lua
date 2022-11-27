@@ -30,11 +30,11 @@ local function instant_setup(pack_name)
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.api.nvim_create_autocmd("BufWritePost", {
-  group = vim.api.nvim_create_augroup("cange_compile_packer", { clear = true }),
-  pattern = "plugins.lua",
-  command = "source <afile> | PackerSync",
-})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--   group = vim.api.nvim_create_augroup("cange_compile_packer", { clear = true }),
+--   pattern = "plugins.lua",
+--   command = "source <afile> | PackerSync",
+-- })
 
 -- Packer bootstrap
 local ensure_packer = function()

@@ -6,7 +6,7 @@ local ns = "[cange.keymaps.groups]"
 ---@field desc string Description of the keybinding
 ---@field cmd string Command of the keybinding
 ---@field dashboard? boolean Determines whether or not to on "alpha" start page
----@field icon? cange.utils.Icons The icon which shown on "alpha" start page
+---@field icon? cange.utils.Icon The icon which shown on "alpha" start page
 ---@field primary? boolean Determines whether or not to show a on inital "which-key" window
 --
 ---@class cange.keymaps.Group
@@ -151,7 +151,7 @@ M.packer = {
       icon = utils.get_icon("ui", "Gear"),
     },
     i = { cmd = "<cmd>PackerInstall<CR>", desc = "Install" },
-    u = { cmd = "<cmd>PackerSync<CR>", desc = "Update plugins", dashboard = true, icon = utils.get_icon("ui", "Sync") },
+    s = { cmd = "<cmd>PackerSync<CR>", desc = "Update plugins", dashboard = true, icon = utils.get_icon("ui", "Sync") },
   },
 }
 M.session = {
