@@ -22,6 +22,12 @@
       },
       {
         "language": [
+          "vue"
+        ],
+        "path": "./javascript/vue.json"
+      },
+      {
+        "language": [
           "javascript",
           "typescript"
         ],
@@ -33,14 +39,14 @@
           "css",
           "vue"
         ],
-        "path": "./css/css.json"
+        "path": "./css.json"
       },
       {
         "language": [
           "scss",
           "vue"
         ],
-        "path": "./css/scss.json"
+        "path": "./scss.json"
       },
       {
         "language": [

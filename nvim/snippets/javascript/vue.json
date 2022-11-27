@@ -1,0 +1,14 @@
+{
+  "<i18n": {
+    "prefix": "<i18n",
+    "body": "<i18n :path=\"${1:path}\" tag=\"${2:div}\">\n\t$3\n</i18n>"
+  },
+  "<slot": {
+    "prefix": "<slot",
+    "body": "<slot${1: name=\"$2\"}></slot>"
+  },
+  "<template v-slot": {
+    "prefix": "<template v-slot",
+    "body": "<template v-slot:$1>\n\t$2\n</template>"
+  }
+}

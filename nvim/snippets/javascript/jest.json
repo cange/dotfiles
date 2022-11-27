@@ -1,98 +1,90 @@
 {
   "describe setup block": {
-    "prefix": "desi",
-    "body": [
-      "describe('${1:componentName}', () => {",
-      "  let ${2|wrapper,subject|}",
-      "",
-      "  beforeEach(() => ",
-      "  $3",
-      "  })",
-      "})"
-    ]
+    "prefix": "describe",
+    "body": "describe('${1:context}', () => {\n\tlet wrapper$2\n})"
   },
   "describe(when…)": {
     "prefix": "when",
     "body": "describe('when ${1:condition}', () => {\n\t$2\n})$3"
   },
-  "it(...)": {
-    "prefix": "it",
-    "body": ["it('$1', () => {", "  $2", "})"]
+  "it": {
+    "prefix": "it(…",
+    "body": "it('$1', () => {\n\t$2\n})"
   },
-  "afterEach(…)": {
-    "prefix": "af",
-    "body": ["afterEach(() => {", "  $1", "})"]
+  "afterEach": {
+    "prefix": "afterEach(…",
+    "body": "afterEach(() => {\n\t$1\n})"
   },
-  "beforeEach(…)": {
-    "prefix": "be",
-    "body": ["beforeEach(() => {", "  $1", "})"]
+  "beforeEach": {
+    "prefix": "beforeEach(…",
+    "body": "beforeEach(() => {\n\t$1\n})"
   },
-  "expect(subject…)": {
-    "prefix": "exs",
+  "expect(subject": {
+    "prefix": "expect(subject",
     "body": "expect(subject.$1).to$2"
   },
-  "expect(wrapper…)": {
-    "prefix": "exw",
+  "expect(wrapper": {
+    "prefix": "expect(wrapper",
     "body": "expect(wrapper.$1).to$2"
   },
   "vue wrapper debug": {
     "prefix": "logd",
-    "body": "console.log('--- ${1:wrapper}$2.html(): %o', $1$2.html())"
+    "body": "console.log(\"--- $1$2.html(): %o\", ${1:wrapper}$2.html())"
   },
   "expect.objectContaining": {
-    "prefix": "exo",
-    "body": "expect.objectContaining({$1})"
+    "prefix": "expect.objectContaining",
+    "body": "expect.objectContaining({$1})$2"
   },
   "expect.stringContaining": {
-    "prefix": "exsc",
-    "body": "expect.stringContaining('$1')"
+    "prefix": "expect.stringContaining",
+    "body": "expect.stringContaining('$1')$2"
   },
   "expect.stringMatching": {
-    "prefix": "exsm",
-    "body": "expect.stringMatching(/$1/)"
+    "prefix": "expect.stringMatching",
+    "body": "expect.stringMatching(/$1/)$2"
   },
   "toEqual": {
-    "prefix": "toe",
-    "body": "toEqual($1)"
+    "prefix": "toequal",
+    "body": "toEqual($1)$2"
   },
   "toBe": {
     "prefix": "tobe",
-    "body": "toBe($1)"
+    "body": "toBe($1)$2"
   },
   "toBeDefined": {
-    "prefix": "tobd",
-    "body": "toBeDefined()"
+    "prefix": "tobedefined",
+    "body": "toBeDefined()$1"
   },
   "toBeUndefined": {
-    "prefix": "tobu",
-    "body": "toBeUndefined()"
+    "prefix": "tobeundefined",
+    "body": "toBeUndefined()$1"
   },
   "toBeNull": {
-    "prefix": "tobn",
+    "prefix": "tobenull",
     "body": "toBeNull()"
   },
   "toBeTruthy": {
-    "prefix": "tobt",
+    "prefix": "tobetrue",
     "body": "toBe(true)"
   },
   "toBeFalsy": {
-    "prefix": "tobf",
+    "prefix": "tobefalse",
     "body": "toBe(false)"
   },
   "toBeCalled": {
-    "prefix": "tobc",
+    "prefix": "tobecalled",
     "body": "toBeCalled()"
   },
   "toBeCalledWith": {
-    "prefix": "tobcw",
+    "prefix": "tobecalledwith",
     "body": "toBeCalledWith($1)"
   },
   "toHaveLength": {
-    "prefix": "tohl",
+    "prefix": "tohavelength",
     "body": "toHaveLength($1)"
   },
-  "specHelper skeleton": {
-    "prefix": "spec",
+  "specHelper": {
+    "prefix": "specHelper",
     "body": "const specHelper = {\n\t$1: ($2) => {\n\t\t$3\n\t}$4\n}"
   }
 }

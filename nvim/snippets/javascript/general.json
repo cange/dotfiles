@@ -1,66 +1,90 @@
 {
   "eslint block": {
-    "prefix": "lintbl",
+    "prefix": "eslint-disable … */",
     "body": ["/* eslint-disable $1 */", "$2", "/* eslint-enable $1 */"]
   },
-  "eslint lint": {
-    "prefix": "lintl",
+  "eslint-disable-line": {
+    "prefix": "eslint-disable-line …",
     "body": "// eslint-disable-line $1"
   },
-  "console.log(...)": {
-    "prefix": "log",
+  "if": {
+    "prefix": "if (…",
+    "body": "if ($1) {\n\t$2\n}"
+  },
+  "forEach": {
+    "prefix": ".forEach(…",
+    "body": ".forEach($1 => $2)"
+  },
+  "map": {
+    "prefix": ".map(…",
+    "body": ".map($1 => $2)"
+  },
+  "filter": {
+    "prefix": ".filter(…",
+    "body": ".filter($1 => $2)"
+  },
+  "console.log(": {
+    "prefix": "log(…",
     "body": "console.log('--- ${1:param}: %o', $1)"
   },
-  "log obj keys": {
+  "log(Object.keys(…": {
     "prefix": "logk",
     "body": "console.log('--- ${1:param} keys: %o', Object.keys($1))"
   },
-  "log filename": {
-    "prefix": "logf",
-    "body": "console.log('--- ${TM_FILENAME} ${1:param}: %o', $1)"
-  },
-  "log({obj})": {
-    "prefix": "log{",
-    "body": "console.log({${1:param}})"
-  },
-  "debug": {
-    "prefix": "deb",
-    "body": "console.debug('=== ${TM_FILENAME/[\\.]/_/} ${1:param}: %o', $1)"
-  },
-  "log - event": {
-    "prefix": "loge",
-    "body": "console.debug('--- ${1:eventName}: %o', event$2)"
-  },
-  "dir - DOM element": {
-    "prefix": "logdr",
-    "body": "console.dir(element)"
-  },
-  "info": {
-    "prefix": "info",
-    "body": "console.info('---${TM_FILENAME/[\\.]/_/} – $1')"
-  },
   "import local": {
-    "prefix": "impl",
+    "prefix": "import local",
     "body": "import ${1:componentName} from './$1'"
   },
   "querySelector": {
-    "prefix": "qs",
-    "body": "${1:document.}querySelector('${2:selector}')"
+    "prefix": ".querySelector(…",
+    "body": ".querySelector('${1:selector}')$2"
   },
   "querySelectorAll": {
-    "prefix": "qsa",
-    "body": "${1:document.}querySelectorAll('${2:selector}')"
+    "prefix": ".querySelectorAll(…",
+    "body": ".querySelectorAll('${1:selector}')$2"
   },
   "DOM ready": {
     "prefix": "ready",
     "body": "document.addEventListener('DOMContentLoaded', () => {\n\t$1\n})"
   },
   "addEventListener": {
-    "prefix": "ade",
-    "body": "addEventListener('${1:eventName}', ${2:event} => {\n\t$3\n})"
+    "prefix": ".addEventListener(…",
+    "body": ".addEventListener('${1:eventName}', ${2:event} => {\n\t$3\n})"
   },
   "createElement": {
-    "prefix": "ce",
-    "body": "const ${1:name} = document.createElement('${2:element}')\n$1.$3"
+    "prefix": ".createElement",
+    "body": ".createElement('${1:element}')$2"
+  },
+  "classList.add": {
+    "prefix": ".classList.add(…",
+    "body": ".classList.add('${1:class}')"
+  },
+  "classList.remove": {
+    "prefix": ".classList.remove(…",
+    "body": ".classList.remove('${1:class}')"
+  },
+  "classList.toggle": {
+    "prefix": ".classList.toggle(…",
+    "body": ".classList.toggle('${1:class}')"
+  },
+  "getAttribute": {
+    "prefix": ".getAttribute(…",
+    "body": ".getAttribute('${1:attr}')"
+  },
+  "removeAttribute": {
+    "prefix": ".removeAttribute(…",
+    "body": ".removeAttribute('${1:attr}')$2"
+  },
+  "setAttribute": {
+    "prefix": ".setAttribute(…, …",
+    "body": ".setAttribute('${1:attr}', ${2:value})$3"
+  },
+  "Object.keys": {
+    "prefix": "Object.keys(…",
+    "body": "Object.keys(${1:obj})$2"
+  },
+  "Object.values": {
+    "prefix": "Object.values(…",
+    "body": "Object.values(${1:obj})$2"
   }
 }
