@@ -1,4 +1,4 @@
-local ns = "[cange.lualine]"
+local ns = "[plugin/lualine]"
 local found_lualine, lualine = pcall(require, "lualine")
 if not found_lualine then
   return
@@ -8,17 +8,33 @@ if not found_utils then
   print(ns, '"cange.utils" not found')
   return
 end
-local found_config, config = pcall(require, "cange.lualine.config")
-if not found_config then
-  print(ns, '"cange.lualine.config" not found')
-  return
+
+---@param type string
+---@return table
+local function seperator_preset(type)
+  ---@enumn separators
+  local seps = {
+    arrow_component = { left = "", right = "" },
+    arrow_section = { left = "", right = "" },
+    line_component = { left = "│", right = "│" },
+    line_section = { left = "", right = "" },
+    none_component = { left = "", right = "" },
+    none_section = { left = "", right = "" },
+    pill_component = { left = "", right = "" },
+    pill_section = { left = "", right = "" },
+    pipe_component = { left = "⏽", right = "⏽" },
+    pipe_section = { left = "", right = "" },
+    triangle_component = { left = "", right = "" },
+    triangle_section = { left = "", right = "" },
+  }
+  return {
+    component_separators = seps[type .. "_component"],
+    section_separators = seps[type .. "_section"],
+  }
 end
 -- config
 lualine.setup({
-  options = {
-    component_separators = config.separators.strong,
-    section_separators = config.separators.none,
-  },
+  options = seperator_preset("line"),
   sections = {
     lualine_b = {
       { "branch", icon = utils.get_icon("git", "Branch", { trim = true }) },

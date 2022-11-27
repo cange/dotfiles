@@ -5,5 +5,4 @@ require("cange.plugins") -- #2
 require("cange.cmp")
 require("cange.keymaps")
 require("cange.lsp")
-require("cange.lualine")
 require("cange.telescope")
