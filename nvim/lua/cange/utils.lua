@@ -25,6 +25,43 @@ function M.set_hls(highlights)
   end
 end
 
+---@enum cange.statusline_separator_presets
+local presets = {
+  arrow = {
+    component = { left = "", right = "" },
+    section = { left = "", right = "" },
+  },
+  line = {
+    component = { left = "│", right = "│" },
+    section = { left = "", right = "" },
+  },
+  none = {
+    component = { left = "", right = "" },
+    section = { left = "", right = "" },
+  },
+  pill = {
+    component = { left = "", right = "" },
+    section = { left = "", right = "" },
+  },
+  pipe = {
+    component = { left = "⏽", right = "⏽" },
+    section = { left = "", right = "" },
+  },
+  triangle = {
+    component = { left = "", right = "" },
+    section = { left = "", right = "" },
+  },
+}
+
+---@param type cange.statusline_separator_presets
+---@return table
+function M.get_statusline_separator_preset(type)
+  return {
+    component_separators = presets[type].component,
+    section_separators = presets[type].section,
+  }
+end
+
 local found_icons, icons = pcall(require, "cange.core.icons")
 if found_icons then
   ---@param icon_list cange.core.Icons|string|nil

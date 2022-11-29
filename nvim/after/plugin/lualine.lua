@@ -9,32 +9,9 @@ if not found_utils then
   return
 end
 
----@param type string
----@return table
-local function seperator_preset(type)
-  ---@enumn separators
-  local seps = {
-    arrow_component = { left = "", right = "" },
-    arrow_section = { left = "", right = "" },
-    line_component = { left = "│", right = "│" },
-    line_section = { left = "", right = "" },
-    none_component = { left = "", right = "" },
-    none_section = { left = "", right = "" },
-    pill_component = { left = "", right = "" },
-    pill_section = { left = "", right = "" },
-    pipe_component = { left = "⏽", right = "⏽" },
-    pipe_section = { left = "", right = "" },
-    triangle_component = { left = "", right = "" },
-    triangle_section = { left = "", right = "" },
-  }
-  return {
-    component_separators = seps[type .. "_component"],
-    section_separators = seps[type .. "_section"],
-  }
-end
 -- config
 lualine.setup({
-  options = seperator_preset("line"),
+  options = utils.get_statusline_separator_preset(utils.get_config("statusline.separator_type")),
   sections = {
     lualine_b = {
       { "branch", icon = utils.get_icon("git", "Branch", { trim = true }) },

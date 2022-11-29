@@ -7,6 +7,7 @@
 ---| '"treesitter.sources"' # List of supported language parser
 ---| '"colorscheme.theme"' # Name of the theme library
 ---| '"colorscheme.variant"' # Variant name of theme
+---| '"statusline.separator_type"' # Type of seperator icons used in statusline
 --
 local M = {}
 
@@ -14,6 +15,7 @@ M["colorscheme.theme"] = "nightfox"
 M["colorscheme.variant"] = "terafox"
 M["author.display_name"] = "Christian"
 M["lsp.diagnostic_virtual_text"] = true
+M["statusline.separator_type"] = "pipe"
 M["lsp.format_on_save"] = true
 M["lsp.server_sources"] = {
   "cssls", -- css
