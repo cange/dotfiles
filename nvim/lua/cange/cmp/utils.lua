@@ -1,12 +1,14 @@
-local found_cmp, cmp = pcall(require, "cmp")
-if not found_cmp then
-  return
-end
+local ns = "[cange.cmp.utils]"
 local found_luasnip, luasnip = pcall(require, "luasnip")
 if not found_luasnip then
   return
 end
 
+local found_utils, utils = pcall(require, "cange.utils")
+if not found_utils then
+  print(ns, '"cange.utils" not found')
+  return
+end
 local win_get_cursor = vim.api.nvim_win_get_cursor
 local get_current_buf = vim.api.nvim_get_current_buf
 
@@ -84,7 +86,26 @@ local function seek_luasnip_cursor_node()
   return false
 end
 
----@module 'cmp.utils'
+---@param value string|nil
+---@param percentage? string
+---@return string # Icon corresponding of percentage or whitespace if no percentage given
+local function prediction_strength_indicator(value, percentage)
+  local function item(icon)
+    return (icon or "  ") .. (value or "")
+  end
+  percentage = percentage or nil
+
+  if percentage and percentage ~= "" then
+    local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
+    local icon = vim.split("         ", " ")[fraction_num] .. " "
+    -- vim.pretty_print(ns .. " strength:", percentage, icon)
+    return item(icon)
+  end
+
+  return item()
+end
+
+---@module 'cange.cmp.utils'
 local M = {}
 
 ---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable
@@ -102,6 +123,32 @@ end
 function M.has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+---@see cmp.FormattingConfig
+function M.menu_item_format(entry, vim_item)
+  local maxwidth = 80
+  local source_icons = utils.get_icon("cmp_source") or {}
+  local name = entry.source.name
+  local strength = ""
+
+  ---@diagnostic disable-next-line: param-type-mismatch
+  if vim.tbl_contains(vim.tbl_keys(source_icons), name) then
+    vim_item.menu = vim.trim(source_icons[name])
+    vim_item.menu_hl_group = "Comment" -- assign appropriate theme color
+  end
+
+  ---@see https://github.com/tzachar/cmp-tabnine#show_prediction_strength
+  local tabnine_detail = (entry.completion_item.data or {}).detail
+  if tabnine_detail and tabnine_detail:find(".*%%.*") then
+    strength = tabnine_detail
+  end
+
+  vim_item.kind = utils.get_icon("cmp_kind", vim_item.kind)
+  vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
+  vim_item.menu = prediction_strength_indicator(vim_item.menu, strength)
+
+  return vim_item
 end
 
 return M
