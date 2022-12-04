@@ -4,11 +4,6 @@ if not found_luasnip then
   return
 end
 
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
-  print(ns, '"cange.utils" not found')
-  return
-end
 local win_get_cursor = vim.api.nvim_win_get_cursor
 local get_current_buf = vim.api.nvim_get_current_buf
 
@@ -126,9 +121,9 @@ function M.has_words_before()
 end
 
 ---@see cmp.FormattingConfig
-function M.menu_item_format(entry, vim_item)
+function M.format(entry, vim_item)
   local maxwidth = 80
-  local source_icons = utils.get_icon("cmp_source") or {}
+  local source_icons = Cange.get_icon("cmp_source") or {}
   local name = entry.source.name
   local strength = ""
 
@@ -144,7 +139,7 @@ function M.menu_item_format(entry, vim_item)
     strength = tabnine_detail
   end
 
-  vim_item.kind = utils.get_icon("cmp_kind", vim_item.kind)
+  vim_item.kind = Cange.get_icon("cmp_kind", vim_item.kind)
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
   vim_item.menu = prediction_strength_indicator(vim_item.menu, strength)
 

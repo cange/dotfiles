@@ -1,14 +1,8 @@
-local ns = "[plugin/indent_blankline]"
+-- local ns = "[plugin/indent_blankline]"
 local found_indent_blankline, indent_blankline = pcall(require, "indent_blankline")
 if not found_indent_blankline then
   return
 end
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
-  print(ns, '"cange.utils" not found')
-  return
-end
-
 indent_blankline.setup({
   enabled = true,
   buftype_exclude = { "terminal", "nofile" },
@@ -20,8 +14,8 @@ indent_blankline.setup({
     "Trouble",
     "text",
   },
-  char = utils.get_icon("ui", "LineLeft"),
-  context_char = utils.get_icon("ui", "LineLeft"),
+  char = Cange.get_icon("ui", "LineLeft"),
+  context_char = Cange.get_icon("ui", "LineLeft"),
   show_current_context = true,
   show_current_context_start = true,
   use_treesitter = true,

@@ -1,10 +1,5 @@
 local ns = "[cange.keymaps.common]"
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
-  print(ns, '"cange.utils" not found')
-  return
-end
-local keymap = utils.keymap
+local keymap = Cange.keymap
 --[[
   FIRST: Set leader key
   Leader needs to be defined before any other keymaps definintions

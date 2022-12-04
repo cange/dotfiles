@@ -3,26 +3,21 @@ local found_lualine, lualine = pcall(require, "lualine")
 if not found_lualine then
   return
 end
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
-  print(ns, '"cange.utils" not found')
-  return
-end
 
 -- config
 lualine.setup({
-  options = utils.get_statusline_separator_preset(utils.get_config("statusline.separator_type")),
+  options = Cange.get_statusline_separator_preset(Cange.get_config("statusline.separator_type")),
   sections = {
     lualine_b = {
-      { "branch", icon = utils.get_icon("git", "Branch", { trim = true }) },
+      { "branch", icon = Cange.get_icon("git", "Branch", { trim = true }) },
       "diff",
       {
         "diagnostics",
         symbols = {
-          error = utils.get_icon("diagnostics", "Error"),
-          warn = utils.get_icon("diagnostics", "Warning"),
-          info = utils.get_icon("diagnostics", "Information"),
-          hint = utils.get_icon("diagnostics", "Hint"),
+          error = Cange.get_icon("diagnostics", "Error"),
+          warn = Cange.get_icon("diagnostics", "Warning"),
+          info = Cange.get_icon("diagnostics", "Information"),
+          hint = Cange.get_icon("diagnostics", "Hint"),
         },
       },
     },
@@ -30,7 +25,7 @@ lualine.setup({
       {
         "filename",
         path = 1, -- 1: Relative path
-        symbols = utils.get_icon("lualine"),
+        symbols = Cange.get_icon("lualine"),
       },
     },
     lualine_x = {

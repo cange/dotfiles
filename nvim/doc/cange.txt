@@ -46,7 +46,7 @@ respective keys already exist there. This offers a convenient option for
 certain settings that are otherwise hidden deep in the setup. The keys can be
 access via:
 >
-    require("cange.utils").get_config("path.to.setting.key")
+    require("cange.core.utils").get_config("path.to.setting.key")
 <
 
 

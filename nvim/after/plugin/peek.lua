@@ -16,17 +16,10 @@ peek.setup({ -- https://github.com/toppair/peek.nvim
   throttle_time = "auto", -- minimum amount of time in milliseconds that has to pass before starting new render
 })
 
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
-  print(ns, '"cange.utils" not found')
-  return
-end
-local keymap = utils.keymap
-
 local function toggle_markdown_preview()
   local method = peek.is_open() and "close" or "open"
   vim.notify(method .. " markdown preview", vim.log.levels.INFO, { title = ns })
   peek[method]()
 end
 
-keymap("n", "<leader>md", toggle_markdown_preview)
+Cange.keymap("n", "<leader>md", toggle_markdown_preview)

@@ -4,16 +4,11 @@ if not found then
   print(ns, '"mason" not found')
   return
 end
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
-  print(ns, '"cange.utils" not found')
-  return
-end
 -- config
 mason.setup({
   ui = {
     border = "rounded",
-    icons = utils.get_icon("mason"),
+    icons = Cange.get_icon("mason"),
   },
   log_level = vim.log.levels.INFO,
   max_concurrent_installers = 4,
@@ -29,7 +24,7 @@ end
 -- config
 -- https://github.com/williamboman/mason-lspconfig.nvim#default-configuration
 mason_lspconfig.setup({
-  ensure_installed = utils.get_config("lsp.server_sources") or {},
+  ensure_installed = Cange.get_config("lsp.server_sources") or {},
   automatic_installation = true,
 })
 --
@@ -43,6 +38,6 @@ end
 -- config
 -- https://github.com/jayp0521/mason-null-ls.nvim#default-configuration
 mason_null_ls.setup({
-  ensure_installed = utils.get_config("lsp.null_ls_sources") or {},
+  ensure_installed = Cange.get_config("lsp.null_ls_sources") or {},
   automatic_installation = true,
 })

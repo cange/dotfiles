@@ -1,20 +1,22 @@
 ---@alias cange.config
----| '"lsp.diagnostic_virtual_text"' # Boolean to show or hide inline hint text
----| '"lsp.server_sources"' # List of LSP servers
----| '"lsp.format_on_save"' # Boolean to toggle on/off auto formatting on save
----| '"lsp.null_ls_sources"' # List of supported formatter, diagnostics servers
 ---| '"author.display_name"' # Name to personalise editor session
----| '"treesitter.sources"' # List of supported language parser
 ---| '"colorscheme.theme"' # Name of the theme library
 ---| '"colorscheme.variant"' # Variant name of theme
+---| '"lsp.diagnostic_virtual_text"' # Boolean to show or hide inline hint text
+---| '"lsp.format_on_save"' # Boolean to toggle on/off auto formatting on save
+---| '"lsp.null_ls_sources"' # List of supported formatter, diagnostics servers
+---| '"lsp.server_sources"' # List of LSP servers
+---| '"snippets.path"' # Snippets relative path to nvim root directory
 ---| '"statusline.separator_type"' # Type of seperator icons used in statusline
+---| '"treesitter.sources"' # List of supported language parser
 --
 local M = {}
 
+M["author.display_name"] = "Christian"
 M["colorscheme.theme"] = "nightfox"
 M["colorscheme.variant"] = "terafox"
-M["author.display_name"] = "Christian"
 M["lsp.diagnostic_virtual_text"] = true
+M["snippets.path"] = "./snippets"
 M["statusline.separator_type"] = "pipe"
 M["lsp.format_on_save"] = true
 M["lsp.server_sources"] = {

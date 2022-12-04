@@ -1,7 +1,13 @@
+local ns = "[cange.globals]"
 local found, plenary_reload = pcall(require, "plenary.reload")
 local reloader = require
 if found then
   reloader = plenary_reload.reload_module
+end
+local found_utils, utils = pcall(require, "cange.core.utils")
+if not found_utils then
+  print(ns, '"cange.core.utils" not found')
+  return
 end
 
 ---Pretty print shorthand
@@ -21,3 +27,5 @@ function R(name)
   RELOAD(name)
   return require(name)
 end
+
+Cange = utils
