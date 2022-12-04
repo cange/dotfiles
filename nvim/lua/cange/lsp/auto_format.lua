@@ -5,11 +5,6 @@ local function notify(msg, level)
     title = ns,
   })
 end
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
-  print(ns, '"cange.utils" not found')
-  return
-end
 
 ---@class cange.lsp.AutoFormat
 ---@field group_name string Handle name for auto group
@@ -18,7 +13,7 @@ end
 
 local M = {
   bufnr = nil,
-  is_active = utils.get_config("lsp.format_on_save") or false,
+  is_active = Cange.get_config("lsp.format_on_save") or false,
   group_name = "cange_lsp_auto_format",
 }
 

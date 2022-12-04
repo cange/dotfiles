@@ -10,11 +10,6 @@ if not found_workflows then
   print(ns, '"cange.keymaps.groups" not found')
   return
 end
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
-  print(ns, '"cange.utils" not found')
-  return
-end
 
 ---Generates a which-key table form mappings
 ---@param group cange.keymaps.Group Key of a keybinding block
@@ -96,7 +91,7 @@ function M.setup()
       -- ['<cr>'] = 'RET',
       -- ['<tab>'] = 'TAB',
     },
-    icons = utils.get_icon("which_key"),
+    icons = Cange.get_icon("which_key"),
     popup_mappings = {
       scroll_down = "<C-s>", -- binding to scroll down inside the popup
       scroll_up = "<C-a>", -- binding to scroll up inside the popup

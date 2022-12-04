@@ -1,11 +1,6 @@
 local ns = "[cange.core.colorscheme]"
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
-  print(ns, '"cange.utils" module not found')
-  return
-end
-local theme = utils.get_config("colorscheme.theme")
-local variant = utils.get_config("colorscheme.variant")
+local theme = Cange.get_config("colorscheme.theme")
+local variant = Cange.get_config("colorscheme.variant")
 
 -- theme https://github.com/EdenEast/nightfox.nvim#usage
 local found, palette = pcall(require, theme .. ".palette")
@@ -25,7 +20,7 @@ end
 local c = palette.load(variant)
 -- vim.pretty_print("color:", vim.tbl_keys(c))
 
-utils.set_hls({
+Cange.set_hls({
   -- defaults override
   CursorLine = { bg = c.bg2 }, -- disable default
   Folded = { bg = nil, fg = c.bg4 }, -- reduces folding noise

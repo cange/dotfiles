@@ -19,7 +19,7 @@ end
 -- Setup
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode completion
 
-require("luasnip.loaders.from_vscode").lazy_load({ paths = "./snippets" })
+require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
 -- require("luasnip.loaders.from_vscode").lazy_load() -- community snippets (create noise)
 
 cmp.setup({
@@ -99,7 +99,7 @@ cmp.setup({
       "abbr",
       "menu",
     },
-    format = cmp_utils.menu_item_format,
+    format = cmp_utils.format,
   },
   window = {
     completion = {

@@ -1,9 +1,9 @@
-local found_utils, utils = pcall(require, "cange.utils")
-if not found_utils then
+if not Cange.set_hls then
+  print('[ftplugin/markdown] "Cange.set_hls" not found')
   return
 end
 
-utils.set_hls({
+Cange.set_hls({
   ["@punctuation.special"] = { link = "Special" },
   ["@text.uri"] = { link = "Type" },
 })

@@ -1,5 +1,5 @@
-local ns = "[cange.utils]"
----@module 'cange.utils'
+local ns = "[cange.core.utils]"
+---@module 'cange.core.utils'
 
 ---Provides general access to certain core sources
 local M = {}
@@ -64,7 +64,7 @@ end
 
 local found_icons, icons = pcall(require, "cange.core.icons")
 if found_icons then
-  ---@param icon_list cange.core.Icons|string|nil
+  ---@param icon_list cange.core.Icons|cange.core.Icon
   ---@param name string
   ---@return cange.core.Icon|nil
   local function get_single_icon(icon_list, name)
