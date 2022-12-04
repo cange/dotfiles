@@ -3,18 +3,31 @@
 These are basic configurations of my working environment like editor, shell and
 terminal.
 
-## Installing
+## Setup
 
-Clone of this repo:
+The setups are focus on MacOS since this is my daily environment.
+
+Clone of this repo on system user root:
 
 ```shell
 git clone http://github.com/cange/dotfiles.git && cd dotfiles
-./install
 ```
 
-## Setups
+### Install
 
-The setups are focus on MacOS since this is my daily environment.
+Run install command to set up the appropriate symlinks:
+
+```shell
+./dotfiles/install
+```
+
+### Uninstall
+
+To remove related symlinks with:
+
+```shell
+./dotfiles/uninstall
+```
 
 ### Homebrew
 
