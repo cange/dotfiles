@@ -92,6 +92,10 @@ def setup_neovim
   FileUtils.ln_sf("#{home}/dotfiles/nvim", "#{home}/.config/nvim")
 end
 
+def setup_snippets
+  FileUtils.ln_sf("#{home}/dotfiles/snippets", "#{home}/.config/snippets")
+end
+
 def setup_zshell
   framework_name = 'oh-my-zsh'
   # check for updates, store local changes, fetch updates and add local changes
@@ -127,4 +131,5 @@ get_dir_files(root).each do |file|
 end
 
 setup_neovim
+setup_snippets
 setup_zshell
