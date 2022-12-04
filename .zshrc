@@ -64,15 +64,6 @@ if [[ -n $HOME/.ssh/id_dsa ]]; then
   ssh-add
 fi
 
-# homebrew
-source $(brew --prefix nvm)/nvm.sh
-
-# node version manager
-# https://github.com/nvm-sh/nvm#install--update-script
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # enable asdf package managersa
 # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
 . /usr/local/opt/asdf/libexec/asdf.sh

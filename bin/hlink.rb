@@ -18,8 +18,8 @@ def home
 end
 
 def destination(file, sub_dir)
-  desti = File.join(*[home, sub_dir, File.basename(file)].compact)
-  desti
+  dest = File.join(*[home, sub_dir, File.basename(file)].compact)
+  dest
 end
 
 def colorize(text, color=:default)
@@ -34,26 +34,17 @@ def colorize(text, color=:default)
   "#{colors[color]}#{text}\033[0m"
 end
 
-
-def message(msg, file_name, success=true)
-  if success
-    puts "#{@color_green}#{msg}#{@color_default} - #{@color_white_bold}#{file_name}#{@color_default}"
-  else
-    puts "#{@color_yellow}#{msg}#{@color_default} - #{@color_white_bold}#{file_name}#{@color_default}"
-  end
-end
-
 def install(file, sub_dir=nil)
   file = File.expand_path(file)
   if !!(file.to_s =~ /dotfiles/)
     file_name = File.basename(file.to_s)
     if system("ln -nsf #{file} #{destination(file, sub_dir)}")
-      puts "#{colorize('successfully symlinked', :green)} #{sub_dir} #{colorize(file_name, :white_bold)}"
+      puts "  #{colorize('↪️ successfully symlinked', :green)} #{sub_dir} #{colorize(file_name, :white_bold)}"
     else
-      puts "#{colorize('failed to symlinked', :red)} #{sub_dir} #{colorize(file_name, :white_bold)}"
+      puts "  #{colorize('❗️failed to symlinked', :red)} #{sub_dir} #{colorize(file_name, :white_bold)}"
     end
   elsif
-    puts "#{colorize('please execute command in', :red)} #{colorize('dotfiles/', :white_bold)}"
+    puts "  #{colorize('❕please execute command in', :red)} #{colorize('dotfiles/', :white_bold)}"
   end
 end
 
@@ -62,10 +53,10 @@ def uninstall(file, sub_dir=nil)
   return puts "no file at #{file}" unless File.exist?(file)
   file_name = File.basename(file.to_s)
   if File.symlink?(file)
-    File.unlink(file)
-    puts "#{colorize('removed symlink at', :green)} #{sub_dir} #{colorize(file_name, :white_bold)}"
+    # File.unlink(file)
+    puts "  #{colorize('🚮removed symlink at', :green)} #{sub_dir} #{colorize(file_name, :white_bold)}"
   else
-    puts "#{colorize('could not remove non-symlink at', :red)} #{sub_dir} #{colorize(file_name, :white_bold)}"
+    puts "  #{colorize('❗️could not remove non-symlink at', :red)} #{sub_dir} #{colorize(file_name, :white_bold)}"
   end
 end
 
@@ -97,36 +88,29 @@ def setup_snippets
 end
 
 def setup_zshell
-  framework_name = 'oh-my-zsh'
+  omz_dir_name = '.oh-my-zsh'
   # check for updates, store local changes, fetch updates and add local changes
-  if File.exist?("#{home}/.#{framework_name}")
-    Dir.chdir("#{home}/.#{framework_name}")
+  if File.exist?("#{home}/#{omz_dir_name}")
+    Dir.chdir("#{home}/#{omz_dir_name}")
     system("git stash")
     system("git pull --rebase")
     system("git stash pop")
   else
     Dir.chdir("#{home}")
-    system("git clone git://github.com/robbyrussell/oh-my-zsh.git .#{framework_name}")
+    system("git clone https://github.com/ohmyzsh/ohmyzsh.git #{omz_dir_name}")
   end
-  # travel back to dotfiles/ directory
-  Dir.chdir("#{home}/dotfiles")
 
   # ZSH additional custom config
   FileUtils.ln_sf("#{home}/dotfiles/zsh", "#{home}/.config/zsh")
-
-  get_dir_files(File.join(root, "#{framework_name}")).each do |dir|
-    framework_path = "#{framework_name}/#{File.basename(dir)}"
-    destination_path = ".#{framework_path}"
-    get_dir_files(File.join(root, "#{framework_name}/#{dir}")).each do |file|
-      install("#{framework_path}/#{file}", destination_path)
-    end
-  end
 end
 #
 ################################################################################
 # install all the dotfiles
 get_dir_files(root).each do |file|
+  black_list = ['nvim', 'snippets', 'install', 'uninstall', 'zsh', '.DS_Store']
+
   next if file =~ /~$/
+  next if black_list.include?(file)
   uninstall? ? uninstall(file) : install(file)
 end
 
