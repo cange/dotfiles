@@ -3,9 +3,14 @@ local found, tree = pcall(require, "nvim-tree")
 if not found then
   return
 end
+local bookmark_nav = require("nvim-tree.api").marks.navigate
 local keymap = Cange.keymap
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>")
 keymap("n", "<leader>.", ":NvimTreeFindFile<CR>")
+
+keymap("n", "<leader>mn", bookmark_nav.next)
+keymap("n", "<leader>mp", bookmark_nav.prev)
+keymap("n", "<leader>ms", bookmark_nav.select)
 
 local api = require("nvim-tree.api")
 local Event = api.events.Event

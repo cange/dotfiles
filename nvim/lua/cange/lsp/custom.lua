@@ -36,7 +36,7 @@ local function attach_keymaps(client, bufnr)
   keymap("gs", vim.lsp.buf.signature_help, "LSP Symbol Info")
   keymap("qf", vim.lsp.buf.code_action, "LSP QuickFix issue")
   keymap("<leader>wd", "<cmd>Telescope lsp_document_symbols<CR>", "LSP Show Symbols")
-  keymap("<leader>rn", vim.lsp.buf.rename, "LSP Rename Symbol")
+  keymap("rn", vim.lsp.buf.rename, "LSP Rename Symbol")
   keymap("<leader>dr", "<cmd>Telescope lsp_references<CR>")
   keymap("<leader>dd", "<cmd>Telescope diagnostics<CR>", "LSP List of Issues")
 
