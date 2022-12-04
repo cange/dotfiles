@@ -24,7 +24,7 @@
     "body": ".filter($1 => $2)"
   },
   "console.log(": {
-    "prefix": "log(…",
+    "prefix": "log",
     "body": "console.log('--- ${1:param}: %o', $1)"
   },
   "log(Object.keys(…": {

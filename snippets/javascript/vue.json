@@ -11,6 +11,17 @@
     "prefix": "<template v-slot",
     "body": "<template v-slot:$1>\n\t$2\n</template>"
   },
+  "prop: {…": {
+    "prefix": "watch:pr wop",
+    "body": [
+      "${1:prop}: {",
+      "\thandler(${2:value}) {",
+      "\t\t$4",
+      "\t}",
+      "\t${3:,immediate: true}",
+      "}"
+    ]
+  },
   "component skeleton": {
     "prefix": "template v2",
     "body": [
