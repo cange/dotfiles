@@ -7,7 +7,6 @@
 ---| '"lsp.null_ls_sources"' # List of supported formatter, diagnostics servers
 ---| '"lsp.server_sources"' # List of LSP servers
 ---| '"snippets.path"' # Snippets relative path to nvim root directory
----| '"statusline.separator_type"' # Type of seperator icons used in statusline
 ---| '"treesitter.sources"' # List of supported language parser
 --
 local M = {}
@@ -17,7 +16,6 @@ M["colorscheme.theme"] = "nightfox"
 M["colorscheme.variant"] = "terafox"
 M["lsp.diagnostic_virtual_text"] = true
 M["snippets.path"] = "./../snippets"
-M["statusline.separator_type"] = "pipe"
 M["lsp.format_on_save"] = true
 M["lsp.server_sources"] = {
   "cssls", -- css

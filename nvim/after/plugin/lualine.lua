@@ -6,7 +6,10 @@ end
 
 -- config
 lualine.setup({
-  options = Cange.get_statusline_separator_preset(Cange.get_config("statusline.separator_type")),
+  options = {
+    component_separators = { left = "⏽", right = "⏽" },
+    section_separators = { left = "", right = "" },
+  },
   sections = {
     lualine_b = {
       { "branch", icon = Cange.get_icon("git", "Branch", { trim = true }) },
