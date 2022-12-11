@@ -27,6 +27,50 @@ local ns = "[cange.keymaps.groups]"
 ---@type cange.keymaps.Groups
 local M = {}
 
+M.config = {
+  subleader = "c",
+  title = "Editor",
+  mappings = {
+    E = {
+      cmd = "<cmd>enew <BAR>startinsert<CR>",
+      desc = "New File",
+      dashboard = true,
+      icon = Cange.get_icon("documents.NewFile"),
+    },
+    a = { cmd = "<cmd>Alpha<CR>", desc = "Start Screen", primary = true },
+    e = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
+    k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/groups.lua<CR>", desc = "Edit Keymaps" },
+    m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
+    o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit Options" },
+    q = {
+      cmd = "<cmd>quitall!<CR>",
+      desc = "Quit",
+      primary = true,
+      dashboard = true,
+      icon = Cange.get_icon("ui.SignOut"),
+    },
+    w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
+  },
+}
+M.git = {
+  subleader = "g",
+  title = "Git",
+  mappings = {
+    l = { cmd = "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "Line blame" },
+    R = { cmd = "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset buffer" },
+    B = { cmd = "<cmd>Telescope git_branches<CR>", desc = "Checkout branch" },
+    C = { cmd = "<cmd>Telescope git_commits<CR>", desc = "Checkout commit" },
+    d = { cmd = "<cmd>Gitsigns diffthis HEAD<CR>", desc = "Diff" },
+    g = { cmd = "<cmd>lua CangeLazygitToggle()<CR>", desc = "Lazygit" },
+    o = { cmd = "<cmd>Telescope git_status<CR>", desc = "Open changed file" },
+    j = { cmd = '<cmd>lua require("gitsigns").next_hunk()<CR>', desc = "Next hunk" },
+    k = { cmd = '<cmd>lua require("gitsigns").prev_hunk()<CR>', desc = "Prev hunk" },
+    p = { cmd = '<cmd>lua require("gitsigns").preview_hunk()<CR>', desc = "Preview hunk" },
+    r = { cmd = '<cmd>lua require("gitsigns").reset_hunk()<CR>', desc = "Reset hunk" },
+    s = { cmd = '<cmd>lua require("gitsigns").stage_hunk()<CR>', desc = "Stage hunk" },
+    u = { cmd = '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', desc = "Undo stage hunk" },
+  },
+}
 M.lsp = {
   subleader = "l",
   title = "LSP Feature",
@@ -44,6 +88,22 @@ M.lsp = {
     p = { cmd = vim.diagnostic.goto_prev, desc = "Go to previous issue" },
     q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
+  },
+}
+M.packer = {
+  subleader = "p",
+  title = "Plugin management",
+  mappings = {
+    S = { cmd = "<cmd>PackerStatus<CR>", desc = "Packer Status" },
+    c = { cmd = "<cmd>PackerCompile<CR>", desc = "Packer Compile" },
+    e = {
+      cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>",
+      desc = "Edit plugins",
+      dashboard = true,
+      icon = Cange.get_icon("ui.Gear"),
+    },
+    i = { cmd = "<cmd>PackerInstall<CR>", desc = "Packer Install" },
+    s = { cmd = "<cmd>PackerSync<CR>", desc = "Update Plugins", dashboard = true, icon = Cange.get_icon("ui.Sync") },
   },
 }
 M.search = {
@@ -86,66 +146,6 @@ M.search = {
       icon = Cange.get_icon("ui.Calendar"),
     },
     w = { cmd = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', desc = "Browse workspace" },
-  },
-}
-M.config = {
-  subleader = "c",
-  title = "Editor",
-  mappings = {
-    E = {
-      cmd = "<cmd>enew <BAR>startinsert<CR>",
-      desc = "New File",
-      dashboard = true,
-      icon = Cange.get_icon("documents", "NewFile"),
-    },
-    a = { cmd = "<cmd>Alpha<CR>", desc = "Start Screen", primary = true },
-    e = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
-    k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/groups.lua<CR>", desc = "Edit Keymaps" },
-    m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
-    o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit Options" },
-    q = {
-      cmd = "<cmd>quitall!<CR>",
-      desc = "Quit",
-      primary = true,
-      dashboard = true,
-      icon = Cange.get_icon("ui", "SignOut"),
-    },
-    w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
-  },
-}
-M.git = {
-  subleader = "g",
-  title = "Git",
-  mappings = {
-    l = { cmd = "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "Line blame" },
-    R = { cmd = "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset buffer" },
-    B = { cmd = "<cmd>Telescope git_branches<CR>", desc = "Checkout branch" },
-    C = { cmd = "<cmd>Telescope git_commits<CR>", desc = "Checkout commit" },
-    d = { cmd = "<cmd>Gitsigns diffthis HEAD<CR>", desc = "Diff" },
-    g = { cmd = "<cmd>lua CangeLazygitToggle()<CR>", desc = "Lazygit" },
-    o = { cmd = "<cmd>Telescope git_status<CR>", desc = "Open changed file" },
-    j = { cmd = '<cmd>lua require("gitsigns").next_hunk()<CR>', desc = "Next hunk" },
-    k = { cmd = '<cmd>lua require("gitsigns").prev_hunk()<CR>', desc = "Prev hunk" },
-    p = { cmd = '<cmd>lua require("gitsigns").preview_hunk()<CR>', desc = "Preview hunk" },
-    r = { cmd = '<cmd>lua require("gitsigns").reset_hunk()<CR>', desc = "Reset hunk" },
-    s = { cmd = '<cmd>lua require("gitsigns").stage_hunk()<CR>', desc = "Stage hunk" },
-    u = { cmd = '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', desc = "Undo stage hunk" },
-  },
-}
-M.packer = {
-  subleader = "p",
-  title = "Plugin management",
-  mappings = {
-    C = { cmd = "<cmd>PackerCompile<CR>", desc = "Compile" },
-    S = { cmd = "<cmd>PackerStatus<CR>", desc = "Status" },
-    c = {
-      cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>",
-      desc = "Edit plugins",
-      dashboard = true,
-      icon = Cange.get_icon("ui", "Gear"),
-    },
-    i = { cmd = "<cmd>PackerInstall<CR>", desc = "Install" },
-    s = { cmd = "<cmd>PackerSync<CR>", desc = "Update plugins", dashboard = true, icon = Cange.get_icon("ui", "Sync") },
   },
 }
 M.session = {
