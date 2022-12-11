@@ -50,9 +50,8 @@ local function get_filename(opts)
     end
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
-    vim.api.nvim_set_hl(0, "Winbar", { fg = navic_text.foreground })
 
-    return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#Winbar#" .. filepath .. "%*"
+    return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%* " .. "%#WinbarFile#" .. filepath .. "%*"
   end
 
   return ""
@@ -68,7 +67,7 @@ local function get_location()
     return ""
   end
 
-  return separator .. location
+  return "%#WindbarSeparator#" .. separator .. "%*" .. location
 end
 
 local function is_excluded()
@@ -133,8 +132,9 @@ function WinbarBreadcrumbRedraw()
 end
 
 local highlight_links = {
-  NavicText = { link = "Normal" },
-  NavicSeparator = { link = "Comment" },
+  NavicText = { link = "SpecialKey"},
+  WinbarFile = { link = "Comment" },
+  WindbarSeparator = { link = "Comment" },
 }
 
 for name, highlight_link in pairs(Cange.get_symbol_kind_hl()) do
