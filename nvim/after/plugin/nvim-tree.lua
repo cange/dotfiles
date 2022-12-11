@@ -30,7 +30,7 @@ end)
 local config = require("nvim-tree.config").nvim_tree_callback
 tree.setup({
   live_filter = {
-    prefix = Cange.get_icon("ui", "Search") .. "  ",
+    prefix = Cange.get_icon("ui.Search") .. "  ",
   },
   -- project plugin related
   sync_root_with_cwd = true,
@@ -47,18 +47,18 @@ tree.setup({
       },
       git_placement = "after",
       glyphs = {
-        default = Cange.get_icon("documents", "File", { trim = true }),
-        bookmark = Cange.get_icon("ui", "Bookmark", { trim = true }),
-        symlink = Cange.get_icon("documents", "SymlinkFile", { trim = true }),
+        default = Cange.get_icon("documents.File", { trim = true }),
+        bookmark = Cange.get_icon("ui.Bookmark", { trim = true }),
+        symlink = Cange.get_icon("documents.SymlinkFile", { trim = true }),
         folder = {
-          arrow_closed = Cange.get_icon("ui", "ChevronRight"),
-          arrow_open = Cange.get_icon("ui", "ChevronDown"),
-          default = Cange.get_icon("documents", "Folder"),
-          empty = Cange.get_icon("documents", "EmptyFolder"),
-          empty_open = Cange.get_icon("documents", "EmptyOpenFolder"),
-          open = Cange.get_icon("documents", "OpenFolder"),
-          symlink = Cange.get_icon("documents", "SymlinkFolder"),
-          symlink_open = Cange.get_icon("documents", "SymlinkFolder"),
+          arrow_closed = Cange.get_icon("ui.ChevronRight"),
+          arrow_open = Cange.get_icon("ui.ChevronDown"),
+          default = Cange.get_icon("documents.Folder"),
+          empty = Cange.get_icon("documents.EmptyFolder"),
+          empty_open = Cange.get_icon("documents.EmptyOpenFolder"),
+          open = Cange.get_icon("documents.OpenFolder"),
+          symlink = Cange.get_icon("documents.SymlinkFolder"),
+          symlink_open = Cange.get_icon("documents.SymlinkFolder"),
         },
         git = Cange.get_icon("git_states"),
       },
@@ -67,10 +67,10 @@ tree.setup({
   diagnostics = {
     enable = true,
     icons = {
-      error = Cange.get_icon("diagnostics", "Error"),
-      warning = Cange.get_icon("diagnostics", "Warning"),
-      hint = Cange.get_icon("diagnostics", "Hint"),
-      info = Cange.get_icon("diagnostics", "Information"),
+      error = Cange.get_icon("diagnostics.Error"),
+      warning = Cange.get_icon("diagnostics.Warning"),
+      hint = Cange.get_icon("diagnostics.Hint"),
+      info = Cange.get_icon("diagnostics.Information"),
     },
   },
   actions = {

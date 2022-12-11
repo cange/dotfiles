@@ -33,7 +33,7 @@ if found_icons then
   local function get_single_icon(icon_list, name)
     local result = icon_list and icon_list[name] or nil
     if not result then
-      vim.pretty_print('[cange.core.icons] icon "' .. name .. '" not found')
+      vim.pretty_print("[cange.core.icons] icon", name, "not found")
       return nil
     end
     return result
@@ -41,32 +41,40 @@ if found_icons then
 
   ---Ensures that the icons of given parts exists
   ---@param group_id string Identifier of the icon group
-  ---@param ... string List of parts the actual icon path
+  ---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
   ---@return cange.core.Icon|nil The icon symbol or nil if not found
   function M.get_icon(group_id, ...)
-    local icon = icons
+    local icon_list = icons
     local opts = {}
     local parts = { ... }
     local last_item = parts[#parts]
+
     if type(last_item) == "table" then
       opts = vim.deepcopy(last_item)
       table.remove(parts, #parts)
     end
 
+    local group_parts = vim.split(group_id, ".", { plain = true })
+    if #group_parts > 1 then
+      parts = vim.list_extend(group_parts, parts)
+      group_id = table.remove(parts, 1)
+    end
+
     ---@diagnostic disable-next-line: cast-local-type
-    icon = get_single_icon(icon, group_id)
+    icon_list = get_single_icon(icon_list, group_id)
     if #parts > 0 then
-      for _, name in ipairs(parts) do
-        icon = get_single_icon(icon, name)
+      for _, icon_name in ipairs(parts) do
+        ---@diagnostic disable-next-line: cast-local-type, param-type-mismatch
+        icon_list = get_single_icon(icon_list, icon_name)
       end
     end
 
-    if type(icon) == "string" and opts.trim ~= nil and opts.trim then
+    if type(icon_list) == "string" and opts.trim ~= nil and opts.trim then
       ---@diagnostic disable-next-line: cast-local-type
-      icon = vim.trim(icon)
+      icon_list = vim.trim(icon_list)
     end
 
-    return icon
+    return icon_list
   end
 else
   print(ns, '"cange.core.icons" not found')

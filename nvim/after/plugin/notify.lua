@@ -29,11 +29,11 @@ notify.setup({
 
   -- Icons for the different levels
   icons = {
-    ERROR = Cange.get_icon("diagnostics", "Error"),
-    WARN = Cange.get_icon("diagnostics", "Warning"),
-    INFO = Cange.get_icon("diagnostics", "Information"),
-    DEBUG = Cange.get_icon("ui", "Bug"),
-    TRACE = Cange.get_icon("ui", "Pencil"),
+    ERROR = Cange.get_icon("diagnostics.Error"),
+    WARN = Cange.get_icon("diagnostics.Warning"),
+    INFO = Cange.get_icon("diagnostics.Information"),
+    DEBUG = Cange.get_icon("ui.Bug"),
+    TRACE = Cange.get_icon("ui.Pencil"),
   },
 })
 

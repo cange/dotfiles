@@ -9,7 +9,7 @@ if not found_web_devicons then
   print(ns, '"nvim-web-devicons" not found')
   return
 end
-local separator = Cange.get_icon("ui", "ChevronRight")
+local separator = Cange.get_icon("ui.ChevronRight")
 -- Setup
 
 navic.setup({
@@ -46,7 +46,7 @@ local function get_filename(opts)
 
     vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
     if str_is_empty(file_icon) then
-      file_icon = Cange.get_icon("kind", "File")
+      file_icon = Cange.get_icon("kind.File")
     end
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
@@ -110,7 +110,7 @@ function WinbarBreadcrumbRedraw()
   end
 
   if not str_is_empty(value) and get_buf_option("mod") then
-    local mod = "%#LspCodeLens#" .. Cange.get_icon("ui", "Circle") .. "%*"
+    local mod = "%#LspCodeLens#" .. Cange.get_icon("ui.Circle") .. "%*"
     if location_added then
       value = value .. " " .. mod
     else

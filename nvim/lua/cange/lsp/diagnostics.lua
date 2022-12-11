@@ -1,10 +1,10 @@
 -- local ns = "[cange.lsp.diagnostics]"
 -- config
 local signs = {
-  { name = "DiagnosticSignError", text = Cange.get_icon("diagnostics", "Error") },
-  { name = "DiagnosticSignWarn", text = Cange.get_icon("diagnostics", "Warning") },
-  { name = "DiagnosticSignHint", text = Cange.get_icon("diagnostics", "Hint") },
-  { name = "DiagnosticSignInfo", text = Cange.get_icon("diagnostics", "Information") },
+  { name = "DiagnosticSignError", text = Cange.get_icon("diagnostics.Error") },
+  { name = "DiagnosticSignWarn", text = Cange.get_icon("diagnostics.Warning") },
+  { name = "DiagnosticSignHint", text = Cange.get_icon("diagnostics.Hint") },
+  { name = "DiagnosticSignInfo", text = Cange.get_icon("diagnostics.Information") },
 }
 
 for _, s in ipairs(signs) do
