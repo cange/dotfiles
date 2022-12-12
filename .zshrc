@@ -26,6 +26,7 @@ export LS_COLORS="rs=0:no=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:
 # Order #2: additional files
 zsh_add_file "aliases.zsh"
 zsh_add_file "exports.zsh"
+zsh_add_file "fzf.zsh"
 zsh_add_file "history.zsh"
 zsh_add_file "oh-my-zsh.zsh"
 zsh_add_file "prompt.zsh"
