@@ -1,7 +1,9 @@
 ---This highlights groups relates to syntactic fragments also known kinds
----@class cange.core.HighlightGroups
+---@class HighlightGroups
 ---@field kinds table Completion kinds Highlight definition map
 ---@field other_kinds table Completion kinds Highlight definition map
+
+---@class HighlightGroups
 local M = {}
 
 M.kinds = {

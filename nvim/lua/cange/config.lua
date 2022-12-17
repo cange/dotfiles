@@ -1,4 +1,4 @@
----@alias cange.config
+---@alias config
 ---| '"author.display_name"' # Name to personalise editor session
 ---| '"colorscheme.theme"' # Name of the theme library
 ---| '"colorscheme.variant"' # Variant name of theme

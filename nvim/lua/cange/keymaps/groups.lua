@@ -1,30 +1,29 @@
-local ns = "[cange.keymaps.groups]"
+-- local ns = "[cange.keymaps.whichkey_groups]"
 -- All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
 -- each plugin by it self.
 --
----@class cange.keymaps.Command
+---@class WhichKeyCommand
 ---@field desc string Description of the keybinding
 ---@field cmd string Command of the keybinding
 ---@field dashboard? boolean Determines whether or not to on "alpha" start page
----@field icon? cange.core.Icon The icon which shown on "alpha" start page
+---@field icon? CoreIcon The icon which shown on "alpha" start page
 ---@field primary? boolean Determines whether or not to show a on inital "which-key" window
---
----@class cange.keymaps.Group
+
+---@class WhichKeyGroup
 ---@field subleader string Additional key to enter the certain group
 ---@field title string Is displayed as group name
----@field mappings table<string, cange.keymaps.Command> The actual key bindings
---
----@class cange.keymaps.Groups
----@field config cange.keymaps.Group
----@field git cange.keymaps.Group
----@field lsp cange.keymaps.Group Language related syntax analytics
----@field packer cange.keymaps.Group Install, update neovims plugins
----@field search cange.keymaps.Group Finding stuff
----@field session cange.keymaps.Group
----@field treesitter cange.keymaps.Group
+---@field mappings table<string, WhichKeyCommand> The actual key bindings
 
----Provides general settings
----@type cange.keymaps.Groups
+---@class WhichKeyGroups
+---@field config WhichKeyGroup
+---@field git WhichKeyGroup
+---@field lsp WhichKeyGroup Language related syntax analytics
+---@field packer WhichKeyGroup Install, update neovims plugins
+---@field search WhichKeyGroup Finding stuff
+---@field session WhichKeyGroup
+---@field treesitter WhichKeyGroup
+
+---@class WhichKeyGroups
 local M = {}
 
 M.config = {

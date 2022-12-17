@@ -17,7 +17,7 @@ function M.keymap(mode, lhs, rhs, opts)
 end
 
 ---Set highlight group by given table.
----@param highlights cange.core.HighlightGroups Highlight definition map
+---@param highlights HighlightGroups Highlight definition map
 ---@see vim.api.nvim_set_hl
 function M.set_hls(highlights)
   for name, val in pairs(highlights) do
@@ -27,9 +27,9 @@ end
 
 local found_icons, icons = pcall(require, "cange.core.icons")
 if found_icons then
-  ---@param icon_list cange.core.Icons|cange.core.Icon
+  ---@param icon_list CoreIcons|CoreIcon
   ---@param name string
-  ---@return cange.core.Icon|nil
+  ---@return CoreIcon|nil
   local function get_single_icon(icon_list, name)
     local result = icon_list and icon_list[name] or nil
     if not result then
@@ -42,7 +42,7 @@ if found_icons then
   ---Ensures that the icons of given parts exists
   ---@param group_id string Identifier of the icon group
   ---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
-  ---@return cange.core.Icon|nil The icon symbol or nil if not found
+  ---@return CoreIcon|nil The icon symbol or nil if not found
   function M.get_icon(group_id, ...)
     local icon_list = icons
     local opts = {}

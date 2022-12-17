@@ -6,11 +6,12 @@ local function notify(msg, level)
   })
 end
 
----@class cange.lsp.AutoFormat
+---@class LSPAutoFormatToggle
 ---@field group_name string Handle name for auto group
 ---@field is_active boolean Formatting is enabled if true
 ---@field bufnr (nil|integer) Identifier of the current used buffer or nil if not taken
 
+---@class LSPAutoFormatToggle
 local M = {
   bufnr = nil,
   is_active = Cange.get_config("lsp.format_on_save") or false,

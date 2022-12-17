@@ -1,18 +1,19 @@
----@alias cange.core.Icon string A single character of a certain shape
+---@alias CoreIcon string A single character of a certain shape
 
----@class cange.core.Icons
----@field cmp_kind table<cange.core.Icon> Completion kinds
----@field cmp_source table<cange.core.Icon>
----@field diagnostics table<cange.core.Icon>
----@field git table<cange.core.Icon>
----@field git_states table<cange.core.Icon>
----@field kind table<cange.core.Icon> Language symbols
----@field lualine table<cange.core.Icon>
----@field mason table<cange.core.Icon> Mason LSP local anguage server plugin
+---@class CoreIcons
+---@field cmp_kind table<CoreIcon> Completion kinds
+---@field cmp_source table<CoreIcon>
+---@field diagnostics table<CoreIcon>
+---@field git table<CoreIcon>
+---@field git_states table<CoreIcon>
+---@field kind table<CoreIcon> Language symbols
+---@field lualine table<CoreIcon>
+---@field mason table<CoreIcon> Mason LSP local anguage server plugin
 ---@field ui table Generic icons for general purposes
----@field which_key table<cange.core.Icon>
----@field documents table<cange.core.Icon>
+---@field which_key table<CoreIcon>
+---@field documents table<CoreIcon>
 
+---@class CoreIcons
 local M = {}
 -- Icons works best with "FiraCode Nerd Font"
 -- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts

@@ -12,7 +12,7 @@ if not found_workflows then
 end
 
 ---Generates a which-key table form mappings
----@param group cange.keymaps.Group Key of a keybinding block
+---@param group WhichKeyGroup Key of a keybinding block
 ---@return table<string, table> mappings bock i.e. { <leader> = { command, title  } }
 local function group_mappings(group)
   local section = {}
@@ -34,7 +34,7 @@ local function group_mappings(group)
 end
 
 ---Generates a which-key primary mapping table
----@param group cange.keymaps.Group Key of a keybinding block
+---@param group WhichKeyGroup Key of a keybinding block
 ---@param mappings table List to store mappings
 local function primary_mappings(group, mappings)
   -- vim.pretty_print(vim.tbl_keys(group))

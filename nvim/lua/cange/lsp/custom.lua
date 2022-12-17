@@ -49,7 +49,7 @@ local function attach_keymaps(client, bufnr)
   end
 end
 
----@module 'cange.lsp.custom'
+---@class LSPCustom
 local M = {}
 
 function M.capabilities()
