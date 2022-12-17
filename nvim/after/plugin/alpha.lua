@@ -14,14 +14,9 @@ local function button(key, label, cmd)
   return btn
 end
 
-local found_greetings, greetings = pcall(require, "cange.core.greetings")
-if not found_greetings then
-  print(ns, '"cange.core.greetings" not found')
-  return
-end
-local found_keymap_groups, keymap_groups = pcall(require, "cange.keymaps.groups")
+local found_keymap_groups, keymap_groups = pcall(require, "cange.keymaps.whichkey_groups")
 if not found_keymap_groups then
-  print(ns, '"cange.keymaps.groups" not found')
+  print(ns, '"cange.keymaps.whichkey_groups" not found')
   return
 end
 
@@ -40,7 +35,7 @@ local function buttons()
 end
 
 section.buttons.val = buttons()
-section.footer.val = Cange.greetings.random_with_name(Cange.get_config("author.display_name"))
+section.footer.val = Cange.get_random_greeting_for(Cange.get_config("author.display_name"))
 section.header.opts.hl = "Include"
 section.buttons.opts.hl = "Macro"
 section.footer.opts.hl = "Type"

@@ -22,4 +22,4 @@ local function toggle_markdown_preview()
   peek[method]()
 end
 
-Cange.keymap("n", "<leader>md", toggle_markdown_preview)
+vim.keymap.set("n", "<leader>md", toggle_markdown_preview)

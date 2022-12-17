@@ -5,9 +5,9 @@ if not found_whichkey then
   print(ns, '"which-key" not found')
   return
 end
-local found_workflows, keymaps_groups = pcall(require, "cange.keymaps.groups")
-if not found_workflows then
-  print(ns, '"cange.keymaps.groups" not found')
+local found_groups, whichkey_groups = pcall(require, "cange.keymaps.whichkey_groups")
+if not found_groups then
+  print(ns, '"cange.keymaps.whichkey_groups" not found')
   return
 end
 
@@ -51,7 +51,7 @@ end
 local primary_keymaps = {}
 local secondary_keymaps = {}
 -- execute
-for _, g in pairs(keymaps_groups) do
+for _, g in pairs(whichkey_groups) do
   secondary_keymaps = vim.tbl_extend("keep", secondary_keymaps, group_mappings(g))
   primary_mappings(g, primary_keymaps)
 end

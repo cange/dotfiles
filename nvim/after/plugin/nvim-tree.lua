@@ -4,13 +4,12 @@ if not found then
   return
 end
 local bookmark_nav = require("nvim-tree.api").marks.navigate
-local keymap = Cange.keymap
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>")
-keymap("n", "<leader>.", ":NvimTreeFindFile<CR>")
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>.", ":NvimTreeFindFile<CR>")
 
-keymap("n", "<leader>mn", bookmark_nav.next)
-keymap("n", "<leader>mp", bookmark_nav.prev)
-keymap("n", "<leader>ms", bookmark_nav.select)
+vim.keymap.set("n", "<leader>mn", bookmark_nav.next)
+vim.keymap.set("n", "<leader>mp", bookmark_nav.prev)
+vim.keymap.set("n", "<leader>ms", bookmark_nav.select)
 
 local api = require("nvim-tree.api")
 local Event = api.events.Event
@@ -18,13 +17,13 @@ local toggle_help_key = "<leader>eh"
 
 -- enable help toggle when tree open
 api.events.subscribe(Event.TreeOpen, function()
-  keymap("n", toggle_help_key, function()
+  vim.keymap.set("n", toggle_help_key, function()
     api.tree.toggle_help()
   end)
 end)
 
 api.events.subscribe(Event.TreeClose, function()
-  keymap("n", toggle_help_key, "<Nop>")
+  vim.keymap.set("n", toggle_help_key, "<Nop>")
 end)
 
 local config = require("nvim-tree.config").nvim_tree_callback

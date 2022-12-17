@@ -4,18 +4,6 @@ local ns = "[cange.core.utils]"
 ---Provides general access to certain core sources
 local M = {}
 
----Keymap with preconfigured noremap
----@param mode string|table
----@param lhs string
----@param rhs string|function
----@param opts? table
----@see vim.keymap.set()
-function M.keymap(mode, lhs, rhs, opts)
-  opts = opts or {}
-  opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts)
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
-
 ---Set highlight group by given table.
 ---@param highlights HighlightGroups Highlight definition map
 ---@see vim.api.nvim_set_hl
@@ -113,7 +101,7 @@ end
 
 local found_greetings, greetings = pcall(require, "cange.core.greetings")
 if found_greetings then
-  M.greetings = greetings
+  M.get_random_greeting_for = greetings.random_with_name
 else
   print(ns, '"cange.core.greetings" not found')
 end
