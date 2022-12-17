@@ -21,24 +21,42 @@ local function attach_keymaps(client, bufnr)
   ---@param desc? string
   local function keymap(lhs, rhs, desc)
     local mode = "n"
-    desc = desc or ""
+
+    desc = desc and "LSP: " .. desc or ""
     local opts = { desc = desc, noremap = true, silent = true, buffer = bufnr }
+
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 
-  keymap("K", vim.lsp.buf.hover, "LSP Hover")
-  keymap("gD", vim.lsp.buf.declaration, "LSP Go to Declaration")
-  keymap("gI", "<cmd>Telescope lsp_implementations<CR>", "Go to Implementation")
+  keymap("gd", vim.lsp.buf.definition, "[G]o to [D]efinition")
+  keymap("td", vim.lsp.buf.type_definition, "[T]ype [D]efinition")
+  keymap("gr", "<cmd>Telescope lsp_references<CR>", "[G]oto [R]eferences")
+  keymap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+  keymap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
   keymap("gT", vim.lsp.buf.type_definition, "Go to Type")
-  keymap("gd", vim.lsp.buf.definition, "Go to Definition")
   keymap("gj", vim.diagnostic.goto_next, "Next Issue")
   keymap("gk", vim.diagnostic.goto_prev, "Previous Issue")
   keymap("gs", vim.lsp.buf.signature_help, "Symbol Info")
-  keymap("qf", vim.lsp.buf.code_action, "QuickFix issue")
+
+  keymap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+  keymap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+
+  keymap("<leader>ds", "<cmd>Telescope lsp_document_symbols", "[D]ocument [S]ymbols")
+  keymap("<leader>ws", "<cmd>Telescope lsp_dynamic_workspace_symbols", "[W]orkspace [S]ymbols")
   keymap("<leader>wd", "<cmd>Telescope lsp_document_symbols<CR>", "Show Symbols")
-  keymap("rn", vim.lsp.buf.rename, "Rename Symbol")
   keymap("<leader>dr", "<cmd>Telescope lsp_references<CR>")
   keymap("<leader>ds", "<cmd>Telescope diagnostics<CR>", "LSP List of Issues")
+
+  -- Lesser used LSP functionality
+  keymap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+  keymap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+  keymap("<leader>wl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, "[W]orkspace [L]ist Folders")
+
+  -- See `:help K` for why this keymap
+  keymap("K", vim.lsp.buf.hover, "Hover Documentation")
+  keymap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
   -- typescript specific keymaps (e.g. rename file and update imports)
   if client.name == "tsserver" then
