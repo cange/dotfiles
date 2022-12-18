@@ -8,7 +8,7 @@
 ---| '"lsp.server_sources"' # List of LSP servers
 ---| '"snippets.path"' # Snippets relative path to nvim root directory
 ---| '"treesitter.sources"' # List of supported language parser
---
+
 local M = {}
 
 M["author.display_name"] = "Christian"
