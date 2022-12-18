@@ -86,7 +86,7 @@ end
 local found_config, config = pcall(require, "cange.config")
 if found_config then
   ---Get certain config attributes
-  ---@param key cange.config Path of a certain configuation key
+  ---@param key config Path of a certain configuation key
   ---@return any Value of given key or nil if not found.
   function M.get_config(key)
     local c = config[key]

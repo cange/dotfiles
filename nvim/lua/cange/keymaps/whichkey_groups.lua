@@ -36,7 +36,6 @@ M.config = {
       dashboard = true,
       icon = Cange.get_icon("documents.NewFile"),
     },
-    W = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
     a = { cmd = "<cmd>Alpha<CR>", desc = "Start Screen", primary = true },
     e = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
     k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/groups.lua<CR>", desc = "Edit Keymaps" },
@@ -49,6 +48,7 @@ M.config = {
       dashboard = true,
       icon = Cange.get_icon("ui.SignOut"),
     },
+    w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
   },
 }
 M.git = {
@@ -81,7 +81,6 @@ M.lsp = {
     d = { cmd = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', desc = "Diagnostics log" },
     f = { cmd = "<cmd>CangeLSPToggleAutoFormat<CR>", desc = "Toggle Auto Formatting" },
     i = { cmd = "<cmd>LspInfo<CR>", desc = "Info LSP" },
-    o = { cmd = "<cmd>SymbolsOutline<CR>", desc = "Symbols Outline" },
     q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
   },
@@ -90,23 +89,23 @@ M.packer = {
   subleader = "p",
   title = "Plugin management",
   mappings = {
-    S = { cmd = "<cmd>PackerStatus<CR>", desc = "Packer Status" },
-    c = { cmd = "<cmd>PackerCompile<CR>", desc = "Packer Compile" },
+    S = { cmd = "<cmd>PackerStatus<CR>", desc = "[P]acker [S]tatus" },
+    c = { cmd = "<cmd>PackerCompile<CR>", desc = "[P]acker [C]ompile" },
     e = {
       cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>",
-      desc = "Edit plugins",
+      desc = "[E]dit Plugins",
       dashboard = true,
       icon = Cange.get_icon("ui.Gear"),
     },
-    i = { cmd = "<cmd>PackerInstall<CR>", desc = "Packer Install" },
-    s = { cmd = "<cmd>PackerSync<CR>", desc = "Update Plugins", dashboard = true, icon = Cange.get_icon("ui.Sync") },
+    i = { cmd = "<cmd>PackerInstall<CR>", desc = "[P]acker [I]nstall" },
+    s = { cmd = "<cmd>PackerSync<CR>", desc = "[P]lugins [S]ync", dashboard = true, icon = Cange.get_icon("ui.Sync") },
   },
 }
 M.search = {
   subleader = "s",
   title = "Search",
   mappings = {
-    B = { cmd = "<cmd>Telescope buffers<CR>", desc = "[S]earch existing [b]uffers", primary = true },
+    B = { cmd = "<cmd>Telescope buffers<CR>", desc = "[S]earch Existing [B]uffers", primary = true },
     C = { cmd = "<cmd>Telescope commands<CR>", desc = "[S]earch [C]ommands" },
     F = {
       cmd = "<cmd>Telescope live_grep<CR>",
@@ -123,8 +122,8 @@ M.search = {
       icon = Cange.get_icon("ui.Project"),
     },
     W = { cmd = '<cmd>lua require("telescope.builtin").grep_string<CR>', desc = "[S]earch current [W]ord" },
-    b = { cmd = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', desc = "[S]earch [b]rowse files" },
-    c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "[S]witch [c]olorscheme" },
+    b = { cmd = '<cmd>lua require("cange.telescope.custom").file_browser()<CR>', desc = "[S]earch [B]rowse files" },
+    c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "[S]witch [C]olorscheme" },
     f = {
       cmd = "<cmd>Telescope find_files<CR>",
       desc = "[S]earch [F]iles",
@@ -134,17 +133,17 @@ M.search = {
     },
     h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "[S]earch [H]elp" },
     k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "[S]earch [K]eybindings" },
-    n = { cmd = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', desc = "Browse [n]vim" },
+    n = { cmd = '<cmd>lua require("cange.telescope.custom").browse_nvim()<CR>', desc = "Browse [N]vim" },
     r = {
       cmd = "<cmd>Telescope oldfiles<CR>",
-      desc = "Find [r]ecently opened files",
+      desc = "[R]ecently Opened Files",
       dashboard = true,
       icon = Cange.get_icon("ui.Calendar"),
     },
-    w = { cmd = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', desc = "Browse [w]orkspace" },
+    w = { cmd = '<cmd>lua require("cange.telescope.custom").browse_workspace()<CR>', desc = "Browse [W]orkspace" },
     ["/"] = {
       cmd = '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
-      desc = "Fuzzily search in current buffer",
+      desc = "Search current buffer",
     },
   },
 }
