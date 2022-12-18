@@ -1,19 +1,4 @@
 local ns = "[cange.plugins]"
--- Use a protected call so we don't error out on first use
-local found, packer = pcall(require, "packer")
-if not found then
-  print(ns, "Packer is not installed")
-  return
-end
-
--- Have packer use a popup window
-packer.init({
-  display = {
-    open_fn = function()
-      return require("packer.util").float({ border = "rounded" })
-    end,
-  },
-})
 -- helpers
 
 ---Simplified setup method
@@ -29,27 +14,16 @@ local function instant_setup(pack_name)
   return pack.setup()
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
--- vim.api.nvim_create_autocmd("BufWritePost", {
---   group = vim.api.nvim_create_augroup("cange_compile_packer", { clear = true }),
---   pattern = "plugins.lua",
---   command = "source <afile> | PackerSync",
--- })
-
--- Packer bootstrap
-local ensure_packer = function()
-  local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-    vim.cmd([[packadd packer.nvim]])
-    return true
-  end
-  return false
+-- Install packer
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local is_bootstrap = false
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  is_bootstrap = true
+  vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+  vim.cmd.packadd("packer.nvim")
 end
 
-local packer_bootstrap = ensure_packer()
-
-packer.startup(function(use)
+require("packer").startup(function(use)
   local devicons = "kyazdani42/nvim-web-devicons"
   -- Plugin Manager
   use("wbthomason/packer.nvim") -- package manager
@@ -111,7 +85,7 @@ packer.startup(function(use)
   -- Snippets
   use("L3MON4D3/LuaSnip") --snippet engine
 
-  -- LSP
+  -- LSP / Language Server Protocol
   use({
     "neovim/nvim-lspconfig", -- configure LSP servers
     requires = {
@@ -119,6 +93,7 @@ packer.startup(function(use)
       "williamboman/mason-lspconfig.nvim", -- bridges mason.nvim with the lspconfig plugin
     },
   })
+
   use({
     "jose-elias-alvarez/null-ls.nvim", -- syntax formatting, diagnostics (requires npm pacakges)
     requires = {
@@ -173,7 +148,7 @@ packer.startup(function(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if packer_bootstrap then
+  if is_bootstrap then
     require("packer").sync()
   end
 end)
