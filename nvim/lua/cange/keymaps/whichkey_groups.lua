@@ -81,7 +81,6 @@ M.lsp = {
     d = { cmd = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', desc = "Diagnostics log" },
     f = { cmd = "<cmd>CangeLSPToggleAutoFormat<CR>", desc = "Toggle Auto Formatting" },
     i = { cmd = "<cmd>LspInfo<CR>", desc = "Info LSP" },
-    o = { cmd = "<cmd>SymbolsOutline<CR>", desc = "Symbols Outline" },
     q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
   },
@@ -94,7 +93,7 @@ M.packer = {
     c = { cmd = "<cmd>PackerCompile<CR>", desc = "[P]acker [C]ompile" },
     e = {
       cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>",
-      desc = "Edit plugins",
+      desc = "[E]dit Plugins",
       dashboard = true,
       icon = Cange.get_icon("ui.Gear"),
     },
