@@ -85,9 +85,9 @@ M.diagnostics = {
   Hint = " ", -- nf-mdi-lightbulb
 }
 M.which_key = {
-  breadcrumb = " ", -- nf-oct-arrow_right
-  separator = M.ui.ChevronRight, -- symbol used between a key and it's label
-  group = " ", -- nf-oct-plus_small
+  Breadcrumb = " ", -- nf-oct-arrow_right
+  Separator = M.ui.ChevronRight, -- symbol used between a key and it's label
+  Group = " ", -- nf-oct-plus_small
 }
 M.kind = {
   File = " ",

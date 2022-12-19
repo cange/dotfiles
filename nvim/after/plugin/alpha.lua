@@ -1,4 +1,4 @@
-local ns = "[plugin/alpha]"
+local ns = "[after/plugin/alpha]"
 local found, alpha = pcall(require, "alpha")
 if not found then
   return
@@ -14,19 +14,19 @@ local function button(key, label, cmd)
   return btn
 end
 
-local found_keymap_groups, keymap_groups = pcall(require, "cange.keymaps.whichkey_groups")
-if not found_keymap_groups then
-  print(ns, '"cange.keymaps.whichkey_groups" not found')
+local found_whichkey, whichkey_groups = pcall(require, "cange.utils.whichkey_groups")
+if not found_whichkey then
+  print(ns, '"cange.utils.whichkey_groups" not found')
   return
 end
 
 ---Pick up designated keys from keymap groups
 local function buttons()
   local btns = {}
-  for _, g in pairs(keymap_groups) do
+  for _, g in pairs(whichkey_groups.get()) do
     for key, m in pairs(g.mappings) do
       if m.dashboard == true then
-        table.insert(btns, button(key, (m.icon or "") .. " " .. m.desc, m.cmd))
+        table.insert(btns, button(key, (Cange.get_icon(m.icon or "")) .. " " .. m.desc, m.cmd))
       end
     end
   end

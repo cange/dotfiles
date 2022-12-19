@@ -4,9 +4,9 @@ local reloader = require
 if found then
   reloader = plenary_reload.reload_module
 end
-local found_utils, utils = pcall(require, "cange.core.utils")
+local found_utils, utils = pcall(require, "cange.utils")
 if not found_utils then
-  print(ns, '"cange.core.utils" not found')
+  print(ns, '"cange.utils" not found')
   return
 end
 

@@ -6,8 +6,8 @@ end
 git.setup({
   keymaps = {
     -- Open blame window
-    blame = "<Leader>gb",
+    blame = "<leader>Gb",
     -- Open file/folder in git repository
-    browse = "<Leader>go",
+    browse = "<leader>Go",
   },
 })
