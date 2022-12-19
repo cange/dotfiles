@@ -38,7 +38,7 @@ local function attach_keymaps(client, bufnr)
   keymap("gk", vim.diagnostic.goto_prev, "Previous Issue")
   keymap("gs", vim.lsp.buf.signature_help, "Symbol Info")
 
-  keymap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+  keymap("qf", vim.lsp.buf.code_action, "[Q]uick [F]ix")
   keymap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 
   keymap("<leader>ds", "<cmd>Telescope lsp_document_symbols", "[D]ocument [S]ymbols")
