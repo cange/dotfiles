@@ -69,6 +69,7 @@ require("packer").startup(function(use)
 
   -- File explorer
   use({ "kyazdani42/nvim-tree.lua", requires = devicons, tag = "nightly" })
+  use({ "ThePrimeagen/harpoon", requires = "nvim-lua/plenary.nvim" }) -- bookmark buffers
 
   -- Comment
   use({ "numToStr/Comment.nvim", config = instant_setup("Comment") }) -- comment toggle
