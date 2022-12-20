@@ -3,6 +3,10 @@
     "prefix": "eslint-disable … */",
     "body": ["/* eslint-disable $1 */", "$2", "/* eslint-enable $1 */"]
   },
+  "disable prettier block": {
+    "prefix": "eslint prettier/prettier */",
+    "body": ["/* eslint-disable prettier/prettier */", "$2", "/* eslint-enable prettier/prettier */"]
+  },
   "eslint-disable-line": {
     "prefix": "eslint-disable-line …",
     "body": "// eslint-disable-line $1"

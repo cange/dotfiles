@@ -1,6 +1,6 @@
 {
   "name": "luasnip-vscode-bridge",
-  "desription": "Mappting to vscode snippet file",
+  "description": "Mappting to vscode snippet file",
   "contributes": {
     "snippets": [
       {
