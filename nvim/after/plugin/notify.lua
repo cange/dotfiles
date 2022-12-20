@@ -1,5 +1,5 @@
-local ns = "[plugin/notify]"
-local found, notify = pcall(require, ns)
+-- local ns = "[after/plugin/notify]"
+local found, notify = pcall(require, "notify")
 if not found then
   return
 end
@@ -37,10 +37,6 @@ notify.setup({
   },
 })
 
-vim.notify = notify
-
-local notify_filter = vim.notify
-
 vim.notify = function(msg, ...)
   if msg:match("character_offset must be called") then
     return
@@ -49,5 +45,5 @@ vim.notify = function(msg, ...)
     return
   end
 
-  notify_filter(msg, ...)
+  notify(msg, ...)
 end
