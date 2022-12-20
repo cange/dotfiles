@@ -20,6 +20,7 @@ M["lsp.format_on_save"] = true
 M["lsp.server_sources"] = {
   "cssls", -- css
   "eslint", -- javascript
+  "jsonls", -- json
   "html", -- html
   "ruby_ls", -- ruby
   "sumneko_lua", -- lua

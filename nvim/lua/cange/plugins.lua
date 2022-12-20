@@ -102,7 +102,7 @@ require("packer").startup(function(use)
     },
   })
   use({ "jose-elias-alvarez/typescript.nvim", requires = "neovim/nvim-lspconfig" }) -- enables LSP features for TS/JS
-
+  use("b0o/SchemaStore.nvim") -- json/yaml schema support
   use("j-hui/fidget.nvim") -- shows LSP initialization progress
 
   -- Completion

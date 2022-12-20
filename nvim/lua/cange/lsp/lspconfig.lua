@@ -26,12 +26,13 @@ local function setup_server(server, config)
     capabilities = custom.capabilities(),
     name = server, -- for log messages
   }
+
   if found_config then
     server_config = vim.tbl_deep_extend("force", server_config, default_config)
   else
     server_config = default_config
   end
-  -- vim.pretty_print(provider, 'config', vim.tbl_keys(config))
+
   if found_typescript and server == "tsserver" then
     typescript.setup({ server = server_config })
   else
@@ -39,7 +40,6 @@ local function setup_server(server, config)
   end
 end
 
-local servers = Cange.get_config("lsp.server_sources") or {}
-for _, server in pairs(servers) do
-  setup_server(server, lspconfig)
+for _, source in pairs(Cange.get_config("lsp.server_sources")) do
+  setup_server(source, lspconfig)
 end
