@@ -66,10 +66,13 @@ local function attach_keymaps(client, bufnr)
 
   -- typescript specific keymaps (e.g. rename file and update imports)
   if client.name == "tsserver" then
-    keymap("qfa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
-    keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "LSP Rename file and update imports")
-    keymap("<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", "LSP Organize imports")
-    keymap("<leader>ru", "<cmd>TypescriptRemoveUnused<CR>", "LSP remove unused variables")
+    keymap("gO", "<cmd>TypescriptOrganizeImports<CR>", "[O]rganize imports")
+    keymap("gA", "<cmd>TypescriptAddMissingImports<CR>", "[A]dd missing imports")
+    keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "[R]ename [f]ile")
+    keymap("<leader>ru", "<cmd>TypescriptRemoveUnused<CR>", "[R]emove [u]nused vars")
+    -- overrides
+    keymap("gd", "<cmd>TypescriptGoToSourceDefinition<CR>")
+    keymap("qf", "<cmd>TypescriptFixAll<CR>", "[Q]uick [f]ix all")
   end
 end
 
