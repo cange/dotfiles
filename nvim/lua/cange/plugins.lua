@@ -2,8 +2,8 @@ local ns = "[cange.plugins]"
 -- helpers
 
 ---Simplified setup method
---- @param pack_name string The packages module name to call for setup
---- @return table|nil
+---@param pack_name string The packages module name to call for setup
+---@return table|nil
 local function instant_setup(pack_name)
   local found_pack, pack = pcall(require, pack_name)
   if not found_pack then

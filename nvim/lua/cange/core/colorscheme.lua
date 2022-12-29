@@ -21,7 +21,6 @@ local c = palette.load(variant)
 -- vim.pretty_print("color:", vim.tbl_keys(c))
 
 Cange.set_hls({
-  -- defaults override
   CursorLine = { bg = c.bg2 }, -- disable default
   Folded = { bg = nil, fg = c.bg4 }, -- reduces folding noise
   -- illuminate

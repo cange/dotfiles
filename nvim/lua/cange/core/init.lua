@@ -1,6 +1,5 @@
--- order is important
-require("cange.core.options") -- #1
-require("cange.core.autocommands")
-require("cange.core.colorscheme")
-require("cange.core.os")
-require("cange.core.winbar")
+Cange.reload("cange.core.options")
+Cange.reload("cange.core.autocommands")
+Cange.reload("cange.core.colorscheme")
+Cange.reload("cange.core.os")
+Cange.reload("cange.core.winbar")
