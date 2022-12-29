@@ -40,6 +40,9 @@ tree.setup({
   },
   -- common
   renderer = {
+    indent_markers = {
+      enable = true,
+    },
     icons = {
       show = {
         folder_arrow = false,
@@ -50,14 +53,14 @@ tree.setup({
         bookmark = Cange.get_icon("ui.Bookmark", { trim = true }),
         symlink = Cange.get_icon("documents.SymlinkFile", { trim = true }),
         folder = {
-          arrow_closed = Cange.get_icon("ui.ChevronRight"),
-          arrow_open = Cange.get_icon("ui.ChevronDown"),
-          default = Cange.get_icon("documents.Folder"),
-          empty = Cange.get_icon("documents.EmptyFolder"),
-          empty_open = Cange.get_icon("documents.EmptyOpenFolder"),
-          open = Cange.get_icon("documents.OpenFolder"),
-          symlink = Cange.get_icon("documents.SymlinkFolder"),
-          symlink_open = Cange.get_icon("documents.SymlinkFolder"),
+          arrow_closed = Cange.get_icon("ui.ChevronRight", { trim = true }),
+          arrow_open = Cange.get_icon("ui.ChevronDown", { trim = true }),
+          default = Cange.get_icon("documents.Folder", { trim = true }),
+          empty = Cange.get_icon("documents.EmptyFolder", { trim = true }),
+          empty_open = Cange.get_icon("documents.EmptyOpenFolder", { trim = true }),
+          open = Cange.get_icon("documents.OpenFolder", { trim = true }),
+          symlink = Cange.get_icon("documents.SymlinkFolder", { trim = true }),
+          symlink_open = Cange.get_icon("documents.SymlinkFolder", { trim = true }),
         },
         git = Cange.get_icon("git_states"),
       },
