@@ -1,4 +1,4 @@
-local ns = "[cange.lsp.custom]"
+local ns = "[cange.lsp.common]"
 local found_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not found_cmp then
   print(ns, '"cmp_nvim_lsp" not found')
@@ -8,6 +8,12 @@ end
 local found_winbar, winbar = pcall(require, "cange.core.winbar")
 if not found_winbar then
   print(ns, '"cange.core.winbar" not found')
+  return
+end
+
+local found_auto_format, auto_format = pcall(require, "cange.lsp.auto_format")
+if not found_auto_format then
+  print(ns, '"cange.lsp.auto_format" not found')
   return
 end
 
@@ -84,6 +90,7 @@ end
 function M.on_attach(client, bufnr)
   winbar.attach(client, bufnr)
   attach_keymaps(client, bufnr)
+  auto_format.on_save(bufnr)
 end
 
 return M

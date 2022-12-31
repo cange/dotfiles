@@ -13,17 +13,17 @@ if not found_typescript then
   return
 end
 
-local found_custom, custom = pcall(require, "cange.lsp.custom")
-if not found_custom then
-  print(ns, '"cange.lsp.custom" not found')
+local found_common, common = pcall(Cange.reload, "cange.lsp.common")
+if not found_common then
+  print(ns, '"cange.lsp.common" not found')
   return
 end
 
 local function setup_server(server, config)
   local found_config, server_config = pcall(require, "cange.lsp.server_configurations." .. server)
   local default_config = {
-    on_attach = custom.on_attach,
-    capabilities = custom.capabilities(),
+    on_attach = common.on_attach,
+    capabilities = common.capabilities(),
     name = server, -- for log messages
   }
 

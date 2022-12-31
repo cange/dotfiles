@@ -5,9 +5,6 @@
 ]]
 vim.g.mapleader = " "
 
--- sort line
-vim.keymap.set("v", "<F5>", ":sort<CR>gv=gv")
-
 vim.keymap.set("v", "p", '"_dP') -- Keep clipboard content instead of overriding it
 
 -- greatest remap ever
@@ -67,4 +64,7 @@ vim.keymap.set(
 )
 
 -- Format
-vim.keymap.set("n", "<F2>", ":lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 })<CR>")
+vim.keymap.set("n", "<F2>", ":lua vim.lsp.buf.format({ async = true })<CR>")
+
+-- Sort lines
+vim.keymap.set("v", "<F5>", ":sort<CR>gv=gv")

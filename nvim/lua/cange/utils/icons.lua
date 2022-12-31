@@ -13,7 +13,7 @@
 ---@field which_key table<CoreIcon>
 ---@field documents table<CoreIcon>
 
----@class CoreIcons
+---@type CoreIcons
 local M = {}
 -- Icons works best with "FiraCode Nerd Font"
 -- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts

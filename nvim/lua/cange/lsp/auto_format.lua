@@ -1,33 +1,23 @@
 local ns = "[cange.lsp.auto_format]"
-local function notify(msg, level)
-  level = level or vim.log.levels.INFO
-  vim.notify(msg, level, {
-    title = ns,
-  })
-end
 
 ---@class LSPAutoFormatToggle
 ---@field group_name string Handle name for auto group
 ---@field is_active boolean Formatting is enabled if true
----@field bufnr (nil|integer) Identifier of the current used buffer or nil if not taken
 
----@class LSPAutoFormatToggle
+---@type LSPAutoFormatToggle
 local M = {
-  bufnr = nil,
   is_active = Cange.get_config("lsp.format_on_save") or false,
   group_name = "cange_lsp_auto_format",
 }
 
----@private
 ---Enables active flag
-function M.enable()
+local function auto_format_on()
   M.is_active = true
-  notify("Enabled auto format on save")
+  vim.notify("On save is ON", vim.log.levels.INFO, { title = ns })
 end
 
----@private
 ---Disables active flag
-function M.disable()
+local function auto_format_off()
   M.is_active = false
   local found_command, _ = pcall(vim.api.nvim_get_autocmds, { group = M.group_name })
   if not found_command then
@@ -35,41 +25,41 @@ function M.disable()
   end
 
   vim.api.nvim_del_augroup_by_name(M.group_name)
-  notify("Disabled auto format on save")
+  vim.notify("On save is OFF", vim.log.levels.INFO, { title = ns })
 end
 
 ---Auto formats codebase on save if format toggle is active
----@param bufnr? integer Identifier of buffer what should be formatted
+---@param bufnr? integer|nil Identifier of buffer what should be formatted
 function M.on_save(bufnr)
-  if M.is_active == false then
-    return
-  end
-  M.bufnr = bufnr or M.bufnr
-  local group = vim.api.nvim_create_augroup(M.group_name, { clear = true })
+  bufnr = bufnr or nil
 
-  vim.api.nvim_clear_autocmds({ group = group, buffer = M.bufnr })
+  local group = vim.api.nvim_create_augroup(M.group_name, { clear = true })
+  vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
   vim.api.nvim_create_autocmd("BufWritePre", {
+    buffer = bufnr,
     group = group,
-    buffer = M.bufnr,
     callback = function()
+      if M.is_active == false then
+        return
+      end
       vim.lsp.buf.format({
-        filter = function(client)
-          return client.name == "null-ls"
-        end,
-        bufnr = M.bufnr,
+        bufnr = bufnr,
         async = false, -- wait until done and save then
+        timeout_ms = 10000,
       })
     end,
   })
 end
 
 ---Allows to enable/disable auto formatting on save within a session
-vim.api.nvim_create_user_command("CangeLSPToggleAutoFormat", function()
+vim.api.nvim_create_user_command("LspToggleOnSaveFormatting", function()
   if M.is_active then
-    M.disable()
+    auto_format_off()
   else
-    M.enable()
+    auto_format_on()
   end
+  -- apply state
+  Cange.reload("cange.lsp")
 end, {})
 
 return M

@@ -23,7 +23,6 @@ telescope.load_extension("project")
 telescope.load_extension("ui-select")
 
 local mappings = {
-
   B = { cmd = "<cmd>Telescope buffers<CR>", desc = "[S]earch Existing [B]uffers", primary = true },
   C = { cmd = "<cmd>Telescope commands<CR>", desc = "[S]earch [C]ommands" },
   F = {

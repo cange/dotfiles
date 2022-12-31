@@ -2,18 +2,6 @@
 return {
   settings = {
     Lua = {
-      format = {
-        enable = false,
-      },
-      hint = {
-        enable = true,
-        arrayIndex = "Disable", -- "Enable", "Auto", "Disable"
-        await = true,
-        paramName = "Disable", -- "All", "Literal", "Disable"
-        paramType = false,
-        semicolon = "Disable", -- "All", "SameLine", "Disable"
-        setType = true,
-      },
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = "LuaJIT",
@@ -23,9 +11,8 @@ return {
         globals = {
           "vim",
           -- custom globals
-          "R",
           "P",
-          "RELOAD",
+          "Cange",
         },
       },
       workspace = {
@@ -33,8 +20,7 @@ return {
         library = {
           [vim.fn.expand("$VIMRUNTIME/lua")] = true,
           [vim.fn.stdpath("config") .. "/lua"] = true,
-          -- [vim.fn.datapath "config" .. "/lua"] = true,
-          -- Make the server aware of Neovim runtime files
+          -- register ALL runtime files NOTE: impacts performance
           -- [vim.api.nvim_get_runtime_file('', true)] = true,
         },
       },

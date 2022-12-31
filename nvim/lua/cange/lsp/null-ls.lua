@@ -4,12 +4,6 @@ if not found_null_ls then
   print(ns, '"null-ls" not found')
   return
 end
-local found_auto_format, auto_format = pcall(require, "cange.lsp.auto_format")
-if not found_auto_format then
-  print(ns, '"cange.lsp.auto_format" not found')
-  return
-end
-
 -- config
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/
 local diagnostics = null_ls.builtins.diagnostics
@@ -53,9 +47,4 @@ null_ls.setup({
     -- zsh
     diagnostics.zsh,
   },
-  on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      auto_format.on_save(bufnr)
-    end
-  end,
 })
