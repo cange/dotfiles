@@ -92,4 +92,21 @@ function M.get_config(key)
   return value
 end
 
+---Pretty print shorthand
+---@param value any
+---@param ... any
+---@return any Returns passt value in order to allow chaining
+function P(value, ...)
+  vim.pretty_print(value, ...)
+  return value
+end
+
+---Reruns a module file by removing the given module first
+---@param module_name string
+---@return table|any
+function M.reload(module_name)
+  package.loaded[module_name] = nil
+  return require(module_name)
+end
+
 return M
