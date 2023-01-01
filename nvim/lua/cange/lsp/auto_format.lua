@@ -52,7 +52,7 @@ function M.on_save(bufnr)
 end
 
 ---Allows to enable/disable auto formatting on save within a session
-vim.api.nvim_create_user_command("LspToggleOnSaveFormatting", function()
+vim.api.nvim_create_user_command("LspToggleFormatOnSave", function()
   if M.is_active then
     auto_format_off()
   else

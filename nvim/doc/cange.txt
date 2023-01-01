@@ -75,7 +75,7 @@ plugins configuration file.
 AutoFormat                                              *cange.lsp.AutoFormat*
 
 Auto formatting within a session can be enabled/disabled by using the
-`CangeLSPToggleAutoFormat` command. It is disabled by default and can be
+`LspToggleFormatOnSave` command. It is disabled by default and can be
 configured in the *cange.config*.
 
 
