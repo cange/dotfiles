@@ -133,7 +133,7 @@ M.cmp_source = {
   nvim_lsp = " ",
   nvim_lua = " ",
   path = M.documents.Folder .. " ",
-  cmp_tabnine = M.ui.Robot .. " ",
+  cmp_tabnine = "⌬  ",
 }
 M.git_states = {
   unstaged = M.git.Mod,
