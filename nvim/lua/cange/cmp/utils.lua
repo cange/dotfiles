@@ -81,23 +81,18 @@ local function seek_luasnip_cursor_node()
   return false
 end
 
----@param value string|nil
----@param percentage? string
----@return string # Icon corresponding of percentage or whitespace if no percentage given
-local function prediction_strength_indicator(value, percentage)
-  local function item(icon)
-    return (icon or "  ") .. (value or "")
-  end
-  percentage = percentage or nil
-
+---Provides prediction strength as an icon
+---@param percentage string Number of strength
+---@return string|nil
+local function prediction_strength_kind_icon(percentage)
   if percentage and percentage ~= "" then
     local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
     local icon = vim.split("         ", " ")[fraction_num] .. " "
     -- vim.pretty_print(ns .. " strength:", percentage, icon)
-    return item(icon)
+    return icon
   end
 
-  return item()
+  return nil
 end
 
 ---@module 'cange.cmp.utils'
@@ -139,9 +134,9 @@ function M.format(entry, vim_item)
     strength = tabnine_detail
   end
 
-  vim_item.kind = Cange.get_icon("cmp_kind", vim_item.kind)
+  vim_item.kind = prediction_strength_kind_icon(strength) or Cange.get_icon("cmp_kind", vim_item.kind)
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
-  vim_item.menu = prediction_strength_indicator(vim_item.menu, strength)
+  vim_item.menu = vim_item.menu
 
   return vim_item
 end

@@ -51,6 +51,7 @@ M.ui = {
   SignOut = " ", -- nf-oct-sign_out
   Stethoscope = " ",
   Sync = " ", -- nf-oct-sync
+  Tabnine = "⌬  ",
   Tag = " ", -- nf-oct-tag
   Telescope = " ", -- nf-oct-telescope
   Watch = " ", -- nf-oct-clock
@@ -133,7 +134,7 @@ M.cmp_source = {
   nvim_lsp = " ",
   nvim_lua = " ",
   path = M.documents.Folder .. " ",
-  cmp_tabnine = "⌬  ",
+  cmp_tabnine = M.ui.Tabnine,
 }
 M.git_states = {
   unstaged = M.git.Mod,
