@@ -2,7 +2,7 @@
 
 # CLI tools
 # https://github.com/sharkdp/bat
-alias cat="bat --paging=never --style=changes --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo OneHalfDark || echo OneHalfLight)"
+alias cat="bat --paging=never --style=changes --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo base16-256 || echo GitHub)"
 
 # editor config
 alias nvimrc='nvim ~/.config/nvim/'

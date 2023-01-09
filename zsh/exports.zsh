@@ -20,7 +20,7 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 export GPG_TTY=$(tty)
 
 # https://github.com/sharkdp/bat
-export BAT_THEME="OneHalfDark"
+# Theme is handled by ./zsh/aliases
 export BAT_STYLE="changes"
 
 # Environment variables set everywhere
