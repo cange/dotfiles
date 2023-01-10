@@ -1,10 +1,4 @@
 -- local ns = "[cange.keymaps.common]"
---[[
-  FIRST: Set leader key
-  Leader needs to be defined before any other keymaps definintions
-]]
-vim.g.mapleader = " "
-
 vim.keymap.set("v", "p", '"_dP') -- Keep clipboard content instead of overriding it
 
 -- greatest remap ever
@@ -59,8 +53,8 @@ vim.keymap.set(
   "n",
   "<leader><leader>x",
   ':write<CR>:luafile %<CR>:lua vim.notify("File saved and executed", '
-    .. vim.log.levels.INFO
-    .. ', { title = "Executed!" })<CR>'
+  .. vim.log.levels.INFO
+  .. ', { title = "Executed!" })<CR>'
 )
 
 -- Format

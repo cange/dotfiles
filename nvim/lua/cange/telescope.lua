@@ -1,4 +1,4 @@
-local ns = "[cange.telescope.custom]"
+local ns = "[cange.telescope]"
 local found_telescope, telescope = pcall(require, "telescope")
 if not found_telescope then
   print(ns, '"telescope" not found')
