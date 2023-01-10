@@ -100,29 +100,29 @@ M.register_group("lsp", {
     },
     N = { cmd = "<cmd>NullLsInfo<CR>", desc = "Info Null-ls" },
     c = { cmd = vim.lsp.buf_get_clients, desc = "LSP clients" },
-    d = { cmd = '<cmd>lua require("cange.telescope.custom").diagnostics_log()<CR>', desc = "Diagnostics log" },
+    d = { cmd = '<cmd>lua require("cange.telescope").diagnostics_log()<CR>', desc = "Diagnostics log" },
     f = { cmd = "<cmd>CangeLSPToggleAutoFormat<CR>", desc = "Toggle Auto Formatting" },
     i = { cmd = "<cmd>LspInfo<CR>", desc = "Info LSP" },
     q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
   },
 })
-M.register_group("packer", {
-  title = "Packer",
+M.register_group("plugins", {
+  title = "Plugins",
   subleader = "p",
   mappings = {
-    S = { cmd = "<cmd>PackerStatus<CR>", desc = "[P]acker [S]tatus" },
-    c = { cmd = "<cmd>PackerCompile<CR>", desc = "[P]acker [C]ompile" },
+    S = { cmd = "<cmd>Lazy health<CR>", desc = "[P]lugin [S]tatus" },
+    h = { cmd = "<cmd>Lazy help<CR>", desc = "[P]lugin [h]elp" },
     e = {
-      cmd = "<cmd>e ~/.config/nvim/lua/cange/plugins.lua<CR>",
+      cmd = "<cmd>e ~/.config/nvim/lua/plugins/init.lua<CR>",
       desc = "[E]dit Plugins",
       dashboard = true,
       icon = "ui.Gear",
     },
-    i = { cmd = "<cmd>PackerInstall<CR>", desc = "[P]acker [I]nstall" },
+    i = { cmd = "<cmd>Lazy install<CR>", desc = "[P]lugin [i]nstall" },
     s = {
-      cmd = "<cmd>PackerSync<CR>",
-      desc = "[P]lugins [S]ync",
+      cmd = "<cmd>Lazy sync<CR>",
+      desc = "[P]lugins [s]ync",
       dashboard = true,
       icon = "ui.Sync",
     },
@@ -156,6 +156,64 @@ M.register_group("treesitter", {
     p = { cmd = "<cmd>TSPlaygroundToggle<cr>", desc = "Playground" },
     r = { cmd = "<cmd>TSToggle rainbow<cr>", desc = "Rainbow" },
   },
+})
+
+local telescope_mappings = {
+  B = { cmd = "<cmd>Telescope buffers<CR>", desc = "[S]earch Existing [B]uffers", primary = true },
+  C = { cmd = "<cmd>Telescope commands<CR>", desc = "[S]earch [C]ommands" },
+  F = {
+    cmd = "<cmd>Telescope live_grep<CR>",
+    desc = "[S]earch by [G]rep",
+    primary = true,
+    dashboard = true,
+    icon = "ui.List",
+  },
+  N = { cmd = "<cmd>Telescope notify<CR>", desc = "[S]earch [N]otifications" },
+  P = {
+    cmd = "<cmd>lua require('telescope').extensions.project.project()<CR>",
+    desc = "[S]earch [P]rojects",
+    dashboard = true,
+    icon = "ui.Project",
+  },
+  W = { cmd = '<cmd>lua require("telescope.builtin").grep_string<CR>', desc = "[S]earch current [W]ord" },
+  b = { cmd = '<cmd>lua require("cange.telescope").file_browser()<CR>', desc = "[S]earch [B]rowse files" },
+  c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "[S]witch [C]olorscheme" },
+  f = {
+    cmd = "<cmd>Telescope find_files<CR>",
+    desc = "[S]earch [F]iles",
+    primary = true,
+    dashboard = true,
+    icon = "ui.Search",
+  },
+  h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "[S]earch [H]elp" },
+  k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "[S]earch [K]eybindings" },
+  n = { cmd = '<cmd>lua require("cange.telescope").browse_nvim()<CR>', desc = "Browse [N]vim" },
+  r = {
+    cmd = "<cmd>Telescope oldfiles<CR>",
+    desc = "[R]ecently Opened Files",
+    dashboard = true,
+    icon = "ui.Calendar",
+  },
+  w = { cmd = '<cmd>lua require("cange.telescope").browse_workspace()<CR>', desc = "Browse [W]orkspace" },
+  ["/"] = {
+    cmd = '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
+    desc = "Search current buffer",
+  },
+}
+local found_harpoon, _ = pcall(require, "harpoon")
+if found_harpoon then
+  telescope_mappings = vim.tbl_extend("keep", telescope_mappings, {
+    a = { cmd = '<cmd>lua require("harpoon.mark").add_file()<CR>', desc = "[A]dd bookmark" },
+    m = { cmd = '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', desc = "Bookmarks [m]enu" },
+  })
+else
+  print(ns, "harpoon not found")
+end
+
+M.register_group("telescope", {
+  title = "Search",
+  subleader = "s",
+  mappings = telescope_mappings,
 })
 
 return M
