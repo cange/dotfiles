@@ -8,7 +8,6 @@ return {
       filetype_exclude = {
         "help",
         "dashboard",
-        "packer",
         "NvimTree",
         "Trouble",
         "text",

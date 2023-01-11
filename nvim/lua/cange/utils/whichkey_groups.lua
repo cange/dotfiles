@@ -19,7 +19,7 @@ local ns = "[cange.utils.whichkey_groups]"
 ---@field config WhichKeyGroup
 ---@field git WhichKeyGroup
 ---@field lsp WhichKeyGroup Language related syntax analytics
----@field packer WhichKeyGroup Install, update neovims plugins
+---@field plugins WhichKeyGroup Install, update neovims plugins
 ---@field search WhichKeyGroup Finding stuff
 ---@field session WhichKeyGroup
 ---@field treesitter WhichKeyGroup
