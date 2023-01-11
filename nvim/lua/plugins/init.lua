@@ -8,9 +8,6 @@ local function instant_setup(plugin_name)
 end
 
 return {
-  -- UI
-  "EdenEast/nightfox.nvim", -- theme
-
   -- UI: Cursorline
   "RRethy/vim-illuminate", -- Highlight the word under the cursor
 

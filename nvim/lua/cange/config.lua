@@ -1,7 +1,6 @@
 ---@alias config
 ---| '"author.display_name"' # Name to personalise editor session
----| '"colorscheme.theme"' # Name of the theme library
----| '"colorscheme.variant"' # Variant name of theme
+---| '"colorscheme"' # Variant name of nightfox theme
 ---| '"lsp.diagnostic_virtual_text"' # Boolean to show or hide inline hint text
 ---| '"lsp.format_on_save"' # Boolean to toggle on/off auto formatting on save
 ---| '"lsp.null_ls_sources"' # List of supported formatter, diagnostics servers
@@ -12,8 +11,7 @@
 local M = {}
 
 M["author.display_name"] = "Christian"
-M["colorscheme.theme"] = "nightfox"
-M["colorscheme.variant"] = "terafox"
+M["colorscheme"] = "terafox"
 M["lsp.diagnostic_virtual_text"] = true
 M["snippets.path"] = "./../snippets"
 M["lsp.format_on_save"] = true
