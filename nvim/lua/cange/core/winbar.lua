@@ -77,7 +77,6 @@ local function is_excluded()
     "Outline",
     "alpha",
     "help",
-    "packer",
     "toggleterm",
     "",
   }
@@ -132,7 +131,7 @@ function WinbarBreadcrumbRedraw()
 end
 
 local highlight_links = {
-  NavicText = { link = "SpecialKey"},
+  NavicText = { link = "SpecialKey" },
   WinbarFile = { link = "Comment" },
   WindbarSeparator = { link = "Comment" },
 }

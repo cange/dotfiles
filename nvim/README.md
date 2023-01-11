@@ -22,16 +22,6 @@ ln -s "$HOME/dotfiles/nvim" "$HOME/.config/"
 
 The configuration should now be applied to when open NeoVim again.
 
-### Requriements
-
-#### Package manager for Neovim
-
-```sh
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-```
-
-<https://github.com/wbthomason/packer.nvim>
-
 #### JavaScript Binaries
 
 Ensure [Node.js] has been installed in order run dependency management via
@@ -86,7 +76,7 @@ npm install --global typescript-language-server \
 
 ### First Start
 
-Open neovim and run package manager `:PackerInstall`
+Open neovim and run package manager `:Lazy install`
 
 **Note:** You might run it more the once if some packages fail to install on
 the first run.
