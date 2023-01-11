@@ -1,6 +1,4 @@
-local ns = "[plugins.whichkey]"
-
--- Keybinding
+-- local ns = "[plugins.whichkey]"
 
 ---Generates a which-key table form mappings
 ---@param group WhichKeyGroup Key of a keybinding block
@@ -40,23 +38,17 @@ local function primary_mappings(group, mappings)
   end
 end
 
-local found_groups, whichkey_groups = pcall(require, "cange.utils.whichkey_groups")
-if not found_groups then
-  print(ns, '"cange.utils.whichkey_groups" not found')
-  return
-end
-
 return {
   "folke/which-key.nvim",
-  -- dependencies = {
-  --   "cange.utils.whichkey_groups",
-  -- },
+  dependencies = {
+    'ThePrimeagen/harpoon'
+  },
   config = function()
     local primary_keymaps = {}
     local secondary_keymaps = {}
     local wk_mappings = {}
     -- execute
-    for _, g in pairs(whichkey_groups.get()) do
+    for _, g in pairs(Cange.get_whichkey_group()) do
       secondary_keymaps = vim.tbl_extend("keep", secondary_keymaps, group_mappings(g))
       primary_mappings(g, primary_keymaps)
     end

@@ -10,16 +10,10 @@ local function button(dashboard, key, label, cmd)
   return btn
 end
 
-local found_whichkey, whichkey_groups = pcall(require, "cange.utils.whichkey_groups")
-if not found_whichkey then
-  print(ns, '"cange.utils.whichkey_groups" not found')
-  return
-end
-
 ---Pick up designated keys from keymap groups
 local function buttons(dashboard)
   local btns = {}
-  for _, g in pairs(whichkey_groups.get()) do
+  for _, g in pairs(Cange.get_whichkey_group()) do
     for key, m in pairs(g.mappings) do
       if m.dashboard == true then
         table.insert(btns, button(dashboard, key, (Cange.get_icon(m.icon or "")) .. " " .. m.desc, m.cmd))

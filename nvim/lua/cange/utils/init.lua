@@ -7,10 +7,12 @@ local hl_groups = require("cange.utils.hl_groups")
 
 ---Provides general access to certain core sources
 ---@class Utils
+
 local M = {}
 
 M.get_random_greeting_for = greetings.random_with_name
-M.register_whichkey_group = whichkey_groups.register_group
+M.set_whichkey_group = whichkey_groups.set_group
+M.get_whichkey_group = whichkey_groups.get_group
 --
 ---Set highlight group by given table.
 ---@param highlights HighlightGroups Highlight definition map
