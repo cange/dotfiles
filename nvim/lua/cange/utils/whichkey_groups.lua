@@ -24,28 +24,28 @@ local ns = "[cange.utils.whichkey_groups]"
 ---@field session WhichKeyGroup
 ---@field treesitter WhichKeyGroup
 
-local M = {}
-
 ---@class WhichKeyGroups
 local groups = {}
+
+local M = {}
+
+---@param group_id string|nil
+---@return WhichKeyGroups # All defined groups or one when group_id is specified
+function M.get_group(group_id)
+  return group_id == nil and groups[group_id] or groups
+end
 
 ---Adds given mapping to the which key menu
 ---@param group_id string Letter starting name of the group
 ---@param group WhichKeyGroup
-function M.register_group(group_id, group)
+function M.set_group(group_id, group)
   group_id = vim.trim(group_id):lower():gsub("%W", "-")
   groups[group_id] = group
-  -- vim.pretty_print(ns, "register_group", group_id, vim.tbl_keys(group))
+  -- vim.pretty_print(ns, "set_group", group_id, vim.tbl_keys(group))
   return groups[group_id]
 end
 
----Returns all defined groups
----@return WhichKeyGroups
-function M.get()
-  return groups
-end
-
-M.register_group("editor", {
+M.set_group("editor", {
   title = "Editor",
   subleader = "c",
   mappings = {
@@ -70,7 +70,7 @@ M.register_group("editor", {
     w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
   },
 })
-M.register_group("git", {
+M.set_group("git", {
   title = "Git",
   subleader = "g",
   mappings = {
@@ -88,7 +88,7 @@ M.register_group("git", {
     u = { cmd = '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', desc = "Undo stage hunk" },
   },
 })
-M.register_group("lsp", {
+M.set_group("lsp", {
   title = "LSP",
   subleader = "l",
   mappings = {
@@ -107,7 +107,7 @@ M.register_group("lsp", {
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
   },
 })
-M.register_group("plugins", {
+M.set_group("plugins", {
   title = "Plugins",
   subleader = "p",
   mappings = {
@@ -128,7 +128,7 @@ M.register_group("plugins", {
     },
   },
 })
-M.register_group("session", {
+M.set_group("session", {
   title = "Session",
   subleader = "b",
   mappings = {
@@ -148,7 +148,7 @@ M.register_group("session", {
     x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
   },
 })
-M.register_group("treesitter", {
+M.set_group("treesitter", {
   title = "Tree-sitter",
   subleader = "t",
   mappings = {
@@ -158,62 +158,53 @@ M.register_group("treesitter", {
   },
 })
 
-local telescope_mappings = {
-  B = { cmd = "<cmd>Telescope buffers<CR>", desc = "[S]earch Existing [B]uffers", primary = true },
-  C = { cmd = "<cmd>Telescope commands<CR>", desc = "[S]earch [C]ommands" },
-  F = {
-    cmd = "<cmd>Telescope live_grep<CR>",
-    desc = "[S]earch by [G]rep",
-    primary = true,
-    dashboard = true,
-    icon = "ui.List",
-  },
-  N = { cmd = "<cmd>Telescope notify<CR>", desc = "[S]earch [N]otifications" },
-  P = {
-    cmd = "<cmd>lua require('telescope').extensions.project.project()<CR>",
-    desc = "[S]earch [P]rojects",
-    dashboard = true,
-    icon = "ui.Project",
-  },
-  W = { cmd = '<cmd>lua require("telescope.builtin").grep_string<CR>', desc = "[S]earch current [W]ord" },
-  b = { cmd = '<cmd>lua require("cange.telescope").file_browser()<CR>', desc = "[S]earch [B]rowse files" },
-  c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "[S]witch [C]olorscheme" },
-  f = {
-    cmd = "<cmd>Telescope find_files<CR>",
-    desc = "[S]earch [F]iles",
-    primary = true,
-    dashboard = true,
-    icon = "ui.Search",
-  },
-  h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "[S]earch [H]elp" },
-  k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "[S]earch [K]eybindings" },
-  n = { cmd = '<cmd>lua require("cange.telescope").browse_nvim()<CR>', desc = "Browse [N]vim" },
-  r = {
-    cmd = "<cmd>Telescope oldfiles<CR>",
-    desc = "[R]ecently Opened Files",
-    dashboard = true,
-    icon = "ui.Calendar",
-  },
-  w = { cmd = '<cmd>lua require("cange.telescope").browse_workspace()<CR>', desc = "Browse [W]orkspace" },
-  ["/"] = {
-    cmd = '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
-    desc = "Search current buffer",
-  },
-}
-local found_harpoon, _ = pcall(require, "harpoon")
-if found_harpoon then
-  telescope_mappings = vim.tbl_extend("keep", telescope_mappings, {
-    a = { cmd = '<cmd>lua require("harpoon.mark").add_file()<CR>', desc = "[A]dd bookmark" },
-    m = { cmd = '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', desc = "Bookmarks [m]enu" },
-  })
-else
-  print(ns, "harpoon not found")
-end
-
-M.register_group("telescope", {
+M.set_group("telescope", {
   title = "Search",
   subleader = "s",
-  mappings = telescope_mappings,
+  mappings = {
+    B = { cmd = "<cmd>Telescope buffers<CR>", desc = "[S]earch Existing [B]uffers", primary = true },
+    C = { cmd = "<cmd>Telescope commands<CR>", desc = "[S]earch [C]ommands" },
+    F = {
+      cmd = "<cmd>Telescope live_grep<CR>",
+      desc = "[S]earch by [G]rep",
+      primary = true,
+      dashboard = true,
+      icon = "ui.List",
+    },
+    N = { cmd = "<cmd>Telescope notify<CR>", desc = "[S]earch [N]otifications" },
+    P = {
+      cmd = "<cmd>lua require('telescope').extensions.project.project()<CR>",
+      desc = "[S]earch [P]rojects",
+      dashboard = true,
+      icon = "ui.Project",
+    },
+    W = { cmd = '<cmd>lua require("telescope.builtin").grep_string<CR>', desc = "[S]earch current [W]ord" },
+    a = { cmd = '<cmd>lua require("harpoon.mark").add_file()<CR>', desc = "[A]dd bookmark" },
+    b = { cmd = '<cmd>lua require("cange.telescope").file_browser()<CR>', desc = "[S]earch [B]rowse files" },
+    c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "[S]witch [C]olorscheme" },
+    f = {
+      cmd = "<cmd>Telescope find_files<CR>",
+      desc = "[S]earch [F]iles",
+      primary = true,
+      dashboard = true,
+      icon = "ui.Search",
+    },
+    h = { cmd = "<cmd>Telescope help_tags<CR>", desc = "[S]earch [H]elp" },
+    k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "[S]earch [K]eybindings" },
+    m = { cmd = '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', desc = "Bookmarks [m]enu" },
+    n = { cmd = '<cmd>lua require("cange.telescope").browse_nvim()<CR>', desc = "Browse [N]vim" },
+    r = {
+      cmd = "<cmd>Telescope oldfiles<CR>",
+      desc = "[R]ecently Opened Files",
+      dashboard = true,
+      icon = "ui.Calendar",
+    },
+    w = { cmd = '<cmd>lua require("cange.telescope").browse_workspace()<CR>', desc = "Browse [W]orkspace" },
+    ["/"] = {
+      cmd = '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
+      desc = "Search current buffer",
+    },
+  },
 })
 
 return M
