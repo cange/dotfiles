@@ -23,6 +23,10 @@
     "prefix": "expect(subject",
     "body": "expect(subject.$1).to$2"
   },
+  "only": {
+    "prefix": ".only",
+    "body": ".only"
+  },
   "expect(wrapper": {
     "prefix": "expect(wrapper",
     "body": "expect(wrapper.$1).to$2"
