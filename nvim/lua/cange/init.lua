@@ -24,7 +24,11 @@ vim.g.maplocalleader = " "
 
 --[[ Order is important ]]
 Cange = require("cange.utils") -- 1st
-require("lazy").setup("plugins") -- 2nd
+require("lazy").setup("plugins", { -- 2nd
+  checker = {
+    enabled = true, -- allows to get the number of pending updates when true
+  },
+})
 -- [[ Other stuff ]]
 Cange.reload("cange.cmp")
 Cange.reload("cange.core")

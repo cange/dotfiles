@@ -1,5 +1,13 @@
+local found_lazy, lazy_status = pcall(require, "lazy.status")
+local lazy_status_component = {}
+if found_lazy then
+  lazy_status_component = {
+    lazy_status.updates,
+    cond = lazy_status.has_updates,
+    color = { fg = "#ff9e64" },
+  }
+end
 
--- UI: Statusline
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
@@ -33,6 +41,7 @@ return {
         lualine_x = {
           "filetype",
           "fileformat",
+          lazy_status_component,
         },
         lualine_y = { "encoding" },
         lualine_z = {
