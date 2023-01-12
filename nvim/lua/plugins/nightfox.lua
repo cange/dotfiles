@@ -6,11 +6,6 @@ return {
     -- local ns = "[plugins.nightfox]"
     local colorscheme = Cange.get_config("colorscheme")
 
-    require("nightfox").setup({
-      options = {
-        dim_inactive = true, -- Non focused panes set to alternative background
-      },
-    })
     -- setup must be called before loading
     vim.cmd("colorscheme " .. colorscheme)
     -- vim.notify(colorscheme .. " colorscheme", vim.log.levels.INFO, { title = "Theme: " .. ns })
