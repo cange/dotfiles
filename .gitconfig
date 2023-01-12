@@ -33,17 +33,18 @@
 	go = checkout -B
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
+
 [fetch]
-  prune = true
+	prune = true # deletes outdated remote references
 
 [pager]
 	color = true
+
 [status]
 	color = auto
 
 [apply]
-	# Detect whitespace errors when applying a patch
-	whitespace = fix
+	whitespace = fix # detects whitespace errors when applying a patch
 
 [core]
 	# Use custom `.gitignore` and `.gitattributes`
@@ -52,40 +53,54 @@
 	# Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
 	# whitespace = space-before-tab,indent-with-non-tab,trailing-space
 	editor = vim
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta] # diff tool https://github.com/dandavison/delta
+	light = false # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	line-numbers = true # show line numbers
+	navigate = true # use n and N to move between diff sections
+
+[merge]
+	conflictstyle = zdiff3 # even cleaner output than diff3
+	log = true # summaries of merged commits in newly created merge commit messages
+
+[diff]
+  colorMoved = default
 
 [color]
-	# Use colors in Git commands that are capable of colored output when outputting to the terminal
-	ui = auto
+	ui = auto # colored output
+
 [color "branch"]
 	current = yellow reverse
 	local = yellow
 	remote = green
+
 [color "diff"]
 	meta = yellow bold
 	frag = magenta bold
-	old = red
-	new = green
+	old = red bold
+	new = green bold
 	whitespace = white reverse
+
 [color "status"]
 	added = yellow
 	changed = green
 	untracked = cyan
-[merge]
-	# Include summaries of merged commits in newly created merge commit messages
-	log = true
-	tool = opendiff
-#[diff]
-	# tool = opendiff
-	# external = opendiff
 
 # Use `origin` as the default remote on the `master` branch in all cases
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
+
 [rerere]
 	enabled = true
+
 [push]
 	default = simple
 	gpgsign = false
+
 [pull]
 	rebase = true

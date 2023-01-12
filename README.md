@@ -40,7 +40,7 @@ Install them in one go by placing them all into a text file and then running
 brew install:
 
 ```sh
-touch apps.txt && echo 'asdf firefox-developer-edition fork git gpg-suite iterm2 itsycal keepingyouawake neovim raycast stats' >> apps.txt
+touch apps.txt && echo 'asdf firefox-developer-edition fork git git-delta gpg-suite iterm2 itsycal keepingyouawake neovim raycast stats' >> apps.txt
 xargs brew install < apps.txt
 rm apps.txt
 ```
