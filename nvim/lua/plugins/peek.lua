@@ -2,7 +2,7 @@ return {
   -- Markdown
   "toppair/peek.nvim",
   build = "deno task --quiet build:fast",
-  confif = function()
+  config = function()
     local ns = "[plugin/peek]"
     local peek = require("peek")
 

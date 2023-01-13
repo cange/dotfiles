@@ -4,13 +4,6 @@ return {
   "rmagatti/auto-session", -- small automated session manager
   dependencies = {
     "rmagatti/session-lens", -- extends auto-session through Telescope
-    config = function()
-      require("session-lens").setup({
-        path_display = { "shorten" },
-        previewer = true,
-        prompt_title = "Sessions",
-      })
-    end,
   },
   config = function()
     -- better experience with the plugin overall using this config for sessionoptions is recommended.

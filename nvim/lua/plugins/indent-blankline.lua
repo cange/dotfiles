@@ -1,7 +1,7 @@
 -- local ns = "[plugin/indent_blankline]"
 return {
   "lukas-reineke/indent-blankline.nvim",
-  confif = function()
+  config = function()
     require("indent_blankline").setup({
       enabled = true,
       buftype_exclude = { "terminal", "nofile" },
