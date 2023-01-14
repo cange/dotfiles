@@ -101,7 +101,7 @@ M.set_group("lsp", {
     N = { cmd = "<cmd>NullLsInfo<CR>", desc = "Info Null-ls" },
     c = { cmd = vim.lsp.buf_get_clients, desc = "LSP clients" },
     d = { cmd = '<cmd>lua require("cange.telescope").diagnostics_log()<CR>', desc = "Diagnostics log" },
-    f = { cmd = "<cmd>CangeLSPToggleAutoFormat<CR>", desc = "Toggle Auto Formatting" },
+    f = { cmd = "<cmd>LspToggleFormatOnSave<CR>", desc = "Toggle format on save" },
     i = { cmd = "<cmd>LspInfo<CR>", desc = "Info LSP" },
     q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
