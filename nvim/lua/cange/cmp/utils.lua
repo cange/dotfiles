@@ -84,7 +84,7 @@ end
 ---Provides prediction strength as an icon
 ---@param percentage string Number of strength
 ---@return string|nil
-local function prediction_strength_kind_icon(percentage)
+local function get_prediction_strength_kind_icon(percentage)
   if percentage and percentage ~= "" then
     local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
     local icon = vim.split("         ", " ")[fraction_num] .. " "
@@ -93,6 +93,18 @@ local function prediction_strength_kind_icon(percentage)
   end
 
   return nil
+end
+
+---Define appropriate highlight color group
+---@param source_name string
+---@return string
+local function get_menu_hl_group_by(source_name)
+  local groups = {
+    cmp_tabnine = "CmpItemKindTabnine",
+    copilot = "CmpItemKindCopilot",
+  }
+
+  return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "Comment"
 end
 
 ---@module 'cange.cmp.utils'
@@ -119,14 +131,8 @@ end
 function M.format(entry, vim_item)
   local maxwidth = 80
   local source_icons = Cange.get_icon("cmp_source") or {}
-  local name = entry.source.name
+  local source_name = entry.source.name
   local strength = ""
-
-  ---@diagnostic disable-next-line: param-type-mismatch
-  if vim.tbl_contains(vim.tbl_keys(source_icons), name) then
-    vim_item.menu = vim.trim(source_icons[name])
-    vim_item.menu_hl_group = "Comment" -- assign appropriate theme color
-  end
 
   ---@see https://github.com/tzachar/cmp-tabnine#show_prediction_strength
   local tabnine_detail = (entry.completion_item.data or {}).detail
@@ -134,9 +140,14 @@ function M.format(entry, vim_item)
     strength = tabnine_detail
   end
 
-  vim_item.kind = prediction_strength_kind_icon(strength) or Cange.get_icon("cmp_kind", vim_item.kind)
+  ---@diagnostic disable-next-line: param-type-mismatch
+  if vim.tbl_contains(vim.tbl_keys(source_icons), source_name) then
+    vim_item.menu = vim.trim(source_icons[source_name])
+  end
+
+  vim_item.kind = get_prediction_strength_kind_icon(strength) or Cange.get_icon("cmp_kind", vim_item.kind)
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
-  vim_item.menu = vim_item.menu
+  vim_item.menu_hl_group = get_menu_hl_group_by(source_name)
 
   return vim_item
 end

@@ -39,6 +39,10 @@ return {
       IndentBlanklineContextStart = { sp = palette.fg3, underline = true },
       IndentBlanklineSpaceChar = { fg = palette.bg3 },
       IndentBlanklineSpaceCharBlankline = { fg = palette.red.base },
+
+      -- cmp / completion
+      CmpItemKindTabnine = { fg = palette.pink.base },
+      CmpItemKindCopilot = { fg = palette.cyan.base },
     })
   end,
 }

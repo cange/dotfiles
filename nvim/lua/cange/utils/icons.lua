@@ -51,7 +51,8 @@ M.ui = {
   SignOut = " ", -- nf-oct-sign_out
   Stethoscope = " ",
   Sync = " ", -- nf-oct-sync
-  Tabnine = "⌬  ",
+  Tabnine = "⌬ ",
+  Octoface = " ", -- nf-oct-octoface
   Tag = " ", -- nf-oct-tag
   Telescope = " ", -- nf-oct-telescope
   Watch = " ", -- nf-oct-clock
@@ -76,7 +77,6 @@ M.git = {
   Rename = " ", -- nf-oct-diff_renamed
   Diff = " ", -- nf-oct-diff
   Branch = " ", --nf-oct-git_branch
-  Octoface = " ", -- nf-oct-octoface
 }
 M.diagnostics = {
   Error = " ", -- nf-mdi-close_circle
@@ -135,6 +135,7 @@ M.cmp_source = {
   nvim_lua = " ",
   path = M.documents.Folder .. " ",
   cmp_tabnine = M.ui.Tabnine,
+  copilot = M.ui.Octoface,
 }
 M.git_states = {
   unstaged = M.git.Mod,
