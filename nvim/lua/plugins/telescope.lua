@@ -72,14 +72,12 @@ return {
         lsp_definitions = lsp_opts,
         lsp_references = lsp_opts,
         quickfix = default_opts,
-
         live_grep = {
           path_display = { "shorten" },
           theme = "ivy",
           mappings = {
             i = {
               ["<C-f>"] = custom_pickers.actions.set_extension,
-              ["<C-l>"] = custom_pickers.actions.set_folders,
             },
           },
         },
