@@ -7,6 +7,10 @@
     "prefix": "when",
     "body": "describe('when ${1:condition}', () => {\n\t$2\n})$3"
   },
+  "describe(with…)": {
+    "prefix": "with",
+    "body": "describe('with ${1:condition}', () => {\n\t$2\n})$3"
+  },
   "it": {
     "prefix": "it(…",
     "body": "it('$1', () => {\n\t$2\n})"
@@ -32,7 +36,7 @@
     "body": "expect(wrapper.$1).to$2"
   },
   "vue wrapper debug": {
-    "prefix": "logd",
+    "prefix": "logdebug",
     "body": "console.log(\"--- $1$2.html(): %o\", ${1:wrapper}$2.html())"
   },
   "expect.objectContaining": {

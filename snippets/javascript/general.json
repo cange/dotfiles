@@ -1,11 +1,19 @@
 {
   "eslint block": {
     "prefix": "eslint-disable … */",
-    "body": ["/* eslint-disable $1 */", "$2", "/* eslint-enable $1 */"]
+    "body": [
+      "/* eslint-disable $1 */",
+      "$2",
+      "/* eslint-enable $1 */"
+    ]
   },
   "disable prettier block": {
     "prefix": "eslint prettier/prettier */",
-    "body": ["/* eslint-disable prettier/prettier */", "$2", "/* eslint-enable prettier/prettier */"]
+    "body": [
+      "/* eslint-disable prettier/prettier */",
+      "$2",
+      "/* eslint-enable prettier/prettier */"
+    ]
   },
   "eslint-disable-line": {
     "prefix": "eslint-disable-line …",
@@ -32,8 +40,12 @@
     "body": "console.log('--- ${1:param}: %o', $1)"
   },
   "log(Object.keys(…": {
-    "prefix": "logk",
+    "prefix": "logkeys",
     "body": "console.log('--- ${1:param} keys: %o', Object.keys($1))"
+  },
+  "console.table(": {
+    "prefix": "logtable",
+    "body": "console.table($1)"
   },
   "import local": {
     "prefix": "import local",
