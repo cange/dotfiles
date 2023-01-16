@@ -7,6 +7,7 @@ return {
     "BurntSushi/ripgrep", -- telescope live grep suggestions
     "nvim-telescope/telescope-project.nvim", -- switch between projects
     "nvim-telescope/telescope-ui-select.nvim", -- improved select UI
+    "nvim-telescope/telescope-live-grep-args.nvim", -- enables passing arguments to the grep command
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- improves search performance
     { "ThePrimeagen/harpoon", dependencies = "nvim-lua/plenary.nvim" }, -- bookmark buffers
   },
