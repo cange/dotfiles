@@ -165,8 +165,8 @@ M.set_group("telescope", {
     B = { cmd = "<cmd>Telescope buffers<CR>", desc = "[S]earch Existing [B]uffers", primary = true },
     C = { cmd = "<cmd>Telescope commands<CR>", desc = "[S]earch [C]ommands" },
     F = {
-      cmd = "<cmd>Telescope live_grep<CR>",
-      desc = "[S]earch by [G]rep",
+      cmd = "<cmd>lua require('cange.telescope').live_grep()<CR>",
+      desc = "[S]earch by Grep",
       primary = true,
       dashboard = true,
       icon = "ui.List",

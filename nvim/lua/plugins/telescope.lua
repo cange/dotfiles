@@ -2,12 +2,13 @@ return {
   -- Fuzzy Finder
   "nvim-telescope/telescope.nvim", -- fuzzy finder over lists
   dependencies = {
+    "BurntSushi/ripgrep", -- telescope live grep suggestions
     "nvim-lua/plenary.nvim", -- common lua functions - https://github.com/nvim-lua/plenary.nvim
     "nvim-telescope/telescope-file-browser.nvim", -- browser extension
-    "BurntSushi/ripgrep", -- telescope live grep suggestions
     "nvim-telescope/telescope-project.nvim", -- switch between projects
     "nvim-telescope/telescope-ui-select.nvim", -- improved select UI
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- improves search performance
+    "nvim-telescope/telescope-live-grep-args.nvim", -- enables passing arguments to the grep command
     { "ThePrimeagen/harpoon", dependencies = "nvim-lua/plenary.nvim" }, -- bookmark buffers
   },
   config = function()
@@ -15,6 +16,7 @@ return {
     local actions = require("telescope.actions")
     local telescope = require("telescope")
     local themes = require("telescope.themes")
+    local custom_pickers = require("cange.telescope")
     -- config
     local default_opts = {
       previewer = false,
@@ -65,12 +67,20 @@ return {
           find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
         }),
         grep_string = default_opts,
-        live_grep = { theme = "ivy" },
         help_tags = { theme = "ivy" },
         lsp_declarations = lsp_opts,
         lsp_definitions = lsp_opts,
         lsp_references = lsp_opts,
         quickfix = default_opts,
+        live_grep = {
+          path_display = { "shorten" },
+          theme = "ivy",
+          mappings = {
+            i = {
+              ["<C-f>"] = custom_pickers.actions.set_extension,
+            },
+          },
+        },
       },
     })
 

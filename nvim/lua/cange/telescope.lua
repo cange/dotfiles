@@ -4,12 +4,62 @@ if not found_telescope then
   print(ns, '"telescope" not found')
   return
 end
+local action_state = require("telescope.actions.state")
+local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
-local actions_state = require("telescope.actions.state")
 local themes = require("telescope.themes")
+local transform_mod = require("telescope.actions.mt").transform_mod
+
 -- config
 local M = {}
 
+---Keep track of the active extension and folders for `live_grep`
+local live_grep_filters = {
+  ---@type nil|string
+  extension = nil,
+  ---@type nil|string[]
+  directories = nil,
+}
+
+---Run `live_grep` with the active filters (extension and folders)
+local function run_live_grep(current_input)
+  -- TODO: Resume old one with same options somehow
+  builtin.live_grep({
+    additional_args = live_grep_filters.extension and function()
+      return { "-g", "*." .. live_grep_filters.extension }
+    end,
+    search_dirs = live_grep_filters.directories,
+    default_text = current_input,
+  })
+end
+
+-- Inspired by https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/plugins/telescope_custom_pickers.lua
+M.actions = transform_mod({
+  ---Ask for a file extension and filtering by it
+  set_extension = function(prompt_bufnr)
+    local current_picker = action_state.get_current_picker(prompt_bufnr)
+
+    vim.ui.input({ default = "", prompt = "File type: *." }, function(input)
+      if input == nil then
+        return
+      end
+
+      live_grep_filters.extension = input
+      actions._close(prompt_bufnr, current_picker.initial_mode == "insert")
+      run_live_grep(action_state.get_current_line())
+    end)
+  end,
+})
+
+---Wapper over `live_grep` to first reset active filters
+function M.live_grep()
+  live_grep_filters.extension = nil
+  live_grep_filters.directories = nil
+
+  builtin.live_grep()
+end
+
+---Search with the neovim folder only
 function M.browse_nvim()
   local opts = {
     cwd = "~/.config/nvim",
@@ -21,6 +71,7 @@ function M.browse_nvim()
   builtin.find_files(opts)
 end
 
+---Align diagnostics dialogue UI
 function M.diagnostics_log()
   builtin.diagnostics(themes.get_ivy({
     bufnr = 0,
@@ -47,7 +98,7 @@ function M.file_browser()
     cwd = vim.fn.expand(path),
     path = path,
     attach_mappings = function(prompt_bufnr, keymap)
-      local current_picker = actions_state.get_current_picker(prompt_bufnr)
+      local current_picker = action_state.get_current_picker(prompt_bufnr)
 
       local modify_cwd = function(new_cwd)
         local finder = current_picker.finder
