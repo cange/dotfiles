@@ -84,23 +84,31 @@ function M.get_symbol_kind_hl(id)
 end
 
 ---Get certain config attributes
----@param key config Path of a certain configuation key
----@return any Value of given key or nil if not found.
-function M.get_config(key)
-  local value = config[key]
-  if value == nil then
-    print(ns, 'of "' .. key .. '" key is not configured!')
+---@param key_path config Dot separated path to a certain config value.
+---@return any value of given key or nil if not found.
+function M.get_config(key_path)
+  local config_prop = config
+  local separator = "%."
+
+  for _, key in pairs(vim.split(key_path, separator)) do
+    if config_prop[key] then
+      ---@diagnostic disable-next-line: cast-local-type
+      config_prop = config_prop[key]
+    end
   end
-  return value
+
+  if config_prop == nil then
+    print(ns, 'of "' .. key_path .. '" key is not configured!')
+  end
+
+  return config_prop
 end
 
 ---Pretty print shorthand
 ---@param value any
 ---@param ... any
----@return any Returns passt value in order to allow chaining
 function P(value, ...)
   vim.pretty_print(value, ...)
-  return value
 end
 
 ---Reruns a module file by removing the given module first
