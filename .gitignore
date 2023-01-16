@@ -352,7 +352,9 @@ zsdoc/data
 !/tests/_output/.gitkeep
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,vim,ruby,rails,sass,macos,node,ssh,zsh
-nvim/nvim-macos/
+
+# https://github.com/folke/lazy.nvim
+lazy-lock.json
 
 # asdf runtime manager
 .tool-versions
