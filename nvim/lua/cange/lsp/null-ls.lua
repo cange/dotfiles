@@ -29,6 +29,7 @@ null_ls.setup({
     -- js
     code_actions.eslint_d.with({ command = execute_path("eslint_d") }),
     diagnostics.eslint_d.with({ command = execute_path("eslint_d") }),
+    formatting.eslint_d.with({ command = execute_path("eslint_d") }),
     ts_code_actions,
 
     -- json
