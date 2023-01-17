@@ -58,6 +58,7 @@ return {
         ["ui-select"] = { --https://github.com/nvim-telescope/telescope-ui-select.nvim#telescope-setup-and-configuration
           themes.get_cursor(),
         },
+        project = default_opts,
       },
       pickers = {
         buffers = default_opts,

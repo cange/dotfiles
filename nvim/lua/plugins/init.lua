@@ -72,7 +72,7 @@ return {
 
   -- Editing support
   { "windwp/nvim-ts-autotag", config = instant_setup("nvim-ts-autotag") }, -- autoclose and autorename html tags
-  { "p00f/nvim-ts-rainbow", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- Rainbow parentheses
+  { "mrjones2014/nvim-ts-rainbow", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- Rainbow parentheses
 
   "mg979/vim-visual-multi", -- multi search and replace
 }
