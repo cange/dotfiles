@@ -11,38 +11,40 @@ return {
     -- vim.notify(colorscheme .. " colorscheme", vim.log.levels.INFO, { title = "Theme: " .. ns })
 
     -- Returns the palette of the specified colorscheme
-    local palette = require("nightfox.palette").load(colorscheme)
+    local p = require("nightfox.palette").load(colorscheme)
+    Cange.register_key("palette", p)
+
     -- vim.pretty_print("color:", vim.tbl_keys(palette))
 
     Cange.set_hls({
-      CursorLine = { bg = palette.bg2 }, -- disable default
-      Folded = { bg = nil, fg = palette.bg4 }, -- reduces folding noise
+      CursorLine = { bg = p.bg2 }, -- disable default
+      Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
       -- illuminate
-      IlluminatedWordText = { bg = palette.bg1 }, -- Default for references if no kind information is available
-      IlluminatedWordRead = { bg = palette.bg2 }, -- for references of kind read
-      IlluminatedWordWrite = { bg = palette.bg2, bold = true }, -- for references of kind write
+      IlluminatedWordText = { bg = p.bg1 }, -- Default for references if no kind information is available
+      IlluminatedWordRead = { bg = p.bg2 }, -- for references of kind read
+      IlluminatedWordWrite = { bg = p.bg2, bold = true }, -- for references of kind write
 
       -- telescope
-      TelescopeMatching = { fg = palette.yellow.bright, bold = true },
-      TelescopeSelection = { bg = palette.sel0 },
-      TelescopeSelectionCaret = { fg = palette.white.base, bg = palette.sel0 },
-      TelescopePromptNormal = { bg = palette.bg },
-      TelescopeSelectionNormal = { bg = palette.bg0 },
-      TelescopePromptBorder = { fg = palette.bg0, bg = palette.bg0 },
-      TelescopePromptTitle = { fg = palette.bg4 },
-      TelescopeBorder = { fg = palette.bg0, bg = palette.bg0 },
-      TelescopeResultsNormal = { bg = palette.bg0 },
+      TelescopeMatching = { fg = p.yellow.bright, bold = true },
+      TelescopeSelection = { bg = p.sel0 },
+      TelescopeSelectionCaret = { fg = p.white.base, bg = p.sel0 },
+      TelescopePromptNormal = { bg = p.bg },
+      TelescopeSelectionNormal = { bg = p.bg0 },
+      TelescopePromptBorder = { fg = p.bg0, bg = p.bg0 },
+      TelescopePromptTitle = { fg = p.bg4 },
+      TelescopeBorder = { fg = p.bg0, bg = p.bg0 },
+      TelescopeResultsNormal = { bg = p.bg0 },
 
       -- indent-blankline
-      IndentBlanklineChar = { fg = palette.bg2 },
-      IndentBlanklineContextChar = { fg = palette.fg3 },
-      IndentBlanklineContextStart = { sp = palette.fg3, underline = true },
-      IndentBlanklineSpaceChar = { fg = palette.bg3 },
-      IndentBlanklineSpaceCharBlankline = { fg = palette.red.base },
+      IndentBlanklineChar = { fg = p.bg2 },
+      IndentBlanklineContextChar = { fg = p.fg3 },
+      IndentBlanklineContextStart = { sp = p.fg3, underline = true },
+      IndentBlanklineSpaceChar = { fg = p.bg3 },
+      IndentBlanklineSpaceCharBlankline = { fg = p.red.base },
 
       -- cmp / completion
-      CmpItemKindTabnine = { fg = palette.pink.base },
-      CmpItemKindCopilot = { fg = palette.cyan.base },
+      CmpItemKindTabnine = { fg = p.pink.base },
+      CmpItemKindCopilot = { fg = p.cyan.base },
     })
   end,
 }

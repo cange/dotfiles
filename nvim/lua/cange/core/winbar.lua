@@ -51,7 +51,7 @@ local function get_filename(opts)
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
 
-    return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%* " .. "%#WinbarFile#" .. filepath .. "%*"
+    return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%* %#WinbarFile#" .. filepath .. "%*"
   end
 
   return ""

@@ -119,4 +119,18 @@ function M.reload(module_name)
   return require(module_name)
 end
 
+---Adds an value to the global namespace, raises an error if key already exists
+---@param key string
+---@param value any
+---@return any # Either registered or the value of taken key
+function M.register_key(key, value)
+  if M[key] ~= nil then
+    vim.pretty_print(ns, '"' .. key .. '" key already taken')
+  else
+    M[key] = value
+  end
+
+  return M[key]
+end
+
 return M
