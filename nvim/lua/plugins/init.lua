@@ -36,19 +36,21 @@ return {
   {
     "neovim/nvim-lspconfig", -- configure LSP servers
     dependencies = {
-      "williamboman/mason.nvim", -- managing & installing LSP servers, linters & formatters
+      "jayp0521/mason-null-ls.nvim", -- bridges mason.nvim with the null-ls plugin
+      "jose-elias-alvarez/null-ls.nvim", -- syntax formatting, diagnostics (dependencies npm pacakges)
+      "jose-elias-alvarez/typescript.nvim", -- enables LSP features for TS/JS
       "williamboman/mason-lspconfig.nvim", -- bridges mason.nvim with the lspconfig plugin
+      "williamboman/mason.nvim", -- managing & installing LSP servers, linters & formatters
     },
+    config = function()
+      -- order is important
+      Cange.reload("cange.lsp.diagnostics") -- 0
+      Cange.reload("cange.lsp.mason") -- 1
+      Cange.reload("cange.lsp.lspconfig") -- 2
+      Cange.reload("cange.lsp.null-ls") -- 3
+    end,
   },
 
-  {
-    "jose-elias-alvarez/null-ls.nvim", -- syntax formatting, diagnostics (dependencies npm pacakges)
-    dependencies = {
-      "williamboman/mason.nvim", -- managing & installing LSP servers, linters & formatters
-      "jayp0521/mason-null-ls.nvim", -- bridges mason.nvim with the null-ls plugin
-    },
-  },
-  { "jose-elias-alvarez/typescript.nvim", dependencies = "neovim/nvim-lspconfig" }, -- enables LSP features for TS/JS
   "b0o/SchemaStore.nvim", -- json/yaml schema support
 
   -- Completion
@@ -67,8 +69,6 @@ return {
 
   -- Color
   { "norcalli/nvim-colorizer.lua", config = instant_setup("colorizer") }, -- color highlighter
-
-  -- Git
 
   -- Editing support
   { "windwp/nvim-ts-autotag", config = instant_setup("nvim-ts-autotag") }, -- autoclose and autorename html tags

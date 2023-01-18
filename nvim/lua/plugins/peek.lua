@@ -3,7 +3,7 @@ return {
   "toppair/peek.nvim",
   build = "deno task --quiet build:fast",
   config = function()
-    local ns = "[plugin/peek]"
+    local ns = "plugins/peek"
     local peek = require("peek")
 
     peek.setup({ -- https://github.com/toppair/peek.nvim
@@ -20,7 +20,7 @@ return {
 
     local function toggle_markdown_preview()
       local method = peek.is_open() and "close" or "open"
-      vim.notify(method .. " markdown preview", vim.log.levels.INFO, { title = ns })
+      vim.notify('Markdown preview "' .. method .. '"', vim.log.levels.INFO, { title = ns })
       peek[method]()
     end
 
