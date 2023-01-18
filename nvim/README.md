@@ -10,59 +10,49 @@ brew install neovim
 
 See also <https://neovim.io/>
 
-### NeoVim Configuration
+### Configuration
 
 The config is located in `dotfiles/nvim` and needs to symlink to the actual
-OS direcotry.
+OS directory.
 Use the command below to achieve this:
 
 ```sh
 ln -s "$HOME/dotfiles/nvim" "$HOME/.config/"
 ```
 
-The configuration should now be applied to when open NeoVim again.
+This applies the config when open NeoVim again.
 
 #### JavaScript Binaries
 
-Ensure [Node.js] has been installed in order run dependency management via
+Ensure Node.js has been installed in order run dependency management via
 "npm".
-
-[node.js]: https://nodejs.org
 
 #### Other Binaries
 
 Some plugins needs certain tools in order to work properly.
 
 ```sh
-touch nvim-deps.txt && echo 'tree-sitter lua-language-server ripgrep font-hack-nerd-font wget' >> nvim-deps.txt
+touch nvim-deps.txt && echo 'tree-sitter lua-language-server ripgrep font-fira-code-nerd-font wget deno' >> nvim-deps.txt
 xargs brew install < nvim-deps.txt
 rm nvim-deps.txt
 ```
 
-The following packages are required to install in order to use this NeoVim setup:
+The following packages are required to install in order to use this NeoVim
+setup:
 
-| What                  | Usage                                 |
-| :-------------------- | :------------------------------------ |
-| [tree-sitter]         | Syntax completion/diagnostic tooling  |
-| [lua-language-server] | Syntax auto completion                |
-| [vue-language-server] | Vue 3 and 2 support                   |
-| [ripgrep]             | Telescope needs it to search in files |
-| [nerd-fonts]          | Font icons                            |
-| wget                  | required by LSP mason client          |
-| [deno]                | required by [peek] markdow-previewer  |
-
-[deno]: https://deno.land/
-[lua-language-server]: https://github.com/sumneko/lua-language-server
-[nerd-fonts]: https://github.com/ryanoasis/nerd-fonts
-[peek]: https://github.com/toppair/peek.nvim
-[ripgrep]: https://github.com/BurntSushi/ripgrep#installation
-[tree-sitter]: https://github.com/tree-sitter/tree-sitter
-[vue-language-server]: https://github.com/neovim/nvim-lspconfigblob/master/doc/server_configurations.md#volar
+| What                | Usage                                 |
+| :------------------ | :------------------------------------ |
+| tree-sitter         | Syntax completion/diagnostic tooling  |
+| lua-language-server | Syntax auto completion                |
+| ripgrep             | Telescope needs it to search in files |
+| nerd-fonts          | Font icons                            |
+| wget                | required by LSP mason client          |
+| deno                | required by peek markdow-previewer    |
 
 #### Install JavaScript Binaries
 
-The following npm packages needs to install in order to enable syntax
-diagnostics and formatting:
+Some functions require associated npm executable packages, which can be
+installed as follows:
 
 ```sh
 npm install --global typescript-language-server \
@@ -76,9 +66,14 @@ npm install --global typescript-language-server \
 
 ### First Start
 
-Open neovim and run package manager `:Lazy install`
+#### Plugins
+
+Open NeoVim and run `:Lazy install` to install all related plugins.
 
 **Note:** You might run it more the once if some packages fail to install on
 the first run.
 
-Make sure that all LSP source installed and up to date. Check with `:Mason` and update/install in dialog.
+### Language Support (LSP)
+
+After that run `:MasonInstallAll` in install support of all relevant languages
+(LSP). See also [doc/](.doc/cange.txt) for more details.

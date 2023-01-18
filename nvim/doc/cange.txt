@@ -1,34 +1,25 @@
-                                                                          *top*
-
-
+*cange.txt*
 
                          CANGES NVIM SETTINGS MANUAL
 
-
-
-
                                        Type |gO| to see the table of contents.
 
-
-================================================================================
-Introduction                                                           intro
+==============================================================================
+INTRODUCTION                                                *cange-introduction*
 
 This are some basic information how this NeoVim setup works.
 
 
+------------------------------------------------------------------------------
+FILES STRUCTURE                                           *cange-file-structure*
 
-
-================================================================================
-Files structure
-
-Files structures follows the module guide by nvim-lua-guide:
-https://github.com/nanotee/nvim-lua-guide.
+Files structures follows the module guide by nvim-lua-guide: *lua-guide*
 
 The namespace is 'cange'. All specific settings are in this namespace
 directory.
 
 The settings are used in the specific plugin configurations, which are mainly
-done the 'after/plugin/' directory. Each plugin has its onw named file.
+done the `lua/plugins` directory. Each plugin has its onw named file.
 Sometimes, plugins needs to set up other plugins to configure, which is to
 a limitidate amount been done it.
 
@@ -36,10 +27,33 @@ The lua documentation anontation based on sumneko:
 https://github.com/sumneko/lua-language-server/wiki/Annotations
 
 
+==============================================================================
+COMMANDS                                                        *cange-commands*
 
+There some handy helper command that can be run during a session.
 
-================================================================================
-Config                                                          *cange.config*
+------------------------------------------------------------------------------
+AUTO INSTALLING ALL PACKAGES                                  *:MasonInstallAll*
+
+The LSP config comes with a preconfigured setup in order to support the most
+common languages.
+
+It can be installed via `mason.vim` and the following command:
+>lua
+  :MasonInstallAll
+<
+Installs all preconfigured packages defined in *cange.config* file.
+
+------------------------------------------------------------------------------
+LSP ON SAVE AUTO FORMAT                                 *:LspToggleFormatOnSave*
+>lua
+  :LspToggleFormatOnSave
+<
+Toggles auto formatting within a session. It can be configured for permanently
+use within *cange.config* file.
+
+==============================================================================
+CONFIG                                                            *cange.config*
 
 Some main configurations can be done in the `config.lua` file if the
 respective keys already exist there. This offers a convenient option for
@@ -48,37 +62,12 @@ access via the global config helper:
 >
     Cange.get_config("path.to.setting.key")
 <
-
-
-
-================================================================================
-Colorscheme                                                *cange.colorscheme*
-
-Provides basic information of the current use theme. The information here are
-used in other plugin configurations. Changing the values will impact the color
-appearance if the colorscheme is installed.
-
-
-
-
-================================================================================
-Keymaps                                                        *cange.keymaps*
+==============================================================================
+KEYMAPS                                                          *cange.keymaps*
 
 Provides information of most common keybindings like open search dialog or
 similar. Depending on the plugin, there are also some individual setups in the
 plugins configuration file.
-
-
-
-
-================================================================================
-AutoFormat                                              *cange.lsp.AutoFormat*
-
-Auto formatting within a session can be enabled/disabled by using the
-`LspToggleFormatOnSave` command. It is disabled by default and can be
-configured in the *cange.config*.
-
-
 
 
 vim:tw=78:ts=8:ft=help:norl:

@@ -1,22 +1,14 @@
 return {
-  ---@type table<string, string>
   author = {
-    ---@type string # Name to personalise editor session
     display_name = "Christian",
   },
-  ---@type string # Variant name of nightfox theme
   colorscheme = "terafox",
-  ---@type table<string, string> # Snippets relative path to nvim root directory
   snippets = {
-    ---@type string
     path = "./../snippets",
   },
   lsp = {
-    ---@type boolean # Boolean to show or hide inline hint text
     diagnostic_virtual_text = true,
-    ---@type boolean # Boolean to toggle on/off auto formatting on save
     format_on_save = true,
-    ---@type table<string[]> # List of LSP servers
     server_sources = {
       "cssls", -- css
       "eslint", -- javascript
@@ -29,8 +21,20 @@ return {
       "volar", --vue 3 and 2
       "yamlls", -- yaml
     },
-    ---@type table<string[]> # List of supported formatter, diagnostics servers
     null_ls_sources = {
+      -- Language servers
+      "css-lsp",
+      "dockerfile-language-server",
+      "eslint-lsp",
+      "html-lsp",
+      "json-lsp",
+      "lua-language-server",
+      "svelte-language-server",
+      "typescript-language-server",
+      "vue-language-server",
+      "yaml-language-server",
+
+      -- Linting and formatting
       "eslint_d",
       "jsonlint",
       "prettierd",
@@ -40,9 +44,7 @@ return {
       "zsh",
     },
   },
-  ---@type table<string, any>
   treesitter = {
-    ---@type table<string[]> # List of supported language parser
     sources = {
       "bash",
       "css",

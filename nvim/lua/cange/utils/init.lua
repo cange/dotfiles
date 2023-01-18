@@ -84,7 +84,7 @@ function M.get_symbol_kind_hl(id)
 end
 
 ---Get certain config attributes
----@param key_path config Dot separated path to a certain config value.
+---@param key_path string Dot separated path to a certain config value.
 ---@return any value of given key or nil if not found.
 function M.get_config(key_path)
   local config_prop = config
