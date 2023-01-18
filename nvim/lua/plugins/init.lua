@@ -65,6 +65,9 @@ return {
       "hrsh7th/cmp-path", -- path completions
       "saadparwaiz1/cmp_luasnip", -- snippet completions
     },
+    config = function()
+      Cange.reload("cange.cmp")
+    end,
   },
 
   -- Color

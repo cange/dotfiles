@@ -76,4 +76,6 @@ the first run.
 ### Language Support (LSP)
 
 After that run `:MasonInstallAll` in install support of all relevant languages
-(LSP). See also [doc/](.doc/cange.txt) for more details.
+(LSP).
+
+See also [help docs](./doc/cange.txt) or `:help cange.txt` for more details.

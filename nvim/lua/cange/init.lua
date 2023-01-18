@@ -30,7 +30,6 @@ require("lazy").setup("plugins", { -- 2nd
   },
 })
 -- [[ Other stuff ]]
-Cange.reload("cange.cmp")
 Cange.reload("cange.core")
 Cange.reload("cange.keymaps")
 Cange.reload("cange.telescope")

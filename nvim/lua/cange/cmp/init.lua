@@ -1,15 +1,8 @@
 -- Reloads this file whenever a 'json' file saved in snippet directory to
 -- enable change immediately
 local ns = "[cange.cmp.init]"
-local found_cmp, cmp = pcall(require, "cmp")
-if not found_cmp then
-  return
-end
-local found_luasnip, luasnip = pcall(require, "luasnip")
-if not found_luasnip then
-  print(ns, '"luasnip" not found')
-  return
-end
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 local found_cmp_utils, cmp_utils = pcall(require, "cange.cmp.utils")
 if not found_cmp_utils then
   print(ns, '"cange.cmp.utils" not found')
