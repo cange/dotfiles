@@ -29,6 +29,7 @@ return {
       "html-lsp",
       "json-lsp",
       "lua-language-server",
+      "stylelint-lsp",
       "svelte-language-server",
       "typescript-language-server",
       "vue-language-server",

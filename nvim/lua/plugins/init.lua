@@ -43,7 +43,7 @@ return {
       "williamboman/mason.nvim", -- managing & installing LSP servers, linters & formatters
     },
     config = function()
-      Cange.reload('cange.lsp')
+      Cange.reload("cange.lsp")
     end,
   },
 

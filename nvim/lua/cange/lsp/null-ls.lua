@@ -15,6 +15,10 @@ null_ls.setup({
     formatting.eslint_d,
     require("typescript.extensions.null-ls.code-actions"),
 
+    -- css
+    diagnostics.stylelint,
+    formatting.stylelint,
+
     -- json
     diagnostics.jsonlint,
 
