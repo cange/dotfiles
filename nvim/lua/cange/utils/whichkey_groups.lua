@@ -172,12 +172,6 @@ M.set_group("telescope", {
       icon = "ui.List",
     },
     N = { cmd = "<cmd>Telescope notify<CR>", desc = "[S]earch [N]otifications" },
-    P = {
-      cmd = "<cmd>lua require('telescope').extensions.project.project()<CR>",
-      desc = "[S]earch [P]rojects",
-      dashboard = true,
-      icon = "ui.Project",
-    },
     W = { cmd = '<cmd>lua require("telescope.builtin").grep_string<CR>', desc = "[S]earch current [W]ord" },
     a = { cmd = '<cmd>lua require("harpoon.mark").add_file()<CR>', desc = "[A]dd bookmark" },
     b = { cmd = '<cmd>lua require("cange.telescope").file_browser()<CR>', desc = "[S]earch [B]rowse files" },
@@ -193,6 +187,12 @@ M.set_group("telescope", {
     k = { cmd = "<cmd>Telescope keymaps<CR>", desc = "[S]earch [K]eybindings" },
     m = { cmd = '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', desc = "Bookmarks [m]enu" },
     n = { cmd = '<cmd>lua require("cange.telescope").browse_nvim()<CR>', desc = "Browse [N]vim" },
+    p = {
+      cmd = "<cmd>lua require('telescope').extensions.project.project()<CR>",
+      desc = "[S]earch [P]rojects",
+      dashboard = true,
+      icon = "ui.Project",
+    },
     r = {
       cmd = "<cmd>Telescope oldfiles<CR>",
       desc = "[R]ecently Opened Files",
