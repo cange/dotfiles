@@ -142,7 +142,7 @@ M.git_states = {
   staged = " ",
   unmerged = "ﱵ ",
   renamed = M.git.Rename,
-  untracked = "ﱡ ",
+  untracked = M.ui.BigUnfilledCircle,
   deleted = M.git.Remove,
   ignored = M.git.Ignore,
 }

@@ -1,4 +1,11 @@
 -- local ns = "[plugins.nvim-tree]"
+local function normalized_git_icons()
+  local icons = Cange.get_icon("git_states")
+  for name, _ in pairs(icons) do
+    icons[name] = Cange.get_icon("git_states." .. name, { trim = true })
+  end
+  return icons
+end
 
 return {
   "kyazdani42/nvim-tree.lua",
@@ -63,7 +70,7 @@ return {
               symlink = Cange.get_icon("documents.SymlinkFolder", { trim = true }),
               symlink_open = Cange.get_icon("documents.SymlinkFolder", { trim = true }),
             },
-            git = Cange.get_icon("git_states"),
+            git = normalized_git_icons(),
           },
         },
       },
