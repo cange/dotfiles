@@ -1,6 +1,7 @@
 -- local ns = "[plugins.nvim-tree]"
 local function normalized_git_icons()
   local icons = Cange.get_icon("git_states")
+  ---@diagnostic disable-next-line: param-type-mismatch
   for name, _ in pairs(icons) do
     icons[name] = Cange.get_icon("git_states." .. name, { trim = true })
   end
@@ -15,11 +16,9 @@ return {
     local bookmark_nav = require("nvim-tree.api").marks.navigate
     local api = require("nvim-tree.api")
     local Event = api.events.Event
-    local toggle_help_key = "<leader>eh"
+    local toggle_help_key = "<leader>/"
     local callback = require("nvim-tree.config").nvim_tree_callback
 
-    vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
-    vim.keymap.set("n", "<leader>.", ":NvimTreeFindFile<CR>")
     vim.keymap.set("n", "<leader>mn", bookmark_nav.next)
     vim.keymap.set("n", "<leader>mp", bookmark_nav.prev)
     vim.keymap.set("n", "<leader>ms", bookmark_nav.select)

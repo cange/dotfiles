@@ -47,27 +47,14 @@ end
 
 M.set_group("editor", {
   title = "Editor",
-  subleader = "c",
+  subleader = "e",
   mappings = {
-    E = {
-      cmd = "<cmd>enew <BAR>startinsert<CR>",
-      desc = "New File",
-      dashboard = true,
-      icon = "documents.NewFile",
-    },
     a = { cmd = "<cmd>Alpha<CR>", desc = "Start Screen", primary = true },
-    e = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
-    k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/M.groups.lua<CR>", desc = "Edit Keymaps" },
+    c = { cmd = "<cmd>TextCaseOpenTelescope<CR>", desc = "[C]hange Case" },
+    k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/M.groups.lua<CR>", desc = "Edit [K]eymaps" },
     m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
-    o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit Options" },
-    q = {
-      cmd = "<cmd>quitall!<CR>",
-      desc = "Quit",
-      primary = true,
-      dashboard = true,
-      icon = "ui.SignOut",
-    },
-    w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
+    o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit [O]ptions" },
+    ["\\"] = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
   },
 })
 M.set_group("git", {
