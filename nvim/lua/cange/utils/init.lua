@@ -38,7 +38,7 @@ end
 ---Ensures that the icons of given parts exists
 ---@param group_id string Identifier of the icon group
 ---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
----@return CoreIcon|nil The icon symbol or nil if not found
+---@return CoreIcon|table|nil # The icon symbol or nil if not found
 function M.get_icon(group_id, ...)
   local icon_list = icons
   local opts = {}
@@ -87,21 +87,17 @@ end
 ---@param key_path string Dot separated path to a certain config value.
 ---@return any value of given key or nil if not found.
 function M.get_config(key_path)
-  local config_prop = config
-  local separator = "%."
+  local prop = config
 
-  for _, key in pairs(vim.split(key_path, separator)) do
-    if config_prop[key] then
+  for _, key in pairs(vim.split(key_path, "%.")) do
+    local next_prop = prop[key]
+    if next_prop ~= nil then
       ---@diagnostic disable-next-line: cast-local-type
-      config_prop = config_prop[key]
+      prop = next_prop
     end
   end
 
-  if config_prop == nil then
-    print(ns, 'of "' .. key_path .. '" key is not configured!')
-  end
-
-  return config_prop
+  return prop
 end
 
 ---Pretty print shorthand

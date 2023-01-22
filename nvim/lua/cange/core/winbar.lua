@@ -49,8 +49,6 @@ local function get_filename(opts)
       file_icon = Cange.get_icon("kind.File")
     end
 
-    local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
-
     return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%* %#WinbarFile#" .. filepath .. "%*"
   end
 
