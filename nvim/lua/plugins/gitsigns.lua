@@ -3,22 +3,23 @@ return {
   config = function()
     require("gitsigns").setup({
       signs = {
-        add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-        change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-        delete = { hl = "GitSignsDelete", text = "", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-        topdelete = { hl = "GitSignsDelete", text = "", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-        changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+        add = { text = Cange.get_icon("ui.VLineLeft", { trim = true }) },
+        change = { text = Cange.get_icon("ui.VLineLeft", { trim = true }) },
+        changedelete = { text = Cange.get_icon("ui.VLineLeft", { trim = true }) },
+        delete = { text = Cange.get_icon("ui.ArrowRight", { trim = true }) },
+        topdelete = { text = Cange.get_icon("ui.ArrowRight", { trim = true }) },
+        untracked = { text = Cange.get_icon("ui.VDashLineLeft", { trim = true }) },
       },
       current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
       current_line_blame_opts = {
         virt_text = true,
         virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
         delay = 800,
-        ignore_whitespace = false,
       },
-      current_line_blame_formatter = "\t\t<author>, <author_time:%Y-%m-%d> • <summary>",
+      current_line_blame_formatter = " <author>, "
+        .. "<author_time:%d.%m.%y> "
+        .. Cange.get_icon("git.Commit")
+        .. "<summary>",
     })
-    -- increase contrast
-    -- vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { link = 'Comment' })
   end,
 }
