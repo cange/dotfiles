@@ -16,9 +16,10 @@ return {
         virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
         delay = 800,
       },
-      current_line_blame_formatter = " <author>, "
-        .. "<author_time:%d.%m.%y> "
+      current_line_blame_formatter = " "
         .. Cange.get_icon("git.Commit")
+        .. "<author>, <author_time:%d.%m.%y> "
+        .. Cange.get_icon("ui.Comment")
         .. "<summary>",
     })
   end,
