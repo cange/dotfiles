@@ -5,7 +5,7 @@ local code_actions = null_ls.builtins.code_actions
 local formatting = null_ls.builtins.formatting
 
 null_ls.setup({
-  update_in_insert = false, -- if true, it runs diagnostics in insert mode, which impacts performance
+  update_in_insert = false, -- if false, diagnostics will run upon exiting insert mode
   sources = {
     -- js, ts, vue, css, html, json, yaml, md etc.
     formatting.prettierd,
@@ -14,6 +14,10 @@ null_ls.setup({
     code_actions.eslint_d,
     formatting.eslint_d,
     require("typescript.extensions.null-ls.code-actions"),
+
+    -- css
+    diagnostics.stylelint,
+    formatting.stylelint,
 
     -- json
     diagnostics.jsonlint,

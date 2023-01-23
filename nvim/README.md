@@ -61,6 +61,7 @@ npm install --global typescript-language-server \
             @volar/vue-language-server \
             eslint_d \
             jsonlint \
+            stylelint \
             typescript
 ```
 
