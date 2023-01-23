@@ -7,7 +7,7 @@ local ns = "[cange.utils.whichkey_groups]"
 ---@field desc string Description of the keybinding
 ---@field cmd string Command of the keybinding
 ---@field dashboard? boolean Determines whether or not to on "alpha" start page
----@field icon? CoreIcon The icon which shown on "alpha" start page
+---@field icon? string The icon which shown on "alpha" start page
 ---@field primary? boolean Determines whether or not to show a on inital "which-key" window
 
 ---@class WhichKeyGroup

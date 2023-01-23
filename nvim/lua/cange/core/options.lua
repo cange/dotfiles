@@ -11,13 +11,13 @@ local options = {
   -- UI
   colorcolumn = "80,120", -- highlight optimal end line¬
   cursorline = true, -- highlight the current line
-  guifont = "Hack Nerd Font Mono:h16", -- the font used in graphical neovim applications
+  guifont = "FiraCode Nerd Font:h16", -- the font used in graphical neovim applications
   laststatus = 3, -- show one global statusline for all windows
-  showtabline = 1, -- always show tabs
   mouse = "a", -- allow the mouse to be used in editor
   number = true, -- set numbered lines
   numberwidth = 3, -- set number column width to 2 {default 4}
   pumblend = 10, -- transparency of popup-menus 0 (none) to 100 (full)
+  showtabline = 1, -- always show tabs
   -- relativenumber = true, -- set relative numbered lines
   termguicolors = true, -- set term gui colors (most terminals support this)
   title = true, -- Update terminal window title

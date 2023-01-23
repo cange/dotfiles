@@ -1,165 +1,57 @@
----@alias CoreIcon string A single character of a certain shape
+local ns = "[cange.utils.icons]"
 
----@class CoreIcons
----@field cmp_kind table<CoreIcon> Completion kinds
----@field cmp_source table<CoreIcon>
----@field diagnostics table<CoreIcon>
----@field git table<CoreIcon>
----@field git_states table<CoreIcon>
----@field kind table<CoreIcon> Language symbols
----@field lualine table<CoreIcon>
----@field mason table<CoreIcon> Mason LSP local anguage server plugin
----@field ui table Generic icons for general purposes
----@field which_key table<CoreIcon>
----@field documents table<CoreIcon>
+---@param name string
+---@return string|nil
+local function get_single_icon(icon_list, name)
+  local result = icon_list and icon_list[name] or nil
 
----@type CoreIcons
+  if not result then
+    vim.pretty_print(ns, name, "not found")
+    return nil
+  end
+  return result
+end
+
+---@class IconUtils
 local M = {}
--- Icons works best with "FiraCode Nerd Font"
--- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts
--- go to the above and then enter <c-v>u<unicode> and the symbold should appear
--- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
--- find more here: https://www.nerdfonts.com/cheat-sheet
 
-M.ui = {
-  ArrowRight = "▸ ", -- U+25B8
-  Bookmark = " ", -- nf-oct-bookmark
-  Bug = " ", -- nf-oct-bug
-  Calendar = " ", -- nf-oct-calendar
-  Check = " ", -- nf-oct-check
-  ChevronDown = " ", -- nf-oct-chevron_down
-  ChevronRight = " ", -- nf-oct-chevron_right
-  Circle = " ", -- nf-oct-pr{imitive_dot
-  CircleUnfilled = " ", -- nf-cod-circle
-  Close = " ", -- nf-oct-x
-  Code = " ", -- nf-oct-code
-  Comment = " ", -- nf-oct-comment
-  Dashboard = " ", -- nf-oct-dashboard
-  Gear = " ", -- nf-oct-gear
-  History = " ", -- nf-oct-history
-  List = " ", -- nf-oct-list_unordered
-  Lock = " ", -- nf-oct-lock
-  Multiline = " ", -- nf-seti-project
-  Note = " ",
-  Octoface = " ", -- nf-oct-octoface
-  Package = " ", -- nf-oct-package
-  Pencil = " ", -- nf-oct-pencil
-  Project = " ", -- nf-oct-repo
-  Robot = "ﮧ ", -- nf-mdi-robot
-  Search = " ", -- nf-oct-search
-  SignIn = " ", -- nf-oct-sign_in
-  SignOut = " ", -- nf-oct-sign_out
-  Stethoscope = " ",
-  Sync = " ", -- nf-oct-sync
-  Tabnine = "⌬ ", -- U+232C
-  Tag = " ", -- nf-oct-tag
-  Telescope = " ", -- nf-oct-telescope
-  VDashLineLeft = "┆ ", -- U+2506
-  VDotLineLeft = "┊ ", --U+250A
-  VLineLeft = "▎ ", -- U+258E
-  VThinLineLeft = "▏ ", -- U+258F
-  Watch = " ", -- nf-oct-clock
-  Workspace = " ", -- nf-oct-briefcase
-}
-M.documents = {
-  NewFile = " ",
-  EmptyFolder = " ",
-  EmptyOpenFolder = " ",
-  File = " ",
-  Files = " ",
-  Folder = " ",
-  OpenFolder = " ",
-  SymlinkFile = " ",
-  SymlinkFolder = " ",
-}
-M.git = {
-  Add = " ", -- nf-oct-diff_added,
-  Mod = " ", -- nf-oct-diff_modified
-  Remove = " ", -- nf-oct-diff_removed
-  Ignore = " ", -- nf-oct-diff_ignored
-  Rename = " ", -- nf-oct-diff_renamed
-  Diff = " ", -- nf-oct-diff
-  Branch = " ", -- nf-oct-git_branch
-  Commit = " ", -- nf-oct-git_commit
-}
-M.git_states = {
-  unstaged = M.git.Mod,
-  staged = " ",
-  unmerged = "ﱵ ",
-  renamed = M.git.Rename,
-  untracked = M.ui.CircleUnfilled,
-  deleted = M.git.Remove,
-  ignored = M.git.Ignore,
-}
-M.diagnostics = {
-  Error = " ", -- nf-mdi-close_circle
-  Warning = " ", -- nf-mdi-information_outline
-  Information = " ", -- nf-mdi-information
-  Question = "ﬤ ", -- nf-mdi-help_circle_outline
-  Hint = " ", -- nf-mdi-lightbulb
-}
-M.which_key = {
-  Breadcrumb = " ", -- nf-oct-arrow_right
-  Separator = M.ui.ChevronRight, -- symbol used between a key and it's label
-  Group = " ", -- nf-oct-plus_small
-}
-M.kind = {
-  File = " ",
-  Module = " ",
-  Namespace = " ",
-  Package = " ",
-  Class = " ",
-  Method = " ",
-  Property = " ",
-  Field = " ",
-  Constructor = " ",
-  Enum = " ",
-  Interface = " ",
-  Function = " ",
-  Variable = " ",
-  Constant = " ",
-  String = " ",
-  Number = " ",
-  Boolean = " ",
-  Array = " ",
-  Object = " ",
-  Key = " ",
-  Null = " ",
-  EnumMember = " ",
-  Struct = " ",
-  Event = " ",
-  Operator = " ",
-  TypeParameter = " ",
-}
-M.cmp_kind = vim.tbl_extend("keep", M.kind, {
-  Color = " ",
-  Folder = M.documents.Folder .. " ",
-  Keyword = " ",
-  Reference = " ",
-  Snippet = " ",
-  Text = " ",
-  Unit = " ",
-  Value = " ",
-})
-M.cmp_source = {
-  buffer = "﬘ ",
-  luasnip = " ", -- nf-fa-cut
-  nvim_lsp = " ",
-  nvim_lua = " ",
-  path = M.documents.Folder .. " ",
-  cmp_tabnine = M.ui.Tabnine,
-  copilot = M.ui.Octoface,
-}
-M.lualine = {
-  modified = M.ui.Circle, -- Text to show when the file is modified.
-  newfile = M.documents.NewFile, -- Text to show for new created file before first writting
-  readonly = M.ui.lock, -- Text to show when the file is non-modifiable or readonly.
-  unnamed = M.documents.File, -- Text to show for unnamed buffers.
-}
-M.mason = {
-  package_installed = M.ui.Check,
-  package_pending = M.ui.Sync,
-  package_uninstalled = M.ui.Close,
-}
+---@param group_id IconGroup Identifier of the icon group
+---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
+---@return string|table|nil # The icon symbol or nil if not found
+function M.get_icon(group_id, ...)
+  local icons = require("cange.core.icons")
+  local opts = {}
+  local parts = { ... }
+  local last_item = parts[#parts]
+
+  if type(last_item) == "table" then
+    opts = vim.deepcopy(last_item)
+    table.remove(parts, #parts)
+  end
+
+  local group_parts = vim.split(group_id, "%.")
+  if #group_parts > 1 then
+    parts = vim.list_extend(group_parts, parts)
+    group_id = table.remove(parts, 1)
+  end
+
+  ---@diagnostic disable-next-line: cast-local-type
+  icons = get_single_icon(icons, group_id)
+  if #parts > 0 then
+    for _, icon_name in ipairs(parts) do
+      ---@diagnostic disable-next-line: cast-local-type, param-type-mismatch
+      icons = get_single_icon(icons, icon_name)
+    end
+  end
+
+  if type(icons) == "string" then
+    if opts.trim ~= nil and opts.trim then
+      ---@diagnostic disable-next-line: cast-local-type
+      icons = vim.trim(icons)
+    end
+  end
+
+  return icons
+end
 
 return M
