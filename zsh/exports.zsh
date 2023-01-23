@@ -27,3 +27,27 @@ export BAT_STYLE="changes"
 export EDITOR="nvim"
 export TERMINAL="iterm2"
 export BROWSER="firefox"
+
+# pnpm
+if [[ -s "${HOME}/Library/pnpm" ]]; then
+  export PNPM_HOME="${HOME}/Library/pnpm"
+  export PATH="$PNPM_HOME:$PATH"
+fi
+# pnpm end
+
+# bun completions
+if [[ -s "${HOME}/.bun" ]]; then
+  export BUN_INSTALL="${HOME}/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+  source "${HOME}/.bun/_bun"
+fi
+# bun end
+
+# SSH
+if [[ -n $HOME/.ssh/id_dsa ]]; then
+  export SSH_KEY_PATH="~/.ssh/id_dsa"
+
+  # add my ssh information
+  ssh-add
+fi
+# SSH end
