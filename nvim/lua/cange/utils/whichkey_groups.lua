@@ -54,6 +54,7 @@ M.set_group("editor", {
     k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/M.groups.lua<CR>", desc = "Edit [K]eymaps" },
     m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
     o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit [O]ptions" },
+    w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
     ["\\"] = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
   },
 })
