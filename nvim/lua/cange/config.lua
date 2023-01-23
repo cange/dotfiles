@@ -7,7 +7,7 @@ return {
     path = "./../snippets",
   },
   lsp = {
-    diagnostic_virtual_text = true,
+    diagnostic_virtual_text = false,
     format_on_save = true,
     server_sources = {
       "cssls", -- css
