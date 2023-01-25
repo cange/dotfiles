@@ -161,6 +161,7 @@ M.set_group("telescope", {
     },
     N = { cmd = "<cmd>Telescope notify<CR>", desc = "[S]earch [N]otifications" },
     W = { cmd = '<cmd>lua require("telescope.builtin").grep_string<CR>', desc = "[S]earch current [W]ord" },
+    H = { cmd = '<cmd>lua require("telescope.builtin").highlights()<CR>', desc = "[S]earch [H]ighlights" },
     a = { cmd = '<cmd>lua require("harpoon.mark").add_file()<CR>', desc = "[A]dd bookmark" },
     b = { cmd = '<cmd>lua require("cange.telescope").file_browser()<CR>', desc = "[S]earch [B]rowse files" },
     c = { cmd = "<cmd>Telescope colorscheme<CR>", desc = "[S]witch [C]olorscheme" },

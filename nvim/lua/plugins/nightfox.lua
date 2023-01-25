@@ -28,7 +28,7 @@ return {
       TelescopeMatching = { fg = p.yellow.bright, bold = true },
       TelescopeSelection = { bg = p.sel0 },
       TelescopeSelectionCaret = { fg = p.white.base, bg = p.sel0 },
-      TelescopePromptNormal = { bg = p.bg },
+      TelescopePromptNormal = { bg = p.bg0 },
       TelescopeSelectionNormal = { bg = p.bg0 },
       TelescopePromptBorder = { fg = p.bg0, bg = p.bg0 },
       TelescopePromptTitle = { fg = p.bg4 },
