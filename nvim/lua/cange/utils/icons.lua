@@ -15,7 +15,7 @@ end
 ---@class IconUtils
 local M = {}
 
----@param group_id IconGroup Identifier of the icon group
+---@param group_id IconGroup|string Identifier of the icon group
 ---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
 ---@return string|table|nil # The icon symbol or nil if not found
 function M.get_icon(group_id, ...)

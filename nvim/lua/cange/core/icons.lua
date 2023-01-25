@@ -43,6 +43,7 @@ M.ui = {
   Octoface = " ", -- nf-oct-octoface
   Package = " ", -- nf-oct-package
   Pencil = " ", -- nf-oct-pencil
+  Pipe = "⏽ ", -- U+23FD
   Project = " ", -- nf-oct-repo
   Robot = "ﮧ ", -- nf-mdi-robot
   Search = " ", -- nf-oct-search
