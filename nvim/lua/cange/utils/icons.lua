@@ -1,3 +1,7 @@
+---@class Cange.utils.Icons
+
+---@type Cange.utils.Icons
+local m = {}
 local ns = "[cange.utils.icons]"
 
 ---@param name string
@@ -12,13 +16,10 @@ local function get_single_icon(icon_list, name)
   return result
 end
 
----@class IconUtils
-local M = {}
-
----@param group_id IconGroup|string Identifier of the icon group
+---@param group_id string Dot separated identifier path of `Cange.core.icons`
 ---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
----@return string|table|nil # The icon symbol or nil if not found
-function M.get_icon(group_id, ...)
+---@return string|Cange.core.icons|nil # The icon symbol or nil if not found
+function m.get_icon(group_id, ...)
   local icons = require("cange.core.icons")
   local opts = {}
   local parts = { ... }
@@ -54,4 +55,4 @@ function M.get_icon(group_id, ...)
   return icons
 end
 
-return M
+return m

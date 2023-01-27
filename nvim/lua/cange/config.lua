@@ -1,3 +1,12 @@
+---@class Cange.config
+---@field author table<string, string>
+---@field colorscheme string
+---@field lsp table<string, boolean|table>
+---@field snippets table<string, string>
+---@field treesitter table<string, table>
+---@field ui table<string, string>
+
+---@type Cange.config
 return {
   author = {
     display_name = "Christian",

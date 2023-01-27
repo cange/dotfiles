@@ -1,12 +1,12 @@
 ---This highlights groups relates to syntactic fragments also known kinds
----@class HighlightGroups
----@field kinds table Completion kinds Highlight definition map
----@field other_kinds table Completion kinds Highlight definition map
+---@class Cange.core.highlight_groups
+---@field kinds table<string, table> Completion kinds Highlight definition map
+---@field other_kinds table<string, table> Completion kinds Highlight definition map
 
----@class HighlightGroups
-local M = {}
+---@type Cange.core.highlight_groups
+local m = {}
 
-M.kinds = {
+m.kinds = {
   Text = { link = "CmpItemKindText" },
   Method = { link = "CmpItemKindMethod" },
   Function = { link = "CmpItemKindFunction" },
@@ -33,7 +33,7 @@ M.kinds = {
   Operator = { link = "CmpItemKindOperator" },
   TypeParameter = { link = "CmpItemKindTypeParameter" },
 }
-M.other_kinds = {
+m.other_kinds = {
   Namespace = { link = "@namespace" },
   Package = { link = "@namespace" },
   String = { link = "@string" },
@@ -45,4 +45,4 @@ M.other_kinds = {
   Null = { link = "@keyword" },
 }
 
-return M
+return m

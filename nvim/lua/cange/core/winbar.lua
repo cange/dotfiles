@@ -160,19 +160,20 @@ vim.api.nvim_create_autocmd(events, {
     end
   end,
 })
--- public
 
----@module 'winbar'
-local M = {}
+---@class Cange.core.Winbar
+
+---@type Cange.core.Winbar
+local m = {}
 
 ---Allow to attach to LSP config
 ---@param client table
 ---@param bufnr integer
-function M.attach(client, bufnr)
+function m.attach(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     vim.g.navic_silence = true
     navic.attach(client, bufnr)
   end
 end
 
-return M
+return m

@@ -1,45 +1,45 @@
 local ns = "[cange.lsp.auto_format]"
 
----@class LSPAutoFormatToggle
+---@class Cange.lsp.AutoFormatToggle
 ---@field group_name string Handle name for auto group
 ---@field is_active boolean Formatting is enabled if true
 
----@type LSPAutoFormatToggle
-local M = {
+---@type Cange.lsp.AutoFormatToggle
+local m = {
   is_active = Cange.get_config("lsp.format_on_save") or false,
   group_name = "cange_lsp_auto_format",
 }
 
 ---Enables active flag
 local function auto_format_on()
-  M.is_active = true
+  m.is_active = true
   vim.notify("On save is ON", vim.log.levels.INFO, { title = ns })
 end
 
 ---Disables active flag
 local function auto_format_off()
-  M.is_active = false
-  local found_command, _ = pcall(vim.api.nvim_get_autocmds, { group = M.group_name })
+  m.is_active = false
+  local found_command, _ = pcall(vim.api.nvim_get_autocmds, { group = m.group_name })
   if not found_command then
     return
   end
 
-  vim.api.nvim_del_augroup_by_name(M.group_name)
+  vim.api.nvim_del_augroup_by_name(m.group_name)
   vim.notify("On save is OFF", vim.log.levels.INFO, { title = ns })
 end
 
 ---Auto formats codebase on save if format toggle is active
 ---@param bufnr? integer|nil Identifier of buffer what should be formatted
-function M.on_save(bufnr)
+function m.on_save(bufnr)
   bufnr = bufnr or nil
 
-  local group = vim.api.nvim_create_augroup(M.group_name, { clear = true })
+  local group = vim.api.nvim_create_augroup(m.group_name, { clear = true })
   vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = bufnr,
     group = group,
     callback = function()
-      if M.is_active == false then
+      if m.is_active == false then
         return
       end
       vim.lsp.buf.format({
@@ -53,7 +53,7 @@ end
 
 ---Allows to enable/disable auto formatting on save within a session
 vim.api.nvim_create_user_command("LspToggleFormatOnSave", function()
-  if M.is_active then
+  if m.is_active then
     auto_format_off()
   else
     auto_format_on()
@@ -62,4 +62,4 @@ vim.api.nvim_create_user_command("LspToggleFormatOnSave", function()
   Cange.reload("cange.lsp")
 end, {})
 
-return M
+return m

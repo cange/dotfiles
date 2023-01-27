@@ -1,4 +1,11 @@
--- [[ Plugin manager ]]
+-- Order is important
+
+---@class Cange
+---@field core Cange.core
+---@field utils Cange.utils
+---@field config Cange.config
+
+-- 1st : setup plugin manager
 -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -15,21 +22,24 @@ end
 vim.opt.termguicolors = true -- set term gui colors (most terminals support this)
 vim.opt.rtp:prepend(lazypath)
 
--- [[ Basic Keymaps ]]
+-- Basic Keymaps
 -- Set <space> as the leader key
 -- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+-- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
---[[ Order is important ]]
-Cange = require("cange.utils") -- 1st
-require("lazy").setup("plugins", { -- 2nd
+-- 2nd : initialize
+require("lazy").setup("plugins", {
   checker = {
     enabled = true, -- allows to get the number of pending updates when true
   },
 })
--- [[ Other stuff ]]
+
+-- 3rd : globals
+Cange = require("cange.utils")
+
+-- 4th : rest
 Cange.reload("cange.core")
 Cange.reload("cange.keymaps")
 Cange.reload("cange.telescope")

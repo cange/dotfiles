@@ -3,18 +3,15 @@ return {
   lazy = false, -- make sure we load this during startup if it is your main colorscheme
   priority = 1000, -- make sure to load this before all the other start plugins
   config = function()
-    -- local ns = "[plugins.nightfox]"
+    Cange = Cange or require("cange.utils")
     local colorscheme = Cange.get_config("colorscheme")
 
     -- setup must be called before loading
     vim.cmd("colorscheme " .. colorscheme)
-    -- vim.notify(colorscheme .. " colorscheme", vim.log.levels.INFO, { title = "Theme: " .. ns })
 
     -- Returns the palette of the specified colorscheme
     local p = require("nightfox.palette").load(colorscheme)
     Cange.register_key("palette", p)
-
-    -- vim.pretty_print("color:", vim.tbl_keys(palette))
 
     Cange.set_hls({
       CursorLine = { bg = p.bg2 }, -- disable default

@@ -1,13 +1,13 @@
 -- local ns = "[cange.lsp.lspconfig]"
-local common = Cange.reload("cange.lsp.common")
+local utils = Cange.reload("cange.lsp.utils")
 
 ---Sets up individual LSP server
 ---@param server string name of the particular server
 local function setup_server(server)
   local found_config, server_config = pcall(require, "cange.lsp.server_configurations." .. server)
   local default_config = {
-    on_attach = common.on_attach,
-    capabilities = common.capabilities(),
+    on_attach = utils.on_attach,
+    capabilities = utils.capabilities(),
     name = server, -- for log messages
   }
 

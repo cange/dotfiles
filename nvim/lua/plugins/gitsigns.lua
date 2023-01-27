@@ -1,16 +1,14 @@
-local icon = Cange.get_icon
-
 return {
   "lewis6991/gitsigns.nvim", -- git highlighter, blame, etc
   config = function()
     require("gitsigns").setup({
       signs = {
-        add = { text = icon("ui.VLineLeft", { trim = true }) },
-        change = { text = icon("ui.VLineLeft", { trim = true }) },
-        changedelete = { text = icon("ui.VLineLeft", { trim = true }) },
-        delete = { text = icon("ui.ArrowRight", { trim = true }) },
-        topdelete = { text = icon("ui.ArrowRight", { trim = true }) },
-        untracked = { text = icon("ui.VDashLineLeft", { trim = true }) },
+        add = { text = Cange.get_icon("ui.VLineLeft", { trim = true }) },
+        change = { text = Cange.get_icon("ui.VLineLeft", { trim = true }) },
+        changedelete = { text = Cange.get_icon("ui.VLineLeft", { trim = true }) },
+        delete = { text = Cange.get_icon("ui.ArrowRight", { trim = true }) },
+        topdelete = { text = Cange.get_icon("ui.ArrowRight", { trim = true }) },
+        untracked = { text = Cange.get_icon("ui.VDashLineLeft", { trim = true }) },
       },
       preview_config = {
         border = Cange.get_config("ui.border"),
@@ -21,9 +19,11 @@ return {
         virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
         delay = 800,
       },
-      current_line_blame_formatter = " " .. icon("git.Commit") .. "<author>, <author_time:%d.%m.%y> " .. icon(
-        "ui.Note"
-      ) .. "<summary>",
+      current_line_blame_formatter = " "
+        .. Cange.get_icon("git.Commit")
+        .. "<author>, <author_time:%d.%m.%y> "
+        .. Cange.get_icon("ui.Note")
+        .. "<summary>",
     })
   end,
 }

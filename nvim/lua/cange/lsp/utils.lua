@@ -73,10 +73,12 @@ local function attach_keymaps(client, bufnr)
   end
 end
 
----@class LSPCustom
-local M = {}
+---@class Cange.lsp.Utils
 
-function M.capabilities()
+---@type Cange.lsp.Utils
+local m = {}
+
+function m.capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -87,10 +89,10 @@ end
 ---Keymapping for lspconfig on_attach options
 -- @param client any
 -- @param bufnr integer buffer
-function M.on_attach(client, bufnr)
+function m.on_attach(client, bufnr)
   winbar.attach(client, bufnr)
   attach_keymaps(client, bufnr)
   auto_format.on_save(bufnr)
 end
 
-return M
+return m

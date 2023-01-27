@@ -1,51 +1,56 @@
-local ns = "[cange.utils.whichkey_groups]"
+-- local ns = "[cange.utils.whichkey_groups]"
 
 -- All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
 -- each plugin by it self.
 
----@class WhichKeyCommand
+---@class Cange.utils.whichkey
+---@field Command Cange.utils.whichkey.Command
+---@field Group Cange.utils.whichkey.Group
+---@field Groups Cange.utils.whichkey.Groups
+
+---@class Cange.utils.whichkey.Command
 ---@field desc string Description of the keybinding
 ---@field cmd string|function Command of the keybinding
 ---@field dashboard? boolean Determines whether or not to on "alpha" start page
 ---@field icon? string The icon which shown on "alpha" start page
 ---@field primary? boolean Determines whether or not to show a on inital "which-key" window
 
----@class WhichKeyGroup
----@field mappings table<string, WhichKeyCommand> The actual key bindings
+---@class Cange.utils.whichkey.Group
+---@field mappings table<string, Cange.utils.whichkey.Command> The actual key bindings
 ---@field subleader string Additional key to enter the certain group
 ---@field title string Is displayed as group name
 
----@class WhichKeyGroups
----@field config WhichKeyGroup
----@field git WhichKeyGroup
----@field lsp WhichKeyGroup Language related syntax analytics
----@field plugins WhichKeyGroup Install, update neovims plugins
----@field search WhichKeyGroup Finding stuff
----@field session WhichKeyGroup
----@field treesitter WhichKeyGroup
+---@class Cange.utils.whichkey.Groups
+---@field config Cange.utils.whichkey.Group
+---@field git Cange.utils.whichkey.Group
+---@field lsp Cange.utils.whichkey.Group Language related syntax analytics
+---@field plugins Cange.utils.whichkey.Group Install, update neovims plugins
+---@field search Cange.utils.whichkey.Group Finding stuff
+---@field session Cange.utils.whichkey.Group
+---@field treesitter Cange.utils.whichkey.Group
 
----@class WhichKeyGroups
+---@type Cange.utils.whichkey.Groups
 local groups = {}
 
-local M = {}
+local m = {}
 
 ---@param group_id string|nil
----@return WhichKeyGroups # All defined groups or one when group_id is specified
-function M.get_group(group_id)
+---@return Cange.utils.whichkey.Groups # All defined groups or one when group_id is specified
+function m.get_group(group_id)
   return group_id == nil and groups[group_id] or groups
 end
 
 ---Adds given mapping to the which key menu
 ---@param group_id string Letter starting name of the group
----@param group WhichKeyGroup
-function M.set_group(group_id, group)
+---@param group Cange.utils.whichkey.Group
+function m.set_group(group_id, group)
   group_id = vim.trim(group_id):lower():gsub("%W", "-")
   groups[group_id] = group
   -- vim.pretty_print(ns, "set_group", group_id, vim.tbl_keys(group))
   return groups[group_id]
 end
 
-M.set_group("editor", {
+m.set_group("editor", {
   title = "Editor",
   subleader = "e",
   mappings = {
@@ -58,7 +63,7 @@ M.set_group("editor", {
     ["\\"] = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
   },
 })
-M.set_group("git", {
+m.set_group("git", {
   title = "Git",
   subleader = "g",
   mappings = {
@@ -83,7 +88,7 @@ M.set_group("git", {
     u = { cmd = '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', desc = "Undo stage hunk" },
   },
 })
-M.set_group("lsp", {
+m.set_group("lsp", {
   title = "LSP",
   subleader = "l",
   mappings = {
@@ -102,7 +107,7 @@ M.set_group("lsp", {
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
   },
 })
-M.set_group("plugins", {
+m.set_group("plugins", {
   title = "Plugins",
   subleader = "p",
   mappings = {
@@ -123,7 +128,7 @@ M.set_group("plugins", {
     },
   },
 })
-M.set_group("session", {
+m.set_group("session", {
   title = "Session",
   subleader = "b",
   mappings = {
@@ -143,7 +148,7 @@ M.set_group("session", {
     x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
   },
 })
-M.set_group("treesitter", {
+m.set_group("treesitter", {
   title = "Tree-sitter",
   subleader = "t",
   mappings = {
@@ -153,7 +158,7 @@ M.set_group("treesitter", {
   },
 })
 
-M.set_group("telescope", {
+m.set_group("telescope", {
   title = "Search",
   subleader = "s",
   mappings = {
@@ -203,4 +208,4 @@ M.set_group("telescope", {
   },
 })
 
-return M
+return m

@@ -1,51 +1,57 @@
-local icon = Cange.get_icon
-
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
+  dependencies = {
+    "EdenEast/nightfox.nvim",
+    "kyazdani42/nvim-web-devicons",
+  },
   config = function()
     require("lualine").setup({
       options = {
         component_separators = {
-          left = icon("ui.Pipe", { trim = true }),
-          right = icon("ui.Pipe", { trim = true }),
+          left = Cange.get_icon("ui.Pipe", { trim = true }),
+          right = Cange.get_icon("ui.Pipe", { trim = true }),
         },
         section_separators = { left = "", right = "" },
       },
       sections = {
+        lualine_a = {
+          "mode",
+        },
         lualine_b = {
-          { "branch", icon = icon("git.Branch", { trim = true }) },
+          { "branch", icon = Cange.get_icon("git.Branch", { trim = true }) },
+        },
+        lualine_c = {
           {
             "diff",
             symbols = {
-              added = icon("git.Add"),
-              modified = icon("git.Mod"),
-              removed = icon("git.Remove"),
+              added = Cange.get_icon("git.Add"),
+              modified = Cange.get_icon("git.Mod"),
+              removed = Cange.get_icon("git.Remove"),
             },
           },
           {
             "diagnostics",
             symbols = {
-              error = icon("diagnostics.Error"),
-              warn = icon("diagnostics.Warning"),
-              info = icon("diagnostics.Information"),
-              hint = icon("diagnostics.Hint"),
+              error = Cange.get_icon("diagnostics.Error"),
+              warn = Cange.get_icon("diagnostics.Warning"),
+              info = Cange.get_icon("diagnostics.Information"),
+              hint = Cange.get_icon("diagnostics.Hint"),
             },
           },
-        },
-        lualine_c = {
           {
             "filename",
             path = 1, -- 1: Relative path
-            symbols = icon("lualine"),
+            symbols = Cange.get_icon("lualine"),
           },
         },
         lualine_x = {
           require("cange.lualine.components.lazy_status"),
-          "filetype",
-          "fileformat",
         },
-        lualine_y = { "encoding" },
+        lualine_y = {
+          { "filetype", icon_only = true },
+          "fileformat",
+          "encoding",
+        },
         lualine_z = {
           "progress",
           "location",
