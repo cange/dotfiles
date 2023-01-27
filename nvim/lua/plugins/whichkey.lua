@@ -96,7 +96,7 @@ return {
         scroll_up = "<C-a>", -- binding to scroll up inside the popup
       },
       window = {
-        border = "rounded", -- none, single, double, rounded, shadow
+        border = Cange.get_config('ui.border'),
         margin = { 0, 8, 2, 8 }, -- extra window margin [top, right, bottom, left]
         padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
         winblend = 2,

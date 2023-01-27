@@ -1,7 +1,7 @@
 -- local ns = "[cange.lsp.mason]"
 require("mason").setup({
   ui = {
-    border = "rounded",
+    border = Cange.get_config("ui.border"),
     icons = Cange.get_icon("mason"),
   },
   log_level = vim.log.levels.INFO,

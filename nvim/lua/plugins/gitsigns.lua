@@ -12,6 +12,9 @@ return {
         topdelete = { text = icon("ui.ArrowRight", { trim = true }) },
         untracked = { text = icon("ui.VDashLineLeft", { trim = true }) },
       },
+      preview_config = {
+        border = Cange.get_config("ui.border"),
+      },
       current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
       current_line_blame_opts = {
         virt_text = true,
