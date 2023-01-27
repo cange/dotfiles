@@ -5,7 +5,7 @@ local ns = "[cange.utils.whichkey_groups]"
 
 ---@class WhichKeyCommand
 ---@field desc string Description of the keybinding
----@field cmd string Command of the keybinding
+---@field cmd string|function Command of the keybinding
 ---@field dashboard? boolean Determines whether or not to on "alpha" start page
 ---@field icon? string The icon which shown on "alpha" start page
 ---@field primary? boolean Determines whether or not to show a on inital "which-key" window
@@ -65,7 +65,14 @@ M.set_group("git", {
     B = { cmd = "<cmd>Telescope git_branches<CR>", desc = "Checkout branch" },
     C = { cmd = "<cmd>Telescope git_commits<CR>", desc = "Checkout commit" },
     R = { cmd = "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset buffer" },
-    d = { cmd = "<cmd>Gitsigns diffthis HEAD<CR>", desc = "Diff" },
+    d = { cmd = "<cmd>Gitsigns diffthis HEAD<CR>", desc = "Git [d]iff" },
+    i = { cmd = "<cmd>Gitsigns blame_line<CR>", desc = "Commit [i]nfo" },
+    I = {
+      cmd = function()
+        require("gitsigns").blame_line({ full = true })
+      end,
+      desc = "Commit full [I]nfo",
+    },
     j = { cmd = '<cmd>lua require("gitsigns").next_hunk()<CR>', desc = "Next hunk" },
     k = { cmd = '<cmd>lua require("gitsigns").prev_hunk()<CR>', desc = "Prev hunk" },
     l = { cmd = "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "Line blame" },
