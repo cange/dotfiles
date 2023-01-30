@@ -20,6 +20,12 @@ autocmd({ "BufRead", "BufNewFile" }, {
   command = ":setlocal textwidth=80",
 })
 
+autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup("cange_mdx_filetype", { clear = true }),
+  pattern = "*.mdx",
+  command = ":set filetype=markdown",
+})
+
 -- Indentation highlighting
 autocmd({ "VimEnter" }, {
   group = augroup("cange_highlight_word_under_cursor", { clear = true }),
