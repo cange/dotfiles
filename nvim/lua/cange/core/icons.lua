@@ -54,6 +54,7 @@ m.ui = {
   Tabnine = "⌬ ", -- U+232C
   Tag = " ", -- nf-oct-tag
   Telescope = " ", -- nf-oct-telescope
+  Test = " ", -- nf-mdi-flask_outline
   VDashLineLeft = "┆ ", -- U+2506
   VDotLineLeft = "┊ ", --U+250A
   VLineLeft = "▎ ", -- U+258E

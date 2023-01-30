@@ -74,12 +74,4 @@ return {
   { "mrjones2014/nvim-ts-rainbow", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- Rainbow parentheses
 
   "mg979/vim-visual-multi", -- multi search and replace
-
-  -- Icons
-  {
-    "kyazdani42/nvim-web-devicons", -- File icons
-    config = function()
-      require("nvim-web-devicons").setup()
-    end,
-  },
 }
