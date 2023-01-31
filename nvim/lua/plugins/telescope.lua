@@ -8,7 +8,6 @@ return {
     "nvim-telescope/telescope-project.nvim", -- switch between projects
     "nvim-telescope/telescope-ui-select.nvim", -- improved select UI
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- improves search performance
-    "nvim-telescope/telescope-live-grep-args.nvim", -- enables passing arguments to the grep command
     { "ThePrimeagen/harpoon", dependencies = "nvim-lua/plenary.nvim" }, -- bookmark buffers
   },
   config = function()
@@ -32,7 +31,7 @@ return {
     telescope.setup({
       defaults = {
         path_display = {
-          "smart", -- shows only the difference between the displayed paths
+          "smart",
           "absolute",
         },
         entry_prefix = "    ",
@@ -74,7 +73,7 @@ return {
         lsp_references = lsp_opts,
         quickfix = default_opts,
         live_grep = {
-          path_display = { "shorten" },
+          path_display = { "smart" },
           theme = "ivy",
           mappings = {
             i = {

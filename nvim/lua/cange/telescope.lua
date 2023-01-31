@@ -19,8 +19,6 @@ local m = {}
 local live_grep_filters = {
   ---@type nil|string
   extension = nil,
-  ---@type nil|string[]
-  directories = nil,
 }
 
 ---Run `live_grep` with the active filters (extension and folders)
@@ -28,9 +26,8 @@ local function run_live_grep(current_input)
   -- TODO: Resume old one with same options somehow
   builtin.live_grep({
     additional_args = live_grep_filters.extension and function()
-      return { "-g", "*." .. live_grep_filters.extension }
+      return { "-g", live_grep_filters.extension }
     end,
-    search_dirs = live_grep_filters.directories,
     default_text = current_input,
   })
 end
@@ -41,7 +38,7 @@ m.actions = transform_mod({
   set_extension = function(prompt_bufnr)
     local current_picker = action_state.get_current_picker(prompt_bufnr)
 
-    vim.ui.input({ default = "", prompt = "File type: *." }, function(input)
+    vim.ui.input({ default = "*.*", prompt = "File type: " }, function(input)
       if input == nil then
         return
       end
@@ -56,7 +53,6 @@ m.actions = transform_mod({
 ---Wapper over `live_grep` to first reset active filters
 function m.live_grep()
   live_grep_filters.extension = nil
-  live_grep_filters.directories = nil
 
   builtin.live_grep()
 end
