@@ -15,6 +15,7 @@ return {
   { "SmiteshP/nvim-navic", dependencies = "neovim/nvim-lspconfig" }, -- A statusline/winbar component
 
   -- Utility
+  { "guns/xterm-color-table.vim" }, -- provides cterm color cheat via command :XtermColorTable
 
   -- Scrolling
   { "karb94/neoscroll.nvim", config = instant_setup("neoscroll") }, -- smooth scrolling
