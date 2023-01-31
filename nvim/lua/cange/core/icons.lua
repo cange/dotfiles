@@ -10,6 +10,7 @@
 ---@field ui table Generic icons for general purposes
 ---@field which_key table
 ---@field documents table
+---@field extension table
 --
 ---@type Cange.core.icons
 local m = {}
@@ -54,13 +55,18 @@ m.ui = {
   Tabnine = "⌬ ", -- U+232C
   Tag = " ", -- nf-oct-tag
   Telescope = " ", -- nf-oct-telescope
-  Test = " ", -- nf-mdi-flask_outline
   VDashLineLeft = "┆ ", -- U+2506
   VDotLineLeft = "┊ ", --U+250A
   VLineLeft = "▎ ", -- U+258E
   VThinLineLeft = "▏ ", -- U+258F
   Watch = " ", -- nf-oct-clock
   Workspace = " ", -- nf-oct-briefcase
+}
+m.extension = {
+  ts = "ﯤ ", -- nf-mdi-language_typescript
+  js = " ", -- nf-mdi-language_javascript
+  storybook = " ", -- nf-dev-javascript_shield
+  test = " ", -- nf-mdi-flask_outline
 }
 m.documents = {
   NewFile = " ",
