@@ -26,7 +26,7 @@ end
 
 return {
   "goolord/alpha-nvim",
-  dependencies = { "kyazdani42/nvim-web-devicons" },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local dashboard = require("alpha.themes.dashboard")
     local section = dashboard.section

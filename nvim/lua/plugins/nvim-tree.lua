@@ -9,8 +9,8 @@ local function normalized_git_icons()
 end
 
 return {
-  "kyazdani42/nvim-tree.lua",
-  dependencies = { "kyazdani42/nvim-web-devicons" },
+  "nvim-tree/nvim-tree.lua",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   version = "nightly",
   config = function()
     local bookmark_nav = require("nvim-tree.api").marks.navigate

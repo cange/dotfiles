@@ -33,7 +33,7 @@ local function merge_iconset_by_filetype(filetype, subset)
 end
 
 return {
-  "kyazdani42/nvim-web-devicons", -- File icons
+  "nvim-tree/nvim-web-devicons", -- File icons
   config = function()
     Cange = Cange or require("cange.utils")
     local devicons = require("nvim-web-devicons")
