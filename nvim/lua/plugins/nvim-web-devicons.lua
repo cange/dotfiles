@@ -32,7 +32,6 @@ local function merge_iconset_by_filetype(filetype, subset)
   })
 end
 
-local ns = "[plugins/nvim-web-devicons]"
 return {
   "kyazdani42/nvim-web-devicons", -- File icons
   config = function()
@@ -48,21 +47,14 @@ return {
     }
 
     devicons.setup()
+
     devicons.set_icon({
       ["js"] = merge_iconset_by_filetype("javascript", { icon = Cange.get_icon("extension.js") }),
     })
     devicons.set_icon({
       ["ts"] = merge_iconset_by_filetype("typescript", { icon = Cange.get_icon("extension.ts") }),
     })
-    devicons.set_icon({
-      ["storybook"] = vim.tbl_extend(
-        "force",
-        preset.storybook,
-        { icon = Cange.get_icon("storybook") }
-      ),
-    })
-    devicons.set_icon({ ["stories.js"] = preset.storybook })
-    -- order is important
+
     devicons.set_icon({ ["cy.js"] = create_icon_by_filetype("javascript", "TestJs") })
     devicons.set_icon({ ["spec.js"] = create_icon_by_filetype("javascript", "TestJs") })
     devicons.set_icon({ ["test.js"] = create_icon_by_filetype("javascript", "TestJs") })
