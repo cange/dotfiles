@@ -21,9 +21,9 @@ return {
       },
       current_line_blame_formatter = " "
         .. Cange.get_icon("git.Commit")
-        .. "<author>, <author_time:%d.%m.%y> "
+        .. " <author>, <author_time:%d.%m.%y> "
         .. Cange.get_icon("ui.Note")
-        .. "<summary>",
+        .. " <summary>",
     })
   end,
 }
