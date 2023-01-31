@@ -8,8 +8,8 @@ return {
     require("lualine").setup({
       options = {
         component_separators = {
-          left = Cange.get_icon("ui.Pipe", { trim = true }),
-          right = Cange.get_icon("ui.Pipe", { trim = true }),
+          left = Cange.get_icon("ui.Pipe"),
+          right = Cange.get_icon("ui.Pipe"),
         },
         section_separators = { left = "", right = "" },
       },
@@ -18,24 +18,24 @@ return {
           "mode",
         },
         lualine_b = {
-          { "branch", icon = Cange.get_icon("git.Branch", { trim = true }) },
+          { "branch", icon = Cange.get_icon("git.Branch") },
         },
         lualine_c = {
           {
             "diff",
             symbols = {
-              added = Cange.get_icon("git.Add"),
-              modified = Cange.get_icon("git.Mod"),
-              removed = Cange.get_icon("git.Remove"),
+              added = Cange.get_icon("git.Add") .. " ",
+              modified = Cange.get_icon("git.Mod") .. " ",
+              removed = Cange.get_icon("git.Remove") .. " ",
             },
           },
           {
             "diagnostics",
             symbols = {
-              error = Cange.get_icon("diagnostics.Error"),
-              warn = Cange.get_icon("diagnostics.Warning"),
-              info = Cange.get_icon("diagnostics.Information"),
-              hint = Cange.get_icon("diagnostics.Hint"),
+              error = Cange.get_icon("diagnostics.Error") .. " ",
+              warn = Cange.get_icon("diagnostics.Warning") .. " ",
+              info = Cange.get_icon("diagnostics.Information") .. " ",
+              hint = Cange.get_icon("diagnostics.Hint") .. " ",
             },
           },
           {

@@ -3,12 +3,12 @@ return {
   config = function()
     require("gitsigns").setup({
       signs = {
-        add = { text = Cange.get_icon("ui.VLineLeft", { trim = true }) },
-        change = { text = Cange.get_icon("ui.VLineLeft", { trim = true }) },
-        changedelete = { text = Cange.get_icon("ui.VLineLeft", { trim = true }) },
-        delete = { text = Cange.get_icon("ui.ArrowRight", { trim = true }) },
-        topdelete = { text = Cange.get_icon("ui.ArrowRight", { trim = true }) },
-        untracked = { text = Cange.get_icon("ui.VDashLineLeft", { trim = true }) },
+        add = { text = Cange.get_icon("ui.VLineLeft") },
+        change = { text = Cange.get_icon("ui.VLineLeft") },
+        changedelete = { text = Cange.get_icon("ui.VLineLeft") },
+        delete = { text = Cange.get_icon("ui.ArrowRight") },
+        topdelete = { text = Cange.get_icon("ui.ArrowRight") },
+        untracked = { text = Cange.get_icon("ui.VDashLineLeft") },
       },
       preview_config = {
         border = Cange.get_config("ui.border"),

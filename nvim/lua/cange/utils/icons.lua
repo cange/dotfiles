@@ -21,12 +21,12 @@ end
 ---@return string|Cange.core.icons|nil # The icon symbol or nil if not found
 function m.get_icon(group_id, ...)
   local icons = require("cange.core.icons")
-  local opts = {}
+  -- local opts = {}
   local parts = { ... }
   local last_item = parts[#parts]
 
   if type(last_item) == "table" then
-    opts = vim.deepcopy(last_item)
+    -- opts = vim.deepcopy(last_item)
     table.remove(parts, #parts)
   end
 
@@ -45,11 +45,10 @@ function m.get_icon(group_id, ...)
     end
   end
 
+
   if type(icons) == "string" then
-    if opts.trim ~= nil and opts.trim then
-      ---@diagnostic disable-next-line: cast-local-type
-      icons = vim.trim(icons)
-    end
+    ---@diagnostic disable-next-line: cast-local-type
+    icons = vim.trim(icons)
   end
 
   return icons

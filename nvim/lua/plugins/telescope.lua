@@ -36,8 +36,8 @@ return {
           "absolute",
         },
         entry_prefix = "    ",
-        prompt_prefix = " " .. Cange.get_icon("ui.Search") .. " ",
-        selection_caret = " " .. Cange.get_icon("ui.ChevronRight") .. " ",
+        prompt_prefix = " " .. Cange.get_icon("ui.Search") .. "  ",
+        selection_caret = " " .. Cange.get_icon("ui.ChevronRight") .. "  ",
         layout_config = {
           horizontal = {
             preview_width = 80,

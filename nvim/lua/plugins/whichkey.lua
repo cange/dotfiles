@@ -88,7 +88,7 @@ return {
       },
       icons = {
         breadcrumb = Cange.get_icon("which_key.Breadcrumb"),
-        separator = Cange.get_icon("which_key.Separator", { trim = true }),
+        separator = Cange.get_icon("which_key.Separator"),
         group = Cange.get_icon("which_key.Group"),
       },
       popup_mappings = {

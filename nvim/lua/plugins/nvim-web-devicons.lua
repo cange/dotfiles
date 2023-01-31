@@ -6,7 +6,7 @@ local function create_icon_by_filetype(filetype, name, opts)
   local devicons = require("nvim-web-devicons")
   local ft_icon, color = devicons.get_icon_color_by_filetype(filetype)
   local _, cterm = devicons.get_icon_cterm_color_by_filetype(filetype)
-  local icon = Cange.get_icon("extension.test", { trim = true })
+  local icon = Cange.get_icon("extension.test")
 
   if opts ~= nil then
     color = opts.color == nil and color or opts.color
@@ -49,16 +49,16 @@ return {
 
     devicons.setup()
     devicons.set_icon({
-      ["js"] = merge_iconset_by_filetype("javascript", { icon = Cange.get_icon("extension.js", { trim = true }) }),
+      ["js"] = merge_iconset_by_filetype("javascript", { icon = Cange.get_icon("extension.js") }),
     })
     devicons.set_icon({
-      ["ts"] = merge_iconset_by_filetype("typescript", { icon = Cange.get_icon("extension.ts", { trim = true }) }),
+      ["ts"] = merge_iconset_by_filetype("typescript", { icon = Cange.get_icon("extension.ts") }),
     })
     devicons.set_icon({
       ["storybook"] = vim.tbl_extend(
         "force",
         preset.storybook,
-        { icon = Cange.get_icon("storybook", { trim = true }) }
+        { icon = Cange.get_icon("storybook") }
       ),
     })
     devicons.set_icon({ ["stories.js"] = preset.storybook })
