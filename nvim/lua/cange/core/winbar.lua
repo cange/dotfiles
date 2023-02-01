@@ -9,7 +9,7 @@ if not found_web_devicons then
   print(ns, '"nvim-web-devicons" not found')
   return
 end
-local separator = Cange.get_icon("ui.ChevronRight") .. ' '
+local separator = Cange.get_icon("ui.ChevronRight") .. " "
 -- Setup
 
 navic.setup({
@@ -73,7 +73,6 @@ local function is_excluded()
     "Markdown",
     "NvimTree",
     "Outline",
-    "alpha",
     "help",
     "toggleterm",
     "",

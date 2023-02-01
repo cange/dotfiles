@@ -8,9 +8,6 @@
 
 ---@type Cange.config
 return {
-  author = {
-    display_name = "Christian",
-  },
   ui = {
     border = "rounded", -- nvim_open_win: none, single, double, rounded, shadow
   },
