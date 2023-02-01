@@ -17,8 +17,6 @@ return {
       auto_session_enabled = true,
       auto_session_suppress_dirs = { "~/", "~/workspace" }, -- Suppress session create/restore if in one of the list of dirs
       auto_session_use_git_branch = nil, -- Use the git branch to differentiate the session name
-      -- the configs below are lua only
-      bypass_session_save_file_types = { "alpha" },
     })
   end,
 }

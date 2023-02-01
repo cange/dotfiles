@@ -7,7 +7,6 @@ return {
       buftype_exclude = { "terminal", "nofile" },
       filetype_exclude = {
         "help",
-        "dashboard",
         "NvimTree",
         "Trouble",
         "text",

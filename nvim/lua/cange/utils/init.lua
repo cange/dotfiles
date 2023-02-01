@@ -9,7 +9,6 @@ local ns = "[cange.utils]"
 local m = {}
 
 m.get_icon = require("cange.utils.icons").get_icon
-m.get_random_greeting_for = require("cange.utils.greetings").random_with_name
 m.set_whichkey_group = require("cange.utils.whichkey_groups").set_group
 m.get_whichkey_group = require("cange.utils.whichkey_groups").get_group
 
