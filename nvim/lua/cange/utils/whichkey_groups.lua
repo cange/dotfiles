@@ -66,23 +66,24 @@ m.set_group("git", {
   mappings = {
     B = { cmd = "<cmd>Telescope git_branches<CR>", desc = "Checkout branch" },
     C = { cmd = "<cmd>Telescope git_commits<CR>", desc = "Checkout commit" },
-    R = { cmd = "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset buffer" },
-    d = { cmd = "<cmd>Gitsigns diffthis HEAD<CR>", desc = "Git [d]iff" },
-    i = { cmd = "<cmd>Gitsigns blame_line<CR>", desc = "Commit [i]nfo" },
+    R = { cmd = "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset file" },
+    S = { cmd = "<cmd>Gitsigns stage_buffer<CR>", desc = "Stage file" },
+    d = { cmd = "<cmd>Gitsigns diffthis HEAD<CR>", desc = "Git diff" },
+    i = { cmd = "<cmd>Gitsigns blame_line<CR>", desc = "Commit info" },
     I = {
       cmd = function()
         require("gitsigns").blame_line({ full = true })
       end,
-      desc = "Commit full [I]nfo",
+      desc = "Commit full info",
     },
-    j = { cmd = '<cmd>lua require("gitsigns").next_hunk()<CR>', desc = "Next hunk" },
-    k = { cmd = '<cmd>lua require("gitsigns").prev_hunk()<CR>', desc = "Prev hunk" },
+    j = { cmd = "<cmd>Gitsigns next_hunk<CR>", desc = "Next hunk" },
+    k = { cmd = "<cmd>Gitsigns prev_hunk<CR>", desc = "Prev hunk" },
     l = { cmd = "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "Line blame" },
     o = { cmd = "<cmd>Telescope git_status<CR>", desc = "Open changed file" },
-    p = { cmd = '<cmd>lua require("gitsigns").preview_hunk()<CR>', desc = "Preview hunk" },
-    r = { cmd = '<cmd>lua require("gitsigns").reset_hunk()<CR>', desc = "Reset hunk" },
-    s = { cmd = '<cmd>lua require("gitsigns").stage_hunk()<CR>', desc = "Stage hunk" },
-    u = { cmd = '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', desc = "Undo stage hunk" },
+    p = { cmd = "<cmd>Gitsigns preview_hunk<CR>", desc = "Preview hunk" },
+    r = { cmd = "<cmd>Gitsigns reset_hunk<CR>", desc = "Reset hunk" },
+    s = { cmd = "<cmd>Gitsigns stage_hunk<CR>", desc = "Stage hunk" },
+    u = { cmd = "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Undo stage hunk" },
   },
 })
 m.set_group("lsp", {
