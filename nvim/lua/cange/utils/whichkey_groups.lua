@@ -52,11 +52,11 @@ m.set_group("editor", {
   title = "Editor",
   subleader = "e",
   mappings = {
+    C = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
     a = { cmd = '<cmd>lua require("harpoon.mark").add_file()<CR>', desc = "Add Bookmark", primary = true },
     c = { cmd = "<cmd>TextCaseOpenTelescope<CR>", desc = "Change Case" },
-    b = { cmd = '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', desc = "Bookmarks Menu", primary = true },
+    m = { cmd = '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', desc = "Bookmarks Menu", primary = true },
     k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/M.groups.lua<CR>", desc = "Edit Keymaps" },
-    m = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
     o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit Options" },
     w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
     ["\\"] = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
