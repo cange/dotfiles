@@ -6,7 +6,7 @@ local function create_icon_by_filetype(filetype, name, opts)
   local devicons = require("nvim-web-devicons")
   local ft_icon, color = devicons.get_icon_color_by_filetype(filetype)
   local _, cterm = devicons.get_icon_cterm_color_by_filetype(filetype)
-  local icon = Cange.get_icon("extension.test")
+  local icon = Cange.get_icon("ui.Beaker")
 
   if opts ~= nil then
     color = opts.color == nil and color or opts.color
@@ -15,21 +15,6 @@ local function create_icon_by_filetype(filetype, name, opts)
   end
 
   return { icon = icon, color = color, cterm_color = cterm, name = name }
-end
-
----@param filetype string
----@param subset table
----@return table
-local function merge_iconset_by_filetype(filetype, subset)
-  local devicons = require("nvim-web-devicons")
-  local icon, color, cterm_color = devicons.get_icon_colors_by_filetype(filetype)
-
-  return vim.tbl_extend("keep", subset, {
-    icon = icon,
-    color = color,
-    cterm_color = cterm_color,
-    name = devicons.get_icon_name_by_filetype(filetype),
-  })
 end
 
 return {
@@ -47,13 +32,6 @@ return {
     }
 
     devicons.setup()
-
-    devicons.set_icon({
-      ["js"] = merge_iconset_by_filetype("javascript", { icon = Cange.get_icon("extension.js") }),
-    })
-    devicons.set_icon({
-      ["ts"] = merge_iconset_by_filetype("typescript", { icon = Cange.get_icon("extension.ts") }),
-    })
 
     devicons.set_icon({ ["cy.js"] = create_icon_by_filetype("javascript", "TestJs") })
     devicons.set_icon({ ["spec.js"] = create_icon_by_filetype("javascript", "TestJs") })

@@ -23,6 +23,7 @@ local m = {}
 
 m.ui = {
   ArrowRight = "▸ ", -- U+25B8
+  Beaker = " ", -- nf-oct-beaker
   Bookmark = " ", -- nf-oct-bookmark
   Bug = " ", -- nf-oct-bug
   Calendar = " ", -- nf-oct-calendar
@@ -46,7 +47,6 @@ m.ui = {
   Pencil = " ", -- nf-oct-pencil
   Pipe = "⏽ ", -- U+23FD
   Project = " ", -- nf-oct-repo
-  Robot = "ﮧ ", -- nf-mdi-robot
   Search = " ", -- nf-oct-search
   SignIn = " ", -- nf-oct-sign_in
   SignOut = " ", -- nf-oct-sign_out
@@ -61,12 +61,6 @@ m.ui = {
   VThinLineLeft = "▏ ", -- U+258F
   Watch = " ", -- nf-oct-clock
   Workspace = " ", -- nf-oct-briefcase
-}
-m.extension = {
-  ts = "ﯤ ", -- nf-mdi-language_typescript
-  js = " ", -- nf-mdi-language_javascript
-  storybook = " ", -- nf-dev-javascript_shield
-  test = " ", -- nf-mdi-flask_outline
 }
 m.documents = {
   NewFile = " ",
@@ -99,11 +93,11 @@ m.git_states = {
   ignored = m.git.Ignore,
 }
 m.diagnostics = {
-  Error = " ", -- nf-mdi-close_circle
-  Warning = " ", -- nf-mdi-information_outline
-  Information = " ", -- nf-mdi-information
-  Question = "ﬤ ", -- nf-mdi-help_circle_outline
-  Hint = " ", -- nf-mdi-lightbulb
+  Error = " ", -- nf-oct-stop
+  Warning = " ", -- nf-oct-alert
+  Information = " ", -- nf-oct-info
+  Question = " ", -- nf-oct-question
+  Hint = " ", -- nf-oct-light_bulb
 }
 m.which_key = {
   Breadcrumb = " ", -- nf-oct-arrow_right
