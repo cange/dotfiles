@@ -1,3 +1,39 @@
+--region TYPES
+
+---@class Nightfox
+
+---@class Nightfox.Shade
+---@field base string
+---@field bright string
+---@field dim string
+---@field light boolean
+
+---@class Nightfox.Palette
+---@field black Nightfox.Shade
+---@field red Nightfox.Shade
+---@field green Nightfox.Shade
+---@field yellow Nightfox.Shade
+---@field blue Nightfox.Shade
+---@field magenta Nightfox.Shade
+---@field cyan Nightfox.Shade
+---@field white Nightfox.Shade
+---@field orange Nightfox.Shade
+---@field pink Nightfox.Shade
+---@field comment string
+---@field bg0 string
+---@field bg1 string
+---@field bg2 string
+---@field bg3 string
+---@field bg4 string
+---@field fg0 string
+---@field fg1 string
+---@field fg2 string
+---@field fg3 string
+---@field sel0 string
+---@field sel1 string
+
+--endregion
+
 return {
   "EdenEast/nightfox.nvim", -- colorscheme
   lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -9,51 +45,10 @@ return {
     -- setup must be called before loading
     vim.cmd("colorscheme " .. colorscheme)
 
-    -- Returns the palette of the specified colorscheme
-    local p = require("nightfox.palette").load(colorscheme)
-    Cange.register_key("palette", p)
+    ---@type Nightfox.Palette
+    local palette = require("nightfox.palette").load(colorscheme)
+    Cange.reload("cange.core.highlights").setup(palette)
 
-    local highlight_links = {
-      NavicSeparator = { fg = p.fg0, link = "lualine_c_normal" },
-      NavicText = { link = "lualine_c_normal" },
-      WinbarFile = { link = "Comment" },
-    }
-
-    for name, highlight_link in pairs(Cange.get_symbol_kind_hl()) do
-      highlight_links["NavicIcons" .. name] = highlight_link
-    end
-
-    Cange.set_hls(highlight_links)
-
-    Cange.set_hls({
-      CursorLine = { bg = p.bg2 }, -- disable default
-      Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
-      -- illuminate
-      IlluminatedWordText = { bg = p.bg1 }, -- Default for references if no kind information is available
-      IlluminatedWordRead = { bg = p.bg2 }, -- for references of kind read
-      IlluminatedWordWrite = { bg = p.bg2, bold = true }, -- for references of kind write
-
-      -- telescope
-      TelescopeMatching = { fg = p.yellow.bright, bold = true },
-      TelescopeSelection = { bg = p.sel0 },
-      TelescopeSelectionCaret = { fg = p.white.base, bg = p.sel0 },
-      TelescopePromptNormal = { bg = p.bg0 },
-      TelescopeSelectionNormal = { bg = p.bg0 },
-      TelescopePromptBorder = { fg = p.bg0, bg = p.bg0 },
-      TelescopePromptTitle = { fg = p.bg4 },
-      TelescopeBorder = { fg = p.bg0, bg = p.bg0 },
-      TelescopeResultsNormal = { bg = p.bg0 },
-
-      -- indent-blankline
-      IndentBlanklineChar = { fg = p.bg2 },
-      IndentBlanklineContextChar = { fg = p.fg3 },
-      IndentBlanklineContextStart = { sp = p.fg3, underline = true },
-      IndentBlanklineSpaceChar = { fg = p.bg3 },
-      IndentBlanklineSpaceCharBlankline = { fg = p.red.base },
-
-      -- cmp / completion
-      CmpItemKindTabnine = { fg = p.pink.base },
-      CmpItemKindCopilot = { fg = p.cyan.base },
-    })
+    vim.keymap.set('n', '<leader><leader>c',function() Cange.reload("cange.core.highlights").setup(palette) end)
   end,
 }
