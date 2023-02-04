@@ -75,4 +75,26 @@ return {
   { "mrjones2014/nvim-ts-rainbow", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- Rainbow parentheses
 
   "mg979/vim-visual-multi", -- multi search and replace
+
+  -- Motion
+  {
+    -- easily jump to any location and enhanced f/t motions for Leap
+    "ggandor/leap.nvim",
+    event = "VeryLazy",
+    config = function()
+      local leap = require("leap")
+
+      leap.add_default_mappings()
+
+      -- Getting used to `d` shouldn't take long - after all, it is more comfortable
+      -- than `x`, and even has a better mnemonic.
+      -- If you still desperately want your old `x` back, then just delete these
+      -- mappings set by Leap:
+      vim.keymap.del({ "x", "o" }, "x")
+      vim.keymap.del({ "x", "o" }, "X")
+
+      vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
+      leap.opts.highlight_unlabeled_phase_one_targets = true
+    end,
+  },
 }
