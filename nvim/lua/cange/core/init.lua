@@ -1,5 +1,4 @@
 ---@class Cange.core
----@field Winbar Cange.core.Winbar
 
 Cange.reload("cange.core.options")
 Cange.reload("cange.core.autocommands")
