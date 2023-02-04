@@ -3,13 +3,15 @@ return {
   dependencies = {
     "EdenEast/nightfox.nvim",
     "nvim-tree/nvim-web-devicons",
+    "nvim-navic",
   },
   config = function()
+    local icon = Cange.get_icon
     require("lualine").setup({
       options = {
         component_separators = {
-          left = Cange.get_icon("ui.Pipe"),
-          right = Cange.get_icon("ui.Pipe"),
+          left = icon("ui.Pipe"),
+          right = icon("ui.Pipe"),
         },
         section_separators = { left = "", right = "" },
       },
@@ -18,43 +20,44 @@ return {
           "mode",
         },
         lualine_b = {
-          { "branch", icon = Cange.get_icon("git.Branch") },
-        },
-        lualine_c = {
+          { "branch", icon = icon("git.Branch") },
           {
             "diff",
             symbols = {
-              added = Cange.get_icon("git.Add") .. " ",
-              modified = Cange.get_icon("git.Mod") .. " ",
-              removed = Cange.get_icon("git.Remove") .. " ",
+              added = icon("git.Add") .. " ",
+              modified = icon("git.Mod") .. " ",
+              removed = icon("git.Remove") .. " ",
             },
           },
           {
             "diagnostics",
             symbols = {
-              error = Cange.get_icon("diagnostics.Error") .. " ",
-              warn = Cange.get_icon("diagnostics.Warning") .. " ",
-              info = Cange.get_icon("diagnostics.Information") .. " ",
-              hint = Cange.get_icon("diagnostics.Hint") .. " ",
+              error = icon("diagnostics.Error") .. " ",
+              warn = icon("diagnostics.Warning") .. " ",
+              info = icon("diagnostics.Information") .. " ",
+              hint = icon("diagnostics.Hint") .. " ",
             },
           },
+        },
+        lualine_c = {
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          { "filename", path = 1, symbols = icon("lualine"), separator = "" },
+          -- stylua: ignore
           {
-            "filename",
-            path = 1, -- 1: Relative path
-            symbols = Cange.get_icon("lualine"),
+            function() return require("nvim-navic").get_location() end,
+            cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
           },
         },
         lualine_x = {
           require("cange.lualine.components.lazy_status"),
         },
         lualine_y = {
-          { "filetype", icon_only = true },
-          "fileformat",
+          { "fileformat", separator = "" },
           "encoding",
         },
         lualine_z = {
-          "progress",
-          "location",
+          { "progress", separator = "", padding = { left = 1, right = 0 } },
+          { "location", padding = { left = 0, right = 1 } },
         },
       },
     })

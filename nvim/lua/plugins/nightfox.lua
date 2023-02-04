@@ -13,6 +13,18 @@ return {
     local p = require("nightfox.palette").load(colorscheme)
     Cange.register_key("palette", p)
 
+    local highlight_links = {
+      NavicSeparator = { fg = p.fg0, link = "lualine_c_normal" },
+      NavicText = { link = "lualine_c_normal" },
+      WinbarFile = { link = "Comment" },
+    }
+
+    for name, highlight_link in pairs(Cange.get_symbol_kind_hl()) do
+      highlight_links["NavicIcons" .. name] = highlight_link
+    end
+
+    Cange.set_hls(highlight_links)
+
     Cange.set_hls({
       CursorLine = { bg = p.bg2 }, -- disable default
       Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise

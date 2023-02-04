@@ -55,19 +55,6 @@ local function get_filename(opts)
   return ""
 end
 
-local function get_location()
-  if not navic.is_available() then
-    return ""
-  end
-
-  local location = navic.get_location()
-  if location == "" or location == "error" then
-    return ""
-  end
-
-  return "%#WindbarSeparator#" .. separator .. "%*" .. location
-end
-
 local function is_excluded()
   local excludes = {
     "Markdown",
@@ -97,12 +84,6 @@ function WinbarBreadcrumbRedraw()
   local value = get_filename()
 
   local location_added = false
-  if not str_is_empty(value) then
-    local location = get_location()
-
-    value = value .. " " .. location
-    location_added = not str_is_empty(location)
-  end
 
   if not str_is_empty(value) and get_buf_option("mod") then
     local mod = "%#LspCodeLens#" .. Cange.get_icon("ui.Circle") .. "%*"
@@ -126,18 +107,6 @@ function WinbarBreadcrumbRedraw()
     return
   end
 end
-
-local highlight_links = {
-  NavicText = { link = "SpecialKey" },
-  WinbarFile = { link = "Comment" },
-  WindbarSeparator = { link = "Comment" },
-}
-
-for name, highlight_link in pairs(Cange.get_symbol_kind_hl()) do
-  highlight_links["NavicIcons" .. name] = highlight_link
-end
-
-Cange.set_hls(highlight_links)
 
 -- Autocommands
 local events = {
