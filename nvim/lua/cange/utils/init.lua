@@ -1,11 +1,10 @@
 local ns = "[cange.utils]"
 
 ---@class Cange.utils
----@field Icons Cange.utils.Icons
----@field whichkey Cange.utils.whichkey
----@field palette table
 
----@type Cange.utils
+---@class Cange.utils.Utils
+
+---@type Cange.utils.Utils
 local m = {}
 
 m.get_icon = require("cange.utils.icons").get_icon
@@ -13,7 +12,7 @@ m.set_whichkey_group = require("cange.utils.whichkey_groups").set_group
 m.get_whichkey_group = require("cange.utils.whichkey_groups").get_group
 
 ---Set highlight group by given table.
----@param highlights Cange.core.highlight_groups Highlight definition map
+---@param highlights Cange.core.Highlights Highlight definition map
 ---@see vim.api.nvim_set_hl
 function m.set_hls(highlights)
   for name, val in pairs(highlights) do
@@ -26,8 +25,8 @@ end
 ---@return table A certain highlight group or all if identifier is nil
 function m.get_symbol_kind_hl(id)
   id = id or nil
-  local groups = require("cange.core.hl_groups")
-  local hls = vim.tbl_extend("keep", groups.kinds, groups.other_kinds)
+  local highlights = require("cange.core.highlights")
+  local hls = vim.tbl_extend("keep", highlights.kinds, highlights.other_kinds)
 
   return id and hls[id] or hls
 end

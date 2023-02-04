@@ -90,7 +90,10 @@ end
 -- @param client any
 -- @param bufnr integer buffer
 function m.on_attach(client, bufnr)
-  winbar.attach(client, bufnr)
+  local navic_ok, navic = pcall(require, "nvim-navic")
+  if navic_ok and client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
   attach_keymaps(client, bufnr)
   auto_format.on_save(bufnr)
 end

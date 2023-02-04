@@ -1,3 +1,5 @@
+---@class Cange.plugins
+
 ---Simplified setup method
 ---@param plugin_name string The packages module name to call for setup
 ---@return function
@@ -7,13 +9,8 @@ local function instant_setup(plugin_name)
   end
 end
 
+---@type Cange.plugins
 return {
-  -- UI: Cursorline
-  "RRethy/vim-illuminate", -- Highlight the word under the cursor
-
-  -- UI: winbar
-  { "SmiteshP/nvim-navic", dependencies = "neovim/nvim-lspconfig" }, -- A statusline/winbar component
-
   -- Utility
   { "guns/xterm-color-table.vim" }, -- provides cterm color cheat via command :XtermColorTable
 

@@ -1,3 +1,6 @@
+---@class Cange.plugins.icons
+
+---@type Cange.plugins.icons
 return {
   -- font icon set
   {
