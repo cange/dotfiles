@@ -84,7 +84,7 @@ function m.browse_workspace()
   builtin.find_files({
     cwd = "~/workspace/",
     hidden = true,
-    prompt_title = Cange.get_icon("ui.Workspace") .. " Workspace",
+    prompt_title = Cange.get_icon("documents.Briefcase") .. " Workspace",
     shorten_path = false,
   })
 end

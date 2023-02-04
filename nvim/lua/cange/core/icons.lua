@@ -1,18 +1,6 @@
----@class Cange.core.icons
----@field cmp_kind table Completion kinds
----@field cmp_source table Completion sources
----@field diagnostics table
----@field git table
----@field git_states table
----@field kind table Language symbols
----@field lualine table
----@field mason table Mason LSP local anguage server plugin
----@field ui table Generic icons for general purposes
----@field which_key table
----@field documents table
----@field extension table
---
----@type Cange.core.icons
+---@class Cange.core.Icons
+
+---@type Cange.core.Icons
 local m = {}
 
 -- Icons works best with "FiraCode Nerd Font"
@@ -21,6 +9,7 @@ local m = {}
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
+---@enum Cange.core.Icons.ui
 m.ui = {
   ArrowRight = "▸ ", -- U+25B8
   Beaker = " ", -- nf-oct-beaker
@@ -46,7 +35,7 @@ m.ui = {
   Package = " ", -- nf-oct-package
   Pencil = " ", -- nf-oct-pencil
   Pipe = "⏽ ", -- U+23FD
-  Project = " ", -- nf-oct-repo
+  PlusSmall = " ", -- nf-oct-plus_small
   Search = " ", -- nf-oct-search
   SignIn = " ", -- nf-oct-sign_in
   SignOut = " ", -- nf-oct-sign_out
@@ -60,19 +49,22 @@ m.ui = {
   VLineLeft = "▎ ", -- U+258E
   VThinLineLeft = "▏ ", -- U+258F
   Watch = " ", -- nf-oct-clock
-  Workspace = " ", -- nf-oct-briefcase
 }
+---@enum Cange.core.Icons.documents
 m.documents = {
-  NewFile = " ",
-  EmptyFolder = " ",
-  EmptyOpenFolder = " ",
-  File = " ",
-  Files = " ",
-  Folder = " ",
-  OpenFolder = " ",
-  SymlinkFile = " ",
-  SymlinkFolder = " ",
+  Briefcase = " ", -- nf-oct-briefcase
+  EmptyFolder = " ", -- nf-fa-folder_o
+  EmptyOpenFolder = " ", -- nf-fa-folder_open_o
+  File = " ", --nf-cod-file
+  Files = " ", -- nf-cod-files
+  Folder = " ", -- nf-fa-folder
+  NewFile = " ", -- nf-cod-new_file
+  OpenFolder = " ", --  nf-fa-folder_open
+  Repo = " ", -- nf-oct-repo
+  SymlinkFile = " ", --nf-cod-file_symlink_file
+  SymlinkFolder = " ", --nf-cod-file_symlink_directory
 }
+---@enum Cange.core.Icons.git
 m.git = {
   Add = " ", -- nf-oct-diff_added,
   Mod = " ", -- nf-oct-diff_modified
@@ -83,15 +75,17 @@ m.git = {
   Branch = " ", -- nf-oct-git_branch
   Commit = " ", -- nf-oct-git_commit
 }
+---@enum Cange.core.Icons.git_states
 m.git_states = {
   unstaged = m.git.Mod,
-  staged = " ",
-  unmerged = "ﱵ ",
+  staged = "󱗜 ", -- nf-md-circle_box
+  unmerged = " ", -- nf-cod-git_pull_request_draft
   renamed = m.git.Rename,
   untracked = m.ui.CircleUnfilled,
   deleted = m.git.Remove,
   ignored = m.git.Ignore,
 }
+---@enum Cange.core.Icons.diagnostics
 m.diagnostics = {
   Error = " ", -- nf-oct-stop
   Warning = " ", -- nf-oct-alert
@@ -99,11 +93,13 @@ m.diagnostics = {
   Question = " ", -- nf-oct-question
   Hint = " ", -- nf-oct-light_bulb
 }
+---@enum Cange.core.Icons.which_key
 m.which_key = {
   Breadcrumb = " ", -- nf-oct-arrow_right
   Separator = m.ui.ChevronRight, -- symbol used between a key and it's label
   Group = " ", -- nf-oct-plus_small
 }
+---@enum Cange.core.Icons.kind
 m.kind = {
   File = " ",
   Module = " ",
@@ -132,6 +128,7 @@ m.kind = {
   Operator = " ",
   TypeParameter = " ",
 }
+---@enum Cange.core.Icons.cmp_kind
 m.cmp_kind = vim.tbl_extend("keep", m.kind, {
   Color = " ",
   Folder = m.documents.Folder .. " ",
@@ -142,6 +139,7 @@ m.cmp_kind = vim.tbl_extend("keep", m.kind, {
   Unit = " ",
   Value = " ",
 })
+---@enum Cange.core.Icons.cmp_source
 m.cmp_source = {
   buffer = "﬘ ",
   luasnip = " ", -- nf-fa-cut
@@ -151,12 +149,14 @@ m.cmp_source = {
   cmp_tabnine = m.ui.Tabnine,
   copilot = m.ui.Octoface,
 }
+---@enum Cange.core.Icons.lualine
 m.lualine = {
   modified = m.ui.Circle, -- Text to show when the file is modified.
   newfile = m.documents.NewFile, -- Text to show for new created file before first writting
   readonly = m.ui.lock, -- Text to show when the file is non-modifiable or readonly.
   unnamed = m.documents.File, -- Text to show for unnamed buffers.
 }
+---@enum Cange.core.Icons.mason
 m.mason = {
   package_installed = m.ui.Check,
   package_pending = m.ui.Sync,
