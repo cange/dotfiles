@@ -11,8 +11,6 @@ end
 
 ---@type Cange.plugins
 return {
-  -- Utility
-  { "guns/xterm-color-table.vim" }, -- provides cterm color cheat via command :XtermColorTable
 
   -- Scrolling
   { "karb94/neoscroll.nvim", config = instant_setup("neoscroll") }, -- smooth scrolling

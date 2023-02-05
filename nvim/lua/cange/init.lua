@@ -1,9 +1,6 @@
 -- Order is important
 
 ---@class Cange
----@field core Cange.core
----@field utils Cange.utils
----@field config Cange.config
 
 -- 1st : setup plugin manager
 -- https://github.com/folke/lazy.nvim
