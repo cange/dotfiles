@@ -93,12 +93,6 @@ m.diagnostics = {
   Question = " ", -- nf-oct-question
   Hint = " ", -- nf-oct-light_bulb
 }
----@enum Cange.core.Icons.which_key
-m.which_key = {
-  Breadcrumb = " ", -- nf-oct-arrow_right
-  Separator = m.ui.ChevronRight, -- symbol used between a key and it's label
-  Group = " ", -- nf-oct-plus_small
-}
 ---@enum Cange.core.Icons.kind
 m.kind = {
   File = " ",

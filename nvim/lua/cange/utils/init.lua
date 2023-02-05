@@ -9,8 +9,6 @@ local m = {}
 
 m.get_icon = require("cange.utils.icons").get_icon
 m.set_hls = require("cange.utils.highlights").set_hls
-m.set_whichkey_group = require("cange.utils.whichkey_groups").set_group
-m.get_whichkey_group = require("cange.utils.whichkey_groups").get_group
 
 ---Get certain config attributes
 ---@param key_path string Dot separated identifier path of `Cange.config`

@@ -1,68 +1,43 @@
--- local ns = "[cange.utils.whichkey_groups]"
+---@class Cange.core.WhichKey
+
+---@class Cange.core.WhichKey.command
+---@field desc string Description of the keybinding
+---@field cmd string|function command of the keybinding
+---@field primary? boolean Determines whether or not to show a on inital "which-key" window
+
+---@class Cange.core.WhichKey.group
+---@field mappings Cange.core.WhichKey.command[] The actual key bindings
+---@field subleader string Additional key to enter the certain group
+---@field title string Is displayed as group name
+
+---@type Cange.core.WhichKey.group[]
+local m = {}
 
 -- All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
 -- each plugin by it self.
 
----@class Cange.utils.whichkey
----@field Command Cange.utils.whichkey.Command
----@field Group Cange.utils.whichkey.Group
----@field Groups Cange.utils.whichkey.Groups
-
----@class Cange.utils.whichkey.Command
----@field desc string Description of the keybinding
----@field cmd string|function Command of the keybinding
----@field primary? boolean Determines whether or not to show a on inital "which-key" window
-
----@class Cange.utils.whichkey.Group
----@field mappings table<string, Cange.utils.whichkey.Command> The actual key bindings
----@field subleader string Additional key to enter the certain group
----@field title string Is displayed as group name
-
----@class Cange.utils.whichkey.Groups
----@field config Cange.utils.whichkey.Group
----@field git Cange.utils.whichkey.Group
----@field lsp Cange.utils.whichkey.Group Language related syntax analytics
----@field plugins Cange.utils.whichkey.Group Install, update neovims plugins
----@field search Cange.utils.whichkey.Group Finding stuff
----@field session Cange.utils.whichkey.Group
----@field treesitter Cange.utils.whichkey.Group
-
----@type Cange.utils.whichkey.Groups
-local groups = {}
-
-local m = {}
-
----@param group_id string|nil
----@return Cange.utils.whichkey.Groups # All defined groups or one when group_id is specified
-function m.get_group(group_id)
-  return group_id == nil and groups[group_id] or groups
-end
-
----Adds given mapping to the which key menu
----@param group_id string Letter starting name of the group
----@param group Cange.utils.whichkey.Group
-function m.set_group(group_id, group)
-  group_id = vim.trim(group_id):lower():gsub("%W", "-")
-  groups[group_id] = group
-  -- vim.pretty_print(ns, "set_group", group_id, vim.tbl_keys(group))
-  return groups[group_id]
-end
-
-m.set_group("editor", {
+---@enum Cange.core.WhichKey.group.editor
+m.editor = {
   title = "Editor",
   subleader = "e",
   mappings = {
     C = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
     a = { cmd = '<cmd>lua require("harpoon.mark").add_file()<CR>', desc = "Add Bookmark", primary = true },
     c = { cmd = "<cmd>TextCaseOpenTelescope<CR>", desc = "Change Case" },
+    n = {
+      cmd = "<cmd>lua vim.o.relativenumber = not vim.o.relativenumber<CR>",
+      desc = "Toggle Relativenumber",
+      primary = true,
+    },
     m = { cmd = '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', desc = "Bookmarks Menu", primary = true },
     k = { cmd = "<cmd>e ~/.config/nvim/lua/cange/keymaps/M.groups.lua<CR>", desc = "Edit Keymaps" },
     o = { cmd = "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>", desc = "Edit Options" },
     w = { cmd = "<cmd>w!<CR>", desc = "Save", primary = true },
     ["\\"] = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
   },
-})
-m.set_group("git", {
+}
+---@enum Cange.core.WhichKey.group.git
+m.git = {
   title = "Git",
   subleader = "g",
   mappings = {
@@ -87,8 +62,9 @@ m.set_group("git", {
     s = { cmd = "<cmd>Gitsigns stage_hunk<CR>", desc = "Stage hunk" },
     u = { cmd = "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Undo stage hunk" },
   },
-})
-m.set_group("lsp", {
+}
+---@enum Cange.core.WhichKey.group.lsp
+m.lsp = {
   title = "LSP",
   subleader = "l",
   mappings = {
@@ -106,8 +82,9 @@ m.set_group("lsp", {
     q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
   },
-})
-m.set_group("plugins", {
+}
+---@enum Cange.core.WhichKey.group.plugins
+m.plugins = {
   title = "Plugins",
   subleader = "p",
   mappings = {
@@ -117,8 +94,9 @@ m.set_group("plugins", {
     i = { cmd = "<cmd>Lazy install<CR>", desc = "Plugin Install" },
     s = { cmd = "<cmd>Lazy sync<CR>", desc = "Plugins Sync" },
   },
-})
-m.set_group("session", {
+}
+---@enum Cange.core.WhichKey.group.session
+m.session = {
   title = "Session",
   subleader = "b",
   mappings = {
@@ -127,8 +105,9 @@ m.set_group("session", {
     s = { cmd = "<cmd>SaveSession<CR>", desc = "Save Session" },
     x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
   },
-})
-m.set_group("treesitter", {
+}
+---@enum Cange.core.WhichKey.group.treesitter
+m.treesitter = {
   title = "Tree-sitter",
   subleader = "t",
   mappings = {
@@ -136,9 +115,9 @@ m.set_group("treesitter", {
     p = { cmd = "<cmd>TSPlaygroundToggle<CR>", desc = "Playground" },
     r = { cmd = "<cmd>TSToggle rainbow<CR>", desc = "Toggle Rainbow" },
   },
-})
-
-m.set_group("telescope", {
+}
+---@enum Cange.core.WhichKey.group.telescope
+m.telescope = {
   title = "Search",
   subleader = "s",
   mappings = {
@@ -168,6 +147,6 @@ m.set_group("telescope", {
       desc = "Search current buffer",
     },
   },
-})
+}
 
 return m
