@@ -74,7 +74,6 @@ return {
         quickfix = default_opts,
         live_grep = {
           path_display = { "smart" },
-          theme = "ivy",
           mappings = {
             i = {
               ["<C-f>"] = custom_pickers.actions.set_extension,

@@ -15,9 +15,6 @@ return {
   -- Scrolling
   { "karb94/neoscroll.nvim", config = instant_setup("neoscroll") }, -- smooth scrolling
 
-  -- File explorer
-  { "ThePrimeagen/harpoon", lazy = false, dependencies = "nvim-lua/plenary.nvim" }, -- bookmark buffers
-
   -- Comment
   { "numToStr/Comment.nvim", config = instant_setup("Comment") }, -- comment toggle
 
