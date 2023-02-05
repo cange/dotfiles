@@ -11,7 +11,6 @@ return {
     { "ThePrimeagen/harpoon", dependencies = "nvim-lua/plenary.nvim" }, -- bookmark buffers
   },
   config = function()
-    -- local ns = "[plugins.telescope]"
     local actions = require("telescope.actions")
     local telescope = require("telescope")
     local themes = require("telescope.themes")
@@ -85,10 +84,8 @@ return {
 
     -- extensions
     telescope.load_extension("fzf")
-    telescope.load_extension("harpoon")
     telescope.load_extension("notify")
     telescope.load_extension("project")
-    telescope.load_extension("textcase")
     telescope.load_extension("ui-select")
   end,
 }

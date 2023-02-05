@@ -1,6 +1,3 @@
----@class Cange.plugins.git
-
----@type Cange.plugins.git
 return {
   {
     "lewis6991/gitsigns.nvim", -- git highlighter, blame, etc
