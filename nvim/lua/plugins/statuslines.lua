@@ -1,6 +1,3 @@
----@class Cange.plugins.statuslines
-
----@type Cange.plugins.statuslines
 return {
   {
     "nvim-lualine/lualine.nvim",
