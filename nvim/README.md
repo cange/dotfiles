@@ -69,10 +69,12 @@ npm install --global typescript-language-server \
 
 #### Plugins
 
-Open NeoVim and run `:Lazy install` to install all related plugins.
+When runing NeoVim first time update dialog pops up and will install the
+necessary plugins.
 
-**Note:** You might run it more the once if some packages fail to install on
-the first run.
+To apply the updated you might have to restart after this NeoVim.
+
+> **Tip!** It is recommended to run `:checkhealth` after installation.
 
 ### Language Support (LSP)
 
