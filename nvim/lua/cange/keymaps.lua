@@ -33,6 +33,9 @@ vim.keymap.set("x", "<A-up>", ":move-2<CR>='[gv")
 vim.keymap.set("x", "j", ":move'>+<CR>='[gv")
 vim.keymap.set("x", "k", ":move-2<CR>='[gv")
 
+vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
+vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
+
 --- Resize window with arrows
 vim.keymap.set("n", "<C-down>", ":resize +4<CR>")
 vim.keymap.set("n", "<C-left>", ":vertical resize -4<CR>")
@@ -53,8 +56,8 @@ vim.keymap.set(
   "n",
   "<leader><leader>x",
   ':write<CR>:luafile %<CR>:lua vim.notify("File saved and executed", '
-  .. vim.log.levels.INFO
-  .. ', { title = "Executed!" })<CR>'
+    .. vim.log.levels.INFO
+    .. ', { title = "Executed!" })<CR>'
 )
 
 -- Format
