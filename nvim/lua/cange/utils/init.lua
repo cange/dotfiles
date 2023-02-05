@@ -8,32 +8,13 @@ local ns = "[cange.utils]"
 local m = {}
 
 m.get_icon = require("cange.utils.icons").get_icon
+m.set_hls = require("cange.utils.highlights").set_hls
 m.set_whichkey_group = require("cange.utils.whichkey_groups").set_group
 m.get_whichkey_group = require("cange.utils.whichkey_groups").get_group
 
----Set highlight group by given table.
----@param highlights Cange.core.Highlights Highlight definition map
----@see vim.api.nvim_set_hl
-function m.set_hls(highlights)
-  for name, val in pairs(highlights) do
-    vim.api.nvim_set_hl(0, name, val)
-  end
-end
-
----Provides mapping for highlight groups of symbol items.
----@param id? string|nil
----@return table A certain highlight group or all if identifier is nil
-function m.get_symbol_kind_hl(id)
-  id = id or nil
-  local highlights = require("cange.core.highlights")
-  local hls = vim.tbl_extend("keep", highlights.kinds, highlights.other_kinds)
-
-  return id and hls[id] or hls
-end
-
 ---Get certain config attributes
----@param key_path string Dot separated identifier path of  `Cange.config`
----@return Cange.config value of given key or nil if not found.
+---@param key_path string Dot separated identifier path of `Cange.config`
+---@return Cange.config|string value of given key or nil if not found.
 function m.get_config(key_path)
   local prop = require("cange.config")
 
