@@ -74,7 +74,6 @@ return {
 
   { -- text case converter (camel case, etc.,
     "johmsalas/text-case.nvim",
-    lazy = true,
     dependencies = {
       "nvim-telescope/telescope.nvim",
     },
