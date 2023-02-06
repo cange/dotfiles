@@ -1,13 +1,7 @@
-local ns = "[cange.lsp.common]"
+local ns = "[cange.lsp.utils]"
 local found_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not found_cmp then
   print(ns, '"cmp_nvim_lsp" not found')
-  return
-end
-
-local found_autoformat, autoformat = pcall(require, "cange.lsp.autoformat")
-if not found_autoformat then
-  print(ns, '"cange.lsp.autoformat" not found')
   return
 end
 
@@ -89,7 +83,7 @@ function m.on_attach(client, bufnr)
     navic.attach(client, bufnr)
   end
   on_attach_keymaps(client, bufnr)
-  autoformat.on_attach(client, bufnr)
+  require("cange.lsp.format").on_attach(client, bufnr)
 end
 
 return m
