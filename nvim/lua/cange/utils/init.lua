@@ -15,7 +15,7 @@ m.set_hls = require("cange.utils.highlights").set_hls
 
 ---Get certain config attributes
 ---@param key_path string Dot separated identifier path of `Cange.config`
----@return Cange.config|string value of given key or nil if not found.
+---@return Cange.config|any value of given key or nil if not found.
 function m.get_config(key_path)
   local prop = require("cange.config")
 
