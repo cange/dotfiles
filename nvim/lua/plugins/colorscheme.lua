@@ -38,8 +38,7 @@ return {
     "EdenEast/nightfox.nvim", -- colorscheme
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
-    config = function(_, opts)
-      vim.pretty_print("colorscheme: opts", vim.tbl_keys(opts))
+    config = function()
       Cange = Cange or require("cange.utils")
       local colorscheme = Cange.get_config("colorscheme")
 
