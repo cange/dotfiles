@@ -21,6 +21,7 @@ m.editor = {
   title = "Editor",
   subleader = "e",
   mappings = {
+    -- Format
     C = { cmd = "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", desc = "Edit Config" },
     a = { cmd = '<cmd>lua require("harpoon.mark").add_file()<CR>', desc = "Add Bookmark", primary = true },
     c = { cmd = "<cmd>TextCaseOpenTelescope<CR>", desc = "Change Case" },
@@ -69,11 +70,6 @@ m.lsp = {
   subleader = "l",
   mappings = {
     C = { cmd = '<cmd>lua require("luasnip").cleanup()<CR>', desc = "Reset snippets UI" },
-    ["<F2>"] = {
-      cmd = "<cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 });Cange.log.info('Auto format')<CR>",
-      desc = "Format",
-      primary = true,
-    },
     N = { cmd = "<cmd>NullLsInfo<CR>", desc = "Null-ls info" },
     c = { cmd = vim.lsp.buf_get_clients, desc = "LSP clients" },
     d = { cmd = '<cmd>lua require("cange.telescope").diagnostics_log()<CR>', desc = "Diagnostics log" },
@@ -81,6 +77,7 @@ m.lsp = {
     i = { cmd = "<cmd>LspInfo<CR>", desc = "Info LSP" },
     q = { cmd = vim.lsp.buf.code_action, desc = "Quickfix issue" },
     s = { cmd = "<cmd>Mason<CR>", desc = "Sync LSP (Mason)" },
+    ["<F2>"] = { cmd = '<cmd>lua require("cange.lsp.format").format()<CR>', desc = "Format", primary = true },
   },
 }
 ---@enum Cange.core.WhichKey.group.plugins

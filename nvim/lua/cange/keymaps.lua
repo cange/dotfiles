@@ -1,65 +1,75 @@
 -- local ns = "[cange.keymaps.common]"
-vim.keymap.set("v", "p", '"_dP') -- Keep clipboard content instead of overriding it
-
--- greatest remap ever
-vim.keymap.set("x", "<leader>p", '"_dP')
 --
--- -- next greatest remap ever : asbjornHaland
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
-vim.keymap.set("n", "<leader>Y", '"+Y', { noremap = false })
---
--- Select all content
-vim.keymap.set("n", "<C-a>", "gg<S-v>G")
---
--- New tab "ctrl+w + t"
-vim.keymap.set("n", "<C-w>t", ":tabedit<CR>")
+local keymaps = {
+  -- Keep clipboard content instead of overriding i
+  { "v", "p", '"_dP' },
 
--- Move window "w+<direction>"
-vim.keymap.set("", "w<left>", "<C-w>h")
-vim.keymap.set("", "w<down>", "<C-w>j")
-vim.keymap.set("", "w<up>", "<C-w>k")
-vim.keymap.set("", "w<right>", "<C-w>l")
-vim.keymap.set("", "wh", "<C-w>h")
-vim.keymap.set("", "wj", "<C-w>j")
-vim.keymap.set("", "wk", "<C-w>k")
-vim.keymap.set("", "wl", "<C-w>l")
+  -- greatest remap ever
+  { "x", "<leader>p", '"_dP' },
+  --
+  -- -- next greatest remap ever : asbjornHaland
+  { { "n", "v" }, "<leader>y", '"+y' },
+  { { "n", "v" }, "<leader>d", '"_d' },
+  { "n", "<leader>Y", '"+Y', { noremap = false } },
+  --
+  -- Select all content
+  { "n", "<C-a>", "gg<S-v>G" },
+  --
+  -- New tab "ctrl+w + t"
+  { "n", "<C-w>t", ":tabedit<CR>" },
 
--- Moving lines up and down
-vim.keymap.set("n", "<A-down>", ":move .+1<CR>==")
-vim.keymap.set("n", "<A-up>", ":move .-2<CR>==")
-vim.keymap.set("x", "<A-down>", ":move'>+<CR>='[gv")
-vim.keymap.set("x", "<A-up>", ":move-2<CR>='[gv")
-vim.keymap.set("x", "j", ":move'>+<CR>='[gv")
-vim.keymap.set("x", "k", ":move-2<CR>='[gv")
+  -- Move window "w+<direction>"
+  { "", "w<left>", "<C-w>h" },
+  { "", "w<down>", "<C-w>j" },
+  { "", "w<up>", "<C-w>k" },
+  { "", "w<right>", "<C-w>l" },
+  { "", "wh", "<C-w>h" },
+  { "", "wj", "<C-w>j" },
+  { "", "wk", "<C-w>k" },
+  { "", "wl", "<C-w>l" },
 
-vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
-vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
+  -- Moving lines up and down
+  { "n", "<A-down>", ":move .+1<CR>==" },
+  { "n", "<A-up>", ":move .-2<CR>==" },
+  { "x", "<A-down>", ":move'>+<CR>='[gv" },
+  { "x", "<A-up>", ":move-2<CR>='[gv" },
+  { "x", "j", ":move'>+<CR>='[gv" },
+  { "x", "k", ":move-2<CR>='[gv" },
 
---- Resize window with arrows
-vim.keymap.set("n", "<C-down>", ":resize +4<CR>")
-vim.keymap.set("n", "<C-left>", ":vertical resize -4<CR>")
-vim.keymap.set("n", "<C-up>", ":resize -4<CR>")
-vim.keymap.set("n", "<C-right>", ":vertical resize +4<CR>")
+  { "n", "<leader>-", "<C-W>s", { desc = "Split window below" } },
+  { "n", "<leader>|", "<C-W>v", { desc = "Split window right" } },
 
--- Keep selection marked when indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
-vim.keymap.set("v", "<Tab>", ">gv")
-vim.keymap.set("v", "<S-Tab>", "<gv")
+  --- Resize window with arrows
+  { "n", "<C-down>", ":resize +4<CR>" },
+  { "n", "<C-left>", ":vertical resize -4<CR>" },
+  { "n", "<C-up>", ":resize -4<CR>" },
+  { "n", "<C-right>", ":vertical resize +4<CR>" },
 
--- switch between the last recent open two files
-vim.keymap.set("n", "<leader><leader>", "<C-^>")
+  -- Keep selection marked when indenting
+  { "v", "<", "<gv" },
+  { "v", ">", ">gv" },
+  { "v", "<Tab>", ">gv" },
+  { "v", "<S-Tab>", "<gv" },
 
--- Reload current file
-vim.keymap.set(
-  "n",
-  "<leader><leader>x",
-  ':write<CR>:luafile %<CR>:lua Cange.log.info("File saved and executed", "Executed!")<CR>'
-)
+  -- switch between the last recent open two files
+  { "n", "<leader><leader>", "<C-^>" },
 
--- Format
-vim.keymap.set("n", "<F2>", ":lua vim.lsp.buf.format({ async = true })<CR>")
+  -- Reload current file
+  {
+    "n",
+    "<leader><leader>x",
+    ':write<CR>:luafile %<CR>:lua Cange.log.info("File saved and executed", "Executed!")<CR>',
+  },
 
--- Sort lines
-vim.keymap.set("v", "<F5>", ":sort<CR>gv=gv")
+  -- Sort lines
+  { "v", "<F5>", ":sort<CR>gv=gv" },
+}
+
+for _, km in pairs(keymaps) do
+  local mode = km[1]
+  local lhs = km[2]
+  local rhs = km[3]
+  local opts = km[4] ~= nil and km[4] or {}
+
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
