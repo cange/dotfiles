@@ -5,19 +5,13 @@ if not found_cmp then
   return
 end
 
-local found_winbar, winbar = pcall(require, "cange.core.winbar")
-if not found_winbar then
-  print(ns, '"cange.core.winbar" not found')
+local found_autoformat, autoformat = pcall(require, "cange.lsp.autoformat")
+if not found_autoformat then
+  print(ns, '"cange.lsp.autoformat" not found')
   return
 end
 
-local found_auto_format, auto_format = pcall(require, "cange.lsp.auto_format")
-if not found_auto_format then
-  print(ns, '"cange.lsp.auto_format" not found')
-  return
-end
-
-local function attach_keymaps(client, bufnr)
+local function on_attach_keymaps(client, bufnr)
   -- Use LSP as the handler for formatexpr.
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
@@ -87,15 +81,15 @@ function m.capabilities()
 end
 
 ---Keymapping for lspconfig on_attach options
--- @param client any
--- @param bufnr integer buffer
+---@param client table
+---@param bufnr integer buffer
 function m.on_attach(client, bufnr)
   local navic_ok, navic = pcall(require, "nvim-navic")
   if navic_ok and client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
-  attach_keymaps(client, bufnr)
-  auto_format.on_save(bufnr)
+  on_attach_keymaps(client, bufnr)
+  autoformat.on_attach(client, bufnr)
 end
 
 return m
