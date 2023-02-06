@@ -8,7 +8,7 @@ end
 local function on_attach_keymaps(client, bufnr)
   -- Use LSP as the handler for formatexpr.
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-
+  local format = require("cange.lsp.format").format
   ---Preconfigured keymap
   ---@param lhs string
   ---@param rhs string|function
@@ -22,28 +22,22 @@ local function on_attach_keymaps(client, bufnr)
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 
-  keymap("gd", vim.lsp.buf.definition, "[G]o to [D]efinition")
-  keymap("td", vim.lsp.buf.type_definition, "[T]ype [D]efinition")
-  keymap("gr", "<cmd>Telescope lsp_references<CR>", "[G]oto [R]eferences")
-  keymap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-  keymap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+  keymap("gd", vim.lsp.buf.definition, "Goto Definition")
+  keymap("gr", "<cmd>Telescope lsp_references<CR>", "Goto References")
+  keymap("gI", vim.lsp.buf.implementation, "Goto Implementation")
+  keymap("gD", vim.lsp.buf.declaration, "Goto Declaration")
   keymap("gT", vim.lsp.buf.type_definition, "Go to Type")
   keymap("gj", vim.diagnostic.goto_next, "Next Issue")
   keymap("gk", vim.diagnostic.goto_prev, "Previous Issue")
   keymap("gs", vim.lsp.buf.signature_help, "Symbol Info")
-
-  keymap("qf", vim.lsp.buf.code_action, "[Q]uick [F]ix")
-  keymap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-
-  keymap("<leader>ds", "<cmd>Telescope lsp_document_symbols", "[D]ocument [S]ymbols")
-  keymap("<leader>ws", "<cmd>Telescope lsp_dynamic_workspace_symbols", "[W]orkspace [S]ymbols")
-  keymap("<leader>wd", "<cmd>Telescope lsp_document_symbols<CR>", "Show Symbols")
-  keymap("<leader>dr", "<cmd>Telescope lsp_references<CR>")
+  keymap("qf", vim.lsp.buf.code_action, "Quick Fix")
+  keymap("<leader>rn", vim.lsp.buf.rename, "Rename")
+  keymap("<leader>ds", "<cmd>Telescope lsp_document_symbols", "Document Symbols")
   keymap("<leader>ds", "<cmd>Telescope diagnostics<CR>", "LSP List of Issues")
 
   -- Lesser used LSP functionality
-  keymap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-  keymap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+  keymap("<leader>wa", vim.lsp.buf.add_workspace_folder, "Workspace Add Folder")
+  keymap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Workspace Remove Folder")
   keymap("<leader>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, "[W]orkspace [L]ist Folders")
@@ -54,6 +48,7 @@ local function on_attach_keymaps(client, bufnr)
 
   -- typescript specific keymaps (e.g. rename file and update imports)
   if client.name == "tsserver" then
+    print('keymaps: for js')
     keymap("qfa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
     keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "LSP Rename file and update imports")
     keymap("<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", "LSP Organize imports")

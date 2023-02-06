@@ -3,18 +3,21 @@
 ---@type Cange.lsp.Format
 local m = {}
 
+local ns = "cange.lsp.format"
 m.autoformat = Cange.get_config("lsp.format_on_save") or false
 
 local function toggle()
   m.autoformat = not m.autoformat
   local label = m.autoformat and "ENABLED" or "DISABLED"
-  Cange.log.info(label .. " format on save", "cange.lsp.autoformat")
+  Cange.log.info(label .. " format on save", ns)
 end
 
-local function format()
+function m.format()
   local buf = vim.api.nvim_get_current_buf()
   local ft = vim.bo[buf].filetype
   local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 1
+
+  Cange.log.info('Auto format', ns)
 
   vim.lsp.buf.format({
     bufnr = buf,
@@ -38,7 +41,7 @@ function m.on_attach(client, bufnr)
     group = vim.api.nvim_create_augroup("cange_lsp_auto_format", { clear = true }),
     callback = function()
       if m.autoformat then
-        format()
+        m.format()
       end
     end,
   })
