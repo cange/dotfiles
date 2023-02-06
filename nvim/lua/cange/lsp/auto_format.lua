@@ -5,15 +5,15 @@ local ns = "[cange.lsp.auto_format]"
 ---@field is_active boolean Formatting is enabled if true
 
 ---@type Cange.lsp.AutoFormatToggle
-local m = {
-  is_active = Cange.get_config("lsp.format_on_save") or false,
-  group_name = "cange_lsp_auto_format",
-}
+local m = {}
+
+m.is_active = Cange.get_config("lsp.format_on_save") or false
+m.group_name = "cange_lsp_auto_format"
 
 ---Enables active flag
 local function auto_format_on()
   m.is_active = true
-  vim.notify("On save is ON", vim.log.levels.INFO, { title = ns })
+  Cange.log.info("On save is ON", ns)
 end
 
 ---Disables active flag
@@ -25,7 +25,7 @@ local function auto_format_off()
   end
 
   vim.api.nvim_del_augroup_by_name(m.group_name)
-  vim.notify("On save is OFF", vim.log.levels.INFO, { title = ns })
+  Cange.log.info("On save is OFF", ns)
 end
 
 ---Auto formats codebase on save if format toggle is active

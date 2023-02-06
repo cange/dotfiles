@@ -55,9 +55,7 @@ vim.keymap.set("n", "<leader><leader>", "<C-^>")
 vim.keymap.set(
   "n",
   "<leader><leader>x",
-  ':write<CR>:luafile %<CR>:lua vim.notify("File saved and executed", '
-    .. vim.log.levels.INFO
-    .. ', { title = "Executed!" })<CR>'
+  ':write<CR>:luafile %<CR>:lua Cange.log.info("File saved and executed", "Executed!")<CR>'
 )
 
 -- Format

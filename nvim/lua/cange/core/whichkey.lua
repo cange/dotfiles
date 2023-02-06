@@ -70,7 +70,7 @@ m.lsp = {
   mappings = {
     C = { cmd = '<cmd>lua require("luasnip").cleanup()<CR>', desc = "Reset snippets UI" },
     ["<F2>"] = {
-      cmd = "<cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 });vim.notify('Auto format')<CR>",
+      cmd = "<cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 10000 });Cange.log.info('Auto format')<CR>",
       desc = "Format",
       primary = true,
     },

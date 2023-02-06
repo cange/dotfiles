@@ -7,6 +7,9 @@ local ns = "[cange.utils]"
 ---@type Cange.utils.Utils
 local m = {}
 
+m.log = {
+  info = require("cange.utils.notify").info,
+}
 m.get_icon = require("cange.utils.icons").get_icon
 m.set_hls = require("cange.utils.highlights").set_hls
 
