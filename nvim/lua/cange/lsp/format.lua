@@ -20,7 +20,8 @@ function m.format()
   Cange.log.info('Auto format', ns)
 
   vim.lsp.buf.format({
-    bufnr = buf,
+    timeout_ms = 10000,
+    async = false, -- wait until done and save then    bufnr = buf,
     filter = function(client)
       -- stylua: ignore
       if have_nls then return client.name == "null-ls" end
