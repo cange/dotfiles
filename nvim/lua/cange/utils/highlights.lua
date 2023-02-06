@@ -5,9 +5,6 @@
 ---@type Cange.utils.Highlights
 local m = {}
 
-local ns = "[cange.utils.highlights]"
-vim.notify(ns .. " reloaded!")
-
 ---Set highlight group by given table.
 ---@param highlights table<string, table> Highlight definition map
 ---@see vim.api.nvim_set_hl
@@ -19,6 +16,7 @@ end
 
 ---@param p Nightfox.Palette
 function m.setup(p)
+  vim.notify("Reloaded!", vim.log.levels.INFO, { title = "cange.utils.highlights" })
   m.set_hls({
     Winbar = { link = "lualine_c_normal" },
     WinbarNC = { link = "Comment" },
