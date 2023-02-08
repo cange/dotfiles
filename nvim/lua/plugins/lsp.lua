@@ -1,15 +1,13 @@
 return {
   { -- lspconfig
     "neovim/nvim-lspconfig", -- configure LSP servers
-    event = "BufReadPre",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason-lspconfig.nvim", -- bridges mason.nvim with the lspconfig plugin
       "williamboman/mason.nvim", -- managing & installing LSP servers, linters & formatters
+      "williamboman/mason-lspconfig.nvim", -- bridges mason.nvim with the lspconfig plugin
     },
     config = function()
-      Cange.reload("cange.lsp.diagnostics")
-      Cange.reload("cange.lsp.lspconfig")
-
+      require("cange.lsp").setup_diagnostics()
       require("mason").setup({
         ui = {
           border = Cange.get_config("ui.border"),
@@ -18,18 +16,18 @@ return {
         log_level = vim.log.levels.INFO,
         max_concurrent_installers = 4,
       })
-
-      -- https://github.com/williamboman/mason-lspconfig.nvim#default-configuration
       require("mason-lspconfig").setup({
         automatic_installation = true,
         ensure_installed = Cange.get_config("lsp.server_sources"),
       })
+      local handler = require("cange.lsp").setup_handler
+      require("mason-lspconfig").setup_handlers({ handler })
     end,
   },
 
   { -- formatters
     "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "jayp0521/mason-null-ls.nvim", -- bridges mason.nvim with the null-ls plugin
       "jose-elias-alvarez/null-ls.nvim", -- syntax formatting, diagnostics (dependencies npm pacakges)
