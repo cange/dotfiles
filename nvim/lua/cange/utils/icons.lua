@@ -24,7 +24,7 @@ end
 
 ---@param group_id string Dot separated identifier path of `Cange.core.icons`
 ---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
----@return Cange.core.Icons|string|nil # The icon symbol or nil if not found
+---@return table|string|nil # The icon symbol or nil if not found
 function m.get_icon(group_id, ...)
   local ok, icons = pcall(require, "cange.core.icons")
   if not ok then

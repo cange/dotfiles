@@ -38,9 +38,6 @@ return {
             navic_status(),
           },
           lualine_x = {
-            lazy_status(),
-          },
-          lualine_y = {
             {
               "diagnostics",
               symbols = {
@@ -50,6 +47,9 @@ return {
                 hint = icon("diagnostics.Hint") .. " ",
               },
             },
+          },
+          lualine_y = {
+            lazy_status(),
             {
               "diff",
               symbols = {

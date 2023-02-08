@@ -1,5 +1,4 @@
 ---@class Cange.cmp
----@field Utils Cange.cmp.Utils
 
 -- Reloads this file whenever a 'json' file saved in snippet directory to
 -- enable change immediately
