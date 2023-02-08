@@ -9,13 +9,6 @@ return {
     },
     config = function()
       local icon = Cange.get_icon
-      local function navic_status()
-        return { require("nvim-navic").get_location, cond = require("nvim-navic").is_available }
-      end
-
-      local function lazy_status()
-        return { require("lazy.status").updates, cond = require("lazy.status").has_updates }
-      end
 
       require("lualine").setup({
         options = {
@@ -35,9 +28,10 @@ return {
           lualine_c = {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { "filename", path = 1, symbols = icon("lualine"), separator = icon("ui.ChevronRight") },
-            navic_status(),
+            { require("nvim-navic").get_location, cond = require("nvim-navic").is_available },
           },
           lualine_x = {
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             {
               "diagnostics",
               symbols = {
@@ -49,7 +43,6 @@ return {
             },
           },
           lualine_y = {
-            lazy_status(),
             {
               "diff",
               symbols = {
