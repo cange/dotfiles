@@ -1,14 +1,16 @@
--- local ns = "[cange.lsp.diagnostics]"
--- config
-local signs = {
-  { name = "DiagnosticSignError", text = Cange.get_icon("diagnostics.Error") },
-  { name = "DiagnosticSignWarn", text = Cange.get_icon("diagnostics.Warning") },
-  { name = "DiagnosticSignHint", text = Cange.get_icon("diagnostics.Hint") },
-  { name = "DiagnosticSignInfo", text = Cange.get_icon("diagnostics.Information") },
-}
+---@class DiagnosticSignSeverity
+---@field name string
+---@field text string
 
-for _, s in ipairs(signs) do
-  vim.fn.sign_define(s.name, { texthl = s.name, text = s.text, numhl = "" })
+---@type table<DiagnosticSignSeverity>
+local signs = {}
+
+for name, icon in pairs(Cange.get_icon("diagnostics")) do
+  local hl_name = "DiagnosticSign" .. name
+
+  vim.pretty_print(hl_name, icon)
+  signs = vim.tbl_extend("force", signs, { name = hl_name, text = icon })
+  vim.fn.sign_define(hl_name, { texthl = hl_name, text = icon, numhl = "" })
 end
 
 vim.diagnostic.config({

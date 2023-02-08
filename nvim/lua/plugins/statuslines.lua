@@ -45,8 +45,8 @@ return {
               "diagnostics",
               symbols = {
                 error = icon("diagnostics.Error") .. " ",
-                warn = icon("diagnostics.Warning") .. " ",
-                info = icon("diagnostics.Information") .. " ",
+                warn = icon("diagnostics.Warn") .. " ",
+                info = icon("diagnostics.Info") .. " ",
                 hint = icon("diagnostics.Hint") .. " ",
               },
             },

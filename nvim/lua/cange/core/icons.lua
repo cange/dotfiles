@@ -33,6 +33,7 @@ m.ui = {
   Note = " ",
   Octoface = " ", -- nf-oct-octoface
   Package = " ", -- nf-oct-package
+  Question = " ", -- nf-oct-question
   Pencil = " ", -- nf-oct-pencil
   Pipe = "⏽ ", -- U+23FD
   PlusSmall = " ", -- nf-oct-plus_small
@@ -88,9 +89,8 @@ m.git_states = {
 ---@enum Cange.core.Icons.diagnostics
 m.diagnostics = {
   Error = " ", -- nf-oct-stop
-  Warning = " ", -- nf-oct-alert
-  Information = " ", -- nf-oct-info
-  Question = " ", -- nf-oct-question
+  Warn = " ", -- nf-oct-alert
+  Info = " ", -- nf-oct-info
   Hint = " ", -- nf-oct-light_bulb
 }
 ---@enum Cange.core.Icons.kind

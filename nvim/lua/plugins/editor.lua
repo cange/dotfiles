@@ -73,9 +73,9 @@ return {
           enable = true,
           icons = {
             error = icon("diagnostics.Error"),
-            warning = icon("diagnostics.Warning"),
+            warning = icon("diagnostics.Warn"),
             hint = icon("diagnostics.Hint"),
-            info = icon("diagnostics.Information"),
+            info = icon("diagnostics.Info"),
           },
         },
         actions = {
