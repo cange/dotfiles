@@ -13,19 +13,21 @@ local function toggle()
 end
 
 function m.format()
-  local buf = vim.api.nvim_get_current_buf()
-  local ft = vim.bo[buf].filetype
-  local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 1
+  local nls = require("null-ls")
+  local nls_src = require("null-ls.sources")
+  local available_formatters = nls_src.get_available(vim.bo.filetype, nls.methods.FORMATTING)
 
-  Cange.log.info('Auto format', ns)
+  Cange.log.info("Auto format", ns)
 
   vim.lsp.buf.format({
+    async = false, -- wait until done and save then
+    bufnr = vim.api.nvim_get_current_buf(),
     timeout_ms = 10000,
-    async = false, -- wait until done and save then    bufnr = buf,
     filter = function(client)
-      -- stylua: ignore
-      if have_nls then return client.name == "null-ls" end
-      return client.name ~= "null-ls"
+      if #available_formatters > 0 then
+        return client.name == "null-ls"
+      end
+      return client.supports_method("textDocument/formatting")
     end,
   })
 end
@@ -34,9 +36,6 @@ end
 ---@param client table
 ---@param bufnr number
 function m.on_attach(client, bufnr)
-  -- stylua: ignore
-  if not client.supports_method("textDocument/formatting") then return end
-
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = bufnr,
     group = vim.api.nvim_create_augroup("cange_lsp_auto_format", { clear = true }),
