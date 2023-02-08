@@ -1,14 +1,15 @@
-local ns = "[cange.lsp.utils]"
+---@class Cange.lsp
+
+local ns = "[cange.lsp.lspconfig]"
 local found_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not found_cmp then
   print(ns, '"cmp_nvim_lsp" not found')
   return
 end
 
-local function on_attach_keymaps(client, bufnr)
+local function keymaps(client, bufnr)
   -- Use LSP as the handler for formatexpr.
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-  local format = require("cange.lsp.format").format
   ---Preconfigured keymap
   ---@param lhs string
   ---@param rhs string|function
@@ -48,7 +49,7 @@ local function on_attach_keymaps(client, bufnr)
 
   -- typescript specific keymaps (e.g. rename file and update imports)
   if client.name == "tsserver" then
-    print('keymaps: for js')
+    print("keymaps: for js")
     keymap("qfa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
     keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "LSP Rename file and update imports")
     keymap("<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", "LSP Organize imports")
@@ -56,29 +57,71 @@ local function on_attach_keymaps(client, bufnr)
   end
 end
 
----@class Cange.lsp.Utils
-
----@type Cange.lsp.Utils
+---@type Cange.lsp
 local m = {}
 
-function m.capabilities()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
+local function capabilities()
+  local caps = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  caps.textDocument.completion.completionItem.snippetSupport = true
 
-  return capabilities
+  return caps
 end
 
 ---Keymapping for lspconfig on_attach options
 ---@param client table
----@param bufnr integer buffer
-function m.on_attach(client, bufnr)
+---@param bufnr integer
+local function on_attach(client, bufnr)
+  keymaps(client, bufnr)
   local navic_ok, navic = pcall(require, "nvim-navic")
   if navic_ok and client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
-  on_attach_keymaps(client, bufnr)
-  require("cange.lsp.format").on_attach(client, bufnr)
+  require("cange.lsp.format").attach(bufnr)
+end
+
+local default_config = {
+  on_attach = on_attach,
+  capabilities = capabilities(),
+}
+
+---Sets up individual LSP server handler
+---@param server_name string
+function m.setup_handler(server_name)
+  local found_config, config = pcall(require, "cange.lsp.server_configurations." .. server_name)
+  if found_config then
+    config = vim.tbl_deep_extend("force", vim.deepcopy(default_config), config)
+  else
+    config = default_config
+  end
+
+  if server_name == "tsserver" then
+    -- Enable LSP for TypeScript/JS
+    -- https://github.com/jose-elias-alvarez/typescript.nvim#setup
+    require("typescript").setup({ server = config })
+  else
+    require("lspconfig")[server_name].setup(config)
+  end
+end
+
+function m.setup_diagnostics()
+  local signs = {}
+
+  ---@diagnostic disable-next-line: param-type-mismatch
+  for name, icon in pairs(Cange.get_icon("diagnostics")) do
+    local sign = { name = "DiagnosticSign" .. name, text = icon }
+    table.insert(signs, sign)
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.icon, numhl = "" })
+  end
+
+  vim.diagnostic.config({
+    float = {
+      source = "if_many", -- Or "always"
+    },
+    signs = {
+      active = signs,
+    },
+    virtual_text = Cange.get_config("lsp.diagnostic_virtual_text") or false,
+  })
 end
 
 return m

@@ -20,7 +20,7 @@ function m.format()
   Cange.log.info("Auto format", ns)
 
   vim.lsp.buf.format({
-    async = false, -- wait until done and save then
+    async = true,
     bufnr = vim.api.nvim_get_current_buf(),
     timeout_ms = 10000,
     filter = function(client)
@@ -33,9 +33,8 @@ function m.format()
 end
 
 ---Auto formats codebase on save if format toggle is active
----@param client table
 ---@param bufnr number
-function m.on_attach(client, bufnr)
+function m.attach(bufnr)
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = bufnr,
     group = vim.api.nvim_create_augroup("cange_lsp_auto_format", { clear = true }),
