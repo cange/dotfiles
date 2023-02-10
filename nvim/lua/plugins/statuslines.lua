@@ -20,14 +20,29 @@ return {
         },
         sections = {
           lualine_a = {
-            "mode",
+            {
+              "mode",
+              fmt = function(mode)
+                return string.sub(mode, 0, 1)
+              end,
+            },
           },
           lualine_b = {
             { "branch", icon = icon("git.Branch") },
           },
           lualine_c = {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 1, symbols = icon("lualine"), separator = icon("ui.ChevronRight") },
+            {
+              "filename",
+              path = 1,
+              symbols = {
+                modified = icon("ui.Circle"),
+                newfile = icon("documents.NewFile"),
+                readonly = icon("ui.lock"),
+                unnamed = icon("documents.File"),
+              },
+              separator = icon("ui.ChevronRight"),
+            },
             { require("nvim-navic").get_location, cond = require("nvim-navic").is_available },
           },
           lualine_x = {
