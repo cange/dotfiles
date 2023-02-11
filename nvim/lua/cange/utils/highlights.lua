@@ -16,7 +16,7 @@ end
 
 ---@param p Nightfox.Palette
 function m.setup(p)
-  vim.notify("Reloaded!", vim.log.levels.INFO, { title = "cange.utils.highlights" })
+  Cange.log.info("Colors reloaded!", "cange.utils.highlights")
   m.set_hls({
     Winbar = { link = "lualine_c_normal" },
     WinbarNC = { link = "Comment" },
