@@ -38,7 +38,7 @@ return {
               symbols = {
                 modified = icon("ui.Circle"),
                 newfile = icon("documents.NewFile"),
-                readonly = icon("ui.lock"),
+                readonly = icon("ui.Lock"),
                 unnamed = icon("documents.File"),
               },
               separator = icon("ui.ChevronRight"),
