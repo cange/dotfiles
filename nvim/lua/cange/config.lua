@@ -25,8 +25,8 @@ m.lsp = {
     "eslint", -- javascript
     "jsonls", -- json
     "html", -- html
+    "lua_ls", -- lua
     "ruby_ls", -- ruby
-    "sumneko_lua", -- lua
     "svelte", -- svelte
     "tsserver", -- javascript, typescript, etc.
     "volar", --vue 3 and 2
