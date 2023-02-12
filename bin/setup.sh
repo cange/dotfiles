@@ -3,7 +3,7 @@
 # --- config ---
 dotfiles_dir="$HOME/dotfiles/"
 is_uninstall=false
-has_error=false
+errors=()
 
 # --- locations ---
 config_includes=(nvim snippets zsh)
@@ -17,11 +17,11 @@ function chalk() {
 	local color=$2
 
 	case $color in
-	red) printf "\033[31m$text\033[0m" ;;
-	green) printf "\033[32m$text\033[0m" ;;
-	yellow) printf "\033[33m$text\033[0m" ;;
-	white) printf "\033[1;38m$text\033[0m" ;;
-	*) printf "\033[30m$text\033[0m" ;;
+	red) printf "\033[31m%s\033[0m" "$text" ;;
+	green) printf "\033[32m%s\033[0m" "$text" ;;
+	yellow) printf "\033[33m%s\033[0m" "$text" ;;
+	white) printf "\033[1;38m%s\033[0m" "$text" ;;
+	*) printf "\033[30m%s\033[0m" "$text" ;;
 	esac
 }
 
@@ -39,16 +39,14 @@ function toggle_link() {
 			rm "$target_path"
 			log "unlink -x \"$target_path\""
 		else
-			has_error=true
-			log "unlink No such file or directory \"$target_path\""
+			errors+=("unlink: No such file or directory \"$target_path\"")
 		fi
 	else
 		if [[ -e $target_dir ]]; then
 			ln -nsf "$file" "$target_path"
 			log "symlink -> \"$filename\""
 		else
-			has_error=true
-			log "symlink No such file or directory \"$target_dir\""
+			errors+=("symlink: No such file or directory \"$target_dir\"")
 		fi
 	fi
 }
@@ -72,10 +70,13 @@ function update() {
 function run() {
 	update "$root_target_dir" "${root_includes[@]}"
 	update "$config_target_dir" "${config_includes[@]}"
-	if [[ $has_error == true ]]; then
-		printf "  %s %s\n" "$(chalk "✕" "red")" "Done with errors!"
+	if [[ "${#errors[@]}" -gt 0 ]]; then
+		printf "  %s %s\n" "$(chalk "✕" "red")" "Completed with errors!"
+		for err in "${errors[@]}"; do
+			log "$err"
+		done
 	else
-		printf "  %s %s\n" "$(chalk "✓" "green")" "Successful done!"
+		printf "  %s %s\n" "$(chalk "✓" "green")" "Successfully completed."
 	fi
 }
 
