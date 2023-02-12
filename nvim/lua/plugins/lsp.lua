@@ -52,34 +52,26 @@ return {
       local diagnostics = nls.builtins.diagnostics
       local code_actions = nls.builtins.code_actions
       local formatting = nls.builtins.formatting
+      code_actions.typescript = require("typescript.extensions.null-ls.code-actions")
 
       nls.setup({
         update_in_insert = false, -- if false, diagnostics will run upon exiting insert mode
         sources = {
-          -- js, ts, vue, css, html, json, yaml, md etc.
-          formatting.prettierd,
+          code_actions.eslint_d, -- js
+          code_actions.typescript,
 
-          -- js
-          code_actions.eslint_d,
-          formatting.eslint_d,
-          require("typescript.extensions.null-ls.code-actions"),
-
-          -- css
-          diagnostics.stylelint,
-          formatting.stylelint,
-
-          -- json
           diagnostics.jsonlint,
-
-          -- lua
-          formatting.stylua,
-
-          -- ruby
-          diagnostics.rubocop,
-          formatting.rubocop,
-
+          diagnostics.rubocop, -- ruby
+          diagnostics.stylelint, -- css
           diagnostics.yamllint,
           diagnostics.zsh,
+
+          formatting.eslint_d, -- js
+          formatting.prettierd, -- js, css, html, json, etc
+          formatting.rubocop, -- ruby
+          formatting.shfmt,-- shell/bash
+          formatting.stylelint, -- css
+          formatting.stylua, -- lua
         },
       })
     end,

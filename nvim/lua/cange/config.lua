@@ -21,11 +21,10 @@ m.lsp = {
   diagnostic_virtual_text = false,
   format_on_save = true,
   server_sources = {
+    "bashls", -- bash
     "cssls", -- css
-    "eslint", -- javascript
-    "jsonls", -- json
     "html", -- html
-    "lua_ls", -- lua
+    "jsonls", -- json
     "ruby_ls", -- ruby
     "svelte", -- svelte
     "tsserver", -- javascript, typescript, etc.
@@ -51,6 +50,7 @@ m.lsp = {
     "jsonlint",
     "prettierd",
     "rubocop",
+    "shfmt", -- shell formatting
     "stylua",
     "yamllint",
     "zsh",
@@ -66,9 +66,9 @@ m.treesitter = {
     "gitattributes",
     "gitignore",
     "go",
+    "html",
     "javascript",
     "json",
-    "html",
     "lua",
     "make",
     "markdown",
