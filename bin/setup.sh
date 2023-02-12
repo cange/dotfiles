@@ -28,15 +28,6 @@ function chalk() {
 function log() {
 	printf "    → %s\n" "$1"
 }
-function log_error() {
-	printf "  %s %s\n" "$(chalk "✕" "red")" "$1"
-}
-function log_success() {
-	printf "  %s %s\n" "$(chalk "✓" "green")" "$1"
-}
-function log_info() {
-	printf "  %s %s\n" "$(chalk "ℹ︎" "white")" "$1"
-}
 
 function toggle_link() {
 	local target_dir=$1
@@ -65,7 +56,7 @@ function toggle_link() {
 function update() {
 	local target_dir=$1
 	local includes=("$@")
-	log_info "Dotfiles symlinks initiated -target: \"$target_dir\""
+	printf "  %s %s\n" "$(chalk "ℹ︎" "white")" "Dotfiles symlinks initiated -target: \"$target_dir\""
 	shopt -s dotglob
 	for file in "$dotfiles_dir"*; do
 		filename=$(basename "$file")
@@ -82,9 +73,9 @@ function run() {
 	update "$root_target_dir" "${root_includes[@]}"
 	update "$config_target_dir" "${config_includes[@]}"
 	if [[ $has_error == true ]]; then
-		log_error "Done with errors!"
+		printf "  %s %s\n" "$(chalk "✕" "red")" "Done with errors!"
 	else
-		log_success "Successful done!"
+		printf "  %s %s\n" "$(chalk "✓" "green")" "Successful done!"
 	fi
 }
 
