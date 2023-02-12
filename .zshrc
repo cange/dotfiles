@@ -55,6 +55,5 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
 . /usr/local/opt/asdf/libexec/asdf.sh
 
-# active wlw-devtools/ docker environment
-# https://github.com/visable-dev/wlw-devtools#working-with-your-vm-through-docker
-[ -s "${HOME}/.iterm2_shell_integration.zsh" ] && source "${HOME}/.iterm2_shell_integration.zsh"
+# https://iterm2.com/documentation-shell-integration.html
+test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
