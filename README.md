@@ -10,23 +10,23 @@ The setups are focus on MacOS since this is my daily environment.
 Clone of this repo on system user root:
 
 ```shell
-git clone http://github.com/cange/dotfiles.git && cd dotfiles
+git clone http://github.com/cange/dotfiles.git
 ```
 
 ### Install
 
 Run install command to set up the appropriate symlinks:
 
-```shell
-./dotfiles/install
+```sh
+dotfiles/cli install
 ```
 
 ### Uninstall
 
 To remove related symlinks with:
 
-```shell
-./dotfiles/uninstall
+```sh
+dotfiles/cli uninstall
 ```
 
 ### Homebrew
