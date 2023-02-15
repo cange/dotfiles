@@ -1,3 +1,0 @@
-#!/bin/bash
-
-bash "$HOME"/dotfiles/cli.sh --uninstall
