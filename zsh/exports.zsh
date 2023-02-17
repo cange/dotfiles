@@ -1,5 +1,5 @@
 # User configuration
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # One may need to manually set your language environment
@@ -31,14 +31,14 @@ export BROWSER="firefox"
 # pnpm
 if [[ -s "${HOME}/Library/pnpm" ]]; then
   export PNPM_HOME="${HOME}/Library/pnpm"
-  export PATH="$PNPM_HOME:$PATH"
+  export PATH="$PATH:$PNPM_HOME"
 fi
 # pnpm end
 
 # bun completions
 if [[ -s "${HOME}/.bun" ]]; then
   export BUN_INSTALL="${HOME}/.bun"
-  export PATH="$BUN_INSTALL/bin:$PATH"
+  export PATH="$PATH:$BUN_INSTALL/bin"
   source "${HOME}/.bun/_bun"
 fi
 # bun end
