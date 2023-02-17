@@ -17,6 +17,29 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode co
 require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
 -- require("luasnip.loaders.from_vscode").lazy_load() -- community snippets (create noise)
 
+local prev_item_handler = function(fallback)
+  if cmp.visible() then
+    cmp.select_prev_item()
+  elseif luasnip.jumpable(-1) then
+    luasnip.jump(-1)
+  else
+    fallback()
+  end
+end
+local next_item_handler = function(fallback)
+  if cmp.visible() then
+    cmp.select_next_item()
+  elseif luasnip.expandable() then
+    luasnip.expand()
+  elseif luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
+  elseif cmp_utils.has_words_before() then
+    fallback()
+  else
+    fallback()
+  end
+end
+
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
@@ -48,28 +71,10 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif cmp_utils.has_words_before() then
-        fallback()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+    ["<C-j>"] = cmp.mapping(next_item_handler, { "i", "s" }),
+    ["<C-k>"] = cmp.mapping(prev_item_handler, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(prev_item_handler, { "i", "s" }),
+    ["<Tab>"] = cmp.mapping(next_item_handler, { "i", "s" }),
   }),
   sources = {
     { name = "cmp_tabnine", keyword_length = 3, max_item_count = 5 },
