@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/zsh
 #
 # This CLI automates un/-linking of all required dotfile sources.
 
 # --- config ---
 IS_UNINSTALL=false
 SCRIPT_NAME=$(basename "$0")
+ERRORS=()
 readonly DOTFILES_DIR="$HOME/dotfiles/"
-readonly ERRORS=()
 
 # --- locations ---
 readonly CONFIG_INCLUDES=(nvim snippets zsh)
@@ -29,7 +29,7 @@ function chalk() {
 }
 
 function log() {
-  printf "    → %s\n" "$1"
+  printf "    - %s\n" "$1"
 }
 
 function toggle_link() {
@@ -61,7 +61,7 @@ function update_links() {
 
   printf "  %s %s\n" "$(chalk "yellow" "ℹ︎")" "Initiate dotfiles linking for $(chalk "white" "$target_dir")"
 
-  shopt -s dotglob
+  setopt dotglob
   for file in "$DOTFILES_DIR"*; do
     filename=$(basename "$file")
     for include in "${includes[@]}"; do
@@ -70,7 +70,7 @@ function update_links() {
       fi
     done
   done
-  shopt -u dotglob
+  unsetopt dotglob
 }
 
 function execute {
@@ -90,38 +90,19 @@ function summary {
   fi
 }
 
-function usage_message {
-  local content=(
-    "Handles the linking of dotfile configuration."
-    ""
-    "Usage: $SCRIPT_NAME [options] <command>"
-    ""
-    "Commands:"
-    "  install    Writes all symlinks for the corresponding files"
-    "  uninstall  Removes all symlinks for the corresponding files"
-    ""
-    "Options:"
-    "  --help, -h Print help."
-    ""
-  )
-
-  printf "%s\n" "${content[@]}"
-}
-
-function unknown_command_message() {
-  local command=$1
-  local content=(
-    "Unknown command: \"$command\""
-    ""
-    "For an overview of options, execute:"
-    "  ./$SCRIPT_NAME --help"
-    ""
-  )
-
-  printf "%s\n" "${content[@]}"
-}
-
 # --- commands ---
+function help {
+  echo "Handles the linking of dotfile configuration.
+
+Usage: $SCRIPT_NAME [options] <command>
+
+Commands:
+  install    Writes all symlinks for the corresponding files
+  uninstall  Removes all symlinks for the corresponding files
+  help       Print help.
+"
+}
+
 function install() {
   execute
   summary
@@ -134,21 +115,10 @@ function uninstall() {
 }
 
 # --- interface ---
-while (($#)); do
-  case "$1" in
-  uninstall | install)
-    command=$1
-    shift
-    "$command" "$*"
-    exit 0
-    ;;
-  --help | -h)
-    usage_message
-    exit 0
-    ;;
-  *)
-    unknown_command_message "$1"
-    exit 1
-    ;;
-  esac
-done
+typeset -A subcmds=(
+  help "help"
+  install "install"
+  uninstall "uninstall"
+)
+emulate -L zsh
+[[ -z "$subcmds[$1]" ]] && { help; return 1 } || ${subcmds[$1]}

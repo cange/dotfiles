@@ -1,20 +1,19 @@
 # To source any files if it exist
 function add_file() {
-  [ -f "$1" ] && source "$1"
+  [[ -f "$1" ]] && source "$1"
 }
 
 # To source files if it exist
 function zsh_add_file() {
-  [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+  [[ -f "$ZDOTDIR/$1" ]] && source "$ZDOTDIR/$1"
 }
 
 function zsh_add_plugin() {
-  PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-  if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then
-    # For plugins
-    zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
-    zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+  local name=$(echo $1 | cut -d "/" -f 2)
+  if [[ -d "$ZDOTDIR/plugins/$name" ]]; then
+    zsh_add_file "plugins/$name/$name.plugin.zsh" || \
+    zsh_add_file "plugins/$name/$name.zsh"
    else
-    git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+    git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$name"
   fi
 }
