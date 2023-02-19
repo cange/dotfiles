@@ -3,8 +3,6 @@ setopt pushdminus
 
 alias vim='nvim'
 alias gui='fork'
-# https://github.com/sharkdp/bat
-alias cat="bat --paging=never --style=changes --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo base16 || echo GitHub)"
 
 # confirm before overwriting something
 alias cp="cp -i"
