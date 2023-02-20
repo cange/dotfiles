@@ -18,9 +18,6 @@ end
 function m.setup(p)
   Cange.log_info("Colors reloaded!", "cange.utils.highlights")
   m.set_hls({
-    Winbar = { link = "lualine_c_normal" },
-    WinbarNC = { link = "Comment" },
-
     CursorLine = { bg = p.bg2 }, -- disable default
     Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
     Todo = { bg = nil, bold = true },
@@ -36,8 +33,6 @@ function m.setup(p)
     --
     HarpoonBorder = { link = "FloatBorder" },
     HarpoonWindow = { link = "FloatNormal" },
-    NavicSeparator = { fg = p.fg0, link = "lualine_c_normal" },
-    NavicText = { link = "lualine_c_normal" },
     TelescopeBorder = { link = "FloatBorder" },
     TelescopeMatching = { link = "MatchParen" },
     TelescopePreviewTitle = { link = "FloatTitle" },

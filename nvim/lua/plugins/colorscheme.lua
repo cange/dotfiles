@@ -47,6 +47,12 @@ return {
       ---@type Nightfox.Palette
       local palette = require("nightfox.palette").load(colorscheme)
 
+      ---@class Cange.utils.Utils
+      ---@field palette Nightfox.Palette
+
+      ---@type Cange.utils.Utils
+      Cange.register_key("palette", palette)
+
       local function assign_highlights()
         Cange.reload("cange.utils.highlights").setup(palette)
       end

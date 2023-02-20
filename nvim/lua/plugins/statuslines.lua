@@ -3,7 +3,6 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
       "EdenEast/nightfox.nvim",
-      "SmiteshP/nvim-navic",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
     },
@@ -34,19 +33,14 @@ return {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
-              path = 1,
+              path = 0,
               symbols = {
                 modified = icon("ui.Circle"),
                 newfile = icon("documents.NewFile"),
                 readonly = icon("ui.Lock"),
                 unnamed = icon("documents.File"),
               },
-              separator = icon("ui.ChevronRight"),
             },
-            { require("nvim-navic").get_location, cond = require("nvim-navic").is_available },
-          },
-          lualine_x = {
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             {
               "diagnostics",
               symbols = {
@@ -57,7 +51,7 @@ return {
               },
             },
           },
-          lualine_y = {
+          lualine_x = {
             {
               "diff",
               symbols = {
@@ -66,6 +60,9 @@ return {
                 removed = icon("git.Remove") .. " ",
               },
             },
+          },
+          lualine_y = {
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
           },
           lualine_z = {
             { "fileformat", separator = "" },
@@ -80,8 +77,26 @@ return {
 
   { "RRethy/vim-illuminate" }, -- Highlight the word under the cursor
 
-  -- lsp symbol navigation
-  {
+  { -- winbar with LSP context symbols
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      local p = Cange.palette
+      require("barbecue").setup({
+        theme = {
+          normal = { bg = p.bg0, fg = p.fg3 },
+          dirname = { fg = p.bg4 },
+        },
+        exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
+      })
+    end,
+  },
+
+  { -- LSP context symbols
     "SmiteshP/nvim-navic",
     dependencies = "neovim/nvim-lspconfig",
     lazy = true,
