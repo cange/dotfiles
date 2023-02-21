@@ -1,22 +1,17 @@
----@class Cange.config
+---@alias Cange.config table<string, table>
 
 ---@type Cange.config
 local m = {}
 
----@enum Cange.config.ui
 m.ui = {
+  colorscheme = "terafox",
   border = "rounded", -- nvim_open_win: none, single, double, rounded, shadow
 }
 
----@enum Cange.config.colorscheme
-m.colorscheme = "terafox"
-
----@enum Cange.config.snippets
 m.snippets = {
   path = "./../snippets",
 }
 
----@enum Cange.config.lsp
 m.lsp = {
   diagnostic_virtual_text = false,
   format_on_save = true,
@@ -56,7 +51,6 @@ m.lsp = {
     "zsh",
   },
 }
----@enum Cange.config.treesitter
 m.treesitter = {
   sources = {
     "bash",

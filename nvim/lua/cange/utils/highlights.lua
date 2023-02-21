@@ -32,6 +32,7 @@ function m.setup(p)
     FloatBorder = { fg = p.bg0, bg = p.bg0 },
     --
     HarpoonBorder = { link = "FloatBorder" },
+    HarpoonCurrentFile = { italic = true },
     HarpoonWindow = { link = "FloatNormal" },
     TelescopeBorder = { link = "FloatBorder" },
     TelescopeMatching = { link = "MatchParen" },

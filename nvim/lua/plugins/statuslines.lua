@@ -30,17 +30,6 @@ return {
             { "branch", icon = icon("git.Branch") },
           },
           lualine_c = {
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            {
-              "filename",
-              path = 0,
-              symbols = {
-                modified = icon("ui.Circle"),
-                newfile = icon("documents.NewFile"),
-                readonly = icon("ui.Lock"),
-                unnamed = icon("documents.File"),
-              },
-            },
             {
               "diagnostics",
               symbols = {
@@ -88,27 +77,12 @@ return {
       local p = Cange.palette
       require("barbecue").setup({
         theme = {
-          normal = { bg = p.bg0, fg = p.fg3 },
-          dirname = { fg = p.bg4 },
+          basename = { fg = p.fg2 },
+          dirname = { fg = p.fg2 },
+          normal = { fg = p.fg3, bg = p.bg0 },
         },
         exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
       })
-    end,
-  },
-
-  { -- LSP context symbols
-    "SmiteshP/nvim-navic",
-    dependencies = "neovim/nvim-lspconfig",
-    lazy = true,
-    config = function()
-      require("nvim-navic").setup({
-        icons = Cange.get_icon("kind"),
-        highlight = true,
-        separator = " ",
-        depth_limit = 0,
-        depth_limit_indicator = "..",
-      })
-      vim.g.navic_silence = true
     end,
   },
 }

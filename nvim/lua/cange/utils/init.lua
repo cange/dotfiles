@@ -3,6 +3,7 @@ local ns = "[cange.utils]"
 ---@class Cange.utils
 
 ---@class Cange.utils.Utils
+---@field palette Nightfox.Palette
 
 ---@type Cange.utils.Utils
 local m = {}

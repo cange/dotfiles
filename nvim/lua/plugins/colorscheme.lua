@@ -40,17 +40,13 @@ return {
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       Cange = Cange or require("cange.utils")
-      local colorscheme = Cange.get_config("colorscheme")
+      local colorscheme = Cange.get_config("ui.colorscheme")
 
       vim.cmd("colorscheme " .. colorscheme)
 
       ---@type Nightfox.Palette
       local palette = require("nightfox.palette").load(colorscheme)
 
-      ---@class Cange.utils.Utils
-      ---@field palette Nightfox.Palette
-
-      ---@type Cange.utils.Utils
       Cange.register_key("palette", palette)
 
       local function assign_highlights()
