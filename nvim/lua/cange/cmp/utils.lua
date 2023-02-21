@@ -146,8 +146,9 @@ function m.format(entry, vim_item)
   if vim.tbl_contains(vim.tbl_keys(source_icons), source_name) then
     vim_item.menu = vim.trim(source_icons[source_name])
   end
+  local kinds = Cange.get_icon("cmp_kinds") or {}
 
-  vim_item.kind = get_prediction_strength_kind_icon(strength) or Cange.get_icon("cmp_kind", vim_item.kind)
+  vim_item.kind = get_prediction_strength_kind_icon(strength) or kinds[vim_item.kind]
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
   vim_item.menu_hl_group = get_menu_hl_group_by(source_name)
 

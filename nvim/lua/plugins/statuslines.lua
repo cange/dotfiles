@@ -3,7 +3,6 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
       "EdenEast/nightfox.nvim",
-      "SmiteshP/nvim-navic",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
     },
@@ -31,22 +30,6 @@ return {
             { "branch", icon = icon("git.Branch") },
           },
           lualine_c = {
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            {
-              "filename",
-              path = 1,
-              symbols = {
-                modified = icon("ui.Circle"),
-                newfile = icon("documents.NewFile"),
-                readonly = icon("ui.Lock"),
-                unnamed = icon("documents.File"),
-              },
-              separator = icon("ui.ChevronRight"),
-            },
-            { require("nvim-navic").get_location, cond = require("nvim-navic").is_available },
-          },
-          lualine_x = {
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             {
               "diagnostics",
               symbols = {
@@ -57,7 +40,7 @@ return {
               },
             },
           },
-          lualine_y = {
+          lualine_x = {
             {
               "diff",
               symbols = {
@@ -66,6 +49,9 @@ return {
                 removed = icon("git.Remove") .. " ",
               },
             },
+          },
+          lualine_y = {
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
           },
           lualine_z = {
             { "fileformat", separator = "" },
@@ -80,20 +66,23 @@ return {
 
   { "RRethy/vim-illuminate" }, -- Highlight the word under the cursor
 
-  -- lsp symbol navigation
-  {
-    "SmiteshP/nvim-navic",
-    dependencies = "neovim/nvim-lspconfig",
-    lazy = true,
+  { -- winbar with LSP context symbols
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
     config = function()
-      require("nvim-navic").setup({
-        icons = Cange.get_icon("kind"),
-        highlight = true,
-        separator = " ",
-        depth_limit = 0,
-        depth_limit_indicator = "..",
+      local p = Cange.palette
+      require("barbecue").setup({
+        theme = {
+          basename = { fg = p.fg2 },
+          dirname = { fg = p.fg2 },
+          normal = { fg = p.fg3, bg = p.bg0 },
+        },
+        exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
       })
-      vim.g.navic_silence = true
     end,
   },
 }

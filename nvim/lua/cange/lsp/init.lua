@@ -72,10 +72,6 @@ end
 ---@param bufnr integer
 local function on_attach(client, bufnr)
   keymaps(client, bufnr)
-  local navic_ok, navic = pcall(require, "nvim-navic")
-  if navic_ok and client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
-  end
   require("cange.lsp.format").attach(bufnr)
 end
 

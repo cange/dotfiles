@@ -1,4 +1,4 @@
----@class Cange.core.Icons
+---@alias Cange.core.Icons table<string, table>
 
 ---@type Cange.core.Icons
 local m = {}
@@ -9,7 +9,6 @@ local m = {}
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
----@enum Cange.core.Icons.ui
 m.ui = {
   ArrowRight = "▸ ", -- U+25B8
   Beaker = " ", -- nf-oct-beaker
@@ -51,7 +50,6 @@ m.ui = {
   VThinLineLeft = "▏ ", -- U+258F
   Watch = " ", -- nf-oct-clock
 }
----@enum Cange.core.Icons.documents
 m.documents = {
   Briefcase = " ", -- nf-oct-briefcase
   EmptyFolder = " ", -- nf-fa-folder_o
@@ -65,7 +63,6 @@ m.documents = {
   SymlinkFile = " ", --nf-cod-file_symlink_file
   SymlinkFolder = " ", --nf-cod-file_symlink_directory
 }
----@enum Cange.core.Icons.git
 m.git = {
   Add = " ", -- nf-oct-diff_added,
   Mod = " ", -- nf-oct-diff_modified
@@ -76,7 +73,6 @@ m.git = {
   Branch = " ", -- nf-oct-git_branch
   Commit = " ", -- nf-oct-git_commit
 }
----@enum Cange.core.Icons.git_states
 m.git_states = {
   unstaged = m.git.Mod,
   staged = "󱗜 ", -- nf-md-circle_box
@@ -86,15 +82,13 @@ m.git_states = {
   deleted = m.git.Remove,
   ignored = m.git.Ignore,
 }
----@enum Cange.core.Icons.diagnostics
 m.diagnostics = {
   Error = " ", -- nf-oct-stop
   Warn = " ", -- nf-oct-alert
   Info = " ", -- nf-oct-info
   Hint = " ", -- nf-oct-light_bulb
 }
----@enum Cange.core.Icons.kind
-m.kind = {
+local kinds = {
   File = " ",
   Module = " ",
   Namespace = " ",
@@ -122,8 +116,7 @@ m.kind = {
   Operator = " ",
   TypeParameter = " ",
 }
----@enum Cange.core.Icons.cmp_kind
-m.cmp_kind = vim.tbl_extend("keep", m.kind, {
+m.cmp_kinds = vim.tbl_extend("keep", kinds, {
   Color = " ",
   Folder = m.documents.Folder .. " ",
   Keyword = " ",
@@ -133,28 +126,15 @@ m.cmp_kind = vim.tbl_extend("keep", m.kind, {
   Unit = " ",
   Value = " ",
 })
----@enum Cange.core.Icons.cmp_source
+
 m.cmp_source = {
   buffer = "﬘ ",
   luasnip = " ", -- nf-fa-cut
   nvim_lsp = " ",
   nvim_lua = " ",
-  path = m.documents.Folder .. " ",
+  path = m.documents.Folder,
   cmp_tabnine = m.ui.Tabnine,
   copilot = m.ui.Octoface,
-}
----@enum Cange.core.Icons.lualine
-m.lualine = {
-  modified = m.ui.Circle, -- Text to show when the file is modified.
-  newfile = m.documents.NewFile, -- Text to show for new created file before first writting
-  readonly = m.ui.lock, -- Text to show when the file is non-modifiable or readonly.
-  unnamed = m.documents.File, -- Text to show for unnamed buffers.
-}
----@enum Cange.core.Icons.mason
-m.mason = {
-  package_installed = m.ui.Check,
-  package_pending = m.ui.Sync,
-  package_uninstalled = m.ui.Close,
 }
 
 return m

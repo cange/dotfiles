@@ -11,7 +11,11 @@ return {
       require("mason").setup({
         ui = {
           border = Cange.get_config("ui.border"),
-          icons = Cange.get_icon("mason"),
+          icons = {
+            package_installed = Cange.get_icon("ui.Check"),
+            package_pending = Cange.get_icon("ui.Sync"),
+            package_uninstalled = Cange.get_icon("ui.Close"),
+          },
         },
         log_level = vim.log.levels.INFO,
         max_concurrent_installers = 4,
@@ -69,7 +73,7 @@ return {
           formatting.eslint_d, -- js
           formatting.prettierd, -- js, css, html, json, etc
           formatting.rubocop, -- ruby
-          formatting.shfmt,-- shell/bash
+          formatting.shfmt, -- shell/bash
           formatting.stylelint, -- css
           formatting.stylua, -- lua
         },
