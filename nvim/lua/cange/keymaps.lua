@@ -58,7 +58,7 @@ local keymaps = {
   {
     "n",
     "<leader><leader>x",
-    ':write<CR>:luafile %<CR>:lua Cange.log.info("File saved and executed", "Executed!")<CR>',
+    ':write<CR>:luafile %<CR>:lua Cange.log_info("File saved and executed", "Executed!")<CR>',
   },
 
   -- Sort lines

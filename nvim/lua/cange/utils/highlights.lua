@@ -16,7 +16,7 @@ end
 
 ---@param p Nightfox.Palette
 function m.setup(p)
-  Cange.log.info("Colors reloaded!", "cange.utils.highlights")
+  Cange.log_info("Colors reloaded!", "cange.utils.highlights")
   m.set_hls({
     Winbar = { link = "lualine_c_normal" },
     WinbarNC = { link = "Comment" },

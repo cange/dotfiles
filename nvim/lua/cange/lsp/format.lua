@@ -9,7 +9,7 @@ m.autoformat = Cange.get_config("lsp.format_on_save") or false
 local function toggle()
   m.autoformat = not m.autoformat
   local label = m.autoformat and "ENABLED" or "DISABLED"
-  Cange.log.info(label .. " format on save", ns)
+  Cange.log_info(label .. " format on save", ns)
 end
 
 function m.format()
@@ -17,7 +17,7 @@ function m.format()
   local nls_src = require("null-ls.sources")
   local available_formatters = nls_src.get_available(vim.bo.filetype, nls.methods.FORMATTING)
 
-  Cange.log.info("Auto format", ns)
+  Cange.log_info("Auto format", ns)
 
   vim.lsp.buf.format({
     async = true,
