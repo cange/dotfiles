@@ -38,7 +38,7 @@ m.actions = transform_mod({
   set_extension = function(prompt_bufnr)
     local current_picker = action_state.get_current_picker(prompt_bufnr)
 
-    vim.ui.input({ default = "*.*", prompt = "File type: " }, function(input)
+    vim.ui.input({ default = "*.", prompt = "File type: " }, function(input)
       if input == nil then
         return
       end

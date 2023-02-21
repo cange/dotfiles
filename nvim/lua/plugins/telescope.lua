@@ -41,6 +41,9 @@ return {
             preview_width = 80,
             prompt_position = "top",
           },
+          bottom_pane = {
+            prompt_position = "bottom",
+          },
         },
         scroll_strategy = "cycle",
         sorting_strategy = "ascending",
@@ -73,6 +76,7 @@ return {
         quickfix = default_opts,
         live_grep = {
           path_display = { "smart" },
+          theme = "ivy",
           mappings = {
             i = {
               ["<C-f>"] = custom_pickers.actions.set_extension,
