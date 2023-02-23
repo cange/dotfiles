@@ -6,10 +6,10 @@ local options = {
   timeoutlen = 300, -- max delay until execute command of a key sequence
   ttimeoutlen = 50, -- max time until next key of a key sequence is expected
   list = true, -- show hidden characters
+  listchars = { eol = "", nbsp = "_", tab = "⇥ " },
   updatetime = 50, -- faster completion (4000ms default), delays and poor user experience
 
   -- UI
-  colorcolumn = "80,120", -- highlight optimal end line¬
   cursorline = true, -- highlight the current line
   guifont = "FiraCode Nerd Font:h16", -- the font used in graphical neovim applications
   laststatus = 3, -- show one global statusline for all windows
@@ -40,7 +40,10 @@ local options = {
   -- search
   hlsearch = true, -- highlight all matches on previous search pattern
   ignorecase = true, -- ignore case in search patterns
+  path = "**", -- Finding files - Search down into subfolders
+  showmatch = true,
   smartcase = true, -- don't ignore cases if search term contains upper-case characters
+  wildignore = ".git/*, .DS_Store, *node_modules/*",
 
   -- tabs
   expandtab = true, -- convert tabs to spaces
@@ -49,6 +52,8 @@ local options = {
   -- indentation
   autoindent = false, -- auto indent on copy paste
   breakindent = true, -- indentation when wrapping text
+  colorcolumn = "120", -- highlight optimal end line¬
+  formatoptions = "cjnqort", -- line wrap logic
   shiftwidth = 2, -- number of spaces inserted for each indentation
   smartindent = true, -- make indenting smarter again
   swapfile = false, -- creates a swapfile
@@ -76,31 +81,4 @@ end
 
 --
 vim.opt.iskeyword:append({ "-" }) --  considers dash "-" as part of a keyword
-vim.opt.formatoptions:remove({ "cro" }) -- adjust automatic formatting
-vim.opt.formatoptions:append({ "r" }) -- Add asterisks in block comments
 vim.opt.shortmess:append({ c = true }) -- don't give |ins-completion-menu| messages
-vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
-vim.opt.wildignore:append({ -- stuff to ignore when tab completing
-  "*.o",
-  "*.obj",
-  "*.png",
-  "*.jpg",
-  "*.gif",
-  "*.pdf",
-  "*.psd",
-  "*/node_modules/*",
-  "*/tmp/*",
-  "*.scssc",
-  "*.so",
-  "*.swp",
-  "*.zip",
-  "*DS_Store*",
-  "*~",
-})
-
--- vim.opt.whichwrap:append({ '<', '>', '[', ']', 'h', 'l' })
-vim.opt.listchars:append({
-  eol = "",
-  nbsp = "_",
-  tab = "⇥ ",
-})

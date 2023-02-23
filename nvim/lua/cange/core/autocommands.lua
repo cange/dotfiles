@@ -16,8 +16,11 @@ autocmd("BufWritePre", {
 
 autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup("cange_line_length", { clear = true }),
-  pattern = "*.md",
-  command = ":setlocal textwidth=80",
+  pattern = "*.md,*.mdx,*.lua,*.txt",
+  callback = function()
+    vim.opt_local.colorcolumn = "80"
+    vim.opt_local.textwidth = 80
+  end,
 })
 
 autocmd({ "BufRead", "BufNewFile" }, {
