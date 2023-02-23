@@ -30,15 +30,6 @@ return {
             { "branch", icon = icon("git.Branch") },
           },
           lualine_c = {
-            {
-              "diagnostics",
-              symbols = {
-                error = icon("diagnostics.Error") .. " ",
-                warn = icon("diagnostics.Warn") .. " ",
-                info = icon("diagnostics.Info") .. " ",
-                hint = icon("diagnostics.Hint") .. " ",
-              },
-            },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
@@ -48,6 +39,15 @@ return {
                 newfile = icon("documents.NewFile"),
                 readonly = icon("ui.Lock"),
                 unnamed = icon("documents.File"),
+              },
+            },
+            {
+              "diagnostics",
+              symbols = {
+                error = icon("diagnostics.Error") .. " ",
+                warn = icon("diagnostics.Warn") .. " ",
+                info = icon("diagnostics.Info") .. " ",
+                hint = icon("diagnostics.Hint") .. " ",
               },
             },
           },
