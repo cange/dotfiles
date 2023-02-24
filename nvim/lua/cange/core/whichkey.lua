@@ -88,8 +88,8 @@ m.plugins = {
     S = { cmd = "<cmd>Lazy health<CR>", desc = "Plugin Status" },
     h = { cmd = "<cmd>Lazy help<CR>", desc = "Plugin Help" },
     e = { cmd = "<cmd>e ~/.config/nvim/lua/plugins/init.lua<CR>", desc = "Edit Plugins" },
-    i = { cmd = "<cmd>Lazy install<CR>", desc = "Plugin Install" },
     s = { cmd = "<cmd>Lazy sync<CR>", desc = "Plugins Sync" },
+    i = { cmd = "<cmd>Lazy show<CR>", desc = "Plugins Show" },
   },
 }
 ---@enum Cange.core.WhichKey.group.session
