@@ -31,6 +31,10 @@
     "prefix": ".only",
     "body": ".only"
   },
+  "attributes": {
+    "prefix": ".attributes",
+    "body": ".attributes('$1')"
+  },
   "expect(wrapper": {
     "prefix": "expect(wrapper",
     "body": "expect(wrapper.$1).to$2"
