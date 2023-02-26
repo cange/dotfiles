@@ -1,7 +1,7 @@
 # Dotfiles
 
-These are basic configurations of my working environment like editor, shell and
-terminal.
+These are basic configurations of my working environment of things like editor,
+shell and terminal configurations.
 
 ## Setup
 
@@ -13,74 +13,59 @@ Clone of this repo on system user root:
 git clone http://github.com/cange/dotfiles.git
 ```
 
-### Install
+### Installation
 
-Run install command to set up the appropriate symlinks:
-
-```sh
-dotfiles/cli install
-```
-
-### Uninstall
-
-To remove related symlinks with:
+Once the repo has been cloned, the required dependencies can be installed using
+[Homebrew](https://brew.sh/). To do this, navigate to the root of the repo and
+run the following command:
 
 ```sh
-dotfiles/cli uninstall
+brew bundle install
 ```
 
-### Homebrew
+This will install any necessary dependencies defined in the `Brewfile`.
 
-This allows us to install tools and apps from the command line. Follow the
-installation guide [Homebrew](https://brew.sh/).
-
-This will also install the xcode build tools which is needed by many other
-developer tools.
-Install them in one go by placing them all into a text file and then running
-brew install:
+Finally, to set up the symlinks to apply all settings. Navigate to the root of
+the repo and run the following command:
 
 ```sh
-touch apps.txt && echo 'asdf firefox-developer-edition fork git git-delta gpg-suite iterm2 itsycal keepingyouawake neovim raycast stats' >> apps.txt
-xargs brew install < apps.txt
-rm apps.txt
+bootstrap link # or `unlink` to remove symlinks
 ```
 
-### Terminal
+### NeoVim as Editor
 
-The basic configuration and theme for _Iterm2_ can be found at
-`~/dotfiles/iterm2`.
+The config is located in `dotfiles/nvim`.
 
-### Shell
+#### First Start
 
-Install _zsh_ plugins:
+##### Plugins
+
+An update dialog pops up and will install all required plugins when running
+NeoVim first time.
+
+Run`:Lazy install` (within NeoVim) if the dialog is not popping up.
+
+##### Language Support (LSP)
+
+Run `:MasonInstallAll` (within NeoVim) to install all related  LSP helpers.
+
+To apply all updates you might need to restart NeoVim.
+
+#### Troubleshooting
+
+> Run `:checkhealth` after installation.
+
+See also [help docs](./doc/cange.txt) or `:help cange.txt` for more details.
+
+In the case of missing node packages, run the following command:
 
 ```sh
-touch zsh_plugins.txt && echo 'zsh-async zsh-autosuggestions zsh-syntax-highlighting' >> zsh_plugins.txt
-xargs brew install < zsh_plugins.txt
-rm zsh_plugins.txt
+npm install --global typescript-language-server \
+            @fsouza/prettierd \
+            @johnnymorganz/stylua-bin \
+            @volar/vue-language-server \
+            eslint_d \
+            jsonlint \
+            stylelint \
+            typescript
 ```
-
-It might be necessary to install [oh-my-zsh] because one or more plug-ins are
-still being used.
-
-[oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh#basic-installation
-
-### Editor
-
-See _NeoVim_ set up [README](./nvim/README.md).
-
-### Other Applications
-
-The following is a list of apps and tools
-
-| Application     | Description                       |
-| --------------- | --------------------------------- |
-| asdf            | Multiple runtime versions manager |
-| fork            | fast and friendly git client      |
-| gpg-suite       | protects Git commits              |
-| iterm2          | terminal                          |
-| itsycal         | menu bar calender                 |
-| keepingyouawake | prevent Max from going to sleep   |
-| neovim          | code editor                       |
-| raycast         | advanced quick launcher           |
-| stats           | menu bar system monitor           |

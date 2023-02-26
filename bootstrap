@@ -97,18 +97,18 @@ function help {
 Usage: $SCRIPT_NAME [options] <command>
 
 Commands:
-  install    Writes all symlinks for the corresponding files
-  uninstall  Removes all symlinks for the corresponding files
-  help       Print help.
+  link    Writes all symlinks for the corresponding files
+  unlink  Removes all symlinks for the corresponding files
+  help    Print help.
 "
 }
 
-function install() {
+function link() {
   execute
   summary
 }
 
-function uninstall() {
+function unlink() {
   IS_UNINSTALL=true
   execute
   summary
@@ -117,8 +117,8 @@ function uninstall() {
 # --- interface ---
 typeset -A subcmds=(
   help "help"
-  install "install"
-  uninstall "uninstall"
+  link "link"
+  unlink "unlink"
 )
 emulate -L zsh
 [[ -z "$subcmds[$1]" ]] && { help; return 1 } || ${subcmds[$1]}
