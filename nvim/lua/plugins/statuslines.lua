@@ -40,6 +40,7 @@ return {
                 readonly = icon("ui.Lock"),
                 unnamed = icon("documents.File"),
               },
+              separator = "",
             },
             {
               "diagnostics",
@@ -49,18 +50,10 @@ return {
                 info = icon("diagnostics.Info") .. " ",
                 hint = icon("diagnostics.Hint") .. " ",
               },
+              padding = { left = 0 },
             },
           },
-          lualine_x = {
-            {
-              "diff",
-              symbols = {
-                added = icon("git.Add") .. " ",
-                modified = icon("git.Mod") .. " ",
-                removed = icon("git.Remove") .. " ",
-              },
-            },
-          },
+          lualine_x = {},
           lualine_y = {
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
           },
