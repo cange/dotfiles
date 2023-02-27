@@ -5,31 +5,6 @@ return {
     version = "nightly",
     config = function()
       local icon = Cange.get_icon
-      local function git_icons()
-        local icons = icon("git_states")
-        ---@diagnostic disable-next-line: param-type-mismatch
-        for name, _ in pairs(icons) do
-          icons[name] = icon("git_states." .. name)
-        end
-        return icons
-      end
-
-      local api = require("nvim-tree.api")
-      local Event = api.events.Event
-      local toggle_help_key = "<leader>/"
-      local callback = require("nvim-tree.config").nvim_tree_callback
-
-      -- enable help toggle when tree open
-      api.events.subscribe(Event.TreeOpen, function()
-        vim.keymap.set("n", toggle_help_key, function()
-          api.tree.toggle_help()
-        end)
-      end)
-
-      api.events.subscribe(Event.TreeClose, function()
-        vim.keymap.set("n", toggle_help_key, "<Nop>")
-      end)
-
       require("nvim-tree").setup({
         live_filter = {
           prefix = icon("ui.Search") .. "  ",
@@ -65,7 +40,7 @@ return {
                 symlink = icon("documents.SymlinkFolder"),
                 symlink_open = icon("documents.SymlinkFolder"),
               },
-              git = git_icons(),
+              git = icon("git_states"),
             },
           },
         },
@@ -83,14 +58,41 @@ return {
             quit_on_open = true,
           },
         },
-        view = {
-          mappings = {
-            list = {
-              { key = "v", cb = callback("vsplit") },
-              { key = "h", cb = callback("split") },
-            },
-          },
-        },
+        on_attach = function(bufnr)
+          local api = require("nvim-tree.api")
+          local opts = function(desc)
+            return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+          end
+          -- stylua: ignore start
+          vim.keymap.set('n', '<BS>',  api.node.navigate.parent_close,     opts('Close Directory'))
+          vim.keymap.set('n', '<C-r>', api.fs.rename_sub,                  opts('Rename: Omit Filename'))
+          vim.keymap.set('n', '<C-t>', api.node.open.tab,                  opts('Open: New Tab'))
+          vim.keymap.set('n', '<CR>',  api.node.open.edit,                 opts('Open'))
+          vim.keymap.set('n', 'D',     api.fs.trash,                       opts('Trash'))
+          vim.keymap.set('n', 'F',     api.live_filter.clear,              opts('Clean Filter'))
+          vim.keymap.set('n', 'H',     api.tree.toggle_hidden_filter,      opts('Toggle Dotfiles'))
+          vim.keymap.set('n', 'I',     api.tree.toggle_gitignore_filter,   opts('Toggle Git Ignore'))
+          vim.keymap.set('n', 'R',     api.tree.reload,                    opts('Refresh'))
+          vim.keymap.set('n', 'W',     api.tree.collapse_all,              opts('Collapse'))
+          vim.keymap.set('n', '[c',    api.node.navigate.git.prev,         opts('Prev Git'))
+          vim.keymap.set('n', '[d',    api.node.navigate.diagnostics.prev, opts('Prev Diagnostic'))
+          vim.keymap.set('n', ']c',    api.node.navigate.git.next,         opts('Next Git'))
+          vim.keymap.set('n', ']d',    api.node.navigate.diagnostics.next, opts('Next Diagnostic'))
+          vim.keymap.set('n', 'a',     api.fs.create,                      opts('Create'))
+          vim.keymap.set('n', 'c',     api.fs.copy.node,                   opts('Copy'))
+          vim.keymap.set('n', 'd',     api.fs.remove,                      opts('Delete'))
+          vim.keymap.set('n', 'f',     api.live_filter.start,              opts('Filter'))
+          vim.keymap.set('n', 'g?',    api.tree.toggle_help,               opts('Help'))
+          vim.keymap.set('n', 'h',     api.node.open.horizontal,           opts('Open: Horizontal Split'))
+          vim.keymap.set('n', 'o',     api.node.open.edit,                 opts('Open'))
+          vim.keymap.set('n', 'p',     api.fs.paste,                       opts('Paste'))
+          vim.keymap.set('n', 'q',     api.tree.close,                     opts('Close'))
+          vim.keymap.set('n', 'r',     api.fs.rename,                      opts('Rename'))
+          vim.keymap.set('n', 'v',     api.node.open.vertical,             opts('Open: Vertical Split'))
+          vim.keymap.set('n', 'x',     api.fs.cut,                         opts('Cut'))
+          vim.keymap.set('n', 'y',     api.fs.copy.relative_path,          opts('Copy Relative Path'))
+          -- stylua: ignore end
+        end,
       })
     end,
   },
