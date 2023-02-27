@@ -107,8 +107,6 @@ local function get_menu_hl_group_by(source_name)
   return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "Comment"
 end
 
----@class Cange.cmp.Utils
-
 ---@type Cange.cmp.Utils
 local m = {}
 

@@ -1,11 +1,6 @@
 local ns = "[cange.utils]"
 
----@class Cange.utils
-
----@class Cange.utils.Utils
----@field palette Nightfox.Palette
-
----@type Cange.utils.Utils
+---@type Cange.utils
 local m = {}
 
 m.log_info = require("cange.utils.notify").info

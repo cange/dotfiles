@@ -1,15 +1,3 @@
----@class Cange.core.WhichKey
-
----@class Cange.core.WhichKey.command
----@field desc string Description of the keybinding
----@field cmd string|function command of the keybinding
----@field primary? boolean Determines whether or not to show a on inital "which-key" window
-
----@class Cange.core.WhichKey.group
----@field mappings Cange.core.WhichKey.command[] The actual key bindings
----@field subleader string Additional key to enter the certain group
----@field title string Is displayed as group name
-
 ---@type Cange.core.WhichKey.group[]
 local m = {}
 

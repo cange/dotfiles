@@ -10,8 +10,6 @@ local builtin = require("telescope.builtin")
 local themes = require("telescope.themes")
 local transform_mod = require("telescope.actions.mt").transform_mod
 
----@class Cange.telescope
-
 ---@type Cange.telescope
 local m = {}
 

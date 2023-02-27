@@ -1,11 +1,3 @@
----@class Cange.utils.Icons
-
----@class Cange.utils.Icons.Preset
----@field icon? Cange.core.Icons
----@field color? string Hex color value
----@field cterm_color? string
----@field name? string
-
 ---@type Cange.utils.Icons
 local m = {}
 local ns = "[cange.utils.icons]"
@@ -62,7 +54,7 @@ end
 
 ---@param filetype string
 ---@param name string
----@param opts? Cange.utils.Icons.Preset
+---@param opts? Cange.utils.IconsPreset
 ---@return table
 local function create_icon_by_filetype(filetype, name, opts)
   local devicons = require("nvim-web-devicons")
@@ -80,7 +72,7 @@ local function create_icon_by_filetype(filetype, name, opts)
   return vim.tbl_extend("force", config, opts)
 end
 
----@type Cange.utils.Icons.Preset[]
+---@type Cange.utils.IconsPreset[]
 local presets = {
   spec = {
     icon = m.get_icon("ui.Beaker"),

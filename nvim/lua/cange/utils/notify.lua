@@ -1,5 +1,3 @@
----@class Cange.utils.Notify
-
 ---@type Cange.utils.Notify
 local m = {}
 

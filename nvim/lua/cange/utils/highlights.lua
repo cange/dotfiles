@@ -1,7 +1,4 @@
 -- Reloadable color highlights
-
----@class Cange.utils.Highlights
-
 ---@type Cange.utils.Highlights
 local m = {}
 

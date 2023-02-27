@@ -1,5 +1,3 @@
----@class Cange.lsp
-
 local ns = "[cange.lsp.lspconfig]"
 local found_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not found_cmp then

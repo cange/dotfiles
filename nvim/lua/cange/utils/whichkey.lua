@@ -1,5 +1,3 @@
----@class Cange.utils.WhichKey
-
 local ns = "[cange.utils.whichkey]"
 
 ---@param group_id string|nil

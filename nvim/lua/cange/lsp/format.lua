@@ -1,5 +1,3 @@
----@class Cange.lsp.Format
-
 ---@type Cange.lsp.Format
 local m = {}
 
