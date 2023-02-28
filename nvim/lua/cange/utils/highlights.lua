@@ -40,7 +40,7 @@ function m.setup(p)
     TelescopePromptBorder = { link = "FloatBorder" },
     TelescopePromptNormal = { link = "FloatNormal" },
     TelescopePromptTitle = { link = "FloatTitle" },
-    TelescopeResultsNormal = { fg = p.fg0, bg = p.bg1 },
+    TelescopeResultsNormal = { fg = p.fg0, bg = p.bg0 },
     TelescopeSelection = { fg = p.fg2, bg = p.sel0 },
     TelescopeSelectionCaret = { fg = p.fg1, bg = p.sel0 },
     TelescopeSelectionNormal = { link = "FloatBorder" },

@@ -68,11 +68,14 @@ return {
           -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
           find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
         }),
+        git_branches = default_opts,
         grep_string = default_opts,
         help_tags = { theme = "ivy" },
+        keymaps = { theme = "ivy" },
         lsp_declarations = lsp_opts,
         lsp_definitions = lsp_opts,
         lsp_references = lsp_opts,
+        oldfiles = { theme = "ivy" },
         quickfix = default_opts,
         live_grep = {
           path_display = { "smart" },
