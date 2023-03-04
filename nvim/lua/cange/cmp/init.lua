@@ -17,7 +17,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode co
 require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
 -- require("luasnip.loaders.from_vscode").lazy_load() -- community snippets (create noise)
 
-local prev_item_handler = function(fallback)
+local function prev_item_handler(fallback)
   if cmp.visible() then
     cmp.select_prev_item()
   elseif luasnip.jumpable(-1) then
@@ -26,7 +26,7 @@ local prev_item_handler = function(fallback)
     fallback()
   end
 end
-local next_item_handler = function(fallback)
+local function next_item_handler(fallback)
   if cmp.visible() then
     cmp.select_next_item()
   elseif luasnip.expandable() then
@@ -39,48 +39,45 @@ local next_item_handler = function(fallback)
     fallback()
   end
 end
+local function prev_choice_handler()
+  if luasnip.choice_active() then
+    luasnip.change_choice(-1)
+  else
+    cmp.mapping.select_prev_item()
+  end
+end
+local function next_choice_handler()
+  if luasnip.choice_active() then
+    luasnip.change_choice(1)
+  else
+    cmp.mapping.select_next_item()
+  end
+end
 
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
 
-    -- Choice
-    ["<C-n>"] = cmp.mapping(function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(1)
-      else
-        cmp.mapping.select_next_item()
-      end
-    end, { "i" }),
-    ["<C-p>"] = cmp.mapping(function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(-1)
-      else
-        cmp.mapping.select_prev_item()
-      end
-    end, { "i" }),
+    ["<C-j>"] = cmp.mapping(next_item_handler, { "i", "s" }),
+    ["<C-k>"] = cmp.mapping(prev_item_handler, { "i", "s" }),
+    ["<Tab>"] = cmp.mapping(next_item_handler, { "i", "s" }),
 
-    ["<C-e>"] = cmp.mapping.close(),
-    ["<C-c>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }),
+    ["<C-h>"] = cmp.mapping(prev_choice_handler, { "i", "s" }),
+    ["<C-l>"] = cmp.mapping(next_choice_handler, { "i", "s" }),
+
+    ["<C-c>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
-    ["<C-j>"] = cmp.mapping(next_item_handler, { "i", "s" }),
-    ["<C-k>"] = cmp.mapping(prev_item_handler, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(prev_item_handler, { "i", "s" }),
-    ["<Tab>"] = cmp.mapping(next_item_handler, { "i", "s" }),
+    ["<C-space>"] = cmp.mapping.complete(),
   }),
   sources = {
     { name = "cmp_tabnine", keyword_length = 3, max_item_count = 5 },
     { name = "luasnip", keyword_length = 2, max_item_count = 5 },
-    { name = "nvim_lsp", keyword_length = 3 },
     { name = "nvim_lua", keyword_length = 3 },
+    { name = "nvim_lsp", keyword_length = 3 },
     { name = "buffer", keyword_length = 3, max_item_count = 3 },
     { name = "path", keyword_length = 3, max_item_count = 3 },
   },
