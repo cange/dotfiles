@@ -100,12 +100,7 @@ local function redefine_icons()
   end
 
   devicons.set_icon({ ["cy.js"] = create_icon_by_filetype("javascript", "TestJs", presets.spec) })
-  devicons.set_icon({ ["spec.js"] = create_icon_by_filetype("javascript", "TestJs", presets.spec) })
-  devicons.set_icon({ ["test.js"] = create_icon_by_filetype("javascript", "TestJs", presets.spec) })
-
   devicons.set_icon({ ["cy.ts"] = create_icon_by_filetype("typescript", "TestTs", presets.spec) })
-  devicons.set_icon({ ["spec.ts"] = create_icon_by_filetype("typescript", "TestTs", presets.spec) })
-  devicons.set_icon({ ["test.ts"] = create_icon_by_filetype("typescript", "TestTs", presets.spec) })
 
   devicons.set_icon({ ["stories.js"] = create_icon_by_filetype("javascript", "StorybookJs", presets.storybook) })
   devicons.set_icon({ ["stories.ts"] = create_icon_by_filetype("typescript", "StorybookTs", presets.storybook) })
