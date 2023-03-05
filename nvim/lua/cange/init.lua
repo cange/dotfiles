@@ -23,7 +23,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- 2nd : initialize
-require("lazy").setup("plugins", {
+require("lazy").setup("cange.plugins", {
   checker = {
     enabled = true, -- allows to get the number of pending updates when true
   },
