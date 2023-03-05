@@ -16,7 +16,7 @@ M.ui = {
   Check = " ", -- nf-oct-check
   ChevronDown = " ", -- nf-oct-chevron_down
   ChevronRight = " ", -- nf-oct-chevron_right
-  Circle = " ", -- nf-oct-pr{imitive_dot
+  Circle = " ", -- nf-oct-primitive_dot
   CircleUnfilled = " ", -- nf-cod-circle
   Close = " ", -- nf-oct-x
   Code = " ", -- nf-oct-code
@@ -73,7 +73,7 @@ M.git = {
 }
 M.git_states = {
   unstaged = M.git.Mod,
-  staged = "󱗜 ", -- nf-md-circle_box
+  staged = "", -- none on purpose
   unmerged = " ", -- nf-cod-git_pull_request_draft
   renamed = M.git.Rename,
   untracked = M.ui.CircleUnfilled,

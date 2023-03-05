@@ -13,8 +13,6 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-
-vim.opt.termguicolors = true -- set term gui colors (most terminals support this)
 vim.opt.rtp:prepend(lazypath)
 
 -- Basic Keymaps
