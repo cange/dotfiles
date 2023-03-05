@@ -1,9 +1,7 @@
----@class Cange.utils.WhichKey
-
 local ns = "[cange.utils.whichkey]"
 
 ---@param group_id string|nil
----@return Cange.core.WhichKey.group[] # All defined groups or one when group_id is specified
+---@return CangeCore.WhichKey.group[] # All defined groups or one when group_id is specified
 local function get_group(group_id)
   local ok, groups = pcall(require, "cange.core.whichkey")
   if not ok then
@@ -12,7 +10,7 @@ local function get_group(group_id)
   return group_id == nil and groups[group_id] or groups
 end
 
----@param group Cange.core.WhichKey.group
+---@param group CangeCore.WhichKey.group
 ---@return table<string, table> # WhichKey mappings
 local function get_mappings_by_group(group)
   local section = {}
@@ -32,7 +30,7 @@ local function get_mappings_by_group(group)
   return section
 end
 
----@param group Cange.core.WhichKey.group Key of a keybinding block
+---@param group CangeCore.WhichKey.group Key of a keybinding block
 ---@param target_mappings table List to store mappings
 local function fetch_primary_key_mappings(group, target_mappings)
   -- vim.pretty_print(ns, 'primary_mappings', vim.tbl_keys(group))
@@ -47,11 +45,11 @@ local function fetch_primary_key_mappings(group, target_mappings)
   end
 end
 
----@type Cange.core.WhichKey
-local m = {}
+---@type CangeCore.WhichKey
+local M = {}
 
----@return Cange.core.WhichKey.group[]
-function m.mappings()
+---@return CangeCore.WhichKey.group[]
+function M.mappings()
   local primary = {}
   local secondary = {}
 
@@ -63,4 +61,4 @@ function m.mappings()
   return vim.tbl_deep_extend("keep", primary, secondary)
 end
 
-return m
+return M

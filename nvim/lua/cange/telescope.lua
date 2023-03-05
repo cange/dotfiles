@@ -10,10 +10,8 @@ local builtin = require("telescope.builtin")
 local themes = require("telescope.themes")
 local transform_mod = require("telescope.actions.mt").transform_mod
 
----@class Cange.telescope
-
----@type Cange.telescope
-local m = {}
+---@type CangeTelescope
+local M = {}
 
 ---Keep track of the active extension and folders for `live_grep`
 local live_grep_filters = {
@@ -33,7 +31,7 @@ local function run_live_grep(current_input)
 end
 
 -- Inspired by https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/plugins/telescope_custom_pickers.lua
-m.actions = transform_mod({
+M.actions = transform_mod({
   ---Ask for a file extension and filtering by it
   set_extension = function(prompt_bufnr)
     local current_picker = action_state.get_current_picker(prompt_bufnr)
@@ -51,14 +49,14 @@ m.actions = transform_mod({
 })
 
 ---Wapper over `live_grep` to first reset active filters
-function m.live_grep()
+function M.live_grep()
   live_grep_filters.extension = nil
 
   builtin.live_grep()
 end
 
 ---Search with the neovim folder only
-function m.browse_nvim()
+function M.browse_nvim()
   local opts = {
     cwd = "~/.config/nvim",
     previewer = false,
@@ -70,7 +68,7 @@ function m.browse_nvim()
 end
 
 ---Align diagnostics dialogue UI
-function m.diagnostics_log()
+function M.diagnostics_log()
   builtin.diagnostics(themes.get_ivy({
     bufnr = 0,
     initial_mode = "normal",
@@ -80,7 +78,7 @@ function m.diagnostics_log()
   }))
 end
 
-function m.browse_workspace()
+function M.browse_workspace()
   builtin.find_files({
     cwd = "~/workspace/",
     hidden = true,
@@ -90,7 +88,7 @@ function m.browse_workspace()
 end
 
 -- File browser
-function m.file_browser()
+function M.file_browser()
   local path = "%:p:h"
   local opts = {
     cwd = vim.fn.expand(path),
@@ -122,4 +120,4 @@ function m.file_browser()
   telescope.extensions.file_browser.file_browser(opts)
 end
 
-return m
+return M

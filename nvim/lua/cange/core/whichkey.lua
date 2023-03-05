@@ -1,23 +1,11 @@
----@class Cange.core.WhichKey
-
----@class Cange.core.WhichKey.command
----@field desc string Description of the keybinding
----@field cmd string|function command of the keybinding
----@field primary? boolean Determines whether or not to show a on inital "which-key" window
-
----@class Cange.core.WhichKey.group
----@field mappings Cange.core.WhichKey.command[] The actual key bindings
----@field subleader string Additional key to enter the certain group
----@field title string Is displayed as group name
-
----@type Cange.core.WhichKey.group[]
-local m = {}
+---@type CangeCore.WhichKey.group[]
+local M = {}
 
 -- All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
 -- each plugin by it self.
 
----@enum Cange.core.WhichKey.group.editor
-m.editor = {
+---@enum CangeCore.WhichKey.group.editor
+M.editor = {
   title = "Editor",
   subleader = "e",
   mappings = {
@@ -37,8 +25,8 @@ m.editor = {
     ["\\"] = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
   },
 }
----@enum Cange.core.WhichKey.group.git
-m.git = {
+---@enum CangeCore.WhichKey.group.git
+M.git = {
   title = "Git",
   subleader = "g",
   mappings = {
@@ -64,8 +52,8 @@ m.git = {
     u = { cmd = "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Undo stage hunk" },
   },
 }
----@enum Cange.core.WhichKey.group.lsp
-m.lsp = {
+---@enum CangeCore.WhichKey.group.lsp
+M.lsp = {
   title = "LSP",
   subleader = "l",
   mappings = {
@@ -80,8 +68,8 @@ m.lsp = {
     ["<F2>"] = { cmd = '<cmd>lua require("cange.lsp.format").format()<CR>', desc = "Format", primary = true },
   },
 }
----@enum Cange.core.WhichKey.group.plugins
-m.plugins = {
+---@enum CangeCore.WhichKey.group.plugins
+M.plugins = {
   title = "Plugins",
   subleader = "p",
   mappings = {
@@ -92,8 +80,8 @@ m.plugins = {
     i = { cmd = "<cmd>Lazy show<CR>", desc = "Plugins Show" },
   },
 }
----@enum Cange.core.WhichKey.group.session
-m.session = {
+---@enum CangeCore.WhichKey.group.session
+M.session = {
   title = "Session",
   subleader = "b",
   mappings = {
@@ -103,8 +91,8 @@ m.session = {
     x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
   },
 }
----@enum Cange.core.WhichKey.group.treesitter
-m.treesitter = {
+---@enum CangeCore.WhichKey.group.treesitter
+M.treesitter = {
   title = "Tree-sitter",
   subleader = "t",
   mappings = {
@@ -113,8 +101,8 @@ m.treesitter = {
     r = { cmd = "<cmd>TSToggle rainbow<CR>", desc = "Toggle Rainbow" },
   },
 }
----@enum Cange.core.WhichKey.group.telescope
-m.telescope = {
+---@enum CangeCore.WhichKey.group.telescope
+M.telescope = {
   title = "Search",
   subleader = "s",
   mappings = {
@@ -146,4 +134,4 @@ m.telescope = {
   },
 }
 
-return m
+return M

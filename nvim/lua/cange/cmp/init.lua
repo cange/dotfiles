@@ -1,5 +1,3 @@
----@class Cange.cmp
-
 -- Reloads this file whenever a 'json' file saved in snippet directory to
 -- enable change immediately
 local ns = "[cange.cmp.init]"
@@ -15,7 +13,6 @@ end
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode completion
 
 require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
--- require("luasnip.loaders.from_vscode").lazy_load() -- community snippets (create noise)
 
 local function prev_item_handler(fallback)
   if cmp.visible() then

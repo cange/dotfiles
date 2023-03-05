@@ -1,7 +1,5 @@
 -- Order is important
 
----@class Cange
-
 -- 1st : setup plugin manager
 -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

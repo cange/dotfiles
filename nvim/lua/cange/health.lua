@@ -1,6 +1,6 @@
-local m = {}
+local M = {}
 
-function m.check()
+function M.check()
   vim.health.report_start("Cange")
 
   for _, cmd in ipairs({ "git", "rg", "deno" }) do
@@ -12,4 +12,4 @@ function m.check()
   end
 end
 
-return m
+return M

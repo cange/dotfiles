@@ -1,18 +1,18 @@
 ---@alias Cange.config table<string, table>
 
 ---@type Cange.config
-local m = {}
+local M = {}
 
-m.ui = {
+M.ui = {
   colorscheme = "terafox",
   border = "rounded", -- nvim_open_win: none, single, double, rounded, shadow
 }
 
-m.snippets = {
+M.snippets = {
   path = "./../snippets",
 }
 
-m.lsp = {
+M.lsp = {
   diagnostic_virtual_text = false,
   format_on_save = true,
   server_sources = {
@@ -51,7 +51,7 @@ m.lsp = {
     "zsh",
   },
 }
-m.treesitter = {
+M.treesitter = {
   sources = {
     "bash",
     "css",
@@ -80,4 +80,4 @@ m.treesitter = {
   },
 }
 
-return m
+return M
