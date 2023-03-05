@@ -1,5 +1,5 @@
----@type Cange.utils.Icons
-local m = {}
+---@type CangeUtil.Icons
+local M = {}
 local ns = "[cange.utils.icons]"
 
 ---@param name string
@@ -14,10 +14,10 @@ local function get_single_icon(icon_list, name)
   return result
 end
 
----@param group_id string Dot separated identifier path of `Cange.core.icons`
+---@param group_id string Dot separated identifier path of `CangeCore.icons`
 ---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
 ---@return table|string|nil # The icon symbol or nil if not found
-function m.get_icon(group_id, ...)
+function M.get_icon(group_id, ...)
   local ok, icons = pcall(require, "cange.core.icons")
   if not ok then
     print(ns, '"cange.core.icons" not found!')
@@ -54,7 +54,7 @@ end
 
 ---@param filetype string
 ---@param name string
----@param opts? Cange.utils.IconsPreset
+---@param opts? CangeUtil.IconsPreset
 ---@return table
 local function create_icon_by_filetype(filetype, name, opts)
   local devicons = require("nvim-web-devicons")
@@ -72,10 +72,10 @@ local function create_icon_by_filetype(filetype, name, opts)
   return vim.tbl_extend("force", config, opts)
 end
 
----@type Cange.utils.IconsPreset[]
+---@type CangeUtil.IconsPreset[]
 local presets = {
   spec = {
-    icon = m.get_icon("ui.Beaker"),
+    icon = M.get_icon("ui.Beaker"),
   },
   storybook = {
     color = "#ff4785",
@@ -104,8 +104,8 @@ local function redefine_icons()
   devicons.set_icon({ ["stories.mdx"] = create_icon_by_filetype("mdx", "StorybookMdx", presets.storybook) })
 end
 
-function m.setup()
+function M.setup()
   redefine_icons()
 end
 
-return m
+return M

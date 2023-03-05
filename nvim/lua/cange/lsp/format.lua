@@ -1,16 +1,16 @@
----@type Cange.lsp.Format
-local m = {}
+---@type CangeLsp.Format
+local M = {}
 
 local ns = "cange.lsp.format"
-m.autoformat = Cange.get_config("lsp.format_on_save") or false
+M.autoformat = Cange.get_config("lsp.format_on_save") or false
 
 local function toggle()
-  m.autoformat = not m.autoformat
-  local label = m.autoformat and "ENABLED" or "DISABLED"
+  M.autoformat = not M.autoformat
+  local label = M.autoformat and "ENABLED" or "DISABLED"
   Cange.log_info(label .. " format on save", ns)
 end
 
-function m.format()
+function M.format()
   local nls = require("null-ls")
   local nls_src = require("null-ls.sources")
   local available_formatters = nls_src.get_available(vim.bo.filetype, nls.methods.FORMATTING)
@@ -32,13 +32,13 @@ end
 
 ---Auto formats codebase on save if format toggle is active
 ---@param bufnr number
-function m.attach(bufnr)
+function M.attach(bufnr)
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = bufnr,
     group = vim.api.nvim_create_augroup("cange_lsp_auto_format", { clear = true }),
     callback = function()
-      if m.autoformat then
-        m.format()
+      if M.autoformat then
+        M.format()
       end
     end,
   })
@@ -47,4 +47,4 @@ end
 -- Allows to enable/disable auto formatting on save within a session
 vim.api.nvim_create_user_command("LspToggleFormatOnSave", toggle, {})
 
-return m
+return M

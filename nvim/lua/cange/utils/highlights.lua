@@ -1,20 +1,20 @@
 -- Reloadable color highlights
----@type Cange.utils.Highlights
-local m = {}
+---@type CangeUtil.Highlights
+local M = {}
 
 ---Set highlight group by given table.
 ---@param highlights table<string, table> Highlight definition map
 ---@see vim.api.nvim_set_hl
-function m.set_hls(highlights)
+function M.set_hls(highlights)
   for name, val in pairs(highlights) do
     vim.api.nvim_set_hl(0, name, val)
   end
 end
 
----@param p Nightfox.Palette
-function m.setup(p)
+---@param p CangeColorscheme.Palette
+function M.setup(p)
   Cange.log_info("Colors reloaded!", "cange.utils.highlights")
-  m.set_hls({
+  M.set_hls({
     CursorLine = { bg = p.bg2 }, -- disable default
     Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
     Todo = { bg = nil, bold = true },
@@ -56,4 +56,4 @@ function m.setup(p)
   })
 end
 
-return m
+return M

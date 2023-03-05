@@ -1,16 +1,16 @@
 local ns = "[cange.utils]"
 
----@type Cange.utils
-local m = {}
+---@type CangeUtil
+local M = {}
 
-m.log_info = require("cange.utils.notify").info
-m.get_icon = require("cange.utils.icons").get_icon
-m.set_hls = require("cange.utils.highlights").set_hls
+M.log_info = require("cange.utils.notify").info
+M.get_icon = require("cange.utils.icons").get_icon
+M.set_hls = require("cange.utils.highlights").set_hls
 
 ---Get certain config attributes
 ---@param key_path string Dot separated identifier path of `Cange.config`
 ---@return Cange.config|any value of given key or nil if not found.
-function m.get_config(key_path)
+function M.get_config(key_path)
   local prop = require("cange.config")
 
   for _, key in pairs(vim.split(key_path, "%.")) do
@@ -34,7 +34,7 @@ end
 ---Reruns a module file by removing the given module first
 ---@param module_name string
 ---@return table|any
-function m.reload(module_name)
+function M.reload(module_name)
   package.loaded[module_name] = nil
   return require(module_name)
 end
@@ -43,14 +43,14 @@ end
 ---@param key string
 ---@param value any
 ---@return any # Either registered or the value of taken key
-function m.register_key(key, value)
-  if m[key] ~= nil then
+function M.register_key(key, value)
+  if M[key] ~= nil then
     vim.pretty_print(ns, '"' .. key .. '" key already taken')
   else
-    m[key] = value
+    M[key] = value
   end
 
-  return m[key]
+  return M[key]
 end
 
-return m
+return M

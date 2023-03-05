@@ -107,14 +107,14 @@ local function get_menu_hl_group_by(source_name)
   return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "Comment"
 end
 
----@type Cange.cmp.Utils
-local m = {}
+---@type CangeCmp.Util
+local M = {}
 
 ---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable
 ---@param direction number 1 for forward, -1 for backward; defaults to 1
 ---@source https://github.com/LunarVim/LunarVim/blob/master/lua/lvim/core/cmp.lua
 ---@return boolean true if a jumpable luasnip field is found while inside a snippet
-function m.jumpable(direction)
+function M.jumpable(direction)
   if direction == -1 then
     return luasnip.in_snippet() and luasnip.jumpable(-1)
   else
@@ -122,13 +122,13 @@ function m.jumpable(direction)
   end
 end
 
-function m.has_words_before()
+function M.has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 ---@see cmp.FormattingConfig
-function m.format(entry, vim_item)
+function M.format(entry, vim_item)
   local maxwidth = 80
   local source_icons = Cange.get_icon("cmp_source") or {}
   local source_name = entry.source.name
@@ -153,4 +153,4 @@ function m.format(entry, vim_item)
   return vim_item
 end
 
-return m
+return M

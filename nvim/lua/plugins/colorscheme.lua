@@ -1,4 +1,3 @@
----@type Cange.plugins.colorscheme
 return {
   {
     "EdenEast/nightfox.nvim", -- colorscheme
@@ -10,7 +9,7 @@ return {
 
       vim.cmd("colorscheme " .. colorscheme)
 
-      ---@type Nightfox.Palette
+      ---@type CangeColorscheme.Palette
       local palette = require("nightfox.palette").load(colorscheme)
 
       Cange.register_key("palette", palette)

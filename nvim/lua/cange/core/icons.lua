@@ -1,7 +1,5 @@
----@alias Cange.core.Icons table<string, table>
-
----@type Cange.core.Icons
-local m = {}
+---@type CangeCore.Icons
+local M = {}
 
 -- Icons works best with "FiraCode Nerd Font"
 -- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts
@@ -9,7 +7,7 @@ local m = {}
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
-m.ui = {
+M.ui = {
   ArrowRight = "▸ ", -- U+25B8
   Beaker = " ", -- nf-oct-beaker
   Bookmark = " ", -- nf-oct-bookmark
@@ -50,7 +48,7 @@ m.ui = {
   VThinLineLeft = "▏ ", -- U+258F
   Watch = " ", -- nf-oct-clock
 }
-m.documents = {
+M.documents = {
   Briefcase = " ", -- nf-oct-briefcase
   EmptyFolder = " ", -- nf-fa-folder_o
   EmptyOpenFolder = " ", -- nf-fa-folder_open_o
@@ -63,7 +61,7 @@ m.documents = {
   SymlinkFile = " ", --nf-cod-file_symlink_file
   SymlinkFolder = " ", --nf-cod-file_symlink_directory
 }
-m.git = {
+M.git = {
   Add = " ", -- nf-oct-diff_added,
   Mod = " ", -- nf-oct-diff_modified
   Remove = " ", -- nf-oct-diff_removed
@@ -73,16 +71,16 @@ m.git = {
   Branch = " ", -- nf-oct-git_branch
   Commit = " ", -- nf-oct-git_commit
 }
-m.git_states = {
-  unstaged = m.git.Mod,
+M.git_states = {
+  unstaged = M.git.Mod,
   staged = "󱗜 ", -- nf-md-circle_box
   unmerged = " ", -- nf-cod-git_pull_request_draft
-  renamed = m.git.Rename,
-  untracked = m.ui.CircleUnfilled,
-  deleted = m.git.Remove,
-  ignored = m.git.Ignore,
+  renamed = M.git.Rename,
+  untracked = M.ui.CircleUnfilled,
+  deleted = M.git.Remove,
+  ignored = M.git.Ignore,
 }
-m.diagnostics = {
+M.diagnostics = {
   Error = " ", -- nf-oct-stop
   Warn = " ", -- nf-oct-alert
   Info = " ", -- nf-oct-info
@@ -116,9 +114,9 @@ local kinds = {
   Operator = " ",
   TypeParameter = " ",
 }
-m.cmp_kinds = vim.tbl_extend("keep", kinds, {
+M.cmp_kinds = vim.tbl_extend("keep", kinds, {
   Color = " ",
-  Folder = m.documents.Folder .. " ",
+  Folder = M.documents.Folder .. " ",
   Keyword = " ",
   Reference = " ",
   Snippet = " ",
@@ -127,14 +125,14 @@ m.cmp_kinds = vim.tbl_extend("keep", kinds, {
   Value = " ",
 })
 
-m.cmp_source = {
+M.cmp_source = {
   buffer = "﬘ ",
   luasnip = " ", -- nf-fa-cut
   nvim_lsp = " ",
   nvim_lua = " ",
-  path = m.documents.Folder,
-  cmp_tabnine = m.ui.Tabnine,
-  copilot = m.ui.Octoface,
+  path = M.documents.Folder,
+  cmp_tabnine = M.ui.Tabnine,
+  copilot = M.ui.Octoface,
 }
 
-return m
+return M

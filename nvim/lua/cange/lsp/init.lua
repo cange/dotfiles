@@ -55,8 +55,8 @@ local function keymaps(client, bufnr)
   end
 end
 
----@type Cange.lsp
-local m = {}
+---@type CangeLsp
+local M = {}
 
 local function capabilities()
   local caps = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -80,7 +80,7 @@ local default_config = {
 
 ---Sets up individual LSP server handler
 ---@param server_name string
-function m.setup_handler(server_name)
+function M.setup_handler(server_name)
   local found_config, config = pcall(require, "cange.lsp.server_configurations." .. server_name)
   if found_config then
     config = vim.tbl_deep_extend("force", vim.deepcopy(default_config), config)
@@ -97,7 +97,7 @@ function m.setup_handler(server_name)
   end
 end
 
-function m.setup_diagnostics()
+function M.setup_diagnostics()
   local signs = {}
 
   ---@diagnostic disable-next-line: param-type-mismatch
@@ -118,4 +118,4 @@ function m.setup_diagnostics()
   })
 end
 
-return m
+return M
