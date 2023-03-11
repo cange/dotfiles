@@ -13,7 +13,7 @@ end
 
 ---@param p CangeColorscheme.Palette
 function M.setup(p)
-  Cange.log_info("Colors reloaded!", "cange.utils.highlights")
+  Cange.log("Colors reloaded!", { title = "cange.utils.highlights" })
   M.set_hls({
     CursorLine = { bg = p.bg2 }, -- disable default
     Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise

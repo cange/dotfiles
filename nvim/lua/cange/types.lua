@@ -4,17 +4,16 @@
 
 ---@class Cange
 
+-- log
+---@class CangeLog
+
 -- utils
 ---@class CangeUtil
-
----@class CangeUtil.Notify
+---@field palette CangeColorscheme.Palette
 
 ---@class CangeUtil.Highlights
 
 ---@class CangeUtil.WhichKey
-
----@class CangeUtil
----@field palette CangeColorscheme.Palette
 
 ---@class CangeUtil.Icons
 

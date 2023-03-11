@@ -148,7 +148,7 @@ return {
 
       local function toggle_markdown_preview()
         local method = peek.is_open() and "close" or "open"
-        Cange.log_info(method, "Markdown Preview - Peek")
+        Cange.log(method, "Markdown Preview - Peek")
         peek[method]()
       end
 
