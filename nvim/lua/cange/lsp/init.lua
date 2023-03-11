@@ -55,7 +55,7 @@ local function keymaps(client, bufnr)
   end
 end
 
----@type CangeLsp
+---@type CangeLSP.Util
 local M = {}
 
 local function capabilities()

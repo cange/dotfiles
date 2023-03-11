@@ -1,4 +1,4 @@
----@type CangeLsp.Format
+---@type CangeLSP.Format
 local M = {}
 
 local ns = "cange.lsp.format"
@@ -10,7 +10,9 @@ local function toggle()
   Cange.log_info(label .. " format on save", ns)
 end
 
-function M.format()
+---@param opts? CangeLSP.FormatOptions
+function M.format(opts)
+  opts = opts or {}
   local nls = require("null-ls")
   local nls_src = require("null-ls.sources")
   local available_formatters = nls_src.get_available(vim.bo.filetype, nls.methods.FORMATTING)
@@ -18,9 +20,9 @@ function M.format()
   Cange.log_info("Auto format", ns)
 
   vim.lsp.buf.format({
-    async = true,
+    async = opts.async == nil or true and opts.async,
     bufnr = vim.api.nvim_get_current_buf(),
-    timeout_ms = 10000,
+    timeout_ms = opts.timeout_ms or 10000,
     filter = function(client)
       if #available_formatters > 0 then
         return client.name == "null-ls"
@@ -38,7 +40,7 @@ function M.attach(bufnr)
     group = vim.api.nvim_create_augroup("cange_lsp_auto_format", { clear = true }),
     callback = function()
       if M.autoformat then
-        M.format()
+        M.format({ async = false })
       end
     end,
   })

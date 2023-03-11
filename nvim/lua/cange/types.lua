@@ -59,9 +59,15 @@
 ---@class CangeCmp.Util
 
 -- lsp
----@class CangeLsp
+---@class CangeLSP
 
----@class CangeLsp.Format
+---@class CangeLSP.Util
+
+---@class CangeLSP.Format
+
+---@class CangeLSP.FormatOptions
+---@field async? boolean
+---@field timeout_ms? integer
 
 -- core
 ---@class CangeCore
