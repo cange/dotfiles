@@ -6,7 +6,6 @@ local options = {
   timeoutlen = 300, -- max delay until execute command of a key sequence
   ttimeoutlen = 50, -- max time until next key of a key sequence is expected
   list = true, -- show hidden characters
-  listchars = { eol = "", nbsp = "_", tab = "⇥ " },
   updatetime = 50, -- faster completion (4000ms default), delays and poor user experience
 
   -- UI
@@ -79,6 +78,6 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
---
 vim.opt.iskeyword:append({ "-" }) --  considers dash "-" as part of a keyword
 vim.opt.shortmess:append({ c = true }) -- don't give |ins-completion-menu| messages
+vim.opt.listchars:append({ eol = "↵", nbsp = "␣", tab = " ⇥" })
