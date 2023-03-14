@@ -79,7 +79,6 @@ return {
     },
     config = function()
       require("textcase").setup()
-      vim.keymap.set({ "n", "v" }, "<leader>cc", "<cmd>TextCaseOpenTelescope<CR>", { desc = "Text Case" })
       require("telescope").load_extension("textcase")
     end,
   },
@@ -148,7 +147,7 @@ return {
 
       local function toggle_markdown_preview()
         local method = peek.is_open() and "close" or "open"
-        Cange.log(method, "Markdown Preview - Peek")
+        Cange.log(method, { title = "Markdown Preview - Peek" })
         peek[method]()
       end
 

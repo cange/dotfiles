@@ -21,25 +21,7 @@ local function keymaps(client, bufnr)
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 
-  keymap("gd", vim.lsp.buf.definition, "Goto Definition")
-  keymap("gr", "<cmd>Telescope lsp_references<CR>", "Goto References")
-  keymap("gI", vim.lsp.buf.implementation, "Goto Implementation")
-  keymap("gD", vim.lsp.buf.declaration, "Goto Declaration")
-  keymap("gT", vim.lsp.buf.type_definition, "Go to Type")
-  keymap("gj", vim.diagnostic.goto_next, "Next Issue")
-  keymap("gk", vim.diagnostic.goto_prev, "Previous Issue")
-  keymap("gs", vim.lsp.buf.signature_help, "Symbol Info")
-  keymap("qf", vim.lsp.buf.code_action, "Quick Fix")
   keymap("<leader>rn", vim.lsp.buf.rename, "Rename")
-  keymap("<leader>ds", "<cmd>Telescope lsp_document_symbols", "Document Symbols")
-  keymap("<leader>ds", "<cmd>Telescope diagnostics<CR>", "LSP List of Issues")
-
-  -- Lesser used LSP functionality
-  keymap("<leader>wa", vim.lsp.buf.add_workspace_folder, "Workspace Add Folder")
-  keymap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Workspace Remove Folder")
-  keymap("<leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, "[W]orkspace [L]ist Folders")
 
   -- See `:help K` for why this keymap
   keymap("K", vim.lsp.buf.hover, "Hover Documentation")
