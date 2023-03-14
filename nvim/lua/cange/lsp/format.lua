@@ -1,4 +1,11 @@
----@type CangeLSP.Format
+--#region Types
+
+---@class cange.lspFormatOptions
+---@field async? boolean
+---@field timeout_ms? integer
+
+--#endregion
+
 local M = {}
 
 local ns = "cange.lsp.format"
@@ -10,7 +17,7 @@ local function toggle()
   Cange.log(label .. " format on save", { title = ns })
 end
 
----@param opts? CangeLSP.FormatOptions
+---@param opts? cange.lspFormatOptions
 function M.format(opts)
   opts = opts or {}
   local nls = require("null-ls")

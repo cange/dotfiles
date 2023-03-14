@@ -1,5 +1,3 @@
--- Reloadable color highlights
----@type CangeUtil.Highlights
 local M = {}
 
 ---Set highlight group by given table.
@@ -11,7 +9,7 @@ function M.set_hls(highlights)
   end
 end
 
----@param p CangeColorscheme.Palette
+---@param p cange.colorschemePalette
 function M.setup(p)
   Cange.log("Colors reloaded!", { title = "cange.utils.highlights" })
   M.set_hls({

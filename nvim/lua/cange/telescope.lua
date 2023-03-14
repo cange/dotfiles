@@ -10,7 +10,6 @@ local builtin = require("telescope.builtin")
 local themes = require("telescope.themes")
 local transform_mod = require("telescope.actions.mt").transform_mod
 
----@type CangeTelescope
 local M = {}
 
 ---Keep track of the active extension and folders for `live_grep`

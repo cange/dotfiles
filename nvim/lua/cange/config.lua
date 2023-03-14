@@ -1,6 +1,4 @@
----@alias Cange.config table<string, table>
-
----@type Cange.config
+---@class cange.configGroup[]
 local M = {}
 
 M.ui = {

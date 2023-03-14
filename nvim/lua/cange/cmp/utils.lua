@@ -107,7 +107,6 @@ local function get_menu_hl_group_by(source_name)
   return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "Comment"
 end
 
----@type CangeCmp.Util
 local M = {}
 
 ---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable

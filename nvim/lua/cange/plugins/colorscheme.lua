@@ -1,3 +1,37 @@
+--#region Types
+
+---@class cange.colorschemeShade
+---@field base string
+---@field bright string
+---@field dim string
+---@field light boolean
+
+---@class cange.colorschemePalette
+---@field black cange.colorschemeShade
+---@field red cange.colorschemeShade
+---@field green cange.colorschemeShade
+---@field yellow cange.colorschemeShade
+---@field blue cange.colorschemeShade
+---@field magenta cange.colorschemeShade
+---@field cyan cange.colorschemeShade
+---@field white cange.colorschemeShade
+---@field orange cange.colorschemeShade
+---@field pink cange.colorschemeShade
+---@field comment string
+---@field bg0 string
+---@field bg1 string
+---@field bg2 string
+---@field bg3 string
+---@field bg4 string
+---@field fg0 string
+---@field fg1 string
+---@field fg2 string
+---@field fg3 string
+---@field sel0 string
+---@field sel1 string
+
+--#endregion
+
 return {
   {
     "EdenEast/nightfox.nvim", -- colorscheme
@@ -9,7 +43,7 @@ return {
 
       vim.cmd("colorscheme " .. colorscheme)
 
-      ---@type CangeColorscheme.Palette
+      ---@type cange.colorschemePalette
       local palette = require("nightfox.palette").load(colorscheme)
 
       Cange.register_key("palette", palette)

@@ -1,10 +1,9 @@
----@type CangeCore.WhichKey.group[]
+---@type cange.keymapsMappingGroup[]
 local M = {}
 
 -- All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
 -- each plugin by it self.
 
----@enum CangeCore.WhichKey.group.editor
 M.editor = {
   title = "Editor",
   subleader = "e",
@@ -25,7 +24,6 @@ M.editor = {
     ["\\"] = { cmd = "<cmd>NvimTreeToggle<CR>", desc = "File Explorer", primary = true },
   },
 }
----@enum CangeCore.WhichKey.group.git
 M.git = {
   title = "Git",
   subleader = "g",
@@ -52,7 +50,6 @@ M.git = {
     u = { cmd = "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Undo stage hunk" },
   },
 }
----@enum CangeCore.WhichKey.group.lsp
 M.lsp = {
   title = "LSP",
   subleader = "l",
@@ -68,7 +65,6 @@ M.lsp = {
     ["<F2>"] = { cmd = '<cmd>lua require("cange.lsp.format").format()<CR>', desc = "Format", primary = true },
   },
 }
----@enum CangeCore.WhichKey.group.plugins
 M.plugins = {
   title = "Plugins",
   subleader = "p",
@@ -80,7 +76,6 @@ M.plugins = {
     i = { cmd = "<cmd>Lazy show<CR>", desc = "Plugins Show" },
   },
 }
----@enum CangeCore.WhichKey.group.session
 M.session = {
   title = "Session",
   subleader = "b",
@@ -91,7 +86,6 @@ M.session = {
     x = { cmd = "<cmd>DeleteSession<CR>", desc = "Delete Session" },
   },
 }
----@enum CangeCore.WhichKey.group.treesitter
 M.treesitter = {
   title = "Tree-sitter",
   subleader = "t",
@@ -101,7 +95,6 @@ M.treesitter = {
     r = { cmd = "<cmd>TSToggle rainbow<CR>", desc = "Toggle Rainbow" },
   },
 }
----@enum CangeCore.WhichKey.group.telescope
 M.telescope = {
   title = "Search",
   subleader = "s",

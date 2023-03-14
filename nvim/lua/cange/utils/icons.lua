@@ -1,4 +1,13 @@
----@type CangeUtil.Icons
+--#region Types
+
+---@class cange.devIconsPreset
+---@field icon? string Path of an icon shape
+---@field color? string Hex color value
+---@field cterm_color? string
+---@field name? string
+
+--#endregion
+
 local M = {}
 local ns = "[cange.utils.icons]"
 
@@ -14,7 +23,7 @@ local function get_single_icon(icon_list, name)
   return result
 end
 
----@param group_id string Dot separated identifier path of `CangeCore.icons`
+---@param group_id string Dot separated path of icon group
 ---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
 ---@return table|string|nil # The icon symbol or nil if not found
 function M.get_icon(group_id, ...)
@@ -54,7 +63,7 @@ end
 
 ---@param filetype string
 ---@param name string
----@param opts? CangeUtil.IconsPreset
+---@param opts? cange.devIconsPreset
 ---@return table
 local function create_icon_by_filetype(filetype, name, opts)
   local devicons = require("nvim-web-devicons")
@@ -72,7 +81,7 @@ local function create_icon_by_filetype(filetype, name, opts)
   return vim.tbl_extend("force", config, opts)
 end
 
----@type CangeUtil.IconsPreset[]
+---@type cange.devIconsPreset[]
 local presets = {
   spec = {
     icon = M.get_icon("ui.Beaker"),

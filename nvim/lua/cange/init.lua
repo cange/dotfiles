@@ -1,3 +1,9 @@
+--#region Types
+
+---@class cange
+
+--#endregion
+
 -- Order is important
 
 -- 1st : setup plugin manager

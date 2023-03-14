@@ -1,7 +1,21 @@
-local ns = "[cange.utils.whichkey]"
+--#region Types
+
+---@class cange.keymapsMapping
+---@field [1] string|function command of the keybinding
+---@field desc string Description of the keybinding
+---@field primary? boolean Determines whether or not to show a on inital "which-key" window
+
+---@class cange.keymapsMappingGroup
+---@field mappings table<string, cange.keymapsMapping> The actual key bindings
+---@field subleader? string Additional key to enter the certain group
+---@field title string Is displayed as group name
+
+--#endregion
+
+-- local ns = "[cange.utils.whichkey]"
 
 ---@param group_id string|nil
----@return CangeCore.WhichKey.group[] # All defined groups or one when group_id is specified
+---@return cange.keymapsMappingGroup|cange.keymapsMappingGroup[] # All defined groups or one when group_id is specified
 local function get_group(group_id)
   local ok, groups = pcall(require, "cange.core.whichkey")
   if not ok then
@@ -10,7 +24,7 @@ local function get_group(group_id)
   return group_id == nil and groups[group_id] or groups
 end
 
----@param group CangeCore.WhichKey.group
+---@param group cange.keymapsMappingGroup
 ---@return table<string, table> # WhichKey mappings
 local function get_mappings_by_group(group)
   local section = {}
@@ -30,7 +44,7 @@ local function get_mappings_by_group(group)
   return section
 end
 
----@param group CangeCore.WhichKey.group Key of a keybinding block
+---@param group cange.keymapsMappingGroup Key of a keybinding block
 ---@param target_mappings table List to store mappings
 local function fetch_primary_key_mappings(group, target_mappings)
   -- vim.pretty_print(ns, 'primary_mappings', vim.tbl_keys(group))
@@ -45,10 +59,9 @@ local function fetch_primary_key_mappings(group, target_mappings)
   end
 end
 
----@type CangeCore.WhichKey
 local M = {}
 
----@return CangeCore.WhichKey.group[]
+---@return cange.keymapsMappingGroup[]
 function M.mappings()
   local primary = {}
   local secondary = {}

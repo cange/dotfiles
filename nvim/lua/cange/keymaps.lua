@@ -1,5 +1,3 @@
--- local ns = "[cange.keymaps.common]"
---
 local keymaps = {
   { "v", "p", '"_dP', { desc = "Clipboard: keep content" } },
   { "n", "<C-a>", "gg<S-v>G", { desc = "Select all content" } },

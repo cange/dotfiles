@@ -1,22 +1,21 @@
----@type CangeLog
 local M = {}
 
----@enum CangeLogLevels
+---@enum cange.logLevels
 M.levels = {
-  DEBUG = 1,
-  ERROR = 4,
-  INFO = 2,
-  OFF = 5,
   TRACE = 0,
+  DEBUG = 1,
+  INFO = 2,
   WARN = 3,
+  ERROR = 4,
+  OFF = 5,
 }
 
----@class CangeLog.options
+---@class cange.logOptions
 ---@field title? string
----@field level? CangeLogLevels|nil
+---@field level? cange.logLevels
 
 ---@param msg string message
----@param opts? CangeLog.options
+---@param opts? cange.logOptions
 function M.log(msg, opts)
   opts = opts or {}
   local title = opts.title ~= nil and type(opts.title) == "string" and opts.title or ""
