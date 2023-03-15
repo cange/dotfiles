@@ -223,7 +223,7 @@ return {
         ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
       })
 
-      wk.register(require("cange.utils.keymaps").mappings(), {})
+      wk.register(require("cange.utils.keymaps").whichkey_mappings(), {})
     end,
   },
 }

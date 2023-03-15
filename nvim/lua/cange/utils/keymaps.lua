@@ -3,7 +3,7 @@
 ---@class cange.keymapsMapping
 ---@field [1] string lhs/key command of the keybinding
 ---@field [2] string|function command of the keybinding
----@field desc string Description of the keybinding
+---@field [3] string Description of the keybinding
 ---@field mode? string|table Mode short-name ("n", "i", "v", "x", …)
 
 ---@class cange.keymapsMappingGroup
@@ -13,27 +13,17 @@
 
 --#endregion
 
----@param keymap cange.keymapsMapping
----@param group_mappings table
-local function assign_to_group(keymap, group_mappings)
-  local key = keymap[1]
-  local cmd = keymap[2]
-  local mapping = { cmd, keymap.desc, keymap.mode }
-  if keymap.mode then
-    mapping = vim.tbl_extend("keep", mapping, { mode = keymap.mode })
-  end
-  group_mappings[key] = mapping
-end
-
 ---@param group cange.keymapsMappingGroup
 ---@return table<string, table> # WhichKey mappings
-local function get_mappings_by_group(group)
+local function define_mappings_of(group)
   local section = {}
   section[group.leader] = { name = group.name }
   local mappings = section[group.leader]
 
-  for _, keymap in pairs(group.mappings) do
-    assign_to_group(keymap, mappings)
+  for _, mapping in pairs(group.mappings) do
+    local keymap = vim.deepcopy(mapping)
+    local key = table.remove(keymap, 1)
+    mappings[key] = keymap
   end
 
   return section
@@ -42,12 +32,12 @@ end
 local M = {}
 
 ---@return cange.keymapsMappingGroup[]
-function M.mappings()
+function M.whichkey_mappings()
   local mappings = {}
   local groups = require("cange.keymaps").groups
 
   for _, group in pairs(groups) do
-    mappings = vim.tbl_extend("keep", mappings, get_mappings_by_group(group))
+    mappings = vim.tbl_extend("keep", mappings, define_mappings_of(group))
   end
 
   return mappings
