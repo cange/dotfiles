@@ -21,9 +21,7 @@ return {
           lualine_a = {
             {
               "mode",
-              fmt = function(mode)
-                return string.sub(mode, 0, 1)
-              end,
+              fmt = function(mode) return string.sub(mode, 0, 1) end,
             },
           },
           lualine_b = {

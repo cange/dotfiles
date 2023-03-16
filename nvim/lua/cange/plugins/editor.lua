@@ -142,13 +142,7 @@ return {
   { -- bookmark buffers
     "ThePrimeagen/harpoon",
     lazy = false,
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("telescope").load_extension("harpoon")
-    end,
+    dependencies = { "nvim-lua/plenary.nvim" },
   },
 
   { -- extends auto-session through Telescope
@@ -187,9 +181,7 @@ return {
 
   { -- shows LSP initialization progress
     "j-hui/fidget.nvim",
-    config = function()
-      require("fidget").setup({ text = { spinner = "dots" } })
-    end,
+    config = function() require("fidget").setup({ text = { spinner = "dots" } }) end,
   },
 
   { -- font icon set

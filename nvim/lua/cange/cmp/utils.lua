@@ -1,8 +1,6 @@
 local ns = "[cange.cmp.utils]"
 local found_luasnip, luasnip = pcall(require, "luasnip")
-if not found_luasnip then
-  return
-end
+if not found_luasnip then return end
 
 local win_get_cursor = vim.api.nvim_win_get_cursor
 local get_current_buf = vim.api.nvim_get_current_buf
@@ -12,14 +10,10 @@ local get_current_buf = vim.api.nvim_get_current_buf
 local function seek_luasnip_cursor_node()
   -- TODO(kylo252): upstream this
   -- for outdated versions of luasnip
-  if not luasnip.session.current_nodes then
-    return false
-  end
+  if not luasnip.session.current_nodes then return false end
 
   local node = luasnip.session.current_nodes[get_current_buf()]
-  if not node then
-    return false
-  end
+  if not node then return false end
 
   local snippet = node.parent.snippet
   local exit_node = snippet.insert_nodes[0]
@@ -135,9 +129,7 @@ function M.format(entry, vim_item)
 
   ---@see https://github.com/tzachar/cmp-tabnine#show_prediction_strength
   local tabnine_detail = (entry.completion_item.data or {}).detail
-  if tabnine_detail and tabnine_detail:find(".*%%.*") then
-    strength = tabnine_detail
-  end
+  if tabnine_detail and tabnine_detail:find(".*%%.*") then strength = tabnine_detail end
 
   ---@diagnostic disable-next-line: param-type-mismatch
   if vim.tbl_contains(vim.tbl_keys(source_icons), source_name) then

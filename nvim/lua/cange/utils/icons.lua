@@ -28,15 +28,11 @@ end
 ---@return table|string|nil # The icon symbol or nil if not found
 function M.get_icon(group_id, ...)
   local ok, icons = pcall(require, "cange.core.icons")
-  if not ok then
-    print(ns, '"cange.core.icons" not found!')
-  end
+  if not ok then print(ns, '"cange.core.icons" not found!') end
   local parts = { ... }
   local last_item = parts[#parts]
 
-  if type(last_item) == "table" then
-    table.remove(parts, #parts)
-  end
+  if type(last_item) == "table" then table.remove(parts, #parts) end
 
   local group_parts = vim.split(group_id, "%.")
   if #group_parts > 1 then
@@ -108,8 +104,6 @@ local function redefine_icons()
   devicons.set_icon({ ["stories.mdx"] = create_icon_by_filetype("mdx", "StorybookMdx", presets.storybook) })
 end
 
-function M.setup()
-  redefine_icons()
-end
+function M.setup() redefine_icons() end
 
 return M

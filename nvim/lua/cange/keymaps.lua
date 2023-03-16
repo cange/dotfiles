@@ -108,6 +108,11 @@ M.groups = {
       { "c", "<cmd>Telescope colorscheme<CR>", "Switch Colorscheme" },
       { "k", "<cmd>e ~/.config/nvim/lua/cange/keymaps.lua<CR>", "Edit keymaps" },
       { "c", "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>", "Edit config" },
+      {
+        "n",
+        "<cmd>lua require('telescope').extensions.notify.notify({ layout_strategy = 'vertical' })<CR>",
+        "Show notifications",
+      },
       -- session
       { "F", "<cmd>SearchSession<CR>", "Find session" },
       { "R", "<cmd>RestoreSession<CR>", "Recent session" },
@@ -176,7 +181,6 @@ M.groups = {
       { "B", "<cmd>Telescope buffers<CR>", "Search buffers" },
       { "C", "<cmd>Telescope commands<CR>", "Search commands" },
       { "H", '<cmd>lua require("telescope.builtin").highlights()<CR>', "Search highlights" },
-      { "N", "<cmd>Telescope notify<CR>", "Search notifications" },
       { "b", '<cmd>lua require("cange.telescope").file_browser()<CR>', "Search in current directory" },
       { "h", "<cmd>Telescope help_tags<CR>", "Search nvim help" },
       { "k", "<cmd>Telescope keymaps<CR>", "Search keybindings" },

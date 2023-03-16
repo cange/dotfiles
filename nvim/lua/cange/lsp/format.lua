@@ -31,9 +31,7 @@ function M.format(opts)
     bufnr = vim.api.nvim_get_current_buf(),
     timeout_ms = opts.timeout_ms or 10000,
     filter = function(client)
-      if #available_formatters > 0 then
-        return client.name == "null-ls"
-      end
+      if #available_formatters > 0 then return client.name == "null-ls" end
       return client.supports_method("textDocument/formatting")
     end,
   })
@@ -46,9 +44,7 @@ function M.attach(bufnr)
     buffer = bufnr,
     group = vim.api.nvim_create_augroup("cange_lsp_auto_format", { clear = true }),
     callback = function()
-      if M.autoformat then
-        M.format({ async = false })
-      end
+      if M.autoformat then M.format({ async = false }) end
     end,
   })
 end

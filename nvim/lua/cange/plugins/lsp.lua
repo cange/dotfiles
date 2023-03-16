@@ -47,9 +47,11 @@ return {
       })
 
       -- Install all necessary packages at once
-      vim.api.nvim_create_user_command("MasonInstallAll", function()
-        vim.cmd("MasonInstall " .. table.concat(sources, " "))
-      end, {})
+      vim.api.nvim_create_user_command(
+        "MasonInstallAll",
+        function() vim.cmd("MasonInstall " .. table.concat(sources, " ")) end,
+        {}
+      )
 
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/
       local nls = require("null-ls")

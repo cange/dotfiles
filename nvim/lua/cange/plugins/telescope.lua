@@ -3,12 +3,13 @@ return {
   "nvim-telescope/telescope.nvim", -- fuzzy finder over lists
   dependencies = {
     "BurntSushi/ripgrep", -- telescope live grep suggestions
+    "ThePrimeagen/harpoon", -- bookmark buffers
     "nvim-lua/plenary.nvim", -- common lua functions - https://github.com/nvim-lua/plenary.nvim
     "nvim-telescope/telescope-file-browser.nvim", -- browser extension
     "nvim-telescope/telescope-project.nvim", -- switch between projects
     "nvim-telescope/telescope-ui-select.nvim", -- improved select UI
+    "rcarriga/nvim-notify",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- improves search performance
-    { "ThePrimeagen/harpoon", dependencies = "nvim-lua/plenary.nvim" }, -- bookmark buffers
   },
   config = function()
     local actions = require("telescope.actions")
@@ -91,6 +92,7 @@ return {
 
     -- extensions
     telescope.load_extension("fzf")
+    telescope.load_extension("harpoon")
     telescope.load_extension("notify")
     telescope.load_extension("project")
     telescope.load_extension("ui-select")

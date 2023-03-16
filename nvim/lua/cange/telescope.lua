@@ -22,9 +22,7 @@ local live_grep_filters = {
 local function run_live_grep(current_input)
   -- TODO: Resume old one with same options somehow
   builtin.live_grep({
-    additional_args = live_grep_filters.extension and function()
-      return { "-g", live_grep_filters.extension }
-    end,
+    additional_args = live_grep_filters.extension and function() return { "-g", live_grep_filters.extension } end,
     default_text = current_input,
   })
 end
@@ -36,9 +34,7 @@ M.actions = transform_mod({
     local current_picker = action_state.get_current_picker(prompt_bufnr)
 
     vim.ui.input({ default = "*.", prompt = "File type: " }, function(input)
-      if input == nil then
-        return
-      end
+      if input == nil then return end
 
       live_grep_filters.extension = input
       actions._close(prompt_bufnr, current_picker.initial_mode == "insert")
@@ -104,13 +100,9 @@ function M.file_browser()
       end
 
       -- navigate up in dir tree
-      keymap("i", "-", function()
-        modify_cwd(current_picker.cwd .. "/..")
-      end)
+      keymap("i", "-", function() modify_cwd(current_picker.cwd .. "/..") end)
       -- up to user root
-      keymap("i", "~", function()
-        modify_cwd(vim.fn.expand("~"))
-      end)
+      keymap("i", "~", function() modify_cwd(vim.fn.expand("~")) end)
 
       return true
     end,

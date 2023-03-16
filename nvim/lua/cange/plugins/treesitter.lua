@@ -33,8 +33,6 @@ return {
   { -- autoclose and autorename html tags
     "windwp/nvim-ts-autotag",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
+    config = function() require("nvim-ts-autotag").setup() end,
   },
 }

@@ -48,9 +48,7 @@ return {
 
       Cange.register_key("palette", palette)
 
-      local function assign_highlights()
-        Cange.reload("cange.utils.highlights").setup(palette)
-      end
+      local function assign_highlights() Cange.reload("cange.utils.highlights").setup(palette) end
 
       assign_highlights()
 

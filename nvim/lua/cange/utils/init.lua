@@ -26,9 +26,7 @@ end
 ---Pretty print shorthand
 ---@param value any
 ---@param ... any
-function P(value, ...)
-  vim.pretty_print(value, ...)
-end
+function P(value, ...) vim.pretty_print(value, ...) end
 
 ---Reruns a module file by removing the given module first
 ---@param module_name string

@@ -36,12 +36,7 @@ return {
       })
 
       vim.notify = function(msg, ...)
-        if msg:match("character_offset must be called") then
-          return
-        end
-        if msg:match("method textDocument") then
-          return
-        end
+        if msg:match("character_offset must be called") or msg:match("method textDocument") then return end
 
         require("notify")(msg, ...)
       end
@@ -65,12 +60,8 @@ return {
     end,
   },
 
-  { -- comment toggle
-    "numToStr/Comment.nvim",
-    config = function()
-      require("Comment").setup()
-    end,
-  },
+  -- comment toggle
+  { "numToStr/Comment.nvim", config = function() require("Comment").setup() end },
 
   { -- text case converter (camel case, etc.,
     "johmsalas/text-case.nvim",
@@ -98,9 +89,7 @@ return {
       -- If you want insert `(` after select function or method item
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       local found_cmp, cmp = pcall(require, "cmp")
-      if not found_cmp then
-        return
-      end
+      if not found_cmp then return end
 
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
@@ -176,19 +165,11 @@ return {
     end,
   },
 
-  { -- smooth scrolling
-    "karb94/neoscroll.nvim",
-    config = function()
-      require("neoscroll").setup()
-    end,
-  },
+  -- smooth scrolling
+  { "karb94/neoscroll.nvim", config = function() require("neoscroll").setup() end },
 
-  { -- Hex color highlighter
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
-  },
+  -- Hex color highlighter
+  { "norcalli/nvim-colorizer.lua", config = function() require("colorizer").setup() end },
 
   { "mg979/vim-visual-multi" }, -- multi search and replace
 
