@@ -1,4 +1,12 @@
 {
+  "binding.pry": {
+    "prefix": "pry",
+    "body": "binding.pry"
+  },
+  "puts": {
+    "prefix": "put",
+    "body": "puts \"--- ${1:param}: #{$1}\""
+  },
   "wlw_alert_block(…)": {
     "prefix": "ale",
     "body": "wlw_alert_block(${1:message}, type: ${2|info,success,warning,danger|})$3"

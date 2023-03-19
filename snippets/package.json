@@ -11,27 +11,27 @@
           "typescript",
           "vue"
         ],
-        "path": "./javascript/general.json"
+        "path": "./javascript.json"
       },
       {
         "language": [
           "javascript",
           "typescript"
         ],
-        "path": "./javascript/jest.json"
+        "path": "./jest.json"
       },
       {
         "language": [
           "vue"
         ],
-        "path": "./javascript/vue.json"
+        "path": "./vue.json"
       },
       {
         "language": [
           "javascript",
           "typescript"
         ],
-        "path": "./javascript/cypress.json"
+        "path": "./cypress.json"
       },
       {
         "language": [
@@ -50,17 +50,11 @@
       },
       {
         "language": [
+          "slim",
           "eruby",
           "ruby"
         ],
-        "path": "./ruby/visable.json"
-      },
-      {
-        "language": [
-          "eruby",
-          "ruby"
-        ],
-        "path": "./ruby/general.json"
+        "path": "./ruby.json"
       },
       {
         "language": [
