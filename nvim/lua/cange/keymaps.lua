@@ -117,10 +117,11 @@ M.groups = {
     leader = "<leader>e",
     mappings = {
       -- stylua: ignore start
-      { "S", '<cmd>lua require("luasnip").cleanup()<CR>',                       "Reset snippets UI" },
-      { "c", "<cmd>Telescope colorscheme<CR>",                                  "Switch Colorscheme" },
-      { "k", "<cmd>e ~/.config/nvim/lua/cange/keymaps.lua<CR>",                 "Edit keymaps" },
+      { "C", "<cmd>Telescope colorscheme<CR>",                                  "Switch Colorscheme" },
+      { "R", '<cmd>lua require("luasnip").cleanup()<CR>',                       "Reset snippets UI" },
       { "c", "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>",                  "Edit config" },
+      { "i", "<cmd>Lazy show<CR>",                                              "Plugin info" },
+      { "k", "<cmd>e ~/.config/nvim/lua/cange/keymaps.lua<CR>",                 "Edit keymaps" },
       {
         "n",
         "<cmd>lua require('telescope').extensions.notify.notify({ layout_strategy = 'vertical' })<CR>",
@@ -129,7 +130,7 @@ M.groups = {
       -- session
       { "F", "<cmd>SearchSession<CR>",                                          "Find session" },
       { "R", "<cmd>RestoreSession<CR>",                                         "Recent session" },
-      { "s", "<cmd>SaveSession<CR>",                                            "Save session" },
+      { "S", "<cmd>SaveSession<CR>",                                            "Save session" },
       { "x", "<cmd>DeleteSession<CR>",                                          "Delete session" },
       -- workspace
       { "a", vim.lsp.buf.add_workspace_folder,                                  "Add workspace" },
@@ -179,19 +180,6 @@ M.groups = {
       { "s", "<cmd>Telescope lsp_document_symbols<CR>",                         "Document Symbols" },
       { "h", "<cmd>TSHighlightCapturesUnderCursor<CR>",                         "Highlight info" },
       { "p", "<cmd>TSPlaygroundToggle<CR>",                                     "Playground" },
-      -- stylua: ignore end
-    },
-  },
-  {
-    name = "Plugins",
-    leader = "<leader>p",
-    mappings = {
-    -- stylua: ignore start
-      { "S", "<cmd>Lazy health<CR>",                                            "Plugins status" },
-      { "d", "<cmd>Telescope lazy<CR>",                                         "Plugins details" },
-      { "h", "<cmd>Lazy help<CR>",                                              "Plugins help" },
-      { "i", "<cmd>Lazy show<CR>",                                              "Plugins show" },
-      { "s", "<cmd>Lazy sync<CR>",                                              "Plugins sync" },
       -- stylua: ignore end
     },
   },
