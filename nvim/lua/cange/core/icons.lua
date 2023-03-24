@@ -21,6 +21,7 @@ M.ui = {
   Close = " ", -- nf-oct-x
   Code = " ", -- nf-oct-code
   Comment = " ", -- nf-oct-comment
+  Cut = " ", -- nf-fa-cut
   Dashboard = " ", -- nf-oct-dashboard
   Gear = " ", -- nf-oct-gear
   History = " ", -- nf-oct-history
@@ -127,7 +128,7 @@ M.cmp_kinds = vim.tbl_extend("keep", kinds, {
 
 M.cmp_source = {
   buffer = "﬘ ",
-  luasnip = " ", -- nf-fa-cut
+  luasnip = M.ui.Cut,
   nvim_lsp = " ",
   nvim_lua = " ",
   path = M.documents.Folder,

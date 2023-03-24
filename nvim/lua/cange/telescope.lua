@@ -50,24 +50,27 @@ function M.live_grep()
   builtin.live_grep()
 end
 
----Search with the neovim folder only
 function M.browse_nvim()
-  local opts = {
+  builtin.find_files({
     cwd = "~/.config/nvim",
     previewer = false,
     prompt_title = Cange.get_icon("ui.Gear") .. " NeoVim Config",
-    shorten_path = false,
-  }
-
-  builtin.find_files(opts)
+  })
 end
 
----Align diagnostics dialogue UI
+function M.browse_snippets()
+  builtin.find_files({
+    cwd = "~/.config/snippets",
+    previewer = true,
+    prompt_title = Cange.get_icon("ui.Cut") .. " Snippets",
+  })
+end
+
 function M.diagnostics_log()
   builtin.diagnostics(themes.get_ivy({
     bufnr = 0,
     initial_mode = "normal",
-    no_listed = true, -- if true show only listed buffersw
+    no_listed = true, -- if true, shows only listed buffers
     previewer = false,
     prompt_title = Cange.get_icon("ui.Stethoscope") .. " Diagnostics Log",
   }))
@@ -82,10 +85,9 @@ function M.browse_workspace()
   })
 end
 
--- File browser
 function M.file_browser()
   local path = "%:p:h"
-  local opts = {
+  telescope.extensions.file_browser.file_browser({
     cwd = vim.fn.expand(path),
     path = path,
     attach_mappings = function(prompt_bufnr, keymap)
@@ -106,9 +108,7 @@ function M.file_browser()
 
       return true
     end,
-  }
-
-  telescope.extensions.file_browser.file_browser(opts)
+  })
 end
 
 return M

@@ -118,10 +118,11 @@ M.groups = {
     mappings = {
       -- stylua: ignore start
       { "C", "<cmd>Telescope colorscheme<CR>",                                  "Switch Colorscheme" },
+      { "P", "<cmd>Lazy show<CR>",                                              "Plugin info" },
       { "R", '<cmd>lua require("luasnip").cleanup()<CR>',                       "Reset snippets UI" },
       { "c", "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>",                  "Edit config" },
-      { "i", "<cmd>Lazy show<CR>",                                              "Plugin info" },
       { "k", "<cmd>e ~/.config/nvim/lua/cange/keymaps.lua<CR>",                 "Edit keymaps" },
+      { "s", '<cmd>lua require("cange.telescope").browse_snippets()<CR>',       "Edit snippets" },
       {
         "n",
         "<cmd>lua require('telescope').extensions.notify.notify({ layout_strategy = 'vertical' })<CR>",
