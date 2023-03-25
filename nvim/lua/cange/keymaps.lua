@@ -90,7 +90,7 @@ M.groups = {
       { "|", "<C-W>v",                                                          "Split window right" },
       {
         "<leader>x",
-        '<cmd>write<CR><cmd>luafile %<CR><cmd>lua Cange.log("Saved and executed", { title = "File" })<CR>',
+        "<cmd>write<CR><cmd>lua Cange.reload('cange'); Cange.log('Saved and executed', { title = 'File' })<CR>",
         "Reload current file",
       },
       -- stylua: ignore end
@@ -117,26 +117,32 @@ M.groups = {
     leader = "<leader>e",
     mappings = {
       -- stylua: ignore start
-      { "C", "<cmd>Telescope colorscheme<CR>",                                  "Switch Colorscheme" },
-      { "P", "<cmd>Lazy show<CR>",                                              "Plugin info" },
-      { "R", '<cmd>lua require("luasnip").cleanup()<CR>',                       "Reset snippets UI" },
-      { "c", "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>",                  "Edit config" },
-      { "k", "<cmd>e ~/.config/nvim/lua/cange/keymaps.lua<CR>",                 "Edit keymaps" },
-      { "s", '<cmd>lua require("cange.telescope").browse_snippets()<CR>',       "Edit snippets" },
-      {
-        "n",
-        "<cmd>lua require('telescope').extensions.notify.notify({ layout_strategy = 'vertical' })<CR>",
-        "Show notifications",
-      },
+      -- edits
+      { "1", '<cmd>lua require("cange.telescope").browse_snippets()<CR>',       "Edit snippets" },
+      { "2", "<cmd>e ~/.config/nvim/lua/cange/keymaps.lua<CR>",                 "Edit keymaps" },
+      { "3", "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>",                 "Edit options" },
+      { "4", "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>",                  "Edit config" },
+      -- toolings
+      { "5", "<cmd>Lazy show<CR>",                                              "Plugin info" },
+      { "6", "<cmd>NullLsInfo<CR>",                                             "Null-ls info" },
+      { "7", "<cmd>Mason<CR>",                                                  "Mason info" },
+      { "8", "<cmd>LspInfo<CR>",                                                "LSP info" },
       -- session
       { "F", "<cmd>SearchSession<CR>",                                          "Find session" },
       { "R", "<cmd>RestoreSession<CR>",                                         "Recent session" },
       { "S", "<cmd>SaveSession<CR>",                                            "Save session" },
-      { "x", "<cmd>DeleteSession<CR>",                                          "Delete session" },
-      -- workspace
-      { "a", vim.lsp.buf.add_workspace_folder,                                  "Add workspace" },
-      { "r", vim.lsp.buf.remove_workspace_folder,                               "Remove workspace" },
+      { "X", "<cmd>DeleteSession<CR>",                                          "Delete session" },
+      -- others
+      { "l", "<cmd>LspToggleFormatOnSave<CR>",                                  "Toggle format on save" },
+      { "s", "<cmd>lua vim.o.spell = not vim.o.spell<CR>",                      "Toggle spelling" },
+      { "c", "<cmd>Telescope colorscheme<CR>",                                  "Change colorscheme" },
+      { "C", '<cmd>lua require("luasnip").cleanup()<CR>',                       "Reset snippets UI" },
       { "p", "<cmd>lua require('telescope').extensions.project.project()<CR>",  "Switch workspace" },
+      {
+        "N",
+        "<cmd>lua require('telescope').extensions.notify.notify({ layout_strategy = 'vertical' })<CR>",
+        "Show notifications",
+      },
       -- stylua: ignore end
     },
   },
@@ -170,10 +176,6 @@ M.groups = {
       { "D", "<cmd>Telescope diagnostics<CR>",                                  "Workspace diagnostics" },
       { "d", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
       { "a", vim.lsp.buf.code_action,                                           "Code actions" },
-      -- LSP tools
-      { "n", "<cmd>NullLsInfo<CR>",                                             "Null-ls info" },
-      { "m", "<cmd>Mason<CR>",                                                  "Mason LSP sync" },
-      { "i", "<cmd>LspInfo<CR>",                                                "LSP info" },
       -- formatter
       { "f", "<cmd>LspToggleFormatOnSave<CR>",                                  "Toggle format on save" },
       { "c", "<cmd>TextCaseOpenTelescope<CR>",                                  "Change Case", mode = { "v", "n" } },

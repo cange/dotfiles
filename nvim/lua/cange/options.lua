@@ -14,13 +14,15 @@ local options = {
   laststatus = 3, -- show one global statusline for all windows
   mouse = "a", -- allow the mouse to be used in editor
   number = true, -- set numbered lines
+  relativenumber = false, -- set relative numbered lines
   numberwidth = 3, -- set number column width to 2 {default 4}
-  pumblend = 10, -- transparency of popup-menus 0 (none) to 100 (full)
   showtabline = 1, -- always show tabs
-  -- relativenumber = true, -- set relative numbered lines
   termguicolors = true, -- set term gui colors (most terminals support this)
   title = true, -- Update terminal window title
-  winblend = 2, -- transparency of popup-menus 0 (none) to 100 (full)
+  -- transparency
+  pumblend = 16, -- transparency of popup-menus 0 (none) to 100 (full)
+  winblend = 0, -- transparency of floating windows 0 (none) to 100 (full)
+
   -- UI - command prompt
   cmdheight = 0, -- space of the command line for displaying messages
   showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
@@ -81,3 +83,10 @@ end
 vim.opt.iskeyword:append({ "-" }) --  considers dash "-" as part of a keyword
 vim.opt.shortmess:append({ c = true }) -- don't give |ins-completion-menu| messages
 vim.opt.listchars:append({ eol = "↵", nbsp = "␣", tab = " ⇥" })
+
+-- Basic Keymaps
+-- Set <space> as the leader key
+-- See `:help mapleader`
+-- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "

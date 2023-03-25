@@ -54,6 +54,7 @@ return {
         scroll_strategy = "cycle",
         selection_caret = " " .. Cange.get_icon("ui.ChevronRight") .. "  ",
         sorting_strategy = "ascending",
+        winblend = vim.opt.winblend:get(),
       },
       extensions = {
         ["ui-select"] = { --https://github.com/nvim-telescope/telescope-ui-select.nvim#telescope-setup-and-configuration

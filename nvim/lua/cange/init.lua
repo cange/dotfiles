@@ -1,12 +1,11 @@
---#region Types
-
 ---@class cange
-
---#endregion
 
 -- Order is important
 
--- 1st : setup plugin manager
+-- 1st : setup
+Cange = require("cange.utils")
+Cange.reload("cange.options")
+
 -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -21,13 +20,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Basic Keymaps
--- Set <space> as the leader key
--- See `:help mapleader`
--- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- 2nd : initialize
 require("lazy").setup("cange.plugins", {
   checker = {
@@ -35,10 +27,7 @@ require("lazy").setup("cange.plugins", {
   },
 })
 
--- 3rd : globals
-Cange = require("cange.utils")
-
--- 4th : rest
+-- 3th : rest
 Cange.reload("cange.core")
 Cange.reload("cange.keymaps")
 Cange.reload("cange.telescope")
