@@ -8,10 +8,9 @@ function M.set_hls(highlights)
     vim.api.nvim_set_hl(0, name, val)
   end
 end
-
 ---@param p cange.colorschemePalette
-function M.setup(p)
-  Cange.log("Colors reloaded!", { title = "cange.utils.highlights" })
+---@param init? boolean|nil
+function M.setup(p, init)
   M.set_hls({
     CursorLine = { bg = p.bg2 }, -- disable default
     Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
@@ -52,6 +51,10 @@ function M.setup(p)
     CmpItemKindTabnine = { fg = p.pink.base },
     CmpItemKindCopilot = { fg = p.cyan.base },
   })
+
+  if not init then
+    vim.schedule(function() Cange.log("Colors reloaded!", { title = "cange.utils.highlights" }) end)
+  end
 end
 
 return M

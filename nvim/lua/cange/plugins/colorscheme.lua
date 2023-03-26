@@ -48,9 +48,9 @@ return {
 
       Cange.register_key("palette", palette)
 
-      local function assign_highlights() Cange.reload("cange.utils.highlights").setup(palette) end
+      local function assign_highlights(init) Cange.reload("cange.utils.highlights").setup(palette, init) end
 
-      assign_highlights()
+      assign_highlights(true)
 
       vim.keymap.set("n", "<leader><leader>c", assign_highlights)
     end,
