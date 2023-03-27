@@ -82,7 +82,7 @@ end
 
 vim.opt.iskeyword:append({ "-" }) --  considers dash "-" as part of a keyword
 vim.opt.shortmess:append({ c = true }) -- don't give |ins-completion-menu| messages
-vim.opt.listchars:append({ eol = "↵", nbsp = "␣", tab = " ⇥" })
+vim.opt.listchars:append({ eol = "↵", nbsp = "␣", tab = " ⇥", trail = "·" })
 
 -- Basic Keymaps
 -- Set <space> as the leader key
