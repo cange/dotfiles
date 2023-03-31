@@ -51,15 +51,18 @@ return {
               padding = { left = 0 },
             },
           },
-          lualine_x = {},
-          lualine_y = {
+          lualine_x = {
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
           },
-          lualine_z = {
-            { "fileformat", separator = "" },
-            "encoding",
+          lualine_y = {
+            "selectioncount",
+            "searchcount",
             { "progress", separator = "", padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
+          },
+          lualine_z = {
+            "fileformat",
+            "encoding",
           },
         },
       })

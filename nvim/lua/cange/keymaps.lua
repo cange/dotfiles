@@ -87,6 +87,7 @@ M.groups = {
       { "n", "<cmd>lua vim.o.relativenumber = not vim.o.relativenumber<CR>",    "Toggle relative number" },
       { "w", "<cmd>w!<CR>",                                                     "Save file" },
       { "-", "<C-W>s",                                                          "Split window below" },
+      { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },
       { "|", "<C-W>v",                                                          "Split window right" },
       {
         "<leader>x",
@@ -200,7 +201,6 @@ M.groups = {
       { "n", '<cmd>lua require("cange.telescope").browse_nvim()<CR>',           "Search nvim config" },
       { "r", "<cmd>Telescope oldfiles<CR>",                                     "Search recently opened files" },
       { "w", '<cmd>lua require("cange.telescope").browse_workspace()<CR>',      "Search current workspace" },
-      { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },
       -- stylua: ignore end
     },
   },
