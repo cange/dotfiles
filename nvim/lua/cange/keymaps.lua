@@ -118,16 +118,16 @@ M.groups = {
     leader = "<leader>e",
     mappings = {
       -- stylua: ignore start
-      -- edits
-      { "1", '<cmd>lua require("cange.telescope").browse_snippets()<CR>',       "Edit snippets" },
-      { "2", "<cmd>e ~/.config/nvim/lua/cange/keymaps.lua<CR>",                 "Edit keymaps" },
-      { "3", "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>",                 "Edit options" },
-      { "4", "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>",                  "Edit config" },
       -- toolings
-      { "5", "<cmd>Lazy show<CR>",                                              "Plugin info" },
-      { "6", "<cmd>NullLsInfo<CR>",                                             "Null-ls info" },
-      { "7", "<cmd>Mason<CR>",                                                  "Mason info" },
-      { "8", "<cmd>LspInfo<CR>",                                                "LSP info" },
+      { "1", "<cmd>Lazy show<CR>",                                              "Plugin info" },
+      { "2", "<cmd>NullLsInfo<CR>",                                             "Null-ls info" },
+      { "3", "<cmd>Mason<CR>",                                                  "Mason info" },
+      { "4", "<cmd>LspInfo<CR>",                                                "LSP info" },
+      -- edits
+      { "5", '<cmd>lua require("cange.telescope").browse_snippets()<CR>',       "Edit snippets" },
+      { "6", "<cmd>e ~/.config/nvim/lua/cange/keymaps.lua<CR>",                 "Edit keymaps" },
+      { "7", "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>",                 "Edit options" },
+      { "8", "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>",                  "Edit config" },
       -- session
       { "F", "<cmd>SearchSession<CR>",                                          "Find session" },
       { "R", "<cmd>RestoreSession<CR>",                                         "Recent session" },
