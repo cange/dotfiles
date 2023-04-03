@@ -58,7 +58,8 @@ M.groups = {
     leader = "[",
     mappings = {
       -- stylua: ignore start
-      { "i", vim.diagnostic.goto_prev,                                          "Next issue" },
+      { "b", '<cmd>bnext<CR>',                                                  "Next buffer" },
+      { "d", vim.diagnostic.goto_prev,                                          "Next diagnostic" },
       { "g", "<cmd>Gitsigns prev_hunk<CR>",                                     "Next Git hunk" },
       -- stylua: ignore end
     },
@@ -68,7 +69,8 @@ M.groups = {
     leader = "]",
     mappings = {
       -- stylua: ignore start
-      { "i", vim.diagnostic.goto_next,                                          "Prev issue" },
+      { "b", '<cmd>bprevious<CR>',                                              "Prev buffer" },
+      { "d", vim.diagnostic.goto_next,                                          "Prev diagnostic" },
       { "g", "<cmd>Gitsigns next_hunk<CR>",                                     "Prev Git hunk" },
       -- stylua: ignore end
     },
