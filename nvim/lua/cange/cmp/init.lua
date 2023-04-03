@@ -72,7 +72,7 @@ cmp.setup({
   }),
   sources = {
     { name = "cmp_tabnine", keyword_length = 3, max_item_count = 2 },
-    { name = "luasnip", keyword_length = 2, max_item_count = 2 },
+    { name = "luasnip", keyword_length = 2, max_item_count = 3 },
     { name = "buffer", keyword_length = 3, max_item_count = 2 },
     { name = "nvim_lsp", keyword_length = 3 }, -- no max_item_count: we want all language details
     { name = "nvim_lua", keyword_length = 3, max_item_count = 2 },

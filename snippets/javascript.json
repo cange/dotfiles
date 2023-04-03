@@ -1,11 +1,7 @@
 {
   "eslint block": {
     "prefix": "eslint-disable … */",
-    "body": [
-      "/* eslint-disable $1 */",
-      "$2",
-      "/* eslint-enable $1 */"
-    ]
+    "body": ["/* eslint-disable $1 */", "$2", "/* eslint-enable $1 */"]
   },
   "disable prettier block": {
     "prefix": "eslint prettier/prettier */",
@@ -39,7 +35,7 @@
     "prefix": "log",
     "body": "console.log('--- ${1:param}: %o', $1)"
   },
-  "log(Object.keys(…": {
+  "console.log(Object.keys(…": {
     "prefix": "logkeys",
     "body": "console.log('--- ${1:param} keys: %o', Object.keys($1))"
   },
