@@ -17,7 +17,7 @@ local function get_single_icon(icon_list, name)
   local result = icon_list and icon_list[name] or nil
 
   if not result then
-    vim.pretty_print(ns, name, "not found")
+    vim.print(ns, name, "not found")
     return nil
   end
   return result

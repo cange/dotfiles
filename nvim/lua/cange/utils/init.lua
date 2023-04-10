@@ -26,7 +26,7 @@ end
 ---Pretty print shorthand
 ---@param value any
 ---@param ... any
-function P(value, ...) vim.pretty_print(value, ...) end
+function P(value, ...) vim.print(value, ...) end
 
 ---Reruns a module file by removing the given module first
 ---@param module_name string
@@ -42,7 +42,7 @@ end
 ---@return any # Either registered or the value of taken key
 function M.register_key(key, value)
   if M[key] ~= nil then
-    vim.pretty_print(ns, '"' .. key .. '" key already taken')
+    vim.print(ns, '"' .. key .. '" key already taken')
   else
     M[key] = value
   end
