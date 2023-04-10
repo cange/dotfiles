@@ -1,3 +1,5 @@
+local icon = Cange.get_icon
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -5,10 +7,9 @@ return {
       "EdenEast/nightfox.nvim",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
+      "jonahgoldwastaken/copilot-status.nvim",
     },
     config = function()
-      local icon = Cange.get_icon
-
       require("lualine").setup({
         options = {
           component_separators = {
@@ -55,12 +56,13 @@ return {
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
           },
           lualine_y = {
+            require("copilot_status").status_string,
             { "fileformat", separator = "", padding = { left = 1, right = 0 } },
             "encoding",
           },
           lualine_z = {
             "selectioncount",
-            { "progress", separator = "", padding = { left = 1, right = 0 } },
+            { "progress", separator = "" },
             { "location", padding = { left = 0, right = 1 } },
           },
         },

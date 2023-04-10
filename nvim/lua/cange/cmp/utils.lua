@@ -117,6 +117,7 @@ function M.jumpable(direction)
 end
 
 function M.has_words_before()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
@@ -133,12 +134,11 @@ function M.format(entry, vim_item)
   if tabnine_detail and tabnine_detail:find(".*%%.*") then strength = tabnine_detail end
 
   ---@diagnostic disable-next-line: param-type-mismatch
-  if vim.tbl_contains(vim.tbl_keys(source_icons), source_name) then
-    vim_item.menu = vim.trim(source_icons[source_name])
-  end
+  if vim.tbl_contains(vim.tbl_keys(source_icons), source_name) then vim_item.menu = source_icons[source_name] end
   local kinds = Cange.get_icon("cmp_kinds") or {}
+  local kind = get_prediction_strength_kind_icon(strength) or kinds[vim_item.kind]
 
-  vim_item.kind = get_prediction_strength_kind_icon(strength) or kinds[vim_item.kind]
+  vim_item.kind = type(kind) == "string" and vim.trim(kind) or kind
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
   vim_item.menu_hl_group = get_menu_hl_group_by(source_name)
 
