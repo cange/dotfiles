@@ -39,6 +39,7 @@ M.ui = {
   SignIn = " ", -- nf-oct-sign_in
   SignOut = " ", -- nf-oct-sign_out
   Stethoscope = " ",
+  Stop = " ", -- nf-oct-circle_slash
   Sync = " ", -- nf-oct-sync
   Tabnine = "⌬ ", -- U+232C
   Tag = " ", -- nf-oct-tag
@@ -117,7 +118,7 @@ local kinds = {
 }
 M.cmp_kinds = vim.tbl_extend("keep", kinds, {
   Color = " ",
-  Folder = M.documents.Folder .. " ",
+  Folder = M.documents.Folder,
   Keyword = " ",
   Reference = " ",
   Snippet = " ",
@@ -128,12 +129,12 @@ M.cmp_kinds = vim.tbl_extend("keep", kinds, {
 
 M.cmp_source = {
   buffer = "﬘ ",
+  cmp_tabnine = M.ui.Tabnine,
+  copilot = M.ui.Octoface,
   luasnip = M.ui.Cut,
   nvim_lsp = " ",
   nvim_lua = " ",
   path = M.documents.Folder,
-  cmp_tabnine = M.ui.Tabnine,
-  copilot = M.ui.Octoface,
 }
 
 return M

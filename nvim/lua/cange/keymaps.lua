@@ -59,6 +59,7 @@ M.groups = {
     mappings = {
       -- stylua: ignore start
       { "b", '<cmd>bprevious<CR>',                                              "Previous buffer" },
+      { "c", '<cmd>require("copilot.suggestion").prev()<CR>',                   "Previous Copilot suggestion" },
       { "d", vim.diagnostic.goto_prev,                                          "Previous diagnostic" },
       { "g", "<cmd>Gitsigns prev_hunk<CR>",                                     "Previous Git hunk" },
       { "m", '<cmd>lua require("harpoon.ui").nav_prev()<CR>',                   "Previous bookmark" },
@@ -71,6 +72,7 @@ M.groups = {
     mappings = {
       -- stylua: ignore start
       { "b", '<cmd>bnext<CR>',                                                  "Next buffer" },
+      { "c", '<cmd>require("copilot.suggestion").next()<CR>',                   "Next Copilot suggestion" },
       { "d", vim.diagnostic.goto_next,                                          "Next diagnostic" },
       { "g", "<cmd>Gitsigns next_hunk<CR>",                                     "Next Git hunk" },
       { "m", '<cmd>lua require("harpoon.ui").nav_next()<CR>',                   "Next bookmark" },
@@ -175,21 +177,24 @@ M.groups = {
     },
   },
   {
-    name = "Code",
+    name = "Code/Copilot",
     leader = "<leader>c",
     mappings = {
       -- stylua: ignore start
       -- code issues
-      { "D", "<cmd>Telescope diagnostics<CR>",                                  "Workspace diagnostics" },
-      { "d", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
+      { "d", "<cmd>Telescope diagnostics<CR>",                                  "Workspace diagnostics" },
+      { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
       { "a", vim.lsp.buf.code_action,                                           "Code actions" },
       -- formatter
       { "f", "<cmd>CangeFormatOnSaveToggle<CR>",                                "Toggle format on save" },
       { "c", "<cmd>TextCaseOpenTelescope<CR>",                                  "Change Case", mode = { "v", "n" } },
-      --
-      { "s", "<cmd>Telescope lsp_document_symbols<CR>",                         "Document Symbols" },
-      { "h", "<cmd>TSHighlightCapturesUnderCursor<CR>",                         "Highlight info" },
-      { "p", "<cmd>TSPlaygroundToggle<CR>",                                     "Playground" },
+      -- copilot
+      { "p", "<cmd>Copilot panel<CR>",                                          "Toggle Copilot panel" },
+      { "r", "<cmd>lua require('copilot.panel').refresh()<CR>",                 "Refresh Copilot panel" },
+      { "s", "<cmd>Copilot suggestion<CR>",                                     "Toggle Copilot suggestion" },
+      { "t", "<cmdrequire('copilot.suggestion').toggle_auto_trigger()<CR>",     "Toggle Copilot suggestion auto trigger" },
+      { "o", "<cmd>Copilot toggle<CR>",                                         "Toggle Copilot" },
+      { "S", "<cmd>Copilot status<CR>",                                         "Copilot status" },
       -- stylua: ignore end
     },
   },

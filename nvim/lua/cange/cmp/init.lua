@@ -31,7 +31,7 @@ local function next_item_handler(fallback)
   elseif luasnip.expand_or_jumpable() then
     luasnip.expand_or_jump()
   elseif cmp_utils.has_words_before() then
-    fallback()
+    cmp.complete()
   else
     fallback()
   end
@@ -66,18 +66,21 @@ cmp.setup({
     ["<C-c>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      -- https://github.com/zbirenbaum/copilot-cmp#clear_after_cursor
+      select = false,
     }),
     ["<C-space>"] = cmp.mapping.complete(),
   }),
-  sources = {
-    { name = "cmp_tabnine", keyword_length = 3, max_item_count = 2 },
-    { name = "luasnip", keyword_length = 2, max_item_count = 3 },
-    { name = "buffer", keyword_length = 3, max_item_count = 2 },
-    { name = "nvim_lsp", keyword_length = 3 }, -- no max_item_count: we want all language details
-    { name = "nvim_lua", keyword_length = 3, max_item_count = 2 },
-    { name = "path", keyword_length = 3, max_item_count = 2 },
-  },
+  sources = cmp.config.sources({
+    { name = "cmp_tabnine", max_item_count = 3 },
+    { name = "copilot" },
+    { name = "luasnip", max_item_count = 3 },
+    { name = "nvim_lsp", max_item_count = 5 },
+    { name = "nvim_lua", max_item_count = 2 },
+  }, {
+    { name = "path", keyword_length = 5, max_item_count = 2 },
+    { name = "buffer", keyword_length = 5, max_item_count = 2 },
+  }),
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -89,9 +92,9 @@ cmp.setup({
   },
   formatting = {
     fields = { -- order within a menu item
-      "kind",
-      "abbr",
       "menu",
+      "abbr",
+      "kind",
     },
     format = cmp_utils.format,
   },

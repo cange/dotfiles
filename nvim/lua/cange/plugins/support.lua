@@ -172,6 +172,4 @@ return {
   { "norcalli/nvim-colorizer.lua", config = function() require("colorizer").setup() end },
 
   { "mg979/vim-visual-multi" }, -- multi search and replace
-
-  { "nvim-treesitter/playground", dependencies = "nvim-treesitter/nvim-treesitter" }, -- inspect syntax node anatomy
 }
