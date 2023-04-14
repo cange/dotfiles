@@ -130,7 +130,7 @@ function M.format(entry, vim_item)
   local strength = ""
 
   ---@see https://github.com/tzachar/cmp-tabnine#show_prediction_strength
-  local tabnine_detail = (entry.completion_item.data or {}).detail
+  local tabnine_detail = (entry.completion_item.labelDetails or {}).detail
   if tabnine_detail and tabnine_detail:find(".*%%.*") then strength = tabnine_detail end
 
   ---@diagnostic disable-next-line: param-type-mismatch
