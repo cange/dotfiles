@@ -28,18 +28,18 @@ return {
             { "branch", icon = icon("git.Branch") },
           },
           lualine_c = {
-            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            -- {
-            --   "filename",
-            --   path = 0,
-            --   symbols = {
-            --     modified = icon("ui.Circle"),
-            --     newfile = icon("documents.NewFile"),
-            --     readonly = icon("ui.Lock"),
-            --     unnamed = icon("documents.File"),
-            --   },
-            --   separator = "",
-            -- },
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            {
+              "filename",
+              path = 0,
+              symbols = {
+                modified = icon("ui.Circle"),
+                newfile = icon("documents.NewFile"),
+                readonly = icon("ui.Lock"),
+                unnamed = icon("documents.File"),
+              },
+              separator = "",
+            },
             {
               "diagnostics",
               symbols = {
