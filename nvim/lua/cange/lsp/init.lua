@@ -29,7 +29,7 @@ local function keymaps(client, bufnr)
 
   -- typescript specific keymaps (e.g. rename file and update imports)
   if client.name == "tsserver" then
-    print("keymaps: for js")
+    Cange.info("ENABLED keymaps for JS/TS ", { title = ns })
     keymap("qfa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
     keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "LSP Rename file and update imports")
     keymap("<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", "LSP Organize imports")

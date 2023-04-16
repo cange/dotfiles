@@ -17,7 +17,7 @@ local function get_single_icon(icon_list, name)
   local result = icon_list and icon_list[name] or nil
 
   if not result then
-    vim.print(ns, name, "not found")
+    print(ns, name, "not found")
     return nil
   end
   return result
@@ -27,8 +27,8 @@ end
 ---@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
 ---@return table|string|nil # The icon symbol or nil if not found
 function M.get_icon(group_id, ...)
-  local ok, icons = pcall(require, "cange.core.icons")
-  if not ok then print(ns, '"cange.core.icons" not found!') end
+  local ok, icons = pcall(require, "cange.icons")
+  if not ok then print(ns, '"cange.icons" not found!') end
   local parts = { ... }
   local last_item = parts[#parts]
 

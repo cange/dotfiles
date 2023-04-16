@@ -58,9 +58,10 @@ M.groups = {
     leader = "[",
     mappings = {
       -- stylua: ignore start
-      { "b", '<cmd>bnext<CR>',                                                  "Next buffer" },
-      { "d", vim.diagnostic.goto_prev,                                          "Next diagnostic" },
-      { "g", "<cmd>Gitsigns prev_hunk<CR>",                                     "Next Git hunk" },
+      { "b", '<cmd>bprevious<CR>',                                              "Previous buffer" },
+      { "d", vim.diagnostic.goto_prev,                                          "Previous diagnostic" },
+      { "g", "<cmd>Gitsigns prev_hunk<CR>",                                     "Previous Git hunk" },
+      { "m", '<cmd>lua require("harpoon.ui").nav_prev()<CR>',                   "Previous bookmark" },
       -- stylua: ignore end
     },
   },
@@ -69,9 +70,11 @@ M.groups = {
     leader = "]",
     mappings = {
       -- stylua: ignore start
-      { "b", '<cmd>bprevious<CR>',                                              "Prev buffer" },
-      { "d", vim.diagnostic.goto_next,                                          "Prev diagnostic" },
-      { "g", "<cmd>Gitsigns next_hunk<CR>",                                     "Prev Git hunk" },
+      { "b", '<cmd>bnext<CR>',                                                  "Next buffer" },
+      { "d", vim.diagnostic.goto_next,                                          "Next diagnostic" },
+      { "g", "<cmd>Gitsigns next_hunk<CR>",                                     "Next Git hunk" },
+      { "m", '<cmd>lua require("harpoon.ui").nav_next()<CR>',                   "Next bookmark" },
+
       -- stylua: ignore end
     },
   },
@@ -91,6 +94,7 @@ M.groups = {
       { "-", "<C-W>s",                                                          "Split window below" },
       { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },
       { "|", "<C-W>v",                                                          "Split window right" },
+      { "<leader>c", "<cmd>CangeUpdateColorscheme<CR>",                         "Update colorscheme highlights" },
       {
         "<leader>x",
         "<cmd>write<CR><cmd>lua Cange.reload('cange'); Cange.log('Saved and executed', { title = 'File' })<CR>",
@@ -136,7 +140,7 @@ M.groups = {
       { "S", "<cmd>SaveSession<CR>",                                            "Save session" },
       { "X", "<cmd>DeleteSession<CR>",                                          "Delete session" },
       -- others
-      { "l", "<cmd>LspToggleFormatOnSave<CR>",                                  "Toggle format on save" },
+      { "l", "<cmd>CangeFormatOnSaveToggle<CR>",                                "Toggle format on save" },
       { "s", "<cmd>lua vim.o.spell = not vim.o.spell<CR>",                      "Toggle spelling" },
       { "c", "<cmd>Telescope colorscheme<CR>",                                  "Change colorscheme" },
       { "C", '<cmd>lua require("luasnip").cleanup()<CR>',                       "Reset snippets UI" },
@@ -180,7 +184,7 @@ M.groups = {
       { "d", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
       { "a", vim.lsp.buf.code_action,                                           "Code actions" },
       -- formatter
-      { "f", "<cmd>LspToggleFormatOnSave<CR>",                                  "Toggle format on save" },
+      { "f", "<cmd>CangeFormatOnSaveToggle<CR>",                                "Toggle format on save" },
       { "c", "<cmd>TextCaseOpenTelescope<CR>",                                  "Change Case", mode = { "v", "n" } },
       --
       { "s", "<cmd>Telescope lsp_document_symbols<CR>",                         "Document Symbols" },

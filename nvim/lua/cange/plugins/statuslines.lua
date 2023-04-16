@@ -78,7 +78,8 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      local p = Cange.palette
+      ---@type cange.colorschemePalette
+      local p = Cange.get_config("ui.palette")
       require("barbecue").setup({
         theme = {
           basename = { fg = p.fg2 },

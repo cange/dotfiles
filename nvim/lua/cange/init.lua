@@ -28,6 +28,7 @@ require("lazy").setup("cange.plugins", {
 })
 
 -- 3th : rest
-Cange.reload("cange.core")
+Cange.reload("cange.autocommands")
 Cange.reload("cange.keymaps")
+Cange.reload("cange.os")
 Cange.reload("cange.telescope")

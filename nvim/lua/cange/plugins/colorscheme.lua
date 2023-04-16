@@ -32,6 +32,64 @@
 
 --#endregion
 
+M = {}
+
+---@type boolean
+M.initialized = false
+
+function M.update_highlights()
+  ---@type cange.colorschemePalette
+  local p = Cange.get_config("ui.palette")
+  local highlights = {
+    CursorLine = { bg = p.bg2 }, -- disable default
+    Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
+    Todo = { bg = nil, bold = true },
+    -- illuminate
+    IlluminatedWordText = { bg = p.bg1 }, -- Default for references if no kind information is available
+    IlluminatedWordRead = { bg = p.bg2 }, -- for references of kind read
+    IlluminatedWordWrite = { bg = p.bg2, bold = true }, -- for references of kind write
+
+    -- Window
+    FloatTitle = { fg = p.fg3, bg = p.bg0 },
+    FloatNormal = { fg = p.fg1, bg = p.bg1 },
+    FloatBorder = { fg = p.bg0, bg = p.bg0 },
+    --
+    HarpoonBorder = { link = "FloatBorder" },
+    HarpoonCurrentFile = { italic = true },
+    HarpoonWindow = { link = "FloatNormal" },
+    TelescopeBorder = { link = "FloatBorder" },
+    TelescopeMatching = { link = "MatchParen" },
+    TelescopePreviewTitle = { link = "FloatTitle" },
+    TelescopePromptBorder = { link = "FloatBorder" },
+    TelescopePromptNormal = { link = "FloatNormal" },
+    TelescopePromptTitle = { link = "FloatTitle" },
+    TelescopeResultsNormal = { fg = p.fg0, bg = p.bg0 },
+    TelescopeSelection = { fg = p.fg2, bg = p.sel0 },
+    TelescopeSelectionCaret = { fg = p.fg1, bg = p.sel0 },
+    TelescopeSelectionNormal = { link = "FloatBorder" },
+    TelescopeTitle = { link = "FloatTitle" },
+    WhichkeyBorder = { link = "FloatBorder" },
+
+    -- indent-blankline
+    IndentBlanklineChar = { fg = p.bg2 },
+    IndentBlanklineContextChar = { fg = p.fg3 },
+    IndentBlanklineContextStart = { sp = p.fg3, underline = true },
+    IndentBlanklineSpaceChar = { fg = p.bg3 },
+
+    -- completion
+    CmpItemKindTabnine = { fg = p.pink.base },
+    CmpItemKindCopilot = { fg = p.cyan.base },
+  }
+
+  Cange.set_highlights(highlights)
+
+  if M.initialized then
+    vim.schedule(function() Cange.log("Color highlights refreshed!", { title = "Colorscheme" }) end)
+  end
+end
+
+vim.api.nvim_create_user_command("CangeUpdateColorscheme", M.update_highlights, {})
+
 return {
   {
     "EdenEast/nightfox.nvim", -- colorscheme
@@ -42,17 +100,9 @@ return {
       local colorscheme = Cange.get_config("ui.colorscheme")
 
       vim.cmd("colorscheme " .. colorscheme)
-
-      ---@type cange.colorschemePalette
-      local palette = require("nightfox.palette").load(colorscheme)
-
-      Cange.register_key("palette", palette)
-
-      local function assign_highlights(init) Cange.reload("cange.utils.highlights").setup(palette, init) end
-
-      assign_highlights(true)
-
-      vim.keymap.set("n", "<leader><leader>c", assign_highlights)
+      Cange.set_config("ui.palette", require("nightfox.palette").load(colorscheme))
+      vim.cmd("CangeUpdateColorscheme")
+      M.initialized = true
     end,
   },
 
