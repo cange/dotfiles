@@ -96,6 +96,7 @@ local function get_menu_hl_group_by(source_name)
   local groups = {
     cmp_tabnine = "CmpItemKindTabnine",
     copilot = "CmpItemKindCopilot",
+    nvim_lua = "CmpItemKindLua",
   }
 
   return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "Comment"

@@ -35,11 +35,22 @@
 M = {}
 
 ---@type boolean
-M.initialized = false
+M._initialized = false
 
-function M.update_highlights()
-  ---@type cange.colorschemePalette
-  local p = Cange.get_config("ui.palette")
+---@return cange.colorschemePalette
+function M._update_palette()
+  local curr_colorscheme = vim.g.colors_name
+  local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
+  local palette = require("nightfox.palette").load(colorscheme)
+
+  Cange.set_config("ui.palette", palette)
+
+  return palette
+end
+
+function M._update_highlights()
+  local _, lua_color = require("nvim-web-devicons").get_icon_color("any.lua", "lua")
+  local p = M._update_palette()
   local highlights = {
     CursorLine = { bg = p.bg2 }, -- disable default
     Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
@@ -77,18 +88,19 @@ function M.update_highlights()
     IndentBlanklineSpaceChar = { fg = p.bg3 },
 
     -- completion
-    CmpItemKindTabnine = { fg = p.pink.base },
-    CmpItemKindCopilot = { fg = p.cyan.base },
+    CmpItemKindTabnine = { fg = p.pink.dim },
+    CmpItemKindCopilot = { fg = p.cyan.dim },
+    CmpItemKindLua = { fg = lua_color },
   }
 
   Cange.set_highlights(highlights)
 
-  if M.initialized then
+  if M._initialized then
     vim.schedule(function() Cange.log("Color highlights refreshed!", { title = "Colorscheme" }) end)
   end
 end
 
-vim.api.nvim_create_user_command("CangeUpdateColorscheme", M.update_highlights, {})
+vim.api.nvim_create_user_command("CangeUpdateColorscheme", M._update_highlights, {})
 
 return {
   {
@@ -100,9 +112,9 @@ return {
       local colorscheme = Cange.get_config("ui.colorscheme")
 
       vim.cmd("colorscheme " .. colorscheme)
-      Cange.set_config("ui.palette", require("nightfox.palette").load(colorscheme))
-      vim.cmd("CangeUpdateColorscheme")
-      M.initialized = true
+
+      M._update_highlights()
+      M._initialized = true
     end,
   },
 

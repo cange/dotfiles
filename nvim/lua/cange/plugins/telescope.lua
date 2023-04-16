@@ -64,7 +64,7 @@ return {
       },
       pickers = {
         buffers = default_opts,
-        colorscheme = default_opts,
+        colorscheme = { enable_preview = true, theme = "dropdown" },
         current_buffer_fuzzy_find = { theme = "ivy" },
         highlights = { theme = "ivy" },
         find_files = {
