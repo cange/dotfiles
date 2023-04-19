@@ -177,7 +177,7 @@ return {
         window = {
           border = Cange.get_config("ui.border"),
           margin = { 4, 8, 4, 8 }, -- extra window margin [top, right, bottom, left]
-          padding = { nil, 0, 2, 0 }, -- extra window padding [top, right, bottom, left]
+          padding = { 0, 0, 2, 0 }, -- extra window padding [top, right, bottom, left]
           winblend = vim.opt.winblend:get(),
         },
         layout = {
