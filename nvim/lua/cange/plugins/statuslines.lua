@@ -1,5 +1,8 @@
 local icon = Cange.get_icon
 
+---@type cange.colorschemePalette
+local p = Cange.get_config("ui.palette")
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -7,7 +10,23 @@ return {
       "EdenEast/nightfox.nvim",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
-      "jonahgoldwastaken/copilot-status.nvim",
+      {
+        "jonahgoldwastaken/copilot-status.nvim",
+        dependencies = "zbirenbaum/copilot.lua",
+        lazy = true,
+        event = "BufReadPost",
+        config = function()
+          require("copilot_status").setup({
+            icons = {
+              idle = icon("ui.Octoface"),
+              error = icon("diagnostics.Error"),
+              warning = icon("diagnostics.Warn"),
+              loading = icon("ui.Sync"),
+              offline = icon("ui.Stop"),
+            },
+          })
+        end,
+      },
     },
     config = function()
       require("lualine").setup({
@@ -70,8 +89,6 @@ return {
     end,
   },
 
-  { "RRethy/vim-illuminate" }, -- Highlight the word under the cursor
-
   { -- winbar with LSP context symbols
     "utilyre/barbecue.nvim",
     name = "barbecue",
@@ -79,17 +96,13 @@ return {
       "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons",
     },
-    config = function()
-      ---@type cange.colorschemePalette
-      local p = Cange.get_config("ui.palette")
-      require("barbecue").setup({
-        theme = {
-          basename = { fg = p.fg2 },
-          dirname = { fg = p.fg2 },
-          normal = { fg = p.fg3, bg = p.bg0 },
-        },
-        exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
-      })
-    end,
+    opts = {
+      theme = {
+        basename = { fg = p.fg2 },
+        dirname = { fg = p.fg2 },
+        normal = { fg = p.fg3, bg = p.bg0 },
+      },
+      exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
+    },
   },
 }

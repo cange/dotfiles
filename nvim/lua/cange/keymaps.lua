@@ -97,6 +97,7 @@ M.groups = {
       { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },
       { "|", "<C-W>v",                                                          "Split window right" },
       { "<leader>c", "<cmd>CangeUpdateColorscheme<CR>",                         "Update colorscheme highlights" },
+      { "z", "<cmd>ZenMode<CR>",                                                "Toggle Zen Mode", mode = { "n", "i" } },
       {
         "<leader>x",
         "<cmd>write<CR><cmd>lua Cange.reload('cange'); Cange.log('Saved and executed', { title = 'File' })<CR>",

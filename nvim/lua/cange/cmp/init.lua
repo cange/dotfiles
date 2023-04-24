@@ -1,9 +1,17 @@
 -- Reloads this file whenever a 'json' file saved in snippet directory to
 -- enable change immediately
 local ns = "[cange.cmp.init]"
-local cmp = require("cmp")
-local luasnip = require("luasnip")
+local found_cmp, cmp = pcall(require, "cmp")
+local found_luasnip, luasnip = pcall(require, "luasnip")
 local found_cmp_utils, cmp_utils = pcall(require, "cange.cmp.utils")
+if not found_cmp then
+  print(ns, '"cmp" not found')
+  return
+end
+if not found_luasnip then
+  print(ns, '"luasnip" not found')
+  return
+end
 if not found_cmp_utils then
   print(ns, '"cange.cmp.utils" not found')
   return
@@ -51,7 +59,9 @@ local function next_choice_handler()
   end
 end
 
-cmp.setup({
+local M = {}
+
+M.opts = {
   mapping = cmp.mapping.preset.insert({
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
@@ -103,24 +113,6 @@ cmp.setup({
       col_offset = -3, -- align abbr text with kind icons in prefix
     },
   },
-})
+}
 
--- https://github.com/hrsh7th/cmp-cmdline
-
--- `/` cmdline setup.
-cmp.setup.cmdline("/", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" },
-  },
-})
-
--- `:` cmdline setup.
-cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = "path" },
-  }, {
-    { name = "cmdline" },
-  }),
-})
+return M

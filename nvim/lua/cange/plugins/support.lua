@@ -1,39 +1,42 @@
 return {
   { -- popover notification
     "rcarriga/nvim-notify",
-    config = function()
-      require("notify").setup({
-        -- Animation style (see below for details)
-        stages = "fade_in_slide_out",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    opts = {
+      -- Animation style (see below for details)
+      stages = "fade_in_slide_out",
 
-        -- Function called when a new window is opened, use for changing win settings/config
-        on_open = nil,
+      -- Function called when a new window is opened, use for changing win settings/config
+      on_open = nil,
 
-        -- Function called when a window is closed
-        on_close = nil,
+      -- Function called when a window is closed
+      on_close = nil,
 
-        -- Render function for notifications. See notify-render()
-        render = "default",
+      -- Render function for notifications. See notify-render()
+      render = "default",
 
-        -- Default timeout for notifications
-        timeout = 175,
+      -- Default timeout for notifications
+      timeout = 175,
 
-        -- For stages that change opacity this is treated as the highlight behind the window
-        -- Set this to either a highlight group or an RGB hex value e.g. "#000000"
-        background_colour = "Normal",
+      -- For stages that change opacity this is treated as the highlight behind the window
+      -- Set this to either a highlight group or an RGB hex value e.g. "#000000"
+      background_colour = "Normal",
 
-        -- Minimum width for notification windows
-        minimum_width = 10,
+      -- Minimum width for notification windows
+      minimum_width = 10,
 
-        -- Icons for the different levels
-        icons = {
-          ERROR = Cange.get_icon("diagnostics.Error"),
-          WARN = Cange.get_icon("diagnostics.Warn"),
-          INFO = Cange.get_icon("diagnostics.Info"),
-          DEBUG = Cange.get_icon("ui.Bug"),
-          TRACE = Cange.get_icon("ui.Pencil"),
-        },
-      })
+      -- Icons for the different levels
+      icons = {
+        ERROR = Cange.get_icon("diagnostics.Error"),
+        WARN = Cange.get_icon("diagnostics.Warn"),
+        INFO = Cange.get_icon("diagnostics.Info"),
+        DEBUG = Cange.get_icon("ui.Bug"),
+        TRACE = Cange.get_icon("ui.Pencil"),
+      },
+    },
+    config = function(_, opts)
+      require("notify").setup(opts)
+      require("telescope").load_extension("notify")
 
       vim.notify = function(msg, ...)
         if msg:match("character_offset must be called") or msg:match("method textDocument") then return end
@@ -45,7 +48,7 @@ return {
 
   { -- Improve the built-in vim.ui interfaces with telescope, fzf, etc
     "stevearc/dressing.nvim",
-    lazy = true,
+    event = "VeryLazy",
     init = function()
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.select = function(...)
@@ -61,13 +64,13 @@ return {
   },
 
   -- comment toggle
-  { "numToStr/Comment.nvim", config = function() require("Comment").setup() end },
+  { "numToStr/Comment.nvim", config = function() require("lualine").setup() end },
+
+  { "RRethy/vim-illuminate" }, -- Highlight the word under the cursor
 
   { -- text case converter (camel case, etc.,
     "johmsalas/text-case.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-    },
+    dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
       require("textcase").setup()
       require("telescope").load_extension("textcase")
@@ -97,23 +100,17 @@ return {
 
   { -- indentation guides to all lines
     "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("indent_blankline").setup({
-        enabled = true,
-        buftype_exclude = { "terminal", "nofile" },
-        filetype_exclude = {
-          "help",
-          "NvimTree",
-          "Trouble",
-          "text",
-        },
-        char = Cange.get_icon("ui.VThinLineLeft"),
-        context_char = Cange.get_icon("ui.VThinLineLeft"),
-        show_current_context = true,
-        show_current_context_start = true,
-        use_treesitter = true,
-      })
-    end,
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      enabled = true,
+      buftype_exclude = { "terminal", "nofile" },
+      filetype_exclude = { "help", "NvimTree", "Trouble", "text", "lazy" },
+      char = Cange.get_icon("ui.VThinLineLeft"),
+      context_char = Cange.get_icon("ui.VThinLineLeft"),
+      show_current_context = true,
+      show_current_context_start = true,
+      use_treesitter = true,
+    },
   },
 
   { -- Markdown preview
@@ -171,5 +168,6 @@ return {
   -- Hex color highlighter
   { "norcalli/nvim-colorizer.lua", config = function() require("colorizer").setup() end },
 
-  { "mg979/vim-visual-multi" }, -- multi search and replace
+  -- multi search and replace
+  "mg979/vim-visual-multi",
 }
