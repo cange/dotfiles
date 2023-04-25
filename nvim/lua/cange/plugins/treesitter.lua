@@ -15,7 +15,10 @@ return {
     },
     opts = {
       autotag = { enable = true },
-      context_commentstring = { enable = true },
+      context_commentstring = {
+        enable = true,
+        enable_autocmd = false, -- enable commentstring support, when false
+      },
       ensure_installed = Cange.get_config("treesitter.sources") or {}, -- A list of parser names, or "all"
       highlight = { enable = true },
       indent = { enable = true }, -- Indentation based on treesitter for the = operator

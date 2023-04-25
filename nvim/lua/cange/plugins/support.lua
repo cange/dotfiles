@@ -63,8 +63,18 @@ return {
     end,
   },
 
-  -- comment toggle
-  { "numToStr/Comment.nvim", config = function() require("lualine").setup() end },
+  { -- comment toggle
+    "numToStr/Comment.nvim",
+    dependencies = {
+      -- contextual comment in embedded language files like Vue.JS
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
+    config = function()
+      require("Comment").setup({
+        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+      })
+    end,
+  },
 
   { "RRethy/vim-illuminate" }, -- Highlight the word under the cursor
 
