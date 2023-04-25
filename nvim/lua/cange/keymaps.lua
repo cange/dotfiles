@@ -76,7 +76,6 @@ M.groups = {
       { "d", vim.diagnostic.goto_next,                                          "Next diagnostic" },
       { "g", "<cmd>Gitsigns next_hunk<CR>",                                     "Next Git hunk" },
       { "m", '<cmd>lua require("harpoon.ui").nav_next()<CR>',                   "Next bookmark" },
-
       -- stylua: ignore end
     },
   },
@@ -97,7 +96,7 @@ M.groups = {
       { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },
       { "|", "<C-W>v",                                                          "Split window right" },
       { "<leader>c", "<cmd>CangeUpdateColorscheme<CR>",                         "Update colorscheme highlights" },
-      { "z", "<cmd>ZenMode<CR>",                                                "Toggle Zen Mode", mode = { "n", "i" } },
+      { "z", "<cmd>ZenMode<CR>",                                                "Toggle Zen Mode" },
       {
         "<leader>x",
         "<cmd>write<CR><cmd>lua Cange.reload('cange'); Cange.log('Saved and executed', { title = 'File' })<CR>",
