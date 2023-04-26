@@ -71,4 +71,13 @@ function M.set_highlights(highlights)
   end
 end
 
+---Returns the hex value of the given highlight group
+---@param name string
+---@return table|nil
+function M.fg(name)
+  ---@type {fg?:number}?
+  local hl = vim.api.nvim_get_hl(0, { name = name })
+  local fg = hl and hl.fg or nil
+  return fg and { fg = string.format("#%06x", fg) }
+end
 return M
