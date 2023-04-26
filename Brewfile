@@ -14,6 +14,8 @@ brew "asdf"
 brew "bat"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# A modern replacement for ‘ls’.
+brew "exa"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Command-line fuzzy finder written in Go

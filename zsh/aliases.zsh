@@ -23,9 +23,10 @@ alias ......='cd ../../../../..'
 alias -- -='cd -'
 
 # lists
-alias l='ls -lah'
-alias la='ls -Alh'
-alias ll='ls -lh'
+alias l='exa  --long --all --icons' # 'ls -lah'
+alias la='exa --long --all --icons --git' # 'ls -Alh'
+alias lt='exa --long --all --icons --git --tree --level=1' # list tree
+alias ll='exa --long --icons' # 'ls -lh'
 alias ls='ls -G'
 
 # Convenient helper to search history
