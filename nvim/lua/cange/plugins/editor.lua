@@ -88,39 +88,23 @@ return {
     config = function() require("telescope").load_extension("harpoon") end,
   },
 
-  { -- extends auto-session through Telescope
-    "rmagatti/session-lens",
-    dependencies = {
-      "rmagatti/auto-session",
-      "nvim-telescope/telescope.nvim",
-    },
-    config = function()
-      require("session-lens").setup({
-        path_display = { "shorten" },
-        previewer = true,
-        prompt_title = "Sessions",
-      })
-      require("telescope").load_extension("session-lens")
-    end,
-  },
-
-  {
-    "rmagatti/auto-session", -- small automated session manager
-    dependencies = { "rmagatti/session-lens" },
-    config = function()
+  { -- small automated session manager
+    "rmagatti/auto-session",
+    config = function(_, opts)
       -- better experience with the plugin overall using this config for sessionoptions is recommended.
       vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
-
-      require("auto-session").setup({
-        log_level = "info",
-        auto_restore_enabled = nil,
-        auto_save_enabled = nil,
-        auto_session_enable_last_session = false, -- Loads the last loaded session if session for cwd does not exist
-        auto_session_enabled = true,
-        auto_session_suppress_dirs = { "~/", "~/workspace" }, -- Suppress session create/restore if in one of the list of dirs
-        auto_session_use_git_branch = nil, -- Use the git branch to differentiate the session name
-      })
+      require("auto-session").setup(opts)
     end,
+    opts = {
+      log_level = "info",
+      auto_restore_enabled = nil,
+      auto_save_enabled = nil,
+      auto_session_enable_last_session = false, -- Loads the last loaded session if session for cwd does not exist
+      auto_session_enabled = true,
+      auto_session_suppress_dirs = { "~/", "~/workspace" }, -- Suppress session create/restore if in one of the list of dirs
+      auto_session_use_git_branch = nil, -- Use the git branch to differentiate the session name
+      session_lens = { shorten_path = true },
+    },
   },
 
   -- shows LSP initialization progress
@@ -136,33 +120,34 @@ return {
 
   { -- keymaps
     "folke/which-key.nvim",
-    config = function()
+    opts = {
+      plugins = {
+        spelling = {
+          enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+          suggestions = 8, -- how many suggestions should be shown in the list?
+        },
+      },
+      icons = {
+        breadcrumb = Cange.get_icon("ui.ArrowRight"),
+        separator = Cange.get_icon("ui.ChevronRight"),
+        group = Cange.get_icon("ui.PlusSmall") .. " ",
+      },
+      window = {
+        border = Cange.get_config("ui.border"),
+        margin = { 4, 8, 4, 8 }, -- extra window margin [top, right, bottom, left]
+        padding = { 0, 0, 2, 0 }, -- extra window padding [top, right, bottom, left]
+        winblend = vim.opt.winblend:get(),
+      },
+      layout = {
+        width = { min = 32, max = 56 }, -- min and max width of the columns
+        spacing = 4, -- spacing between columns
+      },
+      ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+    },
+    config = function(_, opts)
       local wk = require("which-key")
 
-      wk.setup({
-        plugins = {
-          spelling = {
-            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-            suggestions = 8, -- how many suggestions should be shown in the list?
-          },
-        },
-        icons = {
-          breadcrumb = Cange.get_icon("ui.ArrowRight"),
-          separator = Cange.get_icon("ui.ChevronRight"),
-          group = Cange.get_icon("ui.PlusSmall") .. " ",
-        },
-        window = {
-          border = Cange.get_config("ui.border"),
-          margin = { 4, 8, 4, 8 }, -- extra window margin [top, right, bottom, left]
-          padding = { 0, 0, 2, 0 }, -- extra window padding [top, right, bottom, left]
-          winblend = vim.opt.winblend:get(),
-        },
-        layout = {
-          width = { min = 32, max = 56 }, -- min and max width of the columns
-          spacing = 4, -- spacing between columns
-        },
-        ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-      })
+      wk.setup(opts)
 
       wk.register(require("cange.utils.keymaps").whichkey_mappings(), {})
     end,

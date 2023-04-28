@@ -57,6 +57,7 @@ return {
             { "branch", icon = icon("git.Branch") },
           },
           lualine_c = {
+            { require("auto-session.lib").current_session_name },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",

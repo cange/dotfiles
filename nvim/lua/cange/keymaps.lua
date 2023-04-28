@@ -137,10 +137,9 @@ M.groups = {
       { "7", "<cmd>e ~/.config/nvim/lua/cange/options.lua<CR>",                 "Edit options" },
       { "8", "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>",                  "Edit config" },
       -- session
-      { "F", "<cmd>SearchSession<CR>",                                          "Find session" },
-      { "R", "<cmd>RestoreSession<CR>",                                         "Recent session" },
-      { "S", "<cmd>SaveSession<CR>",                                            "Save session" },
-      { "X", "<cmd>DeleteSession<CR>",                                          "Delete session" },
+      { "R", "<cmd>SessionRestore<CR>",                                         "Recent session" },
+      { "S", "<cmd>SessionSave<CR>",                                            "Save session" },
+      { "X", "<cmd>SessionDelete<CR>",                                          "Delete session" },
       -- others
       { "l", "<cmd>CangeFormatOnSaveToggle<CR>",                                "Toggle format on save" },
       { "s", "<cmd>lua vim.o.spell = not vim.o.spell<CR>",                      "Toggle spelling" },
@@ -211,6 +210,7 @@ M.groups = {
       { "k", "<cmd>Telescope keymaps<CR>",                                      "Search keybindings" },
       { "n", '<cmd>lua require("cange.telescope").browse_nvim()<CR>',           "Search nvim config" },
       { "r", "<cmd>Telescope oldfiles<CR>",                                     "Search recently opened files" },
+      { "s", '<cmd>lua require("auto-session.session-lens").search_session()<CR>', "Search Recent Sessions" },
       { "w", '<cmd>lua require("cange.telescope").browse_workspace()<CR>',      "Search current workspace" },
       -- stylua: ignore end
     },
