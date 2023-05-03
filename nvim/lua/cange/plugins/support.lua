@@ -151,18 +151,22 @@ return {
     end,
   },
 
-  { -- easily jump to any location and enhanced f/t motions for Leap
+  { -- jump to any horizontal location
+    "ggandor/flit.nvim",
+    event = "VeryLazy",
+    opts = {
+      multiline = false,
+      labeled_modes = "nx",
+    },
+  },
+  { -- jump to any vertical location
     "ggandor/leap.nvim",
     event = "VeryLazy",
     config = function()
       local leap = require("leap")
 
-      leap.add_default_mappings()
+      leap.add_default_mappings(true)
 
-      -- Getting used to `d` shouldn't take long - after all, it is more comfortable
-      -- than `x`, and even has a better mnemonic.
-      -- If you still desperately want your old `x` back, then just delete these
-      -- mappings set by Leap:
       vim.keymap.del({ "x", "o" }, "x")
       vim.keymap.del({ "x", "o" }, "X")
 
