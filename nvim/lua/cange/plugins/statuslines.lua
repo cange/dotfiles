@@ -58,19 +58,6 @@ return {
           },
           lualine_c = {
             { require("auto-session.lib").current_session_name },
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            {
-              "filename",
-              path = 0,
-              symbols = {
-                modified = icon("ui.Circle"),
-                newfile = icon("documents.NewFile"),
-                readonly = icon("ui.Lock"),
-                unnamed = icon("documents.File"),
-              },
-              separator = "",
-              padding = { left = 1 },
-            },
             {
               "diagnostics",
               symbols = {
@@ -79,7 +66,6 @@ return {
                 info = icon("diagnostics.Info") .. " ",
                 hint = icon("diagnostics.Hint") .. " ",
               },
-              -- padding = { left = 0 },
             },
           },
           lualine_x = {
@@ -112,7 +98,9 @@ return {
         basename = { fg = p.fg2 },
         dirname = { fg = p.fg2 },
         normal = { fg = p.fg3, bg = p.bg0 },
+        modified = { fg = p.fg1 },
       },
+      show_modified = true,
       exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
     },
   },
