@@ -69,6 +69,7 @@ return {
 
   { -- Distraction-free coding
     "folke/zen-mode.nvim",
+    event = "VeryLazy",
     opts = {
       window = {
         backdrop = 0.9, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
@@ -80,7 +81,7 @@ return {
 
   { -- bookmark buffers
     "ThePrimeagen/harpoon",
-    lazy = false,
+    event = "VeryLazy",
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",

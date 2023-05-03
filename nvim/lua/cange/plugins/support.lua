@@ -65,6 +65,7 @@ return {
 
   { -- comment toggle
     "numToStr/Comment.nvim",
+    event = "VeryLazy",
     dependencies = {
       -- contextual comment in embedded language files like Vue.JS
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -80,6 +81,7 @@ return {
 
   { -- text case converter (camel case, etc.,
     "johmsalas/text-case.nvim",
+    event = "VeryLazy",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
       require("textcase").setup()
@@ -89,6 +91,7 @@ return {
 
   { -- close brackets, quotes etc
     "windwp/nvim-autopairs",
+    event = "VeryLazy",
     config = function()
       require("nvim-autopairs").setup({
         check_ts = true, -- enable Tree-Sitter
@@ -125,6 +128,7 @@ return {
 
   { -- Markdown preview
     "toppair/peek.nvim",
+    event = "VeryLazy",
     build = "deno task --quiet build:fast",
     config = function()
       local peek = require("peek")
@@ -176,12 +180,19 @@ return {
     end,
   },
 
-  -- smooth scrolling
-  { "karb94/neoscroll.nvim", config = function() require("neoscroll").setup() end },
+  { -- smooth scrolling
+    "karb94/neoscroll.nvim",
+    event = "VeryLazy",
+    config = function() require("neoscroll").setup() end,
+  },
 
-  -- Hex color highlighter
-  { "norcalli/nvim-colorizer.lua", config = function() require("colorizer").setup() end },
+  { -- Hex color highlighter
+    "norcalli/nvim-colorizer.lua",
+    config = function() require("colorizer").setup() end,
+  },
 
-  -- multi search and replace
-  "mg979/vim-visual-multi",
+  { -- multi search and replace
+    "mg979/vim-visual-multi",
+    event = "VeryLazy",
+  },
 }
