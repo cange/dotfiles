@@ -96,14 +96,8 @@ return {
       require("auto-session").setup(opts)
     end,
     opts = {
-      log_level = "info",
-      auto_restore_enabled = nil,
-      auto_save_enabled = nil,
-      auto_session_enable_last_session = false, -- Loads the last loaded session if session for cwd does not exist
-      auto_session_enabled = true,
+      log_level = vim.log.levels.INFO,
       auto_session_suppress_dirs = { "~/", "~/workspace" }, -- Suppress session create/restore if in one of the list of dirs
-      auto_session_use_git_branch = nil, -- Use the git branch to differentiate the session name
-      session_lens = { shorten_path = true },
     },
   },
 
