@@ -12,6 +12,7 @@ function zsh_add_plugin() {
   local name=$(echo $1 | cut -d "/" -f 2)
   if [[ -d "$ZDOTDIR/plugins/$name" ]]; then
     zsh_add_file "plugins/$name/$name.plugin.zsh" || \
+    zsh_add_file "plugins/$name/$name.zsh-theme" || \
     zsh_add_file "plugins/$name/$name.zsh"
    else
     git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$name"
