@@ -438,6 +438,7 @@
     VCS_STATUS_PUSH_COMMITS_AHEAD_ICON="→" # ⇢
     VCS_STATUS_PUSH_COMMITS_BEHIND_ICON="←" # ⇠
     VCS_STATUS_STASHES_ICON=" " # nf-cod-archive
+    VCS_STATUS_STASHES_ICONS=("󰎥 " "󰎨 " "󰎫 " "󰎲 " "󰎯 " "󰎴 " "󰎷 " "󰎺 " "󰎽 " "󰏀 ") # nf-md-numeric_[1-9_plus]_box_multiple_outline
 
     # ⇣42 if behind the remote.
     (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}${VCS_STATUS_COMMITS_BEHIND}${VCS_STATUS_COMMITS_BEHIND_ICON}"
@@ -450,7 +451,9 @@
     # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
     (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}${VCS_STATUS_PUSH_COMMITS_AHEAD_ICON}${VCS_STATUS_PUSH_COMMITS_AHEAD}"
     # *42 if have stashes.
-    (( VCS_STATUS_STASHES        )) && res+=" ${clean}${VCS_STATUS_STASHES_ICON}${VCS_STATUS_STASHES}"
+    # (( VCS_STATUS_STASHES        )) && res+=" ${clean}${VCS_STATUS_STASHES_ICON}${VCS_STATUS_STASHES}"
+    (( VCS_STATUS_STASHES <= 9   )) && res+=" ${clean}${VCS_STATUS_STASHES_ICONS[$VCS_STATUS_STASHES]}"
+    (( VCS_STATUS_STASHES > 9    )) && res+=" ${clean}${VCS_STATUS_STASHES_ICONS[10]}"
     # 'merge' if the repo is in an unusual state.
     [[ -n $VCS_STATUS_ACTION     ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
     # ~42 if have merge conflicts.

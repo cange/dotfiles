@@ -81,7 +81,9 @@ end
 local function get_prediction_strength_kind_icon(percentage)
   if percentage and percentage ~= "" then
     local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
-    local icon = vim.split("         ", " ")[fraction_num] .. " "
+    local icons = Cange.get_icon("sets.batteries")
+    ---@diagnostic disable-next-line: param-type-mismatch
+    local icon = vim.split(icons, " ")[fraction_num] .. " "
     -- print(ns .. " strength:", percentage, icon)
     return icon
   end
