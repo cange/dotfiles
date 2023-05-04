@@ -117,8 +117,8 @@ M.groups = {
     mappings = {
       -- toolings
       { "1", "<cmd>Lazy show<CR>",                                              "Plugin info" },
-      { "2", "<cmd>NullLsInfo<CR>",                                             "Null-ls info" },
-      { "3", "<cmd>Mason<CR>",                                                  "Mason info" },
+      { "2", "<cmd>Mason<CR>",                                                  "Mason info" },
+      { "3", "<cmd>NullLsInfo<CR>",                                             "Null-ls info" },
       { "4", "<cmd>LspInfo<CR>",                                                "LSP info" },
       -- edits
       { "5", '<cmd>lua require("cange.telescope").browse_snippets()<CR>',       "Edit snippets" },
@@ -166,13 +166,15 @@ M.groups = {
     leader = "<leader>c",
     mappings = {
       -- code issues
-      { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
-      { "a", vim.lsp.buf.code_action,                                           "Code actions" },
       { "D", "<cmd>Telescope diagnostics<CR>",                                  "Workspace diagnostics" },
+      { "a", vim.lsp.buf.code_action,                                           "Code actions/Quickfixes" },
       { "d", "<cmd>lua require('cange.lsp').toggle_virtual_text()<CR>",         "Toggle inline virtual text" },
+      { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnostics" },
       -- formatter
+      { "R", "<cmd>LspRestart<CR>",                                             "Restart LSP" },
       { "c", "<cmd>TextCaseOpenTelescope<CR>",                                  "Change Case", mode = { "v", "n" } },
       { "f", "<cmd>lua require('cange.lsp.format').toggle_format_on_save()<CR>","Toggle format on save" },
+      { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
       -- copilot
       { "p", "<cmd>Copilot panel<CR>",                                          "Toggle Copilot panel" },
       { "r", "<cmd>lua require('copilot.panel').refresh()<CR>",                 "Refresh Copilot panel" },
