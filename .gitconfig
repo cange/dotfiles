@@ -10,30 +10,6 @@
 [gpg]
 	program = /usr/local/bin/gpg
 
-[alias]
-	ci = commit
-	co = checkout
-	# View the current working tree status using the short format
-	s = status -s
-	st = status
-	praise = blame
-	lg = log --graph --pretty=format:'%Cblue%h%Creset - [%Cgreen%d%Creset] %s %Cred(%cr)%Creset' --abbrev-commit --date=relative
-
-	# View the SHA, description, and history graph of the latest 20 commits
-	l = log --pretty=oneline -n 20 --graph
-	# Diff
-	d = diff --patch-with-stat
-	# Pull in remote changes for the current repository and all its submodules
-	p = !"git pull; git submodule foreach git pull origin master"
-	# Clone a repository including all submodules
-	c = clone --recursive
-	# Commit all changes
-	ca = !git add . && git add -u && git commit -a
-	# Switch to a branch, creating it if necessary
-	go = checkout -B
-	# Undo a `git push`
-	undopush = push -f origin HEAD^:master
-
 [fetch]
 	prune = true # deletes outdated remote references
 
@@ -72,23 +48,6 @@
 
 [color]
 	ui = auto # colored output
-
-[color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-
-[color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = white reverse
-
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
 
 # Use `origin` as the default remote on the `master` branch in all cases
 [branch "master"]
