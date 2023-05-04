@@ -44,46 +44,39 @@ M.groups = {
     name = "Goto",
     leader = "g",
     mappings = {
-      -- stylua: ignore start
       { "d", vim.lsp.buf.definition,                                            "Definition" },
       { "r", "<cmd>Telescope lsp_references<CR>",                               "References" },
       { "I", vim.lsp.buf.implementation,                                        "Implementation" },
       { "D", vim.lsp.buf.declaration,                                           "Declaration" },
       { "T", vim.lsp.buf.type_definition,                                       "Type definition" },
-      -- stylua: ignore end
     },
   },
   {
     name = "Prev",
     leader = "[",
     mappings = {
-      -- stylua: ignore start
       { "b", '<cmd>bprevious<CR>',                                              "Previous buffer" },
       { "c", '<cmd>require("copilot.suggestion").prev()<CR>',                   "Previous Copilot suggestion" },
       { "d", vim.diagnostic.goto_prev,                                          "Previous diagnostic" },
       { "g", "<cmd>Gitsigns prev_hunk<CR>",                                     "Previous Git hunk" },
       { "m", '<cmd>lua require("harpoon.ui").nav_prev()<CR>',                   "Previous bookmark" },
-      -- stylua: ignore end
     },
   },
   {
     name = "Next",
     leader = "]",
     mappings = {
-      -- stylua: ignore start
       { "b", '<cmd>bnext<CR>',                                                  "Next buffer" },
       { "c", '<cmd>require("copilot.suggestion").next()<CR>',                   "Next Copilot suggestion" },
       { "d", vim.diagnostic.goto_next,                                          "Next diagnostic" },
       { "g", "<cmd>Gitsigns next_hunk<CR>",                                     "Next Git hunk" },
       { "m", '<cmd>lua require("harpoon.ui").nav_next()<CR>',                   "Next bookmark" },
-      -- stylua: ignore end
     },
   },
   {
     name = "Primary",
     leader = "<leader>",
     mappings = {
-      -- stylua: ignore start
       { "<F2>", '<cmd>lua require("cange.lsp.format").format()<CR>',            "Format" },
       { "\\", "<cmd>NvimTreeToggle<CR>",                                        "File Explorer" },
       { "ff", "<cmd>lua require('cange.telescope').live_grep()<CR>",            "Search in Files" },
@@ -102,14 +95,12 @@ M.groups = {
         "<cmd>write<CR><cmd>lua Cange.reload('cange'); Cange.log('Saved and executed', { title = 'File' })<CR>",
         "Reload current file",
       },
-      -- stylua: ignore end
     },
   },
   {
     name = "Window",
     leader = "w",
     mappings = {
-      -- stylua: ignore start
       { "<left>", "<C-w>h",                                                     "Switch to left" },
       { "<down>", "<C-w>j",                                                     "Switch to down" },
       { "<up>", "<C-w>k",                                                       "Switch to up" },
@@ -118,14 +109,12 @@ M.groups = {
       { "j", "<C-w>j",                                                          "Switch to down" },
       { "k", "<C-w>k",                                                          "Switch to up" },
       { "l", "<C-w>l",                                                          "Switch to right" },
-      -- stylua: ignore end
     },
   },
   {
     name = "Editor",
     leader = "<leader>e",
     mappings = {
-      -- stylua: ignore start
       -- toolings
       { "1", "<cmd>Lazy show<CR>",                                              "Plugin info" },
       { "2", "<cmd>NullLsInfo<CR>",                                             "Null-ls info" },
@@ -151,14 +140,12 @@ M.groups = {
         "<cmd>lua require('telescope').extensions.notify.notify({ layout_strategy = 'vertical' })<CR>",
         "Show notifications",
       },
-      -- stylua: ignore end
     },
   },
   {
     name = "Git",
     leader = "<leader>g",
     mappings = {
-      -- stylua: ignore start
       { "B", "<cmd>Telescope git_branches<CR>",                                 "Checkout branch" },
       { "C", "<cmd>Telescope git_commits<CR>",                                  "Checkout commit" },
       { "I", '<cmd>lua require("gitsigns").blame_line({ full = true })<CR>',    "Commit full info" },
@@ -172,14 +159,12 @@ M.groups = {
       { "r", "<cmd>Gitsigns reset_hunk<CR>",                                    "Reset hunk" },
       { "s", "<cmd>Gitsigns stage_hunk<CR>",                                    "Stage hunk" },
       { "u", "<cmd>Gitsigns undo_stage_hunk<CR>",                               "Undo stage hunk" },
-      -- stylua: ignore end
     },
   },
   {
     name = "Code/Copilot",
     leader = "<leader>c",
     mappings = {
-      -- stylua: ignore start
       -- code issues
       { "d", "<cmd>Telescope diagnostics<CR>",                                  "Workspace diagnostics" },
       { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
@@ -194,14 +179,12 @@ M.groups = {
       { "t", "<cmdrequire('copilot.suggestion').toggle_auto_trigger()<CR>",     "Toggle Copilot suggestion auto trigger" },
       { "o", "<cmd>Copilot toggle<CR>",                                         "Toggle Copilot" },
       { "S", "<cmd>Copilot status<CR>",                                         "Copilot status" },
-      -- stylua: ignore end
     },
   },
   {
     name = "Search",
     leader = "<leader>s",
     mappings = {
-      -- stylua: ignore start
       { "B", "<cmd>Telescope buffers<CR>",                                      "Search buffers" },
       { "C", "<cmd>Telescope commands<CR>",                                     "Search commands" },
       { "H", '<cmd>Telescope highlights<CR>',                                   "Search highlights" },
@@ -212,7 +195,6 @@ M.groups = {
       { "r", "<cmd>Telescope oldfiles<CR>",                                     "Search recently opened files" },
       { "s", '<cmd>lua require("auto-session.session-lens").search_session()<CR>', "Search Recent Sessions" },
       { "w", '<cmd>lua require("cange.telescope").browse_workspace()<CR>',      "Search current workspace" },
-      -- stylua: ignore end
     },
   },
 }
