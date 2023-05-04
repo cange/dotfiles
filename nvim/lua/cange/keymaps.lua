@@ -141,7 +141,7 @@ M.groups = {
       { "S", "<cmd>SessionSave<CR>",                                            "Save session" },
       { "X", "<cmd>SessionDelete<CR>",                                          "Delete session" },
       -- others
-      { "l", "<cmd>CangeFormatOnSaveToggle<CR>",                                "Toggle format on save" },
+      { "l", "<cmd>lua require('cange.lsp.format').toggle_format_on_save()<CR>","Toggle format on save" },
       { "s", "<cmd>lua vim.o.spell = not vim.o.spell<CR>",                      "Toggle spelling" },
       { "c", "<cmd>Telescope colorscheme<CR>",                                  "Change colorscheme" },
       { "C", '<cmd>lua require("luasnip").cleanup()<CR>',                       "Reset snippets UI" },
@@ -185,8 +185,8 @@ M.groups = {
       { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
       { "a", vim.lsp.buf.code_action,                                           "Code actions" },
       -- formatter
-      { "f", "<cmd>CangeFormatOnSaveToggle<CR>",                                "Toggle format on save" },
       { "c", "<cmd>TextCaseOpenTelescope<CR>",                                  "Change Case", mode = { "v", "n" } },
+      { "f", "<cmd>lua require('cange.lsp.format').toggle_format_on_save()<CR>","Toggle format on save" },
       -- copilot
       { "p", "<cmd>Copilot panel<CR>",                                          "Toggle Copilot panel" },
       { "r", "<cmd>lua require('copilot.panel').refresh()<CR>",                 "Refresh Copilot panel" },

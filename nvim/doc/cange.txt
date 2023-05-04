@@ -44,14 +44,6 @@ It can be installed via `mason.vim` and the following command:
 <
 Installs all preconfigured packages defined in *cange.config* file.
 
-------------------------------------------------------------------------------
-LSP ON SAVE AUTO FORMAT                                 *:LspToggleFormatOnSave*
-    >
-    :CangeFormatOnSaveToggle
-<
-Toggles auto formatting within a session. It can be configured for permanently
-use within *cange.config* file.
-
 ==============================================================================
 CONFIG                                                            *cange.config*
 

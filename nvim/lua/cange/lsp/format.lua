@@ -12,7 +12,7 @@ local ns = "cange.lsp.format"
 M.autoformat = Cange.get_config("lsp.format_on_save") or false
 
 -- Allows to enable/disable auto formatting on save within a session
-local function toggle()
+function M.toggle_format_on_save()
   M.autoformat = not M.autoformat
   local label = M.autoformat and "ENABLED" or "DISABLED"
   Cange.log(label .. " format on save", { title = ns })
@@ -49,7 +49,5 @@ function M.attach(bufnr)
     end,
   })
 end
-
-vim.api.nvim_create_user_command("CangeFormatOnSaveToggle", toggle, {})
 
 return M
