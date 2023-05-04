@@ -166,9 +166,10 @@ M.groups = {
     leader = "<leader>c",
     mappings = {
       -- code issues
-      { "d", "<cmd>Telescope diagnostics<CR>",                                  "Workspace diagnostics" },
       { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
       { "a", vim.lsp.buf.code_action,                                           "Code actions" },
+      { "D", "<cmd>Telescope diagnostics<CR>",                                  "Workspace diagnostics" },
+      { "d", "<cmd>lua require('cange.lsp').toggle_virtual_text()<CR>",         "Toggle inline virtual text" },
       -- formatter
       { "c", "<cmd>TextCaseOpenTelescope<CR>",                                  "Change Case", mode = { "v", "n" } },
       { "f", "<cmd>lua require('cange.lsp.format').toggle_format_on_save()<CR>","Toggle format on save" },

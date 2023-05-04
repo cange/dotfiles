@@ -39,6 +39,8 @@ end
 
 local M = {}
 
+M.show_diagnostic_virtual_text = Cange.get_config("lsp.diagnostic_virtual_text") or false
+
 local function capabilities()
   local caps = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
   caps.textDocument.completion.completionItem.snippetSupport = true
@@ -95,8 +97,16 @@ function M.setup_diagnostics()
     signs = {
       active = signs,
     },
-    virtual_text = Cange.get_config("lsp.diagnostic_virtual_text") or false,
+    virtual_text = M.show_diagnostic_virtual_text,
   })
+end
+
+function M.toggle_virtual_text()
+  M.show_diagnostic_virtual_text = not M.show_diagnostic_virtual_text
+  local label = M.show_diagnostic_virtual_text and "ENABLED" or "DISABLED"
+
+  vim.diagnostic.config({ virtual_text = M.show_diagnostic_virtual_text })
+  Cange.log(label .. " virtual inline text", { title = "Diagnostic" })
 end
 
 return M
