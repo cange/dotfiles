@@ -1,12 +1,13 @@
+local icon = Cange.get_icon
 local M = {}
 
 ---@alias copilot_status_notification_data { status: ''|'Normal'|'InProgress'|'Warning', message: string }
 
 M.icons = {
-  [""] = Cange.get_icon("ui.CopilotError"),
-  ["Normal"] = Cange.get_icon("ui.Copilot"),
-  ["Warning"] = Cange.get_icon("ui.CopilotWarning"),
-  ["InProgress"] = Cange.get_icon("ui.Copilot"),
+  [""] = "  " .. icon("ui.CopilotError"),
+  ["Normal"] = "  " .. icon("ui.Copilot"),
+  ["Warning"] = "  " .. icon("ui.CopilotWarning"),
+  ["InProgress"] = icon("ui.Sync") .. " " .. icon("ui.Copilot"),
 }
 
 M.colors = {
