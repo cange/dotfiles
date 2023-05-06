@@ -38,6 +38,7 @@ local M = {}
 -- All main key bindings to open certain function are defined here. Individual plugin internal bindings are handled in
 -- each plugin by it self.
 
+-- stylua: ignore start
 ---@type cange.keymapsMappingGroup[]
 M.groups = {
   {
@@ -201,5 +202,6 @@ M.groups = {
     },
   },
 }
+-- stylua: ignore end
 
 return M

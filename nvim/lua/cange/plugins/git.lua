@@ -1,5 +1,6 @@
 local icon = Cange.get_icon
 
+-- stylua: ignore start
 return {
   {
     "lewis6991/gitsigns.nvim", -- git highlighter, blame, etc
@@ -19,9 +20,8 @@ return {
         virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
         delay = 800,
       },
-      current_line_blame_formatter = " " .. icon("git.Commit") .. " <author>, <author_time:%d.%m.%y> " .. icon(
-        "ui.Note"
-      ) .. " <summary>",
+      current_line_blame_formatter = " " .. icon("git.Commit") .. " <author>, <author_time:%d.%m.%y> " .. icon("ui.Note") .. " <summary>",
     },
   },
 }
+-- stylua: ignore start
