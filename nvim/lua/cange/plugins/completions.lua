@@ -30,7 +30,7 @@ return {
           snippet_placeholder = "..",
           show_prediction_strength = false,
         },
-        config = function(_, opts) require("cmp_tabnine.config").setup(opts) end,
+        config = function(_, opts) require("cmp_tabnine.config"):setup(opts) end,
       },
     },
     -- FIXME: https://github.com/hrsh7th/nvim-cmp/pull/1563

@@ -4,6 +4,7 @@ if not found_luasnip then return end
 
 local win_get_cursor = vim.api.nvim_win_get_cursor
 local get_current_buf = vim.api.nvim_get_current_buf
+local icon = Cange.get_icon
 
 ---sets the current buffer's luasnip to the one nearest the cursor
 ---@return boolean true if a node is found, false otherwise
@@ -79,9 +80,9 @@ local function get_prediction_strength_kind_icon(percentage)
     local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
     local icons = Cange.get_icon("sets.batteries")
     ---@diagnostic disable-next-line: param-type-mismatch
-    local icon = vim.split(icons, " ")[fraction_num] .. " "
-    -- print(ns .. " strength:", percentage, icon)
-    return icon
+    local ico = vim.split(icons, " ")[fraction_num]
+    -- print(ns .. " strength:", percentage, ico)
+    return ico
   end
 
   return nil
@@ -97,7 +98,7 @@ local function get_menu_hl_group_by(source_name)
     nvim_lua = "CmpItemKindLua",
   }
 
-  return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "Comment"
+  return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "@comment"
 end
 
 local M = {}
@@ -123,22 +124,43 @@ end
 ---@see cmp.FormattingConfig
 function M.format(entry, vim_item)
   local maxwidth = 80
-  local source_icons = Cange.get_icon("cmp_source") or {}
-  local source_name = entry.source.name
-  local strength = ""
+  local src_icons = {
+    buffer = icon("ui.Cache"),
+    cmp_tabnine = icon("ui.Tabnine"),
+    copilot = icon("ui.Copilot"),
+    luasnip = icon("ui.Cut"),
+    nvim_lsp = icon("ui.Book"),
+    nvim_lua = icon("extensions.Lua"),
+    path = icon("ui.Path"),
+  }
 
-  ---@see https://github.com/tzachar/cmp-tabnine#show_prediction_strength
-  local tabnine_detail = (entry.completion_item.labelDetails or {}).detail
-  if tabnine_detail and tabnine_detail:find(".*%%.*") then strength = tabnine_detail end
+  local src_name = entry.source.name
+  local cmp_item = entry.completion_item or {}
+  local strength = ""
+  local is_multiline = false
+
+  if src_name == "copilot" then
+    is_multiline = ((cmp_item.documentation or {}).value or ""):find(".*\n.+\n.+\n") ~= nil
+  end
+
+  if src_name == "cmp_tabnine" then
+    ---@see https://github.com/tzachar/cmp-tabnine#show_prediction_strength
+    local detail = (cmp_item.labelDetails or {}).detail
+
+    is_multiline = (cmp_item.data or {}).multiline
+    strength = detail and detail:find(".*%%.*") and detail or ""
+  end
 
   ---@diagnostic disable-next-line: param-type-mismatch
-  if vim.tbl_contains(vim.tbl_keys(source_icons), source_name) then vim_item.menu = source_icons[source_name] end
-  local kinds = Cange.get_icon("cmp_kinds") or {}
-  local kind = get_prediction_strength_kind_icon(strength) or kinds[vim_item.kind]
+  local kinds = icon("cmp_kinds") or {}
+  local strength_icon = get_prediction_strength_kind_icon(strength)
 
-  vim_item.kind = type(kind) == "string" and vim.trim(kind) or kind
+  vim_item.kind = strength_icon
+    or kinds[vim_item.kind]
+    or icon("cmp_kinds." .. (is_multiline and "MultiLine" or "SingleLine"))
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
-  vim_item.menu_hl_group = get_menu_hl_group_by(source_name)
+  vim_item.menu = vim.tbl_contains(vim.tbl_keys(src_icons), src_name) and src_icons[src_name] .. " " or vim_item.menu
+  vim_item.menu_hl_group = get_menu_hl_group_by(src_name)
 
   return vim_item
 end

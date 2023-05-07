@@ -180,7 +180,7 @@ M.groups = {
       { "p", "<cmd>Copilot panel<CR>",                                          "Toggle Copilot panel" },
       { "r", "<cmd>lua require('copilot.panel').refresh()<CR>",                 "Refresh Copilot panel" },
       { "s", "<cmd>Copilot suggestion<CR>",                                     "Toggle Copilot suggestion" },
-      { "t", "<cmdrequire('copilot.suggestion').toggle_auto_trigger()<CR>",     "Toggle Copilot suggestion auto trigger" },
+      { "t", "<cmd>require('copilot.suggestion').toggle_auto_trigger()<CR>",    "Toggle Copilot suggestion auto trigger" },
       { "o", "<cmd>Copilot toggle<CR>",                                         "Toggle Copilot" },
       { "S", "<cmd>Copilot status<CR>",                                         "Copilot status" },
     },

@@ -82,14 +82,14 @@ M.opts = {
     ["<C-space>"] = cmp.mapping.complete(),
   }),
   sources = cmp.config.sources({
-    { name = "cmp_tabnine", max_item_count = 3 },
     { name = "copilot" },
+    { name = "cmp_tabnine", max_item_count = 2 },
     { name = "luasnip", max_item_count = 3 },
     { name = "nvim_lsp", max_item_count = 5 },
     { name = "nvim_lua", max_item_count = 2 },
+    { name = "path", keyword_length = 2, max_item_count = 2 },
   }, {
-    { name = "path", keyword_length = 5, max_item_count = 2 },
-    { name = "buffer", keyword_length = 5, max_item_count = 2 },
+    { name = "buffer", keyword_length = 3, max_item_count = 2 },
   }),
   snippet = {
     expand = function(args)
