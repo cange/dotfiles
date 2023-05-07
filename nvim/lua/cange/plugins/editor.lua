@@ -1,15 +1,11 @@
+local icon = Cange.get_icon
+
 return {
   { -- File explorer
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     version = "nightly",
     config = function()
-      local icon = Cange.get_icon
-      local git_icons = icon("git_states")
-      ---@diagnostic disable-next-line: param-type-mismatch
-      for name, _ in pairs(git_icons) do
-        git_icons[name] = icon("git_states." .. name)
-      end
       require("nvim-tree").setup({
         live_filter = {
           prefix = icon("ui.Search") .. "  ",
@@ -45,7 +41,7 @@ return {
                 symlink = icon("documents.SymlinkFolder"),
                 symlink_open = icon("documents.SymlinkFolder"),
               },
-              git = git_icons,
+              git = icon("git_states"),
             },
           },
         },
