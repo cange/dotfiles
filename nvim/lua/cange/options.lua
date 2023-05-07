@@ -20,7 +20,7 @@ local options = {
   termguicolors = true, -- set term gui colors (most terminals support this)
   title = true, -- Update terminal window title
   -- transparency
-  pumblend = 16, -- transparency of popup-menus 0 (none) to 100 (full)
+  pumblend = 0, -- transparency of popup-menus 0 (none) to 100 (full)
   winblend = 0, -- transparency of floating windows 0 (none) to 100 (full)
 
   -- UI - command prompt
