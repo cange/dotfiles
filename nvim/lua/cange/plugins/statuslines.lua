@@ -32,7 +32,18 @@ return {
             { "branch", icon = icon("git.Branch") },
           },
           lualine_c = {
-            { require("auto-session.lib").current_session_name },
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            {
+              "filename",
+              path = 0,
+              symbols = {
+                modified = icon("ui.DotFill"),
+                newfile = icon("documents.NewFile"),
+                readonly = icon("ui.Lock"),
+                unnamed = icon("documents.File"),
+              },
+              padding = { left = 1, right = 1 },
+            },
             {
               "diagnostics",
               symbols = {
@@ -44,8 +55,9 @@ return {
             },
           },
           lualine_x = {
+            { require("auto-session.lib").current_session_name },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
-            require("cange.utils.copilot").lualine_status,
+            "copilot_status",
           },
           lualine_y = {
             { "fileformat", separator = "", padding = { left = 1, right = 0 } },
