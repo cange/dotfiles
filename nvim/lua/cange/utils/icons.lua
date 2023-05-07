@@ -11,50 +11,34 @@
 local M = {}
 local ns = "[cange.utils.icons]"
 
----@param name string
----@return string|nil
-local function get_single_icon(icon_list, name)
-  local result = icon_list and icon_list[name] or nil
-
-  if not result then
-    print(ns, name, "not found")
-    return nil
-  end
-  return result
-end
-
----@param group_id string Dot separated path of icon group
----@param ... string|table List of parts the actual icon path. Use last argument as options if tables i past
----@return table|string|nil # The icon symbol or nil if not found
-function M.get_icon(group_id, ...)
+--- Retrieves an icon from the specified path.
+--- @param path string Dot separated path to the desired icon.
+--- @return table|string|nil The icon value if found, nil if the path is invalid.
+function M.get_icon(path)
   local ok, icons = pcall(require, "cange.icons")
-  if not ok then print(ns, '"cange.icons" not found!') end
-  local parts = { ... }
-  local last_item = parts[#parts]
-
-  if type(last_item) == "table" then table.remove(parts, #parts) end
-
-  local group_parts = vim.split(group_id, "%.")
-  if #group_parts > 1 then
-    parts = vim.list_extend(group_parts, parts)
-    group_id = table.remove(parts, 1)
+  if not ok then error(ns .. ' "cange.icons" not found!') end
+  local parts = {}
+  for part in string.gmatch(path, "([^%.]+)") do
+    table.insert(parts, part)
   end
 
-  ---@diagnostic disable-next-line: cast-local-type
-  icons = get_single_icon(icons, group_id)
-  if #parts > 0 then
-    for _, icon_name in ipairs(parts) do
-      ---@diagnostic disable-next-line: cast-local-type, param-type-mismatch
-      icons = get_single_icon(icons, icon_name)
-    end
+  -- @type table|string
+  local current = icons
+  for _, part in ipairs(parts) do
+    if type(current) == "table" then current = current[part] end
   end
 
-  if type(icons) == "string" then
+  if not current then
+    print(ns, path, "not found")
+    return nil -- Invalid path
+  end
+
+  if type(current) == "string" then
     ---@diagnostic disable-next-line: cast-local-type
-    icons = vim.trim(icons)
+    current = vim.trim(current)
   end
 
-  return icons
+  return current
 end
 
 ---@param filetype string
