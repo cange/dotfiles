@@ -24,7 +24,7 @@ local options = {
   winblend = 0, -- transparency of floating windows 0 (none) to 100 (full)
 
   -- UI - command prompt
-  cmdheight = 0, -- space of the command line for displaying messages
+  cmdheight = 1, -- space of the command line for displaying messages
   showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
   showcmd = true, -- show incomplete commands
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
