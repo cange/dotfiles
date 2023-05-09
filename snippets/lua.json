@@ -4,20 +4,20 @@
     "body": "-- stylua: ignore ${1|start,end|}"
   },
   "print(…)": {
-    "prefix": "pri",
+    "prefix": "log",
     "body": "vim.print($1)"
   },
   "print(keys…)": {
-    "prefix": "prik",
+    "prefix": "logk",
     "body": "vim.print('$1', vim.tbl_keys($1))"
   },
   "print('…', …)": {
-    "prefix": "pril",
+    "prefix": "logl",
     "body": "vim.print('$1', $1)"
   },
   "notify(…)": {
     "prefix": "not",
-    "body": "vim.notify('$1')"
+    "body": "Cange.log('$1'${2:, { title: $3 }})"
   },
   "local func(…)": {
     "prefix": "lf",
