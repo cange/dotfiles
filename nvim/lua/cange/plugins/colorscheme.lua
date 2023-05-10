@@ -43,8 +43,6 @@ function M._update_palette()
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
   local palette = require("nightfox.palette").load(colorscheme)
 
-  Cange.set_config("ui.palette", palette)
-
   return palette
 end
 
@@ -105,10 +103,8 @@ vim.api.nvim_create_user_command("CangeUpdateColorscheme", M._update_highlights,
 return {
   {
     "EdenEast/nightfox.nvim", -- colorscheme
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
+    lazy = true,
     config = function()
-      Cange = Cange or require("cange.utils")
       local colorscheme = Cange.get_config("ui.colorscheme")
 
       vim.cmd("colorscheme " .. colorscheme)

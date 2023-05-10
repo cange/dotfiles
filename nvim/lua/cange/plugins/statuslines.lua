@@ -1,8 +1,5 @@
 local icon = Cange.get_icon
 
----@type cange.colorschemePalette
-local p = Cange.get_config("ui.palette")
-
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -75,20 +72,23 @@ return {
 
   { -- winbar with LSP context symbols
     "utilyre/barbecue.nvim",
-    name = "barbecue",
     dependencies = {
       "SmiteshP/nvim-navic",
+      "nvim-lualine/lualine.nvim",
       "nvim-tree/nvim-web-devicons",
     },
-    opts = {
-      theme = {
-        basename = { fg = p.fg2 },
-        dirname = { fg = p.fg2 },
-        normal = { fg = p.fg3, bg = p.bg0 },
-        modified = { fg = p.fg1 },
-      },
-      show_modified = true,
-      exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
-    },
+    event = "VeryLazy",
+    config = function()
+      require("barbecue").setup({
+        theme = {
+          dirname = Cange.get_hl("lualine_c_inactive", { "fg" }),
+          normal = Cange.get_hl("lualine_c_normal"),
+          modified = Cange.get_hl("lualine_c_normal", { "fg" }),
+          basename = Cange.get_hl("lualine_c_normal", { "fg" }),
+        },
+        show_modified = true,
+        exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
+      })
+    end,
   },
 }

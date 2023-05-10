@@ -73,11 +73,33 @@ end
 
 ---Returns the hex value of the given highlight group
 ---@param name string
+---@param key string
 ---@return table|nil
-function M.fg(name)
-  ---@type {fg?:number}?
+function M.get_hl_hex(name, key)
+  local hl = Cange.get_hl(name, { key })
+  local value = hl[key] or nil
+
+  if not value then print(ns, '"' .. key .. '" in "' .. name .. '" hl group not found', vim.inspect(hl)) end
+
+  local output = {}
+  output[key] = string.format("#%06x", value)
+  return output
+end
+
+---Returns actual values of the given highlight group name and allows to filter
+---@param name string
+---@param keywords? table
+---@return {fg?:number, bg?:number, bold?:boolean, italic?:boolean}
+function M.get_hl(name, keywords)
+  keywords = keywords or nil
   local hl = vim.api.nvim_get_hl(0, { name = name })
-  local fg = hl and hl.fg or nil
-  return fg and { fg = string.format("#%06x", fg) }
+  if not hl then print(ns, ' hl "' .. name .. '" not found', vim.inspect(hl)) end
+  if not keywords then return hl end
+  local output = {}
+  for _, k in pairs(keywords) do
+    if hl[k] then output[k] = hl[k] end
+  end
+
+  return output
 end
 return M
