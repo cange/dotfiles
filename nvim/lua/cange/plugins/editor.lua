@@ -99,7 +99,7 @@ return {
   },
 
   -- shows LSP initialization progress
-  { "j-hui/fidget.nvim", opts = { text = { spinner = "dots" } } },
+  { "j-hui/fidget.nvim", opts = { text = { spinner = "dots", done = icon("ui.Check") } } },
 
   { -- font icon set
     "nvim-tree/nvim-web-devicons",
@@ -119,9 +119,9 @@ return {
         },
       },
       icons = {
-        breadcrumb = Cange.get_icon("ui.ArrowRight"),
-        separator = Cange.get_icon("ui.ChevronRight"),
-        group = Cange.get_icon("ui.PlusSmall") .. " ",
+        breadcrumb = icon("ui.ArrowRight"),
+        separator = icon("ui.ChevronRight"),
+        group = icon("ui.PlusSmall") .. " ",
       },
       window = {
         border = Cange.get_config("ui.border"),
