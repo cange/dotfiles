@@ -40,12 +40,19 @@ end
 
 ---Auto formats codebase on save if format toggle is active
 ---@param bufnr number
-function M.attach(bufnr)
-  vim.api.nvim_create_autocmd("BufWritePre", {
+function M.attach(client, bufnr)
+  vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     buffer = bufnr,
     group = vim.api.nvim_create_augroup("cange_lsp_auto_format", { clear = true }),
+    desc = "Auto format",
     callback = function()
-      if M.autoformat then M.format({ async = false }) end
+      if not M.autoformat then return end
+      if client.name == "eslint" then
+        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
+        vim.cmd("EslintFixAll")
+      else
+        M.format({ async = false })
+      end
     end,
   })
 end
