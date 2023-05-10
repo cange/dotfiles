@@ -8,10 +8,6 @@ local get_current_buf = vim.api.nvim_get_current_buf
 ---sets the current buffer's luasnip to the one nearest the cursor
 ---@return boolean true if a node is found, false otherwise
 local function seek_luasnip_cursor_node()
-  -- TODO(kylo252): upstream this
-  -- for outdated versions of luasnip
-  if not luasnip.session.current_nodes then return false end
-
   local node = luasnip.session.current_nodes[get_current_buf()]
   if not node then return false end
 
