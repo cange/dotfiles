@@ -64,15 +64,16 @@ return {
         update_in_insert = false, -- if false, diagnostics will run upon exiting insert mode
         sources = {
           code_actions.eslint_d, -- js
+          code_actions.gitsigns, -- git
           code_actions.typescript,
 
+          diagnostics.eslint_d,
           diagnostics.jsonlint,
           diagnostics.rubocop, -- ruby
           diagnostics.stylelint, -- css
           diagnostics.yamllint,
           diagnostics.zsh,
 
-          formatting.eslint_d, -- js
           formatting.prettierd, -- js, css, html, json, etc
           formatting.rubocop, -- ruby
           formatting.shfmt, -- shell/bash

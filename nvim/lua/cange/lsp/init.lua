@@ -29,7 +29,7 @@ local function keymaps(client, bufnr)
 
   -- typescript specific keymaps (e.g. rename file and update imports)
   if client.name == "tsserver" then
-    Cange.info("ENABLED keymaps for JS/TS ", { title = ns })
+    Cange.log("ENABLED keymaps for JS/TS ", { title = ns })
     keymap("qfa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
     keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "LSP Rename file and update imports")
     keymap("<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", "LSP Organize imports")
@@ -53,7 +53,7 @@ end
 ---@param bufnr integer
 local function on_attach(client, bufnr)
   keymaps(client, bufnr)
-  require("cange.lsp.format").attach(bufnr)
+  require("cange.lsp.format").attach(client, bufnr)
 end
 
 local default_config = {
