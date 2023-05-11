@@ -10,13 +10,12 @@ return {
       "zbirenbaum/copilot.lua",
     },
     config = function()
+      local comp_icon = icon("ui.Pipe")
+      local sect_icon = ""
       require("lualine").setup({
         options = {
-          component_separators = {
-            left = icon("ui.Pipe"),
-            right = icon("ui.Pipe"),
-          },
-          section_separators = { left = "", right = "" },
+          component_separators = { left = comp_icon, right = comp_icon },
+          section_separators = { left = sect_icon, right = sect_icon },
         },
         sections = {
           lualine_a = {
@@ -26,9 +25,18 @@ return {
             },
           },
           lualine_b = {
-            { "branch", icon = icon("git.Branch") },
+            {
+              "diagnostics",
+              symbols = {
+                error = icon("diagnostics.Error") .. " ",
+                warn = icon("diagnostics.Warn") .. " ",
+                info = icon("diagnostics.Info") .. " ",
+                hint = icon("diagnostics.Hint") .. " ",
+              },
+            },
           },
           lualine_c = {
+            { "branch", icon = icon("git.Branch") },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
@@ -41,15 +49,6 @@ return {
               },
               padding = { left = 1, right = 1 },
             },
-            {
-              "diagnostics",
-              symbols = {
-                error = icon("diagnostics.Error") .. " ",
-                warn = icon("diagnostics.Warn") .. " ",
-                info = icon("diagnostics.Info") .. " ",
-                hint = icon("diagnostics.Hint") .. " ",
-              },
-            },
           },
           lualine_x = {
             { require("auto-session.lib").current_session_name },
@@ -58,13 +57,12 @@ return {
           },
           lualine_y = {
             { "fileformat", separator = "", padding = { left = 1, right = 0 } },
-            "encoding",
+            { "encoding" },
+            { "selectioncount" },
+            { "progress", separator = "", padding = { left = 1, right = 0 } },
+            { "location" },
           },
-          lualine_z = {
-            "selectioncount",
-            { "progress", separator = "" },
-            { "location", padding = { left = 0, right = 1 } },
-          },
+          lualine_z = {},
         },
       })
     end,
