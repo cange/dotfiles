@@ -14,10 +14,10 @@ local icons = {
   ["InProgress"] = Cange.get_icon("ui.Sync"),
 }
 local colors = {
-  [""] = Cange.get_hl_hex("Comment", "fg"),
-  ["Normal"] = Cange.get_hl_hex("Normal", "fg"),
-  ["Warning"] = Cange.get_hl_hex("WarningMsg", "fg"),
-  ["InProgress"] = Cange.get_hl_hex("Normal", "fg"),
+  [""] = Cange.get_hl_hex("lualine_c_inactive", "fg"),
+  ["Normal"] = Cange.get_hl_hex("lualine_c_normal", "fg"),
+  ["Warning"] = Cange.get_hl_hex("WarningMsg", "fg"), -- using `WarningMsg` avoid missing hl issue
+  ["InProgress"] = Cange.get_hl_hex("lualine_c_normal", "fg"),
 }
 
 function M.init(self, opts)
