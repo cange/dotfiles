@@ -33,8 +33,6 @@ return {
         config = function(_, opts) require("cmp_tabnine.config"):setup(opts) end,
       },
     },
-    -- FIXME: https://github.com/hrsh7th/nvim-cmp/pull/1563
-    commit = "1cad30fcffa282c0a9199c524c821eadc24bf939",
     config = function()
       local cmp = require("cmp")
 
