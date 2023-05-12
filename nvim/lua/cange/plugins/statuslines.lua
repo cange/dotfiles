@@ -51,8 +51,8 @@ return {
             },
           },
           lualine_x = {
-            { require("auto-session.lib").current_session_name },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+            { require("auto-session.lib").current_session_name },
             "copilot_status",
           },
           lualine_y = {
