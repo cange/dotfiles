@@ -30,7 +30,7 @@ local function keymaps(client, bufnr)
   -- typescript specific keymaps (e.g. rename file and update imports)
   if client.name == "tsserver" then
     Cange.log("ENABLED keymaps for JS/TS ", { title = ns })
-    keymap("qfa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
+    keymap("<leader>fa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
     keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "LSP Rename file and update imports")
     keymap("<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", "LSP Organize imports")
     keymap("<leader>ru", "<cmd>TypescriptRemoveUnused<CR>", "LSP remove unused variables")
@@ -42,7 +42,7 @@ local M = {}
 M.show_diagnostic_virtual_text = Cange.get_config("lsp.diagnostic_virtual_text") or false
 
 local function capabilities()
-  local caps = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local caps = cmp_nvim_lsp.default_capabilities()
   caps.textDocument.completion.completionItem.snippetSupport = true
 
   return caps

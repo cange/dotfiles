@@ -32,8 +32,8 @@ local function prev_item_handler(fallback)
   end
 end
 local function next_item_handler(fallback)
-  if cmp.visible() then
-    cmp.select_next_item()
+  if cmp.visible() and cmp_utils.has_words_before() then
+    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
   elseif luasnip.expandable() then
     luasnip.expand()
   elseif luasnip.expand_or_jumpable() then
