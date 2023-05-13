@@ -1,6 +1,6 @@
-local gitsigns_found, _ = pcall(require, "gitsigns.status")
+local gitsigns_found, _ = pcall(require, "gitsigns")
 if not gitsigns_found then
-  print('warn: "copilot.api" not found')
+  print('warn: "gitsigns" not found')
   return
 end
 local M = require("lualine.component"):extend()
