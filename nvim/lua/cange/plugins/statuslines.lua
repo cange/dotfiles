@@ -1,4 +1,4 @@
-local icon = Cange.get_icon
+local i = Cange.get_icon
 
 return {
   {
@@ -10,7 +10,7 @@ return {
       "zbirenbaum/copilot.lua",
     },
     config = function()
-      local comp_icon = icon("ui.Pipe")
+      local comp_icon = i("ui.Pipe")
       local sect_icon = ""
       require("lualine").setup({
         options = {
@@ -24,28 +24,18 @@ return {
               fmt = function(mode) return string.sub(mode, 0, 1) end,
             },
           },
-          lualine_b = {
-            {
-              "diagnostics",
-              symbols = {
-                error = icon("diagnostics.Error") .. " ",
-                warn = icon("diagnostics.Warn") .. " ",
-                info = icon("diagnostics.Info") .. " ",
-                hint = icon("diagnostics.Hint") .. " ",
-              },
-            },
-          },
+          lualine_b = {},
           lualine_c = {
-            { "branch", icon = icon("git.Branch") },
+            { "branch", icon = i("git.Branch") },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
               path = 0,
               symbols = {
-                modified = icon("ui.DotFill"),
-                newfile = icon("documents.NewFile"),
-                readonly = icon("ui.Lock"),
-                unnamed = icon("documents.File"),
+                modified = i("ui.DotFill"),
+                newfile = i("documents.NewFile"),
+                readonly = i("ui.Lock"),
+                unnamed = i("documents.File"),
               },
               separator = "",
               padding = { left = 1 },
@@ -53,8 +43,17 @@ return {
             { "git_blame_line", padding = { left = 2 } },
           },
           lualine_x = {
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+            {
+              "diagnostics",
+              symbols = {
+                error = i("diagnostics.Error") .. " ",
+                warn = i("diagnostics.Warn") .. " ",
+                info = i("diagnostics.Info") .. " ",
+                hint = i("diagnostics.Hint") .. " ",
+              },
+            },
             { require("auto-session.lib").current_session_name },
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             "copilot_status",
           },
           lualine_y = {
