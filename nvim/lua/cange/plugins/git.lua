@@ -1,5 +1,5 @@
 local i = Cange.get_icon
-local line_format = i("git.Commit") .. " <author>, <author_time:%d.%m.%y>  " .. i("ui.Note") .. " <summary>"
+local line_format = i("git.Commit") .. " <author>, <author_time:%d. %b %Y> " .. i("ui.Note") .. " <summary>"
 
 return {
   {
@@ -16,6 +16,10 @@ return {
       preview_config = { border = Cange.get_config("ui.border") },
       current_line_blame = true,
       current_line_blame_formatter = line_format,
+      current_line_blame_opts = {
+        virt_text = false, -- hide inline to preserve to show in statusline
+        delay = 600,
+      },
     },
   },
 }
