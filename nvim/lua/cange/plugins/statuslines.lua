@@ -47,8 +47,10 @@ return {
                 readonly = icon("ui.Lock"),
                 unnamed = icon("documents.File"),
               },
-              padding = { left = 1, right = 1 },
+              separator = "",
+              padding = { left = 1 },
             },
+            { "git_blame_line", padding = { left = 2 } },
           },
           lualine_x = {
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },

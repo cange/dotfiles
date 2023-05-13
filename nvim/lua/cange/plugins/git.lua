@@ -1,5 +1,5 @@
 local i = Cange.get_icon
-local line_format = "   " .. i("git.Commit") .. "   <author>, <author_time:%d.%m.%y> " .. i("ui.Note") .. " <summary>"
+local line_format = i("git.Commit") .. " <author>, <author_time:%d.%m.%y>  " .. i("ui.Note") .. " <summary>"
 
 return {
   {
