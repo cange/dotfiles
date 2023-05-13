@@ -434,7 +434,7 @@
     VCS_STATUS_NUM_CONFLICTED_ICON=" " # nf-oct-alert"~"
     VCS_STATUS_NUM_STAGED_ICON="󱗜 " # nf-md-circle_box "+"
     VCS_STATUS_NUM_UNSTAGED_ICON=" " # nf-oct-diff_modified "!"
-    VCS_STATUS_NUM_UNTRACKED_ICON=" " # "?"
+    VCS_STATUS_NUM_UNTRACKED_ICON=" " # nf-oct-diff_added "?"
     VCS_STATUS_PUSH_COMMITS_AHEAD_ICON="→" # ⇢
     VCS_STATUS_PUSH_COMMITS_BEHIND_ICON="←" # ⇠
     VCS_STATUS_STASHES_ICON=" " # nf-cod-archive
