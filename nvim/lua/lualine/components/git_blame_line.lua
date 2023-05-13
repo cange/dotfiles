@@ -10,8 +10,7 @@ local icon = Cange.get_icon("git.Commit")
 
 local function shorten_by_win_width(msg)
   local len = 72
-  local w = vim.api.nvim_win_get_width(0)
-  msg = msg or ""
+  local w = vim.api.nvim_win_get_width(vim.api.nvim_get_current_win())
 
   if w < 156 and w > 128 then
     len = len / 2
@@ -28,8 +27,7 @@ end
 
 function M.init(self, opts) M.super.init(self, vim.tbl_extend("force", opts, { color = color })) end
 function M.update_status()
-  local bufnr = vim.api.nvim_get_current_buf() or 0
-  local msg = vim.b[bufnr].gitsigns_blame_line or ""
+  local msg = vim.b[vim.api.nvim_get_current_buf()].gitsigns_blame_line or ""
 
   return shorten_by_win_width(vim.trim(msg) == "Not Committed Yet" and icon .. msg or msg)
 end
