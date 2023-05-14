@@ -61,6 +61,7 @@ M.groups = {
       { "d", vim.diagnostic.goto_prev,                                          "Previous diagnostic" },
       { "g", "<cmd>Gitsigns prev_hunk<CR>",                                     "Previous Git hunk" },
       { "m", '<cmd>lua require("harpoon.ui").nav_prev()<CR>',                   "Previous bookmark" },
+      { "p", '<cmd>require("copilot.panel").jump_prev()<CR>',                   "Previous Copilot panel" },
     },
   },
   {
@@ -72,6 +73,7 @@ M.groups = {
       { "d", vim.diagnostic.goto_next,                                          "Next diagnostic" },
       { "g", "<cmd>Gitsigns next_hunk<CR>",                                     "Next Git hunk" },
       { "m", '<cmd>lua require("harpoon.ui").nav_next()<CR>',                   "Next bookmark" },
+      { "p", '<cmd>require("copilot.panel").jump_next()<CR>',                   "Next Copilot panel" },
     },
   },
   {
@@ -177,12 +179,13 @@ M.groups = {
       { "f", "<cmd>lua require('cange.lsp.format').toggle_format_on_save()<CR>","Toggle format on save" },
       { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
       -- copilot
+      { "A", "<cmd>lua require('copilot.panel').accept()<CR>",                  "Accept Copilot panel" },
+      { "S", "<cmd>Copilot status<CR>",                                         "Copilot status" },
+      { "o", "<cmd>Copilot toggle<CR>",                                         "Toggle Copilot" },
       { "p", "<cmd>Copilot panel<CR>",                                          "Toggle Copilot panel" },
       { "r", "<cmd>lua require('copilot.panel').refresh()<CR>",                 "Refresh Copilot panel" },
       { "s", "<cmd>Copilot suggestion<CR>",                                     "Toggle Copilot suggestion" },
       { "t", "<cmd>require('copilot.suggestion').toggle_auto_trigger()<CR>",    "Toggle Copilot suggestion auto trigger" },
-      { "o", "<cmd>Copilot toggle<CR>",                                         "Toggle Copilot" },
-      { "S", "<cmd>Copilot status<CR>",                                         "Copilot status" },
     },
   },
   {
