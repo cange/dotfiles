@@ -40,7 +40,7 @@ return {
               separator = "",
               padding = { left = 1 },
             },
-            { "git_blame_line", padding = { left = 2 }, icon = i("git.Commit") },
+            { "git_blame_line", padding = { left = 2 }, icon = i("git.Commit") .. " " },
           },
           lualine_x = {
             {
@@ -52,17 +52,15 @@ return {
                 hint = i("diagnostics.Hint") .. " ",
               },
             },
-            { require("auto-session.lib").current_session_name },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             "copilot_status",
-          },
-          lualine_y = {
             { "fileformat", separator = "", padding = { left = 1, right = 0 } },
             { "encoding" },
             { "selectioncount" },
             { "progress", separator = "", padding = { left = 1, right = 0 } },
             { "location" },
           },
+          lualine_y = {},
           lualine_z = {},
         },
       })

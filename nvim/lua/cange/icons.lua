@@ -80,7 +80,7 @@ M.git = {
   Rename              = "", -- nf-oct-diff_renamed
   Diff                = "", -- nf-oct-diff
   Branch              = "", -- nf-oct-git_branch
-  Commit              = "", -- nf-cod-git_commit
+  Commit              = "", -- nf-oct-git_commit
 }
 M.git_states = {
   unstaged            = M.git.Mod,
