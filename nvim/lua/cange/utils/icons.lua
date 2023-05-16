@@ -11,9 +11,9 @@
 local M = {}
 local ns = "[cange.utils.icons]"
 
---- Retrieves an icon from the specified path.
---- @param path string Dot separated path to the desired icon.
---- @return table|string|nil The icon value if found, nil if the path is invalid.
+---Retrieves an icon from the specified path.
+---@param path string Dot separated path to the desired icon.
+---@return {table|string|nil} # The icon value if found, nil if the path is invalid.
 function M.get_icon(path)
   local ok, icons = pcall(require, "cange.icons")
   if not ok then error(ns .. ' "cange.icons" not found!') end
@@ -22,7 +22,7 @@ function M.get_icon(path)
     table.insert(parts, part)
   end
 
-  -- @type table|string
+  ---@type table|string
   local current = icons
   for _, part in ipairs(parts) do
     if type(current) == "table" then current = current[part] end
