@@ -4,7 +4,7 @@ if not found_luasnip then return end
 
 local win_get_cursor = vim.api.nvim_win_get_cursor
 local get_current_buf = vim.api.nvim_get_current_buf
-local icon = Cange.get_icon
+local i = Cange.get_icon
 
 ---sets the current buffer's luasnip to the one nearest the cursor
 ---@return boolean true if a node is found, false otherwise
@@ -78,7 +78,7 @@ end
 local function get_prediction_strength_kind_icon(percentage)
   if percentage and percentage ~= "" then
     local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
-    local icons = Cange.get_icon("sets.batteries")
+    local icons = i("sets.batteries")
     ---@diagnostic disable-next-line: param-type-mismatch
     local ico = vim.split(icons, " ")[fraction_num]
     -- print(ns .. " strength:", percentage, ico)
@@ -93,9 +93,11 @@ end
 ---@return string
 local function get_menu_hl_group_by(source_name)
   local groups = {
-    cmp_tabnine = "CmpItemKindTabnine",
-    copilot = "CmpItemKindCopilot",
-    nvim_lua = "CmpItemKindLua",
+    cmp_tabnine = "CmpItemMenuTabnine",
+    copilot = "CmpItemMenuCopilot",
+    nvim_lua = "CmpItemMenuLua",
+    nvim_lsp = "CmpItemMenuLsp",
+    nvim_lsp_signature_help = "CmpItemMenuLspSignatureHelp",
   }
 
   return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "@comment"
@@ -125,15 +127,15 @@ end
 function M.format(entry, vim_item)
   local maxwidth = 80
   local src_icons = {
-    buffer = icon("ui.Cache"),
-    cmp_tabnine = icon("ui.Tabnine"),
-    copilot = icon("ui.Copilot"),
-    luasnip = icon("ui.Cut"),
-    nvim_lsp = icon("ui.Book"),
-    nvim_lua = icon("extensions.Lua"),
-    path = icon("ui.Path"),
+    buffer = i("ui.Cache"),
+    cmp_tabnine = i("ui.Tabnine"),
+    copilot = i("ui.Copilot"),
+    luasnip = i("ui.Cut"),
+    nvim_lsp = i("ui.Book"),
+    nvim_lsp_signature_help = i("ui.Paperclip"),
+    nvim_lua = i("extensions.Lua"),
+    path = i("ui.Path"),
   }
-
   local src_name = entry.source.name
   local cmp_item = entry.completion_item or {}
   local strength = ""
@@ -152,12 +154,13 @@ function M.format(entry, vim_item)
   end
 
   ---@diagnostic disable-next-line: param-type-mismatch
-  local kinds = icon("cmp_kinds") or {}
+  local kinds = i("cmp_kinds") or {}
   local strength_icon = get_prediction_strength_kind_icon(strength)
-
-  vim_item.kind = strength_icon
+  local kind_icon = strength_icon
     or kinds[vim_item.kind]
-    or icon("cmp_kinds." .. (is_multiline and "MultiLine" or "SingleLine"))
+    or i("cmp_kinds." .. (is_multiline and "MultiLine" or "SingleLine"))
+
+  vim_item.kind = kind_icon .. " "
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
   vim_item.menu = vim.tbl_contains(vim.tbl_keys(src_icons), src_name) and src_icons[src_name] .. " " or vim_item.menu
   vim_item.menu_hl_group = get_menu_hl_group_by(src_name)

@@ -86,9 +86,13 @@ function M._update_highlights()
     IndentBlanklineSpaceChar = { fg = p.bg3 },
 
     -- completion
-    CmpItemKindTabnine = { fg = p.pink.dim },
-    CmpItemKindCopilot = { fg = p.cyan.dim },
+    CmpItemKindCopilot = { fg = p.cyan.base },
+    CmpItemKindLsp = { link = "@lsp.type.method" },
+    CmpItemKindLspSignatureHelp = { link = "@lsp.type.parameter" },
     CmpItemKindLua = { fg = lua_color },
+    CmpItemKindTabnine = { fg = p.pink.dim },
+    CmpItemMenuTabnine = { link = "CmpItemKindTabnine" },
+    CmpItemMenuCopilot = { link = "CmpItemKindCopilot" },
   }
 
   Cange.set_highlights(highlights)

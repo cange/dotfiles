@@ -83,9 +83,10 @@ M.opts = {
   }),
   sources = cmp.config.sources({
     { name = "copilot" },
-    { name = "cmp_tabnine", max_item_count = 2 },
     { name = "luasnip", max_item_count = 3 },
+    { name = "cmp_tabnine", max_item_count = 2 },
     { name = "nvim_lsp", max_item_count = 5 },
+    { name = "nvim_lsp_signature_help" },
     { name = "nvim_lua", max_item_count = 2 },
     { name = "path", keyword_length = 2, max_item_count = 2 },
   }, {
