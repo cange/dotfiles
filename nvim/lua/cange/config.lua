@@ -6,6 +6,9 @@ M.ui = {
   border = "rounded", -- nvim_open_win: none, single, double, rounded, shadow
 }
 
+M.log = {
+  level = "info",
+}
 M.snippets = {
   path = "./../snippets",
 }

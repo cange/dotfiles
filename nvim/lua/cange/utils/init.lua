@@ -2,7 +2,6 @@ local ns = "[cange.utils]"
 
 local M = {}
 
-M.log = require("cange.utils.log").log
 M.get_icon = require("cange.utils.icons").get_icon
 
 ---Get certain config attributes

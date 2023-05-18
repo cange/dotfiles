@@ -1,7 +1,6 @@
-local M = {}
+local Log = {}
 
----@enum cange.logLevels
-M.levels = {
+Log.levels = {
   TRACE = 0,
   DEBUG = 1,
   INFO = 2,
@@ -10,16 +9,41 @@ M.levels = {
   OFF = 5,
 }
 
----@class cange.logOptions
----@field title? string
----@field level? cange.logLevels
-
----@param msg string message
----@param opts? cange.logOptions
-function M.log(msg, opts)
-  opts = opts or {}
-  local title = opts.title ~= nil and type(opts.title) == "string" and opts.title or ""
-  vim.notify(" " .. msg, opts.level or M.levels.INFO, { title = title })
+--- Adds a log entry using Plenary.log
+---@param level integer [same as vim.log.levels]
+---@param msg any
+---@param event any
+function Log:add_entry(level, msg, event)
+  event = event or {}
+  local title = event.title ~= nil and type(event.title) == "string" and event.title or ""
+  vim.notify(" " .. msg, level, { title = title })
 end
 
-return M
+---Add a log entry at TRACE level
+---@param msg any
+---@param event any
+function Log:trace(msg, event) self:add_entry(self.levels.TRACE, msg, event) end
+
+---Add a log entry at DEBUG level
+---@param msg any
+---@param event any
+function Log:debug(msg, event) self:add_entry(self.levels.DEBUG, msg, event) end
+
+---Add a log entry at INFO level
+---@param msg any
+---@param event any
+function Log:info(msg, event) self:add_entry(self.levels.INFO, msg, event) end
+
+---Add a log entry at WARN level
+---@param msg any
+---@param event any
+function Log:warn(msg, event) self:add_entry(self.levels.WARN, msg, event) end
+
+---Add a log entry at ERROR level
+---@param msg any
+---@param event any
+function Log:error(msg, event) self:add_entry(self.levels.ERROR, msg, event) end
+
+setmetatable({}, Log)
+
+return Log
