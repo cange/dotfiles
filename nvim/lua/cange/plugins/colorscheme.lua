@@ -35,10 +35,10 @@
 M = {}
 
 ---@type boolean
-M._initialized = false
+local initialized = false
 
 ---@return cange.colorschemePalette
-function M._update_palette()
+local function update_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
   local palette = require("nightfox.palette").load(colorscheme)
@@ -46,9 +46,9 @@ function M._update_palette()
   return palette
 end
 
-function M._update_highlights()
+local function update_highlights()
   local _, lua_color = require("nvim-web-devicons").get_icon_color("any.lua", "lua")
-  local p = M._update_palette()
+  local p = update_palette()
   local highlights = {
     CursorLine = { bg = p.bg2 }, -- disable default
     Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
@@ -113,8 +113,8 @@ return {
 
       vim.cmd("colorscheme " .. colorscheme)
 
-      M._update_highlights()
-      M._initialized = true
+      update_highlights()
+      initialized = true
     end,
   },
 
