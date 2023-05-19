@@ -97,12 +97,12 @@ function M._update_highlights()
 
   Cange.set_highlights(highlights)
 
-  if M._initialized then
-    vim.schedule(function() Cange.log("Color highlights refreshed!", { title = "Colorscheme" }) end)
+  if initialized then
+    vim.schedule(function() Log:info("Color highlights refreshed!", { title = "Colorscheme" }) end)
   end
 end
 
-vim.api.nvim_create_user_command("CangeUpdateColorscheme", M._update_highlights, {})
+vim.api.nvim_create_user_command("CangeUpdateColorscheme", update_highlights, {})
 
 return {
   {
