@@ -177,7 +177,7 @@ M.groups = {
       { "R", "<cmd>LspRestart<CR>",                                             "Restart LSP" },
       { "c", "<cmd>TextCaseOpenTelescope<CR>",                                  "Change Case", mode = { "v", "n" } },
       { "f", "<cmd>lua require('cange.lsp.format').toggle_format_on_save()<CR>","Toggle format on save" },
-      { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnosticss" },
+      { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnostics" },
       -- copilot
       { "A", "<cmd>lua require('copilot.panel').accept()<CR>",                  "Accept Copilot panel" },
       { "S", "<cmd>Copilot status<CR>",                                         "Copilot status" },

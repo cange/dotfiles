@@ -1,11 +1,12 @@
+---@alias copilot_status_notification_data { status: ''|'Normal'|'InProgress'|'Warning', message: string }
+
+---@type _, { status: { data: copilot_status_notification_data } }
 local api_found, api = pcall(require, "copilot.api")
 if not api_found then
   print('warn: "copilot.api" not found')
   return
 end
 local M = require("lualine.component"):extend()
-
----@alias copilot_status_notification_data { status: ''|'Normal'|'InProgress'|'Warning', message: string }
 
 local icons = {
   [""] = Cange.get_icon("ui.CopilotError"),
@@ -25,7 +26,6 @@ function M.init(self, opts)
     self,
     vim.tbl_extend("force", opts, {
       color = function()
-        ---@type copilot_status_notification_data
         local data = api.status.data
 
         return colors[data.status]
@@ -35,7 +35,6 @@ function M.init(self, opts)
 end
 
 function M.update_status()
-  ---@type copilot_status_notification_data
   local data = api.status.data
   local msg = data.message or ""
 
