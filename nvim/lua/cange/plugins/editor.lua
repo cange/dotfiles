@@ -1,4 +1,4 @@
-local icon = Cange.get_icon
+local i = Cange.get_icon
 
 return {
   { -- File explorer
@@ -8,7 +8,7 @@ return {
     config = function()
       require("nvim-tree").setup({
         live_filter = {
-          prefix = icon("ui.Search") .. "  ",
+          prefix = i("ui.Search") .. "  ",
         },
         -- project plugin related
         sync_root_with_cwd = true,
@@ -28,30 +28,30 @@ return {
             },
             git_placement = "after",
             glyphs = {
-              default = icon("documents.File"),
-              bookmark = icon("ui.Bookmark"),
-              symlink = icon("documents.SymlinkFile"),
+              default = i("documents.File"),
+              bookmark = i("ui.Bookmark"),
+              symlink = i("documents.SymlinkFile"),
               folder = {
-                arrow_closed = icon("ui.ChevronRight"),
-                arrow_open = icon("ui.ChevronDown"),
-                default = icon("documents.Folder"),
-                empty = icon("documents.EmptyFolder"),
-                empty_open = icon("documents.EmptyOpenFolder"),
-                open = icon("documents.OpenFolder"),
-                symlink = icon("documents.SymlinkFolder"),
-                symlink_open = icon("documents.SymlinkFolder"),
+                arrow_closed = i("ui.ChevronRight"),
+                arrow_open = i("ui.ChevronDown"),
+                default = i("documents.Folder"),
+                empty = i("documents.EmptyFolder"),
+                empty_open = i("documents.EmptyOpenFolder"),
+                open = i("documents.OpenFolder"),
+                symlink = i("documents.SymlinkFolder"),
+                symlink_open = i("documents.SymlinkFolder"),
               },
-              git = icon("git_states"),
+              git = i("git_states"),
             },
           },
         },
         diagnostics = {
           enable = true,
           icons = {
-            error = icon("diagnostics.Error"),
-            warning = icon("diagnostics.Warn"),
-            hint = icon("diagnostics.Hint"),
-            info = icon("diagnostics.Info"),
+            error = i("diagnostics.Error"),
+            warning = i("diagnostics.Warn"),
+            hint = i("diagnostics.Hint"),
+            info = i("diagnostics.Info"),
           },
         },
         actions = {
@@ -99,7 +99,7 @@ return {
   },
 
   -- shows LSP initialization progress
-  { "j-hui/fidget.nvim", opts = { text = { spinner = "dots", done = icon("ui.Check") } } },
+  { "j-hui/fidget.nvim", opts = { text = { spinner = "dots", done = i("ui.Check") } } },
 
   { -- font icon set
     "nvim-tree/nvim-web-devicons",
@@ -119,9 +119,9 @@ return {
         },
       },
       icons = {
-        breadcrumb = icon("ui.ArrowRight"),
-        separator = icon("ui.ChevronRight"),
-        group = icon("ui.PlusSmall") .. " ",
+        breadcrumb = i("ui.ArrowRight"),
+        group = i("ui.Plus") .. " ",
+        separator = "",
       },
       window = {
         border = Cange.get_config("ui.border"),

@@ -5,7 +5,6 @@
 -- 1st : setup
 Cange = require("cange.utils")
 Cange.reload("cange.options")
-Log = Cange.reload("cange.utils.log")
 
 -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

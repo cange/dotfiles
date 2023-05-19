@@ -9,6 +9,7 @@ local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
 local themes = require("telescope.themes")
 local transform_mod = require("telescope.actions.mt").transform_mod
+local i = Cange.get_icon
 
 local M = {}
 
@@ -54,7 +55,7 @@ function M.browse_nvim()
   builtin.find_files({
     cwd = "~/.config/nvim",
     previewer = false,
-    prompt_title = Cange.get_icon("ui.Gear") .. " NeoVim Config",
+    prompt_title = i("ui.Gear") .. " NeoVim Config",
   })
 end
 
@@ -62,7 +63,7 @@ function M.browse_snippets()
   builtin.find_files({
     cwd = "~/.config/snippets",
     previewer = true,
-    prompt_title = Cange.get_icon("ui.Cut") .. " Snippets",
+    prompt_title = i("ui.Cut") .. " Snippets",
   })
 end
 
@@ -72,7 +73,7 @@ function M.diagnostics_log()
     initial_mode = "normal",
     no_listed = true, -- if true, shows only listed buffers
     previewer = false,
-    prompt_title = Cange.get_icon("ui.Stethoscope") .. " Diagnostics Log",
+    prompt_title = i("ui.Stethoscope") .. " Diagnostics Log",
   }))
 end
 
@@ -80,7 +81,7 @@ function M.browse_workspace()
   builtin.find_files({
     cwd = "~/workspace/",
     hidden = true,
-    prompt_title = Cange.get_icon("documents.Briefcase") .. " Workspace",
+    prompt_title = i("documents.Briefcase") .. " Workspace",
     shorten_path = false,
   })
 end

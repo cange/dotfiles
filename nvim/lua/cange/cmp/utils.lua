@@ -132,7 +132,7 @@ function M.format(entry, vim_item)
     copilot = i("ui.Copilot"),
     luasnip = i("ui.Cut"),
     nvim_lsp = i("ui.Book"),
-    nvim_lsp_signature_help = i("ui.Paperclip"),
+    nvim_lsp_signature_help = i("ui.Ellipsis"),
     nvim_lua = i("extensions.Lua"),
     path = i("ui.Path"),
   }

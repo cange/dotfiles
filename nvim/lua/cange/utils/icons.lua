@@ -16,7 +16,10 @@ local ns = "[cange.utils.icons]"
 ---@return {table|string|nil} # The icon value if found, nil if the path is invalid.
 function M.get_icon(path)
   local ok, icons = pcall(require, "cange.icons")
-  if not ok then error(ns .. ' "cange.icons" not found!') end
+  if not ok then
+    print('[error] "cange.icons" not found!', ns)
+    return ""
+  end
   local parts = {}
   for part in string.gmatch(path, "([^%.]+)") do
     table.insert(parts, part)
@@ -29,7 +32,7 @@ function M.get_icon(path)
   end
 
   if not current then
-    print(ns, path, "not found")
+    Log:warn('Icon "' .. path .. '" not found!', { title = ns })
     return nil -- Invalid path
   end
 
@@ -76,7 +79,7 @@ local presets = {
 local function redefine_icons()
   local ok, devicons = pcall(require, "nvim-web-devicons")
   if not ok then
-    print(ns, '"nvim-web-devicons" not found!')
+    Log:warn('"nvim-web-devicons" not found!', { title = ns })
     return
   end
 

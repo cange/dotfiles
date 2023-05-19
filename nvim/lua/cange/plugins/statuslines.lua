@@ -42,7 +42,7 @@ return {
               separator = "",
               padding = { left = 1 },
             },
-            { "git_blame_line", padding = { left = 2 }, icon = i("git.Commit") .. " " },
+            { "git_blame_line", padding = { left = 1 }, icon = i("git.Commit") },
           },
           lualine_x = {
             {

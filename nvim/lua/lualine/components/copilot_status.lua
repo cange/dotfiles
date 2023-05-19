@@ -6,13 +6,14 @@ if not api_found then
   print('warn: "copilot.api" not found')
   return
 end
+local i = Cange.get_icon
 local M = require("lualine.component"):extend()
 
 local icons = {
-  [""] = Cange.get_icon("ui.CopilotError"),
-  ["Normal"] = Cange.get_icon("ui.Copilot"),
-  ["Warning"] = Cange.get_icon("ui.CopilotWarning"),
-  ["InProgress"] = Cange.get_icon("ui.Sync"),
+  [""] = i("ui.CopilotError"),
+  ["Normal"] = i("ui.Copilot"),
+  ["Warning"] = i("ui.CopilotWarning"),
+  ["InProgress"] = i("ui.Sync"),
 }
 local colors = {
   [""] = Cange.get_hl_hex("lualine_c_inactive", "fg"),

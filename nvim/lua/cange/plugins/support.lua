@@ -1,3 +1,5 @@
+local i = Cange.get_icon
+
 return {
   { -- popover notification
     "rcarriga/nvim-notify",
@@ -7,11 +9,11 @@ return {
         stages = "static",
         background_colour = "FloatBorder",
         icons = {
-          ERROR = Cange.get_icon("diagnostics.Error"),
-          WARN = Cange.get_icon("diagnostics.Warn"),
-          INFO = Cange.get_icon("diagnostics.Info"),
-          DEBUG = Cange.get_icon("ui.Bug"),
-          TRACE = Cange.get_icon("ui.Pencil"),
+          ERROR = i("diagnostics.Error"),
+          WARN = i("diagnostics.Warn"),
+          INFO = i("diagnostics.Info"),
+          DEBUG = i("ui.Bug"),
+          TRACE = i("ui.Pencil"),
         },
       })
       require("telescope").load_extension("notify")
@@ -91,8 +93,8 @@ return {
       enabled = true,
       buftype_exclude = { "terminal", "nofile" },
       filetype_exclude = { "help", "NvimTree", "Trouble", "text", "lazy" },
-      char = Cange.get_icon("ui.VThinLineLeft"),
-      context_char = Cange.get_icon("ui.VThinLineLeft"),
+      char = i("ui.VThinLineLeft"),
+      context_char = i("ui.VThinLineLeft"),
       show_current_context = true,
       show_current_context_start = true,
       use_treesitter = true,
