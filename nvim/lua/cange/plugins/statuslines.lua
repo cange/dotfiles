@@ -16,6 +16,8 @@ return {
         options = {
           component_separators = { left = comp_icon, right = comp_icon },
           section_separators = { left = sect_icon, right = sect_icon },
+          globalstatus = true,
+          refresh = { statusline = 2000 },
         },
         sections = {
           lualine_a = {
