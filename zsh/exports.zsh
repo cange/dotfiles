@@ -1,5 +1,5 @@
 # User configuration
-export PATH=/usr/local/bin:/usr/local/sbin:/sbin/:$PATH
+export PATH="/usr/local/bin:/usr/local/sbin:/sbin/:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # One may need to manually set your language environment
@@ -29,22 +29,22 @@ export TERMINAL="iterm2"
 export BROWSER="firefox"
 
 # --- pnpm
-if [[ -s "${HOME}/Library/pnpm" ]]; then
-  export PNPM_HOME="${HOME}/Library/pnpm"
+if [[ -s "$HOME/Library/pnpm" ]]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
   export PATH="$PNPM_HOME:$PATH"
 fi
 # pnpm ---
 
 # --- bun
-if [[ -s "${HOME}/.bun" ]]; then
-  export BUN_INSTALL="${HOME}/.bun"
+if [[ -s "$HOME/.bun" ]]; then
+  export BUN_INSTALL="$HOME/.bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
-  source "${HOME}/.bun/_bun"
+  source "$HOME/.bun/_bun"
 fi
 # bun ---
 
 # --- ssh
-if [[ -n $HOME/.ssh/id_dsa ]]; then
+if [[ -n "$HOME/.ssh/id_dsa" ]]; then
   export SSH_KEY_PATH="~/.ssh/id_dsa"
 
   # add my ssh information
