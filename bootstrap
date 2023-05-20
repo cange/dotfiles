@@ -6,13 +6,7 @@
 IS_UNINSTALL=false
 SCRIPT_NAME=$(basename "$0")
 ERRORS=()
-readonly DOTFILES_DIR="$HOME/dotfiles/"
-
-# --- locations ---
-readonly CONFIG_INCLUDES=(nvim snippets zsh)
-readonly CONFIG_TARGET_DIR="$HOME/.config/"
-readonly ROOT_INCLUDES=(.ackrc .gitconfig .tool-versions .zshrc .zprofile)
-readonly ROOT_TARGET_DIR="$HOME/"
+readonly DOTFILES="$HOME/dotfiles"
 
 # --- helpers ---
 function chalk() {
@@ -20,73 +14,79 @@ function chalk() {
   local text=$2
 
   case $color in
-  red) printf "\033[31m%s\033[0m" "$text" ;;
-  green) printf "\033[32m%s\033[0m" "$text" ;;
-  yellow) printf "\033[33m%s\033[0m" "$text" ;;
-  white) printf "\033[1;38m%s\033[0m" "$text" ;;
-  *) printf "\033[30m%s\033[0m" "$text" ;;
+    red) printf "\033[31m%s\033[0m" "$text" ;;
+    green) printf "\033[32m%s\033[0m" "$text" ;;
+    yellow) printf "\033[33m%s\033[0m" "$text" ;;
+    white) printf "\033[1;38m%s\033[0m" "$text" ;;
+    *) printf "\033[30m%s\033[0m" "$text" ;;
   esac
 }
 
 function log() {
-  printf "    - %s\n" "$1"
+  printf "  %s %s\n" "$(chalk "yellow" "ℹ︎")" "$1"
+}
+
+function success () {
+  printf "  %s %s\n" "$(chalk "green" "✓")" "$1"
+}
+
+function fail () {
+  printf "  %s %s\n" "$(chalk "red" "✕")" "$1"
 }
 
 function toggle_link() {
-  local target_dir=$1
-  local filename=$2
-  local file=$3
-  local target_path=$target_dir$filename
+  local src=$1
+  local dest=$2
+  local dest_dir=$(dirname $dest)
 
   if [[ $IS_UNINSTALL == true ]]; then
-    if [[ -e $target_path ]]; then
-      rm "$target_path"
-      log "unlink -x $(chalk "white" "$filename")"
+    if [[ -e $dest ]]; then
+      rm "$dest"
+      success "unlink -x $(chalk "white" "$src")"
     else
-      ERRORS+=("unlink: No such file or directory $(chalk "white" "$target_path")")
+      ERRORS+=("unlink: No such file or directory $(chalk "white" "$dest")")
     fi
   else
-    if [[ -e $target_dir ]]; then
-      ln -nsf "$file" "$target_path"
-      log "symlink -> $(chalk "white" "$filename")"
+    if [[ -d "$dest_dir" ]]; then
+      ln -nsf "$src" "$dest"
+      success "symlink -> $(chalk "white" "$dest")"
     else
-      ERRORS+=("symlink: No such file or directory $(chalk "white" "$target_dir")")
+      ERRORS+=("symlink: No such file or directory $(chalk "white" "$dest_dir")")
     fi
   fi
 }
 
-function update_links() {
-  local target_dir=$1
-  local includes=("$@")
+function execute() {
+  local state="linking"
+  if [[ $IS_UNINSTALL == true ]]; then state="unlinking"; fi
+  log "Initiate $state dotfiles:"
 
-  printf "  %s %s\n" "$(chalk "yellow" "ℹ︎")" "Initiate dotfiles linking for $(chalk "white" "$target_dir")"
-
-  setopt dotglob
-  for file in "$DOTFILES_DIR"*; do
-    filename=$(basename "$file")
-    for include in "${includes[@]}"; do
-      if [[ "$filename" == "$include" ]]; then
-        toggle_link "$target_dir" "$filename" "$file"
-      fi
+  find -H "$DOTFILES" -maxdepth 2 -name 'symlinks.prop' -not -path '*.git*' | while read file
+  do
+    cat "$file" | while read mapping
+    do
+      local src=$(eval echo "$mapping" | cut -d '=' -f 1)
+      local dest=$(eval echo "$mapping" | cut -d '=' -f 2)
+      toggle_link "$src" "$dest"
     done
   done
-  unsetopt dotglob
 }
 
-function execute {
-  update_links "$ROOT_TARGET_DIR" "${ROOT_INCLUDES[@]}"
-  update_links "$CONFIG_TARGET_DIR" "${CONFIG_INCLUDES[@]}"
+function prop() {
+  local key=$1
+  local file=$2
+  echo $(eval echo "$(cat $file | grep "$key" | cut -d'=' -f2)")
 }
 
 function summary {
   if [[ ${#ERRORS[@]} -gt 0 ]]; then
-    printf "  %s %s\n" "$(chalk "red" "✕")" "Completed with errors!" >&2
     for err in "${ERRORS[@]}"; do
-      log "$err"
+      fail "$err"
     done
+    fail "Completed with errors!" >&2
     exit 1
   else
-    printf "  %s %s\n" "$(chalk "green" "✓")" "Successfully completed."
+    success "Successfully completed."
   fi
 }
 
@@ -110,8 +110,7 @@ function link() {
 
 function unlink() {
   IS_UNINSTALL=true
-  execute
-  summary
+  link
 }
 
 # --- interface ---

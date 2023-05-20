@@ -32,6 +32,12 @@ the repo and run the following command:
 bootstrap link # or `unlink` to remove symlinks
 ```
 
+### Symlinks
+
+Each application/tool has its own config directory. Inside of these directories
+can be a `symlinks.prop` file with a mapping. These files are evaluated during
+the `bootstrap ...` call.
+
 ### NeoVim as Editor
 
 The config is located in `dotfiles/nvim`.
