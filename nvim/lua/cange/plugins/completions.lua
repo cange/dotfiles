@@ -31,7 +31,6 @@ return {
           snippet_placeholder = "..",
           show_prediction_strength = false,
         },
-        config = function(_, opts) require("cmp_tabnine.config"):setup(opts) end,
       },
     },
     config = function()
