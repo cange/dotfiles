@@ -14,11 +14,15 @@ function chalk() {
   local text=$2
 
   case $color in
-    red) printf "\033[31m%s\033[0m" "$text" ;;
-    green) printf "\033[32m%s\033[0m" "$text" ;;
-    yellow) printf "\033[33m%s\033[0m" "$text" ;;
-    white) printf "\033[1;38m%s\033[0m" "$text" ;;
-    *) printf "\033[30m%s\033[0m" "$text" ;;
+    blue)    printf "\033[34m%s\033[0m" "$text" ;;
+    bold)    printf "\033[1m%s\033[0m" "$text" ;;
+    cyan)    printf "\033[36m%s\033[0m" "$text" ;;
+    green)   printf "\033[32m%s\033[0m" "$text" ;;
+    magenta) printf "\033[35m%s\033[0m" "$text" ;;
+    red)     printf "\033[31m%s\033[0m" "$text" ;;
+    white)   printf "\033[38m%s\033[0m" "$text" ;;
+    yellow)  printf "\033[33m%s\033[0m" "$text" ;;
+    *)       printf "\033[30m%s\033[0m" "$text" ;;
   esac
 }
 
@@ -34,24 +38,25 @@ function fail () {
   printf "  %s %s\n" "$(chalk "red" "✕")" "$1"
 }
 
-function toggle_link() {
+function update_link() {
   local src=$1
   local dest=$2
+  local tool_name=$3
   local dest_dir=$(dirname $dest)
 
   if [[ $IS_UNINSTALL == true ]]; then
     if [[ -e $dest ]]; then
       rm "$dest"
-      success "unlink -x $(chalk "white" "$src")"
+      success "remove $(chalk "bold" "$tool_name") symlink $(chalk "cyan" "$dest") ✂︎-> "
     else
-      ERRORS+=("unlink: No such file or directory $(chalk "white" "$dest")")
+      ERRORS+=("$(chalk "bold" "unlink:") No such file or directory $(chalk "cyan" "$dest")")
     fi
   else
     if [[ -d "$dest_dir" ]]; then
       ln -nsf "$src" "$dest"
-      success "symlink -> $(chalk "white" "$dest")"
+      success "create $(chalk "bold" "$tool_name") symlink $(chalk "cyan" "$dest") -> $(chalk "cyan" "$src")"
     else
-      ERRORS+=("symlink: No such file or directory $(chalk "white" "$dest_dir")")
+      ERRORS+=("symlink: No such file or directory $(chalk "cyan" "$dest_dir")")
     fi
   fi
 }
@@ -63,11 +68,12 @@ function execute() {
 
   find -H "$DOTFILES" -maxdepth 2 -name 'symlinks.prop' -not -path '*.git*' | while read file
   do
+    local tool_name=$(basename $(dirname "$file"))
     cat "$file" | while read mapping
     do
       local src=$(eval echo "$mapping" | cut -d '=' -f 1)
       local dest=$(eval echo "$mapping" | cut -d '=' -f 2)
-      toggle_link "$src" "$dest"
+      update_link "$src" "$dest" "$tool_name"
     done
   done
 }
