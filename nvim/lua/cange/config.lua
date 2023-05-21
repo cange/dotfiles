@@ -42,11 +42,11 @@ M.lsp = {
     "yaml-language-server",
 
     -- Linting and formatting
+    "beautysh", -- bash/zsh formatting
     "eslint_d",
     "jsonlint",
     "prettierd",
     "rubocop",
-    "shfmt", -- shell formatting
     "stylua",
     "yamllint",
     "zsh",

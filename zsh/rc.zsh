@@ -20,8 +20,8 @@ function add_plugin() {
   local name=$(echo $1 | cut -d "/" -f 2)
   if [[ -d "$ZDOTDIR/plugins/$name" ]]; then
     source_if_exists "$ZDOTDIR/plugins/$name/$name.plugin.zsh" || \
-    source_if_exists "$ZDOTDIR/plugins/$name/$name.zsh-theme" || \
-    source_if_exists "$ZDOTDIR/plugins/$name/$name.zsh"
+      source_if_exists "$ZDOTDIR/plugins/$name/$name.zsh-theme" || \
+      source_if_exists "$ZDOTDIR/plugins/$name/$name.zsh"
   else
     git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$name"
   fi

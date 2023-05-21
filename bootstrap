@@ -100,7 +100,7 @@ Commands:
   link    Writes all symlinks for the corresponding files
   unlink  Removes all symlinks for the corresponding files
   help    Print help.
-"
+  "
 }
 
 function link() {

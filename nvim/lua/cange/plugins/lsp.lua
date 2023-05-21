@@ -76,7 +76,7 @@ return {
 
           formatting.prettierd, -- js, css, html, json, etc
           formatting.rubocop, -- ruby
-          formatting.shfmt, -- shell/bash
+          formatting.beautysh.with({ extra_args = { "--indent-size", "2" } }), -- bash, zsh
           formatting.stylelint, -- css
           formatting.stylua, -- lua
         },
