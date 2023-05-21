@@ -5,7 +5,7 @@ shell and terminal configurations.
 
 ## Setup
 
-The setups are focus on MacOS since this is my daily environment.
+> The setup focuses on MacOS, since this is my daily environment.
 
 Clone of this repo on system user root:
 
@@ -20,23 +20,24 @@ Once the repo has been cloned, the required dependencies can be installed using
 run the following command:
 
 ```sh
-brew bundle install
+./bootstrap install
 ```
 
-This will install any necessary dependencies defined in the `Brewfile`.
+**Note:** Use `./bootstrap --help` flag to see available options.
 
-Finally, to set up the symlinks to apply all settings. Navigate to the root of
-the repo and run the following command:
+<details>
+  <summary>Homebrew</summary>
 
-```sh
-bootstrap link # or `unlink` to remove symlinks
-```
+  This will install all necessary dependencies of the individual tool.
+</details>
 
-### Symlinks
+<details>
+  <summary>Symlinks</summary>
 
-Each application/tool has its own config directory. Inside of these directories
-can be a `symlinks.prop` file with a mapping. These files are evaluated during
-the `bootstrap ...` call.
+  Each tool has its own config directory. Inside of these directories
+  can be a `links.prop` file with a mapping. These files are evaluated during
+  the `bootstrap` script.
+</details>
 
 #### Secrets
 
@@ -46,22 +47,22 @@ User details such as tokens are stored in `$HOME/config/secrets/` individually.
 
 The config is located in `dotfiles/nvim`.
 
-#### First Start
+### First Start
 
-##### Plugins
+#### Plugins
 
 An update dialog pops up and will install all required plugins when running
 NeoVim first time.
 
 Run`:Lazy install` (within NeoVim) if the dialog is not popping up.
 
-##### Language Support (LSP)
+#### Language Support (LSP)
 
-Run `:MasonInstallAll` (within NeoVim) to install all related  LSP helpers.
+Run `:MasonInstallAll` (within NeoVim) to install all related LSP helpers.
 
 To apply all updates you might need to restart NeoVim.
 
-#### Troubleshooting
+### Troubleshooting
 
 > Run `:checkhealth` after installation.
 
