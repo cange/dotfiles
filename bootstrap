@@ -1,12 +1,13 @@
 #!/bin/zsh
-#
-# This CLI automates un/-linking of all required dotfile sources.
 
 # --- config ---
-IS_UNINSTALL=false
-SCRIPT_NAME=$(basename "$0")
-ERRORS=()
-readonly DOTFILES="$HOME/dotfiles"
+cd "$(dirname "$0")/.."
+local dotfiles="$(pwd -P)/dotfiles"
+local script_name=$(basename "$0")
+local errors=()
+local logs=()
+local is_verbose=0
+local is_uninstall=0
 
 # --- helpers ---
 function chalk() {
@@ -26,104 +27,220 @@ function chalk() {
   esac
 }
 
-function log() {
-  printf "  %s %s\n" "$(chalk "yellow" "ℹ︎")" "$1"
+function error() {    printf "  %s %s\n" "$(chalk "red" "=>")" "$1" }
+function fail () {    printf "%s %s\n" "$(chalk "red" "✕")" "$1" }
+function info() {     printf "%s %s\n" "$(chalk "blue" "ℹ︎")" "$1" }
+function log() {      printf "  %s %s\n" "$(chalk "blue" "=>")" "$1" }
+function success () { printf "%s %s\n" "$(chalk "green" "✓")" "$1" }
+
+# realpath polyfil for macos M1+
+function realpath_polyfill() {
+  local path="$1"
+  local dir base
+  if [[ "$path" == */* ]]; then
+    dir="${path%/*}"
+    base="${path##*/}"
+    cd -P "$dir" >/dev/null 2>&1 || return
+    path="$PWD/$base"
+  fi
+  echo "$path"
 }
 
-function success () {
-  printf "  %s %s\n" "$(chalk "green" "✓")" "$1"
+# --- homebrew/brewfile ---
+#
+function execute_brewfile() {
+  local brewfile=$1
+  local tool_name=$(basename $(dirname "$brewfile"))
+
+  if [[ $is_uninstall == 1 ]]; then
+    info "Uninstall packages of $(chalk "cyan" "$brewfile")"
+  else
+    info "Install packages for $(chalk "cyan" "$brewfile")";
+  fi
+
+  if [[ ! -f $brewfile ]]; then
+    fail "Brewfile not found at the specified path: $brewfile"
+    echo ""
+    return 1
+  fi
+
+  local opts=$([[ $is_verbose == 1 ]] && echo " --verbose" || echo " --quiet")
+  if [[ $is_uninstall == 1 ]]; then
+    cat "$brewfile" | while read line; do
+      if [[ $line =~ ^(brew|cask|tap)\ * ]]; then
+        local package brew_cmd
+        local cmd="uninstall"
+
+        if [[ $line == cask\ * ]]; then opts+=" --cask";
+        elif [[ $line == tap\ * ]]; then cmd="untap";
+        fi
+        package=$(echo $line | cut -d ' ' -f 2 | cut -d "," -f 1)
+        brew_cmd="brew ${cmd}${opts} ${package}"
+
+        log "$brew_cmd"
+        $(eval echo "$brew_cmd")
+      fi
+    done
+  else
+    local brew_cmd="brew bundle${opts} --file=$brewfile"
+    log "$brew_cmd"
+    $(eval echo "$brew_cmd")
+  fi
+  echo ""
 }
 
-function fail () {
-  printf "  %s %s\n" "$(chalk "red" "✕")" "$1"
+function find_brewfiles() {
+  if ! command -v brew >/dev/null 2>&1; then
+    fail "Homebrew is not installed. Check out https://docs.brew.sh/Installation"
+    return 1
+  fi
+
+  find -H "$dotfiles" -maxdepth 2 -name 'Brewfile' | while read brewfile; do
+    execute_brewfile $brewfile
+  done
 }
 
-function update_link() {
+# --- Symlinks ---
+#
+function execute_symlink() {
   local src=$1
   local dest=$2
   local tool_name=$3
   local dest_dir=$(dirname $dest)
 
-  if [[ $IS_UNINSTALL == true ]]; then
+  if [[ $is_uninstall == 1 ]]; then
     if [[ -e $dest ]]; then
-      rm "$dest"
-      success "remove $(chalk "bold" "$tool_name") symlink $(chalk "cyan" "$dest") ✂︎-> "
+      command rm "$dest"
+      logs+=("remove $(chalk "bold" "$tool_name") symlink $(chalk "cyan" "$dest") ✂︎-> ")
     else
-      ERRORS+=("$(chalk "bold" "unlink:") No such file or directory $(chalk "cyan" "$dest")")
+      errors+=("$(chalk "bold" "unlink:") No such file or directory $(chalk "cyan" "$dest")")
     fi
   else
     if [[ -d "$dest_dir" ]]; then
-      ln -nsf "$src" "$dest"
-      success "create $(chalk "bold" "$tool_name") symlink $(chalk "cyan" "$dest") -> $(chalk "cyan" "$src")"
+      command mkdir -p "$dest_dir"
+      command ln -nsf "$src" "$dest"
+      logs+=("create $(chalk "bold" "$tool_name") symlink $(chalk "cyan" "$dest") -> $(chalk "cyan" "$src")")
     else
-      ERRORS+=("symlink: No such file or directory $(chalk "cyan" "$dest_dir")")
+      errors+=("symlink: No such file or directory $(chalk "cyan" "$dest_dir")")
     fi
   fi
 }
 
-function execute() {
-  local state="linking"
-  if [[ $IS_UNINSTALL == true ]]; then state="unlinking"; fi
-  log "Initiate $state dotfiles:"
-
-  find -H "$DOTFILES" -maxdepth 2 -name 'symlinks.prop' -not -path '*.git*' | while read file
-  do
+function find_symlinks() {
+  find -H "$dotfiles" -maxdepth 2 -name 'links.prop' | while read file; do
     local tool_name=$(basename $(dirname "$file"))
-    cat "$file" | while read mapping
-    do
-      local src=$(eval echo "$mapping" | cut -d '=' -f 1)
-      local dest=$(eval echo "$mapping" | cut -d '=' -f 2)
-      update_link "$src" "$dest" "$tool_name"
+    cat "$file" | while read line; do
+      local src=$(eval echo "$line" | cut -d '=' -f 1)
+      local dest=$(eval echo "$line" | cut -d '=' -f 2)
+      execute_symlink "$(realpath_polyfill "$src")" "$dest" "$tool_name"
     done
   done
 }
 
-function prop() {
-  local key=$1
-  local file=$2
-  echo $(eval echo "$(cat $file | grep "$key" | cut -d'=' -f2)")
+function log_summary() {
+  info "A total of $(chalk "bold" "${#logs[@]}") symlinks have been updated:"
+  for msg in "${logs[@]}"; do
+    log $msg
+  done
+  echo ""
+  logs=() # reset
 }
 
-function summary {
-  if [[ ${#ERRORS[@]} -gt 0 ]]; then
-    for err in "${ERRORS[@]}"; do
-      fail "$err"
-    done
-    fail "Completed with errors!" >&2
-    exit 1
+function error_summary() {
+  info "Errors occurred during installation:"
+  for msg in "${errors[@]}"; do
+    error $msg
+  done
+  echo ""
+  fail "Completed with $(chalk "bold" "${#errors[@]}") errors!" >&2
+  errors=() # reset
+  exit 1
+}
+
+# --- main ---
+#
+function summary_report() {
+  if [[ ${#errors[@]} -gt 0 ]]; then
+    error_summary
   else
+    if [[ ${#logs[@]} -gt 0 ]]; then
+      log_summary
+    fi
     success "Successfully completed."
   fi
 }
 
-# --- commands ---
-function help {
-  echo "Handles the linking of dotfile configuration.
+function perform_install() {
+  local all_selected=1
+  local brew_selected=0
+  local link_selected=0
 
-Usage: $SCRIPT_NAME [options] <command>
-
-Commands:
-  link    Writes all symlinks for the corresponding files
-  unlink  Removes all symlinks for the corresponding files
-  help    Print help.
-  "
-}
-
-function link() {
-  execute
-  summary
-}
-
-function unlink() {
-  IS_UNINSTALL=true
-  link
+  while (( $# > 0 )); do
+    case "$1" in
+      --brew)
+        brew_selected=1
+        all_selected=0
+        shift
+        ;;
+      --link)
+        link_selected=1
+        all_selected=0
+        shift
+        ;;
+      --verbose)
+        is_verbose=1
+        shift
+        ;;
+      *)
+        all_selected=0
+        info "Unknow option: $(chalk "yellow" $1)"
+        echo ""
+        help
+        exit 1
+        ;;
+    esac
+  done
+  [[ $brew_selected == 1 ]] || [[ $all_selected == 1 ]] && find_brewfiles
+  [[ $link_selected == 1 ]] || [[ $all_selected == 1 ]] && find_symlinks
+  summary_report
 }
 
 # --- interface ---
-typeset -A subcmds=(
-  help "help"
-  link "link"
-  unlink "unlink"
-)
-emulate -L zsh
-[[ -z "$subcmds[$1]" ]] && { help; return 1 } || ${subcmds[$1]}
+#
+function help {
+echo "$(chalk "bold" "Usage:") $script_name <command> [options]
+
+Handles the setup of the dotfile configuration.
+
+$(chalk "bold" "Commands:")
+
+\tinstall   \tInstalls package dependencies via Homebrew
+\tuninstall \tUninstalls package dependencies via Homebrew
+
+$(chalk "bold" "Options:")
+
+\t--brew    \tRuns Homebrew un-/install processes
+\t--link    \tRuns file symlinking processes
+\t--verbose \tMake some output more verbose
+\t--help    \tPrint help
+"
+}
+# Main script logic
+case "$1" in
+  install)
+    shift
+    is_uninstall=0
+    perform_install "$@"
+    ;;
+  uninstall)
+    shift
+    is_uninstall=1
+    perform_install "$@"
+    ;;
+  *)
+    info "Unknow command: $(chalk "yellow" $1)"
+    echo ""
+    help
+    exit 1
+    ;;
+esac
