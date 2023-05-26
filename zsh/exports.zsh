@@ -5,9 +5,6 @@ export PATH="/usr/local/bin:/usr/local/sbin:/sbin/:$PATH"
 # One may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# yarn - node package manager
-export PATH="`yarn global bin`:$PATH"
-
 # To link Rubies to Homebrew's OpenSSL 1.1
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
@@ -52,3 +49,25 @@ if [[ -n "$HOME/.ssh/id_dsa" ]]; then
   ssh-add
 fi
 # ssh ---
+
+# --- asdf
+# enable asdf package managers
+# https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
+if [[ -f "$(brew --prefix asdf)/libexec/asdf.sh" ]]; then
+  source "$(brew --prefix asdf)/libexec/asdf.sh"
+  # append completions
+  fpath=(${ASDF_DIR}/completions $fpath)
+  # reinitialise completions with ZSH's compinit
+  autoload -Uz compinit && compinit
+fi
+# asdf ---
+
+# --- yarn
+# https://classic.yarnpkg.com/lang/en/docs/cli/global/
+if [[ -f "$HOME/.asdf/shims/npm" ]]; then
+  # echo "----$(yarn global bin)"
+  export PATH="$(yarn global bin):$PATH"
+else
+  print "yarn not found"
+fi
+# yarn ---
