@@ -11,6 +11,11 @@ export ZDOTDIR=$HOME/.config/zsh
 export DOTFILES=$HOME/dotfiles/
 # config ---
 
+# --- caching
+export ZSH_COMPDUMP="$HOME/.cache"
+mkdir -p $ZSH_COMPDUMP
+# changing ---
+
 source "$ZDOTDIR/helpers.zsh"
 
 # --- secrets
@@ -43,7 +48,7 @@ add_plugin "zsh-users/zsh-syntax-highlighting"
 # --- completions
 add_plugin "zsh-users/zsh-completions"
 # ZSH https://github.com/zsh-users/zsh-completions
-fpath+="$ZDOTDIR/plugins/zsh-completions/src"
+fpath=("$ZDOTDIR/plugins/zsh-completions/src" $fpath)
 # completions ---
 
 # --- prompt theme

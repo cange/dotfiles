@@ -56,7 +56,7 @@ fi
 if [[ -f "$(brew --prefix asdf)/libexec/asdf.sh" ]]; then
   source "$(brew --prefix asdf)/libexec/asdf.sh"
   # append completions
-  fpath=(${ASDF_DIR}/completions $fpath)
+  fpath=("$ASDF_DIR/completions" $fpath)
   # reinitialise completions with ZSH's compinit
   autoload -Uz compinit && compinit
 fi
