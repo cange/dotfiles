@@ -18,7 +18,7 @@
     "Blue Component" : 0.66666666666666996,
     "Green Component" : 0.45882352941176002
   },
-  "Scrollback With Status Bar" : false,
+  "Badge Max Width" : 0.10000000000000001,
   "Cursor Text Color" : {
     "Red Component" : 0.47234123945236206,
     "Color Space" : "P3",
@@ -154,7 +154,7 @@
   "BM Growl" : true,
   "Automatically Log" : false,
   "Background Color (Dark)" : {
-    "Red Component" : 0.082352941176471003,
+    "Red Component" : 0.082352941176471045,
     "Color Space" : "sRGB",
     "Blue Component" : 0.15686274509803999,
     "Green Component" : 0.14509803921569001
@@ -190,7 +190,7 @@
     "Blue Component" : 0.22352941176471,
     "Green Component" : 0.19607843137254999
   },
-  "Transparency" : 0.081473319898785604,
+  "Transparency" : 0.081473319898785618,
   "Use Bright Bold" : true,
   "Horizontal Spacing" : 1,
   "Ansi 13 Color (Light)" : {
@@ -284,7 +284,7 @@
   },
   "Screen" : -1,
   "Cursor Text Color (Dark)" : {
-    "Red Component" : 0.082352941176471003,
+    "Red Component" : 0.082352941176471045,
     "Color Space" : "sRGB",
     "Blue Component" : 0.15686274509803999,
     "Green Component" : 0.14509803921569001
@@ -334,8 +334,8 @@
     "Green Component" : 0.47450980392156999
   },
   "Semantic History" : {
-    "action" : "best editor",
     "text" : "",
+    "action" : "best editor",
     "editor" : "com.sublimetext.3"
   },
   "Ansi 9 Color (Dark)" : {
@@ -521,7 +521,7 @@
     "Blue Component" : 0.50588235294118,
     "Green Component" : 0.62352941176471
   },
-  "Normal Font" : "FiraCodeNerdFontComplete-Regular 14",
+  "Normal Font" : "FiraCodeNF-Reg 16",
   "Triggers" : [
 
   ],
@@ -567,7 +567,7 @@
   },
   "Flashing Bell" : false,
   "Brighten Bold Text (Light)" : true,
-  "Non Ascii Font" : "FiraCodeNerdFontCompleteM-Regular 14",
+  "Non Ascii Font" : "Menlo-Regular 11",
   "Ansi 7 Color (Dark)" : {
     "Red Component" : 0.92156862745098,
     "Color Space" : "sRGB",
@@ -915,7 +915,7 @@
     "Red Component" : 1,
     "Color Space" : "P3",
     "Blue Component" : 1,
-    "Alpha Component" : 0.019607843137254902,
+    "Alpha Component" : 0.019607843137254909,
     "Green Component" : 0.99993687868118286
   },
   "Use Cursor Guide" : false,
@@ -951,5 +951,5 @@
     "Green Component" : 0.3635745644569397
   },
   "Close Sessions On End" : true,
-  "Badge Max Width" : 0.10000000000000001
+  "Scrollback With Status Bar" : false
 }
