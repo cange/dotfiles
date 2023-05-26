@@ -27,11 +27,11 @@ function chalk() {
   esac
 }
 
-function error() {    printf "  %s %s\n" "$(chalk "red" "=>")" "$1" }
-function fail () {    printf "%s %s\n" "$(chalk "red" "✕")" "$1" }
-function info() {     printf "%s %s\n" "$(chalk "blue" "ℹ︎")" "$1" }
-function log() {      printf "  %s %s\n" "$(chalk "blue" "=>")" "$1" }
-function success () { printf "%s %s\n" "$(chalk "green" "✓")" "$1" }
+function warn() {     printf "%s %s\n" "$(chalk "yellow" "▲")" "$1" }
+function error () {   printf "%s %s\n" "$(chalk "red"    "✕")" "$1" }
+function info() {     printf "%s %s\n" "$(chalk "blue"   "ℹ︎")" "$1" }
+function log() {      printf "%s %s\n" "$(chalk "bold"   "⇒")" "$1" }
+function success () { printf "%s %s\n" "$(chalk "green"  "✓")" "$1" }
 
 # realpath polyfil for macos M1+
 function realpath_polyfill() {
@@ -45,6 +45,7 @@ function realpath_polyfill() {
   fi
   echo "$path"
 }
+# helpers ---
 
 # --- homebrew/brewfile ---
 #
@@ -59,7 +60,7 @@ function execute_brewfile() {
   fi
 
   if [[ ! -f $brewfile ]]; then
-    fail "Brewfile not found at the specified path: $brewfile"
+    warn "Brewfile not found at the specified path: $brewfile"
     echo ""
     return 1
   fi
@@ -91,7 +92,7 @@ function execute_brewfile() {
 
 function find_brewfiles() {
   if ! command -v brew >/dev/null 2>&1; then
-    fail "Homebrew is not installed. Check out https://docs.brew.sh/Installation"
+    warn "Homebrew is not installed. Check out https://docs.brew.sh/Installation"
     return 1
   fi
 
@@ -143,16 +144,17 @@ function log_summary() {
     log $msg
   done
   echo ""
+  success "Successfully completed."
   logs=() # reset
 }
 
 function error_summary() {
   info "Errors occurred during installation:"
   for msg in "${errors[@]}"; do
-    error $msg
+    log $msg
   done
   echo ""
-  fail "Completed with $(chalk "bold" "${#errors[@]}") errors!" >&2
+  error "Completed with $(chalk "bold" "${#errors[@]}") errors!" >&2
   errors=() # reset
   exit 1
 }
@@ -162,11 +164,8 @@ function error_summary() {
 function summary_report() {
   if [[ ${#errors[@]} -gt 0 ]]; then
     error_summary
-  else
-    if [[ ${#logs[@]} -gt 0 ]]; then
-      log_summary
-    fi
-    success "Successfully completed."
+  elif [[ ${#logs[@]} -gt 0 ]]; then
+    log_summary
   fi
 }
 
