@@ -1,14 +1,11 @@
-[user]
-	name = Christian Angermann
-	email = christian.angermann@visable.com
-	# GPG signing
-	signingkey = EDD0FFDEFAE157A5
+[include]
+	path = ~/.config/secrets/gitconfig
 
-[commit]
-	gpgsign = false
+[push]
+	default = simple
 
-[gpg]
-	program = /usr/local/bin/gpg
+[pull]
+	rebase = true
 
 [fetch]
 	prune = true # deletes outdated remote references
@@ -56,10 +53,3 @@
 
 [rerere]
 	enabled = true
-
-[push]
-	default = simple
-	gpgsign = false
-
-[pull]
-	rebase = true

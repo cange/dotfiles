@@ -30,7 +30,7 @@ function add_plugin() {
 
 # --- secrets
 # Source secrets first since other servcies could depend on it
-source_if_exists "$HOME/.config/secrets"
+source_if_exists "$HOME/.config/secrets/zsh"
 # secrets ---
 
 # Order #1: Plugins
