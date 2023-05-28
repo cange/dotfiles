@@ -20,23 +20,19 @@ Once the repo has been cloned, the required dependencies can be installed using
 run the following command:
 
 ```sh
-./bootstrap install
+./bootstrap install # or uninstall
 ```
 
-**Note:** Use `./bootstrap --help` flag to see available options.
+> **Note** Use `./bootstrap --help` flag to see available options.
 
 <details>
-  <summary>Homebrew</summary>
+  <summary>Details</summary>
 
-  This will install all necessary dependencies of the individual tool.
-</details>
+  Each tool directory can contain a `Brewfile` and a `links.prop` file for
+  symlinks. These files then contain individual settings of the particular tool.
+  The mapping of a `links.prop` definition is done by `<source>=<destination>`
+  assignment per line.
 
-<details>
-  <summary>Symlinks</summary>
-
-  Each tool has its own config directory. Inside of these directories
-  can be a `links.prop` file with a mapping. These files are evaluated during
-  the `bootstrap` script.
 </details>
 
 #### Secrets
@@ -62,12 +58,6 @@ Run `:MasonInstallAll` (within NeoVim) to install all related LSP helpers.
 
 To apply all updates you might need to restart NeoVim.
 
-### Troubleshooting
-
-> Run `:checkhealth` after installation.
-
-See also [help docs](./doc/cange.txt) or `:help cange.txt` for more details.
-
 In the case of missing node packages, run the following command:
 
 ```sh
@@ -80,3 +70,9 @@ npm install --global typescript-language-server \
             stylelint \
             typescript
 ```
+
+### Troubleshooting
+
+> **Note** Run `:checkhealth` after installation.
+
+See also [help docs](./doc/cange.txt) or `:help cange.txt` for more details.
