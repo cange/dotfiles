@@ -11,9 +11,10 @@ export PATH="`yarn global bin`:$PATH"
 # To link Rubies to Homebrew's OpenSSL 1.1
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
-# Telling Git about your GPG key
+# --- Git GPG key setup
 # https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
-export GPG_TTY=$(tty)
+export GPG_TTY="$(tty)"
+# Git GPG key setup ---
 
 # --- bat file previewer
 if [[ -e $(which bat) ]]; then
