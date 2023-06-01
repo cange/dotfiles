@@ -1,0 +1,5 @@
+tap "jesseduffield/lazydocker"
+# A simple terminal UI for docker, written in Go
+brew "jesseduffield/lazydocker/lazydocker"
+# App to build and share containerized applications and microservices
+cask "docker"

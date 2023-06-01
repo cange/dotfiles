@@ -74,9 +74,10 @@ source_if_exists "$ZDOTDIR/history.zsh"
 source_if_exists "$ZDOTDIR/.iterm2_shell_integration.zsh"
 
 precmd() { # --- refresh on touch
-  source "$DOTFILES/zsh/aliases.zsh"
+  source "$DOTFILES/zsh/aliases.docker.zsh"
   source "$DOTFILES/zsh/aliases.git.zsh"
   source "$DOTFILES/zsh/aliases.yarn.zsh"
+  source "$DOTFILES/zsh/aliases.zsh"
 }
 
 # --- Docker plugin
