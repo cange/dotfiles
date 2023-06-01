@@ -52,7 +52,7 @@ alias k='clear'
 # ruby bundle
 alias be='bundle exec'
 alias bi='bundle install'
-alias server="sudo python -m http.server 80"
+alias server="sudo python3 -m http.server 80"
 
 # --- work
 alias cr='cd ~/workspace/wlw/customer-report-frontend'
