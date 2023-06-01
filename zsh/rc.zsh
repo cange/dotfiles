@@ -57,10 +57,8 @@ add_plugin "romkatv/powerlevel10k"
 # prompt theme ---
 
 # --- z navigation config
-# Tracks most-used directories to make cd smarter
-source_if_exists "$(brew --prefix)/etc/profile.d/z.sh" # https://formulae.brew.sh/formula/z
-add_plugin "agkozak/zsh-z"
 autoload -U compinit && compinit
+eval "$(zoxide init zsh)"
 zstyle ":completion:*" menu select # prettify z menu
 # z navigation config ---
 
