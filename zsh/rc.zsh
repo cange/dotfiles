@@ -7,7 +7,8 @@
 # === Order is important ===
 
 # --- config
-export ZDOTDIR=$HOME/.config/zsh
+export ZDOTDIR=$HOME/
+export Z_CONFIG_DIR="$HOME/.config/zsh" # non-standard variable
 export DOTFILES=$HOME/dotfiles/
 # config ---
 
@@ -16,7 +17,7 @@ export ZSH_COMPDUMP="$HOME/.cache"
 mkdir -p $ZSH_COMPDUMP
 # changing ---
 
-source "$ZDOTDIR/helpers.zsh"
+source "$Z_CONFIG_DIR/helpers.zsh"
 
 # --- secrets
 # Source secrets first since other servcies could depend on it
@@ -48,11 +49,11 @@ add_plugin "zsh-users/zsh-syntax-highlighting"
 # --- completions
 add_plugin "zsh-users/zsh-completions"
 # ZSH https://github.com/zsh-users/zsh-completions
-fpath=("$ZDOTDIR/plugins/zsh-completions/src" $fpath)
+fpath=("$Z_CONFIG_DIR//plugins/zsh-completions/src" $fpath)
 # completions ---
 
 # --- prompt theme
-source_if_exists "$ZDOTDIR/.zshrc" # required by p10k prompt
+source_if_exists "$Z_CONFIG_DIR//.zshrc" # required by p10k prompt
 add_plugin "romkatv/powerlevel10k"
 # prompt theme ---
 
@@ -64,14 +65,14 @@ zstyle ":completion:*" menu select # prettify z menu
 
 # === Order #3 additional files
 
-source_if_exists "$ZDOTDIR/aliases.git.zsh"
-source_if_exists "$ZDOTDIR/aliases.yarn.zsh"
-source_if_exists "$ZDOTDIR/aliases.zsh"
-source_if_exists "$ZDOTDIR/exports.zsh"
-source_if_exists "$ZDOTDIR/fzf.zsh"
-source_if_exists "$ZDOTDIR/history.zsh"
+source_if_exists "$Z_CONFIG_DIR//aliases.git.zsh"
+source_if_exists "$Z_CONFIG_DIR//aliases.yarn.zsh"
+source_if_exists "$Z_CONFIG_DIR//aliases.zsh"
+source_if_exists "$Z_CONFIG_DIR//exports.zsh"
+source_if_exists "$Z_CONFIG_DIR//fzf.zsh"
+source_if_exists "$Z_CONFIG_DIR//history.zsh"
 # https://iterm2.com/documentation-shell-integration.html
-source_if_exists "$ZDOTDIR/.iterm2_shell_integration.zsh"
+source_if_exists "$Z_CONFIG_DIR//.iterm2_shell_integration.zsh"
 
 precmd() { # --- refresh on touch
   source "$DOTFILES/zsh/aliases.docker.zsh"

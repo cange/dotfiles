@@ -5,7 +5,7 @@ function source_if_exists() {
 
 function add_plugin() {
   local name=$(echo $1 | cut -d "/" -f 2)
-  local target="$ZDOTDIR/plugins/$name"
+  local target="$Z_CONFIG_DIR/plugins/$name"
   if [[ -d $target ]]; then
     source_if_exists "$target/$name.plugin.zsh" || \
       source_if_exists "$target/$name.zsh-theme" || \
