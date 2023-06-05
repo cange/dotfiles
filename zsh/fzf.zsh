@@ -1,4 +1,4 @@
-source "$ZDOTDIR/helpers.zsh"
+source "$Z_CONFIG_DIR/helpers.zsh"
 
 # see https://github.com/mrnugget/dotfiles/blob/master/zshrc#L496
 
