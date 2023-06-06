@@ -1,5 +1,5 @@
 # User configuration
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin/:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 
 # One may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -21,6 +21,7 @@ fi
 # bat ---
 
 # Environment variables set everywhere
+# https://manpages.debian.org/bullseye-backports/man-db/man.1.en.html#ENVIRONMENT
 export EDITOR="nvim"
 export TERMINAL="iterm2"
 export BROWSER="firefox"
