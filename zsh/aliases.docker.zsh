@@ -14,7 +14,7 @@ function _docker_compose() {
 alias dco="_docker_compose "     # Docker-compose main command
 alias dce="dco exec"             # Execute command inside a container
 alias dcdn="dco down"            # Stop and remove container
-alias dcrb="dcdn && dco up --detach --build --force-recreate" # Rebuild
+alias dcrb="dco up --detach --build --force-recreate" # Rebuild
 alias dcbl="dco exec bundle"     # Execute Rails bundle command
 alias dcy="dco exec yarn"        # Execute yarn command
 alias dcrs="dco restart"         # Restart container
