@@ -18,7 +18,7 @@
     "Blue Component" : 0.66666666666666996,
     "Green Component" : 0.45882352941176002
   },
-  "Badge Max Width" : 0.10000000000000001,
+  "Scrollback With Status Bar" : false,
   "Cursor Text Color" : {
     "Red Component" : 0.47234123945236206,
     "Color Space" : "P3",
@@ -159,7 +159,7 @@
     "Blue Component" : 0.15686274509803999,
     "Green Component" : 0.14509803921569001
   },
-  "Guid" : "5FA8C689-F1A2-4636-8B0C-816008E9E24E",
+  "Guid" : "D403C46A-D713-4084-9033-F4385B42AD7A",
   "Cursor Color (Dark)" : {
     "Red Component" : 0.90196078431372995,
     "Color Space" : "sRGB",
@@ -190,7 +190,10 @@
     "Blue Component" : 0.22352941176471,
     "Green Component" : 0.19607843137254999
   },
-  "Transparency" : 0.081473319898785618,
+  "Transparency" : 0.23944813829787234,
+  "Bound Hosts" : [
+
+  ],
   "Use Bright Bold" : true,
   "Horizontal Spacing" : 1,
   "Ansi 13 Color (Light)" : {
@@ -270,7 +273,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.76017302274703979
   },
-  "Vertical Spacing" : 1,
+  "Vertical Spacing" : 1.0900000000000001,
   "Use Tab Color (Light)" : false,
   "Cursor Type" : 2,
   "Badge Text" : "",
@@ -334,8 +337,8 @@
     "Green Component" : 0.47450980392156999
   },
   "Semantic History" : {
-    "text" : "",
     "action" : "best editor",
+    "text" : "",
     "editor" : "com.sublimetext.3"
   },
   "Ansi 9 Color (Dark)" : {
@@ -390,7 +393,7 @@
   },
   "Brighten Bold Text (Dark)" : true,
   "Badge Right Margin" : 10,
-  "Name" : "cange",
+  "Name" : "cange retina",
   "Ansi 11 Color (Dark)" : {
     "Red Component" : 0.99215686274509995,
     "Color Space" : "sRGB",
@@ -463,7 +466,7 @@
       "precision" : "very_high"
     }
   ],
-  "Blur Radius" : 16.100000000000001,
+  "Blur Radius" : 24.384084109042554,
   "Rows" : 25,
   "Background Color (Light)" : {
     "Red Component" : 0.91764705882353004,
@@ -521,10 +524,11 @@
     "Blue Component" : 0.50588235294118,
     "Green Component" : 0.62352941176471
   },
-  "Normal Font" : "FiraCodeNF-Reg 16",
+  "Normal Font" : "FiraCodeNF-Reg 14",
   "Triggers" : [
 
   ],
+  "Has Hotkey" : false,
   "Foreground Color" : {
     "Red Component" : 0.47234123945236206,
     "Color Space" : "P3",
@@ -951,5 +955,5 @@
     "Green Component" : 0.3635745644569397
   },
   "Close Sessions On End" : true,
-  "Scrollback With Status Bar" : false
+  "Badge Max Width" : 0.10000000000000001
 }
