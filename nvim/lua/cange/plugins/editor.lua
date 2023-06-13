@@ -99,7 +99,7 @@ return {
   },
 
   -- shows LSP initialization progress
-  { "j-hui/fidget.nvim", opts = { text = { spinner = "dots", done = i("ui.Check") } } },
+  { "j-hui/fidget.nvim", tag = "legacy", opts = { text = { spinner = "dots", done = i("ui.Check") } } },
 
   { -- font icon set
     "nvim-tree/nvim-web-devicons",
