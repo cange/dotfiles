@@ -2,7 +2,7 @@ setopt pushdminus
 
 # --- tools
 alias vim='nvim'
-alias gui='open -a fork ' # allow to run executables within fork
+alias gui='fork .'
 # tools ---
 #
 # --- confirm before overwriting something
