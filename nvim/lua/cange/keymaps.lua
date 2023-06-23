@@ -95,7 +95,7 @@ M.groups = {
       { "z", "<cmd>ZenMode<CR>",                                                "Toggle Zen Mode" },
       {
         "<leader>x",
-        "<cmd>write<CR><cmd>lua Cange.reload('cange'); Log.info('Saved and executed', { title = 'File' })<CR>",
+        "<cmd>write<CR><cmd>lua Cange.reload('cange'); Log:info('Saved and executed', 'File')<CR>",
         "Reload current file",
       },
     },

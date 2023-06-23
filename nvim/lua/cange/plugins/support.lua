@@ -122,7 +122,7 @@ return {
 
       local function toggle_markdown_preview()
         local method = peek.is_open() and "close" or "open"
-        Log:info(method, { title = "Markdown Preview - Peek" })
+        Log:info(method, "Markdown Preview")
         peek[method]()
       end
 

@@ -29,7 +29,7 @@ local function keymaps(client, bufnr)
 
   -- typescript specific keymaps (e.g. rename file and update imports)
   if client.name == "tsserver" then
-    Log:info("ENABLED keymaps for JS/TS ", { title = ns })
+    Log:info("ENABLED keymaps for JS/TS ", ns)
     keymap("<leader>fa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
     keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "LSP Rename file and update imports")
     keymap("<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", "LSP Organize imports")
@@ -106,7 +106,7 @@ function M.toggle_virtual_text()
   local label = M.show_diagnostic_virtual_text and "ENABLED" or "DISABLED"
 
   vim.diagnostic.config({ virtual_text = M.show_diagnostic_virtual_text })
-  Log:info(label .. " virtual inline text", { title = "Diagnostic" })
+  Log:info(label .. " virtual inline text", "Diagnostic")
 end
 
 return M
