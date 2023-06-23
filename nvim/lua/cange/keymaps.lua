@@ -130,11 +130,11 @@ M.groups = {
       { "8", "<cmd>e ~/.config/nvim/lua/cange/config.lua<CR>",                  "Edit config" },
       -- session
       { "R", "<cmd>SessionRestore<CR>",                                         "Recent session" },
-      { "S", "<cmd>SessionSave<CR>",                                            "Save session" },
+      { "s", "<cmd>SessionSave<CR>",                                            "Save session" },
       { "X", "<cmd>SessionDelete<CR>",                                          "Delete session" },
       -- others
       { "l", "<cmd>lua require('cange.lsp.format').toggle_format_on_save()<CR>","Toggle format on save" },
-      { "s", "<cmd>lua vim.o.spell = not vim.o.spell<CR>",                      "Toggle spelling" },
+      { "S", "<cmd>lua vim.o.spell = not vim.o.spell<CR>",                      "Toggle spelling" },
       { "c", "<cmd>Telescope colorscheme<CR>",                                  "Change colorscheme" },
       { "C", '<cmd>lua require("luasnip").cleanup()<CR>',                       "Reset snippets UI" },
       { "p", "<cmd>lua require('telescope').extensions.project.project()<CR>",  "Switch workspace" },
@@ -174,7 +174,7 @@ M.groups = {
       { "d", "<cmd>lua require('cange.lsp').toggle_virtual_text()<CR>",         "Toggle inline virtual text" },
       { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnostics" },
       -- formatter
-      { "R", "<cmd>LspRestart<CR>",                                             "Restart LSP" },
+      { "r", "<cmd>LspRestart;<CR><cmd>lua Log:info('Restarted', 'LSP')<CR>",   "Restart LSP" },
       { "c", "<cmd>TextCaseOpenTelescope<CR>",                                  "Change Case", mode = { "v", "n" } },
       { "f", "<cmd>lua require('cange.lsp.format').toggle_format_on_save()<CR>","Toggle format on save" },
       { "l", '<cmd>lua require("cange.telescope").diagnostics_log()<CR>',       "File diagnostics" },
@@ -183,7 +183,11 @@ M.groups = {
       { "S", "<cmd>Copilot status<CR>",                                         "Copilot status" },
       { "o", "<cmd>Copilot toggle<CR>",                                         "Toggle Copilot" },
       { "p", "<cmd>Copilot panel<CR>",                                          "Toggle Copilot panel" },
-      { "r", "<cmd>lua require('copilot.panel').refresh()<CR>",                 "Refresh Copilot panel" },
+      {
+        "R",
+        "<cmd>lua require('copilot.panel').refresh();<CR><cmd>lua Log:info('Refresh panel', 'Copilot')<CR>",
+        "Refresh Copilot panel"
+      },
       { "s", "<cmd>Copilot suggestion<CR>",                                     "Toggle Copilot suggestion" },
       { "t", "<cmd>require('copilot.suggestion').toggle_auto_trigger()<CR>",    "Toggle Copilot suggestion auto trigger" },
     },
