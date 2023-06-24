@@ -79,12 +79,14 @@ return {
       -- make autopairs and completion work together
       -- If you want insert `(` after select function or method item
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      local found_cmp, cmp = pcall(require, "cmp")
-      if not found_cmp then return end
+      local ok, cmp = pcall(require, "cmp")
+      if not ok then return end
 
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
+
+  { "kylechui/nvim-surround", event = "VeryLazy" }, -- surround selection
 
   { -- indentation guides to all lines
     "lukas-reineke/indent-blankline.nvim",
