@@ -58,16 +58,13 @@ return {
       local diagnostics = nls.builtins.diagnostics
       local code_actions = nls.builtins.code_actions
       local formatting = nls.builtins.formatting
-      code_actions.typescript = require("typescript.extensions.null-ls.code-actions")
+      code_actions.typescript = code_actions.typescript or require("typescript.extensions.null-ls.code-actions")
 
       nls.setup({
         update_in_insert = false, -- if false, diagnostics will run upon exiting insert mode
         sources = {
-          code_actions.eslint_d, -- js
-          code_actions.gitsigns, -- git
           code_actions.typescript,
 
-          diagnostics.eslint_d,
           diagnostics.jsonlint,
           diagnostics.rubocop, -- ruby
           diagnostics.stylelint, -- css
