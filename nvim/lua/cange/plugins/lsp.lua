@@ -67,7 +67,6 @@ return {
 
           diagnostics.jsonlint,
           diagnostics.rubocop, -- ruby
-          diagnostics.stylelint, -- css
           diagnostics.yamllint,
           diagnostics.zsh,
 
