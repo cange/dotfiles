@@ -35,6 +35,7 @@ return {
     },
     config = function()
       local cmp = require("cmp")
+      local max_count = 16
 
       cmp.setup(require("cange.cmp").opts)
 
@@ -43,7 +44,7 @@ return {
       cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-          { name = "buffer" },
+          { name = "buffer", max_item_count = max_count },
         },
       })
 
@@ -51,9 +52,9 @@ return {
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = "path" },
+          { name = "path", max_item_count = max_count },
         }, {
-          { name = "cmdline" },
+          { name = "cmdline", max_item_count = max_count },
         }),
       })
     end,
