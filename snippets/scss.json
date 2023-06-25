@@ -1,8 +1,4 @@
 {
-  "outline debug – breakpoint": {
-    "prefix": "outb",
-    "body": "outline: wlw-breakpoint(${1:desktop}, color) 1px dotted;"
-  },
   "@group - SassDoc": {
     "prefix": "@group",
     "body": "////\n/// @group $1\n////"
@@ -58,10 +54,6 @@
   "@import - design-tokens": {
     "prefix": "@impdt",
     "body": "@import '@visable-dev/design-tokens/dist/${1|wlw,europages,visable|}/tokens';\n$2"
-  },
-  "outline debug - wlw-breakpoint": {
-    "prefix": "outb",
-    "body": "outline: wlw-breakpoint(${1:desktop}, color) 1px dotted;"
   },
   "wlw-alpha(…)": {
     "prefix": "alp",
