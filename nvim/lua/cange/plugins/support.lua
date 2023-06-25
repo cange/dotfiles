@@ -132,29 +132,10 @@ return {
     end,
   },
 
-  { -- jump to any horizontal location
-    "ggandor/flit.nvim",
+  { -- search jump to any vertical/horizontal location
+    "folke/flash.nvim",
     event = "VeryLazy",
-    opts = {
-      multiline = false,
-      labeled_modes = "nx",
-    },
-  },
-  { -- jump to any vertical location
-    "ggandor/leap.nvim",
-    event = "VeryLazy",
-    config = function()
-      local leap = require("leap")
-
-      leap.add_default_mappings(true)
-
-      vim.keymap.del({ "x", "o" }, "x")
-      vim.keymap.del({ "x", "o" }, "X")
-
-      -- fade out active search area
-      vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
-      leap.opts.highlight_unlabeled_phase_one_targets = true
-    end,
+    opts = {},
   },
 
   { -- smooth scrolling
