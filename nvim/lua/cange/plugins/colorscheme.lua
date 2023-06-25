@@ -115,6 +115,4 @@ return {
       initialized = true
     end,
   },
-
-  { "guns/xterm-color-table.vim" }, -- provides cterm color cheat via command :XtermColorTable
 }

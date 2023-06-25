@@ -80,22 +80,25 @@ function M.setup_handler(server_name)
   end
 end
 
-function M.setup_diagnostics()
+---@return table
+local function define_sign_icons()
   local signs = {}
-
   ---@diagnostic disable-next-line: param-type-mismatch
-  for name, icon in pairs(Cange.get_icon("diagnostics")) do
-    local sign = { name = "DiagnosticSign" .. name, text = icon }
-    table.insert(signs, sign)
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.icon, numhl = "" })
+  for type, icon in pairs(Cange.get_icon("diagnostics")) do
+    local hl = "DiagnosticSign" .. type
+    table.insert(signs, { name = hl, text = icon })
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
+  return signs
+end
 
+function M.setup_diagnostics()
   vim.diagnostic.config({
     float = {
       source = "if_many", -- Or "always"
     },
     signs = {
-      active = signs,
+      active = define_sign_icons(),
     },
     virtual_text = M.show_diagnostic_virtual_text,
   })
