@@ -53,6 +53,6 @@
   },
   "prop: outline debug": {
     "prefix": "out",
-    "body": "outline: ${1:red} 1px dotted;"
+    "body": "outline: ${1|red,yellow,magenta,cyan,blue,lime,green|} 1px dotted;"
   }
 }
