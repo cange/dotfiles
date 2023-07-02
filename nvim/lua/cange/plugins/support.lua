@@ -145,8 +145,13 @@ return {
   },
 
   { -- Hex color highlighter
-    "norcalli/nvim-colorizer.lua",
-    config = function() require("colorizer").setup() end,
+    "NvChad/nvim-colorizer.lua",
+    opts = {
+      filetypes = {
+        "*", -- highlight all files by default
+        "!lazy", -- exclude from highlighting.
+      },
+    },
   },
 
   { -- multi search and replace
