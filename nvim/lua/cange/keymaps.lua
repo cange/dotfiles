@@ -1,6 +1,5 @@
 local keymaps = {
   { "v", "p", '"_dP', { desc = "Clipboard: keep content" } },
-  { "n", "<C-a>", "gg<S-v>G", { desc = "Select all content" } },
   { "v", "<F5>", ":sort<CR>gv=gv", { desc = "Sort selected lines" } },
   { "n", "<leader><leader>", "<C-^>", { desc = "Switch last recent 2 buffers" } },
 
@@ -92,6 +91,7 @@ M.groups = {
       { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },
       { "|", "<C-W>v",                                                          "Split window right" },
       { "<leader>c", "<cmd>CangeUpdateColorscheme<CR>",                         "Update colorscheme highlights" },
+      { "<leader>a", "gg<S-v>G",                                                "Select all content" },
       { "z", "<cmd>ZenMode<CR>",                                                "Toggle Zen Mode" },
       {
         "<leader>x",
