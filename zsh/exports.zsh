@@ -53,7 +53,7 @@ fi
 # --- docker
 # ensure docker is running on arm64 (macos M1+)
 # https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
-export DOCKER_DEFAULT_PLATFORM=linux/amd64
+# export DOCKER_DEFAULT_PLATFORM=linux/amd64
 # docker ---
 
 # --- asdf
@@ -77,3 +77,10 @@ else
   print "yarn not found"
 fi
 # yarn ---
+#
+# --- node/npx
+if [[ -f "$HOME/.asdf/shims/node" ]]; then
+  # enables executable for www.fork.dev
+  export PATH=".asdf/shims/node:$PATH"
+fi
+# node/npx ---
