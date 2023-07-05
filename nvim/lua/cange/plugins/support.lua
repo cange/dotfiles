@@ -6,7 +6,6 @@ return {
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
       require("notify").setup({
-        stages = "static",
         background_colour = "FloatBorder",
         icons = {
           ERROR = i("diagnostics.Error"),

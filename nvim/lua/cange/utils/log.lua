@@ -3,11 +3,12 @@ local Log = {}
 --- Adds a log entry using Plenary.log
 ---@param level integer [same as vim.log.levels]
 ---@param msg any
----@param event any
-function Log:add_entry(level, msg, event)
-  event = event or {}
-  local title = event.title ~= nil and type(event.title) == "string" and event.title or ""
-  vim.notify(" " .. msg, level, { title = title })
+---@param opts any Options for notify
+function Log:add_entry(level, msg, opts)
+  opts = opts or {}
+  opts.title = opts.title ~= nil and type(opts.title) == "string" and opts.title or ""
+  msg = vim.tbl_contains({ "minimal", "compact" }, opts.render or "") and msg or " " .. msg
+  vim.notify(msg, level, opts)
 end
 
 ---Add a log entry at TRACE level
@@ -23,12 +24,12 @@ function Log:debug(msg, event) self:add_entry(vim.log.levels.DEBUG, msg, event) 
 ---Add a log entry at INFO level
 ---@param msg any
 ---@param title any
-function Log:info(msg, title) self:add_entry(vim.log.levels.INFO, msg, { title = title }) end
+function Log:info(msg, title) self:add_entry(vim.log.levels.INFO, msg, { title = title, render = "compact" }) end
 
 ---Add a log entry at WARN level
 ---@param msg any
----@param event any
-function Log:warn(msg, event) self:add_entry(vim.log.levels.WARN, msg, event) end
+---@param opts any
+function Log:warn(msg, opts) self:add_entry(vim.log.levels.WARN, msg, opts) end
 
 ---Add a log entry at ERROR level
 ---@param msg any
