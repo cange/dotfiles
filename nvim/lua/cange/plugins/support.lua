@@ -4,17 +4,20 @@ return {
   { -- popover notification
     "rcarriga/nvim-notify",
     dependencies = { "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("notify").setup({
-        background_colour = "FloatBorder",
-        icons = {
-          ERROR = i("diagnostics.Error"),
-          WARN = i("diagnostics.Warn"),
-          INFO = i("diagnostics.Info"),
-          DEBUG = i("ui.Bug"),
-          TRACE = i("ui.Pencil"),
-        },
-      })
+    opts = {
+      background_colour = "#2d4f56",
+      icons = {
+        ERROR = i("diagnostics.Error"),
+        WARN = i("diagnostics.Warn"),
+        INFO = i("diagnostics.Info"),
+        DEBUG = i("ui.Bug"),
+        TRACE = i("ui.Pencil"),
+      },
+      timeout = 3000,
+      render = "compact",
+      top_down = false,
+    },
+    init = function()
       require("telescope").load_extension("notify")
       vim.notify = require("notify")
     end,
