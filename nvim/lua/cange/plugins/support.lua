@@ -88,8 +88,6 @@ return {
     end,
   },
 
-  { "kylechui/nvim-surround", event = "VeryLazy" }, -- surround selection
-
   { -- indentation guides to all lines
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
@@ -186,8 +184,6 @@ return {
     },
   },
 
-  { -- multi search and replace
-    "mg979/vim-visual-multi",
-    event = "VeryLazy",
-  },
+  -- multi search and replace
+  { "mg979/vim-visual-multi", event = "VeryLazy" },
 }
