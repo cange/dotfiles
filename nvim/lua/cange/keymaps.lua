@@ -81,7 +81,6 @@ M.groups = {
     mappings = {
       { "<F2>", '<cmd>lua require("cange.lsp.format").format()<CR>',            "Format" },
       { "\\", "<cmd>NvimTreeToggle<CR>",                                        "File Explorer" },
-      { "ff", "<cmd>lua require('cange.telescope').live_grep()<CR>",            "Search in Files" },
       { "a", '<cmd>lua require("harpoon.mark").add_file()<CR>',                 "Add bookmark" },
       { "f", "<cmd>Telescope find_files<CR>",                                   "Search Files" },
       { "m", '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>',          "Show bookmarks" },
@@ -90,11 +89,18 @@ M.groups = {
       { "-", "<C-W>s",                                                          "Split window below" },
       { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },
       { "|", "<C-W>v",                                                          "Split window right" },
-      { "<leader>c", "<cmd>CangeUpdateColorscheme<CR>",                         "Update colorscheme highlights" },
-      { "<leader>a", "gg<S-v>G",                                                "Select all content" },
       { "z", "<cmd>ZenMode<CR>",                                                "Toggle Zen Mode" },
+    },
+  },
+  {
+    name = "Secondary",
+    leader = "<localleader>",
+    mappings = {
+      { "a", "gg<S-v>G",                                                        "Select all content" },
+      { "c", "<cmd>CangeUpdateColorscheme<CR>",                                 "Update colorscheme highlights" },
+      { "f", "<cmd>lua require('cange.telescope').live_grep()<CR>",             "Search in Files" },
       {
-        "<leader>x",
+        "x",
         "<cmd>write<CR><cmd>lua Cange.reload('cange'); Log:info('Saved and executed', 'File')<CR>",
         "Reload current file",
       },

@@ -89,7 +89,7 @@ vim.opt.listchars:append({ eol = "↵", nbsp = "␣", tab = " ⇥", trail = "·"
 -- See `:help mapleader`
 -- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = ","
 
 -- Operation system related settings
 if vim.fn.has("mac") == 1 then
