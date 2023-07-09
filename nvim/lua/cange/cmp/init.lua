@@ -60,20 +60,16 @@ local function next_choice_handler()
 end
 
 -- stylua: ignore start
-local sources = cmp.config.sources(
-  {
-    { name = "luasnip",     max_item_count = 3 },
-    { name = "nvim_lsp",    max_item_count = 5 },
-    { name = "copilot" },
-    { name = "cmp_tabnine", max_item_count = 2 },
-    { name = "nvim_lua",    max_item_count = 2 },
-  },
-  {
-    { name = "nvim_lsp_signature_help" },
-    { name = "buffer",      max_item_count = 2, keyword_length = 3 },
-    { name = "path",        max_item_count = 2, keyword_length = 2 },
-  }
-)
+local sources =cmp.config.sources({
+  { name = "nvim_lsp",    group_index = 1,    max_item_count = 5 },
+  { name = "luasnip",     group_index = 2,    max_item_count = 3 },
+  { name = "copilot",     group_index = 4 },
+  { name = "cmp_tabnine", group_index = 6,    max_item_count = 2 },
+  { name = "path",                            max_item_count = 2, keyword_length = 2 },
+  { name = "nvim_lua",                        max_item_count = 2 },
+  { name = "nvim_lsp_signature_help" },
+  { name = "buffer",                          max_item_count = 2, keyword_length = 3 },
+})
 -- stylua: ignore end
 
 local M = {}
