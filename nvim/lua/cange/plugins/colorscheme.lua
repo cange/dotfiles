@@ -106,11 +106,13 @@ return {
   {
     "EdenEast/nightfox.nvim", -- colorscheme
     lazy = true,
-    config = function()
+    opts = {
+      transparent = true,
+    },
+    init = function()
       local colorscheme = Cange.get_config("ui.colorscheme")
 
       vim.cmd("colorscheme " .. colorscheme)
-
       update_highlights()
       initialized = true
     end,

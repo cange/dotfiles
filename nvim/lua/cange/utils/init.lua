@@ -73,8 +73,8 @@ function M.set_highlights(highlights)
 end
 
 ---Returns the hex value of the given highlight group
----@param name string
----@param key string
+---@param name string # Normal, Comment, etc.
+---@param key string # fg, bg, etc.
 ---@return table|nil
 function M.get_hl_hex(name, key)
   local hl = Cange.get_hl(name, { key })
