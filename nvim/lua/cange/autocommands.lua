@@ -14,19 +14,19 @@ autocmd("BufWritePre", {
   command = ":%s/\\s\\+$//e",
 })
 
-autocmd({ "BufRead", "BufNewFile" }, {
+autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
   group = augroup("cange_line_length", { clear = true }),
-  pattern = "*.md,*.mdx,*.lua,*.txt",
+  pattern = "*.md,*.lua,*.txt",
   callback = function()
     vim.opt_local.colorcolumn = "80"
     vim.opt_local.textwidth = 80
   end,
 })
 
-autocmd({ "BufRead", "BufNewFile" }, {
+autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
   group = augroup("cange_mdx_filetype", { clear = true }),
   pattern = "*.mdx",
-  command = ":set filetype=markdown",
+  callback = function() vim.bo.filetype = "jsx" end,
 })
 
 -- Indentation highlighting
