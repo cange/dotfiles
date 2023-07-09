@@ -1,8 +1,8 @@
 ---@alias copilot_status_notification_data { status: ''|'Normal'|'InProgress'|'Warning', message: string }
 
 ---@type _, { status: { data: copilot_status_notification_data } }
-local api_found, api = pcall(require, "copilot.api")
-if not api_found then
+local ok, api = pcall(require, "copilot.api")
+if not ok then
   print('warn: "copilot.api" not found')
   return
 end

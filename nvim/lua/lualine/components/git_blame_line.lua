@@ -1,5 +1,5 @@
-local gitsigns_found, _ = pcall(require, "gitsigns")
-if not gitsigns_found then
+local ok, _ = pcall(require, "gitsigns")
+if not ok then
   print('warn: "gitsigns" not found')
   return
 end

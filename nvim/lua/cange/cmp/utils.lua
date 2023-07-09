@@ -1,6 +1,5 @@
-local ns = "[cange.cmp.utils]"
-local found_luasnip, luasnip = pcall(require, "luasnip")
-if not found_luasnip then return end
+local luasnip_ok, luasnip = pcall(require, "luasnip")
+if not luasnip_ok then return end
 
 local win_get_cursor = vim.api.nvim_win_get_cursor
 local get_current_buf = vim.api.nvim_get_current_buf

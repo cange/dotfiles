@@ -1,6 +1,6 @@
 local ns = "[cange.lsp.lspconfig]"
-local found_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not found_cmp then
+local cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not cmp_ok then
   print(ns, '"cmp_nvim_lsp" not found')
   return
 end
@@ -64,8 +64,8 @@ local default_config = {
 ---Sets up individual LSP server handler
 ---@param server_name string
 function M.setup_handler(server_name)
-  local found_config, config = pcall(require, "cange.lsp.server_configurations." .. server_name)
-  if found_config then
+  local ok, config = pcall(require, "cange.lsp.server_configurations." .. server_name)
+  if ok then
     config = vim.tbl_deep_extend("force", vim.deepcopy(default_config), config)
   else
     config = default_config

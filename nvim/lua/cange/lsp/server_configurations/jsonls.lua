@@ -1,5 +1,5 @@
-local found, schemastore = pcall(require, "schemastore")
-if not found then
+local ok, schemastore = pcall(require, "schemastore")
+if not ok then
   print('[cange.lsp.server_configurations.jsonls] "schemastore" not found')
   return
 end
@@ -7,7 +7,7 @@ end
 return {
   settings = {
     json = {
-      schemas = require("schemastore").json.schemas({
+      schemas = schemastore.json.schemas({
         select = {
           ".eslintrc",
           ".stylelintrc",
