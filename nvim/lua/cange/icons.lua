@@ -42,6 +42,7 @@ M.ui = {
   Stethoscope         = "󰓙", -- nf-md-stethoscope
   Stop                = "", -- nf-oct-circle_slash
   Sync                = "", -- nf-oct-sync
+  Tab                 = "", -- nf-oct-tab
   Tabnine             = "⌬", -- U+232C
   Telescope           = "", -- nf-oct-telescope
   VDashLineLeft       = "┆", -- U+2506
