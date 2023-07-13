@@ -13,13 +13,14 @@ function _docker_compose() {
 # see https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
 alias dco="_docker_compose "     # Docker-compose main command
 alias dce="dco exec"             # Execute command inside a container
-alias dcdn="dco down"            # Stop and remove container
-alias dcrb="dco up --detach --build --force-recreate" # Rebuild
 alias dcbl="dco exec bundle"     # Execute Rails bundle command
-alias dcy="dco exec yarn"        # Execute yarn command
-alias dcrs="dco restart"         # Restart container
-alias dcup="dco up --detach"     # Start container and its dependencies
+alias dcdn="dco down"            # Stop and remove container
 alias dcl="dco logs --follow --tail=100" # Show container logs
+alias dcrb="dcup --build --force-recreate" # Rebuild
+alias dcrbl="dcrbl && dcl"       # Rebuild with followup log
+alias dcrs="dco restart && dcl"  # Restart container and show logs
+alias dcup="dco up --detach"     # Start container and its dependencies
+alias dcy="dco exec yarn"        # Execute yarn command
 # docker compose ---
 
 # --- docker
