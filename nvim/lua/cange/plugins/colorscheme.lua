@@ -1,37 +1,3 @@
---#region Types
-
----@class cange.colorschemeShade
----@field base string
----@field bright string
----@field dim string
----@field light boolean
-
----@class cange.colorschemePalette
----@field black cange.colorschemeShade
----@field red cange.colorschemeShade
----@field green cange.colorschemeShade
----@field yellow cange.colorschemeShade
----@field blue cange.colorschemeShade
----@field magenta cange.colorschemeShade
----@field cyan cange.colorschemeShade
----@field white cange.colorschemeShade
----@field orange cange.colorschemeShade
----@field pink cange.colorschemeShade
----@field comment string
----@field bg0 string
----@field bg1 string
----@field bg2 string
----@field bg3 string
----@field bg4 string
----@field fg0 string
----@field fg1 string
----@field fg2 string
----@field fg3 string
----@field sel0 string
----@field sel1 string
-
---#endregion
-
 M = {}
 
 ---@type boolean
@@ -101,6 +67,10 @@ local function update_highlights()
 end
 
 vim.api.nvim_create_user_command("CangeUpdateColorscheme", update_highlights, {})
+vim.api.nvim_create_autocmd({ "ColorScheme" }, {
+  group = vim.api.nvim_create_augroup("cange_on_colorscheme_change", { clear = true }),
+  command = "CangeUpdateColorscheme",
+})
 
 return {
   {
@@ -118,3 +88,33 @@ return {
     end,
   },
 }
+
+---@class cange.colorschemeShade
+---@field base string
+---@field bright string
+---@field dim string
+---@field light boolean
+
+---@class cange.colorschemePalette
+---@field black cange.colorschemeShade
+---@field red cange.colorschemeShade
+---@field green cange.colorschemeShade
+---@field yellow cange.colorschemeShade
+---@field blue cange.colorschemeShade
+---@field magenta cange.colorschemeShade
+---@field cyan cange.colorschemeShade
+---@field white cange.colorschemeShade
+---@field orange cange.colorschemeShade
+---@field pink cange.colorschemeShade
+---@field comment string
+---@field bg0 string
+---@field bg1 string
+---@field bg2 string
+---@field bg3 string
+---@field bg4 string
+---@field fg0 string
+---@field fg1 string
+---@field fg2 string
+---@field fg3 string
+---@field sel0 string
+---@field sel1 string

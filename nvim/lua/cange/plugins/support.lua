@@ -5,7 +5,7 @@ return {
     "rcarriga/nvim-notify",
     dependencies = { "nvim-telescope/telescope.nvim" },
     opts = {
-      background_colour = "#2d4f56",
+      background_colour = "#152528",
       icons = {
         ERROR = i("diagnostics.Error"),
         WARN = i("diagnostics.Warn"),
