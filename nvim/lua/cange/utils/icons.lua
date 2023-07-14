@@ -74,6 +74,16 @@ local presets = {
     cterm_color = "198",
     name = "Storybook",
   },
+  vue = {
+    color = "#42b883",
+    cterm_color = "29",
+  },
+  nuxt = {
+    icon = M.get_icon("extensions.Nuxt"),
+    color = "#00dc82",
+    cterm_color = "35",
+    name = "Nuxt",
+  },
 }
 
 local function redefine_icons()
@@ -85,6 +95,10 @@ local function redefine_icons()
 
   devicons.set_icon({ ["cy.js"] = create_icon_by_filetype("javascript", "TestJs", presets.spec) })
   devicons.set_icon({ ["cy.ts"] = create_icon_by_filetype("typescript", "TestTs", presets.spec) })
+
+  devicons.set_icon({ ["vue"] = create_icon_by_filetype("vue", "Vue", presets.vue) })
+  devicons.set_icon({ ["nuxt.config.js"] = create_icon_by_filetype("javascript", "Nuxt", presets.nuxt) })
+  devicons.set_icon({ ["nuxt.config.ts"] = create_icon_by_filetype("typescript", "Nuxt", presets.nuxt) })
 
   devicons.set_icon({ ["stories.js"] = create_icon_by_filetype("javascript", "StorybookJs", presets.storybook) })
   devicons.set_icon({ ["stories.ts"] = create_icon_by_filetype("typescript", "StorybookTs", presets.storybook) })
