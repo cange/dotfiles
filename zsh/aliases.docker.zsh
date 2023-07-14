@@ -17,7 +17,7 @@ alias dcbl="dco exec bundle"     # Execute Rails bundle command
 alias dcdn="dco down"            # Stop and remove container
 alias dcl="dco logs --follow --tail=100" # Show container logs
 alias dcrb="dcup --build --force-recreate" # Rebuild
-alias dcrbl="dcrbl && dcl"       # Rebuild with followup log
+alias dcrbl="dcrb && dcl"        # Rebuild with followup log
 alias dcrs="dco restart && dcl"  # Restart container and show logs
 alias dcup="dco up --detach"     # Start container and its dependencies
 alias dcy="dco exec yarn"        # Execute yarn command
