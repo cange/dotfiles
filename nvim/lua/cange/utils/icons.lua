@@ -85,6 +85,7 @@ local presets = {
   },
   babelrc = {
     icon = M.get_icon("extensions.Babelrc"),
+    name = "Babelrc",
   },
   stylelint = {
     icon = M.get_icon("extensions.Stylelint"),
