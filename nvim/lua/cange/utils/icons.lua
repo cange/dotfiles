@@ -44,24 +44,23 @@ function M.get_icon(path)
   return current
 end
 
----@param filetype string
----@param name string
----@param opts? cange.devIconsPreset
----@return table
-local function create_icon_by_filetype(filetype, name, opts)
+---@param origin_filetype string
+---@param filename string
+---@param preset? cange.devIconsPreset
+local function set_icon_by_filetype(origin_filetype, filename, preset)
   local devicons = require("nvim-web-devicons")
-  local icon, color = devicons.get_icon_color_by_filetype(filetype)
-  local _, cterm = devicons.get_icon_cterm_color_by_filetype(filetype)
-  local config = {
+  local icon, color = devicons.get_icon_color(origin_filetype)
+  local _, cterm = devicons.get_icon_cterm_color_by_filetype(origin_filetype)
+  local fallback = {
     color = color,
     cterm_color = cterm,
     icon = icon,
-    name = name,
+    name = "",
   }
 
-  opts = opts or {}
+  preset = preset or {}
 
-  return vim.tbl_extend("force", config, opts)
+  devicons.set_icon({ [filename] = vim.tbl_extend("force", fallback, preset) })
 end
 
 ---@type cange.devIconsPreset[]
@@ -84,25 +83,37 @@ local presets = {
     cterm_color = "35",
     name = "Nuxt",
   },
+  babelrc = {
+    icon = M.get_icon("extensions.Babelrc"),
+  },
+  stylelint = {
+    icon = M.get_icon("extensions.Stylelint"),
+    color = "#d0d0d0",
+    cterm_color = "252",
+    name = "Stylelintrc",
+  },
+  eslint = {
+    name = "Eslintrc",
+  },
 }
 
 local function redefine_icons()
-  local ok, devicons = pcall(require, "nvim-web-devicons")
-  if not ok then
-    Log:warn('"nvim-web-devicons" not found!', { title = ns })
-    return
+  set_icon_by_filetype("", ".stylelintrc", presets.stylelint) -- create type
+  set_icon_by_filetype("mdx", "stories.mdx", presets.storybook)
+  set_icon_by_filetype("vue", "vue", presets.vue)
+
+  for _, ext in pairs({ ".json", ".cjs", ".js", ".mjs" }) do
+    set_icon_by_filetype(".babelrc", ".babelrc" .. ext, presets.babelrc)
+    set_icon_by_filetype(".babelrc", "babel.config" .. ext, presets.babelrc)
+    set_icon_by_filetype(".stylelintrc", ".stylelintrc" .. ext, presets.stylelint)
+    set_icon_by_filetype(".eslintrc", ".eslintrc" .. ext, presets.eslint)
   end
 
-  devicons.set_icon({ ["cy.js"] = create_icon_by_filetype("javascript", "TestJs", presets.spec) })
-  devicons.set_icon({ ["cy.ts"] = create_icon_by_filetype("typescript", "TestTs", presets.spec) })
-
-  devicons.set_icon({ ["vue"] = create_icon_by_filetype("vue", "Vue", presets.vue) })
-  devicons.set_icon({ ["nuxt.config.js"] = create_icon_by_filetype("javascript", "Nuxt", presets.nuxt) })
-  devicons.set_icon({ ["nuxt.config.ts"] = create_icon_by_filetype("typescript", "Nuxt", presets.nuxt) })
-
-  devicons.set_icon({ ["stories.js"] = create_icon_by_filetype("javascript", "StorybookJs", presets.storybook) })
-  devicons.set_icon({ ["stories.ts"] = create_icon_by_filetype("typescript", "StorybookTs", presets.storybook) })
-  devicons.set_icon({ ["stories.mdx"] = create_icon_by_filetype("mdx", "StorybookMdx", presets.storybook) })
+  for _, ft in pairs({ "js", "ts" }) do
+    set_icon_by_filetype(ft, "cy." .. ft, presets.spec)
+    set_icon_by_filetype(ft, "nuxt.config." .. ft, presets.nuxt)
+    set_icon_by_filetype(ft, "stories." .. ft, presets.storybook)
+  end
 end
 
 function M.setup() redefine_icons() end

@@ -50,8 +50,10 @@ M.ui = {
   VThinLineLeft       = "▏", -- U+258F
 }
 M.extensions = {
+  Babelrc             = "󰨥", -- nf-md-babel
   Lua                 = "", -- nf-seti-lua
   Nuxt                = "󱄆", -- nf-md-nuxt
+  Stylelint           = "", -- nf-seti-stylelint
 }
 M.documents = {
   Briefcase           = "", -- nf-oct-briefcase
