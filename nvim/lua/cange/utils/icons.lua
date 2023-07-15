@@ -4,7 +4,7 @@
 ---@field icon? string Path of an icon shape
 ---@field color? string Hex color value
 ---@field cterm_color? string
----@field name? string
+---@field name string
 
 --#endregion
 
@@ -58,15 +58,14 @@ local function set_icon_by_filetype(origin_filetype, filename, preset)
     name = "",
   }
 
-  preset = preset or {}
-
-  devicons.set_icon({ [filename] = vim.tbl_extend("force", fallback, preset) })
+  devicons.set_icon({ [filename] = vim.tbl_extend("force", fallback, preset or {}) })
 end
 
 ---@type cange.devIconsPreset[]
 local presets = {
   spec = {
     icon = M.get_icon("ui.Beaker"),
+    name = "Test",
   },
   storybook = {
     color = "#ff4785",
@@ -76,6 +75,7 @@ local presets = {
   vue = {
     color = "#42b883",
     cterm_color = "29",
+    name = "Vue",
   },
   nuxt = {
     icon = M.get_icon("extensions.Nuxt"),
@@ -91,7 +91,7 @@ local presets = {
     icon = M.get_icon("extensions.Stylelint"),
     color = "#d0d0d0",
     cterm_color = "252",
-    name = "Stylelintrc",
+    name = "Stylelint",
   },
   eslint = {
     name = "Eslintrc",
@@ -99,14 +99,15 @@ local presets = {
 }
 
 local function redefine_icons()
-  set_icon_by_filetype("", ".stylelintrc", presets.stylelint) -- create type
-  set_icon_by_filetype("mdx", "stories.mdx", presets.storybook)
+  set_icon_by_filetype("", ".stylelint", presets.stylelint) -- create type
+  set_icon_by_filetype(".stylelintrc", ".stylelintignore", presets.stylelint)
   set_icon_by_filetype("vue", "vue", presets.vue)
+  set_icon_by_filetype("node_modules", ".nvmrc")
 
   for _, ext in pairs({ ".json", ".cjs", ".js", ".mjs" }) do
     set_icon_by_filetype(".babelrc", ".babelrc" .. ext, presets.babelrc)
     set_icon_by_filetype(".babelrc", "babel.config" .. ext, presets.babelrc)
-    set_icon_by_filetype(".stylelintrc", ".stylelintrc" .. ext, presets.stylelint)
+    set_icon_by_filetype(".stylelint", ".stylelintrc" .. ext, presets.stylelint)
     set_icon_by_filetype(".eslintrc", ".eslintrc" .. ext, presets.eslint)
   end
 
