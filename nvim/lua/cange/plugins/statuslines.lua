@@ -79,10 +79,12 @@ return {
     config = function()
       require("barbecue").setup({
         theme = {
-          dirname = Cange.get_hl("lualine_c_inactive", { "fg" }),
-          normal = Cange.get_hl("lualine_c_normal"),
           modified = Cange.get_hl("lualine_c_normal", { "fg" }),
           basename = Cange.get_hl("lualine_c_normal", { "fg" }),
+        },
+        symbols = {
+          modified = i("ui.DotFill"),
+          separator = i("ui.ChevronRight"),
         },
         show_modified = true,
         exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
