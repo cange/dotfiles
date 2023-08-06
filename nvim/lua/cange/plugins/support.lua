@@ -186,4 +186,7 @@ return {
 
   -- multi search and replace
   { "mg979/vim-visual-multi", event = "VeryLazy" },
+
+  -- is all about "surroundings": parentheses, brackets, quotes, XML tags, and more
+  { "tpope/vim-surround" },
 }
