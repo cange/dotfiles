@@ -21,20 +21,10 @@ local function keymaps(client, bufnr)
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 
-  keymap("<leader>rn", vim.lsp.buf.rename, "Rename")
-
   -- See `:help K` for why this keymap
-  keymap("K", vim.lsp.buf.hover, "Hover Documentation")
+  keymap("K", vim.lsp.buf.hover, "Hover symbol info")
   keymap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
-  -- typescript specific keymaps (e.g. rename file and update imports)
-  if client.name == "tsserver" then
-    Log:info("ENABLED keymaps for JS/TS ", ns)
-    keymap("<leader>fa", "<cmd>TypescriptFixAll<CR>", "LSP Fix All Issues")
-    keymap("<leader>rf", "<cmd>TypescriptRenameFile<CR>", "LSP Rename file and update imports")
-    keymap("<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", "LSP Organize imports")
-    keymap("<leader>ru", "<cmd>TypescriptRemoveUnused<CR>", "LSP remove unused variables")
-  end
+  -- NOTE: more keys defined in `cange/keymaps.lua`
 end
 
 local M = {}
