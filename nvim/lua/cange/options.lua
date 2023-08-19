@@ -1,10 +1,7 @@
 local options = {
-  backspace = "start,eol,indent", -- allow backspace in insert mode
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
-  conceallevel = 0, -- so that `` is visible in markdown files
   fileencoding = "utf-8", -- the encoding written to a file
   timeoutlen = 300, -- max delay until execute command of a key sequence
-  ttimeoutlen = 50, -- max time until next key of a key sequence is expected
   list = true, -- show hidden characters
   updatetime = 50, -- faster completion (4000ms default), delays and poor user experience
 
@@ -16,30 +13,21 @@ local options = {
   number = true, -- set numbered lines
   relativenumber = false, -- set relative numbered lines
   numberwidth = 3, -- set number column width to 2 {default 4}
-  showtabline = 1, -- always show tabs
   termguicolors = true, -- set term gui colors (most terminals support this)
   title = true, -- Update terminal window title
-  -- transparency
-  pumblend = 0, -- transparency of popup-menus 0 (none) to 100 (full)
-  winblend = 0, -- transparency of floating windows 0 (none) to 100 (full)
 
   -- UI - command prompt
-  cmdheight = 1, -- space of the command line for displaying messages
   showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
-  showcmd = true, -- show incomplete commands
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
 
-  --
-  spell = false, -- enable spell checking if this is true
   spelllang = { "en_us" }, -- spellchecking will be done for these languages
 
   -- backup handling
   backup = false, -- creates a backup file
-  backupskip = "/tmp/*,/private/tmp/*",
+  undofile = true, -- enable persistent undo
   writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
   -- search
-  hlsearch = true, -- highlight all matches on previous search pattern
   ignorecase = true, -- ignore case in search patterns
   path = "**", -- Finding files - Search down into subfolders
   showmatch = true,
@@ -49,20 +37,19 @@ local options = {
   -- tabs
   expandtab = true, -- convert tabs to spaces
   tabstop = 2, -- number of spaces for a tab
+  shiftwidth = 2, -- number of spaces inserted for each indentation
 
   -- indentation
   autoindent = false, -- auto indent on copy paste
   breakindent = true, -- indentation when wrapping text
   colorcolumn = "120", -- highlight optimal end line¬
   formatoptions = "cjnqort", -- line wrap logic
-  shiftwidth = 2, -- number of spaces inserted for each indentation
   smartindent = true, -- make indenting smarter again
   swapfile = false, -- creates a swapfile
 
   -- behaviour
   scrolloff = 8, -- scroll offset horizontal
   sidescrolloff = 8, -- scroll offset vertical
-  undofile = true, -- enable persistent undo
   wrap = false, -- display lines as one long line
 
   -- split windows
