@@ -3,6 +3,7 @@
 -- Order is important
 
 -- 1st : setup
+require("cange.globals")
 Cange = require("cange.utils")
 Cange.reload("cange.options")
 

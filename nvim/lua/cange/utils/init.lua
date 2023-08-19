@@ -51,11 +51,6 @@ function M.set_config(key, value)
   return config[last_key]
 end
 
----Pretty print shorthand
----@param value any
----@param ... any
-function P(value, ...) vim.print(value, ...) end
-
 ---Reruns a module file by removing the given module first
 ---@param module_name string
 ---@return table|any
@@ -103,4 +98,5 @@ function M.get_hl(name, keywords)
 
   return output
 end
+
 return M
