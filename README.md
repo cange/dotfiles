@@ -54,7 +54,7 @@ Run`:Lazy install` (within NeoVim) if the dialog is not popping up.
 
 #### Language Support (LSP)
 
-Run `:MasonInstallAll` (within NeoVim) to install all related LSP helpers.
+Run `:Mason` (within NeoVim) to install all related LSP helpers.
 
 To apply all updates you might need to restart NeoVim.
 

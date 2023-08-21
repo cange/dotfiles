@@ -40,7 +40,7 @@ common languages.
 
 It can be installed via `mason.vim` and the following command:
     >
-    :MasonInstallAll
+    :Mason
 <
 Installs all preconfigured packages defined in *cange.config* file.
 
