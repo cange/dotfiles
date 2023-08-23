@@ -14,7 +14,7 @@ M.snippets = {
 }
 
 M.lsp = {
-  diagnostic_virtual_text = false,
+  diagnostic_virtual_text = true,
   format_on_save = true,
   server_sources = {
     "bashls", -- bash

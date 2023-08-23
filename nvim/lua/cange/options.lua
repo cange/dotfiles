@@ -1,5 +1,4 @@
 local options = {
-  completeopt = { "menuone", "noselect" }, -- mostly just for cmp
   fileencoding = "utf-8", -- the encoding written to a file
   timeoutlen = 300, -- max delay until execute command of a key sequence
   list = true, -- show hidden characters
