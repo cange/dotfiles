@@ -54,6 +54,9 @@ return {
     end,
   },
 
+  -- highlight TODO, FIXME, etc in comments
+  { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+
   { "RRethy/vim-illuminate" }, -- Highlight the word under the cursor
 
   { -- text case converter (camel case, etc.,
@@ -94,7 +97,7 @@ return {
     opts = {
       enabled = true,
       buftype_exclude = { "terminal", "nofile" },
-      filetype_exclude = { "help", "NvimTree", "Trouble", "text", "lazy" },
+      filetype_exclude = { "help", "NvimTree", "Trouble", "text", "lazy", "qf" },
       char = i("ui.VThinLineLeft"),
       context_char = i("ui.VThinLineLeft"),
       show_current_context = true,
