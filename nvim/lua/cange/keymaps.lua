@@ -58,10 +58,10 @@ M.groups = {
     mappings = {
       { "g", "<cmd>Gitsigns prev_hunk<CR>",                                     "Git hunk" },
       { "b", '<cmd>bprevious<CR>',                                              "Buffer" },
-      { "c", '<cmd>R("copilot.suggestion").prev()<CR>',                         "Copilot suggestion" },
+      { "c", '<cmd>lua R("copilot.suggestion").prev()<CR>',                     "Copilot suggestion" },
       { "d", vim.diagnostic.goto_prev,                                          "Diagnostic" },
       { "m", '<cmd>lua R("harpoon.ui").nav_prev()<CR>',                         "Bookmark" },
-      { "p", '<cmd>R("copilot.panel").jump_prev()<CR>',                         "Copilot panel" },
+      { "p", '<cmd>lua R("copilot.panel").jump_prev()<CR>',                     "Copilot panel" },
     },
   },
   {
@@ -70,10 +70,10 @@ M.groups = {
     mappings = {
       { "g", "<cmd>Gitsigns next_hunk<CR>",                                     "Git hunk" },
       { "b", '<cmd>bnext<CR>',                                                  "Buffer" },
-      { "c", '<cmd>R("copilot.suggestion").next()<CR>',                         "Copilot suggestion" },
+      { "c", '<cmd>lua R("copilot.suggestion").next()<CR>',                     "Copilot suggestion" },
       { "d", vim.diagnostic.goto_next,                                          "Diagnostic" },
       { "m", '<cmd>lua R("harpoon.ui").nav_next()<CR>',                         "Bookmark" },
-      { "p", '<cmd>R("copilot.panel").jump_next()<CR>',                         "Copilot panel" },
+      { "p", '<cmd>lua R("copilot.panel").jump_next()<CR>',                     "Copilot panel" },
     },
   },
   {
@@ -215,6 +215,7 @@ M.groups = {
       { "n", '<cmd>lua R("cange.telescope").browse_nvim()<CR>',                 "Nvim confi" },
       { "r", "<cmd>Telescope oldfiles<CR>",                                     "Recently opened files" },
       { "s", '<cmd>lua R("auto-session.session-lens").search_session()<CR>',    "Recent Sessions" },
+      { "t", "<cmd>TodoTelescope<CR>",                                          "Todo comments" },
       { "w", '<cmd>lua R("cange.telescope").browse_workspace()<CR>',            "Current workspace" },
     },
   },
