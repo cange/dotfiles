@@ -1,6 +1,6 @@
 --#region Types
 
----@class cange.devIconsPreset
+---@class DevIconsPreset
 ---@field icon? string Path of an icon shape
 ---@field color? string Hex color value
 ---@field cterm_color? string
@@ -46,7 +46,7 @@ end
 
 ---@param origin_filetype string
 ---@param filename string
----@param preset? cange.devIconsPreset
+---@param preset? DevIconsPreset
 local function set_icon_by_filetype(origin_filetype, filename, preset)
   local devicons = require("nvim-web-devicons")
   local icon, color = devicons.get_icon_color(origin_filetype)
@@ -61,7 +61,7 @@ local function set_icon_by_filetype(origin_filetype, filename, preset)
   devicons.set_icon({ [filename] = vim.tbl_extend("force", fallback, preset or {}) })
 end
 
----@type cange.devIconsPreset[]
+---@type DevIconsPreset[]
 local presets = {
   spec = {
     icon = M.get_icon("ui.Beaker"),
