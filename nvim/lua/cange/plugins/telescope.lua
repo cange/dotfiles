@@ -20,11 +20,14 @@ return {
       previewer = false,
       theme = "dropdown",
     }
+    local ivy_opts = { theme = "ivy" }
     local lsp_opts = {
       initial_mode = "normal",
       previewer = false,
       theme = "dropdown",
     }
+    local function responsive_width(_, cols) return math.floor(cols * (cols > 120 and 0.4 or 0.6)) end
+    local function responsive_height(_, _, lines) return math.floor(lines * (lines > 100 and 0.4 or 0.6)) end
 
     -- setup
     telescope.setup({
@@ -35,13 +38,16 @@ return {
         },
         entry_prefix = "    ",
         layout_config = {
+          bottom_pane = { prompt_position = "bottom" },
           horizontal = {
-            preview_width = 80,
-            prompt_position = "top",
+            height = responsive_height,
+            preview_width = responsive_width,
           },
-          bottom_pane = {
-            prompt_position = "bottom",
+          vertical = {
+            height = responsive_height,
+            preview_width = responsive_width,
           },
+          prompt_position = "top",
         },
         mappings = {
           i = {
@@ -65,8 +71,8 @@ return {
       pickers = {
         buffers = default_opts,
         colorscheme = { enable_preview = true, theme = "dropdown" },
-        current_buffer_fuzzy_find = { theme = "ivy" },
-        highlights = { theme = "ivy" },
+        current_buffer_fuzzy_find = ivy_opts,
+        highlights = ivy_opts,
         find_files = {
           -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
           find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
@@ -74,9 +80,9 @@ return {
           theme = "dropdown",
         },
         git_branches = default_opts,
-        grep_string = default_opts,
-        help_tags = { theme = "ivy" },
-        keymaps = { theme = "ivy" },
+        grep_string = ivy_opts,
+        help_tags = ivy_opts,
+        keymaps = ivy_opts,
         lsp_declarations = lsp_opts,
         lsp_definitions = lsp_opts,
         lsp_references = lsp_opts,
@@ -88,7 +94,7 @@ return {
             },
           },
         },
-        oldfiles = { theme = "ivy" },
+        oldfiles = ivy_opts,
         quickfix = default_opts,
       },
     })
