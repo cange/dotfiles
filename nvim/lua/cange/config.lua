@@ -1,5 +1,3 @@
----@class cange.configGroup[]
-
 return {
   log = {
     level = "info",

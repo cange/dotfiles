@@ -40,7 +40,7 @@ local M = {}
 -- each plugin by it self.
 
 -- stylua: ignore start
----@type cange.keymapsMappingGroup[]
+---@type KeymapsMappingGroup[]
 M.groups = {
   {
     name = "Goto",

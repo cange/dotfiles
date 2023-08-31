@@ -3,7 +3,7 @@ M = {}
 ---@type boolean
 local initialized = false
 
----@return cange.colorschemePalette
+---@return ColorschemePalette
 local function update_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
@@ -89,23 +89,23 @@ return {
   },
 }
 
----@class cange.colorschemeShade
+---@class ColorschemeShade
 ---@field base string
 ---@field bright string
 ---@field dim string
 ---@field light boolean
 
----@class cange.colorschemePalette
----@field black cange.colorschemeShade
----@field red cange.colorschemeShade
----@field green cange.colorschemeShade
----@field yellow cange.colorschemeShade
----@field blue cange.colorschemeShade
----@field magenta cange.colorschemeShade
----@field cyan cange.colorschemeShade
----@field white cange.colorschemeShade
----@field orange cange.colorschemeShade
----@field pink cange.colorschemeShade
+---@class ColorschemePalette
+---@field black ColorschemeShade
+---@field red ColorschemeShade
+---@field green ColorschemeShade
+---@field yellow ColorschemeShade
+---@field blue ColorschemeShade
+---@field magenta ColorschemeShade
+---@field cyan ColorschemeShade
+---@field white ColorschemeShade
+---@field orange ColorschemeShade
+---@field pink ColorschemeShade
 ---@field comment string
 ---@field bg0 string
 ---@field bg1 string

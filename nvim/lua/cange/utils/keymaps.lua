@@ -1,19 +1,19 @@
 --#region Types
 
----@class cange.keymapsMapping
+---@class KeymapsMapping
 ---@field [1] string lhs/key command of the keybinding
 ---@field [2] string|function command of the keybinding
 ---@field [3] string Description of the keybinding
 ---@field mode? string|table Mode short-name ("n", "i", "v", "x", …)
 
----@class cange.keymapsMappingGroup
----@field mappings table<cange.keymapsMapping[]> The actual key bindings
+---@class KeymapsMappingGroup
+---@field mappings table<KeymapsMapping[]> The actual key bindings
 ---@field leader string Key or key group to trigger the certain mapping group
 ---@field name string Is displayed as group name
 
 --#endregion
 
----@param group cange.keymapsMappingGroup
+---@param group KeymapsMappingGroup
 ---@return table<string, table> # WhichKey mappings
 local function define_mappings_of(group)
   local section = {}
@@ -31,7 +31,7 @@ end
 
 local M = {}
 
----@return cange.keymapsMappingGroup[]
+---@return KeymapsMappingGroup[]
 function M.whichkey_mappings()
   local mappings = {}
   local groups = require("cange.keymaps").groups

@@ -1,5 +1,3 @@
----@class cange
-
 -- Order is important
 
 -- 1st : setup
