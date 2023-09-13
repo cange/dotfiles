@@ -1,5 +1,5 @@
 # User configuration
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/bin:/sbin:$PATH"
 
 # One may need to manually set your language environment
 export LANG=en_US.UTF-8
