@@ -90,16 +90,8 @@ function M.setup_diagnostics()
     signs = {
       active = define_sign_icons(),
     },
-    virtual_text = M.show_diagnostic_virtual_text,
+    virtual_text = Cange.get_config("lsp.diagnostic_virtual_text"),
   })
-end
-
-function M.toggle_virtual_text()
-  M.show_diagnostic_virtual_text = not M.show_diagnostic_virtual_text
-  local label = M.show_diagnostic_virtual_text and "ENABLED" or "DISABLED"
-
-  vim.diagnostic.config({ virtual_text = M.show_diagnostic_virtual_text })
-  Log:info(label .. " virtual inline text", "Diagnostic")
 end
 
 return M

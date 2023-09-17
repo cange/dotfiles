@@ -9,15 +9,6 @@
 local M = {}
 
 local ns = "cange.lsp.format"
-local format_on_save = Cange.get_config("lsp.format_on_save")
-
--- Allows to enable/disable auto formatting on save within a session
-function M.toggle_format_on_save()
-  format_on_save = not format_on_save
-  Cange.set_config("lsp.format_on_save", format_on_save)
-  local label = format_on_save and "ENABLED" or "DISABLED"
-  Log:info(label .. " format on save", ns)
-end
 
 ---@param opts? LspFormatOptions
 function M.format(opts)
@@ -47,8 +38,7 @@ function M.attach(client, bufnr)
     group = vim.api.nvim_create_augroup("cange_lsp_auto_format", { clear = true }),
     desc = "Auto format",
     callback = function()
-      format_on_save = Cange.get_config("lsp.format_on_save")
-      if not format_on_save then return end
+      if not Cange.get_config("lsp.format_on_save") then return end
       if client.name == "eslint" then
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
         vim.cmd("EslintFixAll")

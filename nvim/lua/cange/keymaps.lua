@@ -143,7 +143,7 @@ M.groups = {
       { "s", "<cmd>SessionSave<CR>",                                            "Save session" },
       { "X", "<cmd>SessionDelete<CR>",                                          "Delete session" },
       -- others
-      { "l", "<cmd>lua R('cange.lsp.format').toggle_format_on_save()<CR>",      "Toggle format on save" },
+      { "l", "<cmd>lua R('cange.lsp.toggle').format_on_save()<CR>",      "Toggle format on save" },
       { "S", "<cmd>lua vim.o.spell = not vim.o.spell<CR>",                      "Toggle spellin" },
       { "c", "<cmd>Telescope colorscheme<CR>",                                  "Change colorscheme" },
       { "C", '<cmd>lua R("luasnip").cleanup()<CR>',                             "Reset snippets UI" },
@@ -181,7 +181,7 @@ M.groups = {
       -- code issues
       { "D", "<cmd>Telescope diagnostics<CR>",                                  "Workspace diagnostics" },
       { "a", vim.lsp.buf.code_action,                                           "Code actions/Quickfixes" },
-      { "d", "<cmd>lua R('cange.lsp').toggle_virtual_text()<CR>",               "Toggle inline virtual text" },
+      { "d", "<cmd>lua R('cange.lsp.toggle').virtual_text()<CR>",               "Toggle inline virtual text" },
       { "l", '<cmd>lua R("cange.telescope").diagnostics_lo()<CR>',              "File diagnostics" },
       -- formatter
       { "r", "<cmd>LspRestart;<CR><cmd>lua Log:info('Restarted', 'LSP')<CR>",   "Restart LSP" },
