@@ -77,7 +77,9 @@ return {
     "EdenEast/nightfox.nvim", -- colorscheme
     lazy = true,
     opts = {
-      transparent = true,
+      options = {
+        transparent = true,
+      },
     },
     init = function()
       local colorscheme = Cange.get_config("ui.colorscheme")
