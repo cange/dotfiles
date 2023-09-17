@@ -15,21 +15,33 @@
     "prefix": "eslint-disable-line …",
     "body": "// eslint-disable-line $1"
   },
+  "deep clone object": {
+    "prefix": "JSON.parse(JSON…",
+    "body": "JSON.parse(JSON.stringify($0))"
+  },
+  "pretty print object": {
+    "prefix": "JSON.stringify(…, null, 2)",
+    "body": "JSON.stringify($0, null, 2)"
+  },
   "if": {
     "prefix": "if (…",
     "body": "if ($1) {\n\t$2\n}"
   },
   "forEach": {
-    "prefix": ".forEach(…",
-    "body": ".forEach($1 => $2)"
+    "prefix": "forEach(…",
+    "body": "forEach($1 => $2)"
   },
   "map": {
-    "prefix": ".map(…",
-    "body": ".map($1 => $2)"
+    "prefix": "map(…",
+    "body": "map($1 => $2)"
   },
   "filter": {
-    "prefix": ".filter(…",
-    "body": ".filter($1 => $2)"
+    "prefix": "filter(…",
+    "body": "filter($1 => $2)"
+  },
+  "times": {
+    "prefix": "new Array(…",
+    "body": "new Array($1).fill().$0"
   },
   "console.log(": {
     "prefix": "log",
@@ -37,7 +49,7 @@
   },
   "console.log(param…": {
     "prefix": "logparam",
-    "body": "console.log('--- ${1:param}: %o', $1)"
+    "body": "console.log('--- %o', {$1}})"
   },
   "console.log(Object.keys(…": {
     "prefix": "logkeys",

@@ -41,7 +41,7 @@
   },
   "vue wrapper debug": {
     "prefix": "logdebug",
-    "body": "console.log(\"--- $1$2.html(): %o\", ${1:wrapper}$2.html())"
+    "body": "console.log(`--- $1$2.html(): %o`, ${1:wrapper}$2.html())"
   },
   "expect.objectContaining": {
     "prefix": "expect.objectContaining",
