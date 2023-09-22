@@ -1,7 +1,4 @@
-M = {}
-
----@type boolean
-local initialized = false
+---@diagnostic disable: duplicate-doc-field
 
 ---@return ColorschemePalette
 local function update_palette()
@@ -62,11 +59,23 @@ local function update_highlights()
   }
 
   Cange.set_highlights(highlights)
-
-  if initialized then vim.schedule(function() Log:info("Color highlights refreshed!", "Colorscheme") end) end
 end
 
-vim.api.nvim_create_user_command("CangeUpdateColorscheme", update_highlights, {})
+---@param mode? '"dark"'|'"light"'|nil
+---@param silent? boolean
+local function update_colorscheme(mode, silent)
+  ---@diagnostic disable-next-line: undefined-field
+  local modeState = mode ~= nil and mode or vim.opt.background:get()
+  local theme = Cange.get_config("ui.colorschemes." .. modeState)
+  vim.opt.background = modeState
+  vim.cmd("colorscheme " .. theme)
+
+  if silent == false then vim.schedule(function() Log:info(modeState .. " / " .. theme, "Colorscheme updated!") end) end
+
+  update_highlights()
+end
+
+vim.api.nvim_create_user_command("CangeUpdateColorscheme", function() update_colorscheme() end, {})
 vim.api.nvim_create_autocmd({ "ColorScheme" }, {
   group = vim.api.nvim_create_augroup("cange_on_colorscheme_change", { clear = true }),
   command = "CangeUpdateColorscheme",
@@ -75,18 +84,24 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
 return {
   {
     "EdenEast/nightfox.nvim", -- colorscheme
+    dependencies = { "f-person/auto-dark-mode.nvim" },
     lazy = true,
-    opts = {
-      options = {
-        transparent = true,
-      },
-    },
     init = function()
-      local colorscheme = Cange.get_config("ui.colorscheme")
+      local auto_mode = require("auto-dark-mode")
+      local silent = true
+      update_colorscheme("dark", silent)
 
-      vim.cmd("colorscheme " .. colorscheme)
-      update_highlights()
-      initialized = true
+      auto_mode.setup({
+        set_dark_mode = function()
+          update_colorscheme("dark", silent)
+          silent = false
+        end,
+        set_light_mode = function()
+          update_colorscheme("light", silent)
+          silent = false
+        end,
+        update_interval = 1000,
+      })
     end,
   },
 }

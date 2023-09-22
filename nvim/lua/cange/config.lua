@@ -10,7 +10,10 @@ return {
     path = "./../snippets",
   },
   ui = {
-    colorscheme = "terafox",
+    colorschemes = {
+      dark = "terafox",
+      light = "dayfox",
+    },
     border = "rounded", -- nvim_open_win: none, single, double, rounded, shadow
   },
 }
