@@ -108,6 +108,7 @@ M.groups = {
         "<cmd>write<CR><cmd>lua R('cange'); Log:info(vim.fn.expand('%@'), 'File saved and executed!')<CR>",
         "Reload current file",
       },
+      { "o", "<cmd>SymbolsOutline<CR>",                                         "Toggle Symbole outline" },
     },
   },
   {

@@ -1,12 +1,4 @@
---#region Types
-
----@class DevIconsPreset
----@field icon? string Path of an icon shape
----@field color? string Hex color value
----@field cterm_color? string
----@field name string
-
---#endregion
+---@diagnostic disable: duplicate-doc-field
 
 local M = {}
 local ns = "[cange.utils.icons]"
@@ -121,3 +113,13 @@ end
 function M.setup() redefine_icons() end
 
 return M
+
+--#region Types
+
+---@class DevIconsPreset
+---@field icon? string Path of an icon shape
+---@field color? string Hex color value
+---@field cterm_color? string
+---@field name string
+
+--#endregion

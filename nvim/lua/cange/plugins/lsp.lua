@@ -11,6 +11,20 @@ local server_sources = {
   "yamlls", -- yaml
 }
 
+---@return table
+local function symbol_outline_icons()
+  ---@type table
+  ---@diagnostic disable-next-line: assign-type-mismatch
+  local icons = i("cmp_kinds")
+  local symbols = {}
+
+  for name, icon in pairs(icons) do
+    symbols[name] = { icon = icon }
+  end
+
+  return symbols
+end
+
 return {
   { -- lspconfig
     "neovim/nvim-lspconfig", -- configure LSP servers
@@ -45,4 +59,14 @@ return {
   -- other language supports
   { "slim-template/vim-slim" }, -- slim language support (Vim Script,
   { "b0o/SchemaStore.nvim" }, -- json/yaml schema support
+  {
+    "simrat39/symbols-outline.nvim",
+    cmd = "SymbolsOutline",
+    opts = {
+      autofold_depth = 3,
+      fold_markers = { i("ui.ChevronRight"), i("ui.ChevronDown") },
+      show_symbol_details = false,
+      symbols = symbol_outline_icons(),
+    },
+  },
 }
