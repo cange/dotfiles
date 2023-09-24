@@ -80,7 +80,7 @@ M.groups = {
     name = "Primary",
     leader = "<leader>",
     mappings = {
-      { "<F2>", '<cmd>lua R("cange.lsp.format").format()<CR>',                  "Format" },
+      { "<F2>", '<cmd>lua R("cange.lsp").format()<CR>',                         "Format" },
       { "\\", "<cmd>NvimTreeToggle<CR>",                                        "File Explorer" },
       { "-", "<C-W>s",                                                          "Split window below" },
       { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },

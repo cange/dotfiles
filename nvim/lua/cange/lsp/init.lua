@@ -1,11 +1,12 @@
-local ns = "[cange.lsp.lspconfig]"
+local ns = "cange.lsp.lspconfig"
 local cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_ok then
   print(ns, '"cmp_nvim_lsp" not found')
   return
 end
 
-local function keymaps(client, bufnr)
+---@param bufnr number
+local function keymaps(bufnr)
   -- Use LSP as the handler for formatexpr.
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   ---Preconfigured keymap
@@ -39,32 +40,29 @@ local function capabilities()
 end
 
 ---Keymapping for lspconfig on_attach options
----@param client table
+---@param _ table client
 ---@param bufnr integer
-local function on_attach(client, bufnr)
-  keymaps(client, bufnr)
-  require("cange.lsp.format").attach(client, bufnr)
+local function on_attach(_, bufnr)
+  keymaps(bufnr)
+  M.format()
 end
-
-local default_config = {
-  on_attach = on_attach,
-  capabilities = capabilities(),
-}
 
 ---Sets up individual LSP server handler
 ---@param server_name string
 function M.setup_handler(server_name)
   local ok, config = pcall(require, "cange.lsp.server_configurations." .. server_name)
-  if ok then
-    config = vim.tbl_deep_extend("force", vim.deepcopy(default_config), config)
-  else
-    config = default_config
-  end
+  config = vim.tbl_extend("force", { on_attach = on_attach, capabilities = capabilities() }, ok and config or {})
 
-  if server_name == "tsserver" then
-    -- Enable LSP for TypeScript/JS
-    -- https://github.com/jose-elias-alvarez/typescript.nvim#setup
-    require("typescript").setup({ server = config })
+  if server_name == "tsserver" then -- javascript,typescript
+    require("lspconfig").tsserver.setup({
+      on_attach = on_attach,
+      capabilities = capabilities(),
+      init_options = {
+        preferences = {
+          disableSuggestions = true,
+        },
+      },
+    })
   else
     require("lspconfig")[server_name].setup(config)
   end
@@ -92,6 +90,12 @@ function M.setup_diagnostics()
     },
     virtual_text = Cange.get_config("lsp.diagnostic_virtual_text"),
   })
+end
+
+function M.format()
+  if not Cange.get_config("lsp.format_on_save") then return end
+  Log:info("Auto format", ns)
+  vim.cmd({ cmd = "Format" })
 end
 
 return M
