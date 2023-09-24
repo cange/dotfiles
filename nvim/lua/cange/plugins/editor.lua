@@ -98,14 +98,6 @@ return {
     },
   },
 
-  -- shows LSP initialization progress
-  {
-    "j-hui/fidget.nvim",
-    tag = "legacy",
-    event = "LspAttach",
-    opts = { text = { spinner = "dots", done = i("ui.Check") } },
-  },
-
   { -- font icon set
     "nvim-tree/nvim-web-devicons",
     config = function()

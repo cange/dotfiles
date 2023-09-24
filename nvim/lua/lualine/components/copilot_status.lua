@@ -1,3 +1,4 @@
+---@diagnostic disable: duplicate-doc-alias
 ---@alias copilot_status_notification_data { status: ''|'Normal'|'InProgress'|'Warning', message: string }
 
 ---@type _, { status: { data: copilot_status_notification_data } }
@@ -10,6 +11,7 @@ local i = Cange.get_icon
 local M = require("lualine.component"):extend()
 local refresh_count = 1
 
+--NOTE: function wrappers enables spinner animation
 local icons = {
   [""] = function() return i("ui.CopilotError") end,
   ["Normal"] = function() return i("ui.Copilot") end,
@@ -39,7 +41,6 @@ end
 function M.update_status()
   local data = api.status.data
   local msg = data.message or ""
-
   msg = (msg and #msg > 0 and msg .. " " or "")
   refresh_count = refresh_count + 1
 

@@ -1,3 +1,4 @@
+---@diagnostic disable: duplicate-doc-alias
 local ok, _ = pcall(require, "gitsigns")
 if not ok then
   print('warn: "gitsigns" not found')

@@ -41,6 +41,7 @@ return {
           { "git_blame_line", padding = { left = 1 }, icon = i("git.Commit") },
         },
         lualine_x = {
+          "lsp_progress",
           {
             "diagnostics",
             symbols = {
@@ -51,6 +52,7 @@ return {
             },
           },
           { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+          "lsp_status",
           "copilot_status",
           { "progress", separator = "", padding = { left = 1, right = 0 } },
           { "location", separator = "", padding = { left = 1, right = 0 } },
