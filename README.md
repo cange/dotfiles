@@ -28,10 +28,10 @@ run the following command:
 <details>
   <summary>Details</summary>
 
-  Each tool directory can contain a `Brewfile` and a `links.prop` file for
-  symlinks. These files then contain individual settings of the particular tool.
-  The mapping of a `links.prop` definition is done by `<source>=<destination>`
-  assignment per line.
+Each tool directory can contain a `Brewfile` and a `links.prop` file for
+symlinks. These files then contain individual settings of the particular tool.
+The mapping of a `links.prop` definition is done by `<source>=<destination>`
+assignment per line.
 
 </details>
 
@@ -54,22 +54,9 @@ Run`:Lazy install` (within NeoVim) if the dialog is not popping up.
 
 #### Language Support (LSP)
 
-Run `:Mason` (within NeoVim) to install all related LSP helpers.
+Run `:Mason` (within NeoVim) to install all related LSP, formatter and linter.
 
 To apply all updates you might need to restart NeoVim.
-
-In the case of missing node packages, run the following command:
-
-```sh
-npm install --global typescript-language-server \
-            @fsouza/prettierd \
-            @johnnymorganz/stylua-bin \
-            @volar/vue-language-server \
-            eslint_d \
-            jsonlint \
-            stylelint \
-            typescript
-```
 
 ### Troubleshooting
 

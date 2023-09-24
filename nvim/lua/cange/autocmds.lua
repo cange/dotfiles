@@ -29,4 +29,9 @@ autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
   callback = function() vim.bo.filetype = "jsx" end,
 })
 
--- Indentation highlighting
+autocmd({ "BufWritePost" }, {
+  group = augroup("cange_lsp_auto_format", { clear = true }),
+  pattern = "*",
+  desc = "File format",
+  callback = R("cange.lsp").format,
+})
