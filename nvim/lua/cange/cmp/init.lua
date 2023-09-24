@@ -62,7 +62,7 @@ end
 -- stylua: ignore start
 local sources =cmp.config.sources({
   { name = "nvim_lsp",    group_index = 1,    max_item_count = 5 },
-  { name = "luasnip",     group_index = 2,    max_item_count = 3 },
+  { name = "luasnip",     group_index = 2,    max_item_count = 4 },
   { name = "copilot",     group_index = 4 },
   { name = "cmp_tabnine", group_index = 6,    max_item_count = 2 },
   { name = "path",                            max_item_count = 2, keyword_length = 2 },

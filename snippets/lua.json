@@ -4,20 +4,20 @@
     "body": "-- stylua: ignore ${1|start,end|}"
   },
   "print(…)": {
-    "prefix": "log",
+    "prefix": "logl",
     "body": "vim.print($1)"
   },
   "print(keys…)": {
     "prefix": "logk",
-    "body": "vim.print('$1', vim.tbl_keys($1))"
+    "body": "vim.print(\"$1\", vim.tbl_keys($1))"
   },
-  "print('…', …)": {
-    "prefix": "logl",
-    "body": "vim.print('$1', $1)"
+  "print(\"…\", …)": {
+    "prefix": "log",
+    "body": "vim.print(\"$1\", $1)"
   },
   "notify(…)": {
     "prefix": "not",
-    "body": "Cange.log('$1'${2:, { title: $3 }})"
+    "body": "Cange.log(\"$1\"${2:, { title: $3 }})"
   },
   "local func(…)": {
     "prefix": "lf",
@@ -30,7 +30,7 @@
   "pcall(…)": {
     "prefix": "pca",
     "body": [
-      "local $2_ok, $2 = pcall(require, '$1')",
+      "local $2_ok, $2 = pcall(require, \"$1\")",
       "if not $2_ok then",
       "  print(${3:ns}, '\"$1\" not found')",
       "  return",
