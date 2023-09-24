@@ -14,7 +14,6 @@ return {
         component_separators = { left = i("ui.Pipe"), right = i("ui.Pipe") },
         section_separators = { left = "", right = "" },
         globalstatus = true,
-        refresh = { statusline = 2000 },
       },
       sections = {
         lualine_a = {

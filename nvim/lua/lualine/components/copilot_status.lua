@@ -8,12 +8,13 @@ if not ok then
 end
 local i = Cange.get_icon
 local M = require("lualine.component"):extend()
+local refresh_count = 1
 
 local icons = {
-  [""] = i("ui.CopilotError"),
-  ["Normal"] = i("ui.Copilot"),
-  ["Warning"] = i("ui.CopilotWarning"),
-  ["InProgress"] = i("ui.Sync"),
+  [""] = function() return i("ui.CopilotError") end,
+  ["Normal"] = function() return i("ui.Copilot") end,
+  ["Warning"] = function() return i("ui.CopilotWarning") end,
+  ["InProgress"] = function() return require("cange.utils.spinner").icon(refresh_count) end,
 }
 local colors = {
   [""] = Cange.get_hl_hex("lualine_c_inactive", "fg"),
@@ -40,8 +41,9 @@ function M.update_status()
   local msg = data.message or ""
 
   msg = (msg and #msg > 0 and msg .. " " or "")
+  refresh_count = refresh_count + 1
 
-  return icons[data.status] .. " " .. msg
+  return icons[data.status]() .. " " .. msg
 end
 
 return M
