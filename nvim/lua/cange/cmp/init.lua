@@ -9,96 +9,80 @@ if not cmp_ok then
   return
 end
 if not luasnip_ok then
-  print(ns, '"luasnip" not found')
+  Log:warn('"luasnip" not found', { title = ns })
   return
 end
 if not cmp_utils_ok then
-  print(ns, '"cange.cmp.utils" not found')
+  Log:warn('"cange.cmp.utils" not found', { title = ns })
   return
 end
 
--- Setup
-vim.opt.completeopt = { "menu", "menuone", "noselect" } -- enable Insert mode completion
-
 require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
-
-local function prev_item_handler(fallback)
-  if cmp.visible() then
-    cmp.select_prev_item()
-  elseif luasnip.jumpable(-1) then
-    luasnip.jump(-1)
-  else
-    fallback()
-  end
-end
-local function next_item_handler(fallback)
-  if cmp.visible() and cmp_utils.has_words_before() then
-    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-  elseif luasnip.expandable() then
-    luasnip.expand()
-  elseif luasnip.expand_or_jumpable() then
-    luasnip.expand_or_jump()
-  elseif cmp_utils.has_words_before() then
-    cmp.complete()
-  else
-    fallback()
-  end
-end
-local function prev_choice_handler()
-  if luasnip.choice_active() then
-    luasnip.change_choice(-1)
-  else
-    cmp.mapping.select_prev_item()
-  end
-end
-local function next_choice_handler()
-  if luasnip.choice_active() then
-    luasnip.change_choice(1)
-  else
-    cmp.mapping.select_next_item()
-  end
-end
-
--- stylua: ignore start
-local sources =cmp.config.sources({
-  { name = "nvim_lsp",    group_index = 1,    max_item_count = 5 },
-  { name = "luasnip",     group_index = 2,    max_item_count = 4 },
-  { name = "copilot",     group_index = 4 },
-  { name = "cmp_tabnine", group_index = 6,    max_item_count = 2 },
-  { name = "path",                            max_item_count = 2, keyword_length = 2 },
-  { name = "nvim_lua",                        max_item_count = 2 },
-  { name = "nvim_lsp_signature_help" },
-  { name = "buffer",                          max_item_count = 2, keyword_length = 3 },
-})
--- stylua: ignore end
 
 local M = {}
 
 M.opts = {
-  mapping = cmp.mapping.preset.insert({
+  completion = {
+    completeopt = "menu,menuone",
+  },
+
+  mapping = {
+    ["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
-
-    ["<C-j>"] = cmp.mapping(next_item_handler, { "i", "s" }),
-    ["<C-k>"] = cmp.mapping(prev_item_handler, { "i", "s" }),
-    ["<Tab>"] = cmp.mapping(next_item_handler, { "i", "s" }),
-
-    ["<C-h>"] = cmp.mapping(prev_choice_handler, { "i", "s" }),
-    ["<C-l>"] = cmp.mapping(next_choice_handler, { "i", "s" }),
-
-    ["<C-c>"] = cmp.mapping.close(),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
-      -- https://github.com/zbirenbaum/copilot-cmp#clear_after_cursor
-      select = false,
+      select = true,
     }),
-    ["<C-space>"] = cmp.mapping.complete(),
-  }),
-  sources = sources,
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif require("luasnip").expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif require("luasnip").jumpable(-1) then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<C-h>"] = cmp.mapping(function()
+      if luasnip.choice_active() then
+        luasnip.change_choice(-1)
+      else
+        cmp.mapping.select_prev_item()
+      end
+    end, { "i", "s" }),
+    ["<C-l>"] = cmp.mapping(function()
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
+      else
+        cmp.mapping.select_next_item()
+      end
+    end, { "i", "s" }),
+  },
+  sources = {
+    { name = "nvim_lsp", max_item_count = 5 },
+    { name = "luasnip", max_item_count = 3 },
+    { name = "path", max_item_count = 2, keyword_length = 2 },
+    { name = "nvim_lua", max_item_count = 2 },
+    { name = "nvim_lsp_signature_help" },
+    { name = "buffer", max_item_count = 2, keyword_length = 3 },
+    { name = "copilot" },
+    { name = "cmp_tabnine" },
+  },
   snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body) -- For `luasnip` users.
-    end,
+    expand = function(args) require("luasnip").lsp_expand(args.body) end,
   },
   experimental = {
     ghost_text = true,
