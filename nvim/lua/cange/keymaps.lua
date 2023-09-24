@@ -165,7 +165,7 @@ M.groups = {
       { "I", '<cmd>lua R("gitsigns").blame_line({ full = true })<CR>',          "Commit full info" },
       { "R", "<cmd>Gitsigns reset_buffer<CR>",                                  "Reset file" },
       { "S", "<cmd>Gitsigns stage_buffer<CR>",                                  "Stage file" },
-      { "d", "<cmd>Gitsigns diffthis HEAD<CR>",                                 "Git diff" },
+      { "D", "<cmd>Gitsigns diffthis HEAD<CR>",                                 "Git diff" },
       { "i", "<cmd>Gitsigns blame_line<CR>",                                    "Commit info" },
       { "l", "<cmd>Gitsigns toggle_current_line_blame<CR>",                     "Line blame" },
       { "o", "<cmd>Telescope git_status<CR>",                                   "Open changed file" },
