@@ -94,15 +94,20 @@ return {
   { -- indentation guides to all lines
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    main = "ibl",
     opts = {
-      enabled = true,
-      buftype_exclude = { "terminal", "nofile" },
-      filetype_exclude = { "help", "NvimTree", "Trouble", "text", "lazy", "qf" },
-      char = i("ui.VThinLineLeft"),
-      context_char = i("ui.VThinLineLeft"),
-      show_current_context = true,
-      show_current_context_start = true,
-      use_treesitter = true,
+      exclude = {
+        filetype = { "help", "NvimTree", "Trouble", "text", "lazy", "qf" },
+        buftype = { "terminal", "nofile" },
+      },
+      indent = {
+        char = i("ui.VThinLineLeft"),
+      },
+      scope = {
+        char = i("ui.VThinLineLeft"),
+        enabled = true,
+        show_start = true,
+      },
     },
   },
 

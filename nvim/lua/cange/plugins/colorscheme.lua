@@ -46,10 +46,9 @@ local function update_highlights()
     WhichkeyBorder = { link = "FloatBorder" },
 
     -- indent-blankline
-    IndentBlanklineChar = { fg = p.bg2 },
-    IndentBlanklineContextChar = { fg = p.fg3 },
-    IndentBlanklineContextStart = { sp = p.fg3, underline = true },
-    IndentBlanklineSpaceChar = { fg = p.bg3 },
+    IblIndent = { fg = p.bg2 },
+    IblScope = { fg = p.fg3 },
+    IblWhitespace = { fg = p.bg3 },
 
     -- completion
     CmpItemKindCopilot = { fg = p.cyan.base },
