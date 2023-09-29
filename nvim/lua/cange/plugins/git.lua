@@ -6,9 +6,9 @@ return {
     "lewis6991/gitsigns.nvim", -- git highlighter, blame, etc
     opts = {
       signs = {
-        add = { text = i("ui.VLineLeft") },
-        change = { text = i("ui.VLineLeft") },
-        changedelete = { text = i("ui.VLineLeft") },
+        add = { text = i("ui.VThinLineLeft") },
+        change = { text = i("ui.VThinLineLeft") },
+        changedelete = { text = i("ui.VThinLineLeft") },
         delete = { text = i("ui.ArrowRight") },
         topdelete = { text = i("ui.ArrowRight") },
         untracked = { text = i("ui.VDashLineLeft") },
