@@ -1,5 +1,3 @@
----@diagnostic disable: duplicate-doc-field
-
 ---@return ColorschemePalette
 local function update_palette()
   local curr_colorscheme = vim.g.colors_name

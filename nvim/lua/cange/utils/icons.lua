@@ -1,5 +1,3 @@
----@diagnostic disable: duplicate-doc-field
-
 local M = {}
 local ns = "[cange.utils.icons]"
 

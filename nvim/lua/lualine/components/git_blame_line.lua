@@ -6,10 +6,7 @@ end
 
 local M = require("lualine.component"):extend()
 
----@alias GitBlameLineConfig {icon: string,color: string}
----@alias GitBlameLineCache {win_count: integer, total_width: integer}
---
----@type GitBlameLineConfig
+---@enum GitBlameLineConfig
 local config = {
   icon = "",
   ---@diagnostic disable-next-line: assign-type-mismatch
