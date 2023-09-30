@@ -1,10 +1,25 @@
+local M = {
+  ---@diagnostic disable-next-line: undefined-field
+  mode = vim.opt.background:get(),
+  ---@type ColorschemePalette|nil
+  palette = nil,
+}
+
 ---@return ColorschemePalette
 local function update_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
-  local palette = require("nightfox.palette").load(colorscheme)
+  M.palette = require("nightfox.palette").load(colorscheme)
 
-  return palette
+  return M.palette
+end
+
+---@param shade string
+---@param factor number
+---@return number # as hex
+local function dim(shade, factor)
+  local C = require("nightfox.lib.color")
+  return C.from_hex(shade):blend(C(M.palette.bg1), factor):to_css()
 end
 
 local function update_highlights()
@@ -44,9 +59,16 @@ local function update_highlights()
     WhichkeyBorder = { link = "FloatBorder" },
 
     -- indent-blankline
-    IblIndent = { fg = p.bg2 },
-    IblScope = { fg = p.fg3 },
-    IblWhitespace = { fg = p.bg3 },
+    IblScope = { fg = dim(p.green.base, 0.5) },
+
+    -- Rainbow (indent-blankline)
+    RainbowRed = { fg = dim(p.red.base, 0.7) },
+    RainbowYellow = { fg = dim(p.yellow.base, 0.7) },
+    RainbowBlue = { fg = dim(p.blue.base, 0.7) },
+    RainbowOrange = { fg = dim(p.orange.base, 0.7) },
+    RainbowGreen = { fg = dim(p.green.base, 0.7) },
+    RainbowViolet = { fg = dim(p.magenta.base, 0.7) },
+    RainbowCyan = { fg = dim(p.cyan.base, 0.7) },
 
     -- completion
     CmpItemKindCopilot = { fg = p.cyan.base },
@@ -65,12 +87,12 @@ end
 ---@param silent? boolean
 local function update_colorscheme(mode, silent)
   ---@diagnostic disable-next-line: undefined-field
-  local modeState = mode ~= nil and mode or vim.opt.background:get()
-  local theme = Cange.get_config("ui.colorschemes." .. modeState)
-  vim.opt.background = modeState
+  M.mode = mode ~= nil and mode or vim.opt.background:get()
+  local theme = Cange.get_config("ui.colorscheme." .. M.mode)
+  vim.opt.background = M.mode
   vim.cmd("colorscheme " .. theme)
 
-  if silent == false then vim.schedule(function() Log:info(modeState .. " / " .. theme, "Colorscheme updated!") end) end
+  if silent == false then vim.schedule(function() Log:info(M.mode .. " / " .. theme, "Changed colorscheme") end) end
 
   update_highlights()
 end

@@ -100,7 +100,6 @@ M.groups = {
     leader = "<localleader>",
     mappings = {
       { "a", "gg<S-v>G",                                                        "Select all content" },
-      { "c", "<cmd>CangeUpdateColorscheme<CR>",                                 "Update colorscheme highlights" },
       { "f", "<cmd>lua R('cange.telescope').live_grep()<CR>",                   "Search in Files" },
       { "r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]],            "Replace under cursor"  },
       {

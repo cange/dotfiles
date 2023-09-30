@@ -95,20 +95,26 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
     main = "ibl",
-    opts = {
-      exclude = {
-        filetype = { "help", "NvimTree", "Trouble", "text", "lazy", "qf" },
-        buftype = { "terminal", "nofile" },
-      },
-      indent = {
-        char = i("ui.VThinLineLeft"),
-      },
-      scope = {
-        char = i("ui.VThinLineLeft"),
-        enabled = true,
-        show_start = true,
-      },
-    },
+    config = function()
+      require("ibl").setup({
+        exclude = {
+          filetype = { "help", "NvimTree", "Trouble", "text", "lazy", "qf" },
+        },
+        indent = {
+          char = i("ui.VThinLineLeft"),
+          highlight = {
+            "RainbowRed",
+            "RainbowYellow",
+            "RainbowBlue",
+            "RainbowOrange",
+            "RainbowGreen",
+            "RainbowViolet",
+            "RainbowCyan",
+          },
+        },
+        scope = { char = i("ui.VLineLeft") },
+      })
+    end,
   },
 
   { -- Markdown preview

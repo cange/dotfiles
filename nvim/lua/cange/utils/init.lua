@@ -71,6 +71,7 @@ end
 ---@param name string # Normal, Comment, etc.
 ---@param key string # fg, bg, etc.
 ---@return table|nil
+---@example get_hl_hex("Normal", "fg") --> {fg = "#123456"}
 function M.get_hl_hex(name, key)
   local hl = Cange.get_hl(name, { key })
   local value = hl[key] or nil
@@ -86,6 +87,7 @@ end
 ---@param name string
 ---@param keywords? table
 ---@return {fg?:number, bg?:number, bold?:boolean, italic?:boolean}
+---@example get_hl("Normal", {"fg", "bg"}) --> {fg = 123, bg = 456}
 function M.get_hl(name, keywords)
   keywords = keywords or nil
   local hl = vim.api.nvim_get_hl(0, { name = name })
