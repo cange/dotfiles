@@ -35,12 +35,29 @@ return {
         "windwp/nvim-ts-autotag",
         config = function() require("nvim-ts-autotag").setup() end,
       },
-      { -- contextual comment in embedded language files like Vue.JS
-        "JoosepAlviste/nvim-ts-context-commentstring",
-      },
-      { "HiPhish/nvim-ts-rainbow2" },
+      "HiPhish/nvim-ts-rainbow2",
+      "JoosepAlviste/nvim-ts-context-commentstring", -- contextual comment in embedded language files like Vue.JS
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/playground",
     },
     opts = {
+      textobjects = {
+        select = {
+          enable = true,
+          -- lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ["ac"] = { query = "@class.outer", desc = "Select outer class" },
+            ["ic"] = { query = "@class.inner", desc = "Select inner class" },
+            ["af"] = { query = "@function.outer", desc = "Select outer function" },
+            ["if"] = { query = "@function.inner", desc = "Select inner function" },
+            ["ii"] = { query = "@conditional.inner", desc = "Select inner conditional" },
+            ["ai"] = { query = "@conditional.outer", desc = "Select outer conditional" },
+            ["il"] = { query = "@loop.inner", desc = "Select inner loop" },
+            ["al"] = { query = "@loop.outer", desc = "Select outer loop" },
+          },
+        },
+      },
       autotag = { enable = true },
       context_commentstring = {
         enable = true,
@@ -52,7 +69,6 @@ return {
       playground = { enable = true },
       rainbow = { enable = true },
     },
-    ---@param opts TSConfig
-    config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
+    main = "nvim-treesitter.configs",
   },
 }
