@@ -57,8 +57,8 @@ return {
   },
 
   -- other language supports
-  { "slim-template/vim-slim" }, -- slim language support (Vim Script,
-  { "b0o/SchemaStore.nvim" }, -- json/yaml schema support
+  { "slim-template/vim-slim", event = "VeryLazy" }, -- slim language support (Vim Script,
+  { "b0o/SchemaStore.nvim", event = "VeryLazy" }, -- json/yaml schema support
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",

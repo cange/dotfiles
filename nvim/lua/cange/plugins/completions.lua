@@ -1,8 +1,7 @@
-local icon = Cange.get_icon
-
 return {
   { -- code completion
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
       "L3MON4D3/LuaSnip", -- snippets
       "hrsh7th/cmp-buffer", -- source for buffer words

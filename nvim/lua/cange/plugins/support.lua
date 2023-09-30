@@ -3,9 +3,7 @@ local i = Cange.get_icon
 return {
   { -- popover notification
     "rcarriga/nvim-notify",
-    dependencies = { "nvim-telescope/telescope.nvim" },
     opts = {
-      background_colour = "#152528",
       icons = {
         ERROR = i("diagnostics.Error"),
         WARN = i("diagnostics.Warn"),
@@ -17,15 +15,12 @@ return {
       render = "compact",
       top_down = false,
     },
-    init = function()
-      require("telescope").load_extension("notify")
-      vim.notify = require("notify")
-    end,
+    init = function() vim.notify = require("notify") end,
   },
 
   { -- Improve the built-in vim.ui interfaces with telescope, fzf, etc
     "stevearc/dressing.nvim",
-    event = "VeryLazy",
+    lazy = true,
     init = function()
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.select = function(...)
@@ -55,9 +50,9 @@ return {
   },
 
   -- highlight TODO, FIXME, etc in comments
-  { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+  { "folke/todo-comments.nvim", event = { "BufReadPost", "BufNewFile" } },
 
-  { "RRethy/vim-illuminate" }, -- Highlight the word under the cursor
+  { "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } }, -- Highlight the word under the cursor
 
   { -- text case converter (camel case, etc.,
     "johmsalas/text-case.nvim",
@@ -71,7 +66,7 @@ return {
 
   { -- close brackets, quotes etc
     "windwp/nvim-autopairs",
-    event = "VeryLazy",
+    lazy = true,
     config = function()
       require("nvim-autopairs").setup({
         check_ts = true, -- enable Tree-Sitter
@@ -109,13 +104,13 @@ return {
           "TSRainbowCyan",
         },
       },
-      scope = {  char = i("ui.VLineLeft") },
+      scope = { char = i("ui.VLineLeft") },
     },
   },
 
   { -- Markdown preview
     "toppair/peek.nvim",
-    event = "VeryLazy",
+    event = "InsertEnter",
     build = "deno task --quiet build:fast",
     config = function()
       local peek = require("peek")
@@ -173,5 +168,5 @@ return {
   { "mg979/vim-visual-multi", event = "VeryLazy" },
 
   -- is all about "surroundings": parentheses, brackets, quotes, XML tags, and more
-  { "tpope/vim-surround" },
+  { "tpope/vim-surround", event = "VeryLazy" },
 }

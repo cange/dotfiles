@@ -65,7 +65,6 @@ return {
 
   { -- Distraction-free coding
     "folke/zen-mode.nvim",
-    event = "VeryLazy",
     opts = {
       window = {
         backdrop = 0.9, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
@@ -100,6 +99,7 @@ return {
 
   { -- font icon set
     "nvim-tree/nvim-web-devicons",
+    lazy = true,
     config = function()
       require("nvim-web-devicons").setup()
       require("cange.utils.icons").setup()
@@ -108,6 +108,7 @@ return {
 
   { -- keymaps
     "folke/which-key.nvim",
+    event = "VeryLazy",
     opts = {
       plugins = {
         spelling = {

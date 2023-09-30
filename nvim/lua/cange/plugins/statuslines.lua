@@ -3,11 +3,11 @@ local i = Cange.get_icon
 return {
   {
     "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
     dependencies = {
       "EdenEast/nightfox.nvim",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
-      "zbirenbaum/copilot.lua",
     },
     opts = {
       options = {
