@@ -62,13 +62,13 @@ local function update_highlights()
     IblScope = { fg = dim(p.green.base, 0.5) },
 
     -- Rainbow (indent-blankline)
-    RainbowRed = { fg = dim(p.red.base, 0.7) },
-    RainbowYellow = { fg = dim(p.yellow.base, 0.7) },
-    RainbowBlue = { fg = dim(p.blue.base, 0.7) },
-    RainbowOrange = { fg = dim(p.orange.base, 0.7) },
-    RainbowGreen = { fg = dim(p.green.base, 0.7) },
-    RainbowViolet = { fg = dim(p.magenta.base, 0.7) },
-    RainbowCyan = { fg = dim(p.cyan.base, 0.7) },
+    TSRainbowRed = { fg = dim(p.red.base, 0.7) },
+    TSRainbowYellow = { fg = dim(p.yellow.base, 0.7) },
+    TSRainbowBlue = { fg = dim(p.blue.base, 0.7) },
+    TSRainbowOrange = { fg = dim(p.orange.base, 0.7) },
+    TSRainbowGreen = { fg = dim(p.green.base, 0.7) },
+    TSRainbowViolet = { fg = dim(p.magenta.base, 0.7) },
+    TSRainbowCyan = { fg = dim(p.cyan.base, 0.7) },
 
     -- completion
     CmpItemKindCopilot = { fg = p.cyan.base },
