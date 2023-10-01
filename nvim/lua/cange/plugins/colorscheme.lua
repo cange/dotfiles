@@ -59,16 +59,16 @@ local function update_highlights()
     WhichkeyBorder = { link = "FloatBorder" },
 
     -- indent-blankline
-    IblScope = { fg = dim(p.green.base, 0.5) },
+    IblScope = { fg = p.green.dim },
 
     -- Rainbow (indent-blankline)
-    TSRainbowRed = { fg = dim(p.red.base, 0.7) },
-    TSRainbowYellow = { fg = dim(p.yellow.base, 0.7) },
-    TSRainbowBlue = { fg = dim(p.blue.base, 0.7) },
-    TSRainbowOrange = { fg = dim(p.orange.base, 0.7) },
-    TSRainbowGreen = { fg = dim(p.green.base, 0.7) },
-    TSRainbowViolet = { fg = dim(p.magenta.base, 0.7) },
-    TSRainbowCyan = { fg = dim(p.cyan.base, 0.7) },
+    TSRainbowRed = { fg = dim(p.red.base, 0.5) },
+    TSRainbowYellow = { fg = dim(p.yellow.base, 0.5) },
+    TSRainbowBlue = { fg = dim(p.blue.base, 0.5) },
+    TSRainbowOrange = { fg = dim(p.orange.base, 0.5) },
+    TSRainbowGreen = { fg = dim(p.green.base, 0.5) },
+    TSRainbowViolet = { fg = dim(p.magenta.base, 0.5) },
+    TSRainbowCyan = { fg = dim(p.cyan.base, 0.5) },
 
     -- completion
     CmpItemKindCopilot = { fg = p.cyan.base },
