@@ -49,8 +49,12 @@ return {
     end,
   },
 
-  -- highlight TODO, FIXME, etc in comments
-  { "folke/todo-comments.nvim", event = { "BufReadPost", "BufNewFile" } },
+  { -- highlight TODO, FIXME, etc in comments
+    "folke/todo-comments.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
 
   { "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } }, -- Highlight the word under the cursor
 
