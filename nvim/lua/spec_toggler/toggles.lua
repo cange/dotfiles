@@ -1,6 +1,5 @@
-local ns = "spec_toggler.toggles"
 if not rawget(vim, "treesitter") then
-  Log:warn("not treesitter", { title = ns })
+  Log:warn("not treesitter", { title = "spec_toggler.toggles" })
   return nil
 end
 
@@ -10,11 +9,9 @@ util.debug = false
 
 ---@example it() => it.only() => it()
 function M.only()
+  if not util.supported("only") then return end
   local node = util.tree_walker("only", vim.treesitter.get_node())
-  if node == nil then
-    print(ns .. ":only() no target found!")
-    return
-  end
+  if node == nil then return end
   local flag = ".only"
   local name = util.name(node)
   local active = name:match(flag) ~= nil
@@ -30,11 +27,9 @@ end
 
 ---@example xit() => it() => xit()
 function M.skip()
+  if not util.supported("skip") then return end
   local node = util.tree_walker("skip", vim.treesitter.get_node())
-  if node == nil then
-    print(ns .. ":skip() no target found!")
-    return
-  end
+  if node == nil then return end
   local name = util.name(node)
   local content = name:find("^x") == 1 and name:sub(2) or "x" .. name
   -- util.log("skip: -c: " .. content .. " -n: " .. name)

@@ -1,10 +1,42 @@
+local ns = "spec_toggler"
 local M = {}
+local lang = require("nvim-treesitter.parsers").get_parser():lang()
+local config = require("spec_toggler.config")
+
+---@param msg string
+local function notify(msg) vim.notify(msg, 2, { title = ns }) end
+
+---@return SpecTogglerFeature[]|nil
+local function get_features()
+  if config[lang] == nil then return end
+  return vim.tbl_deep_extend("force", config["*"].features, config[lang].features)
+end
+
+---@param type '"only"'|'"skip"'
+---@return boolean
+function M.supported(type)
+  local supported = config[lang] and config[lang].features[type] ~= nil
+  if not supported then notify(type .. '() is not supported for "' .. lang .. '"') end
+  return supported
+end
 
 M.debug = false
-M.keywords = {
-  skip = { "it", "describe", "test", "xit", "xdescribe", "xtest" },
-  only = { "it", "describe", "test", "it.only", "describe.only", "test.only" },
-}
+M.features = get_features()
+
+
+---@param type string
+---@return table<string>
+local function extend_keywords(type)
+  ---@type SpecTogglerFeature
+  local f = M.features[type]
+  local keywords = {}
+  for _, k in ipairs(f.keywords) do
+    local keyword = f.prefix and f.flag .. f.separator .. k or k .. f.separator .. f.flag
+    table.insert(keywords, k)
+    if not vim.tbl_contains(keywords, keyword) then table.insert(keywords, keyword) end
+  end
+  return keywords
+end
 
 ---@param node TSNode
 ---@return string
@@ -21,7 +53,7 @@ end
 ---@return boolean
 function M.matches(type, node)
   if node == nil then return false end
-  return vim.tbl_contains(M.keywords[type], M.name(node))
+  return vim.tbl_contains(extend_keywords(type), M.name(node))
 end
 
 ---@param type '"skip"'|'"only"'
@@ -35,7 +67,9 @@ function M.tree_walker(type, node)
   elseif node:child_count() > 0 and M.matches(type, node:child()) then
     return node:child()
   end
-  return M.tree_walker(type, node:parent())
+  local target = M.tree_walker(type, node:parent())
+  if target == nil then notify(type .. "() no target found!") end
+  return target
 end
 
 ---@class Range
@@ -53,3 +87,9 @@ function M.replace_text(node, content, range)
 end
 
 return M
+
+---@class SpecTogglerFeature
+---@field keywords table
+---@field flag string
+---@field separator string
+---@field prefix boolean
