@@ -16,4 +16,9 @@ return {
     },
   },
   javascript = { features = { skip = {}, only = {} } },
+  ruby = {
+    features = {
+      skip = { keywords = { "context", "describe", "example", "it", "scenario", "specify", "test" } },
+    },
+  },
 }
