@@ -17,7 +17,7 @@ end
 ---@param shade string
 ---@param factor number
 ---@return number # as hex
-local function dim(shade, factor)
+local function blend(shade, factor)
   local C = require("nightfox.lib.color")
   return C.from_hex(shade):blend(C(M.palette.bg1), factor):to_css()
 end
@@ -60,15 +60,14 @@ local function update_highlights()
 
     -- indent-blankline
     IblScope = { fg = p.green.dim },
-
     -- Rainbow (indent-blankline)
-    TSRainbowRed = { fg = dim(p.red.base, 0.5) },
-    TSRainbowYellow = { fg = dim(p.yellow.base, 0.5) },
-    TSRainbowBlue = { fg = dim(p.blue.base, 0.5) },
-    TSRainbowOrange = { fg = dim(p.orange.base, 0.5) },
-    TSRainbowGreen = { fg = dim(p.green.base, 0.5) },
-    TSRainbowViolet = { fg = dim(p.magenta.base, 0.5) },
-    TSRainbowCyan = { fg = dim(p.cyan.base, 0.5) },
+    RainbowRed = { fg = blend(Cange.get_hl_hex("TSRainbowRed", "fg").fg, 0.8) },
+    RainbowYellow = { fg = blend(Cange.get_hl_hex("TSRainbowYellow", "fg").fg, 0.8) },
+    RainbowBlue = { fg = blend(Cange.get_hl_hex("TSRainbowBlue", "fg").fg, 0.8) },
+    RainbowOrange = { fg = blend(Cange.get_hl_hex("TSRainbowOrange", "fg").fg, 0.8) },
+    RainbowGreen = { fg = blend(Cange.get_hl_hex("TSRainbowGreen", "fg").fg, 0.8) },
+    RainbowViolet = { fg = blend(Cange.get_hl_hex("TSRainbowViolet", "fg").fg, 0.8) },
+    RainbowCyan = { fg = blend(Cange.get_hl_hex("TSRainbowCyan", "fg").fg, 0.8) },
 
     -- completion
     CmpItemKindCopilot = { fg = p.cyan.base },

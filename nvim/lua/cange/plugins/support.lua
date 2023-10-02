@@ -99,16 +99,15 @@ return {
       indent = {
         char = i("ui.VThinLineLeft"),
         highlight = {
-          "TSRainbowRed",
-          "TSRainbowYellow",
-          "TSRainbowBlue",
-          "TSRainbowOrange",
-          "TSRainbowGreen",
-          "TSRainbowViolet",
-          "TSRainbowCyan",
+          "RainbowRed",
+          "RainbowYellow",
+          "RainbowBlue",
+          "RainbowOrange",
+          "RainbowGreen",
+          "RainbowViolet",
+          "RainbowCyan",
         },
       },
-      scope = { char = i("ui.VLineLeft") },
     },
   },
 
