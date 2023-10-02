@@ -95,7 +95,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     main = "ibl",
     opts = {
-      exclude = { filetype = { "help", "dashboard", "NvimTree", "lazy", "mason", "notify" } },
+      exclude = { filetypes = { "help", "dashboard", "NvimTree", "lazy", "mason", "notify" } },
       indent = {
         char = i("ui.VThinLineLeft"),
         highlight = {
