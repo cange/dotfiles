@@ -47,14 +47,6 @@
     "prefix": "log",
     "body": "console.log($1)"
   },
-  "console.log(param…": {
-    "prefix": "logparam",
-    "body": "console.log('--- %o', {$1}})"
-  },
-  "console.log(Object.keys(…": {
-    "prefix": "logkeys",
-    "body": "console.log('--- ${1:param} keys: %o', Object.keys($1))"
-  },
   "console.table(": {
     "prefix": "logtable",
     "body": "console.table($1)"
