@@ -1,8 +1,6 @@
 -- TODO: establish keymaps via setup
 -- TODO: enable in test files only
--- TODO: detect language
 ---TODO: enable only in supported languages
--- TODO: support ruby rspec
 
 ---@class SpecToggler
 ---@field only fun()

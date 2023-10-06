@@ -1,5 +1,4 @@
 local ns = "spec_toggler"
-local M = {}
 local lang = require("nvim-treesitter.parsers").get_parser():lang()
 local config = require("spec_toggler.config")
 
@@ -12,17 +11,42 @@ local function get_features()
   return vim.tbl_deep_extend("force", config["*"].features, config[lang].features)
 end
 
+---@return string[]|nil
+local function get_file_patterns()
+  if config[lang] == nil then return end
+  return config[lang].file_patterns or nil
+end
+
+---@param patterns string[]|nil
+---@return boolean
+local function has_file_name_support(patterns)
+  if patterns == nil then return false end
+  for _, p in ipairs(patterns) do
+    if vim.fn.expand("%"):match(p) then return true end
+  end
+  return false
+end
+
+local M = {}
+M.debug = false
+M.features = get_features()
+M.file_patterns = get_file_patterns()
+
 ---@param type '"only"'|'"skip"'
 ---@return boolean
 function M.supported(type)
-  local supported = config[lang] and config[lang].features[type] ~= nil
-  if not supported then notify(type .. '() is not supported for "' .. lang .. '"') end
+  local has_language_support = config[lang] ~= nil and M.features ~= nil
+  local msg = has_language_support and "" or string.format("%q is not supported!", lang)
+  if #msg == 0 and not has_file_name_support(M.file_patterns) then
+    msg = string.format("File name %q is not supported!", vim.fn.expand("%:t"))
+  end
+  if #msg == 0 and not M.features[type] then msg = string.format('"%s()" does not support %q!', type, lang) end
+
+  local supported = #msg == 0
+
+  if supported == false then notify(msg) end
   return supported
 end
-
-M.debug = false
-M.features = get_features()
-
 
 ---@param type string
 ---@return table<string>
@@ -68,7 +92,7 @@ function M.tree_walker(type, node)
     return node:child()
   end
   local target = M.tree_walker(type, node:parent())
-  if target == nil then notify(type .. "() no target found!") end
+  if target == nil then notify(string.format('"%s()" no target found!', type)) end
   return target
 end
 
