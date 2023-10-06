@@ -30,8 +30,8 @@ local function update_highlights()
     Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
     Todo = { bg = nil, bold = true },
     -- illuminate
-    IlluminatedWordText = { bg = p.bg1 }, -- Default for references if no kind information is available
-    IlluminatedWordRead = { bg = p.bg2 }, -- for references of kind read
+    IlluminatedWordText = { bg = p.bg2 }, -- Default for references if no kind information is available
+    IlluminatedWordRead = { bg = p.sel0, fg = p.fg1 }, -- for references of kind read
     IlluminatedWordWrite = { bg = p.bg2, bold = true }, -- for references of kind write
 
     -- Window

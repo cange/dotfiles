@@ -22,9 +22,10 @@ return {
             fmt = function(mode) return string.sub(mode, 0, 1) end,
           },
         },
-        lualine_b = {},
-        lualine_c = {
+        lualine_b = {
           { "branch", icon = i("git.Branch") },
+        },
+        lualine_c = {
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           {
             "filename",

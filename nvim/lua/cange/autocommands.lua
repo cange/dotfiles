@@ -32,5 +32,10 @@ autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
 -- Indentation highlighting
 autocmd({ "VimEnter" }, {
   group = augroup("cange_highlight_word_under_cursor", { clear = true }),
-  callback = function() vim.cmd("hi link illuminatedWord LspReferenceText") end,
+  callback = function()
+    vim.schedule(function()
+      local ok, nvim_tree = pcall(require, "nvim-tree.api")
+      if ok then nvim_tree.tree.open() end
+    end)
+  end,
 })
