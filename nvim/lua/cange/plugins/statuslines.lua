@@ -12,7 +12,7 @@ return {
     opts = {
       options = {
         component_separators = { left = i("ui.Pipe"), right = i("ui.Pipe") },
-        section_separators = { left = "", right = "" },
+        section_separators = { left = i("ui.TriangleLowerLeft") .. " ", right = i("ui.TriangleLowerRight") .. " " },
         globalstatus = true,
       },
       sections = {
@@ -53,19 +53,24 @@ return {
             },
           },
           { require("lazy.status").updates, cond = require("lazy.status").has_updates },
-          "format_status",
+        },
+        lualine_y = {
           "lsp_status",
+          "format_status",
           "copilot_status",
-          { "progress", separator = "", padding = { left = 1, right = 0 } },
-          { "location", separator = "", padding = { left = 1, right = 0 } },
+          {
+            "progress",
+            separator = "",
+            padding = { left = 1, right = 0 },
+          },
+          "location",
           {
             function() return i("ui.Tab") .. " " .. vim.api.nvim_buf_get_option(0, "shiftwidth") end,
             separator = "",
             padding = { left = 1, right = 0 },
           },
-          { "encoding" },
+          "encoding",
         },
-        lualine_y = {},
         lualine_z = {},
       },
     },
