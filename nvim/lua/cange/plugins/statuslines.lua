@@ -53,6 +53,7 @@ return {
             },
           },
           { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+          "format_status",
           "lsp_status",
           "copilot_status",
           { "progress", separator = "", padding = { left = 1, right = 0 } },
