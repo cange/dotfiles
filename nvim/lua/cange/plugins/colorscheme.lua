@@ -10,6 +10,8 @@ local function update_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
   M.palette = require("nightfox.palette").load(colorscheme)
+  M.palette.copilot = { even = "#93f5ec", odd = "#a77bf3" }
+  M.palette.tabnine = { even = "#0575ed", odd = "#ff16ff" }
 
   return M.palette
 end
@@ -24,6 +26,7 @@ end
 
 local function update_highlights()
   local _, lua_color = require("nvim-web-devicons").get_icon_color("any.lua", "lua")
+
   local p = update_palette()
   local highlights = {
     CursorLine = { bg = p.bg2 }, -- disable default
@@ -70,13 +73,14 @@ local function update_highlights()
     RainbowCyan = { fg = blend(Cange.get_hl_hex("TSRainbowCyan", "fg").fg, 0.8) },
 
     -- completion
-    CmpItemKindCopilot = { fg = p.cyan.base },
-    CmpItemKindLsp = { link = "@lsp.type.method" },
-    CmpItemKindLspSignatureHelp = { link = "@lsp.type.parameter" },
-    CmpItemKindLua = { fg = lua_color },
-    CmpItemKindTabnine = { fg = p.pink.dim },
-    CmpItemMenuTabnine = { link = "CmpItemKindTabnine" },
-    CmpItemMenuCopilot = { link = "CmpItemKindCopilot" },
+    CmpItemKindCopilot = { link = "CmpItemKindDefault" },
+    CmpItemKindTabnine = { link = "CmpItemKindDefault" },
+    CmpItemMenuCopilot = { fg = blend(p.copilot.odd, 0.3) },
+    CmpItemMenuTabnine = { fg = blend(p.tabnine.even, -0.3) },
+    CmpItemAbbrMatch = { link = "TelescopeMatching" },
+    CmpItemMenuLsp = { link = "@lsp.type.method" },
+    CmpItemMenuLspSignatureHelp = { link = "@lsp.type.parameter" },
+    CmpItemMenuLua = { fg = lua_color },
   }
 
   Cange.set_highlights(highlights)
@@ -127,6 +131,10 @@ return {
   },
 }
 
+---@class ColorschemeDualShade
+---@field even string
+---@field odd string
+
 ---@class ColorschemeShade
 ---@field base string
 ---@field bright string
@@ -156,3 +164,5 @@ return {
 ---@field fg3 string
 ---@field sel0 string
 ---@field sel1 string
+---@field tabnine ColorschemeDualShade
+---@field copilot ColorschemeDualShade

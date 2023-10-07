@@ -41,7 +41,7 @@ function M.format(entry, vim_item)
     cmp_tabnine = i("ui.Tabnine"),
     copilot = i("ui.Copilot"),
     luasnip = i("ui.Cut"),
-    nvim_lsp = i("ui.Book"),
+    nvim_lsp = i("ui.Eye"),
     nvim_lsp_signature_help = i("ui.Ellipsis"),
     nvim_lua = i("extensions.Lua"),
     path = i("ui.Path"),
