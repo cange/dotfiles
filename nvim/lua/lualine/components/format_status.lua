@@ -1,12 +1,12 @@
+local ok, conform = pcall(require, "conform")
 local M = require("lualine.component"):extend()
 local cache = {}
+-- local count = 0
 local i = Cange.get_icon
 local icons = {
   ["active"] = i("ui.CheckAll"),
   ["inactive"] = i("ui.EyeClosed"),
 }
-
-local ok, conform = pcall(require, "conform")
 
 ---@return table
 local function get_active_formatters()
@@ -14,17 +14,18 @@ local function get_active_formatters()
   local list = {}
   for _, f in ipairs(conform.list_formatters(vim.api.nvim_get_current_buf())) do
     table.insert(list, f.name)
+    -- count = count + 1
   end
   return list
 end
 
----@param formatters table
+---@param data table
 ---@return string
-local function content(formatters)
+local function content(data)
   local state = ok and Cange.get_config("lsp.format_on_save") and "active" or "inactive"
-  local output = vim.o.columns > 100 and #formatters > 0 and table.concat(formatters or {}, ", ") or "Format"
-  output = icons[state] .. " " .. output
-  return output
+  local output = vim.o.columns > 100 and #data > 0 and table.concat(data or {}, ", ") or "Format"
+  -- P("Format status -c: " .. count .. " -s: " .. state .. " -o: " .. output)
+  return string.format("%s %s", icons[state], output)
 end
 
 function M:update_status()
