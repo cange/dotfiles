@@ -12,7 +12,7 @@ return {
     opts = {
       options = {
         component_separators = { left = i("ui.Pipe"), right = i("ui.Pipe") },
-        section_separators = { left = i("ui.TriangleLowerLeft") .. " ", right = i("ui.TriangleLowerRight") .. " " },
+        section_separators = { left = i("ui.TriangleLowerLeft") .. " ", right = i("ui.TriangleUpperRight") .. " " },
         globalstatus = true,
       },
       sections = {

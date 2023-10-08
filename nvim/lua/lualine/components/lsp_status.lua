@@ -24,7 +24,7 @@ end
 ---@return string
 local function content(clients, debug_label)
   local state = clients ~= nil and #clients == 0 and "inactive" or "active"
-  local output = vim.o.columns > 100 and #clients > 0 and ": " .. table.concat(clients, ", ") or ""
+  local output = vim.o.columns > 100 and #clients > 0 and " " .. table.concat(clients, ", ") or ""
   output = icons[state] .. " LSP" .. output
   if debug then vim.print("lsp " .. debug_label .. " -c: " .. refresh_count .. " -output: " .. output) end
   return output
