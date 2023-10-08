@@ -32,7 +32,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       json = { "jsonlint" },
-      lua = { "luacheck" },
       markdown = { "markdownlint" },
       ruby = { "rubocop" },
       yaml = { "yamllint" },
@@ -67,7 +66,6 @@ return {
       ensure_installed = {
         "eslint_d",
         "jsonlint",
-        "luacheck",
         "markdownlint",
         "prettierd",
         "rubocop",
