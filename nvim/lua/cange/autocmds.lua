@@ -30,8 +30,7 @@ autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
 })
 
 autocmd({ "BufWritePost" }, {
-  group = augroup("cange_lsp_auto_format", { clear = true }),
-  pattern = "*",
+  group = augroup("auto_format", { clear = true }),
   desc = "File format",
   callback = R("cange.lsp").format,
 })
