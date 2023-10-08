@@ -1,6 +1,4 @@
 {
-    "diagnostics.disable": [
-        "duplicate-doc-alias",
-        "duplicate-doc-field"
-    ]
+  "diagnostics.disable": ["duplicate-doc-alias", "duplicate-doc-field"],
+  "diagnostics.globals": ["vim", "P", "Cange", "ignore"]
 }

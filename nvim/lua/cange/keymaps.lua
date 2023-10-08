@@ -143,8 +143,8 @@ M.groups = {
       { "s", "<cmd>SessionSave<CR>",                                            "Save session" },
       { "X", "<cmd>SessionDelete<CR>",                                          "Delete session" },
       -- others
-      { "l", "<cmd>lua R('cange.lsp.toggle').format_on_save()<CR>",      "Toggle format on save" },
-      { "S", "<cmd>lua vim.o.spell = not vim.o.spell<CR>",                      "Toggle spellin" },
+      { "l", "<cmd>lua R('cange.lsp.toggle').format_on_save()<CR>",             "Toggle format on save" },
+      { "S", "<cmd>lua vim.o.spell = not vim.o.spell<CR>",                      "Toggle spelling" },
       { "c", "<cmd>Telescope colorscheme<CR>",                                  "Change colorscheme" },
       { "C", '<cmd>lua R("luasnip").cleanup()<CR>',                             "Reset snippets UI" },
       { "p", "<cmd>lua R('telescope').extensions.project.project()<CR>",        "Switch workspace" },
