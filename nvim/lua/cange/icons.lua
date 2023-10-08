@@ -15,6 +15,7 @@ M.ui = {
   Bug                 = "", -- nf-oct-bug
   Cache               = "", -- nf-oct-cache
   Check               = "", -- nf-oct-check
+  CheckAll            = "", -- nf-cod-check_all
   ChevronDown         = "", -- nf-oct-chevron_down
   ChevronRight        = "", -- nf-oct-chevron_right
   Close               = "", -- nf-oct-x
