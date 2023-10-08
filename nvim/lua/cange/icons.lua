@@ -49,6 +49,7 @@ M.ui = {
   TriangleLowerLeft   = "", -- nf-ple-lower_left_triangle
   TriangleLowerRight  = "", --nf-ple-lower_right_triangle
   VDashLineLeft       = "┆", -- U+2506
+  VWavyLine           = "⌇", -- U+2307
   VLineLeft           = "▎", -- U+258E
   VThinLineLeft       = "▏", -- U+258F
 }

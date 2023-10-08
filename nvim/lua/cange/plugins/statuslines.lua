@@ -53,9 +53,9 @@ return {
             },
           },
           { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+          "lsp_status",
         },
         lualine_y = {
-          "lsp_status",
           "format_status",
           "copilot_status",
           {

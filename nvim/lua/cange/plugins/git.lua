@@ -12,7 +12,7 @@ return {
         changedelete = { text = i("ui.VThinLineLeft") },
         delete = { text = i("ui.ArrowRight") },
         topdelete = { text = i("ui.ArrowRight") },
-        untracked = { text = i("ui.VDashLineLeft") },
+        untracked = { text = i("ui.VWavyLine") },
       },
       preview_config = { border = Cange.get_config("ui.border") },
       current_line_blame = true,
