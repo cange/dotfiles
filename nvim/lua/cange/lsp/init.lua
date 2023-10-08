@@ -92,10 +92,19 @@ function M.setup_diagnostics()
   })
 end
 
+---Triggers LSP or language specific formatting
 function M.format()
   if not Cange.get_config("lsp.format_on_save") then return end
-  Log:info("Auto format", ns)
-  vim.cmd({ cmd = "Format" })
+  local ok, conform = pcall(require, "conform")
+  if not ok then return end
+
+  Log:info("Auto format", "cange.lsp")
+  conform.format({
+    async = false,
+    bufnr = vim.api.nvim_get_current_buf(),
+    lsp_fallback = true,
+    timeout_ms = 1000,
+  })
 end
 
 return M
