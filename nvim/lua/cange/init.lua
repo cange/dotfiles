@@ -4,29 +4,9 @@
 require("cange.globals")
 Cange = require("cange.utils")
 Cange.reload("cange.options")
-
--- https://github.com/folke/lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
--- 2nd : initialize
-require("lazy").setup("cange.plugins", {
-  checker = {
-    enabled = true, -- allows to get the number of pending updates when true
-  },
-})
-
+-- 2st : plugins lazy loading
+Cange.reload("cange.lazy")
 -- 3th : rest
-Cange.reload("cange.autocommands")
+Cange.reload("cange.autocmds")
 Cange.reload("cange.keymaps")
 Cange.reload("cange.telescope")

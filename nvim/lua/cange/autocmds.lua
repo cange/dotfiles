@@ -15,7 +15,7 @@ autocmd("BufWritePre", {
 })
 
 autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
-  group = augroup("cange_line_length", { clear = true }),
+  group = augroup("line_length", { clear = true }),
   pattern = "*.md,*.lua,*.txt",
   callback = function()
     vim.opt_local.colorcolumn = "80"
@@ -24,7 +24,7 @@ autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
 })
 
 autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
-  group = augroup("cange_mdx_filetype", { clear = true }),
+  group = augroup("mdx_filetype", { clear = true }),
   pattern = "*.mdx",
   callback = function() vim.bo.filetype = "jsx" end,
 })
