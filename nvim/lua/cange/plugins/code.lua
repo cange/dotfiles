@@ -26,4 +26,21 @@ return {
       })
     end,
   },
+
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = {
+      ensure_installed = {
+        "eslint_d",
+        "jsonlint",
+        "markdownlint",
+        "prettierd",
+        "rubocop",
+        "stylelint",
+        "stylua",
+        "yamllint",
+      },
+      auto_update = true,
+    },
+  },
 }
