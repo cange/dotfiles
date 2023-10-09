@@ -1,4 +1,8 @@
 local ok, conform = pcall(require, "conform")
+if not ok then
+  print('warn: "conform" not found')
+  return
+end
 local M = require("lualine.component"):extend()
 local cache = {}
 -- local count = 0
@@ -22,7 +26,7 @@ end
 ---@param data table
 ---@return string
 local function content(data)
-  local state = ok and Cange.get_config("lsp.format_on_save") and "active" or "inactive"
+  local state = Cange.get_config("lsp.format_on_save") and "active" or "inactive"
   local output = vim.o.columns > 100 and #data > 0 and table.concat(data or {}, ", ") or "Format"
   -- P("Format status -c: " .. count .. " -s: " .. state .. " -o: " .. output)
   return string.format("%s %s", icons[state], output)
