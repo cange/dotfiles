@@ -1,6 +1,6 @@
 local M = {
   ---@diagnostic disable-next-line: undefined-field
-  mode = vim.opt.background:get(),
+  mode = vim.o.background,
   ---@type ColorschemePalette|nil
   palette = nil,
 }
@@ -90,7 +90,7 @@ end
 ---@param silent? boolean
 local function update_colorscheme(mode, silent)
   ---@diagnostic disable-next-line: undefined-field
-  M.mode = mode ~= nil and mode or vim.opt.background:get()
+  M.mode = mode ~= nil and mode or vim.o.background
   local theme = Cange.get_config("ui.colorscheme." .. M.mode)
   vim.opt.background = M.mode
   vim.cmd("colorscheme " .. theme)

@@ -75,10 +75,13 @@ end
 function M.get_hl_hex(name, key)
   local hl = Cange.get_hl(name, { key })
   local value = hl[key] or nil
-
-  if not value then print(ns, '"' .. key .. '" in "' .. name .. '" hl group not found', vim.inspect(hl)) end
-
   local output = {}
+
+  if not value then
+    P(ns, '"' .. key .. '" in "' .. name .. '" hl group not found', vim.inspect(hl), value)
+    value = 0
+  end
+
   output[key] = string.format("#%06x", value)
   return output
 end
