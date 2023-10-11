@@ -70,12 +70,13 @@ return {
         json = { "prettierd" },
         jsonc = { "prettierd" },
         lua = { "stylua" },
+        html = { "prettierd" },
         markdown = { "prettierd" },
         yaml = { "prettierd" },
         ruby = { "rubocop" },
         -- css
-        css = { { "stylelint", "prettierd" } },
-        scss = { { "stylelint", "prettierd" } },
+        css = { { "prettierd", "stylelint" } },
+        scss = { { "prettierd", "stylelint" } },
         -- js
         javascript = { "prettierd" },
         javascriptreact = { "prettierd" },
@@ -91,7 +92,7 @@ return {
   { -- linting
     "mfussenegger/nvim-lint",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPre", "BufNewFile", "InsertLeave" },
     opts = {
       json = { "jsonlint" },
       markdown = { "markdownlint" },
@@ -130,7 +131,6 @@ return {
 
   { -- json/yaml schema support
     "b0o/SchemaStore.nvim",
-    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
   },
 

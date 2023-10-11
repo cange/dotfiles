@@ -131,7 +131,7 @@ M.groups = {
       -- toolings
       { "1", "<cmd>Lazy show<CR>",                                              "Plugin info" },
       { "2", "<cmd>Mason<CR>",                                                  "Mason info" },
-      { "3", "<cmd>NullLsInfo<CR>",                                             "Null-ls info" },
+      { "3", "<cmd>ConformInfo<CR>",                                            "Formatter info" },
       { "4", "<cmd>LspInfo<CR>",                                                "LSP info" },
       -- edits
       { "5", '<cmd>lua R("cange.telescope").browse_snippets()<CR>',             "Edit snippets" },
@@ -186,7 +186,6 @@ M.groups = {
       -- formatter
       { "r", "<cmd>LspRestart;<CR><cmd>lua Log:info('Restarted', 'LSP')<CR>",   "Restart LSP" },
       { "c", "<cmd>TextCaseOpenTelescope<CR>",                                  "Change Case", mode = { "v", "n" } },
-      { "f", "<cmd>lua R('cange.lsp.format').toggle_format_on_save()<CR>",      "Toggle format on save" },
       { "l", '<cmd>lua R("cange.telescope").diagnostics_lo()<CR>',              "File diagnostics" },
       -- copilot
       { "A", "<cmd>lua R('copilot.panel').accept()<CR>",                        "Accept Copilot panel" },

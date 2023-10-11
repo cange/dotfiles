@@ -42,10 +42,7 @@ end
 ---Keymapping for lspconfig on_attach options
 ---@param _ table client
 ---@param bufnr integer
-local function on_attach(_, bufnr)
-  keymaps(bufnr)
-  M.format()
-end
+local function on_attach(_, bufnr) keymaps(bufnr) end
 
 ---Sets up individual LSP server handler
 ---@param server_name string
@@ -93,8 +90,10 @@ function M.setup_diagnostics()
 end
 
 ---Triggers LSP or language specific formatting
-function M.format()
-  if not Cange.get_config("lsp.format_on_save") then return end
+---@param opts? table<string, boolean>
+function M.format(opts)
+  opts = opts or {}
+  if not Cange.get_config("lsp.format_on_save") and not opts.force then return end
   local ok, conform = pcall(require, "conform")
   if not ok then return end
 

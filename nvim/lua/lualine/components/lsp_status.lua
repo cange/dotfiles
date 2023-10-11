@@ -26,7 +26,7 @@ local function content(data)
   local state = data ~= nil and #data == 0 and "inactive" or "active"
   local output = vim.o.columns > 100 and #data > 0 and table.concat(data, ", ") or ""
   -- P("LSP status -c: " .. count .. " -s: " .. state .. " -o: " .. output)
-  return string.format("%s Lsp %s", icons[state], output)
+  return string.format("%s LSP %s", icons[state], output)
 end
 
 function M:update_status()
