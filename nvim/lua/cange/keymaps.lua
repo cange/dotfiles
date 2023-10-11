@@ -80,8 +80,7 @@ M.groups = {
     name = "Primary",
     leader = "<leader>",
     mappings = {
-      { "<F2>", '<cmd>lua R("cange.lsp").format()<CR>',                         "Format" },
-      { "\\", "<cmd>NvimTreeToggle<CR>",                                        "File Explorer" },
+      { "<F2>", '<cmd>lua R("cange.lsp").format({ force = true })<CR>',         "Format" },
       { "-", "<C-W>s",                                                          "Split window below" },
       { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },
       { "a", '<cmd>lua R("harpoon.mark").add_file()<CR>',                       "Add bookmark" },
@@ -107,7 +106,8 @@ M.groups = {
         "<cmd>write<CR><cmd>lua R('cange'); Log:info(vim.fn.expand('%@'), 'File saved and executed!')<CR>",
         "Reload current file",
       },
-      { "o", "<cmd>SymbolsOutline<CR>",                                         "Toggle Symbole outline" },
+      { "o", "<cmd>lua R('spec_toggler').only()<CR>",                           "Only it/describe/test toggle" },
+      { "s", "<cmd>lua R('spec_toggler').skip()<CR>",                           "Skip it/describe/test toggle" },
     },
   },
   {

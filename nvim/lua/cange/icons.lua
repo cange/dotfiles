@@ -90,9 +90,9 @@ M.git = {
 M.git_states = {
   unstaged            = M.git.Mod,
   staged              = "",  -- none on purpose
-  unmerged            = "", -- nf-oct-git_pull_request_draft
+  unmerged            = "", -- nf-oct-git_pull_request_closed
   renamed             = M.git.Rename,
-  untracked           = M.git.Add,
+  untracked           = " ", -- nf-oct-git_pull_request_draft
   deleted             = M.git.Remove,
   ignored             = M.git.Ignore,
 }

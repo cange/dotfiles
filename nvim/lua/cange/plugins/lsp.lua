@@ -1,19 +1,5 @@
 local i = Cange.get_icon
 
----@return table
-local function symbol_outline_icons()
-  ---@type table
-  ---@diagnostic disable-next-line: assign-type-mismatch
-  local icons = i("cmp_kinds")
-  local symbols = {}
-
-  for name, icon in pairs(icons) do
-    symbols[name] = { icon = icon }
-  end
-
-  return symbols
-end
-
 return {
   { -- lspconfig
     "neovim/nvim-lspconfig", -- configure LSP servers
@@ -150,14 +136,32 @@ return {
 
   {
     "simrat39/symbols-outline.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    cmd = "SymbolsOutline",
-    opts = {
-      autofold_depth = 3,
-      fold_markers = { i("ui.ChevronRight"), i("ui.ChevronDown") },
-      show_symbol_details = false,
-      symbols = symbol_outline_icons(),
+    desc = "Symbol Browser",
+    keys = {
+      { "<localleader>O", "<cmd>SymbolsOutline<CR>", desc = "Toggle Symbole Browser" },
     },
+    cmd = "SymbolsOutline",
+    opts = function()
+      local symbols = {}
+
+      ---@diagnostic disable-next-line: param-type-mismatch
+      for name, icon in pairs(i("cmp_kinds")) do
+        symbols[name] = { icon = icon }
+      end
+
+      return {
+        autofold_depth = 1,
+        fold_markers = { i("ui.ChevronRight"), i("ui.ChevronDown") },
+        show_symbol_details = false,
+        symbols = symbols,
+      }
+    end,
+    init = function()
+      vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
+        group = vim.api.nvim_create_augroup("before_symbol_browser_close", { clear = true }),
+        desc = "Close symbol browser",
+        command = "SymbolsOutlineClose",
+      })
+    end,
   },
 }

@@ -3,6 +3,10 @@ local i = Cange.get_icon
 return {
   { -- File explorer
     "nvim-tree/nvim-tree.lua",
+    -- desc = "File Tree Explorer",
+    keys = {
+      { "<leader>\\", "<cmd>NvimTreeToggle<CR>", desc = "File Tree Explorer" },
+    },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     version = "nightly",
     config = function()
@@ -54,6 +58,12 @@ return {
             info = i("diagnostics.Info"),
           },
         },
+      })
+
+      vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
+        group = vim.api.nvim_create_augroup("before_file_tree_explorer_close", { clear = true }),
+        desc = "Close file tree explorer",
+        command = "NvimTreeClose",
       })
     end,
   },
