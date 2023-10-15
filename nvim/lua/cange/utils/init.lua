@@ -78,8 +78,8 @@ function M.get_hl_hex(name, key)
   local output = {}
 
   if not value then
-    P(ns, '"' .. key .. '" in "' .. name .. '" hl group not found', vim.inspect(hl), value)
     value = 0
+    PF("%s %q in %q hl group not found -inspect %q -value %q", ns, key, name, vim.inspect(hl), value)
   end
 
   output[key] = string.format("#%06x", value)
@@ -94,7 +94,7 @@ end
 function M.get_hl(name, keywords)
   keywords = keywords or nil
   local hl = vim.api.nvim_get_hl(0, { name = name })
-  if not hl then print(ns, ' hl "' .. name .. '" not found', vim.inspect(hl)) end
+  if not hl then P("%s hl %q not found -inspect %q", ns, name, vim.inspect(hl)) end
   if not keywords then return hl end
   local output = {}
   for _, k in pairs(keywords) do

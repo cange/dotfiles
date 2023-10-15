@@ -62,11 +62,11 @@ return {
   { -- AI code suggestions
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
+    build = ":Copilot auth",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       panel = { enabled = false, auto_refresh = true },
       suggestion = { enabled = false, auto_refresh = true },
     },
-    config = function(_, opts) require("copilot").setup(opts) end,
   },
 }

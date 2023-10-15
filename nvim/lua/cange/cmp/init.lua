@@ -25,7 +25,6 @@ M.opts = {
   completion = {
     completeopt = "menu,menuone",
   },
-
   mapping = {
     ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -71,23 +70,20 @@ M.opts = {
       end
     end, { "i", "s" }),
   },
-  sources = {
-    { name = "nvim_lsp", max_item_count = 5 },
-    { name = "luasnip", max_item_count = 3 },
-    { name = "path", max_item_count = 2, keyword_length = 2 },
-    { name = "nvim_lua", max_item_count = 2 },
-    { name = "nvim_lsp_signature_help" },
-    { name = "buffer", max_item_count = 2, keyword_length = 3 },
+  sources = cmp.config.sources({
+    { name = "nvim_lsp", max_item_count = 10 },
+    { name = "luasnip" },
+    { name = "path" },
     { name = "copilot" },
     { name = "cmp_tabnine" },
-  },
+  }, {
+    { name = "buffer" },
+    { name = "nvim_lsp_signature_help" },
+  }),
   snippet = {
     expand = function(args) require("luasnip").lsp_expand(args.body) end,
   },
-  experimental = {
-    ghost_text = true,
-    native_menu = false,
-  },
+  experimental = { ghost_text = { hl_group = "CmpGhostText" } },
   formatting = {
     fields = { -- order within a menu item
       "menu",

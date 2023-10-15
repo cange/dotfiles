@@ -17,15 +17,10 @@ return {
       },
       sections = {
         lualine_a = {
-          {
-            "mode",
-            fmt = function(mode) return string.sub(mode, 0, 1) end,
-          },
-        },
-        lualine_b = {
+          { "mode", fmt = function(mode) return string.sub(mode, 0, 1) end, separator = i("ui.VThinLineLeft") },
           { "branch", icon = i("git.Branch") },
         },
-        lualine_c = {
+        lualine_b = {
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           {
             "filename",
@@ -37,8 +32,9 @@ return {
               unnamed = i("documents.File"),
             },
             separator = "",
-            padding = { left = 1 },
           },
+        },
+        lualine_c = {
           { "git_blame_line", padding = { left = 1 }, icon = i("git.Commit") },
         },
         lualine_x = {

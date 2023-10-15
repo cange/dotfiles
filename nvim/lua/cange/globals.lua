@@ -9,6 +9,15 @@ function P(value, ...)
   return value
 end
 
+---Print format shorthand
+---@param value any
+---@param ... any
+---@return any
+function PF(value, ...)
+  vim.print(string.format(value, ...))
+  return value
+end
+
 ---@param ... any
 ---@return any
 RELOAD = function(...)
