@@ -17,4 +17,12 @@ function M.cached_status(cache, before_ft, formatter_callback, fetch_callback)
   return formatter_callback(cache[ft] or {})
 end
 
+---Truncates a string when longer than maximum length
+---@param content string
+---@param max_len number
+---@return string
+function M.truncate(content, max_len)
+  return #content > max_len and string.sub(content, 1, max_len - 1) .. "…" or content
+end
+
 return M
