@@ -24,6 +24,12 @@ autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
 })
 
 autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
+  group = augroup("line_length", { clear = true }),
+  pattern = ".env.*",
+  callback = function() vim.bo.filetype = "sh" end,
+})
+
+autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
   group = augroup("mdx_filetype", { clear = true }),
   pattern = "*.mdx",
   callback = function() vim.bo.filetype = "jsx" end,
