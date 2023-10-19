@@ -34,6 +34,8 @@ function M.get_icon(path)
   return current
 end
 
+local user_icons = {}
+
 ---@param origin_filetype string
 ---@param filename string
 ---@param preset? DevIconsPreset
@@ -48,7 +50,7 @@ local function set_icon_by_filetype(origin_filetype, filename, preset)
     name = "",
   }
 
-  devicons.set_icon({ [filename] = vim.tbl_extend("force", fallback, preset or {}) })
+  user_icons[filename] = vim.tbl_extend("force", fallback, preset or {})
 end
 
 ---@type DevIconsPreset[]
@@ -106,9 +108,14 @@ local function redefine_icons()
     set_icon_by_filetype(ft, "nuxt.config." .. ft, presets.nuxt)
     set_icon_by_filetype(ft, "stories." .. ft, presets.storybook)
   end
+
+  require("nvim-web-devicons").set_icon(user_icons)
 end
 
-function M.setup() redefine_icons() end
+function M.setup()
+  -- delays call to ensure that all icons are loaded
+  vim.defer_fn(redefine_icons, 1000)
+end
 
 return M
 

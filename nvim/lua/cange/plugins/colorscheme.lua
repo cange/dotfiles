@@ -59,7 +59,9 @@ local function update_highlights()
     TelescopeSelectionCaret = { fg = p.fg1, bg = p.sel0 },
     TelescopeSelectionNormal = { link = "FloatBorder" },
     TelescopeTitle = { link = "FloatTitle" },
+    -- misc
     WhichkeyBorder = { link = "FloatBorder" },
+    NvimTreeGitRenamed = { fg = p.magenta.base },
 
     -- indent-blankline
     IblScope = { fg = p.green.dim },
