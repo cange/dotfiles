@@ -38,28 +38,3 @@ assignment per line.
 #### Secrets
 
 User details such as tokens are stored in `$HOME/config/secrets/` individually.
-
-## NeoVim as Editor
-
-The config is located in `dotfiles/nvim`.
-
-### First Start
-
-#### Plugins
-
-An update dialog pops up and will install all required plugins when running
-NeoVim first time.
-
-Run`:Lazy install` (within NeoVim) if the dialog is not popping up.
-
-#### Language Support (LSP)
-
-Run `:Mason` (within NeoVim) to install all related LSP, formatter and linter.
-
-To apply all updates you might need to restart NeoVim.
-
-### Troubleshooting
-
-> **Note** Run `:checkhealth` after installation.
-
-See also [help docs](./doc/cange.txt) or `:help cange.txt` for more details.
