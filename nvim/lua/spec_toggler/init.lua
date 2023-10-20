@@ -1,6 +1,5 @@
 -- TODO: establish keymaps via setup
 -- TODO: enable in test files only
----TODO: enable only in supported languages
 
 ---@class SpecToggler
 ---@field only fun()
@@ -12,5 +11,9 @@ local M = {}
 
 M.skip = require("spec_toggler.toggles").skip
 M.only = require("spec_toggler.toggles").only
+
+-- Public API
+vim.api.nvim_create_user_command("SpecTogglerSkip", M.skip, {})
+vim.api.nvim_create_user_command("SpecTogglerOnly", M.only, {})
 
 return M

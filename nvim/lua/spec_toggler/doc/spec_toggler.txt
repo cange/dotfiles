@@ -1,0 +1,42 @@
+*spec_toggler.txt*   -work in process-
+
+==============================================================================
+Table of Contents                             *spec_toggler.table-of-contents*
+
+- Features                                             |spec_toggler.features|
+- Commands                                             |spec_toggler.commands|
+- API                                                       |spec_toggler.api|
+
+==============================================================================
+FEATURES                        *spec_toggler.nvim-spec_toggler.nvim-features*
+
+Spec Toggler is a plugin for toggling certain spec blocks to execute only or
+skip them. It uses Treesitter to achieve this.The feature set depends on the
+language and the testing framework. It supports the following languages:
+
+- Ruby with RSpec
+- JavaScript with Jest-like syntax
+
+
+------------------------------------------------------------------------------
+COMMANDS                                               *spec_toggler.commands*
+
+`:SpecTogglerOnly`                                            *:SpecTogglerOnly*
+
+Allows to flag spec block under the cursor with only mark.
+
+`:SpecTogglerSkip`                                            *:SpecTogglerSkip*
+
+Makes the block under the cursor to be skipped.
+
+
+------------------------------------------------------------------------------
+API                                                         *spec_toggler.api*
+
+The commands can also be called via the API. The following functions are:
+
+- `require('spec_toggler').only()`
+- `require('spec_toggler').skip()`
+
+
+vim:tw=78:ts=8:ft=help:norl:
