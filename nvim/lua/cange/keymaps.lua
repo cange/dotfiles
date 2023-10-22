@@ -23,6 +23,10 @@ local keymaps = {
   { "v", ">", ">gv", { desc = "Indent: right" } },
   { "v", "<Tab>", ">gv", { desc = "Indent: left" } },
   { "v", "<S-Tab>", "<gv", { desc = "Indent: right" } },
+
+  -- convenience shortcuts
+  { "c", "Xa", "xa", { desc = "Write all buffer and exit Vim (convenience)" } },
+  { "c", "Qa", "qa", { desc = "Exit Vim (convenience)" } },
 }
 
 for _, km in pairs(keymaps) do
@@ -99,7 +103,7 @@ M.groups = {
     leader = "<localleader>",
     mappings = {
       { "a", "gg<S-v>G",                                                        "Select all content" },
-      { "f", "<cmd>lua R('cange.telescope').live_grep()<CR>",                   "Search in Files" },
+      { "/", "<cmd>lua R('cange.telescope').live_grep()<CR>",                   "Search in Files" },
       { "r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]],            "Replace under cursor"  },
       {
         "x",

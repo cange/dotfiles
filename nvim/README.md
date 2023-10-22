@@ -9,7 +9,7 @@ The config is located in `dotfiles/nvim`.
 An update dialog pops up and will install all required plugins when running
 NeoVim first time.
 
-You might want to run `:Lazy install`  if the dialog is not popping up.
+You might want to run `:Lazy install` if the dialog is not popping up.
 
 ### Languages Support
 
