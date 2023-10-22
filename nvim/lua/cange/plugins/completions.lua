@@ -2,6 +2,7 @@ return {
   { -- code completion
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
+    lazy = true,
     dependencies = {
       "L3MON4D3/LuaSnip", -- snippets
       "hrsh7th/cmp-buffer", -- source for buffer words
@@ -21,7 +22,6 @@ return {
         "tzachar/cmp-tabnine",
         build = "./install.sh",
         dependencies = "hrsh7th/nvim-cmp",
-        event = { "BufReadPre", "BufNewFile" },
         opts = {
           max_lines = 1000,
           max_num_results = 10,

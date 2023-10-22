@@ -112,8 +112,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
 return {
   {
     "EdenEast/nightfox.nvim", -- colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
     dependencies = { "f-person/auto-dark-mode.nvim" },
-    lazy = true,
     init = function()
       local auto_mode = require("auto-dark-mode")
       local silent = true

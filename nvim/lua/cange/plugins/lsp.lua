@@ -77,6 +77,7 @@ return {
 
   {
     "simrat39/symbols-outline.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     desc = "Symbol Browser",
     keys = {
       { "<localleader>O", "<cmd>SymbolsOutline<CR>", desc = "Toggle Symbole Browser" },

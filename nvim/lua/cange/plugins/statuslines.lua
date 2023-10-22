@@ -74,12 +74,12 @@ return {
 
   { -- winbar with LSP context symbols
     "utilyre/barbecue.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "SmiteshP/nvim-navic",
       "nvim-lualine/lualine.nvim",
       "nvim-tree/nvim-web-devicons",
     },
-    event = "VeryLazy",
     config = function()
       require("barbecue").setup({
         theme = {

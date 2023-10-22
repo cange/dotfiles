@@ -16,6 +16,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("cange.plugins", {
   checker = {
+    notify = false,
     enabled = true, -- allows to get the number of pending updates when true
   },
+  change_detection = { notify = false },
 })
