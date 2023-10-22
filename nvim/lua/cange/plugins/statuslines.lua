@@ -20,25 +20,8 @@ return {
           { "mode", fmt = function(mode) return string.sub(mode, 0, 1) end, separator = i("ui.VThinLineLeft") },
           { "branch", icon = i("git.Branch") },
         },
-        lualine_b = {
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          {
-            "filename",
-            path = 0,
-            symbols = {
-              modified = i("ui.DotFill"),
-              newfile = i("documents.NewFile"),
-              readonly = i("ui.Lock"),
-              unnamed = i("documents.File"),
-            },
-            separator = "",
-          },
-        },
+        lualine_b = {},
         lualine_c = {
-          { "git_blame_line", padding = { left = 1 }, icon = i("git.Commit") },
-        },
-        lualine_x = {
-          "lsp_progress",
           {
             "diagnostics",
             symbols = {
@@ -47,6 +30,18 @@ return {
               info = i("diagnostics.Info") .. " ",
               hint = i("diagnostics.Hint") .. " ",
             },
+          },
+          "lsp_progress",
+        },
+        lualine_x = {
+          {
+            "git_blame_line",
+            padding = { right = 1 },
+            icon = i("git.Commit"),
+            fmt = function(name)
+              local w = vim.o.columns
+              return require("lualine.util").truncate(name, w > 172 and 80 or w > 112 and 48 or w > 92 and 24 or 0)
+            end,
           },
           { require("lazy.status").updates, cond = require("lazy.status").has_updates },
           "lsp_status",
