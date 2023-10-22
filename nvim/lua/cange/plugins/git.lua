@@ -4,6 +4,7 @@ local line_format = "<author>, <author_time:%d. %b %Y> " .. i("ui.Note") .. " <s
 return {
   {
     "lewis6991/gitsigns.nvim", -- git highlighter, blame, etc
+    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       signs = {

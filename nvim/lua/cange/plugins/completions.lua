@@ -63,6 +63,7 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
+    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       panel = { enabled = false, auto_refresh = true },

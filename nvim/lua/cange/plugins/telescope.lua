@@ -1,6 +1,7 @@
 return {
   -- Fuzzy Finder
   "nvim-telescope/telescope.nvim", -- fuzzy finder over lists
+  event ="VeryLazy",
   dependencies = {
     "BurntSushi/ripgrep", -- telescope live grep suggestions
     "ThePrimeagen/harpoon", -- bookmark buffers

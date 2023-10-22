@@ -16,8 +16,11 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("cange.plugins", {
   checker = {
-    notify = false,
-    enabled = true, -- allows to get the number of pending updates when true
+    notify = false, -- get a notification when new updates are found
+    enabled = true, -- automatically check for plugin updates
+  },
+  ui = {
+    size = { width = 0.6 }, -- a number <1 is a percentage., >1 is a fixed size
   },
   change_detection = { notify = false },
 })

@@ -70,6 +70,8 @@ return {
 
   { -- Distraction-free coding
     "folke/zen-mode.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       window = {
         backdrop = 0.9, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
@@ -91,15 +93,14 @@ return {
 
   { -- small automated session manager
     "rmagatti/auto-session",
-    config = function(_, opts)
+    opts = function()
       -- better experience with the plugin overall using this config for sessionoptions is recommended.
       vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
-      require("auto-session").setup(opts)
+
+      return {
+        auto_session_suppress_dirs = { "~/", "~/workspace" }, -- Suppress session create/restore if in one of the list of dirs
+      }
     end,
-    opts = {
-      log_level = vim.log.levels.INFO,
-      auto_session_suppress_dirs = { "~/", "~/workspace" }, -- Suppress session create/restore if in one of the list of dirs
-    },
   },
 
   { -- font icon set

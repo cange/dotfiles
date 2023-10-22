@@ -20,24 +20,13 @@ return {
 
   { -- Improve the built-in vim.ui interfaces with telescope, fzf, etc
     "stevearc/dressing.nvim",
-    lazy = true,
-    init = function()
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.select = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.select(...)
-      end
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.input = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.input(...)
-      end
-    end,
+    event = "VeryLazy",
   },
 
   { -- comment toggle
     "numToStr/Comment.nvim",
-    event = "VeryLazy",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       -- contextual comment in embedded language files like Vue.JS
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -51,8 +40,7 @@ return {
 
   { -- highlight TODO, FIXME, etc in comments
     "folke/todo-comments.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "nvim-lua/plenary.nvim" },
+    event = "VeryLazy",
     opts = {},
   },
 
@@ -71,6 +59,7 @@ return {
   { -- close brackets, quotes etc
     "windwp/nvim-autopairs",
     lazy = true,
+    event = { "InsertEnter" },
     config = function()
       require("nvim-autopairs").setup({
         check_ts = true, -- enable Tree-Sitter
