@@ -9,7 +9,7 @@ return {
         WARN = i("diagnostics.Warn"),
         INFO = i("diagnostics.Info"),
         DEBUG = i("ui.Bug"),
-        TRACE = i("ui.Pencil"),
+        TRACE = i("ui.Edit"),
       },
       timeout = 3000,
       render = "compact",

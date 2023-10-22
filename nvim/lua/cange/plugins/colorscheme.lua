@@ -75,15 +75,15 @@ local function update_highlights()
     RainbowCyan = { fg = blend(Cange.get_hl_hex("TSRainbowCyan", "fg").fg, 0.8) },
 
     -- completion
-    CmpGhostText = { fg = p.yellow.dim, italic = true },
+    CmpGhostText = { fg = p.fg3, italic = true },
+    CmpItemAbbr = { fg = p.fg2 },
     CmpItemAbbrMatch = { link = "TelescopeMatching" },
     CmpItemKindCopilot = { link = "CmpItemKindDefault" },
     CmpItemKindTabnine = { link = "CmpItemKindDefault" },
-    CmpItemMenuCopilot = { fg = blend(p.copilot.odd, 0.3) },
-    CmpItemMenuLsp = { link = "@lsp.type.method" },
-    CmpItemMenuLspSignatureHelp = { link = "@lsp.type.parameter" },
+    CmpItemMenuCopilot = { fg = blend(p.copilot.odd, 0.2) },
+    CmpItemMenu = { fg = p.cyan.dim },
     CmpItemMenuLua = { fg = lua_color },
-    CmpItemMenuTabnine = { fg = blend(p.tabnine.even, -0.3) },
+    CmpItemMenuTabnine = { fg = blend(p.tabnine.even, -0.5) },
   }
 
   Cange.set_highlights(highlights)

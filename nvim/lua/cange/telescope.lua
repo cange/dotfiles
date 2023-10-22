@@ -55,7 +55,7 @@ function M.browse_nvim()
   builtin.find_files({
     cwd = "~/.config/nvim",
     previewer = false,
-    prompt_title = i("ui.Gear") .. " NeoVim Config",
+    prompt_title = i("ui.Settings") .. " Neovim",
   })
 end
 
@@ -63,7 +63,7 @@ function M.browse_snippets()
   builtin.find_files({
     cwd = "~/.config/snippets",
     previewer = true,
-    prompt_title = i("ui.Cut") .. " Snippets",
+    prompt_title = i("ui.Library") .. " Snippets",
   })
 end
 

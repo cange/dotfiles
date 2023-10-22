@@ -7,9 +7,9 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       signs = {
-        add = { text = i("ui.VThinLineLeft") },
-        change = { text = i("ui.VThinLineLeft") },
-        changedelete = { text = i("ui.VThinLineLeft") },
+        add = { text = i("ui.VLineLeft") },
+        change = { text = i("ui.VLineLeft") },
+        changedelete = { text = i("ui.VLineLeft") },
         delete = { text = i("ui.ArrowRight") },
         topdelete = { text = i("ui.ArrowRight") },
         untracked = { text = i("ui.VWavyLine") },

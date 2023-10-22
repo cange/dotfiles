@@ -23,9 +23,10 @@ local function get_menu_hl_group_by(source_name)
   local groups = {
     cmp_tabnine = "CmpItemMenuTabnine",
     copilot = "CmpItemMenuCopilot",
+    luasnip = "CmpItemMenu",
     nvim_lua = "CmpItemMenuLua",
-    nvim_lsp = "CmpItemMenuLsp",
-    nvim_lsp_signature_help = "CmpItemMenuLspSignatureHelp",
+    nvim_lsp = "CmpItemMenu",
+    nvim_lsp_signature_help = "CmpItemMenu",
   }
 
   return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "@comment"
@@ -37,11 +38,11 @@ local M = {}
 function M.format(entry, vim_item)
   local maxwidth = 80
   local src_icons = {
-    buffer = i("ui.Cache"),
+    buffer = i("ui.Database"),
     cmp_tabnine = i("ui.Tabnine"),
     copilot = i("ui.Copilot"),
-    luasnip = i("ui.Cut"),
-    nvim_lsp = i("ui.Codespace"),
+    luasnip = i("ui.Library"),
+    nvim_lsp = i("ui.Globe"),
     nvim_lsp_signature_help = i("ui.Ellipsis"),
     nvim_lua = i("extensions.Lua"),
     path = i("ui.Path"),

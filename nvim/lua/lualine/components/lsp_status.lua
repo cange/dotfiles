@@ -5,7 +5,7 @@ local before_ft = ""
 local count = 0
 local i = Cange.get_icon
 local icons = {
-  ["active"] = i("ui.Codespace"),
+  ["active"] = i("ui.Globe"),
   ["inactive"] = i("ui.EyeClosed"),
 }
 
