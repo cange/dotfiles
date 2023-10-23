@@ -8,6 +8,7 @@ return {
       jsonc = { "prettierd" },
       lua = { "stylua" },
       html = { "prettierd" },
+      svg = { "xmlformatter" },
       markdown = { "prettierd" },
       yaml = { "prettierd" },
       ruby = { "rubocop" },

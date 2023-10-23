@@ -33,6 +33,7 @@ return {
         "cssls",
         "html",
         "jsonls",
+        "lemminx", -- xml, xsd, xsl, xslt, svg
         "ruby_ls",
         "svelte",
         "tsserver", -- javascript, typescript, etc.
@@ -58,6 +59,7 @@ return {
         "rubocop",
         "stylelint",
         "stylua",
+        "xmlformatter", -- svg
         "yamllint",
       },
       auto_update = true,
