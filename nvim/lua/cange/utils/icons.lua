@@ -52,11 +52,12 @@ local function set_icon_by_filetype(origin_filetype, filename, preset)
 
   user_icons[filename] = vim.tbl_extend("force", fallback, preset or {})
 end
+local i = M.get_icon
 
 ---@type DevIconsPreset[]
 local presets = {
   spec = {
-    icon = M.get_icon("ui.Beaker"),
+    icon = i("ui.Beaker"),
     name = "Test",
   },
   storybook = {
@@ -70,23 +71,29 @@ local presets = {
     name = "Vue",
   },
   nuxt = {
-    icon = M.get_icon("extensions.Nuxt"),
+    icon = i("extensions.Nuxt"),
     color = "#00dc82",
     cterm_color = "35",
     name = "Nuxt",
   },
   babelrc = {
-    icon = M.get_icon("extensions.Babelrc"),
+    icon = i("extensions.Babelrc"),
     name = "Babelrc",
   },
   stylelint = {
-    icon = M.get_icon("extensions.Stylelint"),
+    icon = i("extensions.Stylelint"),
     color = "#d0d0d0",
     cterm_color = "252",
     name = "Stylelint",
   },
   eslint = {
     name = "Eslintrc",
+  },
+  yarn = {
+    icon = i("extensions.Yarn"),
+    name = "YarnPkg",
+    color = "#2c8ebb",
+    cterm_color = "33",
   },
 }
 
@@ -95,6 +102,9 @@ local function redefine_icons()
   set_icon_by_filetype(".stylelintrc", ".stylelintignore", presets.stylelint)
   set_icon_by_filetype("vue", "vue", presets.vue)
   set_icon_by_filetype("node_modules", ".nvmrc")
+  set_icon_by_filetype("yarn", ".yarn", presets.yarn)
+  set_icon_by_filetype("yarn", ".yarnrc.yml", presets.yarn)
+  set_icon_by_filetype("yarn", "yarn.lock", presets.yarn)
 
   for _, ext in pairs({ ".json", ".cjs", ".js", ".mjs" }) do
     set_icon_by_filetype(".babelrc", ".babelrc" .. ext, presets.babelrc)

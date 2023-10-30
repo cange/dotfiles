@@ -57,6 +57,7 @@ M.extensions = {
   Lua                 = "", -- nf-seti-lua
   Nuxt                = "󱄆", -- nf-md-nuxt
   Stylelint           = "", -- nf-seti-stylelint
+  Yarn                = "", -- nf-seti-yarn
 }
 M.documents = {
   Briefcase           = "", -- nf-oct-briefcase
