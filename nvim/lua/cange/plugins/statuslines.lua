@@ -18,9 +18,10 @@ return {
       sections = {
         lualine_a = {
           { "mode", fmt = function(mode) return string.sub(mode, 0, 1) end, separator = i("ui.VThinLineLeft") },
+        },
+        lualine_b = {
           { "branch", icon = i("git.Branch") },
         },
-        lualine_b = {},
         lualine_c = {
           {
             "diagnostics",
