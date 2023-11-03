@@ -81,6 +81,6 @@ fi
 # --- node/npx
 if [[ -f "$HOME/.asdf/shims/node" ]]; then
   # enables executable for www.fork.dev
-  export PATH=".asdf/shims/node:$PATH"
+  export PATH="$HOME/.asdf/shims/node:$PATH"
 fi
 # node/npx ---
