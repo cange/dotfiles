@@ -1,6 +1,9 @@
+local M = {}
+
 -- NOTE: `file_patterns` expects a table of *string-match* patterns.
-return {
+M.languages = {
   ["*"] = {
+    file_patterns = {},
     features = {
       skip = {
         flag = "x",
@@ -27,3 +30,5 @@ return {
     },
   },
 }
+
+return M

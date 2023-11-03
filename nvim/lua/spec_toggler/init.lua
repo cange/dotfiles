@@ -1,5 +1,7 @@
 -- TODO: establish keymaps via setup
 -- TODO: enable in test files only
+-- TODO: establish telescope extension to show active toggles
+-- TODO: establish jump to next/prev toggle
 
 ---@class SpecToggler
 ---@field only fun()
