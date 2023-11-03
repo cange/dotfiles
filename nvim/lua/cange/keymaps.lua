@@ -1,7 +1,6 @@
 local function help_under_cursor() vim.cmd("help " .. (vim.bo.filetype == "lua" and vim.fn.expand("<cword>") or "")) end
 local keymaps = {
   { "n", "<F1>", help_under_cursor, { desc = "Help for keyword under cursor" } },
-  { "v", "<F5>", ":sort<CR>gv=gv", { desc = "Sort selected lines" } },
   { "v", "p", '"_dP', { desc = "Clipboard: keep content" } },
   { "n", "<leader><leader>", "<C-^>", { desc = "Switch last recent 2 buffers" } },
 
@@ -50,6 +49,10 @@ M.groups = {
     name = "Goto",
     leader = "g",
     mappings = {
+      { "1", '<cmd>lua R("harpoon.ui").nav_file(1)<CR>',                        "⇁ to 1st mark" },
+      { "2", '<cmd>lua R("harpoon.ui").nav_file(2)<CR>',                        "⇁ to 2nd mark" },
+      { "3", '<cmd>lua R("harpoon.ui").nav_file(3)<CR>',                        "⇁ to 3rd mark" },
+      { "4", '<cmd>lua R("harpoon.ui").nav_file(4)<CR>',                        "⇁ to 4th mark" },
       { "D", vim.lsp.buf.declaration,                                           "LSP Goto symbol Declaration" },
       { "d", vim.lsp.buf.definition,                                            "LSP Goto symbol Definition" },
       { "i", vim.lsp.buf.implementation,                                        "LSP List symbol Implementation" },
@@ -84,7 +87,6 @@ M.groups = {
     name = "Primary",
     leader = "<leader>",
     mappings = {
-      { "<F2>", '<cmd>lua R("cange.lsp").format({ force = true })<CR>',         "Format" },
       { "-", "<C-W>s",                                                          "Split window below" },
       { "/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",                    "Search in current file" },
       { "a", '<cmd>lua R("harpoon.mark").add_file()<CR>',                       "Add bookmark" },
@@ -102,8 +104,10 @@ M.groups = {
     name = "Secondary",
     leader = "<localleader>",
     mappings = {
-      { "a", "gg<S-v>G",                                                        "Select all content" },
       { "/", "<cmd>lua R('cange.telescope').live_grep()<CR>",                   "Search in Files" },
+      { "S", ":sort<CR>gv=gv",                                                  "Sort selected lines", mode =  { "v" } },
+      { "a", "gg<S-v>G",                                                        "Select all content" },
+      { "f", '<cmd>lua R("cange.lsp").format({ force = true })<CR>',            "Format" },
       { "r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]],            "Replace under cursor"  },
       {
         "x",
