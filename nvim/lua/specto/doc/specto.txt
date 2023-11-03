@@ -1,0 +1,45 @@
+*specto.txt*   -work in process-
+
+==============================================================================
+Table of Contents                             *specto.table-of-contents*
+
+- Features                                             |specto.features|
+- Commands                                             |specto.commands|
+- API                                                       |specto.api|
+
+==============================================================================
+INTRODUCTION                                                       *specto.nvim*
+
+------------------------------------------------------------------------------
+FEATURES                                                  *specto.nvim.features*
+
+Spec Toggler is a plugin for toggling certain spec blocks to execute only or
+skip them. It uses Treesitter to achieve this.The feature set depends on the
+language and the testing framework. It supports the following languages:
+
+- Ruby with RSpec
+- JavaScript with Jest-like syntax
+
+
+------------------------------------------------------------------------------
+COMMANDS                                               *specto.commands*
+
+`:SpectoOnly`                                            *:SpectoOnly*
+
+Allows to flag spec block under the cursor with only mark.
+
+`:SpectoSkip`                                            *:SpectoSkip*
+
+Makes the block under the cursor to be skipped.
+
+
+------------------------------------------------------------------------------
+API                                                         *specto.api*
+
+The commands can also be called via the API. The following functions are:
+
+- `require('specto').only()`
+- `require('specto').skip()`
+
+
+vim:tw=78:ts=8:ft=help:norl:

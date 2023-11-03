@@ -108,4 +108,9 @@ return {
       })
     end,
   },
+
+  {
+    dir = vim.fn.expand("~") .. "/.config/nvim/lua/specto",
+    -- opts = { "TODO: establish a way to pass options" },
+  },
 }

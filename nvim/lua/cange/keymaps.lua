@@ -114,8 +114,8 @@ M.groups = {
         "<cmd>write<CR><cmd>lua R('cange'); Log:info(vim.fn.expand('%@'), 'File saved and executed!')<CR>",
         "Reload current file",
       },
-      { "o", "<cmd>lua R('spec_toggler').only()<CR>",                           "Only it/describe/test toggle" },
-      { "s", "<cmd>lua R('spec_toggler').skip()<CR>",                           "Skip it/describe/test toggle" },
+      { "o", "<cmd>lua R('specto').only()<CR>",                           "Only it/describe/test toggle" },
+      { "s", "<cmd>lua R('specto').skip()<CR>",                           "Skip it/describe/test toggle" },
     },
   },
   {
