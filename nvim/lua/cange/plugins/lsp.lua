@@ -100,12 +100,5 @@ return {
         symbols = symbols,
       }
     end,
-    init = function()
-      vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
-        group = vim.api.nvim_create_augroup("before_symbol_browser_close", { clear = true }),
-        desc = "Close symbol browser",
-        command = "SymbolsOutlineClose",
-      })
-    end,
   },
 }
