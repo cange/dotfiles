@@ -15,7 +15,6 @@ return {
   config = function()
     local actions = require("telescope.actions")
     local telescope = require("telescope")
-    local custom_pickers = require("cange.telescope")
     -- config
     local default_opts = {
       previewer = false,
@@ -91,7 +90,7 @@ return {
           theme = "ivy",
           mappings = {
             i = {
-              ["<C-f>"] = custom_pickers.actions.set_extension,
+              ["<C-f>"] = require("cange.telescope").file_extension_filter_input,
             },
           },
         },

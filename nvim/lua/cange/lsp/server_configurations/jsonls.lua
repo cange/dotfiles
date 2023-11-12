@@ -1,6 +1,6 @@
 local ok, schemastore = pcall(require, "schemastore")
 if not ok then
-  print('[cange.lsp.server_configurations.jsonls] "schemastore" not found')
+  error('[cange.lsp.server_configurations.jsonls] "schemastore" not found')
   return
 end
 

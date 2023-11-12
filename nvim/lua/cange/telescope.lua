@@ -1,14 +1,12 @@
-local ns = "[cange.telescope]"
 local ok, telescope = pcall(require, "telescope")
 if not ok then
-  print(ns, '"telescope" not found')
+  error('[cange.telescope] "telescope" not found')
   return
 end
 local action_state = require("telescope.actions.state")
 local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
 local themes = require("telescope.themes")
-local transform_mod = require("telescope.actions.mt").transform_mod
 local i = Cange.get_icon
 
 local M = {}
@@ -16,37 +14,36 @@ local M = {}
 ---Keep track of the active extension and folders for `live_grep`
 local live_grep_filters = {
   ---@type nil|string
-  extension = nil,
+  file_extension = nil,
 }
 
 ---Run `live_grep` with the active filters (extension and folders)
 local function run_live_grep(current_input)
-  -- TODO: Resume old one with same options somehow
   builtin.live_grep({
-    additional_args = live_grep_filters.extension and function() return { "-g", live_grep_filters.extension } end,
+    additional_args = live_grep_filters.file_extension
+      and function() return { "-g", live_grep_filters.file_extension } end,
     default_text = current_input,
   })
 end
 
 -- Inspired by https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/plugins/telescope_custom_pickers.lua
-M.actions = transform_mod({
-  ---Ask for a file extension and filtering by it
-  set_extension = function(prompt_bufnr)
-    local current_picker = action_state.get_current_picker(prompt_bufnr)
+-- M.actions = require("telescope.actions.mt").transform_mod({
+---Ask for a file extension and filtering by it
+M.file_extension_filter_input = function(prompt_bufnr)
+  local current_picker = action_state.get_current_picker(prompt_bufnr)
 
-    vim.ui.input({ default = "*.", prompt = "File type: " }, function(input)
-      if input == nil then return end
+  vim.ui.input({ default = "*.", prompt = "File type: " }, function(input)
+    if input == nil then return end
 
-      live_grep_filters.extension = input
-      actions._close(prompt_bufnr, current_picker.initial_mode == "insert")
-      run_live_grep(action_state.get_current_line())
-    end)
-  end,
-})
+    live_grep_filters.file_extension = input
+    actions._close(prompt_bufnr, current_picker.initial_mode == "insert")
+    run_live_grep(action_state.get_current_line())
+  end)
+end
 
 ---Wapper over `live_grep` to first reset active filters
 function M.live_grep()
-  live_grep_filters.extension = nil
+  live_grep_filters.file_extension = nil
 
   builtin.live_grep()
 end

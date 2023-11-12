@@ -7,7 +7,7 @@ local ns = "[cange.utils.icons]"
 function M.get_icon(path)
   local ok, icons = pcall(require, "cange.icons")
   if not ok then
-    print('[error] "cange.icons" not found!', ns)
+    error(ns .. ' "cange.icons" not found!')
     return ""
   end
   local parts = {}

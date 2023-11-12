@@ -4,7 +4,7 @@
 ---@type _, { status: { data: copilot_status_notification_data } }
 local ok, api = pcall(require, "copilot.api")
 if not ok then
-  print('warn: "copilot.api" not found')
+  error('[lualine.components.copilot_status] "copilot.api" not found')
   return
 end
 local i = Cange.get_icon

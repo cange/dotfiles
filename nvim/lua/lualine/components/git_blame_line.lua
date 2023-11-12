@@ -1,7 +1,7 @@
 ---@diagnostic disable: duplicate-doc-alias
 local ok, _ = pcall(require, "gitsigns")
 if not ok then
-  print('warn: "gitsigns" not found')
+  error('[lualine.components.git_blame_line] "gitsigns" not found')
   return
 end
 

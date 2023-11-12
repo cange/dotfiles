@@ -1,6 +1,6 @@
 local ok, conform = pcall(require, "conform")
 if not ok then
-  print('warn: "conform" not found')
+  error('[lualine.components.format_status] "conform" not found')
   return
 end
 
