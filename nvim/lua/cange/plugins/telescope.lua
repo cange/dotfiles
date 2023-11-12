@@ -1,7 +1,7 @@
 return {
   -- Fuzzy Finder
   "nvim-telescope/telescope.nvim", -- fuzzy finder over lists
-  event ="VeryLazy",
+  event = "VeryLazy",
   dependencies = {
     "BurntSushi/ripgrep", -- telescope live grep suggestions
     "ThePrimeagen/harpoon", -- bookmark buffers
@@ -105,4 +105,32 @@ return {
     telescope.load_extension("ui-select")
     telescope.load_extension("lazy")
   end,
+  -- stylua: ignore start
+  keys = {
+    { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",          desc = "Search within buffer" },
+    { "<leader>eN", "<cmd>Telescope notify<CR>",                            desc = "Show notifications", },
+    { "<leader>ec", "<cmd>Telescope colorscheme<CR>",                       desc = "Change colorscheme" },
+    { "<leader>ep", "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },
+    { "<leader>f", "<cmd>Telescope find_files<CR>",                         desc = "Search Files" },
+    { "<leader>gB", "<cmd>Telescope git_branches<CR>",                      desc = "Checkout branch" },
+    { "<leader>gC", "<cmd>Telescope git_commits<CR>",                       desc = "Checkout commit" },
+    { "<leader>go", "<cmd>Telescope git_status<CR>",                        desc = "Open changed file" },
+    { "<leader>sB", "<cmd>Telescope buffers<CR>",                           desc = "Buffers" },
+    { "<leader>sC", "<cmd>Telescope commands<CR>",                          desc = "Commands" },
+    { "<leader>sH", '<cmd>Telescope highlights<CR>',                        desc = "Highlights" },
+    { "<leader>sS", '<cmd>lua R("cange.telescope").browse_snippets()<CR>',  desc = "Edit snippets" },
+    { "<leader>sW", '<cmd>lua R("cange.telescope").browse_workspace()<CR>', desc = "Current workspace" },
+    { "<leader>sb", '<cmd>lua R("cange.telescope").file_browser()<CR>',     desc = "In current directory" },
+    { "<leader>sh", "<cmd>Telescope help_tags<CR>",                         desc = "Nvim help" },
+    { "<leader>sk", "<cmd>Telescope keymaps<CR>",                           desc = "Keybindings" },
+    { "<leader>sn", '<cmd>lua R("cange.telescope").browse_nvim()<CR>',      desc = "Nvim config" },
+    { "<leader>sr", "<cmd>Telescope oldfiles<CR>",                          desc = "Recently opened files" },
+    { "<leader>st", "<cmd>TodoTelescope<CR>",                               desc = "Todo comments" },
+    { "<leader>sw", "<cmd>Telescope grep_string<CR>",                       desc = "Current word" },
+    { "<localleader>/", "<cmd>lua R('cange.telescope').live_grep()<CR>",    desc = "Search in Files" },
+    { "cD", "<cmd>Telescope diagnostics<CR>",                               desc = "Workspace diagnostics" },
+    { "cc", "<cmd>TextCaseOpenTelescope<CR>",                               desc = "Change Case", mode = { "v", "n" } },
+    { "cl", '<cmd>lua R("cange.telescope").diagnostics_log()<CR>',          desc = "File diagnostics" },
+  },
+  -- stylua: ignore end
 }

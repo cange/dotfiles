@@ -25,4 +25,7 @@ return {
       ["_"] = { "trim_whitespace" },
     },
   },
+  keys = {
+    { "<leader>e3", "<cmd>ConformInfo<CR>", desc = "Formatter info" },
+  },
 }

@@ -69,5 +69,20 @@ return {
       panel = { enabled = false, auto_refresh = true },
       suggestion = { enabled = false, auto_refresh = true },
     },
+    -- stylua: ignore start
+    keys = {
+      { "cA", "<cmd>Copilot panel accept<CR>",                   desc = "Accept Copilot panel" },
+      { "cR", "<cmd>Copilot panel refresh<CR>",                  desc = "Refresh Copilot panel" },
+      { "cS", "<cmd>Copilot status<CR>",                         desc = "Copilot status" },
+      { "co", "<cmd>Copilot toggle<CR>",                         desc = "Toggle Copilot" },
+      { "cp", "<cmd>Copilot panel<CR>",                          desc = "Toggle Copilot panel" },
+      { "cs", "<cmd>Copilot suggestion<CR>",                     desc = "Toggle Copilot suggestion" },
+      { "ct", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "Toggle Copilot suggestion auto trigger" },
+      { "[c", '<cmd>Copilot suggestion prev<CR>',                desc = "Prev Copilot suggestion" },
+      { "[p", '<cmd>Copilot panel jump_prev<CR>',                desc = "Prev Copilot panel" },
+      { "]c", '<cmd>Copilot suggestion next<CR>',                desc = "Next Copilot suggestion" },
+      { "]p", '<cmd>Copilot panel jump_next<CR>',                desc = "Next Copilot panel" },
+    },
+    -- stylua: ignore end
   },
 }
