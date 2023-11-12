@@ -13,14 +13,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
+vim.keymap.set("n", "<leader>e1", "<cmd>Lazy show<CR>", { desc = "Plugin info" })
 
 require("lazy").setup("cange.plugins", {
   checker = {
     notify = false, -- get a notification when new updates are found
     enabled = true, -- automatically check for plugin updates
-  },
-  ui = {
-    size = { width = 0.6 }, -- a number <1 is a percentage., >1 is a fixed size
   },
   change_detection = { notify = false },
 })

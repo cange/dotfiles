@@ -79,6 +79,9 @@ return {
         height = 1, -- height of the Zen window
       },
     },
+    keys = {
+      { "<leader>z", "<cmd>ZenMode<CR>", desc = "Toggle Zen Mode" },
+    },
   },
 
   { -- bookmark buffers
@@ -89,17 +92,34 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function() require("telescope").load_extension("harpoon") end,
+    keys = {
+      { "<leader>m", '<cmd>lua R("harpoon.ui").toggle_quick_menu()<CR>', desc = "Show ⇁ marks" },
+      { "<leader>sm", "<cmd>Telescope harpoon marks<CR>", desc = "Search ⇁ marks" },
+      { "<leader>a", '<cmd>lua R("harpoon.mark").add_file()<CR>', desc = "Add ⇁ mark" },
+      { "[m", '<cmd>lua R("harpoon.ui").nav_prev()<CR>', desc = "Prev ⇁ mark" },
+      { "]m", '<cmd>lua R("harpoon.ui").nav_next()<CR>', desc = "Next ⇁ mark" },
+      { "g1", '<cmd>lua R("harpoon.ui").nav_file(1)<CR>', desc = "⇁ to 1st mark" },
+      { "g2", '<cmd>lua R("harpoon.ui").nav_file(2)<CR>', desc = "⇁ to 2nd mark" },
+      { "g3", '<cmd>lua R("harpoon.ui").nav_file(3)<CR>', desc = "⇁ to 3rd mark" },
+      { "g4", '<cmd>lua R("harpoon.ui").nav_file(4)<CR>', desc = "⇁ to 4th mark" },
+    },
   },
 
   { -- small automated session manager
     "rmagatti/auto-session",
-    opts = function()
+    dependencies = "nvim-telescope/telescope.nvim",
+    config = function()
+      require("auto-session").setup({ auto_session_suppress_dirs = { "~/", "~/workspace" }}) -- Suppress session create/restore if in one of the list of dirs
+      require("telescope").load_extension("session-lens")
+
+      -- INFO: plugin is not working which lazy `keys` option is being used
+      vim.keymap.set("n", "<leader>eR", "<cmd>SessionRestore<CR>", { desc = "Recent session" })
+      vim.keymap.set("n", "<leader>eX", "<cmd>SessionDelete<CR>", { desc = "Delete session" })
+      vim.keymap.set("n", "<leader>es", "<cmd>SessionSave<CR>", { desc = "Save session" })
+      vim.keymap.set("n", "<leader>ss", "<cmd>Telescope session-lens<CR>", { desc = "Recent Sessions" })
+
       -- better experience with the plugin overall using this config for sessionoptions is recommended.
       vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
-
-      return {
-        auto_session_suppress_dirs = { "~/", "~/workspace" }, -- Suppress session create/restore if in one of the list of dirs
-      }
     end,
   },
 
@@ -119,7 +139,6 @@ return {
       plugins = {
         spelling = {
           enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-          suggestions = 8, -- how many suggestions should be shown in the list?
         },
       },
       icons = {
@@ -137,14 +156,15 @@ return {
         width = { min = 32, max = 56 }, -- min and max width of the columns
         spacing = 4, -- spacing between columns
       },
-      ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
     },
     config = function(_, opts)
       local wk = require("which-key")
 
       wk.setup(opts)
-
-      wk.register(require("cange.utils.keymaps").whichkey_mappings(), {})
+      wk.register({ ["<leader>c"] = { name = "Code/Copilot" } })
+      wk.register({ ["<leader>g"] = { name = "Git" } })
+      wk.register({ ["<leader>s"] = { name = "Search" } })
+      wk.register({ ["<leader>e"] = { name = "Editor" } })
     end,
   },
 }
