@@ -54,6 +54,9 @@ return {
       require("textcase").setup()
       require("telescope").load_extension("textcase")
     end,
+    keys = {
+      { "cc", "<cmd>TextCaseOpenTelescopeQuickChange<CR>", desc = "Change Case", mode = { "v", "n" } },
+    },
   },
 
   { -- close brackets, quotes etc

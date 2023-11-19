@@ -129,7 +129,6 @@ return {
     { "<leader>sw", "<cmd>Telescope grep_string<CR>",                       desc = "Current word" },
     { "<localleader>/", "<cmd>lua R('cange.telescope').live_grep()<CR>",    desc = "Search in Files" },
     { "cD", "<cmd>Telescope diagnostics<CR>",                               desc = "Workspace diagnostics" },
-    { "cc", "<cmd>TextCaseOpenTelescope<CR>",                               desc = "Change Case", mode = { "v", "n" } },
     { "cl", '<cmd>lua R("cange.telescope").diagnostics_log()<CR>',          desc = "File diagnostics" },
   },
   -- stylua: ignore end
