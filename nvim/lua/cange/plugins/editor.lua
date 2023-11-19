@@ -79,8 +79,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       window = {
-        backdrop = 0.9, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-        width = 1, -- width of the Zen window
+        width = 120, -- width of the Zen window
         height = 1, -- height of the Zen window
       },
     },

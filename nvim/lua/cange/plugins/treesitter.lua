@@ -38,7 +38,6 @@ return {
         config = function() require("nvim-ts-autotag").setup() end,
       },
       "HiPhish/nvim-ts-rainbow2",
-      "JoosepAlviste/nvim-ts-context-commentstring", -- contextual comment in embedded language files like Vue.JS
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/playground",
     },
