@@ -68,6 +68,11 @@ return {
     end,
   },
 
+  { -- Extensible UI notifications and LSP progress messages.
+    "j-hui/fidget.nvim",
+    opts = {},
+  },
+
   { -- Distraction-free coding
     "folke/zen-mode.nvim",
     lazy = true,
@@ -109,7 +114,7 @@ return {
     "rmagatti/auto-session",
     dependencies = "nvim-telescope/telescope.nvim",
     config = function()
-      require("auto-session").setup({ auto_session_suppress_dirs = { "~/", "~/workspace" }}) -- Suppress session create/restore if in one of the list of dirs
+      require("auto-session").setup({ auto_session_suppress_dirs = { "~/", "~/workspace" } }) -- Suppress session create/restore if in one of the list of dirs
       require("telescope").load_extension("session-lens")
 
       -- INFO: plugin is not working which lazy `keys` option is being used

@@ -32,7 +32,6 @@ return {
               hint = i("diagnostics.Hint") .. " ",
             },
           },
-          "lsp_progress",
         },
         lualine_x = {
           {
