@@ -1,19 +1,7 @@
 {
-  "@media (max-width": {
-    "prefix": "@media(max",
-    "body": "@media (max-width: $1) {\n\t$2\n}"
-  },
-  "@media (min-width": {
-    "prefix": "@media(min",
-    "body": "@media (min-width: $1) {\n\t$2\n}"
-  },
-  "@media min/max-range": {
-    "prefix": "@media(range",
-    "body": "@media (min-width: $1) and (max-width: $2)) {\n\t$3\n}"
-  },
   "var(--v-color-…": {
     "prefix": "col",
-    "body": "var(--v-color-${1|blue,gray,green,orange,navy,red,white|}-${2|0,5,10,20,30,40,50,60,70,80,90,100,110,120,130,140|}${3|),-rgb)|}${4:;}"
+    "body": "var(--v-color-${1|blue,gray,green,darkgreen,orange,navy,red,white|}-${2|0,5,10,20,30,40,50,60,70,80,90,100,110,120,130,140|}${3|),-rgb)|}${4:;}"
   },
   "var(--v-breakpoint…": {
     "prefix": "breakpoint",
@@ -38,6 +26,18 @@
   "calc(size-1 * …": {
     "prefix": "sizc",
     "body": "calc(var(--v-size-1) * $1)${2:;}"
+  },
+  "@media (max-width": {
+    "prefix": "@media(max",
+    "body": "@media (max-width: $1) {\n\t$2\n}"
+  },
+  "@media (min-width": {
+    "prefix": "@media(min",
+    "body": "@media (min-width: $1) {\n\t$2\n}"
+  },
+  "@media min/max-range": {
+    "prefix": "@media(range",
+    "body": "@media (min-width: $1) and (max-width: $2)) {\n\t$3\n}"
   },
   "var(--…": {
     "prefix": "var(",

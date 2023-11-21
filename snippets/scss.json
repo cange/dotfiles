@@ -1,4 +1,16 @@
 {
+  "v-breakpoint(…) - mixin": {
+    "prefix": "brem",
+    "body": "@include v-breakpoint(${1|desktop,tablet,mobile|}, ${2|up,only,down|}) {\n\t$3\n}"
+  },
+  "v-breakpoint(…) - function": {
+    "prefix": "bref",
+    "body": "@media ($2-width: v-breakpoint(${1|desktop,tablet,mobile|}, ${2|min,max|})) {\n\t$3\n}"
+  },
+  "@use - design-tokens": {
+    "prefix": "@usedt",
+    "body": "@$use '@visable-dev/design-tokens/dist/tokens' as *;\n$2"
+  },
   "@group - SassDoc": {
     "prefix": "@group",
     "body": "////\n/// @group $1\n////"
@@ -26,73 +38,5 @@
   "map.merge(…)": {
     "prefix": "mapm",
     "body": "map.merge($${1:props}, $2)"
-  },
-  "wlw-color(…)": {
-    "prefix": "col",
-    "body": "wlw-color('${1|navy,blue,green,red,orange,yellow|}-${2|1,2,3,4,5,6,7,8,9,10|}0')$3"
-  },
-  "wlw-breakpoint(…)": {
-    "prefix": "brew",
-    "body": "wlw-breakpoint(${1|desktop,tablet,mobile|}$2)$3"
-  },
-  "v-breakpoint(…) - mixin": {
-    "prefix": "brem",
-    "body": "@include v-breakpoint(${1|desktop,tablet,mobile|}, ${2|up,only,down|}) {\n\t$3\n}"
-  },
-  "v-breakpoint(…) - function": {
-    "prefix": "bref",
-    "body": "@media ($2-width: v-breakpoint(${1|desktop,tablet,mobile|}, ${2|min,max|})) {\n\t$3\n}"
-  },
-  "@use - design-tokens": {
-    "prefix": "@usedt",
-    "body": "@use '@visable-dev/design-tokens/dist/${1|wlw,europages,visable|}/tokens' as *;\n$2"
-  },
-  "@import - design-tokens": {
-    "prefix": "@impdt",
-    "body": "@import '@visable-dev/design-tokens/dist/${1|wlw,europages,visable|}/tokens';\n$2"
-  },
-  "wlw-alpha(…)": {
-    "prefix": "alp",
-    "body": "wlw-alpha($1)$2"
-  },
-  "wlw-border(…)": {
-    "prefix": "bor",
-    "body": "wlw-border($1)$2"
-  },
-  "wlw-border-radius(…)": {
-    "prefix": "bora",
-    "body": "@include wlw-border-radius(${1:value}, ${2:orientation});"
-  },
-  "wlw-icon-size(…)": {
-    "prefix": "ico",
-    "body": "wlw-icon-size($1)$2"
-  },
-  "wlw-font-weight(…)": {
-    "prefix": "fw",
-    "body": "wlw-font-weight(${1|bold,normal,light|})$2"
-  },
-  "wlw-radius(…)": {
-    "prefix": "rad",
-    "body": "wlw-radius($1)$2"
-  },
-  "wlw-spacing(…)": {
-    "prefix": "spa",
-    "body": "wlw-spacing($1)$2"
-  },
-  "@include wlw-hover(…)": {
-    "prefix": "hov",
-    "body": "@include wlw-hover {\n\t$1\n}"
-  },
-  "wlw-box-shadow(100-400)": {
-    "prefix": "sha",
-    "body": "wlw-box-shadow(${1|1,2,3,4|}00)$2"
-  },
-  "wlw-speed(…)": {
-    "prefix": "spe",
-    "body": "wlw-speed($1)$2"
-  },
-  "wlw-easing(…)": {
-    "prefix": "eas",
-    "body": "wlw-easing(${1|ease,ease-in,ease-out,ease-in-out,linear,bounce-in,bounce-out,bounce-in-out|})"
   }
 }
