@@ -19,8 +19,16 @@ end
 
 require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
 
-local M = {}
+local mapping = {
+  select_next_choice = function()
+    if luasnip.choice_active() then luasnip.change_choice(1) end
+  end,
+  select_prev_choice = function()
+    if luasnip.choice_active() then luasnip.change_choice(-1) end
+  end,
+}
 
+local M = {}
 M.opts = {
   completion = {
     completeopt = "menu,menuone",
@@ -28,14 +36,23 @@ M.opts = {
   mapping = {
     ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-k>"] = cmp.mapping.select_prev_item(),
+    ["<C-[>"] = mapping.select_prev_choice,
+    ["<C-]>"] = mapping.select_next_choice,
+    ["<C-h>"] = mapping.select_prev_choice,
+    ["<C-l>"] = mapping.select_next_choice,
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm({
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ["<S-CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = true, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
+    ["<C-CR>"] = function(fallback)
+      cmp.abort()
+      fallback()
+    end,
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -52,21 +69,6 @@ M.opts = {
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
       else
         fallback()
-      end
-    end, { "i", "s" }),
-
-    ["<C-h>"] = cmp.mapping(function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(-1)
-      else
-        cmp.mapping.select_prev_item()
-      end
-    end, { "i", "s" }),
-    ["<C-l>"] = cmp.mapping(function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(1)
-      else
-        cmp.mapping.select_next_item()
       end
     end, { "i", "s" }),
   },
