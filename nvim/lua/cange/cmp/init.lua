@@ -20,12 +20,27 @@ end
 require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
 
 local mapping = {
-  select_next_choice = function()
-    if luasnip.choice_active() then luasnip.change_choice(1) end
+  select_next_choice = function(fallback)
+    if luasnip.choice_active() then
+      luasnip.change_choice(1)
+    else
+      fallback() -- required to exit when in insert mode
+    end
   end,
-  select_prev_choice = function()
-    if luasnip.choice_active() then luasnip.change_choice(-1) end
+  select_prev_choice = function(fallback)
+    if luasnip.choice_active() then
+      luasnip.change_choice(-1)
+    else
+      fallback() -- required to exit when in insert mode
+    end
   end,
+  confirm_and_select_next_item = cmp.mapping(function(fallback)
+    if luasnip.expand_or_jumpable() then
+      vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+    end
+    cmp.abort()
+    fallback()
+  end),
 }
 
 local M = {}
@@ -43,7 +58,7 @@ M.opts = {
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
+    ["<C-e>"] = mapping.confirm_and_select_next_item,
     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     ["<S-CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
@@ -56,7 +71,7 @@ M.opts = {
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif require("luasnip").expand_or_jumpable() then
+      elseif luasnip.expand_or_jumpable() then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
       else
         fallback()
@@ -65,7 +80,7 @@ M.opts = {
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif require("luasnip").jumpable(-1) then
+      elseif luasnip.jumpable(-1) then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
       else
         fallback()
