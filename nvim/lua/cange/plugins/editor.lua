@@ -79,7 +79,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       window = {
-        width = 120, -- width of the Zen window
+        width = 160, -- width of the Zen window
         height = 1, -- height of the Zen window
       },
     },
