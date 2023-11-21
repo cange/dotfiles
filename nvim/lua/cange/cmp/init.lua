@@ -20,27 +20,27 @@ end
 require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
 
 local mapping = {
-  select_next_choice = function(fallback)
+  select_next_choice = cmp.mapping(function(fallback)
     if luasnip.choice_active() then
       luasnip.change_choice(1)
     else
       fallback() -- required to exit when in insert mode
     end
-  end,
-  select_prev_choice = function(fallback)
+  end, { "i", "s" }),
+  select_prev_choice = cmp.mapping(function(fallback)
     if luasnip.choice_active() then
       luasnip.change_choice(-1)
     else
       fallback() -- required to exit when in insert mode
     end
-  end,
-  confirm_and_select_next_item = cmp.mapping(function(fallback)
+  end, { "i", "s" }),
+  apply_item_and_select_next = cmp.mapping(function(fallback)
     if luasnip.expand_or_jumpable() then
       vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
     end
     cmp.abort()
     fallback()
-  end),
+  end, { "i", "s" }),
 }
 
 local M = {}
@@ -58,7 +58,7 @@ M.opts = {
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = mapping.confirm_and_select_next_item,
+    ["<C-e>"] = mapping.apply_item_and_select_next,
     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     ["<S-CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
