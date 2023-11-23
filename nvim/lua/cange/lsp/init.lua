@@ -77,7 +77,7 @@ local function define_sign_icons()
   return signs
 end
 
-function M.setup_diagnostics()
+function M.update_diagnostics()
   vim.diagnostic.config({
     float = {
       source = "if_many", -- Or "always"
@@ -89,21 +89,19 @@ function M.setup_diagnostics()
   })
 end
 
----Triggers LSP or language specific formatting
----@param opts? table<string, boolean>
-function M.format(opts)
-  opts = opts or {}
-  if not Cange.get_config("lsp.format_on_save") and not opts.force then return end
+function M.update_format_on_save()
   local ok, conform = pcall(require, "conform")
   if not ok then return end
-
-  Log:info("Auto format", "cange.lsp")
-  conform.format({
-    async = false,
-    bufnr = vim.api.nvim_get_current_buf(),
-    lsp_fallback = true,
-    timeout_ms = 1000,
-  })
+  local opts = { format_on_save = nil }
+  if Cange.get_config("lsp.format_on_save") then
+    opts = {
+      format_on_save = {
+        lsp_fallback = true,
+        timeout_ms = 1000,
+      },
+    }
+  end
+  conform.setup(opts)
 end
 
 return M

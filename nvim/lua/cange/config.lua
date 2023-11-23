@@ -6,7 +6,7 @@ return {
     diagnostic_virtual_text = true,
     format_on_save = true,
     -- points to the global node_modules system location
-    mason_packages_path = vim.fn.expand("~") .. "/.local/share/nvim/mason/packages"
+    mason_packages_path = vim.fn.expand("~") .. "/.local/share/nvim/mason/packages",
   },
   snippets = {
     path = "./../snippets",

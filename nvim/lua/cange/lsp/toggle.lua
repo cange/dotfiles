@@ -17,12 +17,13 @@ local M = {}
 function M.virtual_text()
   local toggle_state = toggle(diagnostic_virtual_text, "Diagnostic virtual inline text")
   Cange.set_config("lsp.diagnostic_virtual_text", toggle_state)
-  vim.diagnostic.config({ virtual_text = toggle_state })
+  require("cange.lsp").update_diagnostics()
 end
 
 function M.format_on_save()
   local toggle_state = toggle(format_on_save, "Auto format on save")
   Cange.set_config("lsp.format_on_save", toggle_state)
+  require("cange.lsp").update_format_on_save()
 end
 
 return M

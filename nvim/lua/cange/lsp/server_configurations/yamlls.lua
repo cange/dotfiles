@@ -12,7 +12,7 @@ return {
         ["https://json.schemastore.org/yamllint.json"] = "/*yamllint.y*ml",
         ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/*docker-compose.y*ml",
         ["https://yarnpkg.com/configuration/yarnrc.json"] = "/*.yarnrc.y*ml",
-        [vim.fn.expand("$HOME/workspace/services/wlw_styleguide/schemas/docs.schema.json")]= "documentation.y*ml",
+        [vim.fn.expand("$HOME/workspace/services/wlw_styleguide/schemas/docs.schema.json")] = "documentation.y*ml",
       },
       schemaStore = {
         url = "https://www.schemastore.org/json",

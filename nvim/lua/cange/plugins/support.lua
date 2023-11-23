@@ -20,7 +20,8 @@ return {
 
   { -- Improve the built-in vim.ui interfaces with telescope, fzf, etc
     "stevearc/dressing.nvim",
-    event = "VeryLazy",
+    lazy = true,
+    event = { "VimEnter" },
   },
 
   { -- comment toggle

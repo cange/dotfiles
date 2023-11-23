@@ -25,7 +25,12 @@ return {
       ["_"] = { "trim_whitespace" },
     },
   },
+  config = function(_, opts)
+    require("conform").setup(opts)
+    require("cange.lsp").update_format_on_save()
+  end,
   keys = {
     { "<leader>e3", "<cmd>ConformInfo<CR>", desc = "Formatter info" },
+    { "<localleader>f", '<cmd>lua require("conform").format()<CR>', desc = "Format" },
   },
 }
