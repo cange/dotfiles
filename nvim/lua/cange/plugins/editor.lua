@@ -70,7 +70,13 @@ return {
 
   { -- Extensible UI notifications and LSP progress messages.
     "j-hui/fidget.nvim",
-    opts = {},
+    opts = {
+      progress = {
+        display = {
+          done_icon = i("ui.Check"),
+        },
+      },
+    },
   },
 
   { -- Distraction-free coding
@@ -166,9 +172,9 @@ return {
 
       wk.setup(opts)
       wk.register({ ["<leader>c"] = { name = "Code/Copilot" } })
+      wk.register({ ["<leader>e"] = { name = "Editor" } })
       wk.register({ ["<leader>g"] = { name = "Git" } })
       wk.register({ ["<leader>s"] = { name = "Search" } })
-      wk.register({ ["<leader>e"] = { name = "Editor" } })
     end,
   },
 }
