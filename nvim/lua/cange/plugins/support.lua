@@ -1,33 +1,20 @@
 local i = Cange.get_icon
 
 return {
-  { -- popover notification
-    "rcarriga/nvim-notify",
-    opts = {
-      icons = {
-        ERROR = i("diagnostics.Error"),
-        WARN = i("diagnostics.Warn"),
-        INFO = i("diagnostics.Info"),
-        DEBUG = i("ui.Bug"),
-        TRACE = i("ui.Edit"),
-      },
-      timeout = 3000,
-      render = "compact",
-      top_down = false,
-    },
-    init = function() vim.notify = require("notify") end,
-  },
-
-  { -- Improve the built-in vim.ui interfaces with telescope, fzf, etc
-    "stevearc/dressing.nvim",
-    lazy = true,
-    event = { "VimEnter" },
-  },
-
   { -- comment toggle
     "numToStr/Comment.nvim",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
+  },
+
+  { -- highlight TODO, FIXME, etc in comments
+    "folke/todo-comments.nvim",
+    event = "VeryLazy",
+    opts = {
+      keywords = {
+        NOTE = { icon = " ", color = "hint", alt = { "INFO", "DEPRECATED" } },
+      },
+    },
   },
 
   { -- contextual comment in embedded language files like Vue.JS
@@ -39,14 +26,6 @@ return {
       })
     end,
   },
-
-  { -- highlight TODO, FIXME, etc in comments
-    "folke/todo-comments.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
-
-  { "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } }, -- Highlight the word under the cursor
 
   { -- text case converter (camel case, etc.,
     "johmsalas/text-case.nvim",
@@ -82,27 +61,6 @@ return {
 
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
-  },
-
-  { -- indentation guides to all lines
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    main = "ibl",
-    opts = {
-      exclude = { filetypes = { "help", "dashboard", "NvimTree", "lazy", "mason", "notify" } },
-      indent = {
-        char = i("ui.VThinLineLeft"),
-        highlight = {
-          "RainbowRed",
-          "RainbowYellow",
-          "RainbowBlue",
-          "RainbowOrange",
-          "RainbowGreen",
-          "RainbowViolet",
-          "RainbowCyan",
-        },
-      },
-    },
   },
 
   { -- Markdown preview
@@ -160,10 +118,4 @@ return {
       },
     },
   },
-
-  -- multi search and replace
-  { "mg979/vim-visual-multi", event = "VeryLazy" },
-
-  -- is all about "surroundings": parentheses, brackets, quotes, XML tags, and more
-  { "tpope/vim-surround", event = "VeryLazy" },
 }

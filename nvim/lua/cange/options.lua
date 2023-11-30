@@ -41,7 +41,7 @@ local options = {
   -- indentation
   autoindent = false, -- auto indent on copy paste
   breakindent = true, -- indentation when wrapping text
-  colorcolumn = "120", -- highlight optimal end line¬
+  colorcolumn = { "80", "120" }, -- highlight optimal end line¬
   formatoptions = "cjnqort", -- line wrap logic
   smartindent = true, -- make indenting smarter again
   swapfile = false, -- creates a swapfile
@@ -69,6 +69,13 @@ end
 vim.opt.iskeyword:append({ "-" }) --  considers dash "-" as part of a keyword
 vim.opt.shortmess:append({ c = true }) -- don't give |ins-completion-menu| messages
 vim.opt.listchars:append({ eol = "↵", nbsp = "␣", tab = "⇥ ", trail = "·" })
+vim.opt.fillchars:append({
+  eob = " ",
+  fold = " ",
+  foldsep = " ",
+  -- foldopen = "",
+  -- foldclose = "",
+})
 
 -- Basic Keymaps
 -- Set <space> as the leader key

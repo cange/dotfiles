@@ -16,7 +16,7 @@ return {
       { "[d",         vim.diagnostic.goto_prev,                                        desc = "Prev Diagnostic" },
       { "<leader>ca", vim.lsp.buf.code_action,                                         desc = "Code actions/Quickfixes" },
       { "<leader>cd", "<cmd>lua R('cange.lsp.toggle').virtual_text()<CR>",             desc = "Toggle inline virtual text" },
-      { "<leader>cr", "<cmd>LspRestart;<CR><cmd>lua Log:info('Restarted', 'LSP')<CR>", desc = "LSP Restart" },
+      { "<leader>cr", "<cmd>LspRestart;<CR>",                                          desc = "LSP Restart" },
       { "gD",         vim.lsp.buf.declaration,                                         desc = "LSP Goto symbol Declaration" },
       { "gd",         vim.lsp.buf.definition,                                          desc = "LSP Goto symbol Definition" },
       { "gi",         vim.lsp.buf.implementation,                                      desc = "LSP List symbol Implementation" },
@@ -122,5 +122,16 @@ return {
         symbols = symbols,
       }
     end,
+  },
+
+  { -- Extensible UI notifications and LSP progress messages.
+    "j-hui/fidget.nvim",
+    opts = {
+      progress = {
+        display = {
+          done_icon = i("ui.Check"),
+        },
+      },
+    },
   },
 }

@@ -68,32 +68,6 @@ return {
     end,
   },
 
-  { -- Extensible UI notifications and LSP progress messages.
-    "j-hui/fidget.nvim",
-    opts = {
-      progress = {
-        display = {
-          done_icon = i("ui.Check"),
-        },
-      },
-    },
-  },
-
-  { -- Distraction-free coding
-    "folke/zen-mode.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      window = {
-        width = 160, -- width of the Zen window
-        height = 1, -- height of the Zen window
-      },
-    },
-    keys = {
-      { "<leader>z", "<cmd>ZenMode<CR>", desc = "Toggle Zen Mode" },
-    },
-  },
-
   { -- bookmark buffers
     "ThePrimeagen/harpoon",
     event = "VeryLazy",
@@ -133,15 +107,6 @@ return {
     end,
   },
 
-  { -- font icon set
-    "nvim-tree/nvim-web-devicons",
-    lazy = true,
-    config = function()
-      require("nvim-web-devicons").setup()
-      require("cange.utils.icons").setup()
-    end,
-  },
-
   { -- keymaps
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -177,4 +142,13 @@ return {
       wk.register({ ["<leader>s"] = { name = "Search" } })
     end,
   },
+
+  -- Highlight the word under the cursor
+  { "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } },
+
+  -- multi search and replace
+  { "mg979/vim-visual-multi", event = "VeryLazy" },
+
+  -- allows to surround sections parentheses, brackets, quotes, XML tags, and more
+  { "tpope/vim-surround", event = "VeryLazy" },
 }

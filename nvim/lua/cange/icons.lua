@@ -46,11 +46,11 @@ M.ui = {
   -- shapes
   TriangleLowerLeft   = "", -- nf-ple-lower_left_triangle
   TriangleUpperRight  = "", -- nf-ple-upper_right_triangle
-  Pipe                = "|", -- U+007C
-  VDashLineLeft       = "┆", -- U+2506
-  VWavyLine           = "⌇", -- U+2307
   VLineLeft           = "▎", -- U+258E
   VThinLineLeft       = "▏", -- U+258F
+  Pipe                = "|", -- U+007C
+  VDashedLine         = "┆", -- U+2506
+  VThinLine           = "│", -- U+2502
 }
 M.extensions = {
   Babelrc             = "󰨥", -- nf-md-babel

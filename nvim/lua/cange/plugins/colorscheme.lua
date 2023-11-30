@@ -32,6 +32,7 @@ local function update_highlights()
     CursorLine = { bg = p.bg2 }, -- disable default
     Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
     Todo = { bg = nil, bold = true },
+    NonText = { fg = p.bg2 },
     -- illuminate
     IlluminatedWordText = { bg = p.bg2 }, -- Default for references if no kind information is available
     IlluminatedWordRead = { bg = p.sel0, fg = p.fg1 }, -- for references of kind read
@@ -65,14 +66,6 @@ local function update_highlights()
 
     -- indent-blankline
     IblScope = { fg = p.green.dim },
-    -- Rainbow (indent-blankline)
-    RainbowRed = { fg = blend(Cange.get_hl_hex("TSRainbowRed", "fg").fg, 0.8) },
-    RainbowYellow = { fg = blend(Cange.get_hl_hex("TSRainbowYellow", "fg").fg, 0.8) },
-    RainbowBlue = { fg = blend(Cange.get_hl_hex("TSRainbowBlue", "fg").fg, 0.8) },
-    RainbowOrange = { fg = blend(Cange.get_hl_hex("TSRainbowOrange", "fg").fg, 0.8) },
-    RainbowGreen = { fg = blend(Cange.get_hl_hex("TSRainbowGreen", "fg").fg, 0.8) },
-    RainbowViolet = { fg = blend(Cange.get_hl_hex("TSRainbowViolet", "fg").fg, 0.8) },
-    RainbowCyan = { fg = blend(Cange.get_hl_hex("TSRainbowCyan", "fg").fg, 0.8) },
 
     -- completion
     CmpGhostText = { fg = p.fg3, italic = true },
