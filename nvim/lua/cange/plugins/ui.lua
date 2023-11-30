@@ -1,6 +1,9 @@
 local i = Cange.get_icon
 
 return {
+  -- advanced colorcolumn
+  { "lukas-reineke/virt-column.nvim", opts = { char = i("ui.VThinLine") } },
+
   { -- indentation guides to all lines
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
