@@ -35,8 +35,8 @@ local function update_highlights()
     NonText = { fg = p.bg2 },
     -- illuminate
     IlluminatedWordText = { bg = p.bg2 }, -- Default for references if no kind information is available
-    IlluminatedWordRead = { bg = p.sel0, fg = p.fg1 }, -- for references of kind read
-    IlluminatedWordWrite = { bg = p.bg2, bold = true }, -- for references of kind write
+    IlluminatedWordRead = { bg = p.bg2, bold = true }, -- for references of kind read
+    IlluminatedWordWrite = { bold = true }, -- for references of kind write
 
     -- Window
     FloatTitle = { fg = p.fg3, bg = p.bg0 },
