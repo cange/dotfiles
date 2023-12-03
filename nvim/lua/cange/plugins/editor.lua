@@ -71,22 +71,35 @@ return {
   { -- bookmark buffers
     "ThePrimeagen/harpoon",
     event = "VeryLazy",
+    branch = "harpoon2",
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",
     },
-    config = function() require("telescope").load_extension("harpoon") end,
-    keys = {
-      { "<leader>m", '<cmd>lua R("harpoon.ui").toggle_quick_menu()<CR>', desc = "Show ⇁ marks" },
-      { "<leader>sm", "<cmd>Telescope harpoon marks<CR>", desc = "Search ⇁ marks" },
-      { "<leader>a", '<cmd>lua R("harpoon.mark").add_file()<CR>', desc = "Add ⇁ mark" },
-      { "[m", '<cmd>lua R("harpoon.ui").nav_prev()<CR>', desc = "Prev ⇁ mark" },
-      { "]m", '<cmd>lua R("harpoon.ui").nav_next()<CR>', desc = "Next ⇁ mark" },
-      { "m1", '<cmd>lua R("harpoon.ui").nav_file(1)<CR>', desc = "⇁ to 1st mark" },
-      { "m2", '<cmd>lua R("harpoon.ui").nav_file(2)<CR>', desc = "⇁ to 2nd mark" },
-      { "m3", '<cmd>lua R("harpoon.ui").nav_file(3)<CR>', desc = "⇁ to 3rd mark" },
-      { "m4", '<cmd>lua R("harpoon.ui").nav_file(4)<CR>', desc = "⇁ to 4th mark" },
+    opts = {
+      settings = {
+        save_on_toggle = true, -- any time the ui menu is closed then sync
+        ui_width_ratio = 0.35,
+      },
     },
+    config = function(_, opts)
+      require("harpoon"):setup(opts)
+      require("telescope").load_extension("harpoon")
+    end,
+    keys = function()
+      local harpoon = require("harpoon")
+      return {
+        { "<leader>a", function() harpoon:list():append() end, desc = "Add ⇁ mark" },
+        { "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show ⇁ marks" },
+        { "<leader>sm", "<cmd>Telescope harpoon marks<CR>", desc = "Search ⇁ marks" },
+        { "m1", function() harpoon:list():select(1) end, desc = "⇁ to 1st mark" },
+        { "m2", function() harpoon:list():select(2) end, desc = "⇁ to 2nd mark" },
+        { "m3", function() harpoon:list():select(3) end, desc = "⇁ to 3rd mark" },
+        { "m4", function() harpoon:list():select(4) end, desc = "⇁ to 4th mark" },
+        -- { "[m", '<cmd>lua R("harpoon.ui").nav_prev()<CR>', desc = "Prev ⇁ mark" },
+        -- { "]m", '<cmd>lua R("harpoon.ui").nav_next()<CR>', desc = "Next ⇁ mark" },
+      }
+    end,
   },
 
   { -- small automated session manager

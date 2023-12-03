@@ -40,20 +40,20 @@ local function update_highlights()
 
     -- Window
     FloatTitle = { fg = p.fg3, bg = p.bg0 },
-    FloatNormal = { fg = p.fg1, bg = p.bg1 },
+    NormalFloat = { fg = p.fg1, bg = p.bg1 },
     FloatBorder = { fg = p.bg0, bg = p.bg0 },
     -- SymboleOutline
     FocusedSymbol = { bold = true },
     -- Harpoon
+    HarpoonWindow = { link = "NormalFloat" },
+    HarpoonTitle = { link = "FloatTitle" },
     HarpoonBorder = { link = "FloatBorder" },
-    HarpoonCurrentFile = { italic = true },
-    HarpoonWindow = { link = "FloatNormal" },
-    -- Telescope
+    -- NormalTelescope
     TelescopeBorder = { link = "FloatBorder" },
     TelescopeMatching = { link = "MatchParen" },
     TelescopePreviewTitle = { link = "FloatTitle" },
     TelescopePromptBorder = { link = "FloatBorder" },
-    TelescopePromptNormal = { link = "FloatNormal" },
+    TelescopePromptNormal = { link = "NormalFloat" },
     TelescopePromptTitle = { link = "FloatTitle" },
     TelescopeResultsNormal = { fg = p.fg0, bg = p.bg0 },
     TelescopeSelection = { fg = p.fg2, bg = p.sel0 },
