@@ -8,7 +8,8 @@ source_if_exists "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
 if type fzf &> /dev/null; then
   # Theme: Nightfox/Style: terafox
   # https://github.com/EdenEast/nightfox.nvim/tree/main/extra/terafox
-  export FZF_DEFAULT_OPTS="--no-height --color=bg+:#293e40,gutter:-1,pointer:#e6eaea,info:#7aa4a1,hl:#ff8349,hl+:#ff8349"
+  # https://minsw.github.io/fzf-color-picker/
+  export FZF_DEFAULT_OPTS='--color=fg:#e6eaea,bg:-1,hl:#d78b6c --color=fg+:#eaeeee,bg+:#293e40,hl+:#fda47f --color=info:#5a93aa,prompt:#a1cdd8,pointer:#e6eaea --color=marker:#587b7b,spinner:#1d3337,header:#5a93aa'
 
   if type fd &> /dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
