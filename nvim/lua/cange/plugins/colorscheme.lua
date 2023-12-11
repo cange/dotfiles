@@ -65,7 +65,7 @@ local function update_highlights()
     NvimTreeGitRenamed = { fg = p.magenta.base },
 
     -- indent-blankline
-    IblScope = { fg = p.green.dim },
+    MiniIndentscopeSymbol = { fg = p.green.dim },
 
     -- completion
     CmpGhostText = { fg = p.fg3, italic = true },

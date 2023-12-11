@@ -4,14 +4,18 @@ return {
   -- advanced colorcolumn
   { "lukas-reineke/virt-column.nvim", opts = { char = i("ui.VThinLine") } },
 
-  { -- indentation guides to all lines
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    main = "ibl",
-    opts = {
-      exclude = { filetypes = { "help", "dashboard", "NvimTree", "lazy", "mason", "notify" } },
-      indent = { char = i("ui.VThinLineLeft") },
-    },
+  { -- indentation scope lines
+    "echasnovski/mini.indentscope",
+    version = "*",
+    config = function()
+      require("mini.indentscope").setup({
+        symbol = i("ui.VThinLineLeft"),
+        draw = {
+          delay = 0,
+          animation = require("mini.indentscope").gen_animation.none(),
+        },
+      })
+    end,
   },
 
   { -- popover notification
