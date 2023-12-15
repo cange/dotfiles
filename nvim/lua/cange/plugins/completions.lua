@@ -11,6 +11,7 @@ return {
       "hrsh7th/cmp-nvim-lsp-signature-help", -- source displaying function signatures with the current parameter
       "hrsh7th/cmp-nvim-lua", -- Neovim's Lua API
       "hrsh7th/cmp-path", -- path completions
+      "chrisgrieser/cmp-nerdfont",
       "saadparwaiz1/cmp_luasnip", -- snippet completions
       {
         "zbirenbaum/copilot-cmp",

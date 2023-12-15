@@ -93,6 +93,7 @@ M.opts = {
     { name = "path" },
     { name = "copilot" },
     { name = "cmp_tabnine" },
+    { name = "nerdfont" },
   }, {
     { name = "buffer" },
     { name = "nvim_lsp_signature_help" },
