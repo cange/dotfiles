@@ -40,25 +40,11 @@ M.keymaps = {
 
 M.server_config = {
   on_attach = function(_, bufnr)
-    -- Use LSP as the handler for formatexpr.
+    -- enable formatting for ranges
     vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      border = Cange.get_config("ui.border"),
-      title = "Hover",
-    })
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-      border = Cange.get_config("ui.border"),
-      title = "Signature Help",
-    })
-
-    for _, key in pairs(M.keymaps) do
-      local mode = "n"
-      local lhs = key[1]
-      local rhs = key[2]
-      local opts = { desc = key.desc, noremap = true, silent = true, buffer = bufnr }
-
-      vim.keymap.set(mode, lhs, rhs, opts)
+    for _, keys in pairs(M.keymaps) do
+      vim.keymap.set("n", keys[1], keys[2], { desc = keys.desc, noremap = true, silent = true, buffer = bufnr })
     end
   end,
   capabilities = capabilities(),

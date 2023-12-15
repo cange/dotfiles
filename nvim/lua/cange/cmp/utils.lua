@@ -52,6 +52,16 @@ function M.format(entry, vim_item)
   local strength = ""
   local is_multiline = false
 
+  -- Show filetype icons for path source
+  if vim.tbl_contains({ "path" }, entry.source.name) then
+    local icon, hl_group = require("nvim-web-devicons").get_icon(entry:get_completion_item().label)
+    if icon then
+      vim_item.kind = icon
+      vim_item.kind_hl_group = hl_group
+      return vim_item
+    end
+  end
+
   if src_name == "copilot" then
     is_multiline = ((cmp_item.documentation or {}).value or ""):find(".*\n.+\n.+\n") ~= nil
   end

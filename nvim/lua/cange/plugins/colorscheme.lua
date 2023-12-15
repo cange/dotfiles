@@ -39,9 +39,9 @@ local function update_highlights()
     IlluminatedWordWrite = { bold = true }, -- for references of kind write
 
     -- Window
-    FloatTitle = { fg = p.fg3, bg = p.bg0 },
-    NormalFloat = { fg = p.fg1, bg = p.bg1 },
     FloatBorder = { fg = p.bg0, bg = p.bg0 },
+    FloatTitle = { fg = p.fg3, bg = p.bg0 },
+    NormalFloat = { fg = p.fg1, bg = p.bg0 },
     -- SymboleOutline
     FocusedSymbol = { bold = true },
     -- Harpoon

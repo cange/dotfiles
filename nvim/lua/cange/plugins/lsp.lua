@@ -67,6 +67,15 @@ return {
         require("lspconfig")[server].setup(config)
       end
       require("cange.lsp").update_diagnostics()
+
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = Cange.get_config("ui.border"),
+        title = "Hover",
+      })
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = Cange.get_config("ui.border"),
+        title = "Signature Help",
+      })
     end,
     -- stylua: ignore
     keys = require("cange.lsp").keymaps,
