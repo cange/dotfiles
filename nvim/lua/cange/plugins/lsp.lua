@@ -1,32 +1,80 @@
 local i = Cange.get_icon
+local servers = {
+  "bashls",
+  "cssls",
+  "eslint",
+  "html",
+  "jsonls",
+  "lemminx", -- xml, xsd, xsl, xslt, svg
+  "lua_ls",
+  "ruby_ls",
+  "svelte",
+  "tsserver", -- javascript, typescript, etc.
+  "volar", -- vue 3 and 2
+  "yamlls",
+}
+local formatters_and_linters = {
+  "eslint_d",
+  "jsonlint",
+  "markdownlint",
+  "prettierd",
+  "rubocop",
+  "stylelint",
+  "stylua",
+  "xmlformatter", -- svg
+  "yamllint",
+}
 
 return {
-  { -- lspconfig
-    "neovim/nvim-lspconfig", -- configure LSP servers
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    config = function() require("cange.lsp").update_diagnostics() end,
-    -- stylua: ignore start
-    keys = {
-      { "<leader>d",  vim.lsp.buf.type_definition,                                     desc = "LSP goto type Definition" },
-      { "<leader>e4", "<cmd>LspInfo<CR>",                                              desc = "LSP info" },
-      { "<leader>el", "<cmd>lua R('cange.lsp.toggle').format_on_save()<CR>",           desc = "Toggle format on save" },
-      { "<leader>r",  vim.lsp.buf.rename,                                              desc = "LSP Rename symbol" },
-      { "]d",         vim.diagnostic.goto_next,                                        desc = "Next Diagnostic" },
-      { "[d",         vim.diagnostic.goto_prev,                                        desc = "Prev Diagnostic" },
-      { "<leader>ca", vim.lsp.buf.code_action,                                         desc = "Code actions/Quickfixes" },
-      { "<leader>cd", "<cmd>lua R('cange.lsp.toggle').virtual_text()<CR>",             desc = "Toggle inline virtual text" },
-      { "<leader>cr", "<cmd>LspRestart;<CR>",                                          desc = "LSP Restart" },
-      { "gD",         vim.lsp.buf.declaration,                                         desc = "LSP Goto symbol Declaration" },
-      { "gd",         vim.lsp.buf.definition,                                          desc = "LSP Goto symbol Definition" },
-      { "gi",         vim.lsp.buf.implementation,                                      desc = "LSP List symbol Implementation" },
-      { "gr",         "<cmd>Telescope lsp_references<CR>",                             desc = "LSP Symbol References" },
+  { -- auto install main LSPs
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "hrsh7th/cmp-nvim-lsp",
+      { -- json/yaml schema support
+        "b0o/SchemaStore.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+      },
     },
-    -- stylua: ignore end
+    opts = {
+      ensure_installed = servers,
+      automatic_installation = true,
+    },
+  },
+
+  { -- loads LSP formatter and linter
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "williamboman/mason.nvim",
+    },
+    opts = {
+      ensure_installed = formatters_and_linters,
+      auto_update = true,
+    },
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      local config = require("cange.lsp").server_config
+      for _, server in ipairs(servers) do
+        local ok, server_config = pcall(require, "cange.lsp.server_configurations." .. server)
+        if ok then config = vim.tbl_deep_extend("force", config, server_config) end
+
+        require("lspconfig")[server].setup(config)
+      end
+      require("cange.lsp").update_diagnostics()
+    end,
+    -- stylua: ignore
+    keys = require("cange.lsp").keymaps,
   },
 
   { -- managing & installing LSP servers, linters & formatters
     "williamboman/mason.nvim",
+    dependencies = "neovim/nvim-lspconfig",
     opts = {
       ui = {
         border = Cange.get_config("ui.border"),
@@ -39,89 +87,7 @@ return {
       log_level = vim.log.levels.INFO,
       max_concurrent_installers = 4,
     },
-    keys = {
-      { "<leader>e2", "<cmd>Mason<CR>", desc = "Mason info" },
-    },
-  },
-
-  { -- loads main LSPs
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = "williamboman/mason.nvim",
-    opts = {
-      automatic_installation = true,
-      ensure_installed = {
-        "bashls",
-        "cssls",
-        "eslint",
-        "html",
-        "jsonls",
-        "lemminx", -- xml, xsd, xsl, xslt, svg
-        "ruby_ls",
-        "svelte",
-        "tsserver", -- javascript, typescript, etc.
-        "volar", -- vue 3 and 2
-        "yamlls",
-      },
-    },
-    config = function() require("mason-lspconfig").setup_handlers({ require("cange.lsp").setup_handler }) end,
-  },
-
-  { -- loads LSP formatter and linter
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "williamboman/mason.nvim",
-    },
-    opts = {
-      ensure_installed = {
-        "eslint_d",
-        "jsonlint",
-        "markdownlint",
-        "prettierd",
-        "rubocop",
-        "stylelint",
-        "stylua",
-        "xmlformatter", -- svg
-        "yamllint",
-      },
-      auto_update = true,
-    },
-  },
-
-  { -- slim language support (Ruby)
-    "slim-template/vim-slim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-  },
-
-  { -- json/yaml schema support
-    "b0o/SchemaStore.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-  },
-
-  {
-    "simrat39/symbols-outline.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    desc = "Symbol Browser",
-    keys = {
-      { "<localleader>O", "<cmd>SymbolsOutline<CR>", desc = "Toggle Symbole Browser" },
-    },
-    cmd = "SymbolsOutline",
-    opts = function()
-      local symbols = {}
-
-      ---@diagnostic disable-next-line: param-type-mismatch
-      for name, icon in pairs(i("cmp_kinds")) do
-        symbols[name] = { icon = icon }
-      end
-
-      return {
-        autofold_depth = 1,
-        fold_markers = { i("ui.ChevronRight"), i("ui.ChevronDown") },
-        show_symbol_details = false,
-        symbols = symbols,
-      }
-    end,
+    keys = { { "<leader>e2", "<cmd>Mason<CR>", desc = "Mason info" } },
   },
 
   { -- Extensible UI notifications and LSP progress messages.

@@ -5,33 +5,7 @@ if not cmp_ok then
   return
 end
 
----@param bufnr number
-local function keymaps(bufnr)
-  -- Use LSP as the handler for formatexpr.
-  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-  ---Preconfigured keymap
-  ---@param lhs string
-  ---@param rhs string|function
-  ---@param desc? string
-  local function keymap(lhs, rhs, desc)
-    local mode = "n"
-
-    desc = desc and "LSP: " .. desc or ""
-    local opts = { desc = desc, noremap = true, silent = true, buffer = bufnr }
-
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
-
-  -- See `:help K` for why this keymap
-  keymap("K", vim.lsp.buf.hover, "Hover symbol info")
-  keymap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-  -- NOTE: more keys defined in `cange/keymaps.lua`
-end
-
-local M = {}
-
-M.show_diagnostic_virtual_text = Cange.get_config("lsp.diagnostic_virtual_text") or false
-
+---@return table
 local function capabilities()
   local caps = cmp_nvim_lsp.default_capabilities()
   caps.textDocument.completion.completionItem.snippetSupport = true
@@ -39,31 +13,56 @@ local function capabilities()
   return caps
 end
 
----Keymapping for lspconfig on_attach options
----@param _ table client
----@param bufnr integer
-local function on_attach(_, bufnr) keymaps(bufnr) end
+local M = {}
 
----Sets up individual LSP server handler
----@param server_name string
-function M.setup_handler(server_name)
-  local ok, config = pcall(require, "cange.lsp.server_configurations." .. server_name)
-  config = vim.tbl_extend("force", { on_attach = on_attach, capabilities = capabilities() }, ok and config or {})
+M.show_diagnostic_virtual_text = Cange.get_config("lsp.diagnostic_virtual_text") or false
 
-  if server_name == "tsserver" then -- javascript,typescript
-    require("lspconfig").tsserver.setup({
-      on_attach = on_attach,
-      capabilities = capabilities(),
-      init_options = {
-        preferences = {
-          disableSuggestions = true,
-        },
-      },
+-- stylua: ignore start
+M.keymaps = {
+  { "<leader>ca", vim.lsp.buf.code_action,                                desc = "Code actions/Quickfixes" },
+  { "<leader>cd", "<cmd>lua R('cange.lsp.toggle').virtual_text()<CR>",    desc = "Toggle inline virtual text" },
+  { "<leader>cr", "<cmd>LspRestart;<CR>",                                 desc = "LSP Restart" },
+  { "<leader>e4", "<cmd>LspInfo<CR>",                                     desc = "LSP info" },
+  { "<leader>el", "<cmd>lua R('cange.lsp.toggle').format_on_save()<CR>",  desc = "Toggle format on save" },
+  { "<leader>r", vim.lsp.buf.rename,                                      desc = "LSP Rename symbol" },
+  { "[d", vim.diagnostic.goto_prev,                                       desc = "Prev Diagnostic" },
+  { "]d", vim.diagnostic.goto_next,                                       desc = "Next Diagnostic" },
+  { "gD", vim.lsp.buf.declaration,                                        desc = "LSP Goto symbol Declaration" },
+  { "gI", '<cmd>lua R("telescope.builtin").lsp_implementations({ reuse_win = true })<CR>', desc = "Goto Implementation" },
+  { "gd", vim.lsp.buf.definition,                                         desc = "LSP Goto symbol Definition" },
+  { "gi", vim.lsp.buf.implementation,                                     desc = "LSP List symbol Implementation" },
+  { "gr", "<cmd>Telescope lsp_references<CR>",                            desc = "LSP Symbol References" },
+  { "gy", '<cmd>lua R("telescope.builtin").lsp_type_definitions({ reuse_win = true })<CR>', desc = "LSP Goto Type Definition" },
+  { "K", vim.lsp.buf.hover,                                               desc = "LSP Hover symbol info" },
+  { "<C-k>", vim.lsp.buf.signature_help,                                  desc = "LSP Signature Documentation" },
+}
+-- stylua: ignore end
+
+M.server_config = {
+  on_attach = function(_, bufnr)
+    -- Use LSP as the handler for formatexpr.
+    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+      border = Cange.get_config("ui.border"),
+      title = "Hover",
     })
-  else
-    require("lspconfig")[server_name].setup(config)
-  end
-end
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+      border = Cange.get_config("ui.border"),
+      title = "Signature Help",
+    })
+
+    for _, key in pairs(M.keymaps) do
+      local mode = "n"
+      local lhs = key[1]
+      local rhs = key[2]
+      local opts = { desc = key.desc, noremap = true, silent = true, buffer = bufnr }
+
+      vim.keymap.set(mode, lhs, rhs, opts)
+    end
+  end,
+  capabilities = capabilities(),
+}
 
 ---@return table
 local function define_sign_icons()
