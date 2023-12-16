@@ -11,7 +11,7 @@ local i = Cange.get_icon
 local M = require("lualine.component"):extend()
 local refresh_count = 1
 
---NOTE: function wrappers enables spinner animation
+-- NOTE: function wrappers enables spinner animation
 local icons = {
   [""] = function() return i("ui.CopilotError") end,
   ["Normal"] = function() return i("ui.Copilot") end,

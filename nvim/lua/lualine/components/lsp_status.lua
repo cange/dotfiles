@@ -8,6 +8,15 @@ local icons = {
   ["active"] = i("ui.Globe"),
   ["inactive"] = i("ui.EyeClosed"),
 }
+---@class Config
+local config = { exclude_filetypes = { "help" } }
+
+---@param opts Config
+function M:init(opts)
+  M.super.init(self, opts)
+  config.exclude_filetypes =
+    vim.tbl_extend("force", self.options.disabled_filetypes.statusline, opts.exclude_filetypes or {})
+end
 
 ---@return table
 local function get_active_clients()
@@ -31,8 +40,9 @@ local function formatter(data)
     table.insert(store, truncate(label, 8))
   end
   local output = vim.o.columns > 100 and #store > 0 and table.concat(store, ", ") or ""
+  -- PF("LSP status -c: %s -s: %q -o: %q -config: %q", count, state, output, vim.inspect(config))
+  if vim.tbl_contains(config.exclude_filetypes, vim.bo.filetype) then return "" end
 
-  -- PF("LSP status -c: %s -s: %q -o: %q", count, state, output)
   return string.format("%s %s%s", icons[state], #output > 0 and "" or "LSP ", truncate(output, 24))
 end
 

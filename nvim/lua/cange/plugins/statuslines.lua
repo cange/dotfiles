@@ -1,4 +1,13 @@
 local i = Cange.get_icon
+local exclude_filetypes = {
+  "NvimTree",
+  "TelescopePrompt",
+  "gitcommit",
+  "harpoon",
+  "help",
+  "lazy",
+  "mason",
+}
 
 return {
   {
@@ -44,10 +53,10 @@ return {
             end,
           },
           { require("lazy.status").updates, cond = require("lazy.status").has_updates },
-          "lsp_status",
+          { "lsp_status", exclude_filetypes = exclude_filetypes },
         },
         lualine_y = {
-          "format_status",
+          { "format_status", exclude_filetypes = exclude_filetypes },
           "copilot_status",
           {
             "progress",
@@ -86,7 +95,7 @@ return {
           separator = i("ui.ChevronRight"),
         },
         show_modified = true,
-        exclude_filetypes = { "gitcommit", "toggleterm", "help", "NvimTree" },
+        exclude_filetypes = exclude_filetypes,
       })
     end,
   },

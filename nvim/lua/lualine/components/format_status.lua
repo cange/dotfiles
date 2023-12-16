@@ -13,6 +13,15 @@ local icons = {
   ["active"] = i("ui.CheckAll"),
   ["inactive"] = i("ui.EyeClosed"),
 }
+---@class Config
+local config = { exclude_filetypes = { "help" } }
+
+---@param opts Config
+function M:init(opts)
+  M.super.init(self, opts)
+  config.exclude_filetypes =
+    vim.tbl_extend("force", self.options.disabled_filetypes.statusline, opts.exclude_filetypes or {})
+end
 
 ---@return table
 local function get_active_formatters()
@@ -30,6 +39,7 @@ end
 local function content_formatter(data)
   local state = Cange.get_config("lsp.format_on_save") and "active" or "inactive"
   local output = vim.o.columns > 100 and #data > 0 and table.concat(data or {}, ", ") or "Format"
+  if vim.tbl_contains(config.exclude_filetypes, vim.bo.filetype) then return "" end
   -- PF("Formatter status -c: %s -s: %q -o: %q -bft: %q", count, state, output, before_ft)
   return string.format("%s %s", icons[state], output)
 end
