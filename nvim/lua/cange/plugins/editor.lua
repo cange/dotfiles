@@ -162,8 +162,11 @@ return {
   -- multi search and replace
   { "mg979/vim-visual-multi", event = "VeryLazy" },
 
-  -- allows to surround sections parentheses, brackets, quotes, XML tags, and more
-  { "tpope/vim-surround", event = "VeryLazy" },
+  { -- allows to surround sections parentheses, brackets, quotes, XML tags, and more
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = function(_, opts) require("nvim-surround").setup(opts) end,
+  },
 
   { -- comment toggle
     "numToStr/Comment.nvim",
