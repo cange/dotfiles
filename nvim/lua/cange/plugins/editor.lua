@@ -79,7 +79,6 @@ return {
     opts = {
       settings = {
         save_on_toggle = true, -- any time the ui menu is closed then sync
-        ui_width_ratio = 0.35,
       },
     },
     config = function(_, opts)
@@ -96,8 +95,8 @@ return {
         { "m2", function() harpoon:list():select(2) end, desc = "⇁ to 2nd mark" },
         { "m3", function() harpoon:list():select(3) end, desc = "⇁ to 3rd mark" },
         { "m4", function() harpoon:list():select(4) end, desc = "⇁ to 4th mark" },
-        -- { "[m", '<cmd>lua R("harpoon.ui").nav_prev()<CR>', desc = "Prev ⇁ mark" },
-        -- { "]m", '<cmd>lua R("harpoon.ui").nav_next()<CR>', desc = "Next ⇁ mark" },
+        { "[m", function() harpoon:list():prev() end, desc = "Prev ⇁ mark" },
+        { "]m", function() harpoon:list():next() end, desc = "Next ⇁ mark" },
       }
     end,
   },
