@@ -20,14 +20,34 @@ end
 require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
 
 local mapping = {
-  select_next_choice = cmp.mapping(function(fallback)
+  -- items
+  select_next_item = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_next_item()
+    elseif luasnip.expand_or_jumpable() then
+      vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+    else
+      fallback()
+    end
+  end, { "i", "s" }),
+  select_prev_item = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+    elseif luasnip.jumpable(-1) then
+      vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+    else
+      fallback()
+    end
+  end, { "i", "s" }),
+  -- choices within snippet
+  select_next_snippet_choice = cmp.mapping(function(fallback)
     if luasnip.choice_active() then
       luasnip.change_choice(1)
     else
       fallback() -- required to exit when in insert mode
     end
   end, { "i", "s" }),
-  select_prev_choice = cmp.mapping(function(fallback)
+  select_prev_snippet_choice = cmp.mapping(function(fallback)
     if luasnip.choice_active() then
       luasnip.change_choice(-1)
     else
@@ -51,10 +71,10 @@ M.opts = {
   mapping = {
     ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-k>"] = cmp.mapping.select_prev_item(),
-    ["<C-[>"] = mapping.select_prev_choice,
-    ["<C-]>"] = mapping.select_next_choice,
-    ["<C-h>"] = mapping.select_prev_choice,
-    ["<C-l>"] = mapping.select_next_choice,
+    ["<C-[>"] = mapping.select_prev_snippet_choice,
+    ["<C-]>"] = mapping.select_next_snippet_choice,
+    ["<C-h>"] = mapping.select_prev_snippet_choice,
+    ["<C-l>"] = mapping.select_next_snippet_choice,
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
@@ -68,24 +88,10 @@ M.opts = {
       cmp.abort()
       fallback()
     end,
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+    ["<Tab>"] = mapping.select_next_item,
+    ["<down>"] = mapping.select_next_item,
+    ["<S-Tab>"] = mapping.select_prev_item,
+    ["<up>"] = mapping.select_prev_item,
   },
   sources = cmp.config.sources({
     { name = "nvim_lsp", max_item_count = 10 },
