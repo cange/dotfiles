@@ -1,5 +1,6 @@
 local i = Cange.get_icon
 local exclude_filetypes = {
+  "",
   "NvimTree",
   "TelescopePrompt",
   "gitcommit",
@@ -96,6 +97,18 @@ return {
         },
         show_modified = true,
         exclude_filetypes = exclude_filetypes,
+        create_autocmd = false, -- prevent barbecue from updating itself automatically
+      })
+      -- Gain better performance when moving the cursor around
+      vim.api.nvim_create_autocmd({
+        "WinResized",
+        "BufWinEnter",
+        "CursorHold",
+        "InsertLeave",
+        "BufModifiedSet", -- if `show_modified` to `true`
+      }, {
+        group = vim.api.nvim_create_augroup("barbecue.updater", {}),
+        callback = function() require("barbecue.ui").update() end,
       })
     end,
   },

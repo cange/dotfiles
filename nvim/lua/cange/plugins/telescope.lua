@@ -115,7 +115,7 @@ return {
     { "<leader>gB", "<cmd>Telescope git_branches<CR>",                      desc = "Checkout branch" },
     { "<leader>gC", "<cmd>Telescope git_commits<CR>",                       desc = "Checkout commit" },
     { "<leader>go", "<cmd>Telescope git_status<CR>",                        desc = "Open changed file" },
-    { "<leader>sB", "<cmd>Telescope buffers<CR>",                           desc = "Buffers" },
+    { "<leader>bb", "<cmd>Telescope buffers<CR>",                           desc = "Buffers" },
     { "<leader>sC", "<cmd>Telescope commands<CR>",                          desc = "Commands" },
     { "<leader>sH", '<cmd>Telescope highlights<CR>',                        desc = "Highlights" },
     { "<leader>sS", '<cmd>lua R("cange.telescope").browse_snippets()<CR>',  desc = "Edit snippets" },

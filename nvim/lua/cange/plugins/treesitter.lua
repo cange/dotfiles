@@ -24,6 +24,7 @@ local sources = {
   "tsx",
   "typescript",
   "vue",
+  "vimdoc",
   "yaml",
 }
 
