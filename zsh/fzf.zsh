@@ -2,8 +2,8 @@ source "$Z_CONFIG_DIR/helpers.zsh"
 
 # see https://github.com/mrnugget/dotfiles/blob/master/zshrc#L496
 
-source_if_exists "$(brew --prefix)/opt/fzf/shell/completion.zsh"
-source_if_exists "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+_cange_source_if_exists "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+_cange_source_if_exists "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
 
 if type fzf &> /dev/null; then
   # Theme: Nightfox/Style: terafox
