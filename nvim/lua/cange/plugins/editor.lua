@@ -3,12 +3,12 @@ local i = Cange.get_icon
 return {
   { -- File explorer
     "nvim-tree/nvim-tree.lua",
-    -- desc = "File Tree Explorer",
+    version = "*",
+    lazy = false,
     keys = {
       { "<leader>\\", "<cmd>NvimTreeToggle<CR>", desc = "File Tree Explorer" },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    version = "nightly",
     config = function()
       require("nvim-tree").setup({
         live_filter = {
