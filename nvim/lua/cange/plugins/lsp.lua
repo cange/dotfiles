@@ -81,6 +81,49 @@ return {
     keys = require("cange.lsp").keymaps,
   },
 
+  { -- A pretty list for showing diagnostics
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = { "TroubleToggle", "Trouble" },
+    opts = { use_diagnostic_signs = true },
+    keys = function()
+      local opts = { skip_groups = true, jump = true }
+      local trouble = require("trouble")
+
+      return {
+        { "<leader>tx", "<cmd>TroubleToggle<CR>", desc = "All Diagnostics" },
+        { "<leader>tw", "<cmd>TroubleToggle workspace_diagnostics<CR>", desc = "Workspace Diagnostics" },
+        { "<leader>td", "<cmd>TroubleToggle document_diagnostics<CR>", desc = "Document Diagnostics" },
+        { "<leader>tq", "<cmd>TroubleToggle quickfix<CR>", desc = "Quickfix List" },
+        { "<leader>tl", "<cmd>TroubleToggle loclist<CR>", desc = "Location List" },
+        { "gR", "<cmd>TroubleToggle lsp_references<CR>", desc = "LSP Refenrences Search" },
+        {
+          "[t",
+          function()
+            if trouble.is_open() then
+              trouble.previous(opts)
+            else
+              vim.diagnostic.goto_prev()
+            end
+          end,
+          desc = "Prev Diagnostic",
+        },
+
+        {
+          "]t",
+          function()
+            if trouble.is_open() then
+              trouble.next(opts)
+            else
+              vim.diagnostic.goto_next()
+            end
+          end,
+          desc = "Next Diagnostic",
+        },
+      }
+    end,
+  },
+
   { -- managing & installing LSP servers, linters & formatters
     "williamboman/mason.nvim",
     dependencies = "neovim/nvim-lspconfig",
@@ -120,5 +163,42 @@ return {
       { "<LocalLeader>o", "<cmd>Specto toggle only<CR>", desc = "Toggle Only test block" },
       { "<LocalLeader>s", "<cmd>Specto toggle skip<CR>", desc = "Toggle Skip test block" },
     },
+  },
+
+  { -- A pretty list for showing diagnostics
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = { "TroubleToggle", "Trouble" },
+    opts = { use_diagnostic_signs = true },
+    keys = function()
+      local opts = { skip_groups = true, jump = true }
+      local trouble = require("trouble")
+
+      return {
+        { "<leader>tt", "<cmd>TroubleToggle<CR>", desc = "All Diagnostics" },
+        { "<leader>tw", "<cmd>TroubleToggle workspace_diagnostics<CR>", desc = "Workspace Diagnostics" },
+        { "<leader>td", "<cmd>TroubleToggle document_diagnostics<CR>", desc = "Document Diagnostics" },
+        { "<leader>tq", "<cmd>TroubleToggle quickfix<CR>", desc = "Quickfix List" },
+        { "<leader>tl", "<cmd>TroubleToggle loclist<CR>", desc = "Location List" },
+        { "gR", "<cmd>TroubleToggle lsp_references<CR>", desc = "LSP Refenrences Search" },
+        {
+          "[q",
+          function()
+            trouble.open()
+            trouble.previous(opts)
+          end,
+          desc = "Prev Diagnostic",
+        },
+
+        {
+          "]q",
+          function()
+            trouble.open()
+            trouble.next(opts)
+          end,
+          desc = "Next Diagnostic",
+        },
+      }
+    end,
   },
 }

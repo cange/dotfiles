@@ -129,8 +129,8 @@ return {
         },
       },
       icons = {
-        breadcrumb = i("ui.ArrowRight"),
-        group = i("ui.Plus") .. " ",
+        breadcrumb = "",
+        group = i("ui.ChevronRight") .. " ",
         separator = "",
       },
       window = {
@@ -148,10 +148,12 @@ return {
       local wk = require("which-key")
 
       wk.setup(opts)
+      wk.register({ ["<leader>b"] = { name = "Buffers" } })
       wk.register({ ["<leader>c"] = { name = "Code/Copilot" } })
       wk.register({ ["<leader>e"] = { name = "Editor" } })
       wk.register({ ["<leader>g"] = { name = "Git" } })
       wk.register({ ["<leader>s"] = { name = "Search" } })
+      wk.register({ ["<leader>t"] = { name = "Troubleshooting" } })
     end,
   },
 
