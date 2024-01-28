@@ -3,7 +3,7 @@ local ns = "[cange.utils.icons]"
 
 ---Retrieves an icon from the specified path.
 ---@param path string Dot separated path to the desired icon.
----@return {table|string|nil} # The icon value if found, nil if the path is invalid.
+---@return table|string|nil # The icon value if found, nil if the path is invalid.
 function M.get_icon(path)
   local ok, icons = pcall(require, "cange.icons")
   if not ok then

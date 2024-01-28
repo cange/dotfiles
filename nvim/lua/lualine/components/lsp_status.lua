@@ -46,6 +46,9 @@ local function formatter(data)
   return string.format("%s %s%s", icons[state], #output > 0 and "" or "LSP ", truncate(output, 24))
 end
 
-function M:update_status() return require("lualine.util").cached_status(cache, before_ft, formatter, get_active_clients) end
+function M:update_status()
+  -- stylua: ignore
+  return require("lualine.util").cached_status(cache, before_ft, formatter, get_active_clients)
+end
 
 return M

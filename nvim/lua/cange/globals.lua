@@ -20,7 +20,7 @@ end
 
 ---@param ... any
 ---@return any
-RELOAD = function(...)
+local function reload(...)
   local reloader = require
 
   local ok_plenary, plenary_reload = pcall(require, "plenary.reload")
@@ -32,6 +32,6 @@ end
 ---@param name string
 ---@return table
 R = function(name)
-  RELOAD(name)
+  reload(name)
   return require(name)
 end

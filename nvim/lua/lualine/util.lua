@@ -9,7 +9,6 @@ local M = {}
 function M.cached_status(cache, before_ft, formatter_callback, fetch_callback)
   local ft = vim.fn.expand("%:e")
   ft = ft ~= "" and ft or not before_ft and before_ft or "none"
-  if ft ~= "" then before_ft = ft end
 
   if cache[ft] then return formatter_callback(cache[ft]) end
   local data = fetch_callback()

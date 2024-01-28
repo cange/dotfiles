@@ -105,7 +105,8 @@ return {
     "rmagatti/auto-session",
     dependencies = "nvim-telescope/telescope.nvim",
     config = function()
-      require("auto-session").setup({ auto_session_suppress_dirs = { "~/", "~/workspace" } }) -- Suppress session create/restore if in one of the list of dirs
+      -- Suppress session create/restore if in one of the list of dirs
+      require("auto-session").setup({ auto_session_suppress_dirs = { "~/", "~/workspace" } })
       require("telescope").load_extension("session-lens")
 
       -- INFO: plugin is not working which lazy `keys` option is being used

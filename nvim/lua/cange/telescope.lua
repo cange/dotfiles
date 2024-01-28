@@ -18,6 +18,7 @@ local live_grep_filters = {
 }
 
 ---Run `live_grep` with the active filters (extension and folders)
+---@param current_input string
 local function run_live_grep(current_input)
   builtin.live_grep({
     additional_args = live_grep_filters.file_extension
@@ -26,9 +27,8 @@ local function run_live_grep(current_input)
   })
 end
 
--- Inspired by https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/plugins/telescope_custom_pickers.lua
--- M.actions = require("telescope.actions.mt").transform_mod({
 ---Ask for a file extension and filtering by it
+---@param prompt_bufnr number
 M.file_extension_filter_input = function(prompt_bufnr)
   local current_picker = action_state.get_current_picker(prompt_bufnr)
 

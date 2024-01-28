@@ -1,5 +1,3 @@
-local luasnip_ok, luasnip = pcall(require, "luasnip")
-if not luasnip_ok then return end
 local i = Cange.get_icon
 
 ---Provides prediction strength as an icon

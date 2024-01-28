@@ -8,7 +8,7 @@ M.get_icon = require("cange.utils.icons").get_icon -- 2nd
 
 ---Get certain config attributes
 ---@param key_path string Dot separated path of config group
----@return cange.configGroup|any value of given key or nil if not found.
+---@return table|any value of given key or nil if not found.
 function M.get_config(key_path)
   local prop = require("cange.config")
 

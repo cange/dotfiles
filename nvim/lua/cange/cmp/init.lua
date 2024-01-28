@@ -79,10 +79,14 @@ M.opts = {
     ["<C-s>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = mapping.apply_item_and_select_next,
-    ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    -- Accept currently selected item. Set `select` to `false` to only confirm
+    -- explicitly selected items.
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
     ["<S-CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      -- Accept currently selected item. Set `select` to `false` to only
+      -- confirm explicitly selected items.
+      select = true,
     }),
     ["<C-CR>"] = function(fallback)
       cmp.abort()

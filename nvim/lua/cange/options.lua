@@ -24,7 +24,7 @@ local options = {
   -- backup handling
   backup = false, -- creates a backup file
   undofile = true, -- enable persistent undo
-  writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+  writebackup = false, -- prevent editing while a file is being edited by another program
 
   -- search
   ignorecase = true, -- ignore case in search patterns
@@ -80,7 +80,8 @@ vim.opt.fillchars:append({
 -- Basic Keymaps
 -- Set <space> as the leader key
 -- See `:help mapleader`
--- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+-- NOTE: Must happen before plugins are required (otherwise wrong leader will
+-- be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 

@@ -28,11 +28,19 @@ M.keymaps = {
   { "[d", vim.diagnostic.goto_prev,                                       desc = "Prev Diagnostic" },
   { "]d", vim.diagnostic.goto_next,                                       desc = "Next Diagnostic" },
   { "gD", vim.lsp.buf.declaration,                                        desc = "LSP Goto symbol Declaration" },
-  { "gI", '<cmd>lua R("telescope.builtin").lsp_implementations({ reuse_win = true })<CR>', desc = "Goto Implementation" },
+  {
+    "gI",
+    function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end,
+    desc = "Goto Implementation"
+  },
   { "gd", vim.lsp.buf.definition,                                         desc = "LSP Goto symbol Definition" },
   { "gi", vim.lsp.buf.implementation,                                     desc = "LSP List symbol Implementation" },
   { "gr", "<cmd>Telescope lsp_references<CR>",                            desc = "LSP Symbol References" },
-  { "gy", '<cmd>lua R("telescope.builtin").lsp_type_definitions({ reuse_win = true })<CR>', desc = "LSP Goto Type Definition" },
+  {
+    "gy",
+    function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end,
+    desc = "LSP Goto Type Definition"
+  },
   { "K", vim.lsp.buf.hover,                                               desc = "LSP Hover symbol info" },
   { "<C-k>", vim.lsp.buf.signature_help,                                  desc = "LSP Signature Documentation" },
 }
