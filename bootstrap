@@ -11,11 +11,11 @@ local is_uninstall=0
 
 # --- helpers ---
 source "${dotfiles}/zsh/helpers.zsh"
-function warn() {     printf "%s %s\n" "$(_cange_chalk "yellow" "▲")" "$1" }
-function error () {   printf "%s %s\n" "$(_cange_chalk "red"    "✕")" "$1" }
-function info() {     printf "%s %s\n" "$(_cange_chalk "blue"   "ℹ︎")" "$1" }
-function log() {      printf "%s %s\n" "$(_cange_chalk "bold"   "⇒")" "$1" }
-function success () { printf "%s %s\n" "$(_cange_chalk "green"  "✓")" "$1" }
+function warn() {     printf "%s %s\n" "$(_chalk "yellow" "▲")" "$1" }
+function error () {   printf "%s %s\n" "$(_chalk "red"    "✕")" "$1" }
+function info() {     printf "%s %s\n" "$(_chalk "blue"   "ℹ︎")" "$1" }
+function log() {      printf "%s %s\n" "$(_chalk "bold"   "⇒")" "$1" }
+function success () { printf "%s %s\n" "$(_chalk "green"  "✓")" "$1" }
 
 # realpath polyfil for macos M1+
 function realpath_polyfill() {
@@ -38,9 +38,9 @@ function execute_brewfile() {
   local tool_name=$(basename $(dirname "$brewfile"))
 
   if [[ $is_uninstall == 1 ]]; then
-    info "Uninstall packages of $(_cange_chalk "cyan" "$brewfile")"
+    info "Uninstall packages of $(_chalk "cyan" "$brewfile")"
   else
-    info "Install packages for $(_cange_chalk "cyan" "$brewfile")";
+    info "Install packages for $(_chalk "cyan" "$brewfile")";
   fi
 
   if [[ ! -f $brewfile ]]; then
@@ -96,17 +96,17 @@ function execute_symlink() {
   if [[ $is_uninstall == 1 ]]; then
     if [[ -e $dest ]]; then
       command rm "$dest"
-      logs+=("remove $(_cange_chalk "bold" "$tool_name") symlink $(_cange_chalk "cyan" "$dest") ✂︎-> ")
+      logs+=("remove $(_chalk "bold" "$tool_name") symlink $(_chalk "cyan" "$dest") ✂︎-> ")
     else
-      errors+=("$(_cange_chalk "bold" "unlink:") No such file or directory $(_cange_chalk "cyan" "$dest")")
+      errors+=("$(_chalk "bold" "unlink:") No such file or directory $(_chalk "cyan" "$dest")")
     fi
   else
     if [[ -d "$dest_dir" ]]; then
       command mkdir -p "$dest_dir"
       command ln -nsf "$src" "$dest"
-      logs+=("create $(_cange_chalk "bold" "$tool_name") symlink $(_cange_chalk "cyan" "$dest") -> $(_cange_chalk "cyan" "$src")")
+      logs+=("create $(_chalk "bold" "$tool_name") symlink $(_chalk "cyan" "$dest") -> $(_chalk "cyan" "$src")")
     else
-      errors+=("symlink: No such file or directory $(_cange_chalk "cyan" "$dest_dir")")
+      errors+=("symlink: No such file or directory $(_chalk "cyan" "$dest_dir")")
     fi
   fi
 }
@@ -123,7 +123,7 @@ function find_symlinks() {
 }
 
 function log_summary() {
-  info "A total of $(_cange_chalk "bold" "${#logs[@]}") symlinks have been updated:"
+  info "A total of $(_chalk "bold" "${#logs[@]}") symlinks have been updated:"
   for msg in "${logs[@]}"; do
     log $msg
   done
@@ -138,7 +138,7 @@ function error_summary() {
     log $msg
   done
   echo ""
-  error "Completed with $(_cange_chalk "bold" "${#errors[@]}") errors!" >&2
+  error "Completed with $(_chalk "bold" "${#errors[@]}") errors!" >&2
   errors=() # reset
   exit 1
 }
@@ -176,7 +176,7 @@ function perform_install() {
         ;;
       *)
         all_selected=0
-        info "Unknown option: $(_cange_chalk "yellow" $1)"
+        info "Unknown option: $(_chalk "yellow" $1)"
         echo ""
         help
         exit 1
@@ -191,14 +191,14 @@ function perform_install() {
 # --- interface ---
 #
 function help {
-echo "$(_cange_chalk "bold" "Usage:") $script_name <command> [options]
+echo "$(_chalk "bold" "Usage:") $script_name <command> [options]
 Handles the setup of the dotfile configuration.
 
-$(_cange_chalk "bold" "Commands:")
+$(_chalk "bold" "Commands:")
 \tinstall   \tInstalls package dependencies via Homebrew
 \tuninstall \tUninstalls package dependencies via Homebrew
 
-$(_cange_chalk "bold" "Options:")
+$(_chalk "bold" "Options:")
 \t--brew    \tRuns Homebrew un-/install processes
 \t--link    \tRuns file symlinking processes
 \t--verbose \tMake some output more verbose
@@ -218,7 +218,7 @@ case "$1" in
     perform_install "$@"
     ;;
   *)
-    info "Unknown command: $(_cange_chalk "yellow" $1)"
+    info "Unknown command: $(_chalk "yellow" $1)"
     echo ""
     help
     exit 1
