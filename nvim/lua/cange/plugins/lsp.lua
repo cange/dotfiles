@@ -46,7 +46,6 @@ return {
       end
 
       local server_configs = {
-        bashls = {},
         cssls = {},
         eslint = {
           settings = {
@@ -57,7 +56,6 @@ return {
         html = {},
         lemminx = {}, -- xml, xsd, xsl, xslt, svg
         ruby_ls = {},
-        svelte = {},
         lua_ls = {
           settings = {
             Lua = {

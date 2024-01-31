@@ -15,6 +15,7 @@ return {
         "rubocop",
         "stylelint",
         "stylua",
+        "shfmt",
         "xmlformatter", -- svg
         "yamllint",
       },
@@ -70,6 +71,10 @@ return {
         markdown = { "prettierd" },
         yaml = { "prettierd" },
         ruby = { "rubocop" },
+        -- shell scripts
+        zsh = { "shfmt" },
+        shell = { "shfmt" },
+        bash = { "shfmt" },
         -- css
         css = { { "prettierd", "stylelint" } },
         scss = { { "prettierd", "stylelint" } },
