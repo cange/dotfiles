@@ -17,7 +17,7 @@ function _cange_docker_compose_init() {
 
 	function log() {
 		local title="$(_cange_chalk "blue" "󰡨") docker compose:"
-		print "$title$dir_state $1"
+		printf "%s %s %s\n" "$title" "$1" "$dir_state"
 	}
 
 	function find_file_upwards() {
@@ -66,7 +66,7 @@ function _cange_docker_compose_init() {
 
 		if [[ $PWD != $CANGE_OLD_PWD ]]; then
 			CANGE_OLD_PWD=$PWD
-			dir_state=" 󰁔 directory changed!"
+			dir_state="$(_cange_chalk "yellow" "󰛨") Directory changed!"
 			_cange_docker_compose_detect_file 1
 		fi
 	}
