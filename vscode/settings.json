@@ -1,0 +1,42 @@
+{
+  // Theme
+  "workbench.colorTheme": "Terafox",
+  "workbench.iconTheme": "material-icon-theme",
+
+  // Font size
+  "editor.fontFamily": "JetBrainsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 12,
+  "editor.inlayHints.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontSize": 12,
+
+  // UI
+  "breadcrumbs.filePath": "last",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.linkedEditing": true,
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.horizontal": "auto",
+  "editor.scrollbar.vertical": "auto",
+  "window.commandCenter": false,
+  "window.titleBarStyle": "custom",
+  "workbench.startupEditor": "none",
+
+  // formatter
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+
+  "[css]": { "editor.defaultFormatter": "stylelint.vscode-stylelint" },
+  "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[scss]": { "editor.defaultFormatter": "stylelint.vscode-stylelint" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[vue]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+
+  // vim
+  "vim.foldfix": true,
+  "vim.leader": "<space>",
+  "workbench.activityBar.location": "hidden"
+}
