@@ -10,28 +10,12 @@ local is_verbose=0
 local is_uninstall=0
 
 # --- helpers ---
-function chalk() {
-  local color=$1
-  local text=$2
-
-  case $color in
-    blue)    printf "\033[34m%s\033[0m" "$text" ;;
-    bold)    printf "\033[1m%s\033[0m" "$text" ;;
-    cyan)    printf "\033[36m%s\033[0m" "$text" ;;
-    green)   printf "\033[32m%s\033[0m" "$text" ;;
-    magenta) printf "\033[35m%s\033[0m" "$text" ;;
-    red)     printf "\033[31m%s\033[0m" "$text" ;;
-    white)   printf "\033[38m%s\033[0m" "$text" ;;
-    yellow)  printf "\033[33m%s\033[0m" "$text" ;;
-    *)       printf "\033[30m%s\033[0m" "$text" ;;
-  esac
-}
-
-function warn() {     printf "%s %s\n" "$(chalk "yellow" "▲")" "$1" }
-function error () {   printf "%s %s\n" "$(chalk "red"    "✕")" "$1" }
-function info() {     printf "%s %s\n" "$(chalk "blue"   "ℹ︎")" "$1" }
-function log() {      printf "%s %s\n" "$(chalk "bold"   "⇒")" "$1" }
-function success () { printf "%s %s\n" "$(chalk "green"  "✓")" "$1" }
+source "${dotfiles}/zsh/helpers.zsh"
+function warn() {     printf "%s %s\n" "$(_chalk "yellow" "▲")" "$1" }
+function error () {   printf "%s %s\n" "$(_chalk "red"    "✕")" "$1" }
+function info() {     printf "%s %s\n" "$(_chalk "blue"   "ℹ︎")" "$1" }
+function log() {      printf "%s %s\n" "$(_chalk "bold"   "⇒")" "$1" }
+function success () { printf "%s %s\n" "$(_chalk "green"  "✓")" "$1" }
 
 # realpath polyfil for macos M1+
 function realpath_polyfill() {
@@ -54,9 +38,9 @@ function execute_brewfile() {
   local tool_name=$(basename $(dirname "$brewfile"))
 
   if [[ $is_uninstall == 1 ]]; then
-    info "Uninstall packages of $(chalk "cyan" "$brewfile")"
+    info "Uninstall packages of $(_chalk "cyan" "$brewfile")"
   else
-    info "Install packages for $(chalk "cyan" "$brewfile")";
+    info "Install packages for $(_chalk "cyan" "$brewfile")";
   fi
 
   if [[ ! -f $brewfile ]]; then
@@ -112,17 +96,17 @@ function execute_symlink() {
   if [[ $is_uninstall == 1 ]]; then
     if [[ -e $dest ]]; then
       command rm "$dest"
-      logs+=("remove $(chalk "bold" "$tool_name") symlink $(chalk "cyan" "$dest") ✂︎-> ")
+      logs+=("remove $(_chalk "bold" "$tool_name") symlink $(_chalk "cyan" "$dest") ✂︎-> ")
     else
-      errors+=("$(chalk "bold" "unlink:") No such file or directory $(chalk "cyan" "$dest")")
+      errors+=("$(_chalk "bold" "unlink:") No such file or directory $(_chalk "cyan" "$dest")")
     fi
   else
     if [[ -d "$dest_dir" ]]; then
       command mkdir -p "$dest_dir"
       command ln -nsf "$src" "$dest"
-      logs+=("create $(chalk "bold" "$tool_name") symlink $(chalk "cyan" "$dest") -> $(chalk "cyan" "$src")")
+      logs+=("create $(_chalk "bold" "$tool_name") symlink $(_chalk "cyan" "$dest") -> $(_chalk "cyan" "$src")")
     else
-      errors+=("symlink: No such file or directory $(chalk "cyan" "$dest_dir")")
+      errors+=("symlink: No such file or directory $(_chalk "cyan" "$dest_dir")")
     fi
   fi
 }
@@ -139,7 +123,7 @@ function find_symlinks() {
 }
 
 function log_summary() {
-  info "A total of $(chalk "bold" "${#logs[@]}") symlinks have been updated:"
+  info "A total of $(_chalk "bold" "${#logs[@]}") symlinks have been updated:"
   for msg in "${logs[@]}"; do
     log $msg
   done
@@ -154,7 +138,7 @@ function error_summary() {
     log $msg
   done
   echo ""
-  error "Completed with $(chalk "bold" "${#errors[@]}") errors!" >&2
+  error "Completed with $(_chalk "bold" "${#errors[@]}") errors!" >&2
   errors=() # reset
   exit 1
 }
@@ -192,7 +176,7 @@ function perform_install() {
         ;;
       *)
         all_selected=0
-        info "Unknow option: $(chalk "yellow" $1)"
+        info "Unknown option: $(_chalk "yellow" $1)"
         echo ""
         help
         exit 1
@@ -207,17 +191,14 @@ function perform_install() {
 # --- interface ---
 #
 function help {
-echo "$(chalk "bold" "Usage:") $script_name <command> [options]
-
+echo "$(_chalk "bold" "Usage:") $script_name <command> [options]
 Handles the setup of the dotfile configuration.
 
-$(chalk "bold" "Commands:")
-
+$(_chalk "bold" "Commands:")
 \tinstall   \tInstalls package dependencies via Homebrew
 \tuninstall \tUninstalls package dependencies via Homebrew
 
-$(chalk "bold" "Options:")
-
+$(_chalk "bold" "Options:")
 \t--brew    \tRuns Homebrew un-/install processes
 \t--link    \tRuns file symlinking processes
 \t--verbose \tMake some output more verbose
@@ -237,7 +218,7 @@ case "$1" in
     perform_install "$@"
     ;;
   *)
-    info "Unknow command: $(chalk "yellow" $1)"
+    info "Unknown command: $(_chalk "yellow" $1)"
     echo ""
     help
     exit 1

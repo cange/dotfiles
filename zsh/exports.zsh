@@ -54,12 +54,6 @@ if [[ -n "$HOME/.ssh/id_dsa" ]]; then
 fi
 # ssh ---
 
-# --- docker
-# ensure docker is running on arm64 (macos M1+)
-# https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
-# export DOCKER_DEFAULT_PLATFORM=linux/amd64
-# docker ---
-
 # --- asdf
 # enable asdf package managers
 # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf

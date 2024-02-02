@@ -21,7 +21,7 @@ source "$Z_CONFIG_DIR/helpers.zsh"
 
 # --- secrets
 # Source secrets first since other servcies could depend on it
-source_if_exists "$HOME/.config/secrets/zsh"
+_source_if_exists "$HOME/.config/secrets/zsh"
 # secrets ---
 
 # === Order #1
@@ -43,18 +43,18 @@ fi
 
 # === Order #2 Plugins
 
-add_plugin "zsh-users/zsh-autosuggestions"
-add_plugin "zsh-users/zsh-syntax-highlighting"
+_add_plugin "zsh-users/zsh-autosuggestions"
+_add_plugin "zsh-users/zsh-syntax-highlighting"
 
 # --- completions
-add_plugin "zsh-users/zsh-completions"
+_add_plugin "zsh-users/zsh-completions"
 # ZSH https://github.com/zsh-users/zsh-completions
 fpath=("$Z_CONFIG_DIR/plugins/zsh-completions/src" $fpath)
 # completions ---
 
 # --- prompt theme
-source_if_exists "$Z_CONFIG_DIR/.zshrc" # required by p10k prompt
-add_plugin "romkatv/powerlevel10k"
+_source_if_exists "$Z_CONFIG_DIR/.zshrc" # required by p10k prompt
+_add_plugin "romkatv/powerlevel10k"
 # prompt theme ---
 
 # --- z navigation config
@@ -65,16 +65,17 @@ zstyle ":completion:*" menu select # prettify z menu
 
 # === Order #3 additional files
 
-source_if_exists "$Z_CONFIG_DIR/aliases.zsh"
-source_if_exists "$Z_CONFIG_DIR/aliases.docker.zsh"
-source_if_exists "$Z_CONFIG_DIR/aliases.git.zsh"
-source_if_exists "$Z_CONFIG_DIR/aliases.pnpm.zsh"
-source_if_exists "$Z_CONFIG_DIR/aliases.yarn.zsh"
-source_if_exists "$Z_CONFIG_DIR/exports.zsh"
-source_if_exists "$Z_CONFIG_DIR/fzf.zsh"
-source_if_exists "$Z_CONFIG_DIR/history.zsh"
+_source_if_exists "$Z_CONFIG_DIR/aliases.git.zsh"
+_source_if_exists "$Z_CONFIG_DIR/aliases.yarn.zsh"
+_source_if_exists "$Z_CONFIG_DIR/aliases.docker.zsh"
+_source_if_exists "$Z_CONFIG_DIR/aliases.pnpm.zsh"
+_source_if_exists "$Z_CONFIG_DIR/aliases.zsh"
+_source_if_exists "$Z_CONFIG_DIR/exports.zsh"
+_source_if_exists "$Z_CONFIG_DIR/fzf.zsh"
+_source_if_exists "$Z_CONFIG_DIR/history.zsh"
+
 # https://iterm2.com/documentation-shell-integration.html
-source_if_exists "$Z_CONFIG_DIR/.iterm2_shell_integration.zsh"
+_source_if_exists "$Z_CONFIG_DIR/.iterm2_shell_integration.zsh"
 
 # precmd() { # --- refresh on touch
 # }

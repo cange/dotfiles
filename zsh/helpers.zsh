@@ -1,17 +1,35 @@
 # --- helpers
-function source_if_exists() {
-  [[ -f "$1" ]] && source "$1"
+function _source_if_exists() {
+	[[ -f "$1" ]] && source "$1"
 }
 
-function add_plugin() {
-  local name=$(echo $1 | cut -d "/" -f 2)
-  local target="$Z_CONFIG_DIR/plugins/$name"
-  if [[ -d $target ]]; then
-    source_if_exists "$target/$name.plugin.zsh" || \
-      source_if_exists "$target/$name.zsh-theme" || \
-      source_if_exists "$target/$name.zsh"
-  else
-    git clone "https://github.com/$1.git" "$target"
-  fi
+function _add_plugin() {
+	local name=$(echo $1 | cut -d "/" -f 2)
+	local target="$Z_CONFIG_DIR/plugins/$name"
+	if [[ -d $target ]]; then
+		_source_if_exists "$target/$name.plugin.zsh" ||
+			_source_if_exists "$target/$name.zsh-theme" ||
+			_source_if_exists "$target/$name.zsh"
+	else
+		git clone "https://github.com/$1.git" "$target"
+	fi
+}
+
+# Example: "$(_chalk "blue" "msg")"
+function _chalk() {
+	local color=$1
+	local text=$2
+
+	case $color in
+	blue) printf "\033[34m%s\033[0m" "$text" ;;
+	bold) printf "\033[1m%s\033[0m" "$text" ;;
+	cyan) printf "\033[36m%s\033[0m" "$text" ;;
+	green) printf "\033[32m%s\033[0m" "$text" ;;
+	magenta) printf "\033[35m%s\033[0m" "$text" ;;
+	red) printf "\033[31m%s\033[0m" "$text" ;;
+	white) printf "\033[38m%s\033[0m" "$text" ;;
+	yellow) printf "\033[33m%s\033[0m" "$text" ;;
+	*) printf "\033[30m%s\033[0m" "$text" ;;
+	esac
 }
 # helpers ---
