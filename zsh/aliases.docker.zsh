@@ -1,58 +1,33 @@
 #!/bin/zsh
 
 export CANGE_OLD_PWD=$PWD
-local _cached_compose_file=$COMPOSE_FILE
 
 # File detection mechanism to automatically detect the appropriate Docker
 function _docker_compose_init_detection() {
+	local init_compose_file=$COMPOSE_FILE
 	local dir_state=""
 
 	function log() {
 		local title="$(_chalk "blue" "󰡨") docker compose:"
-		printf "%s %s %s\n" "$title" "$1" "$dir_state"
+		printf "%s %s %s %s\n" "$title" "$1" "$(_chalk "bold" "\$COMPOSE_FILE")" "$dir_state"
 		dir_state=""
 	}
 
-	function file_level_dir_depth() {
-		local file_to_find="$1"
-		local current_dir="$PWD"
-		local level_count=1
-
-		while [[ "$current_dir" != "/" ]]; do
-			level_count=$(($level_count + 1))
-			if [[ -e "$current_dir/$file_to_find" ]]; then
-				return 0
-			fi
-			current_dir=$(dirname "$current_dir")
-		done
-		echo $level_count
-		level_count=0
-		return 1
-	}
-
 	function _docker_compose_detect_file() {
-		# continue when docker project
 		if [[ ! -e "Dockerfile" ]]; then return 0; fi
 
 		local files=("docker-compose.yml" "docker-compose.yaml" "compose.yml" "compose.yaml")
 		local count=$1
-		local file="${files[$count]}"
 
 		if [[ $count -gt ${#files[@]} && -z $COMPOSE_FILE ]]; then
-			export COMPOSE_FILE=$_cached_compose_file
-			log "No local file detected! Reset to default $(_chalk "bold" "\$COMPOSE_FILE")"
+			export COMPOSE_FILE=$init_compose_file
+			log "No local file detected! Reset to default"
 			return 0
 		fi
 
-		local dir_level=$(printf "%d" "$(file_level_dir_depth "$file")")
-
-		if [[ ($dir_level -eq 0 && -e $file) ]]; then
-			_cached_compose_file=$([[ -z $COMPOSE_FILE ]] && print $_cached_compose_file || print $COMPOSE_FILE)
-			unset COMPOSE_PROJECT_NAME
+		if [[ -e "${files[$count]}" ]]; then
 			unset COMPOSE_FILE
-			log "File detected! Unset $(_chalk "bold" "\$COMPOSE_FILE, \$COMPOSE_PROJECT_NAME")"
-			return 0
-		elif [[ $dir_level -eq 0 && $file != $COMPOSE_FILE ]]; then
+			log "File detected! Unset"
 			return 0
 		else
 			_docker_compose_detect_file $(($count + 1))
@@ -93,7 +68,7 @@ function _docker_compose() {
 #
 # --- docker compose
 # see https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
-alias dco="_docker_compose "                        # Docker-compose main command
+alias dco="_docker_compose"                         # Docker-compose main command
 alias dcbl="_docker_compose exec bundle"            # Execute Rails bundle command
 alias dcdn="_docker_compose down"                   # Stop and remove container
 alias dce="_docker_compose exec"                    # Execute command inside a container
