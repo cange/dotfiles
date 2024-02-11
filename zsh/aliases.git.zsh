@@ -60,7 +60,7 @@ alias glgg='git log --graph --decorate --all'
 alias glgm='glg --max-count=10'
 # ---- push
 alias gp='git push'
-alias gpf='git push --force-with-lease' # safer than --force
+alias gpfl='git push --force-with-lease' # safer than --force
 # --- status
 alias gss='git status --short'
 alias gst='git status'
