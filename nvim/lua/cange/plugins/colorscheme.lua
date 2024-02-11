@@ -77,6 +77,10 @@ local function update_highlights()
     CmpItemMenu = { fg = p.cyan.dim },
     CmpItemMenuLua = { fg = lua_color },
     CmpItemMenuTabnine = { fg = blend(p.tabnine.even, -0.5) },
+
+    -- NvimTree
+    NvimTreeGitDirtyIcon = { link = "GitSignsChange" },
+    NvimTreeGitNewIcon = { link = "GitSignsAdd" },
   }
 
   Cange.set_highlights(highlights)

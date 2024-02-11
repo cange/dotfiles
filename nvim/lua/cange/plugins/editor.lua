@@ -29,7 +29,7 @@ return {
             diagnostics_placement = "after",
             git_placement = "signcolumn",
             modified_placement = "signcolumn",
-            symlink_arrow = i("documents.SymlinkFile"),
+            symlink_arrow = " " .. i("documents.SymlinkFile") .. " ",
             glyphs = {
               default = i("documents.File"),
               bookmark = i("ui.Bookmark"),
