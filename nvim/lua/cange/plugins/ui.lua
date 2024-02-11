@@ -52,6 +52,7 @@ return {
 
   { -- Distraction-free coding
     "folke/zen-mode.nvim",
+    dependencies = "folke/twilight.nvim", -- dimmer
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     opts = {
@@ -61,7 +62,8 @@ return {
       },
     },
     keys = {
-      { "<leader>z", "<cmd>ZenMode<CR>", desc = "Toggle Zen Mode" },
+      { "<leader>z", "<cmd>ZenMode<CR><cmd>TwilighEnable<CR>", desc = "Toggle Zen Focus Mode" },
+      { "<localleader>z", "<cmd>ZenMode<CR><cmd>TwilightDisable<CR>", desc = "Toggle Zen Mode" },
     },
   },
 

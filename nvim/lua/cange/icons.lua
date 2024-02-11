@@ -44,8 +44,8 @@ M.ui = {
   Tab                 = "", -- nf-oct-tab
   Tabnine             = "⌬", -- U+232C
   -- shapes
-  TriangleLowerLeft   = "", -- nf-ple-lower_left_triangle
-  TriangleUpperRight  = "", -- nf-ple-upper_right_triangle
+  TriangleLeft        = "", -- nf-ple-upper_left_triangle
+  TriangleRight       = "", -- nf-ple-lower_right_triangle
   VLineLeft           = "▎", -- U+258E
   VThinLineLeft       = "▏", -- U+258F
   Pipe                = "|", -- U+007C

@@ -98,15 +98,14 @@ M.opts = {
     ["<up>"] = mapping.select_prev_item,
   },
   sources = cmp.config.sources({
-    { name = "nvim_lsp", max_item_count = 10 },
     { name = "luasnip" },
-    { name = "path" },
+    { name = "nvim_lsp", max_item_count = 10 },
     { name = "copilot" },
     { name = "cmp_tabnine" },
-    { name = "nerdfont" },
-  }, {
-    { name = "buffer" },
+    { name = "path" },
     { name = "nvim_lsp_signature_help" },
+    { name = "buffer" },
+    { name = "nerdfont" },
   }),
   snippet = {
     expand = function(args) require("luasnip").lsp_expand(args.body) end,

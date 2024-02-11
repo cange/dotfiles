@@ -23,14 +23,13 @@ return {
         },
         -- common
         renderer = {
-          indent_markers = {
-            enable = true,
-          },
+          indent_markers = { enable = true },
           icons = {
-            show = {
-              folder_arrow = false,
-            },
-            git_placement = "after",
+            show = { folder_arrow = false },
+            diagnostics_placement = "after",
+            git_placement = "signcolumn",
+            modified_placement = "signcolumn",
+            symlink_arrow = i("documents.SymlinkFile"),
             glyphs = {
               default = i("documents.File"),
               bookmark = i("ui.Bookmark"),
