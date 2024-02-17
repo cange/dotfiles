@@ -5,6 +5,7 @@ local M = {}
 Log = require("cange.utils.log") -- 1st
 --
 M.get_icon = require("cange.utils.icons").get_icon -- 2nd
+M.get_service_icons = require("cange.utils.icons").get_service_icons
 
 ---Get certain config attributes
 ---@param key_path string Dot separated path of config group

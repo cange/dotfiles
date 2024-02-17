@@ -54,10 +54,11 @@ return {
             end,
           },
           { require("lazy.status").updates, cond = require("lazy.status").has_updates },
-          { "lsp_status", exclude_filetypes = exclude_filetypes },
         },
         lualine_y = {
           { "format_status", exclude_filetypes = exclude_filetypes },
+          { "lint_status", exclude_filetypes = exclude_filetypes },
+          { "lsp_status", exclude_filetypes = exclude_filetypes },
           "copilot_status",
           {
             "progress",
