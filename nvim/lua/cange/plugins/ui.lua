@@ -65,7 +65,6 @@ return {
 
   { -- font icon set
     "nvim-tree/nvim-web-devicons",
-    lazy = true,
     config = function()
       require("nvim-web-devicons").setup()
       require("cange.utils.icons").setup()

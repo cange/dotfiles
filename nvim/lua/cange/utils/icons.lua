@@ -52,14 +52,11 @@ local function set_icon_by_filetype(origin_filetype, filename, preset)
 
   user_icons[filename] = vim.tbl_extend("force", fallback, preset or {})
 end
+
 local i = M.get_icon
 
 ---@type DevIconsPreset[]
 local presets = {
-  spec = {
-    icon = i("ui.Beaker"),
-    name = "Test",
-  },
   storybook = {
     color = "#ff4785",
     cterm_color = "198",
@@ -114,7 +111,6 @@ local function redefine_icons()
   end
 
   for _, ft in pairs({ "js", "ts" }) do
-    set_icon_by_filetype(ft, "cy." .. ft, presets.spec)
     set_icon_by_filetype(ft, "nuxt.config." .. ft, presets.nuxt)
     set_icon_by_filetype(ft, "stories." .. ft, presets.storybook)
   end
@@ -127,8 +123,31 @@ function M.setup()
   vim.defer_fn(redefine_icons, 1000)
 end
 
-return M
+function M.get_service_icons()
+  ---@param extension string
+  ---@return string
+  local function grep_icon(extension)
+    local icon, _ = require("nvim-web-devicons").get_icon("", extension)
+    return icon
+  end
 
+  return {
+    cssls = grep_icon("css"),
+    eslint = grep_icon(".eslintrc"),
+    jsonlint = grep_icon("json"),
+    jsonls = grep_icon("json"),
+    lua_ls = grep_icon("lua"),
+    markdownlint = grep_icon("md"),
+    rubocop = grep_icon("rb"),
+    ruby_ls = grep_icon("rb"),
+    stylelint = grep_icon(".stylelint"),
+    tailwindcss = grep_icon("tailwind.config.js"),
+    tsserver = grep_icon("ts"),
+    volar = grep_icon("vue"),
+  }
+end
+
+return M
 --#region Types
 
 ---@class DevIconsPreset
