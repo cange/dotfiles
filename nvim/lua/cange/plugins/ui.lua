@@ -71,4 +71,49 @@ return {
       require("cange.utils.icons").setup()
     end,
   },
+
+  { -- A pretty list for showing diagnostics
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = { "TroubleToggle", "Trouble" },
+    opts = { use_diagnostic_signs = true },
+    config = function(_, opts)
+      require("trouble").setup(opts)
+
+      vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
+        group = vim.api.nvim_create_augroup("before_troubleshooting_list_close", { clear = true }),
+        desc = "Close troubleshooting list",
+        callback = function() require("trouble").close() end,
+      })
+    end,
+    keys = function()
+      local opts = { skip_groups = true, jump = true }
+      local trouble = require("trouble")
+
+      return {
+        { "<leader>tt", "<cmd>TroubleToggle<CR>", desc = "All Diagnostics" },
+        { "<leader>tw", "<cmd>TroubleToggle workspace_diagnostics<CR>", desc = "Workspace Diagnostics" },
+        { "<leader>td", "<cmd>TroubleToggle document_diagnostics<CR>", desc = "Document Diagnostics" },
+        { "<leader>tq", "<cmd>TroubleToggle quickfix<CR>", desc = "Quickfix List" },
+        { "<leader>tl", "<cmd>TroubleToggle loclist<CR>", desc = "Location List" },
+        { "gR", "<cmd>TroubleToggle lsp_references<CR>", desc = "LSP Refenrences Search" },
+        {
+          "[q",
+          function()
+            if not trouble.is_open() then trouble.open() end
+            trouble.previous(opts)
+          end,
+          desc = "Prev Diagnostic",
+        },
+        {
+          "]q",
+          function()
+            if not trouble.is_open() then trouble.open() end
+            trouble.next(opts)
+          end,
+          desc = "Next Diagnostic",
+        },
+      }
+    end,
+  },
 }
