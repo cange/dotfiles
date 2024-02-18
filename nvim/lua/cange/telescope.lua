@@ -52,7 +52,7 @@ function M.browse_nvim()
   builtin.find_files({
     cwd = "~/.config/nvim",
     previewer = false,
-    prompt_title = i("ui.Settings") .. " Neovim",
+    prompt_title = i("ui.Neovim") .. " Neovim",
   })
 end
 
