@@ -1,3 +1,4 @@
+local util = require("lualine.util")
 ---@class StateIcons
 ---@field active? string
 ---@field inactive? string
@@ -48,15 +49,16 @@ end
 function M:formatter(data)
   local store = {}
   for _, label in ipairs(data) do
-    table.insert(store, self.service_icons[label] or require("lualine.util").truncate(label, 12))
+    table.insert(store, self.service_icons[label] or util.truncate(label, 12))
   end
+  util.list_dedupe(store)
 
   local output = vim.o.columns > 100 and #store > 0 and table.concat(store, " ") or ""
   if vim.tbl_contains(self.config.exclude_filetypes or {}, vim.bo.filetype) then return "" end
 
   local name = self.label or self.state_icons[self:get_state()]
-
-  return string.format("%s %s", name, #output == 0 and self.state_icons["inactive"] or output)
+  output = #output == 0 and self.state_icons["inactive"] or output
+  return string.format("%s %s", name, output)
 end
 
 ---@param new_state boolean
