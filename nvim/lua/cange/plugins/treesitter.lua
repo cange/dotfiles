@@ -79,7 +79,21 @@ return {
     lazy = false,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = "nvim-treesitter/nvim-treesitter",
-    opts = {},
+    opts = {
+      exclude = {
+        filetypes = {
+          "",
+          "NvimTree",
+          "TelescopePrompt",
+          "gitcommit",
+          "markdown",
+          "harpoon",
+          "help",
+          "lazy",
+          "mason",
+        },
+      },
+    },
     keys = {
       { "<LocalLeader>o", "<cmd>Specto toggle only<CR>", desc = "Toggle Only test block" },
       { "<LocalLeader>s", "<cmd>Specto toggle skip<CR>", desc = "Toggle Skip test block" },
