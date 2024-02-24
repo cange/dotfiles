@@ -4,11 +4,11 @@
 
 -- Define autocommands with Lua APIs
 -- See: h:api-autocmd, h:augroup
-local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+local group_id = vim.api.nvim_create_augroup("CangeSetup", { clear = true })
 
 autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
-  group = augroup("line_length", { clear = true }),
+  group = group_id,
   pattern = "*.md,*.lua,*.txt",
   callback = function()
     vim.opt_local.colorcolumn = "80"
@@ -17,13 +17,13 @@ autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
 })
 
 autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
-  group = augroup("line_length", { clear = true }),
+  group = group_id,
   pattern = ".env.*",
   callback = function() vim.bo.filetype = "sh" end,
 })
 
 autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
-  group = augroup("mdx_filetype", { clear = true }),
+  group = group_id,
   pattern = "*.mdx",
   callback = function() vim.bo.filetype = "jsx" end,
 })

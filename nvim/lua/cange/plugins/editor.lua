@@ -180,7 +180,9 @@ return {
     event = "VeryLazy",
     opts = {
       keywords = {
-        NOTE = { icon = " ", color = "hint", alt = { "INFO", "DEPRECATED" } },
+        FIX = { alt = { "FIXME", "FIXUP", "BUG", "FIXIT", "ISSUE" }, icon = nil },
+        NOTE = { alt = { "INFO", "DEPRECATED" }, icon = nil },
+        TODO = { icon = i("ui.Check") },
       },
     },
   },
