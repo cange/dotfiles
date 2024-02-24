@@ -88,9 +88,9 @@ local presets = {
   },
   yarn = {
     icon = i("extensions.Yarn"),
-    name = "YarnPkg",
     color = "#2c8ebb",
     cterm_color = "33",
+    name = "YarnPkg",
   },
 }
 
@@ -124,6 +124,7 @@ function M.setup()
 end
 
 function M.get_service_icons()
+  redefine_icons()
   ---@param extension string
   ---@return string
   local function grep_icon(extension)
