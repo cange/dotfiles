@@ -23,23 +23,19 @@ return {
     lazy = true,
     config = function()
       -- NOTE: needs to be delayed to apply background_colour
-      vim.schedule(
-        function()
-          require("notify").setup({
-            icons = {
-              ERROR = i("diagnostics.Error"),
-              WARN = i("diagnostics.Warn"),
-              INFO = i("diagnostics.Info"),
-              DEBUG = i("ui.Bug"),
-              TRACE = i("ui.Edit"),
-            },
-            background_colour = Cange.get_hl_hex("Normal", "fg").fg,
-            render = "compact",
-            timeout = 3000,
-            top_down = false,
-          })
-        end
-      )
+      require("notify").setup({
+        icons = {
+          ERROR = i("diagnostics.Error"),
+          WARN = i("diagnostics.Warn"),
+          INFO = i("diagnostics.Info"),
+          DEBUG = i("ui.Bug"),
+          TRACE = i("ui.Edit"),
+        },
+        background_colour = "#000000",
+        render = "compact",
+        timeout = 3000,
+        top_down = false,
+      })
     end,
     init = function() vim.notify = require("notify") end,
   },
