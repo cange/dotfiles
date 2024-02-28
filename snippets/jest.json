@@ -23,9 +23,13 @@
     "prefix": "beforeEach(…",
     "body": "beforeEach(() => {\n\t$1\n})"
   },
+  "expect(wrapper": {
+    "prefix": "expect(wrapper",
+    "body": "expect(wrapper.$1).to$0"
+  },
   "expect(subject": {
     "prefix": "expect(subject",
-    "body": "expect(subject.$1).to$2"
+    "body": "expect(subject.$1).to$0"
   },
   "only": {
     "prefix": ".only",
@@ -35,41 +39,41 @@
     "prefix": ".attributes",
     "body": ".attributes('$1')"
   },
-  "expect(wrapper": {
-    "prefix": "expect(wrapper",
-    "body": "expect(wrapper.$1).to$2"
-  },
   "vue wrapper debug": {
     "prefix": "logdebug",
     "body": "console.log(`--- $1$2.html(): %o`, ${1:wrapper}$2.html())"
   },
+  "expect.arraytContaining": {
+    "prefix": "arrayContaining",
+    "body": "expect.arrayContaining({$1})$0"
+  },
   "expect.objectContaining": {
-    "prefix": "expect.objectContaining",
-    "body": "expect.objectContaining({$1})$2"
+    "prefix": "objectContaining",
+    "body": "expect.objectContaining({$1})$0"
   },
   "expect.stringContaining": {
-    "prefix": "expect.stringContaining",
-    "body": "expect.stringContaining('$1')$2"
+    "prefix": "stringContaining",
+    "body": "expect.stringContaining('$1')$0"
   },
   "expect.stringMatching": {
-    "prefix": "expect.stringMatching",
-    "body": "expect.stringMatching(/$1/)$2"
+    "prefix": "stringMatching",
+    "body": "expect.stringMatching(/$1/)$0"
   },
   "toEqual": {
     "prefix": "toequal",
-    "body": "toEqual($1)$2"
+    "body": "toEqual($1)$0"
   },
   "toBe": {
     "prefix": "tobe",
-    "body": "toBe($1)$2"
+    "body": "toBe($1)$0"
   },
   "toBeDefined": {
     "prefix": "tobedefined",
-    "body": "toBeDefined()$1"
+    "body": "toBeDefined()$0"
   },
   "toBeUndefined": {
     "prefix": "tobeundefined",
-    "body": "toBeUndefined()$1"
+    "body": "toBeUndefined()$0"
   },
   "toBeNull": {
     "prefix": "tobenull",

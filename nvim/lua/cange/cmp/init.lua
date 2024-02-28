@@ -88,7 +88,7 @@ M.opts = {
       -- confirm explicitly selected items.
       select = true,
     }),
-    ["<C-CR>"] = function(fallback)
+    ["<ESC>"] = function(fallback)
       cmp.abort()
       fallback()
     end,

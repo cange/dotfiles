@@ -57,11 +57,11 @@
   },
   "querySelector": {
     "prefix": ".querySelector(…",
-    "body": ".querySelector('${1:selector}')$2"
+    "body": ".querySelector('${1:selector}')$0"
   },
   "querySelectorAll": {
     "prefix": ".querySelectorAll(…",
-    "body": ".querySelectorAll('${1:selector}')$2"
+    "body": ".querySelectorAll('${1:selector}')$0"
   },
   "DOM ready": {
     "prefix": "ready",
