@@ -16,7 +16,10 @@ local util = require("lualine.util")
 ---@field private origin {super:{init:function}}
 ---@field private service_icons string[]
 ---@field private state_icons string[]
+---@field get_state function
+---@field set_state function
 ---@field cached_status function
+---@field new function
 ---@field update function
 local M = {}
 M.__index = M
@@ -91,7 +94,7 @@ function M:cached_status()
   self:log("assigned", self.get_data())
 
   if #data > 0 then self.cache[ft] = data end
-  self:log("refreshed", self.cache[ft] or {})
+  self:log("refreshed", self.cache[ft])
 
   return self:formatter(self.cache[ft] or {})
 end
