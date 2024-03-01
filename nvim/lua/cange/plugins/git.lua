@@ -41,4 +41,11 @@ return {
     },
     --- stylua: ignore end
   },
+
+  {
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    dependencies = "nvim-lua/plenary.nvim",
+    keys = { { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "Open LazyGit" } },
+  },
 }

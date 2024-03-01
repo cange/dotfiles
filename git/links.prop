@@ -1,1 +1,2 @@
 $DOTFILES/git/gitconfig=$HOME/.gitconfig
+$DOTFILES/git/lazygit.config.yml=$HOME/Library/Application\ Support/lazygit/config.yml

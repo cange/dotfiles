@@ -1,0 +1,8 @@
+# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+gui:
+  nerdFontsVersion: "3"
+  theme:
+    selectedLineBgColor:
+      - reverse
+    unstagedChangesColor:
+      - magenta
