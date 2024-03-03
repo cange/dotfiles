@@ -27,3 +27,9 @@ autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
   pattern = "*.mdx",
   callback = function() vim.bo.filetype = "jsx" end,
 })
+
+autocmd("TextYankPost", {
+  desc = "Highlight when yanking (copying) text",
+  group = group_id,
+  callback = function() vim.highlight.on_yank({ higroup = "Cursor" }) end,
+})
