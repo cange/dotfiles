@@ -56,7 +56,7 @@ local function update_highlights()
     TelescopePromptCounter = { fg = p.fg3 },
     TelescopePromptNormal = { fg = p.fg2, bg = p.bg1 },
     TelescopePromptTitle = { link = "FloatTitle" },
-    TelescopeResultsNormal = { fg = p.fg0, bg = p.bg0 },
+    TelescopeResultsNormal = { fg = p.fg2, bg = p.bg0 },
     TelescopeSelection = { fg = p.fg2, bg = p.sel0 },
     TelescopeSelectionCaret = { fg = p.fg1, bg = p.sel0 },
     TelescopeSelectionNormal = { link = "FloatBorder" },
