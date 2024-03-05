@@ -22,9 +22,8 @@ return {
     }
     local ivy_opts = { theme = "ivy" }
     local lsp_opts = {
-      initial_mode = "normal",
-      previewer = false,
-      theme = "dropdown",
+      previewer = true,
+      theme = "ivy",
     }
     local function responsive_width(_, cols) return math.floor(cols * (cols > 120 and 0.4 or 0.6)) end
     local function responsive_height(_, _, lines) return math.floor(lines * (lines > 100 and 0.4 or 0.6)) end
