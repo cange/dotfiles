@@ -147,11 +147,8 @@ return {
   { -- Extensible UI notifications and LSP progress messages.
     "j-hui/fidget.nvim",
     opts = {
-      progress = {
-        display = {
-          done_icon = i("ui.Check"),
-        },
-      },
+      progress = { display = { done_icon = i("ui.Check") } },
+      notification = { window = { winblend = 0 } },
     },
   },
 

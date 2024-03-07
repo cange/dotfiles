@@ -52,9 +52,8 @@ end
 function M:formatter(data)
   local store = {}
   for _, label in ipairs(data) do
-    table.insert(store, self.service_icons[label] or util.truncate(label, 12))
+    table.insert(store, self.service_icons[label] or util.truncate(label, 8))
   end
-  util.list_dedupe(store)
 
   local output = vim.o.columns > 100 and #store > 0 and table.concat(store, " ") or ""
   if vim.tbl_contains(self.config.exclude_filetypes or {}, vim.bo.filetype) then return "" end
@@ -86,12 +85,12 @@ function M:cached_status()
   ft = ft ~= "" and ft or not self.before_ft and self.before_ft or "none"
 
   if self.cache[ft] then
-    self:log("cached", self.cache[ft] or {})
+    self:log("cached", self.cache[ft])
     return self:formatter(self.cache[ft])
   end
 
   local data = self.get_data()
-  self:log("assigned", self.get_data())
+  self:log("assigned", data)
 
   if #data > 0 then self.cache[ft] = data end
   self:log("refreshed", self.cache[ft])
