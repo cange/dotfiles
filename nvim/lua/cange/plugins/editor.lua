@@ -109,8 +109,8 @@ return {
       require("telescope").load_extension("session-lens")
 
       -- INFO: plugin is not working which lazy `keys` option is being used
-      vim.keymap.set("n", "<leader>eR", "<cmd>SessionRestore<CR>", { desc = "Recent session" })
-      vim.keymap.set("n", "<leader>eX", "<cmd>SessionDelete<CR>", { desc = "Delete session" })
+      vim.keymap.set("n", "<leader>er", "<cmd>SessionRestore<CR>", { desc = "Recent session" })
+      vim.keymap.set("n", "<leader>ex", "<cmd>SessionDelete<CR>", { desc = "Delete session" })
       vim.keymap.set("n", "<leader>es", "<cmd>SessionSave<CR>", { desc = "Save session" })
       vim.keymap.set("n", "<leader>ss", "<cmd>Telescope session-lens<CR>", { desc = "Recent Sessions" })
 

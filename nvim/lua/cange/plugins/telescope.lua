@@ -107,7 +107,7 @@ return {
   -- stylua: ignore start
   keys = {
     { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",          desc = "Search within buffer" },
-    { "<leader>eN", "<cmd>Telescope notify<CR>",                            desc = "Show notifications", },
+    { "<leader>en", "<cmd>Telescope notify<CR>",                            desc = "Show notifications", },
     { "<leader>ec", "<cmd>Telescope colorscheme<CR>",                       desc = "Change colorscheme" },
     { "<leader>ep", "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },
     { "<leader>f", "<cmd>Telescope find_files<CR>",                         desc = "Search Files" },
