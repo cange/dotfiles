@@ -46,7 +46,12 @@ return {
       end
 
       local server_configs = {
-        cssls = {},
+        cssls = {
+          settings = {
+            css = { lint = { unknownAtRules = "ignore" } },
+            scss = { lint = { unknownAtRules = "ignore" } },
+          },
+        },
         html = {},
         lemminx = {}, -- xml, xsd, xsl, xslt, svg
         ruby_ls = {},
