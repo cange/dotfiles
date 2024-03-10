@@ -3,3 +3,5 @@ tap "jesseduffield/lazydocker"
 brew "jesseduffield/lazydocker/lazydocker"
 # App to build and share containerized applications and microservices
 cask "docker"
+# Isolated development environments using Docker
+brew "docker-compose"

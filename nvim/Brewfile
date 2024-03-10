@@ -20,4 +20,4 @@ brew "ripgrep"
 # Extremely fast tool to remove dupes and other lint from your filesystem
 brew "rmlint"
 # Developer targeted fonts with a high number of glyphs
-cask "font-fira-code-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
