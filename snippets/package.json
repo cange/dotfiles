@@ -15,6 +15,16 @@
       },
       {
         "language": [
+          "html",
+          "javascript",
+          "svelte",
+          "typescript",
+          "vue"
+        ],
+        "path": "./html.json"
+      },
+      {
+        "language": [
           "javascript",
           "typescript"
         ],

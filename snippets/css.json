@@ -43,6 +43,10 @@
     "prefix": "var(",
     "body": "var(--$1)$2"
   },
+  "prettier-ignore": {
+    "prefix": "lintpr",
+    "body": "/* prettier-ignore */"
+  },
   "lint - stylelint-disable-line": {
     "prefix": "lintline",
     "body": "/* stylelint-disable-line $1 */"

@@ -11,6 +11,11 @@
       "/* eslint-enable prettier/prettier */"
     ]
   },
+  "prettier-ignore": {
+    "prefix": "lintpr",
+    "description": "exclude the next node",
+    "body": "// prettier-ignore"
+  },
   "eslint-disable-line": {
     "prefix": "eslint-disable-line …",
     "body": "// eslint-disable-line $1"

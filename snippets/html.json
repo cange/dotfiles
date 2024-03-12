@@ -1,0 +1,15 @@
+{
+  "prettier-ignore": {
+    "prefix": "lintpr",
+    "description": "exclude the next node",
+    "body": "<!-- prettier-ignore -->"
+  },
+  "prettier-ignore-attribute": {
+    "prefix": "lintprattr",
+    "body": "<!-- prettier-ignore-attribute -->"
+  },
+  "prettier-ignore-attribute keyword": {
+    "prefix": "lintprattrk",
+    "body": "<!-- prettier-ignore-attribute ($keyword) -->"
+  }
+}

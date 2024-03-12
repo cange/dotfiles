@@ -45,7 +45,7 @@
   },
   "expect.arraytContaining": {
     "prefix": "arrayContaining",
-    "body": "expect.arrayContaining({$1})$0"
+    "body": "expect.arrayContaining([$1])$0"
   },
   "expect.objectContaining": {
     "prefix": "objectContaining",
