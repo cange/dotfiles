@@ -13,7 +13,7 @@
   },
   "var(--v-font-…": {
     "prefix": "fon",
-    "body": "var(--v-font-${1$0|copy,display|}-${2|100,200,300,400,500,600,700,800,900,1000|})$0"
+    "body": "var(--v-font-${1|copy,display|}-${2|100,200,300,400,500,600,700,800,900,1000|})$0"
   },
   "var(--v-radius-…": {
     "prefix": "rad",
