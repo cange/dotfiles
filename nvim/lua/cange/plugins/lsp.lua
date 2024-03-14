@@ -31,11 +31,11 @@ return {
     config = function()
       local util = require("lspconfig.util")
       local function get_typescript_server_path(root_dir)
-        local global_ts = vim.fn.expand("$HOME")
-          .. "/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"
+        local global_ts = vim.fn.expand("$HOME/")
+          .. ".local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"
         local found_ts = ""
         local function check_dir(path)
-          found_ts = path .. "/node_modules/typescript/lib"
+          found_ts = util.path.join(path, "node_modules/typescript/lib")
           if util.path.exists(found_ts) then return path end
         end
         if util.search_ancestors(root_dir, check_dir) then
@@ -72,23 +72,40 @@ return {
           },
         },
         tsserver = { -- javascript, typescript, etc.
+          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
           init_options = {
-            preferences = {
-              disableSuggestions = true,
-            },
-            completions = {
-              completeFunctionCalls = true,
+            preferences = { disableSuggestions = true },
+            completions = { completeFunctionCalls = true },
+            plugins = {
+              {
+                -- NOTE: It is crucial to ensure that @vue/typescript-plugin and volar are of identical versions.
+                -- check `npm list -g`
+                name = "@vue/typescript-plugin",
+                location = vim.fn.expand("$HOME/")
+                  .. ".asdf/installs/nodejs/20.11.0/lib/node_modules/@vue/typescript-plugin/",
+                languages = { "javascript", "typescript", "vue" },
+              },
             },
           },
+          filetypes = {
+            "javascript",
+            "javascript.jsx",
+            "javascriptreact",
+            "json",
+            "typescript",
+            "typescript.tsx",
+            "typescriptreact",
+            "vue",
+          },
         },
-        volar = { -- vue 3 and 2
-          -- enable typescript Take Over Mode
-          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
-          filetypes = { "vue" },
-          on_new_config = function(new_config, new_root_dir)
-            new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-          end,
-        },
+        -- NOTE: volar is not needed if using @vue/typescript-plugin
+        -- volar = { -- vue
+        --   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
+        --   filetypes = { "vue" },
+        --   on_new_config = function(new_config, new_root_dir)
+        --     new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+        --   end,
+        -- },
         jsonls = {
           settings = {
             json = { schemas = require("schemastore").json.schemas() },
