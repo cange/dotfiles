@@ -53,13 +53,13 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       window = {
-        width = 160, -- width of the Zen window
+        width = Cange.responsive_width(220, 0.95, 0.75), -- % width of the Zen window
         height = 1, -- height of the Zen window
       },
     },
     keys = {
-      { "<leader>z", "<cmd>ZenMode<CR><cmd>TwilighEnable<CR>", desc = "Toggle Zen Focus Mode" },
-      { "<localleader>z", "<cmd>ZenMode<CR><cmd>TwilightDisable<CR>", desc = "Toggle Zen Mode" },
+      { "<localleader>z", "<cmd>ZenMode<CR><cmd>TwilighEnable<CR>", desc = "Toggle Zen Focus Mode" },
+      { "<leader>z", "<cmd>ZenMode<CR><cmd>TwilightDisable<CR>", desc = "Toggle Zen Mode" },
     },
   },
 

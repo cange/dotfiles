@@ -105,4 +105,11 @@ function M.get_hl(name, keywords)
   return output
 end
 
+---allows to set a width depending columns on the window
+---@param breakpoint integer
+---@param down number width when columns lower than breakpoint
+---@param up number width when columns higher than breakpoint
+---@return integer
+function M.responsive_width(breakpoint, down, up) return vim.o.columns > breakpoint and up or down end
+
 return M
