@@ -86,6 +86,10 @@ local presets = {
   eslint = {
     name = "Eslintrc",
   },
+  prettier = {
+    -- temp fix until this is working https://github.com/nvim-tree/nvim-web-devicons/pull/417
+    icon = "󰈧",
+  },
   yarn = {
     icon = i("extensions.Yarn"),
     color = "#2c8ebb",
@@ -95,19 +99,20 @@ local presets = {
 }
 
 local function redefine_icons()
-  set_icon_by_filetype("", ".stylelint", presets.stylelint) -- create type
+  set_icon_by_filetype(".prettierrc", ".prettierignore", presets.prettier)
   set_icon_by_filetype(".stylelintrc", ".stylelintignore", presets.stylelint)
-  set_icon_by_filetype("vue", "vue", presets.vue)
   set_icon_by_filetype("node_modules", ".nvmrc")
+  set_icon_by_filetype("vue", "vue", presets.vue)
   set_icon_by_filetype("yarn", ".yarn", presets.yarn)
   set_icon_by_filetype("yarn", ".yarnrc.yml", presets.yarn)
   set_icon_by_filetype("yarn", "yarn.lock", presets.yarn)
 
-  for _, ext in pairs({ ".json", ".cjs", ".js", ".mjs" }) do
+  for _, ext in pairs({ "", ".json", ".cjs", ".js", ".mjs" }) do
     set_icon_by_filetype(".babelrc", ".babelrc" .. ext, presets.babelrc)
     set_icon_by_filetype(".babelrc", "babel.config" .. ext, presets.babelrc)
-    set_icon_by_filetype(".stylelint", ".stylelintrc" .. ext, presets.stylelint)
     set_icon_by_filetype(".eslintrc", ".eslintrc" .. ext, presets.eslint)
+    set_icon_by_filetype(".prettierrc", ".prettierrc" .. ext, presets.prettier)
+    set_icon_by_filetype(".stylelint", ".stylelintrc" .. ext, presets.stylelint)
   end
 
   for _, ft in pairs({ "js", "ts" }) do
