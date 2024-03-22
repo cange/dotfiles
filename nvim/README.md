@@ -17,9 +17,3 @@ In order to enable languages features run `:Mason` (within NeoVim) to install
 all related LSP, formatter and linter.
 
 Restart NeoVim ensures that all changes are applied.
-
-### Troubleshooting
-
-> **Note** Run `:checkhealth` after installation.
-
-See also [help docs](./doc/cange.txt) or `:help cange.txt` for more details.
