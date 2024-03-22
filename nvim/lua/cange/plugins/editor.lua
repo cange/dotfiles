@@ -12,7 +12,7 @@ return {
     config = function()
       require("nvim-tree").setup({
         live_filter = {
-          prefix = i("ui.Search") .. "  ",
+          prefix = i("ui.Search", { right = 2 }),
         },
         -- project plugin related
         sync_root_with_cwd = true,
@@ -29,7 +29,7 @@ return {
             diagnostics_placement = "after",
             git_placement = "signcolumn",
             modified_placement = "signcolumn",
-            symlink_arrow = " " .. i("documents.SymlinkFile") .. " ",
+            symlink_arrow = i("documents.SymlinkFile", { left = 1, right = 1 }),
             glyphs = {
               default = i("documents.File"),
               bookmark = i("ui.Bookmark"),
@@ -130,7 +130,7 @@ return {
       },
       icons = {
         breadcrumb = "",
-        group = i("ui.ChevronRight") .. " ",
+        group = i("ui.ChevronRight", { right = 1 }),
         separator = "",
       },
       window = {

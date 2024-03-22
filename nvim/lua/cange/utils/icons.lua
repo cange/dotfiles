@@ -1,10 +1,12 @@
 local M = {}
+local strUtil = require("cange.utils.string")
 local ns = "[cange.utils.icons]"
 
 ---Retrieves an icon from the specified path.
 ---@param path string Dot separated path to the desired icon.
+---@param opts? {left?:number, right?:number}
 ---@return table|string|nil # The icon value if found, nil if the path is invalid.
-function M.get_icon(path)
+function M.get_icon(path, opts)
   local ok, icons = pcall(require, "cange.icons")
   if not ok then
     error(ns .. ' "cange.icons" not found!')
@@ -27,8 +29,8 @@ function M.get_icon(path)
   end
 
   if type(current) == "string" then
-    ---@diagnostic disable-next-line: cast-local-type
-    current = vim.trim(current)
+    opts = opts or { right = 0, left = 0 }
+    return strUtil.pad(vim.trim(current), opts)
   end
 
   return current

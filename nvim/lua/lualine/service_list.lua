@@ -1,4 +1,4 @@
-local util = require("lualine.util")
+local strUtil = require("cange.utils.string")
 ---@class StateIcons
 ---@field active? string
 ---@field inactive? string
@@ -51,8 +51,9 @@ end
 ---@return string
 function M:formatter(data)
   local store = {}
+  local maxLength = 12
   for _, label in ipairs(data) do
-    table.insert(store, self.service_icons[label] or util.truncate(label, 8))
+    table.insert(store, self.service_icons[label] or strUtil.truncate(label, maxLength))
   end
 
   local output = vim.o.columns > 100 and #store > 0 and table.concat(store, " ") or ""

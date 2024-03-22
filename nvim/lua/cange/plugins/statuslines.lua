@@ -1,4 +1,5 @@
 local i = Cange.get_icon
+local strUtil = require("cange.utils.string")
 local exclude_filetypes = {
   "",
   "NvimTree",
@@ -22,7 +23,10 @@ return {
     opts = {
       options = {
         component_separators = { left = i("ui.Pipe"), right = i("ui.Pipe") },
-        section_separators = { left = i("ui.TriangleLeft") .. " ", right = i("ui.TriangleRight") .. " " },
+        section_separators = {
+          left = i("ui.TriangleLeft", { right = 1 }),
+          right = i("ui.TriangleRight", { right = 1 }),
+        },
         globalstatus = true,
       },
       sections = {
@@ -36,10 +40,10 @@ return {
           {
             "diagnostics",
             symbols = {
-              error = i("diagnostics.Error") .. " ",
-              warn = i("diagnostics.Warn") .. " ",
-              info = i("diagnostics.Info") .. " ",
-              hint = i("diagnostics.Hint") .. " ",
+              error = i("diagnostics.Error", { right = 1 }),
+              warn = i("diagnostics.Warn", { right = 1 }),
+              info = i("diagnostics.Info", { right = 1 }),
+              hint = i("diagnostics.Hint", { right = 1 }),
             },
           },
         },
@@ -50,7 +54,7 @@ return {
             icon = i("git.Commit"),
             fmt = function(name)
               local w = vim.o.columns
-              return require("lualine.util").truncate(name, w > 172 and 80 or w > 112 and 48 or w > 92 and 24 or 0)
+              return strUtil.truncate(name, w > 172 and 80 or w > 112 and 48 or w > 92 and 24 or 0)
             end,
           },
           { require("lazy.status").updates, cond = require("lazy.status").has_updates },
@@ -64,9 +68,13 @@ return {
             separator = "",
             padding = { left = 1, right = 0 },
           },
-          "location",
           {
-            function() return i("ui.Tab") .. " " .. vim.api.nvim_buf_get_option(0, "shiftwidth") end,
+            "location",
+            separator = "",
+            padding = { left = 1, right = 0 },
+          },
+          {
+            function() return i("ui.Tab", { left = 1 }) .. vim.api.nvim_buf_get_option(0, "shiftwidth") end,
             separator = "",
             padding = { left = 1, right = 0 },
           },
