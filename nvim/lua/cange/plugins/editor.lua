@@ -150,6 +150,7 @@ return {
       wk.setup(opts)
       wk.register({ ["<leader>b"] = { name = "Buffers" } })
       wk.register({ ["<leader>c"] = { name = "Code/Copilot" } })
+      wk.register({ ["<leader>d"] = { name = "Debug" } })
       wk.register({ ["<leader>e"] = { name = "Editor" } })
       wk.register({ ["<leader>g"] = { name = "Git" } })
       wk.register({ ["<leader>s"] = { name = "Search" } })
