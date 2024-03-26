@@ -29,25 +29,17 @@ local function update_highlights()
 
   local p = update_palette()
   local highlights = {
-    CursorLine = { bg = p.bg2 }, -- disable default
+    CursorLine = { bg = p.bg2 }, -- more subtle
     Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
-    Todo = { bg = nil, bold = true },
-    NonText = { fg = p.bg2 },
-    -- illuminate
-    IlluminatedWordText = { bg = p.bg2 }, -- Default for references if no kind information is available
-    IlluminatedWordRead = { bg = p.bg2, bold = true }, -- for references of kind read
-    IlluminatedWordWrite = { bold = true }, -- for references of kind write
+    NonText = { fg = p.bg2 }, -- subtle virtual/column line
 
     -- Window
     FloatBorder = { fg = p.bg0, bg = p.bg0 },
     FloatTitle = { fg = p.fg3, bg = p.bg0 },
     NormalFloat = { fg = p.fg1, bg = p.bg0 },
+
     -- SymboleOutline
     FocusedSymbol = { bold = true },
-    -- Harpoon
-    HarpoonWindow = { link = "NormalFloat" },
-    HarpoonTitle = { link = "FloatTitle" },
-    HarpoonBorder = { link = "FloatBorder" },
     -- NormalTelescope
     TelescopeBorder = { link = "FloatBorder" },
     TelescopeMatching = { link = "MatchParen" },
@@ -78,10 +70,6 @@ local function update_highlights()
     CmpItemMenu = { fg = p.cyan.dim },
     CmpItemMenuLua = { fg = lua_color },
     CmpItemMenuTabnine = { fg = blend(p.tabnine.even, -0.5) },
-
-    -- NvimTree
-    NvimTreeGitDirtyIcon = { link = "GitSignsChange" },
-    NvimTreeGitNewIcon = { link = "GitSignsAdd" },
   }
 
   Cange.set_highlights(highlights)

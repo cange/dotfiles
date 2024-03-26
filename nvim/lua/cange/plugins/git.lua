@@ -47,5 +47,12 @@ return {
     lazy = true,
     dependencies = "nvim-lua/plenary.nvim",
     keys = { { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "Open LazyGit" } },
+    config = function()
+      vim.g.lazygit_floating_window_border_chars = { " ", " ", " ", " ", " ", " ", " ", " " } -- no borders
+      Cange.set_highlights({
+        LazyGitBorder = { link = "FloatBorder" },
+        LazyGitFloat = { link = "NormalFloat" },
+      })
+    end,
   },
 }
