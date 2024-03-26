@@ -31,7 +31,7 @@ return {
       },
       sections = {
         lualine_a = {
-          { "mode", fmt = function(mode) return string.sub(mode, 0, 1) end, separator = i("ui.VThinLineLeft") },
+          "mode",
         },
         lualine_b = {
           { "branch", icon = i("git.Branch") },
@@ -74,7 +74,7 @@ return {
             padding = { left = 1, right = 0 },
           },
           {
-            function() return i("ui.Tab", { left = 1 }) .. vim.api.nvim_buf_get_option(0, "shiftwidth") end,
+            function() return i("ui.Tab", { right = 1 }) .. vim.api.nvim_buf_get_option(0, "shiftwidth") end,
             separator = "",
             padding = { left = 1, right = 0 },
           },
