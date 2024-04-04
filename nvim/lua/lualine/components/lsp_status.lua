@@ -1,5 +1,5 @@
 local M = require("lualine.component"):extend()
-local SerivceList = require("lualine.service_list")
+local debug = false
 
 ---@return table
 local function get_active_services()
@@ -17,9 +17,16 @@ end
 function M:init(opts)
   local state_icons = { inactive = Cange.get_icon("ui.EyeClosed") }
   M.super.init(self, opts)
-  M.service_list = SerivceList:new("LSP", Cange.get_service_icons(), state_icons, get_active_services, opts)
+  M.list_services = require("lualine.list_services"):new(
+    "LSP",
+    Cange.get_service_icons(),
+    state_icons,
+    get_active_services,
+    opts,
+    debug
+  )
 end
 
-function M:update_status() return M.service_list:cached_status() end
+function M:update_status() return M.list_services:cached_status() end
 
 return M

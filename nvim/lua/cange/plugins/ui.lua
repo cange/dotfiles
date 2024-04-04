@@ -24,6 +24,7 @@ return {
     config = function()
       -- NOTE: needs to be delayed to apply background_colour
       require("notify").setup({
+        level = Cange.get_config("log.level"),
         icons = {
           ERROR = i("diagnostics.Error"),
           WARN = i("diagnostics.Warn"),

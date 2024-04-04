@@ -5,7 +5,7 @@ if not ok then
 end
 
 local M = require("lualine.component"):extend()
-local SerivceList = require("lualine.service_list")
+local debug = false
 
 ---@return table
 local function get_active_services()
@@ -23,12 +23,12 @@ function M:init(opts)
     inactive = Cange.get_icon("ui.EyeClosed"),
   }
   M.super.init(self, opts)
-  M.service_list = SerivceList:new(nil, {}, state_icons, get_active_services, opts)
+  M.list_services = require("lualine.list_services"):new(nil, {}, state_icons, get_active_services, opts, debug)
 end
 
 function M:update_status()
-  M.service_list:set_state(Cange.get_config("lsp.format_on_save"))
-  return M.service_list:cached_status()
+  M.list_services:set_state(Cange.get_config("lsp.format_on_save"))
+  return M.list_services:cached_status()
 end
 
 return M

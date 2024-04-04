@@ -2,7 +2,7 @@ local ns = "[cange.utils]"
 
 local M = {}
 
-Log = require("cange.utils.log") -- 1st
+Log = require("cange.utils.log"):new() -- 1st
 --
 M.get_icon = require("cange.utils.icons").get_icon -- 2nd
 M.get_service_icons = require("cange.utils.icons").get_service_icons

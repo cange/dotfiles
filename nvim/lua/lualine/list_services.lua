@@ -1,4 +1,5 @@
 local strUtil = require("cange.utils.string")
+
 ---@class StateIcons
 ---@field active? string
 ---@field inactive? string
@@ -70,11 +71,16 @@ function M:set_state(new_state) self.state = new_state end
 ---@return "active" | "inactive"
 function M:get_state() return self.state and "active" or "inactive" end
 
+local log = require("plenary.log").new({ plugin = "lualine.list_services" })
+log.level = "debug"
+
 ---@param msg string
 ---@param meta any
 function M:log(msg, meta)
   if self.debug then
-    print(string.format("[%s] %s -msg: %s -meta: %s", self.count, self.label, msg, vim.inspect(meta):gsub("\n", " ")))
+    log.debug(
+      string.format("[%s] %s -msg: %s -meta: %s", self.count, self.label, msg, vim.inspect(meta):gsub("\n", " "))
+    )
     self.count = self.count + 1
   end
 end
