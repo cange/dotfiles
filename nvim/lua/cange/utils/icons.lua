@@ -37,11 +37,11 @@ function M.get_icon(path, opts)
 end
 
 local user_icons = {}
-
 ---@param origin_filetype string
 ---@param filename string
+---@param extensions? string[]
 ---@param preset? DevIconsPreset
-local function set_icon_by_filetype(origin_filetype, filename, preset)
+local function set_icon_by_filetype(origin_filetype, filename, extensions, preset)
   local devicons = require("nvim-web-devicons")
   local icon, color = devicons.get_icon_color(origin_filetype)
   local _, cterm = devicons.get_icon_cterm_color_by_filetype(origin_filetype)
@@ -52,7 +52,11 @@ local function set_icon_by_filetype(origin_filetype, filename, preset)
     name = "",
   }
 
-  user_icons[filename] = vim.tbl_extend("force", fallback, preset or {})
+  for _, ext in pairs(extensions or { "" }) do
+    local fname = filename .. ext
+    user_icons[fname] = vim.tbl_extend("force", fallback, preset or {})
+    -- print(string.format("[%s] %s", fname, vim.inspect(user_icons[fname])):gsub("\n", " "))
+  end
 end
 
 local i = M.get_icon
@@ -75,22 +79,22 @@ local presets = {
     cterm_color = "35",
     name = "Nuxt",
   },
-  babelrc = {
+  babel = {
     icon = i("extensions.Babelrc"),
     name = "Babelrc",
   },
+  cypress = {
+    color = "#69d3a7",
+    cterm_color = "24",
+    name = "Cypress",
+  },
+  eslint = { name = "Eslintrc" },
+  prettier = { name = "PrettierConfig" },
   stylelint = {
     icon = i("extensions.Stylelint"),
     color = "#d0d0d0",
     cterm_color = "252",
-    name = "Stylelint",
-  },
-  eslint = {
-    name = "Eslintrc",
-  },
-  prettier = {
-    -- temp fix until this is working https://github.com/nvim-tree/nvim-web-devicons/pull/417
-    icon = "󰈧",
+    name = "StylelintConfig",
   },
   yarn = {
     icon = i("extensions.Yarn"),
@@ -99,27 +103,42 @@ local presets = {
     name = "YarnPkg",
   },
 }
+---Defines the set for all "rc" related files eg. .eslintrc, .eslintignore, .eslintrc.config.js, etc.
+---@param type string
+---@param rc_set string[] Extension set for ".…rc" files eg. .babelrc,
+---@param config_set string[] Extension set for ".….config" related types eg. .babel.config
+local function set_rc_file_icons(type, rc_set, config_set)
+  local filetype = "." .. type .. "rc"
+  set_icon_by_filetype(filetype, filetype, rc_set, presets[type])
+  set_icon_by_filetype(filetype, "." .. type .. "ignore", nil, presets[type])
+  set_icon_by_filetype(filetype, "" .. type .. ".config", config_set, presets[type])
+end
 
 local function redefine_icons()
-  set_icon_by_filetype(".prettierrc", ".prettierignore", presets.prettier)
-  set_icon_by_filetype(".stylelintrc", ".stylelintignore", presets.stylelint)
-  set_icon_by_filetype("node_modules", ".nvmrc")
-  set_icon_by_filetype("vue", "vue", presets.vue)
-  set_icon_by_filetype("yarn", ".yarn", presets.yarn)
-  set_icon_by_filetype("yarn", ".yarnrc.yml", presets.yarn)
-  set_icon_by_filetype("yarn", "yarn.lock", presets.yarn)
+  set_rc_file_icons("babel", { "", ".json", ".js", ".cjs", ".mjs", ".cts" }, { ".json", ".js", ".cjs", ".mjs", ".cts" })
+  set_rc_file_icons("eslint", { "", ".json", ".js", ".cjs", ".yaml", ".yml" }, { ".js", ".cjs", ".mjs" })
+  set_rc_file_icons(
+    "prettier",
+    { "", ".json", ".js", ".cjs", ".mjs", ".yaml", ".yml", ".json5", ".toml" },
+    { ".js", ".cjs", ".mjs" }
+  )
 
-  for _, ext in pairs({ "", ".json", ".cjs", ".js", ".mjs" }) do
-    set_icon_by_filetype(".babelrc", ".babelrc" .. ext, presets.babelrc)
-    set_icon_by_filetype(".babelrc", "babel.config" .. ext, presets.babelrc)
-    set_icon_by_filetype(".eslintrc", ".eslintrc" .. ext, presets.eslint)
-    set_icon_by_filetype(".prettierrc", ".prettierrc" .. ext, presets.prettier)
-    set_icon_by_filetype(".stylelint", ".stylelintrc" .. ext, presets.stylelint)
+  set_rc_file_icons("stylelint", { "", ".json", ".js", ".cjs", ".mjs", ".yaml", ".yml" }, { ".js", ".cjs", ".mjs" })
+
+  set_icon_by_filetype("node_modules", ".nvmrc")
+  set_icon_by_filetype("vue", "vue", nil, presets.vue)
+  set_icon_by_filetype("yarn", ".yarn", { "", "rc.yml" }, presets.yarn)
+  set_icon_by_filetype("yarn", "yarn.lock", nil, presets.yarn)
+
+  for _, ext in pairs({ "js", "ts" }) do
+    set_icon_by_filetype(ext, "nuxt.config." .. ext, nil, presets.nuxt)
+    set_icon_by_filetype(ext, "stories." .. ext, nil, presets.storybook)
+    set_icon_by_filetype(ext, "cypress.config", { ".js", ".cjs", ".mjs", ".ts" }, presets.cypress)
   end
 
-  for _, ft in pairs({ "js", "ts" }) do
-    set_icon_by_filetype(ft, "nuxt.config." .. ft, presets.nuxt)
-    set_icon_by_filetype(ft, "stories." .. ft, presets.storybook)
+  -- rare file types
+  for _, filename in pairs({ ".tool-versions", ".visabletemplaterc", "links.prop" }) do
+    set_icon_by_filetype("yaml", filename, nil, { name = "Config" })
   end
 
   require("nvim-web-devicons").set_icon(user_icons)
@@ -131,7 +150,7 @@ function M.setup()
 end
 
 function M.get_service_icons()
-  redefine_icons()
+  redefine_icons() -- ensure all icons are set
   ---@param extension string
   ---@return string
   local function grep_icon(extension)
@@ -147,7 +166,8 @@ function M.get_service_icons()
     lua_ls = grep_icon("lua"),
     markdownlint = grep_icon("md"),
     rubocop = grep_icon("rb"),
-    ruby_ls = grep_icon("rb"),
+    ruby_ls = grep_icon("rb"), -- deprecated lsp
+    ruby_lsp = grep_icon("rb"),
     stylelint = grep_icon(".stylelint"),
     tailwindcss = grep_icon("tailwind.config.js"),
     tsserver = grep_icon("ts"),
