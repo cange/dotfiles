@@ -20,10 +20,10 @@ Once the repo has been cloned, the required dependencies can be installed using
 run the following command:
 
 ```sh
-./bootstrap install # or uninstall
+./bootstrap.zsh install # or uninstall
 ```
 
-> **Note** Use `./bootstrap --help` flag to see available options.
+> **Note** Use `./bootstrap.zsh --help` flag to see available options.
 
 <details>
   <summary>Details</summary>
