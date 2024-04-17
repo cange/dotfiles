@@ -146,24 +146,25 @@ return {
       window = {
         border = Cange.get_config("ui.border"),
         margin = { 4, 8, 4, 8 }, -- extra window margin [top, right, bottom, left]
-        padding = { 0, 0, 2, 0 }, -- extra window padding [top, right, bottom, left]
+        padding = { 0, 0, 1, 0 }, -- extra window padding [top, right, bottom, left]
         winblend = vim.opt.winblend:get(),
       },
       layout = {
         width = { min = 32, max = 56 }, -- min and max width of the columns
         spacing = 4, -- spacing between columns
       },
+      show_keys = true, -- show the currently pressed key and its label as a message in the command line
     },
     config = function(_, opts)
       local wk = require("which-key")
 
       wk.setup(opts)
-      wk.register({ ["<leader>b"] = { name = "Buffers" } })
-      wk.register({ ["<leader>c"] = { name = "Code/Copilot" } })
-      wk.register({ ["<leader>e"] = { name = "Editor" } })
-      wk.register({ ["<leader>g"] = { name = "Git" } })
-      wk.register({ ["<leader>s"] = { name = "Search" } })
-      wk.register({ ["<leader>t"] = { name = "Troubleshooting" } })
+      wk.register({ ["<leader>b"] = { name = i("documents.File", { right = 1 }) .. "Buffers" } })
+      wk.register({ ["<leader>c"] = { name = i("ui.Copilot", { right = 1 }) .. "Code/Copilot" } })
+      wk.register({ ["<leader>e"] = { name = i("ui.Neovim", { right = 1 }) .. "Editor" } })
+      wk.register({ ["<leader>g"] = { name = i("git.Branch", { right = 1 }) .. "Git" } })
+      wk.register({ ["<leader>s"] = { name = i("ui.Search", { right = 1 }) .. "Search" } })
+      wk.register({ ["<leader>t"] = { name = i("ui.Stethoscope", { right = 1 }) .. "Troubleshooting" } })
     end,
   },
 
