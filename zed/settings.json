@@ -1,0 +1,53 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "auto_update_extensions": {
+    "colorizer": false
+  },
+  "telemetry": {
+    "metrics": false
+  },
+
+  "theme": {
+    "mode": "system",
+    "dark": "Terafox",
+    "light": "Dayfox"
+  },
+  "ui_font_size": 12,
+  "ui_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 12,
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "terminal": {
+    "font_size": 11,
+    "font_family": "JetBrainsMonoNL Nerd Font"
+  },
+
+  // Character counts at which to show wrap guides in the editor.
+  "wrap_guides": [80, 120],
+
+  "vim_mode": true,
+  "vim": {
+    "use_multiline_find": true,
+    "use_smartcase_find": true
+  },
+
+  "relative_line_numbers": true,
+
+  // The number of lines to keep above/below the cursor when scrolling.
+  "vertical_scroll_margin": 8,
+
+  "scrollbar": { "show": "never" },
+  "tab_size": 2,
+
+  "project_panel": {
+    "default_width": 180,
+    "dock": "left",
+    "indent_size": 16
+  }
+}
