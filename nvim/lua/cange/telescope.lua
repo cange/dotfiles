@@ -52,7 +52,7 @@ function M.browse_nvim()
   builtin.find_files({
     cwd = "~/.config/nvim",
     previewer = false,
-    prompt_title = i("ui.Neovim") .. " Neovim",
+    prompt_title = i("ui.Neovim", { right = 1 }) .. "Neovim",
   })
 end
 
@@ -60,7 +60,7 @@ function M.browse_snippets()
   builtin.find_files({
     cwd = "~/.config/snippets",
     previewer = true,
-    prompt_title = i("ui.Library") .. " Snippets",
+    prompt_title = i("ui.Library", { right = 1 }) .. "Snippets",
   })
 end
 
@@ -70,7 +70,7 @@ function M.diagnostics_log()
     initial_mode = "normal",
     no_listed = true, -- if true, shows only listed buffers
     previewer = false,
-    prompt_title = i("ui.Stethoscope") .. " Diagnostics Log",
+    prompt_title = i("ui.Stethoscope", { right = 1 }) .. "Diagnostics Log",
   }))
 end
 
@@ -78,7 +78,7 @@ function M.browse_workspace()
   builtin.find_files({
     cwd = "~/workspace/",
     hidden = true,
-    prompt_title = i("documents.Briefcase") .. " Workspace",
+    prompt_title = i("documents.Briefcase", { right = 1 }) .. "Workspace",
     shorten_path = false,
   })
 end

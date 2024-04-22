@@ -55,7 +55,7 @@ return {
             ["<C-c>"] = actions.close,
           },
         },
-        prompt_prefix = Cange.get_icon("ui.Search", { left = 1, right = 1 }),
+        prompt_prefix = Cange.get_icon("ui.Search", { left = 1, right = 2 }),
         scroll_strategy = "cycle",
         selection_caret = Cange.get_icon("ui.ChevronRight", { left = 1, right = 2 }),
         sorting_strategy = "ascending",
