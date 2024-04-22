@@ -96,7 +96,7 @@ return {
         { "<leader>td", "<cmd>TroubleToggle document_diagnostics<CR>", desc = "Document Diagnostics" },
         { "<leader>tq", "<cmd>TroubleToggle quickfix<CR>", desc = "Quickfix List" },
         { "<leader>tl", "<cmd>TroubleToggle loclist<CR>", desc = "Location List" },
-        { "gR", "<cmd>TroubleToggle lsp_references<CR>", desc = "LSP Refenrences Search" },
+        { "gR", "<cmd>TroubleToggle lsp_references<CR>", desc = "LSP References Search" },
         {
           "[q",
           function()

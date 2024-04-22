@@ -124,6 +124,7 @@ return {
     { "<leader>sk", "<cmd>Telescope keymaps<CR>",                           desc = "Keybindings" },
     { "<leader>sn", '<cmd>lua R("cange.telescope").browse_nvim()<CR>',      desc = "Nvim config" },
     { "<leader>sr", "<cmd>Telescope oldfiles<CR>",                          desc = "Recently opened files" },
+    { "<leader>sR", "<cmd>Telescope registers<CR>",                         desc = "Register values" },
     { "<leader>st", "<cmd>TodoTelescope<CR>",                               desc = "Todo comments" },
     { "<leader>sw", "<cmd>Telescope grep_string<CR>",                       desc = "Current word" },
     { "<localleader>/", "<cmd>lua R('cange.telescope').live_grep()<CR>",    desc = "Search in Files" },

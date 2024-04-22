@@ -153,11 +153,13 @@ return {
 
       wk.setup(opts)
       wk.register({ ["<leader>b"] = { name = i("documents.File", { right = 1 }) .. "Buffers" } })
-      wk.register({ ["<leader>c"] = { name = i("ui.Copilot", { right = 1 }) .. "Code/Copilot" } })
+      wk.register({ ["<leader>c"] = { name = i("ui.Code", { right = 1 }) .. "Code" } })
       wk.register({ ["<leader>e"] = { name = i("ui.Neovim", { right = 1 }) .. "Editor" } })
       wk.register({ ["<leader>g"] = { name = i("git.Branch", { right = 1 }) .. "Git" } })
       wk.register({ ["<leader>s"] = { name = i("ui.Search", { right = 1 }) .. "Search" } })
       wk.register({ ["<leader>t"] = { name = i("ui.Stethoscope", { right = 1 }) .. "Troubleshooting" } })
+      wk.register({ ["<localleader>c"] = { name = i("ui.Copilot", { right = 1 }) .. "Copilot" } })
+      wk.register({ ["g"] = { name = i("ui.Code", { right = 1 }) .. "Code/LSP" } })
     end,
   },
 

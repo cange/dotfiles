@@ -70,19 +70,22 @@ return {
       panel = { enabled = false, auto_refresh = true },
       suggestion = { enabled = false, auto_refresh = true },
     },
-    -- stylua: ignore start
-    keys = {
-      { "<leader>cA", "<cmd>Copilot panel accept<CR>",  desc = "Accept Copilot panel" },
-      { "<leader>cR", "<cmd>Copilot panel refresh<CR>", desc = "Refresh Copilot panel" },
-      { "<leader>cS", "<cmd>Copilot status<CR>",        desc = "Copilot status" },
-      { "<leader>co", "<cmd>Copilot toggle<CR>",        desc = "Toggle Copilot" },
-      { "<leader>cp", "<cmd>Copilot panel<CR>",         desc = "Toggle Copilot panel" },
-      { "<leader>cs", "<cmd>Copilot suggestion<CR>",    desc = "Toggle Copilot suggestion" },
-      { "[c", '<cmd>Copilot suggestion prev<CR>',       desc = "Prev Copilot suggestion" },
-      { "[p", '<cmd>Copilot panel jump_prev<CR>',       desc = "Prev Copilot panel" },
-      { "]c", '<cmd>Copilot suggestion next<CR>',       desc = "Next Copilot suggestion" },
-      { "]p", '<cmd>Copilot panel jump_next<CR>',       desc = "Next Copilot panel" },
-    },
-    -- stylua: ignore end
+    keys = function()
+      local icon = Cange.get_icon("ui.Copilot", { right = 1 })
+      -- stylua: ignore start
+      return {
+        { "<localleader>cA", "<cmd>Copilot panel accept<CR>",  desc = "Accept Copilot panel" },
+        { "<localleader>cR", "<cmd>Copilot panel refresh<CR>", desc = "Refresh Copilot panel" },
+        { "<localleader>cS", "<cmd>Copilot status<CR>",        desc = "Copilot status" },
+        { "<localleader>co", "<cmd>Copilot toggle<CR>",        desc = "Toggle Copilot" },
+        { "<localleader>cp", "<cmd>Copilot panel<CR>",         desc = "Toggle Copilot panel" },
+        { "<localleader>cs", "<cmd>Copilot suggestion<CR>",    desc = "Toggle Copilot suggestion" },
+        { "[c", '<cmd>Copilot suggestion prev<CR>',            desc = icon .. "Prev Copilot suggestion" },
+        { "[p", '<cmd>Copilot panel jump_prev<CR>',            desc = icon .. "Prev Copilot panel" },
+        { "]c", '<cmd>Copilot suggestion next<CR>',            desc = icon .. "Next Copilot suggestion" },
+        { "]p", '<cmd>Copilot panel jump_next<CR>',            desc = icon .. "Next Copilot panel" },
+      }
+      -- stylua: ignore end
+    end,
   },
 }
