@@ -30,20 +30,9 @@ return {
     },
     config = function()
       local util = require("lspconfig.util")
-      local function get_typescript_server_path(root_dir)
-        local global_ts = vim.fn.expand("$HOME/")
-          .. ".local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"
-        local found_ts = ""
-        local function check_dir(path)
-          found_ts = util.path.join(path, "node_modules/typescript/lib")
-          if util.path.exists(found_ts) then return path end
-        end
-        if util.search_ancestors(root_dir, check_dir) then
-          return found_ts
-        else
-          return global_ts
-        end
-      end
+      local node_modules_path = "~/.asdf/installs/nodejs/"
+        .. Cange.get_config("lsp.node_version")
+        .. "/lib/node_modules"
 
       local server_configs = {
         cssls = {
@@ -80,13 +69,17 @@ return {
               {
                 -- NOTE: It is crucial to ensure that @vue/typescript-plugin and volar are of identical versions.
                 -- check `npm list -g`
+                -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vue-support
+                -- You must make sure volar is setup
                 name = "@vue/typescript-plugin",
-                location = vim.fn.expand("$HOME/")
-                  .. ".asdf/installs/nodejs/20.11.0/lib/node_modules/@vue/typescript-plugin/",
+                -- location MUST be defined. If the plugin is installed in node_modules, location can have any value.
+                location = node_modules_path .. "/@vue/typescript-plugin/",
+                -- languages must include vue even if it is listed in filetypes
                 languages = { "javascript", "typescript", "vue" },
               },
             },
           },
+          -- filetypes is extended here to include Vue SFC
           filetypes = {
             "javascript",
             "javascript.jsx",
@@ -99,13 +92,25 @@ return {
           },
         },
         -- NOTE: volar is not needed if using @vue/typescript-plugin
-        -- volar = { -- vue
-        --   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
-        --   filetypes = { "vue" },
-        --   on_new_config = function(new_config, new_root_dir)
-        --     new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-        --   end,
-        -- },
+        volar = { -- vue
+          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
+          on_new_config = function(new_config, new_root_dir)
+            local function get_typescript_server_path(root_dir)
+              local global_ts = node_modules_path .. "/typescript/lib"
+              local found_ts = ""
+              local function check_dir(path)
+                found_ts = util.path.join(path, "node_modules", "typescript", "lib")
+                if util.path.exists(found_ts) then return path end
+              end
+              if util.search_ancestors(root_dir, check_dir) then
+                return found_ts
+              else
+                return global_ts
+              end
+            end
+            new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+          end,
+        },
         jsonls = {
           settings = {
             json = { schemas = require("schemastore").json.schemas() },
