@@ -111,22 +111,15 @@ return {
   },
 
   { -- small automated session manager
-    "rmagatti/auto-session",
-    dependencies = "nvim-telescope/telescope.nvim",
-    config = function()
-      -- Suppress session create/restore if in one of the list of dirs
-      require("auto-session").setup({ auto_session_suppress_dirs = { "~/", "~/workspace" } })
-      require("telescope").load_extension("session-lens")
-
-      -- INFO: plugin is not working which lazy `keys` option is being used
-      vim.keymap.set("n", "<leader>er", "<cmd>SessionRestore<CR>", { desc = "Recent session" })
-      vim.keymap.set("n", "<leader>ex", "<cmd>SessionDelete<CR>", { desc = "Delete session" })
-      vim.keymap.set("n", "<leader>es", "<cmd>SessionSave<CR>", { desc = "Save session" })
-      vim.keymap.set("n", "<leader>ss", "<cmd>Telescope session-lens<CR>", { desc = "Recent Sessions" })
-
-      -- better experience with the plugin overall using this config for sessionoptions is recommended.
-      vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
-    end,
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    opts = { options = vim.opt.sessionoptions:get() },
+    keys = {
+      { "<leader>er", function() require("persistence").load({ last = true }) end, desc = "Recent Session" },
+      { "<leader>es", function() require("persistence").save() end, desc = "Save session" },
+      { "<leader>ed", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+    },
+    init = function() require("persistence").load() end,
   },
 
   { -- keymaps
