@@ -54,7 +54,7 @@ return {
         },
         html = {},
         lemminx = {}, -- xml, xsd, xsl, xslt, svg
-        ruby_ls = {},
+        ruby_lsp = {},
         tailwindcss = {},
         lua_ls = {
           settings = {
