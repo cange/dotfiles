@@ -1,0 +1,69 @@
+[
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      "shift-k": "editor::Hover",
+      "g c c": "editor::ToggleComments",
+      "space n": "editor::ToggleLineNumbers",
+
+      "space \\": "workspace::ToggleLeftDock",
+      "space c a": "editor::ToggleCodeActions",
+      "space c d": "diagnostics::ToggleWarnings",
+      "space f": "file_finder::Toggle",
+      "space r": "editor::Rename",
+      "space s o": "outline::Toggle",
+      "space w": "workspace::Save",
+
+      "g r": "editor::FindAllReferences",
+      // ", /": "vim::Search",
+      // travel next/prev
+      "] d ": "editor::GoToDiagnostic",
+      "[ d ": "editor::GoToPrevDiagnostic",
+      "] g": "editor::GoToHunk",
+      "[ g": "editor::GoToPrevHunk"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      ", a": "editor::SelectAll"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "bindings": {
+      ", S": "editor::SortLinesCaseInsensitive"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert && !VimWaiting && !menu",
+    "bindings": {
+      "j j": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-r": "project_panel::Rename",
+      "cmd-a": "project_panel::NewFile",
+      "cmd-c": "project_panel::Copy",
+      "cmd-p": "project_panel::Paste",
+      "cmd-d": "project_panel::Delete",
+      "cmd-x": "project_panel::Cut"
+    }
+  },
+  {
+    "context": "Editor || Terminal",
+    "bindings": {
+      "cmd-]": "pane::ActivateNextItem",
+      "cmd-[": "pane::ActivatePrevItem",
+      "cmd-shift-enter": "workspace::ToggleZoom"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-d": "workspace::NewTerminal"
+    }
+  }
+]
