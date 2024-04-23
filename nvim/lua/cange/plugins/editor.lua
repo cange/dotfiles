@@ -97,7 +97,7 @@ return {
     keys = function()
       local harpoon = require("harpoon")
       return {
-        { "<leader>a", function() harpoon:list():append() end, desc = "Add ⇁ mark" },
+        { "<leader>a", function() harpoon:list():add() end, desc = "Add ⇁ mark" },
         { "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show ⇁ marks" },
         { "<leader>sm", "<cmd>Telescope harpoon marks<CR>", desc = "Search ⇁ marks" },
         { "<leader>1", function() harpoon:list():select(1) end, desc = "⇁ to 1st mark" },
