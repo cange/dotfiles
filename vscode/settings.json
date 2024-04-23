@@ -38,5 +38,40 @@
   // vim
   "vim.foldfix": true,
   "vim.leader": "<space>",
-  "workbench.activityBar.location": "hidden"
+  "editor.fontLigatures": true,
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"]
+    },
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["lineBreakInsert"],
+      "silent": true
+    }
+  ],
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
+  },
+
+  // To improve performance
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  }
 }

@@ -1,0 +1,55 @@
+// Place your key bindings in this file to override the defaultsauto[]
+// https://code.visualstudio.com/docs/getstarted/keybindings
+[
+  {
+    "when": "editorTextFocus && vim.mode == 'Normal' || editorTextFocus && vim.mode == 'Visual'",
+    "key": "space w",
+    "command": "workbench.action.files.save"
+  },
+  {
+    "when": "editorTextFocus && vim.mode == 'Normal' || editorTextFocus && vim.mode == 'Visual'",
+    "key": "space f",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "when": "editorTextFocus && vim.mode == 'Normal' || editorTextFocus && vim.mode == 'Visual'",
+    "key": "space \\",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "key": ", a",
+    "command": "editor.action.selectAll",
+    "description": "Select all content"
+  },
+  {
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "key": ", S",
+    "command": "editor.action.sortLinesAscending",
+    "description": "Sort Lines Ascending"
+  },
+
+  // LSP symbols
+  {
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "key": "g d",
+    "command": "editor.action.revealDefinition",
+    "description": "Go to Definition"
+  },
+  {
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "key": "g y",
+    "command": "editor.action.goToTypeDefinition",
+    "description": "Go to Type Definition"
+  },
+  {
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "key": "g i",
+    "command": "editor.action.goToImplementation"
+  },
+  {
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "key": "g r",
+    "command": "editor.action.goToReferences"
+  }
+]
