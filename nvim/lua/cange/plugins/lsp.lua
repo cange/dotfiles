@@ -29,9 +29,9 @@ return {
       "williamboman/mason.nvim",
     },
     config = function()
-      local node_modules_path = vim.fn.expand("~/.asdf/installs/nodejs/")
-        .. Cange.get_config("lsp.node_version")
-        .. "/lib/node_modules"
+      local mason_registry = require("mason-registry")
+      local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+        .. "/node_modules/@vue/language-server"
 
       local server_configs = {
         cssls = {
@@ -66,12 +66,12 @@ return {
             completions = { completeFunctionCalls = true },
             plugins = {
               { -- vue setup with hybridMode:
-                -- https://github.com/vuejs/language-tools/tree/master?tab=readme-ov-file#hybrid-mode-configuration-requires-vuelanguage-server-version-200
+                -- https://github.com/vuejs/language-tools/blob/master/README.md#hybrid-mode-configuration-requires-vuelanguage-server-version-200
                 -- NOTE: It is crucial to ensure that @vue/typescript-plugin and volar are of identical versions.
                 -- check `npm list -g`
                 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vue-support
                 name = "@vue/typescript-plugin",
-                location = node_modules_path .. "/@vue/language-server",
+                location = vue_language_server_path,
                 languages = { "javascript", "typescript", "vue" },
               },
             },

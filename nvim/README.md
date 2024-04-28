@@ -17,13 +17,3 @@ In order to enable languages features run `:Mason` (within NeoVim) to install
 all related LSP, formatter and linter.
 
 Restart NeoVim ensures that all changes are applied.
-
-> [!IMPORTANT]
-> Make sure that the following `node_modules` are installed globally so that LSP
-> can be executed correctly (vue support).
-
-```sh
-npm install -g @vue/typescript-plugin @vue/language-server typescript
-```
-
-The node version can be adjust in `lua/cange/config.lua`.
