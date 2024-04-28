@@ -29,21 +29,9 @@ return {
       "williamboman/mason.nvim",
     },
     config = function()
-      local util = require("lspconfig.util")
-      local function get_typescript_server_path(root_dir)
-        local global_ts = vim.fn.expand("$HOME/")
-          .. ".local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"
-        local found_ts = ""
-        local function check_dir(path)
-          found_ts = util.path.join(path, "node_modules/typescript/lib")
-          if util.path.exists(found_ts) then return path end
-        end
-        if util.search_ancestors(root_dir, check_dir) then
-          return found_ts
-        else
-          return global_ts
-        end
-      end
+      local mason_registry = require("mason-registry")
+      local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+        .. "/node_modules/@vue/language-server"
 
       local server_configs = {
         cssls = {
@@ -77,16 +65,18 @@ return {
             preferences = { disableSuggestions = true },
             completions = { completeFunctionCalls = true },
             plugins = {
-              {
+              { -- vue setup with hybridMode:
+                -- https://github.com/vuejs/language-tools/blob/master/README.md#hybrid-mode-configuration-requires-vuelanguage-server-version-200
                 -- NOTE: It is crucial to ensure that @vue/typescript-plugin and volar are of identical versions.
                 -- check `npm list -g`
+                -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vue-support
                 name = "@vue/typescript-plugin",
-                location = vim.fn.expand("$HOME/")
-                  .. ".asdf/installs/nodejs/20.11.0/lib/node_modules/@vue/typescript-plugin/",
+                location = vue_language_server_path,
                 languages = { "javascript", "typescript", "vue" },
               },
             },
           },
+          -- filetypes is extended here to include Vue SFC
           filetypes = {
             "javascript",
             "javascript.jsx",
@@ -98,14 +88,9 @@ return {
             "vue",
           },
         },
-        -- NOTE: volar is not needed if using @vue/typescript-plugin
-        -- volar = { -- vue
-        --   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
-        --   filetypes = { "vue" },
-        --   on_new_config = function(new_config, new_root_dir)
-        --     new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-        --   end,
-        -- },
+        volar = { -- vue
+          -- NOTE: not needed to configure if using @vue/typescript-plugin
+        },
         jsonls = {
           settings = {
             json = { schemas = require("schemastore").json.schemas() },
