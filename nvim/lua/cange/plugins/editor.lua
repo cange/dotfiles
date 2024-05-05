@@ -256,7 +256,7 @@ return {
     },
     keys = {
       {
-        "<leader>M",
+        "<localleader>m",
         function()
           local method = require("peek").is_open() and "close" or "open"
           Log:info(method, "Markdown Preview")
