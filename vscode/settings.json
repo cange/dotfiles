@@ -1,7 +1,7 @@
 {
   // Theme
   "workbench.colorTheme": "Terafox",
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "vs-minimal",
 
   // Font size
   "editor.fontFamily": "JetBrainsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
