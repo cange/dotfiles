@@ -25,10 +25,8 @@ return {
         renderer = {
           indent_markers = { enable = true },
           icons = {
-            show = { folder_arrow = false },
-            diagnostics_placement = "after",
-            git_placement = "signcolumn",
-            modified_placement = "signcolumn",
+            git_placement = "after",
+            show = { folder = false },
             symlink_arrow = i("documents.SymlinkFile", { left = 1, right = 1 }),
             glyphs = {
               default = i("documents.File"),
