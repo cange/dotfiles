@@ -1,153 +1,46 @@
 {
-  "<i18n": {
-    "prefix": "<i18n",
-    "body": "<i18n :path=\"${1:path}\" tag=\"${2:div}\">\n\t$3\n</i18n>"
+  "Component Skeleton": {
+    "prefix": "<script><template>",
+    "body": [
+      "<script setup lang=\"ts\">\n$0\n</script>\n",
+      "<template>\n$1\n</template>\n",
+      "<style scoped>\n$2\n</style>"
+    ]
   },
-  "<slot": {
-    "prefix": "<slot",
+  "template block": {
+    "prefix": "<template>",
+    "body": "<template>\n$1\n</template>\n"
+  },
+  "script block": {
+    "prefix": "<script>",
+    "body": "<script ${1:setup }lang=\"ts\">\n${0}\n</script>"
+  },
+  "script - Component Name": {
+    "prefix": "<script>",
+    "body": "<script lang=\"ts\">\nexport default { name: '$1' }\n</script>"
+  },
+  "Component Skeleton v2": {
+    "prefix": "<template> v2",
+    "body": [
+      "<script lang=\"ts\">\nexport default {\n\t$0\n}\n</script>\n",
+      "<template>\n$1\n</template>\n",
+      "<style scoped>\n$2\n</style>"
+    ]
+  },
+  "i18n-t - Interpolation": {
+    "prefix": "<i18n-t>",
+    "body": "<i18n-t :keypath=\"${1:path}\" tag=\"$2:div}\">\n\t$0\n</i18n-t>"
+  },
+  "Define slot": {
+    "prefix": "<slot>",
     "body": "<slot${1: name=\"$2\"}></slot>"
   },
-  "<template v-slot": {
-    "prefix": "<template v-slot",
+  "Call slot": {
+    "prefix": "<template v-slot>",
     "body": "<template v-slot:$1>\n\t$2\n</template>"
   },
-  "prop: {…": {
-    "prefix": "watch:pr wop",
-    "body": [
-      "${1:prop}: {",
-      "\thandler(${2:value}) {",
-      "\t\t$4",
-      "\t}",
-      "\t${3:,immediate: true}",
-      "}"
-    ]
-  },
-  "component skeleton": {
-    "prefix": "template v2",
-    "body": [
-      "<template>",
-      "",
-      "</template>",
-      "",
-      "<script>",
-      "\texport default {",
-      "\t\t${0}",
-      "\t}",
-      "</script>",
-      "",
-      "<style scoped>",
-      "",
-      "</style>"
-    ]
-  },
-  "component skeleton TypeScript": {
-    "prefix": "template v2 TS",
-    "body": [
-      "<template>",
-      "",
-      "</template>",
-      "",
-      "<script lang=\"ts\">",
-      "\timport Vue from 'vue'",
-      "",
-      "\texport default Vue.extend({",
-      "\t\t${0}",
-      "\t})",
-      "</script>",
-      "",
-      "<style scoped>",
-      "",
-      "</style>"
-    ],
-    "description": "Base for Vue File with Typescript"
-  },
-  "Component composition API v2": {
-    "prefix": "template comp v2",
-    "body": [
-      "<template>",
-      "",
-      "</template>",
-      "",
-      "<script>",
-      "export default {",
-      "\tsetup () {",
-      "\t\t${0}",
-      "",
-      "\t\treturn {}",
-      "\t}",
-      "}",
-      "</script>",
-      "",
-      "<style scoped>",
-      "",
-      "</style>"
-    ]
-  },
-  "Component composition API v3": {
-    "prefix": "template comp v3",
-    "body": [
-      "<template>",
-      "",
-      "</template>",
-      "",
-      "<script setup>",
-      "",
-      "</script>",
-      "",
-      "<style scoped>",
-      "",
-      "</style>"
-    ]
-  },
-  "Component composition API reactive": {
-    "prefix": "reactive",
-    "body": [
-      "import { reactive, toRefs } from 'vue'",
-      "",
-      "export default {",
-      "\tsetup () {",
-      "\t\tconst state = reactive({",
-      "\t\t\t${0:count}: ${1:0},",
-      "\t\t})",
-      "\t",
-      "\t\treturn {",
-      "\t\t\t...toRefs(state),",
-      "\t\t}",
-      "\t}",
-      "}"
-    ]
-  },
-  "Component composition API with TypeScript": {
-    "prefix": "reactive TS",
-    "body": [
-      "<script lang=\"ts\">",
-      "import { defineComponent } from 'vue'",
-      "",
-      "export default defineComponent({",
-      "\tsetup () {",
-      "\t\t${0}\n",
-      "\t\treturn {}",
-      "\t}",
-      "})",
-      "</script>"
-    ]
-  },
-  "Component TS setup": {
-    "prefix": "setup v3 TS",
-    "body": "<script setup lang=\"ts\">\n\n</script>"
-  },
-  "Component TS class": {
-    "prefix": "class v3 TS",
-    "body": [
-      "<script lang=\"ts\">",
-      "\timport { Component, Vue } from 'vue-property-decorator';",
-      "",
-      "\t@Component",
-      "\texport default class ${0} extends Vue {",
-      "\t\t",
-      "\t}",
-      "</script>"
-    ]
+  "watch v3": {
+    "prefix": "watch",
+    "body": "watch(\n\t() => ${1:prop},\n\t() => ${2:handler},\n\t{ immediate: ${3:true} }\n)"
   }
 }
-
