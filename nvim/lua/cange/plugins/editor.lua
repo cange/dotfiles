@@ -112,8 +112,12 @@ return {
 
   { -- small automated session manager
     "folke/persistence.nvim",
+    dependencies = { "nvim-tree/nvim-tree.lua" },
     event = "BufReadPre",
-    opts = { options = vim.opt.sessionoptions:get() },
+    opts = {
+      options = vim.opt.sessionoptions:get(),
+      pre_save = function() require("nvim-tree.api").tree.close() end,
+    },
     keys = {
       { "<leader>er", function() require("persistence").load({ last = true }) end, desc = "Recent Session" },
       { "<leader>es", function() require("persistence").save() end, desc = "Save session" },
