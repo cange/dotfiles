@@ -32,16 +32,38 @@
 	diffFilter = delta --color-only
 
 [delta] # diff tool https://github.com/dandavison/delta
-	light = false # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	# use `delta --show-config` to see all available options
 	line-numbers = true # show line numbers
+	file-added-label          = 
+	file-modified-label       = 
+	file-removed-label        = 
+	file-renamed-label        = 
+	line-numbers-minus-style  = "#901011"
+	line-numbers-plus-style   = "#006000"
+	line-numbers-zero-style   = brightblack
+	file-style                = brightblack
+	line-numbers-left-format  = {nm:^4} # hides item by empty whitespace
+	line-numbers-right-format = {np:^4} # hides item by empty whitespace
 	navigate = true # use n and N to move between diff sections
+
+[delta "interactive"]
+	keep-plus-minus-markers = false
+
+[delta "decorations"]
+	commit-decoration-style = blue ol
+	commit-style = raw
+	file-style = omit
+	hunk-header-decoration-style = blue box
+	hunk-header-file-style = red
+	hunk-header-line-number-style = "#006000"
+	hunk-header-style = file line-number syntax
 
 [merge]
 	conflictstyle = zdiff3 # even cleaner output than diff3
 	log = true # summaries of merged commits in newly created merge commit messages
 
 [diff]
-  colorMoved = default
+	colorMoved = default
 
 [column]
 	ui = auto
@@ -51,8 +73,8 @@
 
 # Use `origin` as the default remote on the `main` branch in all cases
 [branch "main"]
- 	remote = origin
- 	merge = refs/heads/main
+	remote = origin
+	merge = refs/heads/main
 
 [init]
 	defaultBranch = main

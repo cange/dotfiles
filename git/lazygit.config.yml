@@ -6,3 +6,7 @@ gui:
       - reverse
     unstagedChangesColor:
       - magenta
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never --syntax-theme base16 --line-numbers
