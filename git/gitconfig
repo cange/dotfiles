@@ -38,13 +38,23 @@
 	file-modified-label       = 
 	file-removed-label        = 
 	file-renamed-label        = 
-	line-numbers-minus-style  = "#901011"
-	line-numbers-plus-style   = "#006000"
 	line-numbers-zero-style   = brightblack
 	file-style                = brightblack
 	line-numbers-left-format  = {nm:^4} # hides item by empty whitespace
 	line-numbers-right-format = {np:^4} # hides item by empty whitespace
 	navigate = true # use n and N to move between diff sections
+	minus-style                   = syntax "#352d2e"
+	minus-non-emph-style          = syntax "#352d2e"
+	minus-emph-style              = reverse "#e85c51"
+	minus-empty-line-marker-style = normal "#352d2e"
+	line-numbers-minus-style      = "#e85c51"
+	plus-style                    = syntax "#24383a"
+	plus-non-emph-style           = syntax "#24383a"
+	plus-emph-style               = reverse "#7aa4a1"
+	plus-empty-line-marker-style  = normal "#24383a"
+	line-numbers-plus-style       = "#7aa4a1"
+  tabs = 2
+  syntax-theme = base16
 
 [delta "interactive"]
 	keep-plus-minus-markers = false
@@ -55,7 +65,7 @@
 	file-style = omit
 	hunk-header-decoration-style = blue box
 	hunk-header-file-style = red
-	hunk-header-line-number-style = "#006000"
+	hunk-header-line-number-style = 28
 	hunk-header-style = file line-number syntax
 
 [merge]
