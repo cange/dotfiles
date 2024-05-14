@@ -166,7 +166,14 @@ return {
   },
 
   -- Highlight the word under the cursor
-  { "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } },
+  {
+    "RRethy/vim-illuminate",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      filetypes_denylist = { "NvimTree" },
+    },
+    config = function(_, opts) require("illuminate").configure(opts) end,
+  },
 
   -- multi search and replace
   { "mg979/vim-visual-multi", event = "VeryLazy" },
