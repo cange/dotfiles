@@ -3,7 +3,7 @@ return {
     level = "info",
   },
   lsp = {
-    diagnostic_virtual_text = false,
+    diagnostic_virtual_text = true,
     format_on_save = true,
   },
   snippets = {

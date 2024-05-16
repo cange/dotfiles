@@ -31,7 +31,7 @@ return {
       },
       sections = {
         lualine_a = {
-          "mode",
+          { 'mode', fmt = function(str) return str:sub(1, 1) end }
         },
         lualine_b = {
           { "branch", icon = i("git.Branch") },
