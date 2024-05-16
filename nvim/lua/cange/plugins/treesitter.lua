@@ -62,7 +62,6 @@ return {
       },
       autotag = { enable = true },
       context_commentstring = {
-        enable = true,
         enable_autocmd = false, -- enable commentstring support, when false
       },
       ensure_installed = sources, -- A list of parser names, or "all"

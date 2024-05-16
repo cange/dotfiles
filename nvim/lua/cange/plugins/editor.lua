@@ -198,10 +198,17 @@ return {
     config = function(_, opts) require("nvim-surround").setup(opts) end,
   },
 
-  { -- comment toggle
-    "numToStr/Comment.nvim",
-    lazy = true,
+  {
+    -- contextual comment in embedded language files like Vue.JS
+    "JoosepAlviste/nvim-ts-context-commentstring",
     event = { "BufReadPre", "BufNewFile" },
+    lazy = true,
+    dependencies = "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup({
+        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+      })
+    end,
   },
 
   { -- highlight TODO, FIXME, etc in comments
@@ -214,16 +221,6 @@ return {
         TODO = { icon = i("ui.Check") },
       },
     },
-  },
-
-  { -- contextual comment in embedded language files like Vue.JS
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    commit = "6c30f3c", -- lock until `vim.g.skip_ts_context_commentstring_module = true` works
-    config = function()
-      require("Comment").setup({
-        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-      })
-    end,
   },
 
   { -- text case converter (camel case, etc.,
