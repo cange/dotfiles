@@ -1,11 +1,11 @@
 local M = {
   ---@diagnostic disable-next-line: undefined-field
   mode = vim.o.background,
-  ---@type ColorschemePalette|nil
+  ---@type Palette|nil
   palette = nil,
 }
 
----@return ColorschemePalette
+---@return Palette
 local function update_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
@@ -27,16 +27,16 @@ end
 local function update_highlights()
   local _, lua_color = require("nvim-web-devicons").get_icon_color("any.lua", "lua")
 
-  local p = update_palette()
+  local pal = update_palette()
   local highlights = {
-    CursorLine = { bg = p.bg2 }, -- more subtle
-    Folded = { bg = nil, fg = p.bg4 }, -- reduces folding noise
-    NonText = { fg = p.bg2 }, -- subtle virtual/column line
+    CursorLine = { bg = pal.bg2 }, -- more subtle
+    Folded = { bg = nil, fg = pal.bg4 }, -- reduces folding noise
+    NonText = { fg = pal.bg2 }, -- subtle virtual/column line
 
     -- Window
-    FloatBorder = { fg = p.bg0, bg = p.bg0 },
-    FloatTitle = { fg = p.fg3, bg = p.bg0 },
-    NormalFloat = { fg = p.fg1, bg = p.bg0 },
+    FloatBorder = { fg = pal.bg0, bg = pal.bg0 },
+    FloatTitle = { fg = pal.fg3, bg = pal.bg0 },
+    NormalFloat = { fg = pal.fg1, bg = pal.bg0 },
 
     -- SymboleOutline
     FocusedSymbol = { bold = true },
@@ -45,31 +45,34 @@ local function update_highlights()
     TelescopeMatching = { link = "MatchParen" },
     TelescopePreviewTitle = { link = "FloatTitle" },
     TelescopePromptBorder = { link = "FloatBorder" },
-    TelescopePromptCounter = { fg = p.fg3 },
-    TelescopePromptNormal = { fg = p.fg2, bg = p.bg1 },
+    TelescopePromptCounter = { fg = pal.fg3 },
+    TelescopePromptNormal = { fg = pal.fg2, bg = pal.bg1 },
     TelescopePromptTitle = { link = "FloatTitle" },
-    TelescopeResultsNormal = { fg = p.fg2, bg = p.bg0 },
-    TelescopeSelection = { fg = p.fg2, bg = p.sel0 },
-    TelescopeSelectionCaret = { fg = p.fg1, bg = p.sel0 },
+    TelescopeResultsNormal = { fg = pal.fg2, bg = pal.bg0 },
+    TelescopeSelection = { fg = pal.fg2, bg = pal.sel0 },
+    TelescopeSelectionCaret = { fg = pal.fg1, bg = pal.sel0 },
     TelescopeSelectionNormal = { link = "FloatBorder" },
     TelescopeTitle = { link = "FloatTitle" },
-    -- misc
-    WhichkeyBorder = { link = "FloatBorder" },
-    NvimTreeGitRenamed = { fg = p.magenta.base },
-
+    -- NvimTree
+    NvimTreeFolderArrowClosed = { fg = pal.fg3 },
+    NvimTreeFolderArrowOpen = { fg = pal.fg3 },
+    NvimTreeGitRenamed = { fg = pal.magenta.base },
+    NvimTreeIndentMarker = { fg = pal.bg2 },
     -- indent-blankline
-    MiniIndentscopeSymbol = { fg = p.green.dim },
-
+    MiniIndentscopeSymbol = { fg = pal.green.dim },
     -- completion
-    CmpGhostText = { fg = p.fg3, italic = true },
-    CmpItemAbbr = { fg = p.fg2 },
+    CmpGhostText = { fg = pal.fg3, italic = true },
+    CmpItemAbbr = { fg = pal.fg2 },
     CmpItemAbbrMatch = { link = "TelescopeMatching" },
     CmpItemKindCopilot = { link = "CmpItemKindDefault" },
     CmpItemKindTabnine = { link = "CmpItemKindDefault" },
-    CmpItemMenuCopilot = { fg = blend(p.copilot.odd, 0.2) },
-    CmpItemMenu = { fg = p.cyan.dim },
+    CmpItemMenuCopilot = { fg = blend(pal.copilot.odd, 0.2) },
+    CmpItemMenu = { fg = pal.cyan.dim },
     CmpItemMenuLua = { fg = lua_color },
-    CmpItemMenuTabnine = { fg = blend(p.tabnine.even, -0.5) },
+    CmpItemMenuTabnine = { fg = blend(pal.tabnine.even, -0.5) },
+    -- misc
+    WhichkeyBorder = { link = "FloatBorder" },
+    LspInlayHint = { fg = pal.comment, bg = nil },
   }
 
   Cange.set_highlights(highlights)
@@ -121,38 +124,48 @@ return {
   },
 }
 
----@class ColorschemeDualShade
+
+--#region Types
+
+---@class DualShade
 ---@field even string
 ---@field odd string
 
----@class ColorschemeShade
+---@class PaletteMeta
+---@field name string
+---@field light boolean
+
+---@class Shade
 ---@field base string
 ---@field bright string
 ---@field dim string
 ---@field light boolean
 
----@class ColorschemePalette
----@field black ColorschemeShade
----@field red ColorschemeShade
----@field green ColorschemeShade
----@field yellow ColorschemeShade
----@field blue ColorschemeShade
----@field magenta ColorschemeShade
----@field cyan ColorschemeShade
----@field white ColorschemeShade
----@field orange ColorschemeShade
----@field pink ColorschemeShade
+---@class Palette
+---@field meta PaletteMeta
+---@field black Shade
+---@field red Shade
+---@field green Shade
+---@field yellow Shade
+---@field blue Shade
+---@field magenta Shade
+---@field cyan Shade
+---@field white Shade
+---@field orange Shade
+---@field pink Shade
 ---@field comment string
----@field bg0 string
----@field bg1 string
----@field bg2 string
----@field bg3 string
----@field bg4 string
----@field fg0 string
----@field fg1 string
----@field fg2 string
----@field fg3 string
----@field sel0 string
----@field sel1 string
----@field tabnine ColorschemeDualShade
----@field copilot ColorschemeDualShade
+---@field bg0 string Dark bg (status line and float)
+---@field bg1 string Default bg
+---@field bg2 string Lighter bg (colorcolm folds)
+---@field bg3 string Lighter bg (cursor line)
+---@field bg4 string Conceal, border fg
+---@field fg0 string Lighter fg
+---@field fg1 string Default fg
+---@field fg2 string Darker fg (status line)
+---@field fg3 string Darker fg (line numbers, fold colums)
+---@field sel0 string Popup bg, visual selection bg
+---@field sel1 string Popup sel bg, search bg
+---@field tabnine DualShade
+---@field copilot DualShade
+
+--#endregion

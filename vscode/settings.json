@@ -1,7 +1,7 @@
 {
   // Theme
   "workbench.colorTheme": "Terafox",
-  "workbench.iconTheme": "vs-minimal",
+  "workbench.iconTheme": "material-icon-theme",
 
   // Font size
   "editor.fontFamily": "JetBrainsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
@@ -73,5 +73,9 @@
   // To improve performance
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
-  }
+  },
+  "material-icon-theme.activeIconPack": "vue",
+  "material-icon-theme.files.color": "#587b7b",
+  "material-icon-theme.folders.color": "#587b7b",
+  "material-icon-theme.folders.theme": "none"
 }
