@@ -14,29 +14,28 @@ local function capabilities()
 end
 
 local M = {}
-local icon = Cange.get_icon("ui.Code", { right = 1 })
+local code_icon = Cange.get_icon("ui.Code", { right = 1 })
 M.show_diagnostic_virtual_text = Cange.get_config("lsp.diagnostic_virtual_text") or false
-local telescope_builtin = function(method, opts) require("telescope.builtin")[method]({ reuse_win = true }) end
+local telescope_builtin = function(method) require("telescope.builtin")[method]({ reuse_win = true }) end
 -- stylua: ignore start
 M.keymaps = {
-  { "<leader>ca", vim.lsp.buf.code_action,                                desc = icon .. "Code Actions" },
-  { "<leader>cd", require("cange.lsp.toggle").virtual_text,               desc = "Toggle Inline Virtual Text" },
-  { "<leader>cr", "<cmd>LspRestart;<CR>",                                 desc = "LSP Restart" },
-  { "<leader>e4", "<cmd>LspInfo<CR>",                                     desc = "LSP info" },
-  { "<leader>el", require("cange.lsp.toggle").format_on_save,             desc = "Toggle Format on Save" },
-  { "<leader>r", vim.lsp.buf.rename,                                      desc = icon .. "Rename Symbol" },
-  { "[d", vim.diagnostic.goto_prev,                                       desc = icon .. "Prev Diagnostic" },
-  { "]d", vim.diagnostic.goto_next,                                       desc = icon .. "Next Diagnostic" },
-  { "gD", "<cmd>Telescope lsp_type_definitions<CR>",                      desc = icon .. "Find Type Definition" },
-  { "gD", vim.lsp.buf.declaration,                                        desc = icon .. "Go to Symbol Declaration" },
-  { "gI", function() telescope_builtin('lsp_implementations') end,        desc = icon .. "Find Implementation" },
-  { "gd", vim.lsp.buf.definition,                                         desc = icon .. "Go to Definition" },
-  { "gi", vim.lsp.buf.implementation,                                     desc = icon .. "Go to Implementation" },
-  { "gr", "<cmd>Telescope lsp_references<CR>",                            desc = icon .. "Find All References" },
-  { "gs", "<cmd>Telescope lsp_document_symbols<CR>",                      desc = icon .. "Find Symbol in current buffer" },
-  { "gy", function() telescope_builtin('lsp_type_definitions') end,       desc = icon .. "Find Type Definition" },
-  { "K", vim.lsp.buf.hover,                                               desc = icon .. "LSP Hover symbol info" },
-  { "<C-k>", vim.lsp.buf.signature_help,                                  desc = icon .. "LSP Signature Documentation" },
+  { "<leader>ca", vim.lsp.buf.code_action,                          desc = code_icon .. "Code Actions" },
+  { "<leader>cd", require("cange.lsp.toggle").virtual_text,         desc = "Toggle Inline Virtual Text" },
+  { "<leader>cr", "<cmd>LspRestart;<CR>",                           desc = "LSP Restart" },
+  { "<leader>e4", "<cmd>LspInfo<CR>",                               desc = "LSP info" },
+  { "<leader>el", require("cange.lsp.toggle").format_on_save,       desc = "Toggle Format on Save" },
+  { "<leader>r", vim.lsp.buf.rename,                                desc = code_icon .. "Rename Symbol" },
+  { "[d", vim.diagnostic.goto_prev,                                 desc = code_icon .. "Prev Diagnostic" },
+  { "]d", vim.diagnostic.goto_next,                                 desc = code_icon .. "Next Diagnostic" },
+  { "gD", "<cmd>Telescope lsp_type_definitions<CR>",                desc = code_icon .. "Find Type Definition" },
+  { "gD", vim.lsp.buf.declaration,                                  desc = code_icon .. "Go to Symbol Declaration" },
+  { "gI", function() telescope_builtin('lsp_implementations') end,  desc = code_icon .. "Find Implementation" },
+  { "gd", vim.lsp.buf.definition,                                   desc = code_icon .. "Go to Definition" },
+  { "gi", vim.lsp.buf.implementation,                               desc = code_icon .. "Go to Implementation" },
+  { "gr", "<cmd>Telescope lsp_references<CR>",                      desc = code_icon .. "Find All References" },
+  { "gs", "<cmd>Telescope lsp_document_symbols<CR>",                desc = code_icon .. "Find Symbol in current buffer" },
+  { "gy", function() telescope_builtin('lsp_type_definitions') end, desc = code_icon .. "Find Type Definition" },
+  { "<C-k>", vim.lsp.buf.signature_help,                            desc = code_icon .. "LSP Signature Documentation" },
 }
 -- stylua: ignore end
 
