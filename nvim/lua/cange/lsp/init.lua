@@ -42,7 +42,7 @@ M.keymaps = {
 M.server_config = {
   on_attach = function(_, bufnr)
     -- enable formatting for ranges
-    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+    vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
 
     for _, keys in pairs(M.keymaps) do
       vim.keymap.set("n", keys[1], keys[2], { desc = keys.desc, noremap = true, silent = true, buffer = bufnr })

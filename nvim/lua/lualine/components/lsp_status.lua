@@ -5,12 +5,11 @@ local debug = false
 local function get_active_services()
   if not vim.lsp then return {} end
   local active_clients = {}
-  local buf = vim.api.nvim_get_current_buf()
-  vim.lsp.for_each_buffer_client(buf, function(client)
+  local bufnr = vim.api.nvim_get_current_buf()
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
     local blacklisted = vim.tbl_contains({ "copilot" }, client.name)
-    if client.attached_buffers[buf] and not blacklisted then table.insert(active_clients, client.name) end
-  end)
-
+    if client.attached_buffers[bufnr] and not blacklisted then table.insert(active_clients, client.name) end
+  end
   return active_clients
 end
 

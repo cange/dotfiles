@@ -74,7 +74,7 @@ return {
             padding = { left = 1, right = 0 },
           },
           {
-            function() return i("ui.Tab", { right = 1 }) .. vim.api.nvim_buf_get_option(0, "shiftwidth") end,
+            function() return i("ui.Tab", { right = 1 }) .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) end,
             separator = "",
             padding = { left = 1, right = 0 },
           },
