@@ -124,7 +124,6 @@ return {
   },
 }
 
-
 --#region Types
 
 ---@class DualShade

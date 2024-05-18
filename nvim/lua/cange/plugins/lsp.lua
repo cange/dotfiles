@@ -112,7 +112,7 @@ return {
                 includeInlayEnumMemberValueHints = true,
               },
             },
-          }
+          },
         },
         volar = { -- vue
           -- NOTE: not needed to configure if using @vue/typescript-plugin
