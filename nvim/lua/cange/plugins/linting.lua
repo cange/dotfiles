@@ -1,24 +1,6 @@
 return {
-  { -- loads formatter and linter
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "williamboman/mason.nvim",
-    },
-    opts = {
-      ensure_installed = {
-        "eslint",
-        "jsonlint",
-        "markdownlint",
-        "rubocop",
-        "stylelint",
-        "yamllint",
-      },
-      auto_update = true,
-    },
-  },
-
-  { -- linting
+  -- NOTE: linter installation handled via mason
+  {
     "mfussenegger/nvim-lint",
     lazy = true,
     event = { "BufWritePost", "TextChanged" },

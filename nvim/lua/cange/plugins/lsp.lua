@@ -3,7 +3,10 @@ local i = Cange.get_icon
 return {
   { -- managing & installing LSP servers, linters & formatters
     "williamboman/mason.nvim",
-    dependencies = "neovim/nvim-lspconfig",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
     opts = {
       ui = {
         border = Cange.get_config("ui.border"),
@@ -17,6 +20,22 @@ return {
       max_concurrent_installers = 4,
     },
     keys = { { "<leader>e2", "<cmd>Mason<CR>", desc = "Mason info" } },
+    config = function(_, opts)
+      require("mason").setup(opts)
+      -- loads formatter and linter
+      local linter = { "eslint", "jsonlint", "markdownlint", "rubocop", "stylelint", "yamllint" }
+      local formatter = {
+        "prettierd",
+        "rubocop",
+        "shfmt",
+        "stylua",
+        "xmlformatter", -- svg
+      }
+      require("mason-tool-installer").setup({
+        ensure_installed = vim.tbl_extend("force", linter, formatter),
+        auto_update = true,
+      })
+    end,
   },
 
   {

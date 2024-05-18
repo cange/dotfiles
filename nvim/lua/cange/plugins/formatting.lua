@@ -1,23 +1,6 @@
 return {
-  { -- loads formatter and linter
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "williamboman/mason.nvim",
-    },
-    opts = {
-      ensure_installed = {
-        "prettierd",
-        "rubocop",
-        "shfmt",
-        "stylua",
-        "xmlformatter", -- svg
-      },
-      auto_update = true,
-    },
-  },
-
-  { -- formatting
+  -- NOTE: formatter installation handled via mason
+  {
     "stevearc/conform.nvim",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
