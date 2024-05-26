@@ -14,6 +14,7 @@ return {
       dark = "terafox",
       light = "dayfox",
     },
-    border = "rounded", -- nvim_open_win: none, single, double, rounded, shadow
+    ---@type "none" | "single" | "double" | "rounded" | "shadow"
+    border = "rounded",
   },
 }
