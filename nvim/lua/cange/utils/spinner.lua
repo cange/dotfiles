@@ -8,7 +8,7 @@ local M = {}
 ---@param count? number|nil
 ---@return string
 function M.icon(count)
-  local ms = vim.loop.hrtime() / 1000000
+  local ms = vim.uv.hrtime() / 1000000
   local frame = math.floor(count or ms / 120) % icon_len
 
   return icons[frame + 1]
