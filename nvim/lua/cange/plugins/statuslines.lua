@@ -22,11 +22,8 @@ return {
     },
     opts = {
       options = {
+        section_separators = { left = "", right = "" },
         component_separators = { left = i("ui.Pipe"), right = i("ui.Pipe") },
-        section_separators = {
-          left = i("ui.TriangleLeft", { right = 1 }),
-          right = i("ui.TriangleRight", { right = 1 }),
-        },
         globalstatus = true,
       },
       sections = {
@@ -87,6 +84,7 @@ return {
 
   { -- winbar with LSP context symbols
     "utilyre/barbecue.nvim",
+    name = "barbecue",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "SmiteshP/nvim-navic",

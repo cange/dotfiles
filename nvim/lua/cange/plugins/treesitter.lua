@@ -34,10 +34,6 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      { -- autoclose and autorename html tags
-        "windwp/nvim-ts-autotag",
-        config = function() require("nvim-ts-autotag").setup() end,
-      },
       "HiPhish/nvim-ts-rainbow2",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/playground",
@@ -71,6 +67,12 @@ return {
       rainbow = { enable = true },
     },
     main = "nvim-treesitter.configs",
+  },
+
+  { -- autoclose and autorename html tags
+    "windwp/nvim-ts-autotag",
+    opts = {},
+    config = function(_, opts) require("nvim-ts-autotag").setup(opts) end,
   },
 
   { -- testing toggle util
