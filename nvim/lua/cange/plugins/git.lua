@@ -55,4 +55,18 @@ return {
       })
     end,
   },
+
+  {
+    "akinsho/git-conflict.nvim",
+    lazy = true,
+    event = { "BufReadPre" },
+    keys = {
+      { "<leader>gco", "<cmd>GitConflictChooseOurs<CR>", desc = "Select the current changes" },
+      { "<leader>gct", "<cmd>GitConflictChooseTheirs<CR>", desc = "Select the incoming changes" },
+      { "<leader>gcb", "<cmd>GitConflictChooseBoth<CR>", desc = "Select both changes" },
+      { "<leader>gcn", "<cmd>GitConflictChooseNone<CR>", desc = "Select none of the changes" },
+      { "]gc", "<cmd>GitConflictNextConflict<CR>", desc = "Move to the next conflict" },
+      { "[gc", "<cmd>GitConflictPrevConflict<CR>", desc = "Move to the previous conflict" },
+    },
+  },
 }
