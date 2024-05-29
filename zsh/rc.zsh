@@ -68,6 +68,7 @@ zstyle ":completion:*" menu select # prettify z menu
 _source_if_exists "$Z_CONFIG_DIR/aliases.git.zsh"
 _source_if_exists "$Z_CONFIG_DIR/aliases.yarn.zsh"
 _source_if_exists "$Z_CONFIG_DIR/aliases.docker.zsh"
+_source_if_exists "$Z_CONFIG_DIR/aliases.npm.zsh"
 _source_if_exists "$Z_CONFIG_DIR/aliases.pnpm.zsh"
 _source_if_exists "$Z_CONFIG_DIR/aliases.zsh"
 _source_if_exists "$Z_CONFIG_DIR/exports.zsh"
