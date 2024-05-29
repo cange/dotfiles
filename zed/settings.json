@@ -14,6 +14,7 @@
     "metrics": false
   },
 
+  "current_line_highlight": "line",
   "theme": {
     "mode": "system",
     "dark": "Terafox",
@@ -35,6 +36,9 @@
   "vim": {
     "use_multiline_find": true,
     "use_smartcase_find": true
+  },
+  "tab_bar": {
+    "show": false
   },
 
   "relative_line_numbers": true,

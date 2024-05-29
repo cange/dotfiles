@@ -52,6 +52,13 @@
       "cmd-x": "project_panel::Cut"
     }
   },
+
+  {
+    "context": "ProjectPanel || Editor",
+    "bindings": {
+      "space space": "pane::AlternateFile"
+    }
+  },
   {
     "context": "Editor || Terminal",
     "bindings": {
