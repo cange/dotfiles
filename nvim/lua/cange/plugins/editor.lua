@@ -199,13 +199,6 @@ return {
     config = function(_, opts) require("nvim-surround").setup(opts) end,
   },
 
-  {
-    -- contextual comment in embedded language files like Vue.JS
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    event = { "BufReadPre", "BufNewFile" },
-    lazy = true,
-  },
-
   { -- highlight TODO, FIXME, etc in comments
     "folke/todo-comments.nvim",
     event = "VeryLazy",

@@ -75,6 +75,21 @@ return {
     config = function(_, opts) require("nvim-ts-autotag").setup(opts) end,
   },
 
+  {
+    -- contextual comment in embedded language files like Vue.JS
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    lazy = true,
+    init = function()
+      -- enable native commenting https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#native-commenting-in-neovim-010
+      local get_option = vim.filetype.get_option
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.filetype.get_option = function(filetype, option)
+        return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
+          or get_option(filetype, option)
+      end
+    end,
+  },
+
   { -- testing toggle util
     "cange/specto.nvim",
     lazy = false,
