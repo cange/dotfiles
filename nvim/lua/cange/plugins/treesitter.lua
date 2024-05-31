@@ -34,9 +34,9 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      "HiPhish/nvim-ts-rainbow2",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/playground",
+      "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
     },
     opts = {
       textobjects = {
