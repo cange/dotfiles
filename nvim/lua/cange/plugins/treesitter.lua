@@ -36,7 +36,6 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/playground",
-      "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
     },
     opts = {
       textobjects = {
@@ -64,7 +63,6 @@ return {
       highlight = { enable = true },
       indent = { enable = true }, -- Indentation based on treesitter for the = operator
       playground = { enable = true },
-      rainbow = { enable = true },
     },
     main = "nvim-treesitter.configs",
   },
