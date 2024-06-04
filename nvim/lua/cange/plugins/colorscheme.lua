@@ -73,15 +73,6 @@ local function update_highlights()
     -- misc
     WhichkeyBorder = { link = "FloatBorder" },
     LspInlayHint = { fg = pal.comment, bg = nil },
-
-    -- parentheses highlighting
-    RainbowDelimiterRed = { fg = pal.red.base },
-    RainbowDelimiterYellow = { fg = pal.yellow.base },
-    RainbowDelimiterBlue = { fg = pal.blue.base },
-    RainbowDelimiterOrange = { fg = pal.orange.base },
-    RainbowDelimiterGreen = { fg = pal.green.base },
-    RainbowDelimiterViolet = { fg = pal.magenta.base },
-    RainbowDelimiterCyan = { fg = pal.cyan.base },
   }
 
   Cange.set_highlights(highlights)
