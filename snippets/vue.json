@@ -42,5 +42,13 @@
   "watch v3": {
     "prefix": "watch",
     "body": "watch(\n\t() => ${1:prop},\n\t() => ${2:handler},\n\t{ immediate: ${3:true} }\n)"
+  },
+  "defineEmits": {
+    "prefix": "emits",
+    "body": "const emit = defineEmits<{\n$1: [${2:key}: ${3:type}]\n$0\n}>()"
+  },
+  "defineProps": {
+    "prefix": "props",
+    "body": "const props = defineProps<{\n${1:key}: ${2:type}\n}>()"
   }
 }
