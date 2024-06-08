@@ -1,4 +1,5 @@
-tap "romkatv/powerlevel10k"
+# Prompt theme engine for any shell
+brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Statistics utility to count lines of code
