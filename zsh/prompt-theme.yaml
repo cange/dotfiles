@@ -17,7 +17,7 @@ blocks:
       - type: git
         style: plain
         foreground: green
-        template: "<white>on</> {{if .Rebase}}<white>Rebasing </>{{end}}{{ .HEAD }}{{if and (gt .Ahead 0) (gt .Behind 0)}}<magenta> {{if gt .Behind 0}}↓{{ .Behind }}{{end}}{{if gt .Ahead 0}}↑{{ .Ahead }}{{end}}</>{{end}}{{if gt .StashCount 0}}  {{ .StashCount }}{{end}}{{if .Working.Changed}}<yellow>  {{.Working.String }}</>{{end}}{{if .Staging.Changed}} 󱗜 {{ .Staging.String }}{{end}}"
+        template: "<white>on</> {{if .Rebase}}<white>Rebasing </>{{end}}{{ .HEAD }}{{if and (gt .Ahead 0) (gt .Behind 0)}}<magenta> {{if gt .Behind 0}}↓{{ .Behind }}{{end}}{{if gt .Ahead 0}}↑{{ .Ahead }}{{end}}</>{{end}}{{if gt .StashCount 0}}  {{ .StashCount }}{{end}}<yellow>{{if .Staging.Changed}} 󱗜 {{ .Staging.String }}{{end}}{{if .Working.Changed}}  {{.Working.String }}</>{{end}}</>"
         properties:
           branch_ahead_icon: "↑"
           branch_behind_icon: "↓"
