@@ -76,7 +76,18 @@ return {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = { "TroubleToggle", "Trouble" },
-    opts = { use_diagnostic_signs = true },
+    opts = {
+      use_diagnostic_signs = true,
+      icons = {
+        indent = {
+          fold_open = i("ui.ChevronDown"),
+          fold_closed = i("ui.ChevronRight"),
+        },
+        folder_closed = i("documents.Folder"),
+        folder_open = i("documents.OpenFolder"),
+        kinds = i("cmp_kinds"),
+      },
+    },
     config = function(_, opts)
       require("trouble").setup(opts)
 
@@ -86,34 +97,15 @@ return {
         callback = function() require("trouble").close() end,
       })
     end,
-    keys = function()
-      local opts = { skip_groups = true, jump = true }
-      local trouble = require("trouble")
-
-      return {
-        { "<leader>tt", "<cmd>TroubleToggle<CR>", desc = "All Diagnostics" },
-        { "<leader>tw", "<cmd>TroubleToggle workspace_diagnostics<CR>", desc = "Workspace Diagnostics" },
-        { "<leader>td", "<cmd>TroubleToggle document_diagnostics<CR>", desc = "Document Diagnostics" },
-        { "<leader>tq", "<cmd>TroubleToggle quickfix<CR>", desc = "Quickfix List" },
-        { "<leader>tl", "<cmd>TroubleToggle loclist<CR>", desc = "Location List" },
-        { "gR", "<cmd>TroubleToggle lsp_references<CR>", desc = "LSP References Search" },
-        {
-          "[q",
-          function()
-            if not trouble.is_open() then trouble.open() end
-            trouble.previous(opts)
-          end,
-          desc = "Prev Diagnostic",
-        },
-        {
-          "]q",
-          function()
-            if not trouble.is_open() then trouble.open() end
-            trouble.next(opts)
-          end,
-          desc = "Next Diagnostic",
-        },
-      }
-    end,
+    keys = {
+      {
+        "<leader>xl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<CR>",
+        desc = "LSP Definitions / references / ...",
+      },
+      { "<leader>xs", "<cmd>Trouble symbols toggle focus=false<CR>", desc = "Symbols" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer Diagnostics" },
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", desc = "Diagnostics" },
+    },
   },
 }

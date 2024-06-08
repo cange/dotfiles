@@ -174,7 +174,7 @@ return {
       wk.register({ ["<leader>g"] = { name = i("git.Branch", { right = 1 }) .. "Git" } })
       wk.register({ ["<leader>gc"] = { name = "Conflicts" } })
       wk.register({ ["<leader>s"] = { name = i("ui.Search", { right = 1 }) .. "Search" } })
-      wk.register({ ["<leader>t"] = { name = i("ui.Stethoscope", { right = 1 }) .. "Troubleshooting" } })
+      wk.register({ ["<leader>x"] = { name = i("ui.Stethoscope", { right = 1 }) .. "Troubleshooting" } })
       wk.register({ ["<localleader>c"] = { name = i("ui.Copilot", { right = 1 }) .. "Copilot" } })
       wk.register({ ["g"] = { name = i("ui.Code", { right = 1 }) .. "Code/LSP" } })
     end,
@@ -201,12 +201,12 @@ return {
 
   { -- highlight TODO, FIXME, etc in comments
     "folke/todo-comments.nvim",
-    event = "VeryLazy",
+    dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
       keywords = {
-        FIX = { alt = { "FIXME", "FIXUP", "BUG", "FIXIT", "ISSUE" }, icon = nil },
-        NOTE = { alt = { "INFO", "DEPRECATED" }, icon = nil },
-        TODO = { icon = i("ui.Check") },
+        FIX = { icon = "" },
+        NOTE = { icon = "" },
+        TODO = { icon = "" },
       },
     },
   },
