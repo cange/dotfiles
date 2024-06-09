@@ -36,6 +36,7 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/playground",
+      "windwp/nvim-ts-autotag",
     },
     opts = {
       textobjects = {
@@ -65,12 +66,9 @@ return {
       playground = { enable = true },
     },
     main = "nvim-treesitter.configs",
-  },
-
-  { -- autoclose and autorename html tags
-    "windwp/nvim-ts-autotag",
-    opts = {},
-    config = function(_, opts) require("nvim-ts-autotag").setup(opts) end,
+    config = function()
+      require("nvim-ts-autotag").setup() -- autoclose and autorename html tags
+    end,
   },
 
   {
