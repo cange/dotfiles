@@ -54,9 +54,7 @@ fpath=("$Z_CONFIG_DIR/plugins/zsh-completions/src" $fpath)
 
 # --- prompt theme
 # disable Apples for terminal app (ANSI characters)
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 	eval "$(oh-my-posh init zsh --config $HOME/.config/zsh/prompt-theme.yaml)"
-fi
 # prompt theme ---
 
 # --- z navigation config
