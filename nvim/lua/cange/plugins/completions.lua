@@ -71,7 +71,7 @@ return {
       suggestion = { enabled = false, auto_refresh = true },
     },
     keys = function()
-      local icon = Cange.get_icon("ui.Copilot", { right = 1 })
+      local icon = Cange.get_icon("plugin.Copilot", { right = 1 })
       -- stylua: ignore start
       return {
         { "<localleader>cA", "<cmd>Copilot panel accept<CR>",  desc = "Accept Copilot panel" },

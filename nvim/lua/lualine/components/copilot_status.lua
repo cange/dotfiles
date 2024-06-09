@@ -13,9 +13,9 @@ local refresh_count = 1
 
 -- NOTE: function wrappers enables spinner animation
 local icons = {
-  [""] = function() return i("ui.CopilotError") end,
-  ["Normal"] = function() return i("ui.Copilot") end,
-  ["Warning"] = function() return i("ui.CopilotWarning") end,
+  [""] = function() return i("plugin.CopilotError") end,
+  ["Normal"] = function() return i("plugin.Copilot") end,
+  ["Warning"] = function() return i("plugin.CopilotWarning") end,
   ["InProgress"] = function() return require("cange.utils.spinner").icon(refresh_count) end,
 }
 local colors = {

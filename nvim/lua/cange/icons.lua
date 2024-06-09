@@ -19,9 +19,6 @@ M.ui = {
   ChevronRight        = "", -- nf-cod-chevron_right
   Close               = "", -- nf-cod-close
   Code                = "", -- nf-cod-code
-  Copilot             = "", -- nf-oct-copilot
-  CopilotError        = "", -- nf-oct-copilot_error
-  CopilotWarning      = "", -- nf-oct-copilot_warning
   Database            = "", -- nf-cod-database
   Dot                 = "", -- nf-cod-circle
   DotFill             = "", -- nf-cot-circle_fill
@@ -42,7 +39,6 @@ M.ui = {
   Stethoscope         = "󰓙", -- nf-md-stethoscope
   Sync                = "", -- nf-cod-sync
   Tab                 = "", -- nf-oct-tab
-  Tabnine             = "⌬", -- U+232C
   -- shapes
   TriangleLeft        = "", -- nf-ple-lower_left_triangle
   TriangleRight       = "", -- :nf-ple-upper_right_trangleRight 
@@ -51,6 +47,13 @@ M.ui = {
   Pipe                = "|", -- U+007C
   VDashedLine         = "┆", -- U+2506
   VThinLine           = "│", -- U+2502
+}
+M.plugin = {
+  Copilot             = "", -- nf-oct-copilot
+  CopilotError        = "", -- nf-oct-copilot_error
+  CopilotWarning      = "", -- nf-oct-copilot_warning
+  Harpoon             = '⇁', -- U+21C1
+  Tabnine             = "⌬", -- U+232C
 }
 M.extensions = {
   Babelrc             = "󰨥", -- nf-md-babel

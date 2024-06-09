@@ -10,8 +10,7 @@ local M = require("lualine.component"):extend()
 ---@enum GitBlameLineConfig
 local config = {
   icon = "",
-  ---@diagnostic disable-next-line: assign-type-mismatch
-  color = Cange.get_hl_hex("lualine_c_inactive", "fg"),
+  color = Cange.get_hl_hex("Comment", "fg"),
 }
 
 function M:init(opts)

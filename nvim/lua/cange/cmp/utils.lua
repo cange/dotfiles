@@ -37,8 +37,8 @@ function M.format(entry, vim_item)
   local maxwidth = 80
   local src_icons = {
     buffer = i("ui.Database"),
-    cmp_tabnine = i("ui.Tabnine"),
-    copilot = i("ui.Copilot"),
+    cmp_tabnine = i("plugin.Tabnine"),
+    copilot = i("plugin.Copilot"),
     luasnip = i("ui.Library"),
     nvim_lsp = i("ui.Globe"),
     nvim_lsp_signature_help = i("ui.Ellipsis"),

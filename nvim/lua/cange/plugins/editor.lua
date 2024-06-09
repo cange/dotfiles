@@ -108,17 +108,20 @@ return {
     end,
     keys = function()
       local harpoon = require("harpoon")
+      local function l(name) return string.format(name, i("plugin.Harpoon")) end
+      -- stylua: ignore start
       return {
-        { "<leader>a", function() harpoon:list():add() end, desc = "Add ⇁ mark" },
-        { "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show ⇁ marks" },
-        { "<leader>sm", "<cmd>Telescope harpoon marks<CR>", desc = "Search ⇁ marks" },
-        { "<leader>1", function() harpoon:list():select(1) end, desc = "⇁ to 1st mark" },
-        { "<leader>2", function() harpoon:list():select(2) end, desc = "⇁ to 2nd mark" },
-        { "<leader>3", function() harpoon:list():select(3) end, desc = "⇁ to 3rd mark" },
-        { "<leader>4", function() harpoon:list():select(4) end, desc = "⇁ to 4th mark" },
-        { "[m", function() harpoon:list():prev() end, desc = "Prev ⇁ mark" },
-        { "]m", function() harpoon:list():next() end, desc = "Next ⇁ mark" },
+        { "<leader>a", function() harpoon:list():add() end,                         desc = l("Add %s mark") },
+        { "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = l("Show %s marks") },
+        { "<leader>sm", "<cmd>Telescope harpoon marks<CR>",                         desc = l("Search marks") },
+        { "<leader>1", function() harpoon:list():select(1) end,                     desc = l("%s to 1st mark") },
+        { "<leader>2", function() harpoon:list():select(2) end,                     desc = l("%s to 2nd mark") },
+        { "<leader>3", function() harpoon:list():select(3) end,                     desc = l("%s to 3rd mark") },
+        { "<leader>4", function() harpoon:list():select(4) end,                     desc = l("%s to 4th mark") },
+        { "[m", function() harpoon:list():prev() end,                               desc = l("Prev %s mark") },
+        { "]m", function() harpoon:list():next() end,                               desc = l("Next %s mark") },
       }
+      -- stylua: ignore end
     end,
   },
 
@@ -175,7 +178,7 @@ return {
       wk.register({ ["<leader>gc"] = { name = "Conflicts" } })
       wk.register({ ["<leader>s"] = { name = i("ui.Search", { right = 1 }) .. "Search" } })
       wk.register({ ["<leader>x"] = { name = i("ui.Stethoscope", { right = 1 }) .. "Troubleshooting" } })
-      wk.register({ ["<localleader>c"] = { name = i("ui.Copilot", { right = 1 }) .. "Copilot" } })
+      wk.register({ ["<localleader>c"] = { name = i("plugin.Copilot", { right = 1 }) .. "Copilot" } })
       wk.register({ ["g"] = { name = i("ui.Code", { right = 1 }) .. "Code/LSP" } })
     end,
   },

@@ -19,6 +19,7 @@ return {
       "EdenEast/nightfox.nvim",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
+      "letieu/harpoon-lualine",
     },
     opts = {
       options = {
@@ -34,6 +35,7 @@ return {
           { "branch", icon = i("git.Branch") },
         },
         lualine_c = {
+          { "harpoon2", icon = i("plugin.Harpoon") },
           {
             "diagnostics",
             symbols = {
@@ -57,8 +59,9 @@ return {
           { require("lazy.status").updates, cond = require("lazy.status").has_updates },
         },
         lualine_y = {
-          { "format_status", exclude_filetypes = exclude_filetypes },
-          { "lsp_status", exclude_filetypes = exclude_filetypes },
+          { "inlay_hints", exclude_filetypes = exclude_filetypes },
+          { "format_clients", exclude_filetypes = exclude_filetypes },
+          { "lsp_clients", exclude_filetypes = exclude_filetypes },
           "copilot_status",
           {
             "progress",
@@ -88,15 +91,10 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "SmiteshP/nvim-navic",
-      "nvim-lualine/lualine.nvim",
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
       require("barbecue").setup({
-        theme = {
-          modified = Cange.get_hl("lualine_c_normal", { "fg" }),
-          basename = Cange.get_hl("lualine_c_normal", { "fg" }),
-        },
         symbols = {
           modified = i("ui.DotFill"),
           separator = i("ui.ChevronRight"),

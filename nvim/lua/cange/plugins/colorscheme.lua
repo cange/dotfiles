@@ -64,12 +64,7 @@ local function update_highlights()
     CmpGhostText = { fg = pal.fg3, italic = true },
     CmpItemAbbr = { fg = pal.fg2 },
     CmpItemAbbrMatch = { link = "TelescopeMatching" },
-    CmpItemKindCopilot = { link = "CmpItemKindDefault" },
-    CmpItemKindTabnine = { link = "CmpItemKindDefault" },
-    CmpItemMenuCopilot = { fg = blend(pal.copilot.odd, 0.2) },
-    CmpItemMenu = { fg = pal.cyan.dim },
     CmpItemMenuLua = { fg = lua_color },
-    CmpItemMenuTabnine = { fg = blend(pal.tabnine.even, -0.5) },
     -- misc
     WhichkeyBorder = { link = "FloatBorder" },
     LspInlayHint = { fg = pal.comment, bg = nil },
