@@ -66,7 +66,7 @@ return {
       playground = { enable = true },
     },
     main = "nvim-treesitter.configs",
-    config = function()
+    init = function()
       require("nvim-ts-autotag").setup() -- autoclose and autorename html tags
     end,
   },
