@@ -44,7 +44,7 @@ function M.update_status()
   msg = (msg and #msg > 0 and msg .. " " or "")
   refresh_count = refresh_count + 1
 
-  return icons[data.status]() .. " " .. msg
+  return vim.trim(icons[data.status]() .. " " .. msg)
 end
 
 return M
