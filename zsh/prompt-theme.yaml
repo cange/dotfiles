@@ -2,7 +2,7 @@
 ---
 version: 2
 final_space: true
-console_title_template: "{{ .Shell }} in {{ .Folder }}"
+console_title_template: "{{.Shell}} in {{.Folder}}"
 
 blocks:
   - type: prompt
@@ -11,18 +11,19 @@ blocks:
       - type: path
         style: plain
         foreground: blue
-        template: "{{ .Path }} "
+        template: "{{.Path}} "
         properties:
           style: letter
       - type: git
         style: plain
         foreground: green
-        template: "<white>on</> {{if .Rebase}}<white>Rebasing </>{{ .HEAD }}{{else}}{{ .HEAD }}{{if and (gt .Ahead 0) (gt .Behind 0)}}<lightMagenta> {{if gt .Behind 0}}↓{{ .Behind }}{{end}}{{if gt .Ahead 0}}↑{{ .Ahead }}{{end}}</>{{end}}{{if gt .StashCount 0}}  {{ .StashCount }}{{end}}{{if .Staging.Changed}}<yellow> 󱗜 {{ .Staging.String }}</>{{end}}{{if .Working.Changed}}<magenta>  {{.Working.String }}</>{{end}}{{end}}"
+        template: "<white>on</> {{if .Rebase}}<white>Rebasing </>{{.HEAD}}{{else}}{{.HEAD}}{{if .BranchStatus}} <yellow>{{.BranchStatus}}</>{{ end}}{{if .Staging.Changed}}<blue> 󱗜 {{.Staging.String}}</>{{end}}{{if .Working.Changed}}<lightMagenta>  {{.Working.String}}</>{{end}}{{end}}"
         properties:
           branch_ahead_icon: "↑"
           branch_behind_icon: "↓"
+          branch_gone_icon: "󱓌 "
+          branch_identical_icon: ""
           branch_icon: " "
-          branch_max_length: 24
           commit_icon: " "
           fetch_status: true
           fetch_upstream_icon: true
@@ -34,34 +35,30 @@ blocks:
       - type: executiontime
         style: plain
         foreground: yellow
-        template: "<white>took</> {{ .FormattedMs }}</> "
+        template: "  <white>took</> {{.FormattedMs}}</>"
         properties:
           threshold: 5000
           style: round
       - type: node
         style: plain
         foreground: white
-        template: "<green>󰎙</> {{.Full }} "
+        template: " <green>󰎙</> {{.Full}}"
       - type: ruby
         style: plain
         foreground: white
-        template: "<red></> {{.Full }} "
+        template: " <red></> {{.Full}}"
       - type: rust
         style: plain
         foreground: white
-        template: "<red></> {{.Full }} "
+        template: " <red></> {{.Full}}"
       - type: go
         style: plain
         foreground: white
-        template: "<cyan></> {{.Full }} "
+        template: " <cyan></> {{.Full}}"
       - type: lua
         style: plain
         foreground: white
-        template: "<blue></> {{.Full }} "
-      - type: time
-        style: plain
-        foreground: blue
-        template: <white>at</> {{ .CurrentDate | date .Format }}
+        template: " <blue></> {{.Full}}"
 
   - type: prompt
     alignment: left
