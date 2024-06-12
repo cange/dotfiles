@@ -100,11 +100,6 @@ return {
     config = function(_, opts)
       require("harpoon"):setup(opts)
       require("telescope").load_extension("harpoon")
-      Cange.set_highlights({
-        HarpoonWindow = { link = "NormalFloat" },
-        HarpoonTitle = { link = "FloatTitle" },
-        HarpoonBorder = { link = "FloatBorder" },
-      })
     end,
     keys = function()
       local harpoon = require("harpoon")

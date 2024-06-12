@@ -19,12 +19,11 @@ return {
       "EdenEast/nightfox.nvim",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
-      "letieu/harpoon-lualine",
     },
     opts = {
       options = {
         section_separators = { left = "", right = "" },
-        component_separators = { left = i("ui.Pipe"), right = i("ui.Pipe") },
+        component_separators = { left = " ", right = " " },
         globalstatus = true,
       },
       sections = {
@@ -35,7 +34,6 @@ return {
           { "branch", icon = i("git.Branch") },
         },
         lualine_c = {
-          { "harpoon2", icon = i("plugin.Harpoon") },
           {
             "diagnostics",
             symbols = {
