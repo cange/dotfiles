@@ -10,18 +10,8 @@ local function update_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
   M.palette = require("nightfox.palette").load(colorscheme)
-  M.palette.copilot = { even = "#93f5ec", odd = "#a77bf3" }
-  M.palette.tabnine = { even = "#0575ed", odd = "#ff16ff" }
 
   return M.palette
-end
-
----@param shade string
----@param factor number
----@return number # as hex
-local function blend(shade, factor)
-  local C = require("nightfox.lib.color")
-  return C.from_hex(shade):blend(C(M.palette.bg1), factor):to_css()
 end
 
 local function update_highlights()
@@ -73,18 +63,34 @@ local function update_highlights()
   Cange.set_highlights(highlights)
 end
 
----@param mode? '"dark"'|'"light"'|nil
+local themes = {
+  contrast = { name = "carbonfox", mode = "dark" },
+  dark = { name = "terafox", mode = "dark" },
+  light = { name = "dayfox", mode = "light" },
+}
+
+---@param mode? '"dark"'|'"light"'|'"contrast"'|nil
 ---@param silent? boolean
 local function update_colorscheme(mode, silent)
   ---@diagnostic disable-next-line: undefined-field
   M.mode = mode ~= nil and mode or vim.o.background
-  local theme = Cange.get_config("ui.colorscheme." .. M.mode)
-  vim.opt.background = M.mode
-  vim.cmd("colorscheme " .. theme)
+  if not mode then return end
+  local theme = themes[M.mode]
+  vim.opt.background = theme.mode
+  vim.cmd("colorscheme " .. theme.name)
 
-  if silent == false then vim.schedule(function() Log:info(M.mode .. " / " .. theme, "Changed colorscheme") end) end
+  if silent == false then
+    vim.schedule(function() Log:info(M.mode .. " / " .. theme.name, "Changed colorscheme") end)
+  end
 
   update_highlights()
+end
+
+local selected_index = 1
+local function toggle_colorscheme()
+  local index = selected_index + 1
+  selected_index = (index % vim.tbl_count(themes)) + 1
+  update_colorscheme(vim.tbl_keys(themes)[selected_index], false)
 end
 
 vim.api.nvim_create_user_command("CangeUpdateColorscheme", function() update_colorscheme() end, {})
@@ -116,6 +122,9 @@ return {
         update_interval = 1000,
       })
     end,
+    keys = {
+      { "<leader>et", toggle_colorscheme, desc = "Toggle colorscheme mode" },
+    },
   },
 }
 
@@ -159,7 +168,5 @@ return {
 ---@field fg3 string Darker fg (line numbers, fold colums)
 ---@field sel0 string Popup bg, visual selection bg
 ---@field sel1 string Popup sel bg, search bg
----@field tabnine DualShade
----@field copilot DualShade
 
 --#endregion

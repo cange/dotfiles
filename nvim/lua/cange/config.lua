@@ -10,10 +10,6 @@ return {
     path = "./../snippets",
   },
   ui = {
-    colorscheme = {
-      dark = "terafox",
-      light = "dayfox",
-    },
     ---@type "none" | "single" | "double" | "rounded" | "shadow"
     border = "rounded",
   },
