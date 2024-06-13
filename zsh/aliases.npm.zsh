@@ -18,6 +18,7 @@
 # generic commands
 alias npmi="npm install"        # equivalent to yarn add
 alias npmid="npm install --dev" # equivalent to yarn add --dev
+alias npmrm="npm uninstall"
 alias npmr="npm run"
 alias npmup="npm update"
 
