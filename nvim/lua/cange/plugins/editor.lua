@@ -178,8 +178,7 @@ return {
     end,
   },
 
-  -- Highlight the word under the cursor
-  {
+  { -- Highlight the word under the cursor
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
@@ -283,6 +282,20 @@ return {
       { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
+  },
+
+  { -- Move by subwords and skip insignificant punctuation.
+    "chrisgrieser/nvim-spider",
+    event = "VeryLazy",
+    opts = {
+      subwordMovement = false,
+      skipInsignificantPunctuation = true,
+    },
+    keys = {
+      { "w", function() require("spider").motion("w") end, desc = "Spider-w", mode = { "n", "o", "x" } },
+      { "e", function() require("spider").motion("e") end, desc = "Spider-e", mode = { "n", "o", "x" } },
+      { "b", function() require("spider").motion("b") end, desc = "Spider-b", mode = { "n", "o", "x" } },
     },
   },
 
