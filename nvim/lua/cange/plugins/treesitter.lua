@@ -35,10 +35,9 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "nvim-treesitter/playground",
-      "windwp/nvim-ts-autotag",
     },
     opts = {
+      ensure_installed = sources, -- A list of parser names, or "all"
       textobjects = {
         select = {
           enable = true,
@@ -56,19 +55,20 @@ return {
           },
         },
       },
-      autotag = { enable = true },
       context_commentstring = {
         enable_autocmd = false, -- enable commentstring support, when false
       },
-      ensure_installed = sources, -- A list of parser names, or "all"
       highlight = { enable = true },
       indent = { enable = true }, -- Indentation based on treesitter for the = operator
-      playground = { enable = true },
     },
     main = "nvim-treesitter.configs",
-    init = function()
-      require("nvim-ts-autotag").setup() -- autoclose and autorename html tags
-    end,
+  },
+
+  { -- autoclose and autorename html tags
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = function() require("nvim-ts-autotag").setup() end,
   },
 
   {
