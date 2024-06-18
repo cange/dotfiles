@@ -86,6 +86,24 @@ return {
     end,
   },
 
+  {
+    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      highlight = {
+        "RainbowDelimiterRed",
+        "RainbowDelimiterYellow",
+        "RainbowDelimiterBlue",
+        "RainbowDelimiterOrange",
+        "RainbowDelimiterGreen",
+        "RainbowDelimiterViolet",
+        "RainbowDelimiterCyan",
+      },
+      blacklist = { "vue" },
+    },
+    config = function(_, opts) require("rainbow-delimiters.setup").setup(opts) end,
+  },
+
   { -- testing toggle util
     "cange/specto.nvim",
     lazy = false,

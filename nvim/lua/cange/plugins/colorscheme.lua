@@ -3,6 +3,8 @@ local M = {
   mode = vim.o.background,
   ---@type Palette|nil
   palette = nil,
+  ---@type Spec|nil
+  spec = nil,
 }
 
 ---@return Palette
@@ -10,13 +12,23 @@ local function update_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
   M.palette = require("nightfox.palette").load(colorscheme)
+  M.spec = require("nightfox.spec").load(colorscheme)
 
   return M.palette
 end
 
+---Returns a new color that a linear blend between two colors
+---@param base_color string
+---@param blend_color string
+---@param factor number Float [0,1]. 0 being this and 1 being other
+---@return string
+local function blend(base_color, blend_color, factor)
+  local C = require("nightfox.lib.color")
+  return C(base_color):blend(C(blend_color), factor):to_css()
+end
+
 local function update_highlights()
   local _, lua_color = require("nvim-web-devicons").get_icon_color("any.lua", "lua")
-
   local pal = update_palette()
   local highlights = {
     CursorLine = { bg = pal.bg2 }, -- more subtle
@@ -58,6 +70,15 @@ local function update_highlights()
     -- misc
     WhichkeyBorder = { link = "FloatBorder" },
     LspInlayHint = { fg = pal.comment, bg = nil },
+
+    -- parentheses highlighting
+    RainbowDelimiterRed = { fg = blend(M.spec.syntax.bracket, pal.red.dim, 0.75) },
+    RainbowDelimiterYellow = { fg = blend(M.spec.syntax.bracket, pal.yellow.dim, 0.75) },
+    RainbowDelimiterBlue = { fg = blend(M.spec.syntax.bracket, pal.blue.dim, 0.75) },
+    RainbowDelimiterOrange = { fg = blend(M.spec.syntax.bracket, pal.orange.dim, 0.75) },
+    RainbowDelimiterGreen = { fg = blend(M.spec.syntax.bracket, pal.green.dim, 0.75) },
+    RainbowDelimiterViolet = { fg = blend(M.spec.syntax.bracket, pal.magenta.dim, 0.75) },
+    RainbowDelimiterCyan = { fg = blend(M.spec.syntax.bracket, pal.cyan.dim, 0.75) },
   }
 
   Cange.set_highlights(highlights)
@@ -168,5 +189,73 @@ return {
 ---@field fg3 string Darker fg (line numbers, fold colums)
 ---@field sel0 string Popup bg, visual selection bg
 ---@field sel1 string Popup sel bg, search bg
+
+---@class Spec
+---@field bg0 string Dark bg (status line and float)
+---@field bg1 string Default bg
+---@field bg2 string Lighter bg (colorcolm folds)
+---@field bg3 string Lighter bg (cursor line)
+---@field bg4 string Conceal, border fg
+---@field fg0 string Lighter fg
+---@field fg1 string Default fg
+---@field fg2 string Darker fg (status line)
+---@field fg3 string Darker fg (line numbers, fold colums)
+---@field sel0 string Popup bg, visual selection bg
+---@field sel1 string Popup sel bg, search bg
+---@field syntax SpecSyntax
+---@field diag SpecDiagnostic
+---@field diag_bg SpecDiagnosticBg
+---@field diff SpecDiff
+---@field git SpecGit
+
+---@class SpecSyntax
+---@field bracket string Brackets and Punctuation
+---@field builtin0 string Builtin variable
+---@field builtin1 string Builtin type
+---@field builtin2 string Builtin const
+---@field builtin3 string Not used
+---@field comment string Comment
+---@field conditional string Conditional and loop
+---@field const string Constants, imports and booleans
+---@field dep string Deprecated
+---@field field string Field
+---@field func string Functions and Titles
+---@field ident string Identifiers
+---@field keyword string Keywords
+---@field number string Numbers
+---@field operator string Operators
+---@field preproc string PreProc
+---@field regex string Regex
+---@field statement string Statements
+---@field string string Strings
+---@field type string Types
+---@field variable string Variables
+
+---@class SpecDiagnostic
+---@field error string
+---@field warn string
+---@field info string
+---@field hint string
+---@field ok string
+
+---@class SpecDiagnosticBg
+---@field error string
+---@field warn string
+---@field info string
+---@field hint string
+---@field ok string
+
+---@class SpecDiff
+---@field add string
+---@field delete string
+---@field change string
+---@field text string
+
+---@class SpecGit
+---@field add string
+---@field changed string
+---@field conflict string
+---@field ignored string
+---@field removed string
 
 --#endregion
