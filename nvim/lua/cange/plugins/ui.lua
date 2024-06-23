@@ -54,8 +54,8 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       window = {
-        width = Cange.responsive_width(220, 0.95, 0.75), -- % width of the Zen window
-        height = 1, -- height of the Zen window
+        width = 1,
+        height = 1,
       },
     },
     keys = {
