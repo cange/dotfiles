@@ -49,9 +49,6 @@ return {
     },
     config = function()
       local mason_registry = require("mason-registry")
-      local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
-        .. "/node_modules/@vue/language-server"
-
       local server_configs = {
         cssls = {
           settings = {
@@ -90,7 +87,8 @@ return {
                 -- check `npm list -g`
                 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vue-support
                 name = "@vue/typescript-plugin",
-                location = vue_language_server_path,
+                location = mason_registry.get_package("vue-language-server"):get_install_path()
+                  .. "/node_modules/@vue/language-server",
                 languages = { "javascript", "typescript", "vue" },
               },
             },
@@ -99,11 +97,9 @@ return {
           filetypes = {
             "javascript",
             "javascript.jsx",
-            "javascriptreact",
             "json",
             "typescript",
             "typescript.tsx",
-            "typescriptreact",
             "vue",
           },
           settings = {

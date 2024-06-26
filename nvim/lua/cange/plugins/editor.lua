@@ -17,7 +17,6 @@ return {
 
   { -- File explorer
     "nvim-tree/nvim-tree.lua",
-    version = "*",
     lazy = false,
     keys = {
       { "<leader>\\", "<cmd>NvimTreeToggle<CR>", desc = "File Tree Explorer" },
@@ -277,25 +276,11 @@ return {
     event = "VeryLazy",
     opts = {},
     keys = {
-      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
-  },
-
-  { -- Move by subwords and skip insignificant punctuation.
-    "chrisgrieser/nvim-spider",
-    event = "VeryLazy",
-    opts = {
-      subwordMovement = false,
-      skipInsignificantPunctuation = true,
-    },
-    keys = {
-      { "w", function() require("spider").motion("w") end, desc = "Spider-w", mode = { "n", "o", "x" } },
-      { "e", function() require("spider").motion("e") end, desc = "Spider-e", mode = { "n", "o", "x" } },
-      { "b", function() require("spider").motion("b") end, desc = "Spider-b", mode = { "n", "o", "x" } },
+      { "s", function() require("flash").jump() end, desc = "Flash", mode = { "n", "o", "x" } },
+      { "S", function() require("flash").treesitter() end, desc = "Flash Treesitter", mode = { "n", "o", "x" } },
+      { "r", function() require("flash").remote() end, desc = "Remote Flash", mode = "o" },
+      { "R", function() require("flash").treesitter_search() end, desc = "Treesitter Search", mode = { "o", "x" } },
+      { "<c-s>", function() require("flash").toggle() end, desc = "Toggle Flash Search", mode = "c" },
     },
   },
 
@@ -306,7 +291,7 @@ return {
   },
 
   { -- Hex color highlighter
-    "NvChad/nvim-colorizer.lua",
+    "norcalli/nvim-colorizer.lua",
     opts = {
       filetypes = {
         "*", -- highlight all files by default
