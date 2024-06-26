@@ -1,11 +1,11 @@
 {
   "describe setup block": {
     "prefix": "describe",
-    "body": "describe('${1:context}', () => {\n\tlet wrapper$2\n})"
+    "body": "describe('${1:context}', () => {\n\tlet wrapper${2::any}\n\t$0\n})"
   },
   "describe(when…)": {
     "prefix": "when",
-    "body": "describe('when ${1:condition}', () => {\n\t$2\n})$3"
+    "body": "describe('when ${1:condition}', () => {\n\t$2\n})$0"
   },
   "describe(with…)": {
     "prefix": "with",
@@ -13,23 +13,19 @@
   },
   "it": {
     "prefix": "it(…",
-    "body": "it('$1', () => {\n\t$2\n})"
+    "body": "it('$1', () => {\n\t$0\n})"
   },
   "afterEach": {
     "prefix": "afterEach(…",
-    "body": "afterEach(() => {\n\t$1\n})"
+    "body": "afterEach(() => {\n\t$0\n})"
   },
   "beforeEach": {
     "prefix": "beforeEach(…",
-    "body": "beforeEach(() => {\n\t$1\n})"
+    "body": "beforeEach(() => {\n\t$0\n})"
   },
-  "expect(wrapper": {
-    "prefix": "expect(wrapper",
-    "body": "expect(wrapper.$1).to$0"
-  },
-  "expect(subject": {
-    "prefix": "expect(subject",
-    "body": "expect(subject.$1).to$0"
+  "expect(": {
+    "prefix": "expect(",
+    "body": "expect(${1|wrapper,subject|}.$1).to$0"
   },
   "only": {
     "prefix": ".only",
@@ -37,7 +33,7 @@
   },
   "attributes": {
     "prefix": ".attributes",
-    "body": ".attributes('$1')"
+    "body": ".attributes('$0')"
   },
   "vue wrapper debug": {
     "prefix": "logdebug",
@@ -59,45 +55,13 @@
     "prefix": "stringMatching",
     "body": "expect.stringMatching(/$1/)$0"
   },
-  "toEqual": {
-    "prefix": "toequal",
-    "body": "toEqual($1)$0"
-  },
-  "toBe": {
-    "prefix": "tobe",
-    "body": "toBe($1)$0"
-  },
-  "toBeDefined": {
-    "prefix": "tobedefined",
-    "body": "toBeDefined()$0"
-  },
-  "toBeUndefined": {
-    "prefix": "tobeundefined",
-    "body": "toBeUndefined()$0"
-  },
-  "toBeNull": {
-    "prefix": "tobenull",
-    "body": "toBeNull()"
-  },
   "toBeTruthy": {
-    "prefix": "tobetrue",
-    "body": "toBe(true)"
+    "prefix": "toBeTrue",
+    "body": "toBe(true)$0"
   },
   "toBeFalsy": {
-    "prefix": "tobefalse",
-    "body": "toBe(false)"
-  },
-  "toBeCalled": {
-    "prefix": "tobecalled",
-    "body": "toBeCalled()"
-  },
-  "toBeCalledWith": {
-    "prefix": "tobecalledwith",
-    "body": "toBeCalledWith($1)"
-  },
-  "toHaveLength": {
-    "prefix": "tohavelength",
-    "body": "toHaveLength($1)"
+    "prefix": "toBeFalse",
+    "body": "toBe(false)$0"
   },
   "specHelper": {
     "prefix": "specHelper",
