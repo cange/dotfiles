@@ -291,12 +291,14 @@ return {
   },
 
   { -- Hex color highlighter
-    "norcalli/nvim-colorizer.lua",
+    "brenoprata10/nvim-highlight-colors",
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
-      filetypes = {
-        "*", -- highlight all files by default
-        "!lazy", -- exclude from highlighting.
-      },
+      render = "virtual",
+      enable_tailwind = true,
+    },
+    keys = {
+      { "<leader>ct", "<cmd>HighlightColors Toggle<CR>", desc = "Toggle Highlight Colors" },
     },
   },
 }
