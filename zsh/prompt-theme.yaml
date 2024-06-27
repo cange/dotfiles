@@ -17,11 +17,11 @@ blocks:
       - type: git
         style: plain
         foreground: green
-        template: "<white>on</> {{if .Rebase}}<white>Rebasing </>{{.HEAD}}{{else}}{{.HEAD}}{{if .BranchStatus}} <yellow>{{.BranchStatus}}</>{{ end}}{{if .Staging.Changed}}<blue> 󱗜 {{.Staging.String}}</>{{end}}{{if .Working.Changed}}<lightMagenta>  {{.Working.String}}</>{{end}}{{end}}"
+        template: "<default>on</> {{if .Rebase}}<default>Rebasing </>{{.HEAD}}{{else}}{{.HEAD}}{{if .BranchStatus}} <yellow>{{.BranchStatus}}</>{{ end}}{{if .Staging.Changed}}<blue> 󱗜 {{.Staging.String}}</>{{end}}{{if .Working.Changed}}<lightMagenta>  {{.Working.String}}</>{{end}}{{end}}"
         properties:
           branch_ahead_icon: "↑"
           branch_behind_icon: "↓"
-          branch_gone_icon: "󱓌 "
+          branch_gone_icon: " "
           branch_identical_icon: ""
           branch_icon: " "
           commit_icon: " "
@@ -35,29 +35,29 @@ blocks:
       - type: executiontime
         style: plain
         foreground: yellow
-        template: "  <white>took</> {{.FormattedMs}}</>"
+        template: "  <default>took</> {{.FormattedMs}}</>"
         properties:
           threshold: 5000
           style: round
       - type: node
         style: plain
-        foreground: white
+        foreground: default
         template: " <green>󰎙</> {{.Full}}"
       - type: ruby
         style: plain
-        foreground: white
+        foreground: default
         template: " <red></> {{.Full}}"
       - type: rust
         style: plain
-        foreground: white
+        foreground: default
         template: " <red></> {{.Full}}"
       - type: go
         style: plain
-        foreground: white
+        foreground: default
         template: " <cyan></> {{.Full}}"
       - type: lua
         style: plain
-        foreground: white
+        foreground: default
         template: " <blue></> {{.Full}}"
 
   - type: prompt
