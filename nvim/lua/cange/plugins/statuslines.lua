@@ -20,67 +20,74 @@ return {
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
     },
-    opts = {
-      options = {
-        section_separators = { left = "", right = "" },
-        component_separators = { left = " ", right = " " },
-        globalstatus = true,
-      },
-      sections = {
-        lualine_a = {
-          { "mode", fmt = function(str) return str:sub(1, 1) end },
+    opts = function()
+      local custom_theme = require("lualine.themes.terafox")
+      -- set the bg of lualine_c section to non-transparent
+      custom_theme.normal.c.bg = Cange.get_hl_hex("NormalFloat", "bg").bg
+
+      return {
+        options = {
+          component_separators = { left = " ", right = " " },
+          globalstatus = true,
+          section_separators = { left = "", right = "" },
+          theme = custom_theme,
         },
-        lualine_b = {
-          { "branch", icon = i("git.Branch") },
-        },
-        lualine_c = {
-          {
-            "diagnostics",
-            symbols = {
-              error = i("diagnostics.Error", { right = 1 }),
-              warn = i("diagnostics.Warn", { right = 1 }),
-              info = i("diagnostics.Info", { right = 1 }),
-              hint = i("diagnostics.Hint", { right = 1 }),
+        sections = {
+          lualine_a = {
+            { "mode", fmt = function(str) return str:sub(1, 1) end },
+          },
+          lualine_b = {
+            { "branch", icon = i("git.Branch") },
+          },
+          lualine_c = {
+            {
+              "diagnostics",
+              symbols = {
+                error = i("diagnostics.Error", { right = 1 }),
+                warn = i("diagnostics.Warn", { right = 1 }),
+                info = i("diagnostics.Info", { right = 1 }),
+                hint = i("diagnostics.Hint", { right = 1 }),
+              },
             },
           },
+          lualine_x = {
+            {
+              "git_blame_line",
+              padding = { right = 1 },
+              icon = i("git.Commit"),
+              fmt = function(name)
+                local w = vim.o.columns
+                return strUtil.truncate(name, w > 172 and 80 or w > 112 and 48 or w > 92 and 24 or 0)
+              end,
+            },
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+          },
+          lualine_y = {
+            { "inlay_hints", exclude_filetypes = exclude_filetypes },
+            { "format_clients", exclude_filetypes = exclude_filetypes },
+            { "lsp_clients", exclude_filetypes = exclude_filetypes },
+            "copilot_status",
+            {
+              "progress",
+              separator = "",
+              padding = { left = 1, right = 0 },
+            },
+            {
+              "location",
+              separator = "",
+              padding = { left = 1, right = 0 },
+            },
+            {
+              function() return i("ui.Tab", { right = 1 }) .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) end,
+              separator = "",
+              padding = { left = 1, right = 0 },
+            },
+            "encoding",
+          },
+          lualine_z = {},
         },
-        lualine_x = {
-          {
-            "git_blame_line",
-            padding = { right = 1 },
-            icon = i("git.Commit"),
-            fmt = function(name)
-              local w = vim.o.columns
-              return strUtil.truncate(name, w > 172 and 80 or w > 112 and 48 or w > 92 and 24 or 0)
-            end,
-          },
-          { require("lazy.status").updates, cond = require("lazy.status").has_updates },
-        },
-        lualine_y = {
-          { "inlay_hints", exclude_filetypes = exclude_filetypes },
-          { "format_clients", exclude_filetypes = exclude_filetypes },
-          { "lsp_clients", exclude_filetypes = exclude_filetypes },
-          "copilot_status",
-          {
-            "progress",
-            separator = "",
-            padding = { left = 1, right = 0 },
-          },
-          {
-            "location",
-            separator = "",
-            padding = { left = 1, right = 0 },
-          },
-          {
-            function() return i("ui.Tab", { right = 1 }) .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) end,
-            separator = "",
-            padding = { left = 1, right = 0 },
-          },
-          "encoding",
-        },
-        lualine_z = {},
-      },
-    },
+      }
+    end,
   },
 
   { -- winbar with LSP context symbols

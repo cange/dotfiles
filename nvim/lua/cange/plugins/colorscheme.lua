@@ -1,20 +1,14 @@
 local M = {
   ---@diagnostic disable-next-line: undefined-field
   mode = vim.o.background,
-  ---@type Palette|nil
-  palette = nil,
-  ---@type Spec|nil
-  spec = nil,
 }
 
----@return Palette
-local function update_palette()
+---@return Palette, Spec
+local function get_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
-  M.palette = require("nightfox.palette").load(colorscheme)
-  M.spec = require("nightfox.spec").load(colorscheme)
 
-  return M.palette
+  return require("nightfox.palette").load(colorscheme), require("nightfox.spec").load(colorscheme)
 end
 
 ---Returns a new color that a linear blend between two colors
@@ -29,7 +23,7 @@ end
 
 local function update_highlights()
   local _, lua_color = require("nvim-web-devicons").get_icon_color("any.lua", "lua")
-  local pal = update_palette()
+  local pal, spec = get_palette()
   local highlights = {
     CursorLine = { bg = pal.bg2 }, -- more subtle
     Folded = { bg = nil, fg = pal.bg4 }, -- reduces folding noise
@@ -69,16 +63,16 @@ local function update_highlights()
     CmpItemMenuLua = { fg = lua_color },
     -- misc
     WhichkeyBorder = { link = "FloatBorder" },
-    LspInlayHint = { fg = pal.comment, bg = nil },
+    LspInlayHint = { fg = pal.comment, bg = nil, italic = true },
 
     -- parentheses highlighting
-    RainbowDelimiterRed = { fg = blend(M.spec.syntax.bracket, pal.red.dim, 0.75) },
-    RainbowDelimiterYellow = { fg = blend(M.spec.syntax.bracket, pal.yellow.dim, 0.75) },
-    RainbowDelimiterBlue = { fg = blend(M.spec.syntax.bracket, pal.blue.dim, 0.75) },
-    RainbowDelimiterOrange = { fg = blend(M.spec.syntax.bracket, pal.orange.dim, 0.75) },
-    RainbowDelimiterGreen = { fg = blend(M.spec.syntax.bracket, pal.green.dim, 0.75) },
-    RainbowDelimiterViolet = { fg = blend(M.spec.syntax.bracket, pal.magenta.dim, 0.75) },
-    RainbowDelimiterCyan = { fg = blend(M.spec.syntax.bracket, pal.cyan.dim, 0.75) },
+    RainbowDelimiterRed = { fg = blend(spec.syntax.bracket, pal.red.dim, 0.75) },
+    RainbowDelimiterYellow = { fg = blend(spec.syntax.bracket, pal.yellow.dim, 0.75) },
+    RainbowDelimiterBlue = { fg = blend(spec.syntax.bracket, pal.blue.dim, 0.75) },
+    RainbowDelimiterOrange = { fg = blend(spec.syntax.bracket, pal.orange.dim, 0.75) },
+    RainbowDelimiterGreen = { fg = blend(spec.syntax.bracket, pal.green.dim, 0.75) },
+    RainbowDelimiterViolet = { fg = blend(spec.syntax.bracket, pal.magenta.dim, 0.75) },
+    RainbowDelimiterCyan = { fg = blend(spec.syntax.bracket, pal.cyan.dim, 0.75) },
   }
 
   Cange.set_highlights(highlights)

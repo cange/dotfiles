@@ -296,6 +296,7 @@ return {
     opts = {
       render = "virtual",
       enable_tailwind = true,
+      exclude_filetypes = { "lazy" },
     },
     keys = {
       { "<leader>ct", "<cmd>HighlightColors Toggle<CR>", desc = "Toggle Highlight Colors" },
