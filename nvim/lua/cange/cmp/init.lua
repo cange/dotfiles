@@ -76,7 +76,7 @@ M.opts = {
     ["<C-h>"] = mapping.select_prev_snippet_choice,
     ["<C-l>"] = mapping.select_next_snippet_choice,
     ["<C-a>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-s>"] = cmp.mapping.scroll_docs(4),
+    ["<C-x>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = mapping.apply_item_and_select_next,
     -- Accept currently selected item. Set `select` to `false` to only confirm
@@ -103,7 +103,7 @@ M.opts = {
   }, {
     { name = "luasnip" },
     { name = "nvim_lsp", max_item_count = 10 },
-    -- { name = "nvim_lsp_signature_help" },
+    { name = "nvim_lsp_signature_help" },
     { name = "buffer" },
     { name = "copilot" },
     { name = "cmp_tabnine" },
