@@ -2,14 +2,14 @@ local i = Cange.get_icon
 
 return {
   -- advanced colorcolumn
-  { "lukas-reineke/virt-column.nvim", opts = { char = i("ui.VThinLine") } },
+  { "lukas-reineke/virt-column.nvim", opts = { char = i("ui.LineThin") } },
 
   { -- indentation scope lines
     "echasnovski/mini.indentscope",
     version = "*",
     config = function()
       require("mini.indentscope").setup({
-        symbol = i("ui.VThinLineLeft"),
+        symbol = i("ui.LineLeftThin"),
         draw = {
           delay = 0,
           animation = require("mini.indentscope").gen_animation.none(),

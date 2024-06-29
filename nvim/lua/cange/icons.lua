@@ -42,11 +42,12 @@ M.ui = {
   -- shapes
   TriangleLeft        = "", -- nf-ple-lower_left_triangle
   TriangleRight       = "", -- :nf-ple-upper_right_trangleRight 
-  VLineLeft           = "▎", -- U+258E
-  VThinLineLeft       = "▏", -- U+258F
+  LineLeft            = "▎", -- U+258E 
+  LineLeftThin        = "▏", -- U+258F
+  LineLower           = "▁", -- U+2594 
+  LineThin            = "│", -- U+2502
+  LineUpper           = "▔", -- U+2581 
   Pipe                = "|", -- U+007C
-  VDashedLine         = "┆", -- U+2506
-  VThinLine           = "│", -- U+2502
 }
 M.plugin = {
   Copilot             = "", -- nf-oct-copilot

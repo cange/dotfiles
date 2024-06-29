@@ -8,9 +8,10 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       signs = {
-        add = { text = i("ui.VLineLeft") },
-        change = { text = i("ui.VLineLeft") },
-        changedelete = { text = i("ui.VLineLeft") },
+        add = { text = i("ui.LineLeft") },
+        change = { text = i("ui.LineLeft") },
+        delete = { text = i("ui.LineLower") },
+        topdelete = { text = i("ui.LineUpper") },
       },
       preview_config = { border = Cange.get_config("ui.border") },
       current_line_blame = true,
