@@ -71,11 +71,11 @@ blocks:
         template: ""
     newline: true
 
-transient_prompt:
-  foreground_templates:
-    - "{{if gt .Code 0}}yellow{{end}}"
-    - "{{if eq .Code 0}}green{{end}}"
-  template: " "
+# transient_prompt:
+#   foreground_templates:
+#     - "{{if gt .Code 0}}yellow{{end}}"
+#     - "{{if eq .Code 0}}green{{end}}"
+#   template: " "
 
 secondary_prompt:
   foreground: green
