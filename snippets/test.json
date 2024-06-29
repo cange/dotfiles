@@ -5,11 +5,15 @@
   },
   "describe(when…)": {
     "prefix": "when",
-    "body": "describe('when ${1:condition}', () => {\n\t$2\n})$0"
+    "body": "describe('when $1', () => {\n\t$0\n})"
   },
   "describe(with…)": {
     "prefix": "with",
-    "body": "describe('with ${1:condition}', () => {\n\t$2\n})$3"
+    "body": "describe('with $1', () => {\n\t$0\n})"
+  },
+  "describe.each(…)": {
+    "prefix": "each",
+    "body": "describe.each(${1|assertions,|})('$2', ($3) => {\n\t$0\n})"
   },
   "it": {
     "prefix": "it(…",
@@ -21,11 +25,11 @@
   },
   "beforeEach": {
     "prefix": "beforeEach(…",
-    "body": "beforeEach(() => {\n\t$0\n})"
+    "body": "beforeEach(${1|async ,|}() => {\n\t$0\n})"
   },
   "expect(": {
     "prefix": "expect(",
-    "body": "expect(${1|wrapper,subject|}.$1).to$0"
+    "body": "expect(${1|wrapper.,subject.,store.,|}$2).to$0"
   },
   "only": {
     "prefix": ".only",
@@ -45,7 +49,7 @@
   },
   "expect.objectContaining": {
     "prefix": "objectContaining",
-    "body": "expect.objectContaining({$1})$0"
+    "body": "expect.objectContaining({${1|{},|}})$0"
   },
   "expect.stringContaining": {
     "prefix": "stringContaining",
@@ -65,6 +69,6 @@
   },
   "specHelper": {
     "prefix": "specHelper",
-    "body": "const specHelper = {\n\t$1: ($2) => {\n\t\t$3\n\t}$4\n}"
+    "body": "const specHelper = {\n\t$0\n}"
   }
 }

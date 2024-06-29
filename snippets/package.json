@@ -28,7 +28,7 @@
           "javascript",
           "typescript"
         ],
-        "path": "./jest.json"
+        "path": "./test.json"
       },
       {
         "language": [
