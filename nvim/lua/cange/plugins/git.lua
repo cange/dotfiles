@@ -11,6 +11,7 @@ return {
         add = { text = i("ui.LineLeft") },
         change = { text = i("ui.LineLeft") },
         delete = { text = i("ui.LineLower") },
+        changedelete = { text = i("git.Diff") },
         topdelete = { text = i("ui.LineUpper") },
       },
       preview_config = { border = Cange.get_config("ui.border") },
