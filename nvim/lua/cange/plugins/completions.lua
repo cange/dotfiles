@@ -8,7 +8,6 @@ return {
       "hrsh7th/cmp-buffer", -- source for buffer words
       "hrsh7th/cmp-cmdline", -- cmdline completions
       "hrsh7th/cmp-nvim-lsp", -- source for neovim’s built-in LSP
-      "hrsh7th/cmp-nvim-lsp-signature-help", -- source displaying function signatures with the current parameter
       "hrsh7th/cmp-nvim-lua", -- Neovim's Lua API
       "hrsh7th/cmp-path", -- path completions
       "chrisgrieser/cmp-nerdfont",
