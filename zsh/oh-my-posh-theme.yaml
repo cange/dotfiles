@@ -10,14 +10,12 @@ blocks:
     segments:
       - type: path
         style: plain
-        foreground: blue
-        template: "{{.Path}} "
+        template: "<blue>{{.Path}} </>"
         properties:
           style: letter
       - type: git
         style: plain
-        foreground: green
-        template: "<default>on</> {{if .Rebase}}<default>Rebasing </>{{.HEAD}}{{else}}{{.HEAD}}{{if .BranchStatus}} <yellow>{{.BranchStatus}}</>{{ end}}{{if .Staging.Changed}}<blue> 󱗜 {{.Staging.String}}</>{{end}}{{if .Working.Changed}}<lightMagenta>  {{.Working.String}}</>{{end}}{{end}}"
+        template: "<default>on</> {{if .Rebase}}<default>Rebasing </><green>{{.HEAD}}</>{{else}}<green>{{.HEAD}}</>{{if .BranchStatus}} <yellow>{{.BranchStatus}}</>{{ end}}{{if .Staging.Changed}}<blue> 󱗜 {{.Staging.String}}</>{{end}}{{if .Working.Changed}}<lightMagenta>  {{.Working.String}}</>{{end}}{{end}}"
         properties:
           branch_ahead_icon: "↑"
           branch_behind_icon: "↓"
@@ -34,8 +32,7 @@ blocks:
     segments:
       - type: executiontime
         style: plain
-        foreground: yellow
-        template: "  <default>took</> {{.FormattedMs}}</>"
+        template: "<yellow>  </><default>took</><yellow> {{.FormattedMs}}</>"
         properties:
           threshold: 5000
           style: round
