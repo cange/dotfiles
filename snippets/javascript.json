@@ -16,9 +16,13 @@
     "description": "exclude the next node",
     "body": "// prettier-ignore"
   },
+  "eslint-disable-next-line": {
+    "prefix": "eslint-disable-next-line …",
+    "body": "// eslint-disable-next-line $0"
+  },
   "eslint-disable-line": {
     "prefix": "eslint-disable-line …",
-    "body": "// eslint-disable-line $1"
+    "body": "// eslint-disable-line $0"
   },
   "deep clone object": {
     "prefix": "JSON.parse(JSON…",
@@ -45,7 +49,8 @@
     "body": "filter($1 => $2)"
   },
   "times": {
-    "prefix": "new Array(…",
+    "description": "Create an array with n elements",
+    "prefix": "times Array(…",
     "body": "new Array($1).fill().$0"
   },
   "console.log(": {
