@@ -76,6 +76,7 @@ alias dcl="_docker_compose logs --follow --tail=10" # Show container logs
 alias dcrb="dcup --build --force-recreate"          # Rebuild
 alias dcrbl="dcrb && dcl"                           # Rebuild with followup log
 alias dcrs="_docker_compose restart && dcl"         # Restart container and show logs
+alias dchrs="dco down && dcup && dcl app"           # Hard restart with logs
 alias dcup="_docker_compose up --detach"            # Start container and its dependencies
 alias dcy="_docker_compose exec yarn"               # Execute yarn command
 # docker compose ---

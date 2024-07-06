@@ -28,7 +28,7 @@ fi
 # https://manpages.debian.org/bullseye-backports/man-db/man.1.en.html#ENVIRONMENT
 export EDITOR="nvim"
 export TERMINAL="iterm2"
-export BROWSER="firefox"
+export BROWSER="firefox-developer-edition"
 
 # --- pnpm
 if [[ -s "$HOME/Library/pnpm" ]]; then
