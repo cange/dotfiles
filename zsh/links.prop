@@ -1,3 +1,4 @@
 $DOTFILES/zsh=$HOME/.config/zsh
 $DOTFILES/zsh/zshrc.zsh=$HOME/.zshrc
 $DOTFILES/zsh/zprofile.zsh=$HOME/.zprofile
+$DOTFILES/zsh/starship.toml=$HOME/.config/starship.toml
