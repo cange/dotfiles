@@ -32,7 +32,7 @@ style = "blue"
 read_only = " "
 
 [cmd_duration]
-format = ' [](dimmed yellow) [took](white) [$duration](dimmed yellow)'
+format = ' [](dimmed yellow) $duration'
 
 # GIT --------------------------------------------------------------------------
 [git_branch]
@@ -100,26 +100,26 @@ format = ' [$symbol()]($style)$version'
 [nodejs]
 symbol = " "
 style = "green"
-format = ' [$symbol](dimmed $style)[$version](white)'
+format = ' [$symbol](dimmed $style)$version'
 
 [package]
 symbol = "󰏗 "
 style = "green"
-format = ' [$symbol](dimmed $style)[$version](white)'
+format = ' [$symbol](dimmed $style)$version'
 
 [php]
 symbol = " "
-format = ' [$symbol](dimmed $style)[$version](white)'
+format = ' [$symbol](dimmed $style)$version'
 
 [python]
 symbol = " "
 style = "yellow"
-format = ' [$symbol](dimmed $style)[$version](white)'
+format = ' [$symbol](dimmed $style)$version'
 
 [ruby]
 symbol = " "
-format = ' [$symbol](dimmed $style)[$version](white)'
+format = ' [$symbol](dimmed $style)$version'
 
 [rust]
 symbol = " "
-format = ' [$symbol](dimmed $style)[$version](white)'
+format = ' [$symbol](dimmed $style)$version'
