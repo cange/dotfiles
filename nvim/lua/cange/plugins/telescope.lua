@@ -14,6 +14,7 @@ return {
   },
   config = function()
     local actions = require("telescope.actions")
+    local action_layout = require("telescope.actions.layout")
     local telescope = require("telescope")
     -- config
     local default_opts = {
@@ -50,11 +51,15 @@ return {
         },
         mappings = {
           i = {
-            ["<C-a>"] = actions.cycle_history_next,
-            ["<C-x>"] = actions.cycle_history_prev,
-            ["<C-j>"] = actions.cycle_history_next,
+            ["<C-a>"] = actions.cycle_history_prev,
             ["<C-k>"] = actions.cycle_history_prev,
+            ["<C-j>"] = actions.cycle_history_next,
+            ["<C-x>"] = actions.cycle_history_next,
             ["<C-c>"] = actions.close,
+            ["<M-p>"] = action_layout.toggle_preview,
+          },
+          n = {
+            ["<M-p>"] = action_layout.toggle_preview,
           },
         },
         prompt_prefix = Cange.get_icon("ui.Search", { left = 1, right = 2 }),
@@ -108,11 +113,12 @@ return {
   end,
   -- stylua: ignore start
   keys = {
-    { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<CR>",          desc = "Search within buffer" },
+    { "<localleader>/", "<cmd>lua R('cange.telescope').live_grep()<CR>",    desc = "Search in Files" },
+    { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<CR>",         desc = "Search within buffer" },
+    { "<leader>f",  "<cmd>Telescope find_files<CR>",                        desc = "Search Files" },
+    { "<leader>p",  "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },
     { "<leader>en", "<cmd>Telescope notify<CR>",                            desc = "Show notifications", },
     { "<leader>ec", "<cmd>Telescope colorscheme<CR>",                       desc = "Change colorscheme" },
-    { "<leader>ep", "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },
-    { "<leader>f", "<cmd>Telescope find_files<CR>",                         desc = "Search Files" },
     { "<leader>gB", "<cmd>Telescope git_branches<CR>",                      desc = "Checkout branch" },
     { "<leader>gC", "<cmd>Telescope git_commits<CR>",                       desc = "Checkout commit" },
     { "<leader>go", "<cmd>Telescope git_status<CR>",                        desc = "Open changed file" },
@@ -129,7 +135,6 @@ return {
     { "<leader>sR", "<cmd>Telescope registers<CR>",                         desc = "Register values" },
     { "<leader>st", "<cmd>TodoTelescope<CR>",                               desc = "Todo comments" },
     { "<leader>sw", "<cmd>Telescope grep_string<CR>",                       desc = "Current word" },
-    { "<localleader>/", "<cmd>lua R('cange.telescope').live_grep()<CR>",    desc = "Search in Files" },
     { "cD", "<cmd>Telescope diagnostics<CR>",                               desc = "Workspace diagnostics" },
     { "cl", '<cmd>lua R("cange.telescope").diagnostics_log()<CR>',          desc = "File diagnostics" },
   },

@@ -128,9 +128,9 @@ return {
       pre_save = function() require("nvim-tree.api").tree.close() end,
     },
     keys = {
-      { "<leader>er", function() require("persistence").load({ last = true }) end, desc = "Recent Session" },
-      { "<leader>es", function() require("persistence").save() end, desc = "Save session" },
-      { "<leader>ed", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+      { "<leader>qr", function() require("persistence").load({ last = true }) end, desc = "Recent Session" },
+      { "<leader>qs", function() require("persistence").save() end, desc = "Save session" },
+      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
     },
     init = function() require("persistence").load() end,
   },
