@@ -1,4 +1,4 @@
-local i = Cange.get_icon
+local icons = require("cange.icons")
 
 return {
   { -- managing & installing LSP servers, linters & formatters
@@ -11,9 +11,9 @@ return {
       ui = {
         border = Cange.get_config("ui.border"),
         icons = {
-          package_installed = i("ui.Check"),
-          package_pending = i("ui.Sync"),
-          package_uninstalled = i("ui.Close"),
+          package_installed = icons.ui.Check,
+          package_pending = icons.ui.Sync,
+          package_uninstalled = icons.ui.Close,
         },
       },
       log_level = vim.log.levels.INFO,
@@ -195,7 +195,7 @@ return {
   { -- Extensible UI notifications and LSP progress messages.
     "j-hui/fidget.nvim",
     opts = {
-      progress = { display = { done_icon = i("ui.Check") } },
+      progress = { display = { done_icon = icons.ui.Check } },
       notification = { window = { winblend = 0 } },
     },
   },

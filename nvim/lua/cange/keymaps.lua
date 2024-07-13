@@ -43,14 +43,12 @@ local keymaps = {
   -- others
   { "<leader>eS", toggle_spelling, { desc = "Toggle spelling" } },
   { "<leader>ci", toggle_inlay_hints, { desc = "Toggle inlay hints" } },
-  { "<leader>-", "<C-W>s", { desc = "Split window below" } },
   { "<leader>n", toggle_relative_number, { desc = "Toggle relative number" } },
   { "<leader>w", "<cmd>w!<CR>", { desc = "Save file" } },
-  { "<leader>|", "<C-W>v", { desc = "Split window right" } },
   { "<localleader>a", "gg<S-v>G", { desc = "Select all content" } },
   { "<localleader>r", replace_under_cursor, { desc = "Replace under cursor" } },
-  { "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" } },
-  { "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" } },
+  { "<localleader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" } },
+  { "<localleader><localleader>x", "<cmd>source %<CR>", { desc = "Execute the current file" } },
   { "<localleader>S", ":sort<CR>gv=gv", { desc = "Sort selected lines" }, { "v" } },
 }
 

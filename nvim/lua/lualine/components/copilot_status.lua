@@ -7,15 +7,16 @@ if not ok then
   error('[lualine.components.copilot_status] "copilot.api" not found')
   return
 end
-local i = Cange.get_icon
+local icos = require("cange.icons")
+
 local M = require("lualine.component"):extend()
 local refresh_count = 1
 
 -- NOTE: function wrappers enables spinner animation
 local icons = {
-  [""] = function() return i("plugin.CopilotError") end,
-  ["Normal"] = function() return i("plugin.Copilot") end,
-  ["Warning"] = function() return i("plugin.CopilotWarning") end,
+  [""] = function() return icos.plugin.CopilotError end,
+  ["Normal"] = function() return icos.plugin.Copilot end,
+  ["Warning"] = function() return icos.plugin.CopilotWarning end,
   ["InProgress"] = function() return require("cange.utils.spinner").icon(refresh_count) end,
 }
 local colors = {

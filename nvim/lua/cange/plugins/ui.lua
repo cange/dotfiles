@@ -1,15 +1,15 @@
-local i = Cange.get_icon
+local icons = require("cange.icons")
 
 return {
   -- advanced colorcolumn
-  { "lukas-reineke/virt-column.nvim", opts = { char = i("ui.LineThin") } },
+  { "lukas-reineke/virt-column.nvim", opts = { char = icons.ui.LineThin } },
 
   { -- indentation scope lines
     "echasnovski/mini.indentscope",
     version = "*",
     config = function()
       require("mini.indentscope").setup({
-        symbol = i("ui.LineLeftThin"),
+        symbol = icons.ui.LineLeftThin,
         draw = {
           delay = 0,
           animation = require("mini.indentscope").gen_animation.none(),
@@ -26,11 +26,11 @@ return {
       require("notify").setup({
         level = Cange.get_config("log.level"),
         icons = {
-          ERROR = i("diagnostics.Error"),
-          WARN = i("diagnostics.Warn"),
-          INFO = i("diagnostics.Info"),
-          DEBUG = i("ui.Bug"),
-          TRACE = i("ui.Edit"),
+          ERROR = icons.diagnostics.Error,
+          WARN = icons.diagnostics.Warn,
+          INFO = icons.diagnostics.Info,
+          DEBUG = icons.ui.Bug,
+          TRACE = icons.ui.Edit,
         },
         background_colour = "#000000",
         render = "compact",
@@ -80,12 +80,12 @@ return {
       use_diagnostic_signs = true,
       icons = {
         indent = {
-          fold_open = i("ui.ChevronDown"),
-          fold_closed = i("ui.ChevronRight"),
+          fold_open = icons.ui.ChevronDown,
+          fold_closed = icons.ui.ChevronRight,
         },
-        folder_closed = i("documents.Folder"),
-        folder_open = i("documents.OpenFolder"),
-        kinds = i("cmp_kinds"),
+        folder_closed = icons.documents.Folder,
+        folder_open = icons.documents.OpenFolder,
+        kinds = icons.cmp_kinds,
       },
     },
     config = function(_, opts)
@@ -99,13 +99,13 @@ return {
     end,
     keys = {
       {
-        "<leader>xl",
+        "<leader>tl",
         "<cmd>Trouble lsp toggle focus=false win.position=right<CR>",
         desc = "LSP Definitions / references / ...",
       },
-      { "<leader>xs", "<cmd>Trouble symbols toggle focus=false<CR>", desc = "Symbols" },
-      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer Diagnostics" },
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", desc = "Diagnostics" },
+      { "<leader>ts", "<cmd>Trouble symbols toggle focus=false<CR>", desc = "Symbols" },
+      { "<leader>tX", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer Diagnostics" },
+      { "<leader>tx", "<cmd>Trouble diagnostics toggle<CR>", desc = "Diagnostics" },
     },
   },
 }

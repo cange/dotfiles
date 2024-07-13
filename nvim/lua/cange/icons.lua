@@ -39,6 +39,8 @@ M.ui = {
   Search              = "", -- nf-cod-search
   Stethoscope         = "󰓙", -- nf-md-stethoscope
   Sync                = "", -- nf-cod-sync
+  SplitHorizontal     = "", -- nf-cod-split_vertical
+  SplitVertical       = "", -- nf-cod-split_horizontal
   Tab                 = "", -- nf-oct-tab
   -- shapes
   TriangleLeft        = "", -- nf-ple-lower_left_triangle

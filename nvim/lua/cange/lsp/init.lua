@@ -17,26 +17,25 @@ local M = {}
 
 M.show_diagnostic_virtual_text = Cange.get_config("lsp.diagnostic_virtual_text") or false
 local telescope_builtin = function(method) require("telescope.builtin")[method]({ reuse_win = true }) end
-local function l(name) return string.format("%s %s", Cange.get_icon("ui.Code"), name) end
 -- stylua: ignore start
 M.keymaps = {
-  { "<leader>ca", vim.lsp.buf.code_action,                          desc = l("Code Actions") },
-  { "<leader>cd", require("cange.lsp.toggle").virtual_text,         desc = l("Toggle Inline Virtual Text" ) },
-  { "<leader>cr", "<cmd>LspRestart;<CR>",                           desc = l("LSP Restart" ) },
-  { "<leader>e4", "<cmd>LspInfo<CR>",                               desc = l("LSP info" ) },
-  { "<leader>el", require("cange.lsp.toggle").format_on_save,       desc = l("Toggle Format on Save" ) },
-  { "<leader>r", vim.lsp.buf.rename,                                desc = l("Rename Symbol") },
-  { "[d", vim.diagnostic.goto_prev,                                 desc = l("Prev Diagnostic") },
-  { "]d", vim.diagnostic.goto_next,                                 desc = l("Next Diagnostic") },
-  { "gD", "<cmd>Telescope lsp_type_definitions<CR>",                desc = l("Find Type Definition") },
-  { "gD", vim.lsp.buf.declaration,                                  desc = l("Go to Symbol Declaration") },
-  { "gI", function() telescope_builtin('lsp_implementations') end,  desc = l("Find Implementation") },
-  { "gd", vim.lsp.buf.definition,                                   desc = l("Go to Definition") },
-  { "gi", vim.lsp.buf.implementation,                               desc = l("Go to Implementation") },
-  { "gr", "<cmd>Telescope lsp_references<CR>",                      desc = l("Find All References") },
-  { "gs", "<cmd>Telescope lsp_document_symbols<CR>",                desc = l("Find Symbol in current buffer") },
-  { "gy", function() telescope_builtin('lsp_type_definitions') end, desc = l("Find Type Definition") },
-  { "<C-k>", vim.lsp.buf.signature_help,                            desc = l("LSP Signature Documentation") },
+  { "<leader>ca", vim.lsp.buf.code_action,                          desc = "Code Actions" },
+  { "<leader>cd", require("cange.lsp.toggle").virtual_text,         desc = "Toggle Inline Virtual Text"  },
+  { "<leader>cr", "<cmd>LspRestart;<CR>",                           desc = "LSP Restart"  },
+  { "<leader>e4", "<cmd>LspInfo<CR>",                               desc = "LSP info"  },
+  { "<leader>el", require("cange.lsp.toggle").format_on_save,       desc = "Toggle Format on Save"  },
+  { "<leader>r", vim.lsp.buf.rename,                                desc = "Rename Symbol" },
+  { "[d", vim.diagnostic.goto_prev,                                 desc = "Prev Diagnostic" },
+  { "]d", vim.diagnostic.goto_next,                                 desc = "Next Diagnostic" },
+  { "gD", "<cmd>Telescope lsp_type_definitions<CR>",                desc = "Find Type Definition" },
+  { "gD", vim.lsp.buf.declaration,                                  desc = "Go to Symbol Declaration" },
+  { "gI", function() telescope_builtin('lsp_implementations') end,  desc = "Find Implementation" },
+  { "gd", vim.lsp.buf.definition,                                   desc = "Go to Definition" },
+  { "gi", vim.lsp.buf.implementation,                               desc = "Go to Implementation" },
+  { "gr", "<cmd>Telescope lsp_references<CR>",                      desc = "Find All References" },
+  { "gs", "<cmd>Telescope lsp_document_symbols<CR>",                desc = "Find Symbol in current buffer" },
+  { "gy", function() telescope_builtin('lsp_type_definitions') end, desc = "Find Type Definition" },
+  { "<C-k>", vim.lsp.buf.signature_help,                            desc = "LSP Signature Documentation" },
 }
 -- stylua: ignore end
 
@@ -56,7 +55,7 @@ M.server_config = {
 local function define_sign_icons()
   local signs = {}
   ---@diagnostic disable-next-line: param-type-mismatch
-  for type, icon in pairs(Cange.get_icon("diagnostics")) do
+  for type, icon in pairs(require("cange.icons").diagnostics) do
     local hl = "DiagnosticSign" .. type
     table.insert(signs, { name = hl, text = icon })
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

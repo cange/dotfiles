@@ -70,7 +70,6 @@ return {
       suggestion = { enabled = false, auto_refresh = true },
     },
     keys = function()
-      local icon = Cange.get_icon("plugin.Copilot", { right = 1 })
       -- stylua: ignore start
       return {
         { "<localleader>cA", "<cmd>Copilot panel accept<CR>",  desc = "Accept Copilot panel" },
@@ -79,10 +78,10 @@ return {
         { "<localleader>co", "<cmd>Copilot toggle<CR>",        desc = "Toggle Copilot" },
         { "<localleader>cp", "<cmd>Copilot panel<CR>",         desc = "Toggle Copilot panel" },
         { "<localleader>cs", "<cmd>Copilot suggestion<CR>",    desc = "Toggle Copilot suggestion" },
-        { "[c", '<cmd>Copilot suggestion prev<CR>',            desc = icon .. "Prev Copilot suggestion" },
-        { "[p", '<cmd>Copilot panel jump_prev<CR>',            desc = icon .. "Prev Copilot panel" },
-        { "]c", '<cmd>Copilot suggestion next<CR>',            desc = icon .. "Next Copilot suggestion" },
-        { "]p", '<cmd>Copilot panel jump_next<CR>',            desc = icon .. "Next Copilot panel" },
+        { "[c", '<cmd>Copilot suggestion prev<CR>',            desc = "Prev Copilot suggestion" },
+        { "[p", '<cmd>Copilot panel jump_prev<CR>',            desc = "Prev Copilot panel" },
+        { "]c", '<cmd>Copilot suggestion next<CR>',            desc = "Next Copilot suggestion" },
+        { "]p", '<cmd>Copilot panel jump_next<CR>',            desc = "Next Copilot panel" },
       }
       -- stylua: ignore end
     end,

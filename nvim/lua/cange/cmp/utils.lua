@@ -1,4 +1,4 @@
-local i = Cange.get_icon
+local icons = require("cange.icons")
 
 ---Provides prediction strength as an icon
 ---@param percentage string Number of strength
@@ -6,9 +6,7 @@ local i = Cange.get_icon
 local function get_prediction_strength_kind_icon(percentage)
   if percentage and percentage ~= "" then
     local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
-    local icons = i("sets.batteries")
-    ---@diagnostic disable-next-line: param-type-mismatch
-    return vim.split(icons, " ")[fraction_num]
+    return vim.split(icons.sets.batteries, " ")[fraction_num]
   end
 
   return nil
@@ -35,13 +33,13 @@ local M = {}
 function M.format(entry, vim_item)
   local maxwidth = 80
   local src_icons = {
-    buffer = i("ui.Database"),
-    cmp_tabnine = i("plugin.Tabnine"),
-    copilot = i("plugin.Copilot"),
-    luasnip = i("ui.Library"),
-    nvim_lsp = i("ui.Globe"),
-    nvim_lua = i("extensions.Lua"),
-    path = i("ui.Path"),
+    buffer = icons.ui.Database,
+    cmp_tabnine = icons.plugin.Tabnine,
+    copilot = icons.plugin.Copilot,
+    luasnip = icons.ui.Library,
+    nvim_lsp = icons.ui.Globe,
+    nvim_lua = icons.extensions.Lua,
+    path = icons.ui.Path,
   }
   local src_name = entry.source.name
   local cmp_item = entry.completion_item or {}
@@ -71,11 +69,11 @@ function M.format(entry, vim_item)
   end
 
   ---@diagnostic disable-next-line: param-type-mismatch
-  local kinds = i("cmp_kinds") or {}
+  local kinds = icons.cmp_kinds or {}
   local strength_icon = get_prediction_strength_kind_icon(strength)
   local kind_icon = strength_icon
     or kinds[vim_item.kind]
-    or i("cmp_kinds." .. (is_multiline and "MultiLine" or "SingleLine"))
+    or icons.cmp_kinds[is_multiline and "MultiLine" or "SingleLine"]
 
   vim_item.kind = kind_icon .. " "
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)

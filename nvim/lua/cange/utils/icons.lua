@@ -1,46 +1,16 @@
 local M = {}
-local strUtil = require("cange.utils.string")
 local ns = "[cange.utils.icons]"
-
----Retrieves an icon from the specified path.
----@param path string Dot separated path to the desired icon.
----@param opts? {left?:number, right?:number}
----@return table|string|nil # The icon value if found, nil if the path is invalid.
-function M.get_icon(path, opts)
-  local ok, icons = pcall(require, "cange.icons")
-  if not ok then
-    error(ns .. ' "cange.icons" not found!')
-    return ""
-  end
-  local parts = {}
-  for part in string.gmatch(path, "([^%.]+)") do
-    table.insert(parts, part)
-  end
-
-  ---@type table|string
-  local current = icons
-  for _, part in ipairs(parts) do
-    if type(current) == "table" then current = current[part] end
-  end
-
-  if not current then
-    Log:warn('Icon "' .. path .. '" not found!', { title = ns })
-    return nil -- Invalid path
-  end
-
-  if type(current) == "string" then
-    opts = opts or { right = 0, left = 0 }
-    return strUtil.pad(vim.trim(current), opts)
-  end
-
-  return current
+local ok, icons = pcall(require, "cange.icons")
+if not ok then
+  error(ns .. ' "cange.icons" not found!')
+  return ""
 end
 
 local user_icons = {}
 ---@param origin_filetype string
 ---@param filename string
 ---@param extensions? string[]
----@param preset? DevIconsPreset
+---@param preset? cange.DevIconsPreset
 local function set_icon_by_filetype(origin_filetype, filename, extensions, preset)
   local devicons = require("nvim-web-devicons")
   local icon, color = devicons.get_icon_color(origin_filetype)
@@ -58,10 +28,7 @@ local function set_icon_by_filetype(origin_filetype, filename, extensions, prese
     -- print(string.format("[%s] %s", fname, vim.inspect(user_icons[fname])):gsub("\n", " "))
   end
 end
-
-local i = M.get_icon
-
----@type DevIconsPreset[]
+---@type cange.DevIconsPreset[]
 local presets = {
   storybook = {
     color = "#ff4785",
@@ -74,13 +41,13 @@ local presets = {
     name = "Vue",
   },
   nuxt = {
-    icon = i("extensions.Nuxt"),
+    icon = icons.extensions.Nuxt,
     color = "#00dc82",
     cterm_color = "35",
     name = "Nuxt",
   },
   babel = {
-    icon = i("extensions.Babelrc"),
+    icon = icons.extensions.Babelrc,
     name = "Babelrc",
   },
   cypress = {
@@ -91,13 +58,13 @@ local presets = {
   eslint = { name = "Eslintrc" },
   prettier = { name = "PrettierConfig" },
   stylelint = {
-    icon = i("extensions.Stylelint"),
+    icon = icons.extensions.Stylelint,
     color = "#d0d0d0",
     cterm_color = "252",
     name = "StylelintConfig",
   },
   yarn = {
-    icon = i("extensions.Yarn"),
+    icon = icons.extensions.Yarn,
     color = "#2c8ebb",
     cterm_color = "33",
     name = "YarnPkg",
@@ -177,11 +144,5 @@ end
 
 return M
 --#region Types
-
----@class DevIconsPreset
----@field icon? string Path of an icon shape
----@field color? string Hex color value
----@field cterm_color? string
----@field name string
 
 --#endregion

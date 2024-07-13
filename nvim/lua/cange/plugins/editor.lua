@@ -1,4 +1,4 @@
-local i = Cange.get_icon
+local icons = require("cange.icons")
 
 return {
   { -- file explorer to execute bulk file/directory operations (renaming)
@@ -25,7 +25,7 @@ return {
     config = function()
       require("nvim-tree").setup({
         live_filter = {
-          prefix = i("ui.Search", { right = 2 }),
+          prefix = icons.ui.Search .. "  ",
         },
         -- project plugin related
         sync_root_with_cwd = true,
@@ -40,32 +40,32 @@ return {
           icons = {
             git_placement = "after",
             show = { folder = false },
-            symlink_arrow = i("documents.SymlinkFile", { left = 1, right = 1 }),
+            symlink_arrow = " " .. icons.documents.SymlinkFile .. " ",
             glyphs = {
-              default = i("documents.File"),
-              bookmark = i("ui.Bookmark"),
-              symlink = i("documents.SymlinkFile"),
+              default = icons.documents.File,
+              bookmark = icons.ui.Bookmark,
+              symlink = icons.documents.SymlinkFile,
               folder = {
-                arrow_closed = i("ui.ChevronRight"),
-                arrow_open = i("ui.ChevronDown"),
-                default = i("documents.Folder"),
-                empty = i("documents.EmptyFolder"),
-                empty_open = i("documents.EmptyOpenFolder"),
-                open = i("documents.OpenFolder"),
-                symlink = i("documents.SymlinkFolder"),
-                symlink_open = i("documents.SymlinkFolder"),
+                arrow_closed = icons.ui.ChevronRight,
+                arrow_open = icons.ui.ChevronDown,
+                default = icons.documents.Folder,
+                empty = icons.documents.EmptyFolder,
+                empty_open = icons.documents.EmptyOpenFolder,
+                open = icons.documents.OpenFolder,
+                symlink = icons.documents.SymlinkFolder,
+                symlink_open = icons.documents.SymlinkFolder,
               },
-              git = i("git_states"),
+              git = icons.git_states,
             },
           },
         },
         diagnostics = {
           enable = true,
           icons = {
-            error = i("diagnostics.Error"),
-            warning = i("diagnostics.Warn"),
-            hint = i("diagnostics.Hint"),
-            info = i("diagnostics.Info"),
+            error = icons.diagnostics.Error,
+            warning = icons.diagnostics.Warn,
+            hint = icons.diagnostics.Hint,
+            info = icons.diagnostics.Info,
           },
         },
       })
@@ -102,18 +102,17 @@ return {
     end,
     keys = function()
       local harpoon = require("harpoon")
-      local function l(name) return string.format(name, i("plugin.Harpoon")) end
       -- stylua: ignore start
       return {
-        { "<leader>a", function() harpoon:list():add() end,                         desc = l("Add %s mark") },
-        { "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = l("Show %s marks") },
-        { "<leader>sm", "<cmd>Telescope harpoon marks<CR>",                         desc = l("Search marks") },
-        { "<leader>1", function() harpoon:list():select(1) end,                     desc = l("%s to 1st mark") },
-        { "<leader>2", function() harpoon:list():select(2) end,                     desc = l("%s to 2nd mark") },
-        { "<leader>3", function() harpoon:list():select(3) end,                     desc = l("%s to 3rd mark") },
-        { "<leader>4", function() harpoon:list():select(4) end,                     desc = l("%s to 4th mark") },
-        { "[m", function() harpoon:list():prev() end,                               desc = l("Prev %s mark") },
-        { "]m", function() harpoon:list():next() end,                               desc = l("Next %s mark") },
+        { "<leader>ma", function() harpoon:list():add() end,                         desc = "Add %s mark" },
+        { "<leader>mm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show %s marks" },
+        { "<leader>ms", "<cmd>Telescope harpoon marks<CR>",                          desc = "Search marks" },
+        { "<leader>m1", function() harpoon:list():select(1) end,                     desc = "1st mark" },
+        { "<leader>m2", function() harpoon:list():select(2) end,                     desc = "2nd mark" },
+        { "<leader>m3", function() harpoon:list():select(3) end,                     desc = "3rd mark" },
+        { "<leader>m4", function() harpoon:list():select(4) end,                     desc = "4th mark" },
+        { "[m", function() harpoon:list():prev() end,                                desc = "Prev %s mark" },
+        { "]m", function() harpoon:list():next() end,                                desc = "Next %s mark" },
       }
       -- stylua: ignore end
     end,
@@ -139,41 +138,36 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
-      plugins = {
-        spelling = {
-          enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-        },
-      },
       icons = {
         breadcrumb = "",
-        group = i("ui.ChevronRight", { right = 1 }),
+        group = icons.ui.ChevronRight .. " ",
         separator = "",
+        colors = false,
       },
-      window = {
-        border = Cange.get_config("ui.border"),
-        margin = { 4, 8, 4, 8 }, -- extra window margin [top, right, bottom, left]
-        padding = { 0, 0, 1, 0 }, -- extra window padding [top, right, bottom, left]
-        winblend = vim.opt.winblend:get(),
+      win = {
+        padding = { 2, 2 },
       },
-      layout = {
-        width = { min = 32, max = 56 }, -- min and max width of the columns
-        spacing = 4, -- spacing between columns
-      },
-      show_keys = true, -- show the currently pressed key and its label as a message in the command line
     },
     config = function(_, opts)
       local wk = require("which-key")
 
       wk.setup(opts)
-      wk.register({ ["<leader>b"] = { name = i("documents.File", { right = 1 }) .. "Buffers" } })
-      wk.register({ ["<leader>c"] = { name = i("ui.Code", { right = 1 }) .. "Code" } })
-      wk.register({ ["<leader>e"] = { name = i("ui.Neovim", { right = 1 }) .. "Editor" } })
-      wk.register({ ["<leader>g"] = { name = i("git.Branch", { right = 1 }) .. "Git" } })
-      wk.register({ ["<leader>gc"] = { name = "Conflicts" } })
-      wk.register({ ["<leader>s"] = { name = i("ui.Search", { right = 1 }) .. "Search" } })
-      wk.register({ ["<leader>x"] = { name = i("ui.Stethoscope", { right = 1 }) .. "Troubleshooting" } })
-      wk.register({ ["<localleader>c"] = { name = i("plugin.Copilot", { right = 1 }) .. "Copilot" } })
-      wk.register({ ["g"] = { name = i("ui.Code", { right = 1 }) .. "Code/LSP" } })
+      wk.add({
+        -- groups
+        { "<leader>b", group = "Buffers", icon = icons.documents.File },
+        { "<leader>c", group = "Code", icon = icons.ui.Code },
+        { "<leader>e", group = "Editor", icon = icons.ui.Neovim },
+        { "<leader>g", group = "Git", icon = icons.git.Branch },
+        { "<leader>m", group = "Bookmark", icon = icons.plugin.Harpoon },
+        { "<leader>q", group = "Session" },
+        { "<leader>s", group = "Search", icon = icons.ui.Search },
+        { "<leader>t", group = "Troubleshooting", icon = icons.ui.Stethoscope },
+        { "<localleader>c", group = "Copilot", icon = icons.plugin.Copilot },
+        { "g", group = "Code/LSP", icon = icons.ui.Code },
+        -- direct keymaps
+        { "<leader>-", "<C-W>s", desc = "Split horizontal", icon = icons.ui.SplitHorizontal },
+        { "<leader>|", "<C-W>v", desc = "Split vertical", icon = icons.ui.SplitVertical },
+      })
     end,
   },
 

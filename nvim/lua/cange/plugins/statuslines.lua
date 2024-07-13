@@ -1,4 +1,4 @@
-local i = Cange.get_icon
+local icons = require("cange.icons")
 local strUtil = require("cange.utils.string")
 local exclude_filetypes = {
   "",
@@ -37,16 +37,16 @@ return {
             { "mode", fmt = function(str) return str:sub(1, 1) end },
           },
           lualine_b = {
-            { "branch", icon = i("git.Branch") },
+            { "branch", icon = icons.git.Branch },
           },
           lualine_c = {
             {
               "diagnostics",
               symbols = {
-                error = i("diagnostics.Error", { right = 1 }),
-                warn = i("diagnostics.Warn", { right = 1 }),
-                info = i("diagnostics.Info", { right = 1 }),
-                hint = i("diagnostics.Hint", { right = 1 }),
+                error = icons.diagnostics.Error .. " ",
+                warn = icons.diagnostics.Warn .. " ",
+                info = icons.diagnostics.Info .. " ",
+                hint = icons.diagnostics.Hint .. " ",
               },
             },
           },
@@ -54,7 +54,7 @@ return {
             {
               "git_blame_line",
               padding = { right = 1 },
-              icon = i("git.Commit"),
+              icon = icons.git.Commit,
               fmt = function(name)
                 local w = vim.o.columns
                 return strUtil.truncate(name, w > 172 and 80 or w > 112 and 48 or w > 92 and 24 or 0)
@@ -78,7 +78,7 @@ return {
               padding = { left = 1, right = 0 },
             },
             {
-              function() return i("ui.Tab", { right = 1 }) .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) end,
+              function() return icons.ui.Tab .. " " .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) end,
               separator = "",
               padding = { left = 1, right = 0 },
             },
@@ -101,8 +101,8 @@ return {
     config = function()
       require("barbecue").setup({
         symbols = {
-          modified = i("ui.DotFill"),
-          separator = i("ui.ChevronRight"),
+          modified = icons.ui.DotFill,
+          separator = icons.ui.ChevronRight,
         },
         show_modified = true,
         exclude_filetypes = exclude_filetypes,

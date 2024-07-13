@@ -19,8 +19,8 @@ end
 
 function M:init(opts)
   local state_icons = {
-    active = Cange.get_icon("ui.CheckAll"),
-    inactive = Cange.get_icon("ui.EyeClosed"),
+    active = require("cange.icons").ui.CheckAll,
+    inactive = require("cange.icons").ui.EyeClosed,
   }
   M.super.init(self, opts)
   M.list_services = require("lualine.list_services"):new(nil, {}, state_icons, get_active_services, opts, debug)

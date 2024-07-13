@@ -1,0 +1,133 @@
+---@meta
+
+---@class cange.PaletteMeta
+---@field name string
+---@field light boolean
+
+---@class cange.Shade
+---@field base string
+---@field bright string
+---@field dim string
+---@field light boolean
+
+---@class cange.Palette
+---@field meta cange.PaletteMeta
+---@field black cange.Shade
+---@field red cange.Shade
+---@field green cange.Shade
+---@field yellow cange.Shade
+---@field blue cange.Shade
+---@field magenta cange.Shade
+---@field cyan cange.Shade
+---@field white cange.Shade
+---@field orange cange.Shade
+---@field pink cange.Shade
+---@field comment string
+---@field bg0 string Dark bg (status line and float)
+---@field bg1 string Default bg
+---@field bg2 string Lighter bg (colorcolm folds)
+---@field bg3 string Lighter bg (cursor line)
+---@field bg4 string Conceal, border fg
+---@field fg0 string Lighter fg
+---@field fg1 string Default fg
+---@field fg2 string Darker fg (status line)
+---@field fg3 string Darker fg (line numbers, fold colums)
+---@field sel0 string Popup bg, visual selection bg
+---@field sel1 string Popup sel bg, search bg
+
+---@class cange.Spec
+---@field bg0 string Dark bg (status line and float)
+---@field bg1 string Default bg
+---@field bg2 string Lighter bg (colorcolm folds)
+---@field bg3 string Lighter bg (cursor line)
+---@field bg4 string Conceal, border fg
+---@field fg0 string Lighter fg
+---@field fg1 string Default fg
+---@field fg2 string Darker fg (status line)
+---@field fg3 string Darker fg (line numbers, fold colums)
+---@field sel0 string Popup bg, visual selection bg
+---@field sel1 string Popup sel bg, search bg
+---@field syntax cange.SpecSyntax
+---@field diag cange.SpecDiagnostic
+---@field diag_bg cange.SpecDiagnosticBg
+---@field diff cange.SpecDiff
+---@field git cange.SpecGit
+
+---@class cange.SpecSyntax
+---@field bracket string Brackets and Punctuation
+---@field builtin0 string Builtin variable
+---@field builtin1 string Builtin type
+---@field builtin2 string Builtin const
+---@field builtin3 string Not used
+---@field comment string Comment
+---@field conditional string Conditional and loop
+---@field const string Constants, imports and booleans
+---@field dep string Deprecated
+---@field field string Field
+---@field func string Functions and Titles
+---@field ident string Identifiers
+---@field keyword string Keywords
+---@field number string Numbers
+---@field operator string Operators
+---@field preproc string PreProc
+---@field regex string Regex
+---@field statement string Statements
+---@field string string Strings
+---@field type string Types
+---@field variable string Variables
+
+---@class cange.SpecDiagnostic
+---@field error string
+---@field warn string
+---@field info string
+---@field hint string
+---@field ok string
+
+---@class cange.SpecDiagnosticBg
+---@field error string
+---@field warn string
+---@field info string
+---@field hint string
+---@field ok string
+
+---@class cange.SpecDiff
+---@field add string
+---@field delete string
+---@field change string
+---@field text string
+
+---@class cange.SpecGit
+---@field add string
+---@field changed string
+---@field conflict string
+---@field ignored string
+---@field removed string
+
+---@class cange.LualineStateIcons
+---@field active? string
+---@field inactive? string
+
+---@class cange.LualineServiceList
+---@field private before_ft string
+---@field private debug string
+---@field private cache table
+---@field private config {exclude_filetypes:string[]}
+---@field private formatter function
+---@field private get_data function
+---@field private log function
+---@field private label string|nil
+---@field private state boolean
+---@field private origin {super:{init:function}}
+---@field private service_icons string[]
+---@field private state_icons string[]
+---@field get_state function
+---@field set_state function
+---@field cached_status function
+---@field new function
+---@field update function
+
+---@class cange.DevIconsPreset
+---@field icon? string Path of an icon shape
+---@field color? string Hex color value
+---@field cterm_color? string
+---@field name string

@@ -3,7 +3,7 @@ local M = {
   mode = vim.o.background,
 }
 
----@return Palette, Spec
+---@return cange.Palette, cange.Spec
 local function get_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
@@ -73,6 +73,11 @@ local function update_highlights()
     RainbowDelimiterGreen = { fg = blend(spec.syntax.bracket, pal.green.dim, 0.75) },
     RainbowDelimiterViolet = { fg = blend(spec.syntax.bracket, pal.magenta.dim, 0.75) },
     RainbowDelimiterCyan = { fg = blend(spec.syntax.bracket, pal.cyan.dim, 0.75) },
+
+    -- WhichKey
+    WhichKey = { link = "@markup.link" },
+    WhichKeyDesc = { link = "Comment" },
+    WhichKeyIcon = { link = "Comment" },
   }
 
   Cange.set_highlights(highlights)
@@ -142,114 +147,3 @@ return {
     },
   },
 }
-
---#region Types
-
----@class DualShade
----@field even string
----@field odd string
-
----@class PaletteMeta
----@field name string
----@field light boolean
-
----@class Shade
----@field base string
----@field bright string
----@field dim string
----@field light boolean
-
----@class Palette
----@field meta PaletteMeta
----@field black Shade
----@field red Shade
----@field green Shade
----@field yellow Shade
----@field blue Shade
----@field magenta Shade
----@field cyan Shade
----@field white Shade
----@field orange Shade
----@field pink Shade
----@field comment string
----@field bg0 string Dark bg (status line and float)
----@field bg1 string Default bg
----@field bg2 string Lighter bg (colorcolm folds)
----@field bg3 string Lighter bg (cursor line)
----@field bg4 string Conceal, border fg
----@field fg0 string Lighter fg
----@field fg1 string Default fg
----@field fg2 string Darker fg (status line)
----@field fg3 string Darker fg (line numbers, fold colums)
----@field sel0 string Popup bg, visual selection bg
----@field sel1 string Popup sel bg, search bg
-
----@class Spec
----@field bg0 string Dark bg (status line and float)
----@field bg1 string Default bg
----@field bg2 string Lighter bg (colorcolm folds)
----@field bg3 string Lighter bg (cursor line)
----@field bg4 string Conceal, border fg
----@field fg0 string Lighter fg
----@field fg1 string Default fg
----@field fg2 string Darker fg (status line)
----@field fg3 string Darker fg (line numbers, fold colums)
----@field sel0 string Popup bg, visual selection bg
----@field sel1 string Popup sel bg, search bg
----@field syntax SpecSyntax
----@field diag SpecDiagnostic
----@field diag_bg SpecDiagnosticBg
----@field diff SpecDiff
----@field git SpecGit
-
----@class SpecSyntax
----@field bracket string Brackets and Punctuation
----@field builtin0 string Builtin variable
----@field builtin1 string Builtin type
----@field builtin2 string Builtin const
----@field builtin3 string Not used
----@field comment string Comment
----@field conditional string Conditional and loop
----@field const string Constants, imports and booleans
----@field dep string Deprecated
----@field field string Field
----@field func string Functions and Titles
----@field ident string Identifiers
----@field keyword string Keywords
----@field number string Numbers
----@field operator string Operators
----@field preproc string PreProc
----@field regex string Regex
----@field statement string Statements
----@field string string Strings
----@field type string Types
----@field variable string Variables
-
----@class SpecDiagnostic
----@field error string
----@field warn string
----@field info string
----@field hint string
----@field ok string
-
----@class SpecDiagnosticBg
----@field error string
----@field warn string
----@field info string
----@field hint string
----@field ok string
-
----@class SpecDiff
----@field add string
----@field delete string
----@field change string
----@field text string
-
----@class SpecGit
----@field add string
----@field changed string
----@field conflict string
----@field ignored string
----@field removed string
-
---#endregion

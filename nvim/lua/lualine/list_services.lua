@@ -1,27 +1,5 @@
 local strUtil = require("cange.utils.string")
 
----@class StateIcons
----@field active? string
----@field inactive? string
-
----@class ServiceList
----@field private before_ft string
----@field private debug string
----@field private cache table
----@field private config {exclude_filetypes:string[]}
----@field private formatter function
----@field private get_data function
----@field private log function
----@field private label string|nil
----@field private state boolean
----@field private origin {super:{init:function}}
----@field private service_icons string[]
----@field private state_icons string[]
----@field get_state function
----@field set_state function
----@field cached_status function
----@field new function
----@field update function
 local M = {}
 M.__index = M
 
@@ -32,7 +10,7 @@ M.__index = M
 ---@param get_data function -- callback to get the data
 ---@param config {exclude_filetypes:string[]}
 ---@param debug? boolean
----@return ServiceList
+---@return cange.LualineServiceList
 function M:new(label, service_icons, state_icons, get_data, config, debug)
   return setmetatable({
     beofre_ft = "",
