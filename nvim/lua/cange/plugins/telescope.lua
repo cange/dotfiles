@@ -1,3 +1,5 @@
+local icons = require("cange.icons")
+
 return {
   -- Fuzzy Finder
   "nvim-telescope/telescope.nvim", -- fuzzy finder over lists
@@ -9,6 +11,7 @@ return {
     "nvim-telescope/telescope-file-browser.nvim", -- browser extension
     "nvim-telescope/telescope-project.nvim", -- switch between projects
     "nvim-telescope/telescope-ui-select.nvim", -- improved select UI
+    "debugloop/telescope-undo.nvim",
     "tsakirist/telescope-lazy.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- improves search performance
   },
@@ -62,9 +65,9 @@ return {
             ["<M-p>"] = action_layout.toggle_preview,
           },
         },
-        prompt_prefix = " " .. require("cange.icons").ui.Search .. "  ",
+        prompt_prefix = " " .. icons.ui.Search .. "  ",
         scroll_strategy = "cycle",
-        selection_caret = " " .. require("cange.icons").ui.ChevronRight .. "  ",
+        selection_caret = " " .. icons.ui.ChevronRight .. "  ",
         sorting_strategy = "ascending",
         winblend = vim.opt.winblend:get(),
       },
@@ -73,6 +76,18 @@ return {
           require("telescope.themes").get_cursor(),
         },
         project = default_opts,
+        undo = {
+          layout_config = { preview_width = 0.7 },
+          entry_format = "$ID   " .. icons.ui.Time .. " $TIME",
+          mappings = {
+            i = {
+              ["<CR>"] = require("telescope-undo.actions").restore,
+            },
+            n = {
+              ["<CR>"] = require("telescope-undo.actions").restore,
+            },
+          },
+        },
       },
       pickers = {
         buffers = default_opts,
@@ -108,8 +123,9 @@ return {
     -- extensions
     telescope.load_extension("fzf")
     telescope.load_extension("project")
-    telescope.load_extension("ui-select")
     telescope.load_extension("lazy")
+    telescope.load_extension("ui-select")
+    telescope.load_extension("undo")
   end,
   -- stylua: ignore start
   keys = {
@@ -134,6 +150,7 @@ return {
     { "<leader>sr", "<cmd>Telescope oldfiles<CR>",                          desc = "Recently opened files" },
     { "<leader>sR", "<cmd>Telescope registers<CR>",                         desc = "Register values" },
     { "<leader>st", "<cmd>TodoTelescope<CR>",                               desc = "Todo comments" },
+    { "<leader>su", "<cmd>Telescope undo<CR>",                              desc = "Undo tree" },
     { "<leader>sw", "<cmd>Telescope grep_string<CR>",                       desc = "Current word" },
     { "cD", "<cmd>Telescope diagnostics<CR>",                               desc = "Workspace diagnostics" },
     { "cl", '<cmd>lua R("cange.telescope").diagnostics_log()<CR>',          desc = "File diagnostics" },

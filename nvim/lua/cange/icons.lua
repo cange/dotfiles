@@ -42,6 +42,7 @@ M.ui = {
   SplitHorizontal     = "", -- nf-cod-split_vertical
   SplitVertical       = "", -- nf-cod-split_horizontal
   Tab                 = "", -- nf-oct-tab
+  Time                = "", -- nf-oct-stopwatch
   -- shapes
   TriangleLeft        = "", -- nf-ple-lower_left_triangle
   TriangleRight       = "", -- :nf-ple-upper_right_trangleRight 
