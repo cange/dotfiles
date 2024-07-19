@@ -49,10 +49,10 @@ alias -- -='cd -'
 # cd ---
 #
 # --- lists
-alias l='eza  --long --all --icons' # 'ls -lah'
-alias la='eza --long --all --icons --git' # 'ls -Alh'
+alias l='eza  --long --all --icons'                        # 'ls -lah'
+alias la='eza --long --all --icons --git'                  # 'ls -Alh'
 alias lt='eza --long --all --icons --git --tree --level=1' # list tree
-alias ll='eza --long --icons' # 'ls -lh'
+alias ll='eza --long --icons'                              # 'ls -lh'
 alias ls='ls -G'
 # lists ---
 #

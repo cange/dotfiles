@@ -28,16 +28,16 @@ _source_if_exists "$HOME/.config/secrets/zsh"
 
 # --- Homebrew Setup
 if [[ $(uname -p) == "arm" ]]; then
-	eval "$(/opt/homebrew/bin/brew shellenv)" # M1+ Mac
+  eval "$(/opt/homebrew/bin/brew shellenv)" # M1+ Mac
 else
-	eval "$(/usr/local/bin/brew shellenv)" # Intel Mac
+  eval "$(/usr/local/bin/brew shellenv)" # Intel Mac
 fi
 
 # To make Homebrew’s completions available
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
-	fpath+=("$(brew --prefix)/share/zsh/site-functions") # append completions
-	autoload -Uz compinit && compinit
+  fpath+=("$(brew --prefix)/share/zsh/site-functions") # append completions
+  autoload -Uz compinit && compinit
 fi
 # Homebrew Setup ---
 

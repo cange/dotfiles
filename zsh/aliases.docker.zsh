@@ -4,53 +4,53 @@ export CANGE_OLD_PWD=$PWD
 
 # File detection mechanism to automatically detect the appropriate Docker
 function _docker_compose_init_detection() {
-	local init_compose_file=$COMPOSE_FILE
-	local dir_state=""
+  local init_compose_file=$COMPOSE_FILE
+  local dir_state=""
 
-	function log() {
-		local title="$(_chalk "blue" "󰡨") docker compose:"
-		printf "%s %s %s %s\n" "$title" "$1" "$(_chalk "bold" "\$COMPOSE_FILE")" "$dir_state"
-		dir_state=""
-	}
+  function log() {
+    local title="$(_chalk "blue" "󰡨") docker compose:"
+    printf "%s %s %s %s\n" "$title" "$1" "$(_chalk "bold" "\$COMPOSE_FILE")" "$dir_state"
+    dir_state=""
+  }
 
-	function _docker_compose_detect_file() {
-		if [[ ! -e "Dockerfile" ]]; then return 0; fi
+  function _docker_compose_detect_file() {
+    if [[ ! -e "Dockerfile" ]]; then return 0; fi
 
-		local files=("docker-compose.yml" "docker-compose.yaml" "compose.yml" "compose.yaml")
-		local count=$1
+    local files=("docker-compose.yml" "docker-compose.yaml" "compose.yml" "compose.yaml")
+    local count=$1
 
-		if [[ $count -gt ${#files[@]} && -z $COMPOSE_FILE ]]; then
-			export COMPOSE_FILE=$init_compose_file
-			log "No local file detected! Reset to default"
-			return 0
-		fi
+    if [[ $count -gt ${#files[@]} && -z $COMPOSE_FILE ]]; then
+      export COMPOSE_FILE=$init_compose_file
+      log "No local file detected! Reset to default"
+      return 0
+    fi
 
-		if [[ -e "${files[$count]}" ]]; then
-			unset COMPOSE_FILE
-			log "File detected! Unset"
-			return 0
-		else
-			_docker_compose_detect_file $(($count + 1))
-			return 0
-		fi
-	}
+    if [[ -e "${files[$count]}" ]]; then
+      unset COMPOSE_FILE
+      log "File detected! Unset"
+      return 0
+    else
+      _docker_compose_detect_file $(($count + 1))
+      return 0
+    fi
+  }
 
-	# initialise detection
-	_docker_compose_detect_file 1
+  # initialise detection
+  _docker_compose_detect_file 1
 
-	# Hook to triggered when the current directory changes
-	function _docker_compose_chpwd_hook() {
-		if [[ -z $CANGE_OLD_PWD ]]; then CANGE_OLD_PWD=$PWD; fi
+  # Hook to triggered when the current directory changes
+  function _docker_compose_chpwd_hook() {
+    if [[ -z $CANGE_OLD_PWD ]]; then CANGE_OLD_PWD=$PWD; fi
 
-		if [[ $PWD != $CANGE_OLD_PWD ]]; then
-			CANGE_OLD_PWD=$PWD
-			dir_state="$(_chalk "yellow" "󰛨") Dir changed!"
-			_docker_compose_detect_file 1
-		fi
-	}
+    if [[ $PWD != $CANGE_OLD_PWD ]]; then
+      CANGE_OLD_PWD=$PWD
+      dir_state="$(_chalk "yellow" "󰛨") Dir changed!"
+      _docker_compose_detect_file 1
+    fi
+  }
 
-	# Enable chpwd hook
-	add-zsh-hook chpwd _docker_compose_chpwd_hook
+  # Enable chpwd hook
+  add-zsh-hook chpwd _docker_compose_chpwd_hook
 }
 
 _docker_compose_init_detection
@@ -58,10 +58,10 @@ _docker_compose_init_detection
 # Execute `docker compose` from within a services directory and the dir name as
 # project name.
 function _docker_compose() {
-	local cmd=$1
-	local dirname=$([[ -z $COMPOSE_PROJECT_NAME ]] && print "" || print $(basename $(pwd)))
-	shift 1
-	docker-compose "$cmd" $dirname "$@"
+  local cmd=$1
+  local dirname=$([[ -z $COMPOSE_PROJECT_NAME ]] && print "" || print $(basename $(pwd)))
+  shift 1
+  docker-compose "$cmd" $dirname "$@"
 }
 
 # aliases
@@ -76,7 +76,7 @@ alias dcl="_docker_compose logs --follow --tail=10" # Show container logs
 alias dcrb="dcup --build --force-recreate"          # Rebuild
 alias dcrbl="dcrb && dcl"                           # Rebuild with followup log
 alias dcrs="_docker_compose restart && dcl"         # Restart container and show logs
-alias dchrs="dco down && dcup && dcl app"           # Hard restart with logs
+alias dcrsh="dco down && dcup && dcl app"           # Hard restart with logs
 alias dcup="_docker_compose up --detach"            # Start container and its dependencies
 alias dcy="_docker_compose exec yarn"               # Execute yarn command
 # docker compose ---
