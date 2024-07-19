@@ -138,14 +138,12 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
+      preset = "modern",
       icons = {
         breadcrumb = "",
         group = icons.ui.ChevronRight .. " ",
         separator = "",
         colors = false,
-      },
-      win = {
-        padding = { 2, 2 },
       },
     },
     config = function(_, opts)

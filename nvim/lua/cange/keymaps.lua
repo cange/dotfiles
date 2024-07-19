@@ -6,7 +6,7 @@ local toggle_spelling = function() vim.o.spell = not vim.o.spell end
 
 local keymaps = {
   { "<F1>", help_under_cursor, { desc = "Help for keyword under cursor" } },
-  { "<leader><leader>", "<C-^>", { desc = "Switch last recent 2 buffers" } },
+  { "<leader><leader>", "<C-^>", { desc = "Toggle between previous buffer" } },
   { "[b", "<cmd>bprev<CR>", { desc = "Prev Buffer" } },
   { "]b", "<cmd>bnext<CR>", { desc = "Next Buffer" } },
   { "p", '"_dP', { desc = "Clipboard: keep content" }, { "v" } },
