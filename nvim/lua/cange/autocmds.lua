@@ -34,13 +34,18 @@ autocmd("TextYankPost", {
   callback = function() vim.highlight.on_yank({ higroup = "Cursor" }) end,
 })
 
+local is_in_project = true
+autocmd({ "BufRead" }, {
+  group = group_id,
+  callback = function() is_in_project = false end,
+})
+
 -- Show project picker on startup
 autocmd({ "VimEnter" }, {
   group = group_id,
   callback = function()
     local ok, telescope = pcall(require, "telescope")
-    if not ok then return end
-    if not telescope.extensions.project then return end
+    if not ok or not telescope.extensions.project or not is_in_project then return end
     telescope.extensions.project.project({})
   end,
 })
