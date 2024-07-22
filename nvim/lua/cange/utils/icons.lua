@@ -132,8 +132,8 @@ function M.get_service_icons()
     jsonls = grep_icon("json"),
     lua_ls = grep_icon("lua"),
     markdownlint = grep_icon("md"),
+    prettier = grep_icon(".prettierrc"),
     rubocop = grep_icon("rb"),
-    ruby_ls = grep_icon("rb"), -- deprecated lsp
     ruby_lsp = grep_icon("rb"),
     stylelint = grep_icon(".stylelint"),
     tailwindcss = grep_icon("tailwind.config.js"),

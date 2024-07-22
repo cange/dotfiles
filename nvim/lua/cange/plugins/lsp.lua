@@ -24,13 +24,7 @@ return {
       require("mason").setup(opts)
       -- loads formatter and linter
       local linter = { "eslint", "jsonlint", "markdownlint", "rubocop", "stylelint", "yamllint" }
-      local formatter = {
-        "prettierd",
-        "rubocop",
-        "shfmt",
-        "stylua",
-        "xmlformatter", -- svg
-      }
+      local formatter = { "prettier", "rubocop", "shfmt", "stylua", "xmlformatter" }
       require("mason-tool-installer").setup({
         ensure_installed = vim.tbl_extend("force", linter, formatter),
         auto_update = true,
