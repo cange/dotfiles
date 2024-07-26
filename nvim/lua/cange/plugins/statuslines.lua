@@ -27,8 +27,8 @@ return {
 
       return {
         options = {
-          component_separators = { left = " ", right = " " },
           globalstatus = true,
+          component_separators = { left = " ", right = " " },
           section_separators = { left = "", right = "" },
           theme = custom_theme,
         },
@@ -37,7 +37,17 @@ return {
             { "mode", fmt = function(str) return str:sub(1, 1) end },
           },
           lualine_b = {
-            { "branch", icon = icons.git.Branch },
+            {
+              "workspace",
+              on_click = function() vim.cmd("Telescope project") end,
+              padding = { left = 1, right = -2 },
+              suffix = " on",
+            },
+            {
+              "branch",
+              icon = icons.git.Branch,
+              padding = { left = 0, right = 1 },
+            },
           },
           lualine_c = {
             {
