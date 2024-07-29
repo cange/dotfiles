@@ -46,6 +46,7 @@ return {
             {
               "branch",
               icon = icons.git.Branch,
+              on_click = function() vim.cmd("Telescope git_branches") end,
               padding = { left = 0, right = 1 },
             },
           },
