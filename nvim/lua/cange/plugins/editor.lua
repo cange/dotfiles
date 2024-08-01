@@ -293,4 +293,17 @@ return {
       { "<leader>ct", "<cmd>HighlightColors Toggle<CR>", desc = "Toggle Highlight Colors" },
     },
   },
+
+  { -- Toggle booleans and common string values eg. true/false, endable/disable, etc
+    "nat-418/boole.nvim",
+    opts = {
+      mappings = {
+        increment = "<C-a>",
+        decrement = "<C-x>",
+      },
+    },
+      additions = {
+        { "flex", "block", "inline-flex", "inline-block" },
+      },
+  },
 }
