@@ -128,34 +128,24 @@ return {
         },
         jsonls = {
           settings = {
-            json = { schemas = require("schemastore").json.schemas() },
-            validate = { enable = true },
+            json = {
+              schemas = require("schemastore").json.schemas(),
+              validate = { enable = true },
+            },
           },
         },
         yamlls = {
           settings = {
-            redhat = { telemetry = { enabled = false } },
             yaml = {
               schemaStore = {
-                enable = true,
+                -- You must disable built-in schemaStore support if you want to use
+                -- this plugin and its advanced options like `ignore`.
+                enable = false,
                 -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
                 url = "",
               },
-              schemas = require("schemastore").yaml.schemas({
-                extra = {
-                  {
-                    description = "Definition of Visables pattern lib documentation data",
-                    fileMatch = {
-                      "**/wlw_styleguide/**/documentation.yml",
-                      "**/wlw_styleguide/**/documentation.yaml",
-                    },
-                    name = "wlw styleguide",
-                    url = vim.fn.expand("file://$HOME/workspace/services/wlw_styleguide/schemas/docs.schema.json"),
-                  },
-                },
-              }),
+              schemas = require("schemastore").yaml.schemas(),
             },
-            validate = { enable = true },
           },
         },
       }
