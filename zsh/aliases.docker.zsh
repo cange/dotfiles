@@ -5,12 +5,12 @@ export CANGE_OLD_PWD=$PWD
 # File detection mechanism to automatically detect the appropriate Docker
 function _docker_compose_init_detection() {
   local init_compose_file=$COMPOSE_FILE
-  local dir_state=""
+  local log_dir_state=""
 
   function log() {
     local title="$(_chalk "blue" "󰡨") docker compose:"
-    printf "%s %s %s %s\n" "$title" "$1" "$(_chalk "bold" "\$COMPOSE_FILE")" "$dir_state"
-    dir_state=""
+    printf "%s %s %s %s\n" "$title" "$1" "$(_chalk "bold" "\$COMPOSE_FILE")" "$log_dir_state"
+    log_dir_state=""
   }
 
   function _docker_compose_detect_file() {
@@ -44,7 +44,7 @@ function _docker_compose_init_detection() {
 
     if [[ $PWD != $CANGE_OLD_PWD ]]; then
       CANGE_OLD_PWD=$PWD
-      dir_state="$(_chalk "yellow" "󰛨") Dir changed!"
+      # log_dir_state="$(_chalk "yellow" "󰛨") Dir changed!"
       _docker_compose_detect_file 1
     fi
   }
