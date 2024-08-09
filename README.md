@@ -9,7 +9,7 @@ shell and terminal configurations.
 
 Clone of this repo on system user root:
 
-```shell
+```sh
 git clone http://github.com/cange/dotfiles.git
 ```
 
