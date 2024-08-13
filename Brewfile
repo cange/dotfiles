@@ -18,8 +18,6 @@ cask "itsycal"
 cask "keepassxc"
 # Password manager
 cask "nordpass"
-# Move and resize windows using keyboard shortcuts or snap areas
-cask "rectangle"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Music streaming service

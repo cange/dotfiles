@@ -7,8 +7,13 @@
         "language": [
           "html",
           "javascript",
+          "javscript.jsx",
+          "javascriptreact",
+          "json",
           "svelte",
           "typescript",
+          "typescript.jsx",
+          "typescriptreact",
           "vue"
         ],
         "path": "./javascript.json"

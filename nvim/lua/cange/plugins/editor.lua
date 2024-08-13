@@ -314,6 +314,8 @@ return {
       },
       additions = {
         { "flex", "block", "inline-flex", "inline-block" },
+        { "red", "magenta", "yellow", "cyan", "lime", "purple", "pink" },
+        { "solid", "dashed", "dotted", "double", "none", "groove", "ridge", "inset", "outset" },
       },
     },
   },

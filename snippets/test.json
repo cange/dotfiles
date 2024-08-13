@@ -25,7 +25,7 @@
   },
   "beforeEach": {
     "prefix": "beforeEach(…",
-    "body": "beforeEach(${1|async ,|}() => {\n\t$0\n})"
+    "body": "beforeEach(${1:async}() => {\n\t$0\n})"
   },
   "expect(": {
     "prefix": "expect(",
