@@ -84,12 +84,11 @@ local function update_highlights()
 end
 
 local themes = {
-  contrast = { name = "carbonfox", mode = "dark" },
   dark = { name = "terafox", mode = "dark" },
   light = { name = "dayfox", mode = "light" },
 }
 
----@param mode? '"dark"'|'"light"'|'"contrast"'|nil
+---@param mode? '"dark"'|'"light"'|nil
 ---@param silent? boolean
 local function update_colorscheme(mode, silent)
   ---@diagnostic disable-next-line: undefined-field

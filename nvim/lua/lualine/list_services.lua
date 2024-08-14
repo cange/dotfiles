@@ -2,6 +2,11 @@ local strUtil = require("cange.utils.string")
 
 local M = {}
 M.__index = M
+local default_state_icons = {
+  active = require("cange.icons").ui.CheckAll,
+  inactive = require("cange.icons").ui.EyeClosed,
+  minimized = require("cange.icons").ui.Eye,
+}
 
 --- Provides a list of services which are can be displayed by icons
 ---@param label string|nil
@@ -22,7 +27,7 @@ function M:new(label, service_icons, state_icons, get_data, config, debug)
     label = label,
     service_icons = service_icons,
     state = true,
-    state_icons = state_icons,
+    state_icons = vim.tbl_extend("force", default_state_icons, state_icons),
   }, self)
 end
 
@@ -39,7 +44,7 @@ function M:formatter(data)
   if vim.tbl_contains(self.config.exclude_filetypes or {}, vim.bo.filetype) then return "" end
 
   local name = self.label or self.state_icons[self:get_state()]
-  output = #output == 0 and self.state_icons["inactive"] or output
+  output = #output == 0 and self.state_icons["minimized"] or output
   return string.format("%s %s", name, output)
 end
 
