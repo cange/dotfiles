@@ -18,7 +18,7 @@ return {
       javascriptreact = { "eslint" },
       typescriptreact = { "eslint" },
       svelte = { "eslint" },
-      vue = { "eslint" },
+      vue = { "eslint", "stylelint" },
     },
     keys = {
       { "<leader>l", "<cmd>lua R('lint').try_lint()<CR>", desc = "Trigger linting for current file" },

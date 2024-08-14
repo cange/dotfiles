@@ -133,6 +133,7 @@ function M.get_service_icons()
     lua_ls = grep_icon("lua"),
     markdownlint = grep_icon("md"),
     prettier = grep_icon(".prettierrc"),
+    prettierd = grep_icon(".prettierrc") .. "+",
     rubocop = grep_icon("rb"),
     ruby_lsp = grep_icon("rb"),
     stylelint = grep_icon(".stylelint"),

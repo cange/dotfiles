@@ -83,7 +83,16 @@ return {
                 name = "@vue/typescript-plugin",
                 location = mason_registry.get_package("vue-language-server"):get_install_path()
                   .. "/node_modules/@vue/language-server",
-                languages = { "javascript", "typescript", "vue" },
+                languages = {
+                  "javascript",
+                  "javascript.jsx",
+                  "javascriptreact",
+                  "json",
+                  "typescript",
+                  "typescript.tsx",
+                  "typescriptreact",
+                  "vue",
+                },
               },
             },
           },
@@ -91,9 +100,11 @@ return {
           filetypes = {
             "javascript",
             "javascript.jsx",
+            "javascriptreact",
             "json",
             "typescript",
             "typescript.tsx",
+            "typescriptreact",
             "vue",
           },
           settings = {

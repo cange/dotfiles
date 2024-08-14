@@ -1,5 +1,12 @@
 local icons = require("cange.icons")
 local line_format = "<author>, <author_time:%d. %b %Y> " .. icons.ui.Note .. " <summary>"
+local signs = {
+  add = { text = icons.ui.LineLeft },
+  change = { text = icons.ui.LineLeft },
+  delete = { text = icons.ui.LineLower },
+  changedelete = { text = icons.git.Diff },
+  topdelete = { text = icons.ui.LineUpper },
+}
 
 return {
   {
@@ -7,13 +14,8 @@ return {
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      signs = {
-        add = { text = icons.ui.LineLeft },
-        change = { text = icons.ui.LineLeft },
-        delete = { text = icons.ui.LineLower },
-        changedelete = { text = icons.git.Diff },
-        topdelete = { text = icons.ui.LineUpper },
-      },
+      signs = signs,
+      signs_staged = signs,
       preview_config = { border = Cange.get_config("ui.border") },
       current_line_blame = true,
       current_line_blame_formatter = line_format,
