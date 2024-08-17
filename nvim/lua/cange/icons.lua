@@ -46,7 +46,9 @@ M.ui = {
   Workspace           = "", -- nf-oct-briefcase
   -- shapes
   TriangleLeft        = "", -- nf-ple-lower_left_triangle
-  TriangleRight       = "", -- :nf-ple-upper_right_trangleRight 
+  TriangleRight       = "", -- nf-ple-upper_right_trangleRight 
+  HalfCircleLeft      = "", -- nf-ple-left_half_circle_thick 
+  HalfCircleRight     = "", -- nf-ple-right_half_circle_thick
   LineLeft            = "▎", -- U+258E 
   LineLeftThin        = "▏", -- U+258F
   LineLower           = "▁", -- U+2594 

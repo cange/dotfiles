@@ -27,7 +27,8 @@ fi
 # Environment variables set everywhere
 # https://manpages.debian.org/bullseye-backports/man-db/man.1.en.html#ENVIRONMENT
 export EDITOR="nvim"
-export TERMINAL="iterm2"
+export VISIUAL="nvim"
+export TERMINAL="wezterm"
 export BROWSER="firefox-developer-edition"
 
 # --- pnpm
