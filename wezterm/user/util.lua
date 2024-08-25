@@ -32,4 +32,11 @@ function M.tbl_extend(behavior, tbl1, tbl2)
   return merged
 end
 
+function M.get_current_working_dir(tab)
+  local current_dir = tab.active_pane and tab.active_pane.current_working_dir or { file_path = "" }
+  local HOME_DIR = string.format("file://%s", os.getenv("HOME"))
+
+  return current_dir == HOME_DIR and "." or string.gsub(current_dir.file_path, "(.*[/\\])(.*)", "%2")
+end
+
 return M
