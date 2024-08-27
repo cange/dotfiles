@@ -26,53 +26,56 @@ return {
       { "<leader>\\", "<cmd>NvimTreeToggle<CR>", desc = "File Tree Explorer" },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("nvim-tree").setup({
-        live_filter = {
-          prefix = icons.ui.Search .. "  ",
-        },
-        -- project plugin related
-        sync_root_with_cwd = true,
-        respect_buf_cwd = true,
-        update_focused_file = {
-          enable = true,
-          update_root = true,
-        },
-        -- common
-        renderer = {
-          indent_markers = { enable = true },
-          icons = {
-            git_placement = "after",
-            show = { folder = false },
-            symlink_arrow = " " .. icons.documents.SymlinkFile .. " ",
-            glyphs = {
-              default = icons.documents.File,
-              bookmark = icons.ui.Bookmark,
-              symlink = icons.documents.SymlinkFile,
-              folder = {
-                arrow_closed = icons.ui.ChevronRight,
-                arrow_open = icons.ui.ChevronDown,
-                default = icons.documents.Folder,
-                empty = icons.documents.EmptyFolder,
-                empty_open = icons.documents.EmptyOpenFolder,
-                open = icons.documents.OpenFolder,
-                symlink = icons.documents.SymlinkFolder,
-                symlink_open = icons.documents.SymlinkFolder,
-              },
-              git = icons.git_states,
+    opts = {
+      live_filter = {
+        prefix = icons.ui.Search .. "  ",
+      },
+      -- project plugin related
+      sync_root_with_cwd = true,
+      respect_buf_cwd = true,
+      update_focused_file = {
+        enable = true,
+        update_root = true,
+      },
+      view = {
+        -- side = "right",
+      },
+      renderer = {
+        indent_markers = { enable = true },
+        icons = {
+          git_placement = "after",
+          show = { folder = false },
+          symlink_arrow = " " .. icons.documents.SymlinkFile .. " ",
+          glyphs = {
+            default = icons.documents.File,
+            bookmark = icons.ui.Bookmark,
+            symlink = icons.documents.SymlinkFile,
+            folder = {
+              arrow_closed = icons.ui.ChevronRight,
+              arrow_open = icons.ui.ChevronDown,
+              default = icons.documents.Folder,
+              empty = icons.documents.EmptyFolder,
+              empty_open = icons.documents.EmptyOpenFolder,
+              open = icons.documents.OpenFolder,
+              symlink = icons.documents.SymlinkFolder,
+              symlink_open = icons.documents.SymlinkFolder,
             },
+            git = icons.git_states,
           },
         },
-        diagnostics = {
-          enable = true,
-          icons = {
-            error = icons.diagnostics.Error,
-            warning = icons.diagnostics.Warn,
-            hint = icons.diagnostics.Hint,
-            info = icons.diagnostics.Info,
-          },
+      },
+      diagnostics = {
+        enable = true,
+        icons = {
+          error = icons.diagnostics.Error,
+          warning = icons.diagnostics.Warn,
+          hint = icons.diagnostics.Hint,
+          info = icons.diagnostics.Info,
         },
-      })
+      },
+    },
+    config = function(_, opts)
+      require("nvim-tree").setup(opts)
 
       vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
         group = vim.api.nvim_create_augroup("before_file_tree_explorer_close", { clear = true }),
@@ -313,9 +316,10 @@ return {
         decrement = "<C-x>",
       },
       additions = {
-        { "flex", "block", "inline-flex", "inline-block" },
+        { "flex", "block", "inline-flex", "inline-block", "inline", "none" },
         { "red", "magenta", "yellow", "cyan", "lime", "purple", "pink" },
         { "solid", "dashed", "dotted", "double", "none", "groove", "ridge", "inset", "outset" },
+        { "left", "right" },
       },
     },
   },
