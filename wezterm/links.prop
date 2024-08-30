@@ -1,0 +1,2 @@
+$DOTFILES/wezterm=$HOME/.config/wezterm
+$HOME/.local/share/nvim/lazy/nightfox.nvim/lua/nightfox=$HOME/.config/wezterm/

@@ -3,6 +3,8 @@ setopt pushdminus
 # --- tools
 alias vim='nvim'
 alias gui='fork .'
+alias lg='lazygit'
+alias ld='lazydocker'
 # tools ---
 
 #--- nvim switchers
@@ -13,7 +15,7 @@ alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
 
 function nvims() {
   items=("default" "kickstart" "LazyVim" "NvChad" "AstroNvim")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config 󰄾" --height=~50% --layout=reverse --border --exit-0)
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config 󰄾" --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
     return 0
@@ -40,6 +42,7 @@ alias fgrep='fgrep --color=auto'
 # grep output ---
 #
 # --- cd
+alias cd=z # use zoxide
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'

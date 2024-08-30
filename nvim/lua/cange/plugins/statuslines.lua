@@ -29,7 +29,7 @@ return {
         options = {
           globalstatus = true,
           component_separators = { left = " ", right = " " },
-          section_separators = { left = "", right = "" },
+          section_separators = { left = icons.ui.HalfCircleRight, right = icons.ui.HalfCircleLeft },
           theme = custom_theme,
         },
         sections = {
