@@ -1,16 +1,15 @@
 -- inspired by https://alexplescan.com/posts/2024/08/10/wezterm/https://alexplescan.com/posts/2024/08/10/wezterm/
 local wezterm = require("wezterm")
 local theme = require("user.theme")
-local util = require("user.util")
 local pal = theme.pal
 local config = wezterm.config_builder()
 local font = wezterm.font({ family = "JetBrainsMono Nerd Font", scale = 1 })
 local bg_base = pal.bg0
 local bg_presets = {
   BLURRY = {
-    util.hex2rgba(bg_base, 80),
-    util.hex2rgba(bg_base, 96),
-    util.hex2rgba(bg_base, 96),
+    theme.hex2rgba(bg_base, 72),
+    theme.hex2rgba(bg_base, 80),
+    theme.hex2rgba(bg_base, 96),
   },
   OPAQUE = { bg_base },
 }
@@ -25,6 +24,7 @@ config = {
   -- Fonts
 
   font = font,
+  adjust_window_size_when_changing_font_size = false,
   -- Cursor
   default_cursor_style = "BlinkingUnderline",
 
@@ -77,15 +77,35 @@ config = {
   command_palette_fg_color = pal.sel1,
 }
 
+local function get_current_working_dir(tab)
+  local current_dir = tab.active_pane and tab.active_pane.current_working_dir or { file_path = "" }
+  local HOME_DIR = string.format("file://%s", os.getenv("HOME"))
+
+  return current_dir == HOME_DIR and "." or string.gsub(current_dir.file_path, "(.*[/\\])(.*)", "%2")
+end
+
 -- Set tab title to the one that was set via `tab:set_title()`
 -- or fall back to the current working directory as a title
 wezterm.on("format-tab-title", function(tab)
   local custom_title = tab.tab_title
   local index = tonumber(tab.tab_index) + 1
-  local title = util.get_current_working_dir(tab)
+  local title = get_current_working_dir(tab)
   if custom_title and #custom_title > 0 then title = custom_title end
 
   return theme.render_tab(title, index, tab.is_active)
+end)
+
+-- Status bar
+-- Name of the current workspace | Hostname
+wezterm.on("update-status", function(window)
+  local fmt = "%s %s  "
+  local right_status = wezterm.format({
+    { Background = { Color = theme.transparent } },
+    { Foreground = { Color = pal.sel1 } },
+    { Text = string.format(fmt, wezterm.nerdfonts.oct_codespaces, window:active_workspace()) },
+    { Text = string.format(fmt, wezterm.nerdfonts.oct_clock, wezterm.strftime("%a,%e. %b %H:%M")) },
+  })
+  window:set_right_status(right_status)
 end)
 
 return config

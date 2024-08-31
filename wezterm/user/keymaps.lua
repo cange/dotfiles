@@ -17,6 +17,14 @@ wezterm.on("restore_session", function(win)
   session_manager.restore_state(win)
 end)
 
+local function desc(text)
+  wezterm.format({
+    { Attribute = { Intensity = "Bold" } },
+    { Foreground = { AnsiColor = "Fuchsia" } },
+    { Text = text },
+  })
+end
+
 return {
   -- sessions
   { key = "h", mods = "LEADER", action = act.EmitEvent("hello") },
@@ -58,14 +66,10 @@ return {
   },
   -- Tab renaming
   {
-    key = "e",
+    key = "r",
     mods = "LEADER",
     action = act.PromptInputLine({
-      description = wezterm.format({
-        { Attribute = { Intensity = "Bold" } },
-        { Foreground = { AnsiColor = "Fuchsia" } },
-        { Text = "Renaming Tab Title:" },
-      }),
+      description = desc("Renaming tab title:"),
       action = wezterm.action_callback(function(window, _, line)
         if line then window:active_tab():set_title(line) end
       end),
