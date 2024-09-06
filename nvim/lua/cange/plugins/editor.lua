@@ -114,20 +114,21 @@ return {
     end,
   },
 
-  {
-    "olimorris/persisted.nvim",
-    lazy = false, -- make sure the plugin is always loaded at startup
+  { -- small automated session manager
+    "folke/persistence.nvim",
+    dependencies = { "nvim-tree/nvim-tree.lua" },
+    event = "BufReadPre",
     opts = {
-      autoload = true,
-      on_autoload_no_session = function() vim.notify("[persisted] No existing session to load.") end,
+      options = vim.opt.sessionoptions:get(),
+      pre_save = function() require("nvim-tree.api").tree.close() end,
     },
-    config = function(_, opts) require("persisted").setup(opts) end,
     keys = {
-      { "<leader>qd", "<cmd>SessionLoad<CR>", desc = "Load session of current directory" },
-      { "<leader>qr", "<cmd>SessionLoadLast>", desc = "Recent session " },
-      { "<leader>qs", "<cmd>SessionSave<CR>", desc = "Save the current session" },
-      { "<leader>qS", "<cmd>SessionStop<CR>", desc = "Stop recording a session" },
+      { "<leader>qr", function() require("persistence").load({ last = true }) end, desc = "Recent Session" },
+      { "<leader>qs", function() require("persistence").save() end, desc = "Save session" },
+      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+      { "<leader>qS", function() require("persistence").select() end, desc = "Select a session" },
     },
+    init = function() require("persistence").load() end,
   },
 
   { -- keymaps
