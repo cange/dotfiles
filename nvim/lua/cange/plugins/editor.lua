@@ -94,21 +94,17 @@ return {
       -- stylua: ignore start
       return {
         {
-          "<leader>ma",
+          "<leader>a",
           function()
             harpoon:list():add()
             Log:info("Bookmark added!", "[harpoon]")
           end,
           desc = "Add bookmark",
-        },
-        { "<leader>mm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show bookmarks" },
-        { "<leader>ms", "<cmd>Telescope harpoon marks<CR>",                          desc = "Search bookmarks" },
-        { "<leader>m1", function() harpoon:list():select(1) end,                     desc = "1st bookmark" },
-        { "<leader>m2", function() harpoon:list():select(2) end,                     desc = "2nd bookmark" },
-        { "<leader>m3", function() harpoon:list():select(3) end,                     desc = "3rd bookmark" },
-        { "<leader>m4", function() harpoon:list():select(4) end,                     desc = "4th bookmark" },
-        { "[m", function() harpoon:list():prev() end,                                desc = "Prev bookmark" },
-        { "]m", function() harpoon:list():next() end,                                desc = "Next bookmark" },
+         },
+        { "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show bookmarks" },
+        { "<leader>sm", "<cmd>Telescope harpoon marks<CR>",                          desc = "Search bookmarks" },
+        { "[m", function() harpoon:list():prev() end,                               desc = "Prev bookmark" },
+        { "]m", function() harpoon:list():next() end,                               desc = "Next bookmark" },
       }
       -- stylua: ignore end
     end,
