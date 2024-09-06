@@ -54,6 +54,7 @@ local function update_highlights()
     NvimTreeFolderArrowOpen = { fg = pal.fg3 },
     NvimTreeGitRenamed = { fg = pal.magenta.base },
     NvimTreeIndentMarker = { fg = pal.bg2 },
+    NvimTreeWindowPicker = { fg = pal.fg0, bg = pal.sel1 },
     -- indent-blankline
     MiniIndentscopeSymbol = { fg = pal.green.dim },
     -- completion
