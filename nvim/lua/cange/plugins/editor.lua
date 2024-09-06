@@ -1,24 +1,6 @@
 local icons = require("cange.icons")
 
 return {
-  { -- file explorer to execute bulk file/directory operations (renaming)
-    "stevearc/oil.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      columns = { "icon" },
-      view_options = {
-        show_hidden = true,
-      },
-      float = {
-        padding = 16,
-        max_width = 88,
-      },
-    },
-    keys = {
-      { "-", "<cmd>Oil --float<CR>", desc = "Open Oil explorer" },
-    },
-  },
-
   { -- File explorer
     "nvim-tree/nvim-tree.lua",
     lazy = false,

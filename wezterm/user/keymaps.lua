@@ -18,7 +18,7 @@ wezterm.on("restore_session", function(win)
 end)
 
 local function desc(text)
-  wezterm.format({
+  return wezterm.format({
     { Attribute = { Intensity = "Bold" } },
     { Foreground = { AnsiColor = "Fuchsia" } },
     { Text = text },
@@ -66,12 +66,34 @@ return {
   },
   -- Tab renaming
   {
-    key = "r",
+    key = "t",
     mods = "LEADER",
     action = act.PromptInputLine({
-      description = desc("Renaming tab title:"),
+      description = desc(" Renaming tab title:"),
       action = wezterm.action_callback(function(window, _, line)
         if line then window:active_tab():set_title(line) end
+      end),
+    }),
+  },
+
+  -- Switch to a monitoring workspace, which will have `top` launched into it
+  {
+    key = "u",
+    mods = "LEADER",
+    action = act.SwitchToWorkspace({ name = "monitoring", spawn = { args = { "top" } } }),
+  },
+  -- Create a new workspace with a random name and switch to it
+  { key = "i", mods = "LEADER", action = act.SwitchToWorkspace },
+  -- Show the launcher in fuzzy selection mode and have it list all workspaces
+  -- and allow activating one.
+  { key = "p", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+  {
+    key = "s",
+    mods = "LEADER",
+    action = act.PromptInputLine({
+      description = desc("  New session name:"),
+      action = wezterm.action_callback(function(_, _, line)
+        if line then wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line) end
       end),
     }),
   },
