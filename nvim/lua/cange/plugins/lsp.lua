@@ -69,8 +69,8 @@ return {
             },
           },
         },
-        tsserver = { -- javascript, typescript, etc.
-          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+        ts_ls = { -- javascript, typescript, etc.
+          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ts_ls
           init_options = {
             preferences = { disableSuggestions = true },
             completions = { completeFunctionCalls = true },
@@ -164,7 +164,6 @@ return {
 
       for server, server_config in pairs(server_configs) do
         local config = vim.tbl_deep_extend("force", default_config, server_config)
-
         require("lspconfig")[server].setup(config)
       end
 

@@ -138,7 +138,7 @@ function M.get_service_icons()
     ruby_lsp = grep_icon("rb"),
     stylelint = grep_icon(".stylelint"),
     tailwindcss = grep_icon("tailwind.config.js"),
-    tsserver = grep_icon("ts"),
+    ts_ls = grep_icon("ts"),
     volar = grep_icon("vue"),
   }
 end
