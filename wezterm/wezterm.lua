@@ -36,7 +36,8 @@ config = {
     colors = bg_presets.BLURRY,
   },
   inactive_pane_hsb = {
-    saturation = 0,
+    saturation = 0.9,
+    brightness = 0.5,
   },
 
   -- Spacing
@@ -65,7 +66,7 @@ config = {
       inactive_tab_edge = theme.transparent,
     },
   },
-  hide_tab_bar_if_only_one_tab = true,
+  -- hide_tab_bar_if_only_one_tab = true,
 
   -- make wezterm evnironment aware
   set_environment_variables = {
@@ -98,14 +99,36 @@ end)
 -- Status bar
 -- Name of the current workspace | Hostname
 wezterm.on("update-status", function(window)
-  local fmt = "%s %s  "
-  local right_status = wezterm.format({
+  local fmt = " %s  %s  "
+  local content = {
     { Background = { Color = theme.transparent } },
     { Foreground = { Color = pal.sel1 } },
-    { Text = string.format(fmt, wezterm.nerdfonts.oct_codespaces, window:active_workspace()) },
-    { Text = string.format(fmt, wezterm.nerdfonts.oct_clock, wezterm.strftime("%a,%e. %b %H:%M")) },
-  })
-  window:set_right_status(right_status)
+    { Text = string.format(fmt, wezterm.nerdfonts.oct_clock, wezterm.strftime("%a, %e. %b %H:%M")) },
+  }
+
+  window:set_right_status(wezterm.format(content))
+end)
+
+-- Session manager
+-- https://github.com/danielcopper/wezterm-session-manager
+local ok, session_manager = pcall(require, "wezterm-session-manager/session-manager")
+if not ok then
+  error("[wezterm-session-manager] not found! Ensure wezterm-session-manager repo is cloned to your runtimepath")
+  -- run git clone https://github.com/danielcopper/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
+end
+
+wezterm.on("window-config-reloaded", function(win)
+  wezterm.log_info("Startup restore session!", win)
+  session_manager.restore_state(win)
+end)
+
+wezterm.on("save_session", function(win)
+  wezterm.log_info("Save session!", win)
+  session_manager.save_state(win)
+end)
+wezterm.on("restore_session", function(win)
+  wezterm.log_info("Restore session!", win)
+  session_manager.restore_state(win)
 end)
 
 return config

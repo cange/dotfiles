@@ -27,7 +27,6 @@ end
 
 return {
   -- sessions
-  { key = "h", mods = "LEADER", action = act.EmitEvent("hello") },
   { key = "s", mods = "LEADER", action = act.EmitEvent("save_session") },
   { key = "r", mods = "LEADER", action = act.EmitEvent("restore_session") },
   -- Pane splitting
@@ -58,42 +57,20 @@ return {
   -- Word jumping
   { key = "LeftArrow", mods = "SUPER", action = act.SendString("\x1bb") },
   { key = "RightArrow", mods = "SUPER", action = act.SendString("\x1bf") },
-  -- open wezterm settings in new tab
-  {
+
+  { -- open wezterm settings in new tab
     key = ",",
     mods = "SUPER",
     action = act.SpawnCommandInNewTab({ cwd = wezterm.home_dir, args = { "nvim", wezterm.config_file } }),
   },
-  -- Tab renaming
-  {
+
+  { -- Tab renaming
     key = "t",
     mods = "LEADER",
     action = act.PromptInputLine({
-      description = desc(" Renaming tab title:"),
+      description = desc("Rename tab:"),
       action = wezterm.action_callback(function(window, _, line)
         if line then window:active_tab():set_title(line) end
-      end),
-    }),
-  },
-
-  -- Switch to a monitoring workspace, which will have `top` launched into it
-  {
-    key = "u",
-    mods = "LEADER",
-    action = act.SwitchToWorkspace({ name = "monitoring", spawn = { args = { "top" } } }),
-  },
-  -- Create a new workspace with a random name and switch to it
-  { key = "i", mods = "LEADER", action = act.SwitchToWorkspace },
-  -- Show the launcher in fuzzy selection mode and have it list all workspaces
-  -- and allow activating one.
-  { key = "p", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
-  {
-    key = "s",
-    mods = "LEADER",
-    action = act.PromptInputLine({
-      description = desc("  New session name:"),
-      action = wezterm.action_callback(function(_, _, line)
-        if line then wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line) end
       end),
     }),
   },

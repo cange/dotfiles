@@ -57,6 +57,7 @@ local function color_by_dirname(name, active)
   local names = {
     ["vue"] = "#42b883",
     ["frontend"] = "#f7df1e",
+    ["routing"] = "#f7df1e",
   }
   local bg = pal.bg4
   local fg = active and pal.fg2 or pal.bg0
