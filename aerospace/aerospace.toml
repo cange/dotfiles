@@ -195,3 +195,11 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
 run = 'layout floating'
+
+# https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+t = ['C34H89x.*', 'built-in']
+b = ['C34H89x.*', 'Dell U2719D (1)', 'Dell U2719D.*', 'built-in']
+g = ['C34H89x.*', 'Dell U2719D (2)', 'Dell U2719D.*', 'built-in']
+m = ['Dell U2719D (2)', 'Dell U2719D.*', 'built-in']
+c = ['Dell U2719D (2)', 'Dell U2719D.*', 'built-in']
