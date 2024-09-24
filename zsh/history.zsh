@@ -7,6 +7,7 @@ export HISTFILE=~/.zsh_history   # path/location of the history file
 export HISTSIZE=1000000000       # number of commands that are loaded into memory
 export SAVEHIST=1000000000       # number of commands that are stored
 export HISTTIMEFORMAT="[%F %T] " # Timestamp format for history
+export HISTCONTROL=ignoreboth    # Ignore duplicates and commands starting with a space
 
 setopt APPEND_HISTORY       # Append history to the history file
 setopt INC_APPEND_HISTORY   # Immediately append to the history file, not just when the shell exits
