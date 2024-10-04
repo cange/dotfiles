@@ -1,2 +1,8 @@
+tap "homebrew/cask-versions"
+tap "homebrew/cask-fonts"
+# Simplified and community-driven man pages
+brew "tldr"
+# Developer targeted fonts with a high number of glyphs
+cask "font-jetbrains-mono-nerd-font"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"

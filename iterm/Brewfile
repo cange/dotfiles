@@ -1,8 +1,0 @@
-tap "homebrew/cask-versions"
-tap "homebrew/cask-fonts"
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2-beta"
-# Simplified and community-driven man pages
-brew "tldr"
-# Developer targeted fonts with a high number of glyphs
-cask "font-jetbrains-mono-nerd-font"

@@ -75,9 +75,6 @@ _source_if_exists "$Z_CONFIG_DIR/exports.zsh"
 _source_if_exists "$Z_CONFIG_DIR/fzf.zsh"
 _source_if_exists "$Z_CONFIG_DIR/history.zsh"
 
-# https://iterm2.com/documentation-shell-integration.html
-_source_if_exists "$Z_CONFIG_DIR/.iterm2_shell_integration.zsh"
-
 # precmd() { # --- refresh on touch
 # }
 
