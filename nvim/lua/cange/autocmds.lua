@@ -41,11 +41,3 @@ autocmd({ "BufRead" }, {
 })
 
 -- Show project picker on startup
-autocmd({ "VimEnter" }, {
-  group = group_id,
-  callback = function()
-    local ok, telescope = pcall(require, "telescope")
-    if not ok or not telescope.extensions.project or not is_in_project then return end
-    telescope.extensions.project.project({})
-  end,
-})

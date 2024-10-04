@@ -23,7 +23,6 @@ return {
     opts = function()
       local custom_theme = require("lualine.themes.terafox")
       -- set the bg of lualine_c section to non-transparent
-      custom_theme.normal.c.bg = Cange.get_hl_hex("NormalFloat", "bg").bg
 
       return {
         options = {
