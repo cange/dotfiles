@@ -45,32 +45,4 @@ return {
       })
     end,
   },
-
-  { -- AI code suggestions
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      panel = { enabled = false, auto_refresh = true },
-      suggestion = { enabled = false, auto_refresh = true },
-    },
-    keys = function()
-      -- stylua: ignore start
-      return {
-        { "<localleader>cA", "<cmd>Copilot panel accept<CR>",  desc = "Accept Copilot panel" },
-        { "<localleader>cR", "<cmd>Copilot panel refresh<CR>", desc = "Refresh Copilot panel" },
-        { "<localleader>cS", "<cmd>Copilot status<CR>",        desc = "Copilot status" },
-        { "<localleader>co", "<cmd>Copilot toggle<CR>",        desc = "Toggle Copilot" },
-        { "<localleader>cp", "<cmd>Copilot panel<CR>",         desc = "Toggle Copilot panel" },
-        { "<localleader>cs", "<cmd>Copilot suggestion<CR>",    desc = "Toggle Copilot suggestion" },
-        { "[c", '<cmd>Copilot suggestion prev<CR>',            desc = "Prev Copilot suggestion" },
-        { "[p", '<cmd>Copilot panel jump_prev<CR>',            desc = "Prev Copilot panel" },
-        { "]c", '<cmd>Copilot suggestion next<CR>',            desc = "Next Copilot suggestion" },
-        { "]p", '<cmd>Copilot panel jump_next<CR>',            desc = "Next Copilot panel" },
-      }
-      -- stylua: ignore end
-    end,
-  },
 }

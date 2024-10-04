@@ -35,6 +35,7 @@ M.ui = {
   Note                = "", -- nf-cod-note
   Package             = "", -- nf-cod-package
   Path                = "", -- nf-oct-rel_file_path
+  Person              = "", -- nf-oct-person
   Plus                = "", -- nf-doc-plus
   Search              = "", -- nf-cod-search
   Stethoscope         = "󰓙", -- nf-md-stethoscope

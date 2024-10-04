@@ -94,7 +94,7 @@ return {
       -- stylua: ignore start
       return {
         {
-          "<leader>a",
+          "<leader>A",
           function()
             harpoon:list():add()
             Log:info("Bookmark added!", "[harpoon]")
@@ -102,7 +102,7 @@ return {
           desc = "Add bookmark",
          },
         { "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show bookmarks" },
-        { "<leader>sm", "<cmd>Telescope harpoon marks<CR>",                          desc = "Search bookmarks" },
+        { "<leader>sm", "<cmd>Telescope harpoon marks<CR>",                         desc = "Search bookmarks" },
         { "[m", function() harpoon:list():prev() end,                               desc = "Prev bookmark" },
         { "]m", function() harpoon:list():next() end,                               desc = "Next bookmark" },
       }
@@ -149,7 +149,6 @@ return {
         { "<leader>c", group = "Code", icon = icons.ui.Code },
         { "<leader>e", group = "Editor", icon = icons.ui.Neovim },
         { "<leader>g", group = "Git", icon = icons.git.Branch },
-        { "<leader>m", group = "Bookmark", icon = icons.plugin.Harpoon },
         { "<leader>q", group = "Session" },
         { "<leader>s", group = "Search", icon = icons.ui.Search },
         { "<leader>t", group = "Troubleshooting", icon = icons.ui.Stethoscope },
