@@ -20,12 +20,9 @@
     "dark": "Terafox",
     "light": "Dayfox"
   },
-  "ui_font_size": 12,
   "ui_font_family": "JetBrainsMono Nerd Font",
-  "buffer_font_size": 12,
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "terminal": {
-    "font_size": 11,
     "font_family": "JetBrainsMonoNL Nerd Font"
   },
 
@@ -37,10 +34,8 @@
     "use_multiline_find": true,
     "use_smartcase_find": true
   },
-  "tab_bar": {
-    "show": false
-  },
 
+  "tabs": { "file_icons": true },
   "relative_line_numbers": true,
 
   // The number of lines to keep above/below the cursor when scrolling.
