@@ -18,19 +18,6 @@ return {
         opts = {},
         config = function(_, opts) require("copilot_cmp").setup(opts) end,
       },
-      { -- AI code suggestions
-        "tzachar/cmp-tabnine",
-        build = "./install.sh",
-        dependencies = "hrsh7th/nvim-cmp",
-        opts = {
-          max_lines = 1000,
-          max_num_results = 10,
-          sort = true, -- results by returned priority
-          run_on_every_keystroke = true,
-          snippet_placeholder = "..",
-          show_prediction_strength = false,
-        },
-      },
     },
     config = function()
       local cmp = require("cmp")

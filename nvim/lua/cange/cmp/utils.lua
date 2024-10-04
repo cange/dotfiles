@@ -17,7 +17,6 @@ end
 ---@return string
 local function get_menu_hl_group_by(source_name)
   local groups = {
-    cmp_tabnine = "CmpItemMenuTabnine",
     copilot = "CmpItemMenuCopilot",
     luasnip = "CmpItemMenu",
     nvim_lua = "CmpItemMenuLua",
@@ -34,7 +33,6 @@ function M.format(entry, vim_item)
   local maxwidth = 80
   local src_icons = {
     buffer = icons.ui.Database,
-    cmp_tabnine = icons.plugin.Tabnine,
     copilot = icons.plugin.Copilot,
     luasnip = icons.ui.Library,
     nvim_lsp = icons.ui.Globe,
@@ -60,13 +58,6 @@ function M.format(entry, vim_item)
     is_multiline = ((cmp_item.documentation or {}).value or ""):find(".*\n.+\n.+\n") ~= nil
   end
 
-  if src_name == "cmp_tabnine" then
-    ---@see https://github.com/tzachar/cmp-tabnine#show_prediction_strength
-    local detail = (cmp_item.labelDetails or {}).detail
-
-    is_multiline = (cmp_item.data or {}).multiline
-    strength = detail and detail:find(".*%%.*") and detail or ""
-  end
 
   ---@diagnostic disable-next-line: param-type-mismatch
   local kinds = icons.cmp_kinds or {}
