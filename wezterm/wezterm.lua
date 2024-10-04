@@ -78,11 +78,15 @@ config = {
   command_palette_fg_color = pal.sel1,
 }
 
-local function get_current_working_dir(tab)
-  local current_dir = tab.active_pane and tab.active_pane.current_working_dir or { file_path = "" }
-  local HOME_DIR = string.format("file://%s", os.getenv("HOME"))
+local function get_dir_name(path)
+  if path == "default" then return path end
+  local home_dir = string.format("file://%s", os.getenv("HOME"))
+  return path == home_dir and "." or path:gsub("(.*[/\\])(.*)", "%2")
+end
 
-  return current_dir == HOME_DIR and "." or string.gsub(current_dir.file_path, "(.*[/\\])(.*)", "%2")
+local function get_current_working_dir(tab)
+  local path = tab.active_pane and tab.active_pane.current_working_dir or { file_path = "" }
+  return get_dir_name(path.file_path)
 end
 
 -- Set tab title to the one that was set via `tab:set_title()`
@@ -103,13 +107,14 @@ wezterm.on("update-status", function(window)
   local content = {
     { Background = { Color = theme.transparent } },
     { Foreground = { Color = pal.sel1 } },
+    { Text = string.format(fmt, wezterm.nerdfonts.oct_codespaces, get_dir_name(window:active_workspace())) },
     { Text = string.format(fmt, wezterm.nerdfonts.oct_clock, wezterm.strftime("%a, %e. %b %H:%M")) },
   }
 
   window:set_right_status(wezterm.format(content))
 end)
 
--- Session manager
+-- Session manager (save/restore)
 -- https://github.com/danielcopper/wezterm-session-manager
 local ok, session_manager = pcall(require, "wezterm-session-manager/session-manager")
 if not ok then
@@ -126,6 +131,7 @@ wezterm.on("save_session", function(win)
   wezterm.log_info("Save session!", win)
   session_manager.save_state(win)
 end)
+
 wezterm.on("restore_session", function(win)
   wezterm.log_info("Restore session!", win)
   session_manager.restore_state(win)
