@@ -1,8 +1,3 @@
-local M = {
-  ---@diagnostic disable-next-line: undefined-field
-  mode = vim.o.background,
-}
-
 ---@return user.Palette, user.Spec
 local function get_palette()
   local curr_colorscheme = vim.g.colors_name
@@ -84,33 +79,19 @@ local function update_highlights()
   User.set_highlights(highlights)
 end
 
-local themes = {
-  dark = { name = "terafox", mode = "dark" },
-  light = { name = "dayfox", mode = "light" },
-}
-
 ---@param mode? '"dark"'|'"light"'|nil
 ---@param silent? boolean
 local function update_colorscheme(mode, silent)
   ---@diagnostic disable-next-line: undefined-field
-  M.mode = mode ~= nil and mode or vim.o.background
+  mode = mode ~= nil and mode or vim.o.background
   if not mode then return end
-  local theme = themes[M.mode]
-  vim.opt.background = theme.mode
-  vim.cmd("colorscheme " .. theme.name)
+  vim.opt.background = mode
+  local theme = mode == "dark" and "terafox" or "dayfox"
+  vim.cmd("colorscheme " .. theme)
 
-  if silent == false then
-    vim.schedule(function() Log:info(M.mode .. " / " .. theme.name, "Changed colorscheme") end)
-  end
+  if silent == false then vim.schedule(function() Log:info(mode .. " / " .. theme, "Changed colorscheme") end) end
 
   update_highlights()
-end
-
-local selected_index = 1
-local function toggle_colorscheme()
-  local index = selected_index + 1
-  selected_index = (index % vim.tbl_count(themes)) + 1
-  update_colorscheme(vim.tbl_keys(themes)[selected_index], false)
 end
 
 vim.api.nvim_create_user_command("UserUpdateColorscheme", function() update_colorscheme() end, {})
@@ -142,8 +123,5 @@ return {
         update_interval = 1000,
       })
     end,
-    keys = {
-      { "<leader>et", toggle_colorscheme, desc = "Toggle colorscheme mode" },
-    },
   },
 }
