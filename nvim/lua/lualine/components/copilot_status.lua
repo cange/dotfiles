@@ -7,7 +7,7 @@ if not ok then
   error('[lualine.components.copilot_status] "copilot.api" not found')
   return
 end
-local icos = require("cange.icons")
+local icos = require("user.icons")
 
 local M = require("lualine.component"):extend()
 local refresh_count = 1
@@ -17,13 +17,13 @@ local icons = {
   [""] = function() return icos.plugin.CopilotError end,
   ["Normal"] = function() return icos.plugin.Copilot end,
   ["Warning"] = function() return icos.plugin.CopilotWarning end,
-  ["InProgress"] = function() return require("cange.utils.spinner").icon(refresh_count) end,
+  ["InProgress"] = function() return require("user.utils.spinner").icon(refresh_count) end,
 }
 local colors = {
-  [""] = Cange.get_hl_hex("lualine_c_inactive", "fg"),
-  ["Normal"] = Cange.get_hl_hex("lualine_c_normal", "fg"),
-  ["Warning"] = Cange.get_hl_hex("WarningMsg", "fg"), -- using `WarningMsg` avoid missing hl issue
-  ["InProgress"] = Cange.get_hl_hex("lualine_c_normal", "fg"),
+  [""] = User.get_hl_hex("lualine_c_inactive", "fg"),
+  ["Normal"] = User.get_hl_hex("lualine_c_normal", "fg"),
+  ["Warning"] = User.get_hl_hex("WarningMsg", "fg"), -- using `WarningMsg` avoid missing hl issue
+  ["InProgress"] = User.get_hl_hex("lualine_c_normal", "fg"),
 }
 
 function M.init(self, opts)

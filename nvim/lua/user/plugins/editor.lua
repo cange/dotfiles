@@ -1,4 +1,4 @@
-local icons = require("cange.icons")
+local icons = require("user.icons")
 
 return {
   { -- File explorer
@@ -65,7 +65,7 @@ return {
         command = "NvimTreeClose",
       })
 
-      Cange.set_highlights({
+      User.set_highlights({
         NvimTreeGitDirtyIcon = { link = "GitSignsChange" },
         NvimTreeGitNewIcon = { link = "GitSignsAdd" },
       })

@@ -2,7 +2,7 @@ local M = require("lualine.component"):extend()
 
 local config = {
   exclude_filetypes = {},
-  icon = require("cange.icons").ui.Eye,
+  icon = require("user.icons").ui.Eye,
 }
 
 ---@return boolean

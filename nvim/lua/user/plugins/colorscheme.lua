@@ -3,10 +3,10 @@ local M = {
   mode = vim.o.background,
 }
 
----@return cange.Palette, cange.Spec
+---@return user.Palette, user.Spec
 local function get_palette()
   local curr_colorscheme = vim.g.colors_name
-  local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or Cange.get_config("ui.colorscheme")
+  local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or User.get_config("ui.colorscheme")
 
   return require("nightfox.palette").load(colorscheme), require("nightfox.spec").load(colorscheme)
 end
@@ -81,7 +81,7 @@ local function update_highlights()
     WhichKeyIcon = { link = "Comment" },
   }
 
-  Cange.set_highlights(highlights)
+  User.set_highlights(highlights)
 end
 
 local themes = {
@@ -113,10 +113,10 @@ local function toggle_colorscheme()
   update_colorscheme(vim.tbl_keys(themes)[selected_index], false)
 end
 
-vim.api.nvim_create_user_command("CangeUpdateColorscheme", function() update_colorscheme() end, {})
+vim.api.nvim_create_user_command("UserUpdateColorscheme", function() update_colorscheme() end, {})
 vim.api.nvim_create_autocmd({ "ColorScheme" }, {
-  group = vim.api.nvim_create_augroup("cange_on_colorscheme_change", { clear = true }),
-  command = "CangeUpdateColorscheme",
+  group = vim.api.nvim_create_augroup("user_on_colorscheme_change", { clear = true }),
+  command = "UserUpdateColorscheme",
 })
 
 return {

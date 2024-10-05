@@ -1,5 +1,5 @@
-local icons = require("cange.icons")
-local strUtil = require("cange.utils.string")
+local icons = require("user.icons")
+local strUtil = require("user.utils.string")
 local exclude_filetypes = {
   "",
   "NvimTree",

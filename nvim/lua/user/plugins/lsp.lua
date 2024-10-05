@@ -1,4 +1,4 @@
-local icons = require("cange.icons")
+local icons = require("user.icons")
 
 return {
   { -- managing & installing LSP servers, linters & formatters
@@ -9,7 +9,7 @@ return {
     },
     opts = {
       ui = {
-        border = Cange.get_config("ui.border"),
+        border = User.get_config("ui.border"),
         icons = {
           package_installed = icons.ui.Check,
           package_pending = icons.ui.Sync,
@@ -160,30 +160,30 @@ return {
           },
         },
       }
-      local default_config = require("cange.lsp").server_config
+      local default_config = require("user.lsp").server_config
 
       for server, server_config in pairs(server_configs) do
         local config = vim.tbl_deep_extend("force", default_config, server_config)
         require("lspconfig")[server].setup(config)
       end
 
-      require("cange.lsp").update_diagnostics()
+      require("user.lsp").update_diagnostics()
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(server_configs),
         automatic_installation = true,
       })
 
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = Cange.get_config("ui.border"),
+        border = User.get_config("ui.border"),
         title = "Hover",
       })
       vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = Cange.get_config("ui.border"),
+        border = User.get_config("ui.border"),
         title = "Signature Help",
       })
     end,
     -- stylua: ignore
-    keys = require("cange.lsp").keymaps,
+    keys = require("user.lsp").keymaps,
   },
 
   { -- Extensible UI notifications and LSP progress messages.

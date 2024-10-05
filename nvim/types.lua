@@ -1,27 +1,27 @@
 ---@meta
 
----@class cange.PaletteMeta
+---@class user.PaletteMeta
 ---@field name string
 ---@field light boolean
 
----@class cange.Shade
+---@class user.Shade
 ---@field base string
 ---@field bright string
 ---@field dim string
 ---@field light boolean
 
----@class cange.Palette
----@field meta cange.PaletteMeta
----@field black cange.Shade
----@field red cange.Shade
----@field green cange.Shade
----@field yellow cange.Shade
----@field blue cange.Shade
----@field magenta cange.Shade
----@field cyan cange.Shade
----@field white cange.Shade
----@field orange cange.Shade
----@field pink cange.Shade
+---@class user.Palette
+---@field meta user.PaletteMeta
+---@field black user.Shade
+---@field red user.Shade
+---@field green user.Shade
+---@field yellow user.Shade
+---@field blue user.Shade
+---@field magenta user.Shade
+---@field cyan user.Shade
+---@field white user.Shade
+---@field orange user.Shade
+---@field pink user.Shade
 ---@field comment string
 ---@field bg0 string Dark bg (status line and float)
 ---@field bg1 string Default bg
@@ -35,7 +35,7 @@
 ---@field sel0 string Popup bg, visual selection bg
 ---@field sel1 string Popup sel bg, search bg
 
----@class cange.Spec
+---@class user.Spec
 ---@field bg0 string Dark bg (status line and float)
 ---@field bg1 string Default bg
 ---@field bg2 string Lighter bg (colorcolm folds)
@@ -47,13 +47,13 @@
 ---@field fg3 string Darker fg (line numbers, fold colums)
 ---@field sel0 string Popup bg, visual selection bg
 ---@field sel1 string Popup sel bg, search bg
----@field syntax cange.SpecSyntax
----@field diag cange.SpecDiagnostic
----@field diag_bg cange.SpecDiagnosticBg
----@field diff cange.SpecDiff
----@field git cange.SpecGit
+---@field syntax user.SpecSyntax
+---@field diag user.SpecDiagnostic
+---@field diag_bg user.SpecDiagnosticBg
+---@field diff user.SpecDiff
+---@field git user.SpecGit
 
----@class cange.SpecSyntax
+---@class user.SpecSyntax
 ---@field bracket string Brackets and Punctuation
 ---@field builtin0 string Builtin variable
 ---@field builtin1 string Builtin type
@@ -76,38 +76,38 @@
 ---@field type string Types
 ---@field variable string Variables
 
----@class cange.SpecDiagnostic
+---@class user.SpecDiagnostic
 ---@field error string
 ---@field warn string
 ---@field info string
 ---@field hint string
 ---@field ok string
 
----@class cange.SpecDiagnosticBg
+---@class user.SpecDiagnosticBg
 ---@field error string
 ---@field warn string
 ---@field info string
 ---@field hint string
 ---@field ok string
 
----@class cange.SpecDiff
+---@class user.SpecDiff
 ---@field add string
 ---@field delete string
 ---@field change string
 ---@field text string
 
----@class cange.SpecGit
+---@class user.SpecGit
 ---@field add string
 ---@field changed string
 ---@field conflict string
 ---@field ignored string
 ---@field removed string
 
----@class cange.LualineStateIcons
+---@class user.LualineStateIcons
 ---@field active? string
 ---@field inactive? string
 
----@class cange.LualineServiceList
+---@class user.LualineServiceList
 ---@field private before_ft string
 ---@field private debug string
 ---@field private cache table
@@ -126,7 +126,7 @@
 ---@field new function
 ---@field update function
 
----@class cange.DevIconsPreset
+---@class user.DevIconsPreset
 ---@field icon? string Path of an icon shape
 ---@field color? string Hex color value
 ---@field cterm_color? string

@@ -23,7 +23,7 @@ return {
       local cmp = require("cmp")
       local max_count = 16
 
-      cmp.setup(require("cange.cmp").opts)
+      cmp.setup(require("user.cmp").opts)
 
       -- https://github.com/hrsh7th/cmp-cmdline
       -- `/` cmdline setup.

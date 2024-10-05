@@ -1,11 +1,11 @@
-local strUtil = require("cange.utils.string")
+local strUtil = require("user.utils.string")
 
 local M = {}
 M.__index = M
 local default_state_icons = {
-  active = require("cange.icons").ui.CheckAll,
-  inactive = require("cange.icons").ui.EyeClosed,
-  minimized = require("cange.icons").ui.Eye,
+  active = require("user.icons").ui.CheckAll,
+  inactive = require("user.icons").ui.EyeClosed,
+  minimized = require("user.icons").ui.Eye,
 }
 
 --- Provides a list of services which are can be displayed by icons
@@ -15,7 +15,7 @@ local default_state_icons = {
 ---@param get_data function -- callback to get the data
 ---@param config {exclude_filetypes:string[]}
 ---@param debug? boolean
----@return cange.LualineServiceList
+---@return user.LualineServiceList
 function M:new(label, service_icons, state_icons, get_data, config, debug)
   return setmetatable({
     beofre_ft = "",

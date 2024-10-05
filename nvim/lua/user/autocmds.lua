@@ -5,7 +5,7 @@
 -- Define autocommands with Lua APIs
 -- See: h:api-autocmd, h:augroup
 local autocmd = vim.api.nvim_create_autocmd
-local group_id = vim.api.nvim_create_augroup("CangeSetup", { clear = true })
+local group_id = vim.api.nvim_create_augroup("UserSetup", { clear = true })
 
 autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
   group = group_id,

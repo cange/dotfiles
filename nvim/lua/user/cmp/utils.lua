@@ -1,4 +1,4 @@
-local icons = require("cange.icons")
+local icons = require("user.icons")
 
 ---Provides prediction strength as an icon
 ---@param percentage string Number of strength
@@ -57,7 +57,6 @@ function M.format(entry, vim_item)
   if src_name == "copilot" then
     is_multiline = ((cmp_item.documentation or {}).value or ""):find(".*\n.+\n.+\n") ~= nil
   end
-
 
   ---@diagnostic disable-next-line: param-type-mismatch
   local kinds = icons.cmp_kinds or {}

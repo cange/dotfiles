@@ -16,7 +16,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.keymap.set("n", "<leader>e1", "<cmd>Lazy show<CR>", { desc = "Plugin info" })
 
-require("lazy").setup("cange.plugins", {
+require("lazy").setup("user.plugins", {
   checker = {
     notify = false, -- get a notification when new updates are found
     enabled = true, -- automatically check for plugin updates

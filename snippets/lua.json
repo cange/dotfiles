@@ -17,7 +17,7 @@
   },
   "notify(…)": {
     "prefix": "not",
-    "body": "Cange.log(\"$1\"${2:, { title: $3 }})"
+    "body": "User.log(\"$1\"${2:, { title: $3 }})"
   },
   "local func(…)": {
     "prefix": "lf",

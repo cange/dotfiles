@@ -1,8 +1,8 @@
 local M = {}
-local ns = "[cange.utils.icons]"
-local ok, icons = pcall(require, "cange.icons")
+local ns = "[user.utils.icons]"
+local ok, icons = pcall(require, "user.icons")
 if not ok then
-  error(ns .. ' "cange.icons" not found!')
+  error(ns .. ' "user.icons" not found!')
   return ""
 end
 
@@ -10,7 +10,7 @@ local user_icons = {}
 ---@param origin_filetype string
 ---@param filename string
 ---@param extensions? string[]
----@param preset? cange.DevIconsPreset
+---@param preset? user.DevIconsPreset
 local function set_icon_by_filetype(origin_filetype, filename, extensions, preset)
   local devicons = require("nvim-web-devicons")
   local icon, color = devicons.get_icon_color(origin_filetype)
@@ -28,7 +28,7 @@ local function set_icon_by_filetype(origin_filetype, filename, extensions, prese
     -- print(string.format("[%s] %s", fname, vim.inspect(user_icons[fname])):gsub("\n", " "))
   end
 end
----@type cange.DevIconsPreset[]
+---@type user.DevIconsPreset[]
 local presets = {
   storybook = {
     color = "#ff4785",

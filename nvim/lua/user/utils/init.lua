@@ -1,17 +1,17 @@
-local ns = "[cange.utils]"
+local ns = "[user.utils]"
 
 local M = {}
 
-Log = require("cange.utils.log"):new() -- 1st
+Log = require("user.utils.log"):new() -- 1st
 --
-M.get_icon = require("cange.utils.icons").get_icon -- 2nd
-M.get_service_icons = require("cange.utils.icons").get_service_icons
+M.get_icon = require("user.utils.icons").get_icon -- 2nd
+M.get_service_icons = require("user.utils.icons").get_service_icons
 
 ---Get certain config attributes
 ---@param key_path string Dot separated path of config group
 ---@return table|any value of given key or nil if not found.
 function M.get_config(key_path)
-  local prop = require("cange.config")
+  local prop = require("user.config")
 
   for _, key in pairs(vim.split(key_path, "%.")) do
     local next_prop = prop[key]
@@ -29,7 +29,7 @@ end
 ---@param value any
 ---@return any # Either registered or the value of taken key
 function M.set_config(key, value)
-  local config = require("cange.config")
+  local config = require("user.config")
 
   local parts = {}
   for part in string.gmatch(key, "[%w_]+") do
@@ -74,7 +74,7 @@ end
 ---@return table|nil
 ---@example get_hl_hex("Normal", "fg") --> {fg = "#123456"}
 function M.get_hl_hex(name, key)
-  local hl = Cange.get_hl(name, { key })
+  local hl = User.get_hl(name, { key })
   local value = hl[key] or nil
   local output = {}
 

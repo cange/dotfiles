@@ -3,7 +3,7 @@ M.__index = M
 
 function M:new()
   return setmetatable({
-    plugin = "cange",
+    plugin = "user",
   }, self)
 end
 

@@ -1,5 +1,5 @@
 local M = require("lualine.component"):extend()
-local str = require("cange.utils.string")
+local str = require("user.utils.string")
 
 local default_options = {
   prefix = "",

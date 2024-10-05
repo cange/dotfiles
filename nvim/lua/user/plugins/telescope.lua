@@ -1,4 +1,4 @@
-local icons = require("cange.icons")
+local icons = require("user.icons")
 
 return {
   -- Fuzzy Finder
@@ -111,7 +111,7 @@ return {
           theme = "ivy",
           mappings = {
             i = {
-              ["<C-f>"] = require("cange.telescope").file_extension_filter_input,
+              ["<C-f>"] = require("user.telescope").file_extension_filter_input,
             },
           },
         },
@@ -129,7 +129,7 @@ return {
   end,
   -- stylua: ignore start
   keys = {
-    { "<localleader>/", "<cmd>lua R('cange.telescope').live_grep()<CR>",    desc = "Search in Files" },
+    { "<localleader>/", "<cmd>lua R('user.telescope').live_grep()<CR>",    desc = "Search in Files" },
     { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<CR>",         desc = "Search within buffer" },
     { "<leader>f",  "<cmd>Telescope find_files<CR>",                        desc = "Search Files" },
     { "<leader>p",  "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },
@@ -141,19 +141,19 @@ return {
     { "<leader>bb", "<cmd>Telescope buffers<CR>",                           desc = "Buffers" },
     { "<leader>sC", "<cmd>Telescope commands<CR>",                          desc = "Commands" },
     { "<leader>sH", '<cmd>Telescope highlights<CR>',                        desc = "Highlights" },
-    { "<leader>sS", '<cmd>lua R("cange.telescope").browse_snippets()<CR>',  desc = "Edit snippets" },
-    { "<leader>sW", '<cmd>lua R("cange.telescope").browse_workspace()<CR>', desc = "Current workspace" },
-    { "<leader>sb", '<cmd>lua R("cange.telescope").file_browser()<CR>',     desc = "In current directory" },
+    { "<leader>sS", '<cmd>lua R("user.telescope").browse_snippets()<CR>',  desc = "Edit snippets" },
+    { "<leader>sW", '<cmd>lua R("user.telescope").browse_workspace()<CR>', desc = "Current workspace" },
+    { "<leader>sb", '<cmd>lua R("user.telescope").file_browser()<CR>',     desc = "In current directory" },
     { "<leader>sh", "<cmd>Telescope help_tags<CR>",                         desc = "Nvim help" },
     { "<leader>sk", "<cmd>Telescope keymaps<CR>",                           desc = "Keybindings" },
-    { "<leader>sn", '<cmd>lua R("cange.telescope").browse_nvim()<CR>',      desc = "Nvim config" },
+    { "<leader>sn", '<cmd>lua R("user.telescope").browse_nvim()<CR>',      desc = "Nvim config" },
     { "<leader>sr", "<cmd>Telescope oldfiles<CR>",                          desc = "Recently opened files" },
     { "<leader>sR", "<cmd>Telescope registers<CR>",                         desc = "Register values" },
     { "<leader>st", "<cmd>TodoTelescope<CR>",                               desc = "Todo comments" },
     { "<leader>su", "<cmd>Telescope undo<CR>",                              desc = "Undo tree" },
     { "<leader>sw", "<cmd>Telescope grep_string<CR>",                       desc = "Current word" },
     { "cD", "<cmd>Telescope diagnostics<CR>",                               desc = "Workspace diagnostics" },
-    { "cl", '<cmd>lua R("cange.telescope").diagnostics_log()<CR>',          desc = "File diagnostics" },
+    { "cl", '<cmd>lua R("user.telescope").diagnostics_log()<CR>',          desc = "File diagnostics" },
   },
   -- stylua: ignore end
 }

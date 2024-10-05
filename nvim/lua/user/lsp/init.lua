@@ -1,4 +1,4 @@
-local ns = "cange.lsp.lspconfig"
+local ns = "user.lsp.lspconfig"
 local cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_ok then
   print(ns, '"cmp_nvim_lsp" not found')
@@ -15,15 +15,15 @@ end
 
 local M = {}
 
-M.show_diagnostic_virtual_text = Cange.get_config("lsp.diagnostic_virtual_text") or false
+M.show_diagnostic_virtual_text = User.get_config("lsp.diagnostic_virtual_text") or false
 local telescope_builtin = function(method) require("telescope.builtin")[method]({ reuse_win = true }) end
 -- stylua: ignore start
 M.keymaps = {
   { "<leader>ca", vim.lsp.buf.code_action,                          desc = "Code Actions" },
-  { "<leader>cd", require("cange.lsp.toggle").virtual_text,         desc = "Toggle Inline Virtual Text"  },
+  { "<leader>cd", require("user.lsp.toggle").virtual_text,         desc = "Toggle Inline Virtual Text"  },
   { "<leader>cr", "<cmd>LspRestart;<CR>",                           desc = "LSP Restart"  },
   { "<leader>e4", "<cmd>LspInfo<CR>",                               desc = "LSP info"  },
-  { "<leader>el", require("cange.lsp.toggle").format_on_save,       desc = "Toggle Format on Save"  },
+  { "<leader>el", require("user.lsp.toggle").format_on_save,       desc = "Toggle Format on Save"  },
   { "<leader>r", vim.lsp.buf.rename,                                desc = "Rename Symbol" },
   { "[d", vim.diagnostic.goto_prev,                                 desc = "Prev Diagnostic" },
   { "]d", vim.diagnostic.goto_next,                                 desc = "Next Diagnostic" },
@@ -55,7 +55,7 @@ M.server_config = {
 local function define_sign_icons()
   local signs = {}
   ---@diagnostic disable-next-line: param-type-mismatch
-  for type, icon in pairs(require("cange.icons").diagnostics) do
+  for type, icon in pairs(require("user.icons").diagnostics) do
     local hl = "DiagnosticSign" .. type
     table.insert(signs, { name = hl, text = icon })
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -71,7 +71,7 @@ function M.update_diagnostics()
     signs = {
       active = define_sign_icons(),
     },
-    virtual_text = Cange.get_config("lsp.diagnostic_virtual_text"),
+    virtual_text = User.get_config("lsp.diagnostic_virtual_text"),
   })
 end
 
@@ -79,7 +79,7 @@ function M.update_format_on_save()
   local ok, conform = pcall(require, "conform")
   if not ok then return end
   local opts = { format_on_save = nil }
-  if Cange.get_config("lsp.format_on_save") then
+  if User.get_config("lsp.format_on_save") then
     opts = {
       format_on_save = {
         lsp_fallback = true,

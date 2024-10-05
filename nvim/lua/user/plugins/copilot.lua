@@ -1,4 +1,4 @@
-local icons = require("cange.icons")
+local icons = require("user.icons")
 -- inspired by https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/coding/copilot-chat.lua
 
 local M = {}
@@ -9,7 +9,7 @@ function M.pick(kind)
     local actions = require("CopilotChat.actions")
     local items = actions[kind .. "_actions"]()
     if not items then
-      Cange:warn("No " .. kind .. " found on the current line", { title = "[CopilotChat]" })
+      User:warn("No " .. kind .. " found on the current line", { title = "[CopilotChat]" })
       return
     end
     local ok = pcall(require, "fzf-lua")

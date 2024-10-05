@@ -1,4 +1,4 @@
-local icons = require("cange.icons")
+local icons = require("user.icons")
 
 return {
   -- advanced colorcolumn
@@ -24,7 +24,7 @@ return {
     config = function()
       -- NOTE: needs to be delayed to apply background_colour
       require("notify").setup({
-        level = Cange.get_config("log.level"),
+        level = User.get_config("log.level"),
         icons = {
           ERROR = icons.diagnostics.Error,
           WARN = icons.diagnostics.Warn,
@@ -68,7 +68,7 @@ return {
     "nvim-tree/nvim-web-devicons",
     config = function()
       require("nvim-web-devicons").setup()
-      require("cange.utils.icons").setup()
+      require("user.utils.icons").setup()
     end,
   },
 

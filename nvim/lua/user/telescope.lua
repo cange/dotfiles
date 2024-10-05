@@ -1,13 +1,13 @@
 local ok, telescope = pcall(require, "telescope")
 if not ok then
-  error('[cange.telescope] "telescope" not found')
+  error('[user.telescope] "telescope" not found')
   return
 end
 local action_state = require("telescope.actions.state")
 local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
 local themes = require("telescope.themes")
-local icon = require("cange.icons")
+local icon = require("user.icons")
 
 local M = {}
 

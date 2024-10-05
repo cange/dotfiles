@@ -1,4 +1,4 @@
-local icons = require("cange.icons")
+local icons = require("user.icons")
 local line_format = "<author>, <author_time:%d. %b %Y> " .. icons.ui.Note .. " <summary>"
 local signs = {
   add = { text = icons.ui.LineLeft },
@@ -16,7 +16,7 @@ return {
     opts = {
       signs = signs,
       signs_staged = signs,
-      preview_config = { border = Cange.get_config("ui.border") },
+      preview_config = { border = User.get_config("ui.border") },
       current_line_blame = true,
       current_line_blame_formatter = line_format,
       current_line_blame_opts = {
@@ -50,7 +50,7 @@ return {
     keys = { { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "Open LazyGit" } },
     config = function()
       vim.g.lazygit_floating_window_border_chars = { " ", " ", " ", " ", " ", " ", " ", " " } -- no borders
-      Cange.set_highlights({
+      User.set_highlights({
         LazyGitBorder = { link = "FloatBorder" },
         LazyGitFloat = { link = "NormalFloat" },
       })

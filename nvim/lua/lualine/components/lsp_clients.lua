@@ -14,16 +14,10 @@ local function get_active_services()
 end
 
 function M:init(opts)
-  local state_icons = { inactive = require("cange.icons").ui.EyeClosed }
+  local state_icons = { inactive = require("user.icons").ui.EyeClosed }
   M.super.init(self, opts)
-  M.list_services = require("lualine.list_services"):new(
-    "LSP",
-    Cange.get_service_icons(),
-    state_icons,
-    get_active_services,
-    opts,
-    debug
-  )
+  M.list_services =
+    require("lualine.list_services"):new("LSP", User.get_service_icons(), state_icons, get_active_services, opts, debug)
 end
 
 function M:update_status() return M.list_services:cached_status() end

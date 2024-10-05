@@ -1,9 +1,9 @@
 -- Reloads this file whenever a 'json' file saved in snippet directory to
 -- enable change immediately
-local ns = "[cange.cmp.init]"
+local ns = "[user.cmp.init]"
 local cmp_ok, cmp = pcall(require, "cmp")
 local luasnip_ok, luasnip = pcall(require, "luasnip")
-local cmp_utils_ok, cmp_utils = pcall(require, "cange.cmp.utils")
+local cmp_utils_ok, cmp_utils = pcall(require, "user.cmp.utils")
 if not cmp_ok then
   print(ns, '"cmp" not found')
   return
@@ -13,11 +13,11 @@ if not luasnip_ok then
   return
 end
 if not cmp_utils_ok then
-  Log:warn('"cange.cmp.utils" not found', { title = ns })
+  Log:warn('"user.cmp.utils" not found', { title = ns })
   return
 end
 
-require("luasnip.loaders.from_vscode").lazy_load({ paths = Cange.get_config("snippets.path") })
+require("luasnip.loaders.from_vscode").lazy_load({ paths = User.get_config("snippets.path") })
 
 local mapping = {
   -- items
