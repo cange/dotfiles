@@ -40,9 +40,6 @@ M.pal = palette.load("terafox") -- debug only
 M.transparent = M.hex2rgba("#0000000", 0)
 
 local Color = require("nightfox.lib.color")
-local begin_icon = require("wezterm").nerdfonts.ple_left_half_circle_thick
-local end_icon = require("wezterm").nerdfonts.ple_right_half_circle_thick
-
 ---@param color string
 ---@param accent string
 ---@param factor? number
@@ -51,41 +48,45 @@ local function blend(color, accent, factor) return Color(color):blend(Color(acce
 
 ---@param name string
 ---@param active boolean
----@return string, string # accent, fg
-local function color_by_dirname(name, active)
+---@return string # accent
+local function define_accent_color(name, active)
   local pal = M.pal
   local names = {
-    ["vue"] = "#42b883",
-    ["frontend"] = "#f7df1e",
-    ["routing"] = "#f7df1e",
+    vue = "#42b883",
+    frontend = "#f7df1e",
+    routing = "#f7df1e",
   }
-  local bg = pal.bg4
-  local fg = active and pal.fg2 or pal.bg0
-  for p, accent in pairs(names) do
-    if name:find(p) then return blend(bg, accent, 0.3), fg end
+  local fg = pal.fg0
+  for pattern, accent in pairs(names) do
+    if name:find(pattern) then fg = accent end
   end
-  return bg, fg
+  return blend(fg, pal.bg4, active and 0.3 or 0.7)
 end
 
 ---@param content string
 ---@param index number
 ---@param active boolean
 function M.render_tab(content, index, active)
-  local accent, fg = color_by_dirname(content, active)
+  local icons = {
+    -- begin = require("wezterm").nerdfonts.ple_left_half_circle_thick,
+    -- ["end"] = require("wezterm").nerdfonts.ple_right_half_circle_thick,
+    dot = "■",
+  }
 
+  local accent = define_accent_color(content, active)
   return require("wezterm").format({
     -- start
     { Background = { Color = M.transparent } },
     { Foreground = { Color = accent } },
-    { Text = begin_icon },
+    -- { Text = icons.begin },
     --- content
-    { Background = { Color = accent } },
-    { Foreground = { Color = fg } },
-    { Text = string.format("%s %s", index, content) },
+    -- { Background = { Color = accent } },
+    -- { Foreground = { Color = fg } },
+    { Text = string.format(" %s %s", active and icons.dot or index, content) },
     -- end
-    { Background = { Color = M.transparent } },
-    { Foreground = { Color = accent } },
-    { Text = end_icon },
+    -- { Background = { Color = M.transparent } },
+    -- { Foreground = { Color = accent } },
+    -- { Text = icons.end },
   })
 end
 

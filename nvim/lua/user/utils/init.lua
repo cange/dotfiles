@@ -2,7 +2,7 @@ local ns = "[user.utils]"
 
 local M = {}
 
-Log = require("user.utils.log"):new() -- 1st
+Notify = require("user.utils.notify"):new() -- 1st
 --
 M.get_icon = require("user.utils.icons").get_icon -- 2nd
 M.get_service_icons = require("user.utils.icons").get_service_icons

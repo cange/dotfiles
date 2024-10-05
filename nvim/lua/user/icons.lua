@@ -19,6 +19,7 @@ M.ui = {
   ChevronRight        = "", -- nf-cod-chevron_right
   Close               = "", -- nf-cod-close
   Code                = "", -- nf-cod-code
+  Creation            = "󰙴", -- nf-md-creation,
   Database            = "", -- nf-cod-database
   Dot                 = "", -- nf-cod-circle
   DotFill             = "", -- nf-cot-circle_fill

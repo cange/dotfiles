@@ -27,8 +27,8 @@ return {
       return {
         options = {
           globalstatus = true,
-          component_separators = { left = " ", right = " " },
-          section_separators = { left = icons.ui.HalfCircleRight, right = icons.ui.HalfCircleLeft },
+          component_separators = { left = icons.ui.Pipe, right = icons.ui.Pipe },
+          section_separators = { left = " ", right = " " },
           theme = custom_theme,
         },
         sections = {
@@ -39,8 +39,9 @@ return {
             {
               "workspace",
               on_click = function() vim.cmd("Telescope project") end,
-              padding = { left = 1, right = -2 },
+              padding = { left = 1, right = 1 },
               suffix = " on",
+              separator = "",
             },
             {
               "branch",
@@ -70,29 +71,38 @@ return {
                 return strUtil.truncate(name, w > 172 and 80 or w > 112 and 48 or w > 92 and 24 or 0)
               end,
             },
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
           },
           lualine_y = {
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             { "inlay_hints", exclude_filetypes = exclude_filetypes },
-            { "format_clients", exclude_filetypes = exclude_filetypes },
-            { "lsp_clients", exclude_filetypes = exclude_filetypes },
-            "copilot_status",
+            {
+              "format_clients",
+              exclude_filetypes = exclude_filetypes,
+              -- padding = { left = 1, right = 0 },
+              separator = "",
+            },
+            { "lsp_clients", exclude_filetypes = exclude_filetypes, separator = "" },
+            {
+              "copilot_status",
+              padding = { left = 1, right = 2 },
+            },
             {
               "progress",
-              separator = "",
               padding = { left = 1, right = 0 },
+              separator = "",
             },
             {
               "location",
-              separator = "",
               padding = { left = 1, right = 0 },
-            },
-            {
-              function() return icons.ui.Tab .. " " .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) end,
               separator = "",
-              padding = { left = 1, right = 0 },
+              exclude_filetypes = exclude_filetypes,
             },
-            "encoding",
+            -- {
+            --   function() return icons.ui.Tab .. " " .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) end,
+            --   separator = "",
+            --   padding = { left = 1, right = 0 },
+            -- },
+            { "encoding" },
           },
           lualine_z = {},
         },

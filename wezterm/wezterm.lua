@@ -35,6 +35,12 @@ config = {
     noise = 40,
     colors = bg_presets.BLURRY,
   },
+  window_decorations = "INTEGRATED_BUTTONS|RESIZE",
+  window_frame = {
+    font = font,
+    active_titlebar_bg = theme.transparent,
+    inactive_titlebar_bg = pal.bg0,
+  },
   inactive_pane_hsb = {
     saturation = 0.9,
     brightness = 0.6,
@@ -43,30 +49,23 @@ config = {
   -- Spacing
   window_padding = {
     bottom = 0,
-    left = "0.5cell",
-    right = "0.5cell",
-    top = "0.5cell",
+    left = 8,
+    right = 8,
+    top = 4,
   },
 
   -- Tabs
-  window_decorations = "RESIZE",
-  tab_bar_at_bottom = true,
-  use_fancy_tab_bar = true,
-  window_frame = {
-    font = font,
-    active_titlebar_bg = theme.transparent,
-    inactive_titlebar_bg = pal.bg0,
-  },
+  tab_bar_at_bottom = false,
   tab_max_width = 32,
+  use_fancy_tab_bar = true,
   colors = {
     tab_bar = {
       -- the actual tabs are handled below
-      new_tab = { bg_color = theme.transparent, fg_color = pal.fg3 },
-      new_tab_hover = { bg_color = theme.transparent, fg_color = pal.green.bright },
+      new_tab = { bg_color = theme.transparent, fg_color = pal.bg1 },
+      new_tab_hover = { bg_color = theme.transparent, fg_color = pal.bg1 },
       inactive_tab_edge = theme.transparent,
     },
   },
-  -- hide_tab_bar_if_only_one_tab = true,
 
   -- make wezterm evnironment aware
   set_environment_variables = {
@@ -106,7 +105,7 @@ wezterm.on("update-status", function(window)
   local fmt = " %s  %s  "
   local content = {
     { Background = { Color = theme.transparent } },
-    { Foreground = { Color = pal.sel1 } },
+    { Foreground = { Color = pal.fg3 } },
     { Text = string.format(fmt, wezterm.nerdfonts.oct_codespaces, get_dir_name(window:active_workspace())) },
     { Text = string.format(fmt, wezterm.nerdfonts.oct_clock, wezterm.strftime("%a, %e. %b %H:%M")) },
   }

@@ -97,7 +97,7 @@ return {
           "<leader>A",
           function()
             harpoon:list():add()
-            Log:info("Bookmark added!", "[harpoon]")
+            Notify:info("Bookmark added!", "[harpoon]")
           end,
           desc = "Add bookmark",
          },
@@ -149,6 +149,7 @@ return {
         { "<leader>c", group = "Code", icon = icons.ui.Code },
         { "<leader>e", group = "Editor", icon = icons.ui.Neovim },
         { "<leader>g", group = "Git", icon = icons.git.Branch },
+        { "<leader>a", group = "AI", icon = icons.ui.Creation },
         { "<leader>q", group = "Session" },
         { "<leader>s", group = "Search", icon = icons.ui.Search },
         { "<leader>t", group = "Troubleshooting", icon = icons.ui.Stethoscope },
@@ -247,7 +248,7 @@ return {
         "<localleader>m",
         function()
           local method = require("peek").is_open() and "close" or "open"
-          Log:info(method, "Markdown Preview")
+          Notify:info(method, "Markdown Preview")
           require("peek")[method]()
         end,
         desc = "Toggle Markdown Preview",

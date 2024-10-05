@@ -5,7 +5,7 @@
 local function toggle(state, title)
   local new_state = not state
   local msg = new_state and "enabled" or "disabled"
-  Log:info(msg, title)
+  Notify:info(msg, title)
   return new_state
 end
 

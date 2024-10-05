@@ -89,7 +89,7 @@ local function update_colorscheme(mode, silent)
   local theme = mode == "dark" and "terafox" or "dayfox"
   vim.cmd("colorscheme " .. theme)
 
-  if silent == false then vim.schedule(function() Log:info(mode .. " / " .. theme, "Changed colorscheme") end) end
+  if silent == false then vim.schedule(function() Notify:info(mode .. " / " .. theme, "Changed colorscheme") end) end
 
   update_highlights()
 end

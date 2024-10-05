@@ -15,7 +15,7 @@ after-login-command = []
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -54,10 +54,10 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 [gaps]
 inner.horizontal = 8
 inner.vertical =   8
-outer.left =       12
-outer.bottom =     12
-outer.top =        12
-outer.right =      12
+outer.left =       8
+outer.bottom =     8
+outer.top =        8
+outer.right =      8
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -162,15 +162,19 @@ alt-shift-l = ['join-with right', 'mode main']
 #
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = "move-node-to-workspace T"
+run = "move-node-to-workspace D"
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefoxdeveloperedition'
 run = "move-node-to-workspace B"
 
 [[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = "move-node-to-workspace B"
+
+[[on-window-detected]]
 if.app-id = 'com.DanPristupov.Fork'
-run = "move-node-to-workspace G"
+run = "move-node-to-workspace D"
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
@@ -178,6 +182,10 @@ run = "move-node-to-workspace M"
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
+run = 'move-node-to-workspace F'
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
 run = 'move-node-to-workspace F'
 
 [[on-window-detected]]
@@ -190,6 +198,10 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.docker.docker'
 run = 'layout floating'
 
 # https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors

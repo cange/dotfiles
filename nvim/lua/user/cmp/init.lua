@@ -9,11 +9,11 @@ if not cmp_ok then
   return
 end
 if not luasnip_ok then
-  Log:warn('"luasnip" not found', { title = ns })
+  Notify:warn('"luasnip" not found', { title = ns })
   return
 end
 if not cmp_utils_ok then
-  Log:warn('"user.cmp.utils" not found', { title = ns })
+  Notify:warn('"user.cmp.utils" not found', { title = ns })
   return
 end
 
