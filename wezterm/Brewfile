@@ -1,5 +1,3 @@
-tap "homebrew/cask-versions"
-tap "homebrew/cask-fonts"
 # Simplified and community-driven man pages
 brew "tldr"
 # Developer targeted fonts with a high number of glyphs

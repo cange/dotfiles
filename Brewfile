@@ -1,4 +1,3 @@
-tap "homebrew/cask-versions"
 tap "homebrew/services"
 # Enable Windows-like alt-tab
 cask "alt-tab"
