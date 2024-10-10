@@ -1,22 +1,6 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
--- https://github.com/danielcopper/wezterm-session-manager
-local ok, session_manager = pcall(require, "wezterm-session-manager/session-manager")
-if not ok then
-  error("[wezterm-session-manager] not found! Ensure wezterm-session-manager repo is cloned to your runtimepath")
-  -- run git clone https://github.com/danielcopper/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
-end
-
-wezterm.on("save_session", function(win)
-  wezterm.log_info("Save session!", win)
-  session_manager.save_state(win)
-end)
-wezterm.on("restore_session", function(win)
-  wezterm.log_info("Restore session!", win)
-  session_manager.restore_state(win)
-end)
-
 local function desc(text)
   return wezterm.format({
     { Attribute = { Intensity = "Bold" } },
@@ -47,10 +31,10 @@ return {
   { key = "[", mods = "SUPER|SHIFT", action = act.RotatePanes("CounterClockwise") },
   { key = "]", mods = "SUPER|SHIFT", action = act.RotatePanes("Clockwise") },
   -- Pane switching
-  { key = "LeftArrow", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Left") },
-  { key = "RightArrow", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Right") },
-  { key = "UpArrow", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Up") },
-  { key = "DownArrow", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Down") },
+  { key = "LeftArrow", mods = "SUPER|SHIFT", action = act.ActivatePaneDirection("Left") },
+  { key = "RightArrow", mods = "SUPER|SHIFT", action = act.ActivatePaneDirection("Right") },
+  { key = "UpArrow", mods = "SUPER|SHIFT", action = act.ActivatePaneDirection("Up") },
+  { key = "DownArrow", mods = "SUPER|SHIFT", action = act.ActivatePaneDirection("Down") },
   -- Tap navigation
   { key = "[", mods = "SUPER", action = act.ActivateTabRelative(-1) },
   { key = "]", mods = "SUPER", action = act.ActivateTabRelative(1) },
