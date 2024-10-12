@@ -1,1 +1,2 @@
-$DOTFILES/.tool-versions=$HOME/.tool-versions
+$DOTFILES/asdf/.tool-versions=$HOME/.tool-versions
+$DOTFILES/asdf/.asdfrc=$HOME/.asdfrc
