@@ -43,12 +43,20 @@ return {
     },
     config = function()
       local mason_registry = require("mason-registry")
+      local lspconfig = require("lspconfig")
+      vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
+
       local server_configs = {
         cssls = {
           settings = {
             css = { lint = { unknownAtRules = "ignore" } },
             scss = { lint = { unknownAtRules = "ignore" } },
           },
+        },
+        denols = {
+          -- prevent ts_ls and denols are attached to current buffer
+          -- https://docs.deno.com/runtime/getting_started/setup_your_environment/
+          root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
         },
         html = {},
         lemminx = {}, -- xml, xsd, xsl, xslt, svg
@@ -133,6 +141,9 @@ return {
               },
             },
           },
+          -- prevent ts_ls and denols are attached to current buffer
+          root_dir = lspconfig.util.root_pattern("package.json"),
+          single_file_support = false,
         },
         volar = { -- vue
           -- NOTE: not needed to configure if using @vue/typescript-plugin
