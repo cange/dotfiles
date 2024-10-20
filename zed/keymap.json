@@ -2,19 +2,11 @@
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
-      "shift-k": "editor::Hover",
-      "g c c": "editor::ToggleComments",
       "space n": "editor::ToggleLineNumbers",
-
       "space \\": "workspace::ToggleLeftDock",
-      "space c a": "editor::ToggleCodeActions",
-      "space c d": "diagnostics::ToggleWarnings",
-      "space f": "file_finder::Toggle",
-      "space r": "editor::Rename",
-      "space s o": "outline::Toggle",
       "space w": "workspace::Save",
+      "space f": "file_finder::Toggle",
 
-      "g r": "editor::FindAllReferences",
       // ", /": "vim::Search",
       // travel next/prev
       "] d ": "editor::GoToDiagnostic",
@@ -26,7 +18,13 @@
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
-      ", a": "editor::SelectAll"
+      ", a": "editor::SelectAll",
+      "space c a": "editor::ToggleCodeActions",
+      "space c d": "diagnostics::ToggleWarnings",
+      "space r": "editor::Rename",
+      "space s s": "outline::Toggle",
+      "g r": "editor::FindAllReferences",
+      "g i": "editor::GoToImplementation"
     }
   },
   {
@@ -67,10 +65,5 @@
       "cmd-shift-enter": "workspace::ToggleZoom"
     }
   },
-  {
-    "context": "Terminal",
-    "bindings": {
-      "cmd-d": "workspace::NewTerminal"
-    }
-  }
+  { "context": "Terminal", "bindings": { "cmd-d": "workspace::NewTerminal" } }
 ]
