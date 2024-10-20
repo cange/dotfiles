@@ -28,18 +28,18 @@ return {
         options = {
           globalstatus = true,
           component_separators = { left = icons.ui.Pipe, right = icons.ui.Pipe },
-          section_separators = { left = " ", right = " " },
+          section_separators = { left = "", right = "" },
           theme = custom_theme,
         },
         sections = {
           lualine_a = {
             { "mode", fmt = function(str) return str:sub(1, 1) end },
           },
-          lualine_b = {
+          lualine_b = {},
+          lualine_c = {
             {
               "workspace",
               on_click = function() vim.cmd("Telescope project") end,
-              padding = { left = 1, right = 1 },
               suffix = " on",
               separator = "",
             },
@@ -48,9 +48,8 @@ return {
               icon = icons.git.Branch,
               on_click = function() vim.cmd("Telescope git_branches") end,
               padding = { left = 0, right = 1 },
+              separator = icons.ui.Pipe,
             },
-          },
-          lualine_c = {
             {
               "diagnostics",
               symbols = {
@@ -70,9 +69,8 @@ return {
                 local w = vim.o.columns
                 return strUtil.truncate(name, w > 172 and 80 or w > 112 and 48 or w > 92 and 24 or 0)
               end,
+              separator = icons.ui.Pipe,
             },
-          },
-          lualine_y = {
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             { "inlay_hints", exclude_filetypes = exclude_filetypes },
             {
@@ -104,6 +102,7 @@ return {
             -- },
             { "encoding" },
           },
+          lualine_y = {},
           lualine_z = {},
         },
       }

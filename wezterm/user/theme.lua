@@ -36,7 +36,6 @@ local ok, palette = pcall(require, "nightfox.palette")
 if not ok then error("[nightfox.palette] not found! Please symlink the nightfox repo to your runtimepath") end
 
 M.pal = palette.load(M.color_scheme)
-M.pal = palette.load("terafox") -- debug only
 M.transparent = M.hex2rgba("#0000000", 0)
 
 local Color = require("nightfox.lib.color")

@@ -69,6 +69,10 @@ local function update_highlights()
     RainbowDelimiterGreen = { fg = blend(spec.syntax.bracket, pal.green.dim, 0.75) },
     RainbowDelimiterViolet = { fg = blend(spec.syntax.bracket, pal.magenta.dim, 0.75) },
     RainbowDelimiterCyan = { fg = blend(spec.syntax.bracket, pal.cyan.dim, 0.75) },
+    -- lualine - keep opaque
+    lualine_c_normal = { fg = pal.fg2, bg = pal.bg0 },
+    lualine_x_copilot_status_normal = { link = "lualine_c_normal" },
+    lualine_x_git_blame_line_normal = { fg = pal.comment, bg = pal.bg0 },
 
     -- WhichKey
     WhichKey = { link = "@markup.link" },
@@ -79,6 +83,11 @@ local function update_highlights()
   User.set_highlights(highlights)
 end
 
+local theme_modes = {
+  light = "dayfox",
+  dark = "terafox",
+}
+
 ---@param mode? '"dark"'|'"light"'|nil
 ---@param silent? boolean
 local function update_colorscheme(mode, silent)
@@ -86,12 +95,12 @@ local function update_colorscheme(mode, silent)
   mode = mode ~= nil and mode or vim.o.background
   if not mode then return end
   vim.opt.background = mode
-  local theme = mode == "dark" and "terafox" or "dayfox"
+  local theme = theme_modes[mode]
   vim.cmd("colorscheme " .. theme)
 
   if silent == false then vim.schedule(function() Notify:info(mode .. " / " .. theme, "Changed colorscheme") end) end
 
-  update_highlights()
+  vim.schedule(function() update_highlights() end) -- schedule enforces the update after the colorscheme change
 end
 
 vim.api.nvim_create_user_command("UserUpdateColorscheme", function() update_colorscheme() end, {})
