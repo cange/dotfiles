@@ -64,6 +64,7 @@ if [[ -f "$(brew --prefix asdf)/libexec/asdf.sh" ]]; then
   fpath=("$ASDF_DIR/completions" $fpath)
   # reinitialise completions with ZSH's compinit
   autoload -Uz compinit && compinit
+  export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
 fi
 # asdf ---
 
