@@ -83,6 +83,14 @@ function M.browse_workspace()
   })
 end
 
+function M.browse_test_files()
+  local file_base_name = vim.fn.expand("%:t:r")
+  builtin.find_files({
+    prompt_title = icon.ui.Beaker .. " tests associated with file",
+    find_command = { "rg", "--files", "--iglob", file_base_name .. "{.,_}{spec,test}.{js,ts,rb,lua}" },
+  })
+end
+
 function M.file_browser()
   local path = "%:p:h"
   telescope.extensions.file_browser.file_browser({
