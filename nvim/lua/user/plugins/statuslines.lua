@@ -93,7 +93,6 @@ return {
               "location",
               padding = { left = 1, right = 0 },
               separator = "",
-              exclude_filetypes = exclude_filetypes,
             },
             -- {
             --   function() return icons.ui.Tab .. " " .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) end,

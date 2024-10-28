@@ -12,17 +12,15 @@ local icon = require("user.icons")
 local M = {}
 
 ---Keep track of the active extension and folders for `live_grep`
-local live_grep_filters = {
-  ---@type nil|string
-  file_extension = nil,
-}
+---@type nil|string
+local live_grep_query = nil
 
 ---Run `live_grep` with the active filters (extension and folders)
 ---@param current_input string
 local function run_live_grep(current_input)
+  local query = live_grep_query
   builtin.live_grep({
-    additional_args = live_grep_filters.file_extension
-      and function() return { "-g", live_grep_filters.file_extension } end,
+    additional_args = query and function() return { "-g", query } or nil end,
     default_text = current_input,
   })
 end
@@ -35,7 +33,7 @@ M.file_extension_filter_input = function(prompt_bufnr)
   vim.ui.input({ default = "*.", prompt = icon.ui.Filter .. " files via Regex" }, function(input)
     if input == nil then return end
 
-    live_grep_filters.file_extension = input
+    live_grep_query = input
     actions._close(prompt_bufnr, current_picker.initial_mode == "insert")
     run_live_grep(action_state.get_current_line())
   end)
@@ -43,8 +41,7 @@ end
 
 ---Wapper over `live_grep` to first reset active filters
 function M.live_grep()
-  live_grep_filters.file_extension = nil
-
+  live_grep_query = nil
   builtin.live_grep()
 end
 
@@ -85,6 +82,7 @@ end
 
 function M.browse_test_files()
   local file_base_name = vim.fn.expand("%:t:r")
+
   builtin.find_files({
     prompt_title = icon.ui.Beaker .. " tests associated with file",
     find_command = { "rg", "--files", "--iglob", file_base_name .. "{.,_}{spec,test}.{js,ts,rb,lua}" },
