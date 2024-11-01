@@ -150,7 +150,7 @@ return {
     { "<leader>sr", "<cmd>Telescope oldfiles<CR>",                          desc = "Recently opened files" },
     { "<leader>sS", '<cmd>lua R("user.telescope").browse_snippets()<CR>',   desc = "Edit snippets" },
     { "<leader>ss", "<cmd>Telescope lsp_document_symbols<CR>",              desc = "Show symbols" },
-    { "<leader>sT", '<cmd>lua R("user.telescope").browse_test_files()<CR>', desc = "Associated test files" },
+    { "<localleader>t", '<cmd>lua R("user.telescope").browse_test_files()<CR>', desc = "Associated test files" },
     { "<leader>st", "<cmd>TodoTelescope<CR>",                               desc = "Todo comments" },
     { "<leader>su", "<cmd>Telescope undo<CR>",                              desc = "Undo tree" },
     { "<leader>sW", '<cmd>lua R("user.telescope").browse_workspace()<CR>',  desc = "Current workspace" },

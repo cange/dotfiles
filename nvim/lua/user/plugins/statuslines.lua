@@ -76,7 +76,6 @@ return {
             {
               "format_clients",
               exclude_filetypes = exclude_filetypes,
-              -- padding = { left = 1, right = 0 },
               separator = "",
             },
             { "lsp_clients", exclude_filetypes = exclude_filetypes, separator = "" },
@@ -94,11 +93,6 @@ return {
               padding = { left = 1, right = 0 },
               separator = "",
             },
-            -- {
-            --   function() return icons.ui.Tab .. " " .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) end,
-            --   separator = "",
-            --   padding = { left = 1, right = 0 },
-            -- },
             { "encoding" },
           },
           lualine_y = {},

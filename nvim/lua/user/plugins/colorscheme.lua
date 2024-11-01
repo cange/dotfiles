@@ -17,7 +17,6 @@ local function blend(base_color, blend_color, factor)
 end
 
 local function update_highlights()
-  local _, lua_color = require("nvim-web-devicons").get_icon_color("any.lua", "lua")
   local pal, spec = get_palette()
   local highlights = {
     CursorLine = { bg = pal.bg2 }, -- more subtle
@@ -57,7 +56,7 @@ local function update_highlights()
     CmpGhostText = { fg = pal.fg3, italic = true },
     CmpItemAbbr = { fg = pal.fg2 },
     CmpItemAbbrMatch = { link = "TelescopeMatching" },
-    CmpItemMenuLua = { fg = lua_color },
+
     -- misc
     WhichkeyBorder = { link = "FloatBorder" },
     LspInlayHint = { fg = pal.comment, bg = nil, italic = true },

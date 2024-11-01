@@ -12,8 +12,7 @@ function M.pick(kind)
       User:warn("No " .. kind .. " found on the current line", { title = "[CopilotChat]" })
       return
     end
-    local ok = pcall(require, "fzf-lua")
-    require("CopilotChat.integrations." .. (ok and "fzflua" or "telescope")).pick(items)
+    require("CopilotChat.integrations.telescope").pick(items)
   end
 end
 
@@ -32,6 +31,7 @@ return {
       return {
         context = "buffer", -- Default context to use, 'buffers', 'buffer' or none (can be specified manually in prompt via @).
         auto_insert_mode = true,
+        chat_autocomplete = true, -- Enable chat autocompletion (when disabled, requires manual `mappings.complete` trigger)
         show_help = true,
         question_header = string.format("%s %s ", icons.ui.Person, user),
         answer_header = string.format("%s Copilot ", icons.plugin.Copilot),
@@ -42,12 +42,26 @@ return {
           local select = require("CopilotChat.select")
           return select.visual(source) or select.buffer(source)
         end,
+        prompts = {
+          Tests = {
+            prompt = "> /COPILOT_GENERATE\n\nPlease generate tests for my code."
+              .. "\n\t - Assume **Vitest** it is installed and the API methods are globally available and does not need to import."
+              .. "\n\t - Use **Vitest** instead of Jest as test runner."
+              .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
+              .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible.",
+          },
+        },
       }
     end,
     keys = {
-      { "<c-s>", "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
-      { "<leader>aa", "<cmd>CopilotChatToggle<CR>", desc = "Toggle (CopilotChat)", mode = { "n", "v" } },
-      { "<leader>ax", "<cmd>CopilotChatReset<CR>", desc = "Clear (CopilotChat)", mode = { "n", "v" } },
+      -- stylua: ignore start
+      { "<leader>aa", M.pick("prompt"), desc = "Code Actions (CopilotChat)", mode = { "n", "v" } },
+      { "<leader>ac", "<cmd>CopilotChatToggle<CR>", desc = "Toggle (CopilotChat)", mode = { "n", "v" } },
+      { "<leader>ah", M.pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
+      { "<leader>ao", "<cmd>CopilotChatOptimize<CR>", desc = "Optimise (CopilotChat)", mode = { "n", "v" } },
+      { "<leader>at", "<cmd>CopilotChatTests<CR>", desc = "Tests (CopilotChat)", mode = { "n", "v" } },
+      { "<leader>aX", "<cmd>CopilotChatReset<CR>", desc = "Clear (CopilotChat)", mode = { "n", "v" } },
+      { "<leader>ax", "<cmd>CopilotChatExplain<CR>", desc = "Explain (CopilotChat)", mode = { "n", "v" } },
       {
         "<leader>aq",
         function()
@@ -57,14 +71,9 @@ return {
         desc = "Quick Chat (CopilotChat)",
         mode = { "n", "v" },
       },
-      -- Show help actions with telescope
-      { "<leader>ah", M.pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
-      -- Show prompts actions with telescope
-      { "<leader>ap", M.pick("prompt"), desc = "Prompt Actions (CopilotChat)", mode = { "n", "v" } },
+      -- stylua: ignore end
     },
-    config = function(_, opts)
-      require("CopilotChat.integrations.cmp").setup()
-
+    init = function()
       vim.api.nvim_create_autocmd("BufEnter", {
         pattern = "copilot-chat",
         callback = function()
@@ -72,8 +81,6 @@ return {
           vim.opt_local.number = false
         end,
       })
-
-      require("CopilotChat").setup(opts)
     end,
   },
 
@@ -84,22 +91,36 @@ return {
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      panel = { enabled = false, auto_refresh = true },
-      suggestion = { enabled = false, auto_refresh = true },
+      suggestion = {
+        enabled = true,
+        auto_refresh = true,
+        keymap = {
+          accept = "<C-CR>",
+          next = "<C-.>", -- Ctrl + >
+          prev = "<C-,>", -- Ctrl + <
+          dismiss = "<C-c>",
+        },
+      },
     },
+    init = function()
+      local ok, cmp = pcall(require, "cmp")
+      if ok then
+        -- hide copilot suggestions when cmp menu is open
+        cmp.event:on("menu_opened", function() vim.b.copilot_suggestion_hidden = true end)
+        cmp.event:on("menu_closed", function() vim.b.copilot_suggestion_hidden = false end)
+      end
+    end,
     keys = function()
       -- stylua: ignore start
       return {
-        { "<localleader>cA", "<cmd>Copilot panel accept<CR>",  desc = "Accept Copilot panel" },
-        { "<localleader>cR", "<cmd>Copilot panel refresh<CR>", desc = "Refresh Copilot panel" },
-        { "<localleader>cS", "<cmd>Copilot status<CR>",        desc = "Copilot status" },
-        { "<localleader>co", "<cmd>Copilot toggle<CR>",        desc = "Toggle Copilot" },
-        { "<localleader>cp", "<cmd>Copilot panel<CR>",         desc = "Toggle Copilot panel" },
-        { "<localleader>cs", "<cmd>Copilot suggestion<CR>",    desc = "Toggle Copilot suggestion" },
-        { "[c", '<cmd>Copilot suggestion prev<CR>',            desc = "Prev Copilot suggestion" },
-        { "[p", '<cmd>Copilot panel jump_prev<CR>',            desc = "Prev Copilot panel" },
-        { "]c", '<cmd>Copilot suggestion next<CR>',            desc = "Next Copilot suggestion" },
-        { "]p", '<cmd>Copilot panel jump_next<CR>',            desc = "Next Copilot panel" },
+        { "<leader>aR", "<cmd>Copilot panel refresh<CR>", desc = "Refresh panel (Copilot)" },
+        { "<leader>ap", "<cmd>Copilot panel<CR>",         desc = "Toggle panel (Copilot)" },
+        { "<leader>aP", "<cmd>Copilot panel accept<CR>",  desc = "Accept panel (Copilot)" },
+        { "<leader>as", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "Toggle suggestion (Copilot)" },
+        { "<leader>aS", "<cmd>Copilot status<CR>",        desc = "Copilot status" },
+        { "<leader>at", "<cmd>Copilot toggle<CR>",        desc = "Toggle (Copilot)" },
+        { "[p", '<cmd>Copilot panel jump_prev<CR>',       desc = "Prev panel (Copilot)" },
+        { "]p", '<cmd>Copilot panel jump_next<CR>',       desc = "Next panel (Copilot)" },
       }
       -- stylua: ignore end
     end,

@@ -17,8 +17,6 @@ if not cmp_utils_ok then
   return
 end
 
-require("luasnip.loaders.from_vscode").lazy_load({ paths = User.get_config("snippets.path") })
-
 local mapping = {
   -- items
   select_next_item = cmp.mapping(function(fallback)
@@ -98,15 +96,14 @@ M.opts = {
     ["<up>"] = mapping.select_prev_item,
   },
   sources = cmp.config.sources({
+    { name = "nvim_lsp", max_item_count = 10 },
+    { name = "luasnip" },
+    { name = "copilot" },
+  }, {
     { name = "path" },
     { name = "nerdfont" },
-  }, {
-    { name = "luasnip" },
-    { name = "nvim_lsp", max_item_count = 10 },
-    { name = "nvim_lsp_signature_help" },
     { name = "buffer" },
-    { name = "copilot" },
-  }, {}),
+  }),
   snippet = {
     expand = function(args) require("luasnip").lsp_expand(args.body) end,
   },

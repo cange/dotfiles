@@ -1,31 +1,5 @@
 local icons = require("user.icons")
 
----Provides prediction strength as an icon
----@param percentage string Number of strength
----@return string|nil
-local function get_prediction_strength_kind_icon(percentage)
-  if percentage and percentage ~= "" then
-    local fraction_num = math.modf(tonumber(percentage:match("%d+")) / 10) + 1
-    return vim.split(icons.sets.batteries, " ")[fraction_num]
-  end
-
-  return nil
-end
-
----Define appropriate highlight color group
----@param source_name string
----@return string
-local function get_menu_hl_group_by(source_name)
-  local groups = {
-    copilot = "CmpItemMenuCopilot",
-    luasnip = "CmpItemMenu",
-    nvim_lua = "CmpItemMenuLua",
-    nvim_lsp = "CmpItemMenu",
-  }
-
-  return vim.tbl_contains(vim.tbl_keys(groups), source_name) and groups[source_name] or "@comment"
-end
-
 local M = {}
 
 ---@see cmp.FormattingConfig
@@ -41,7 +15,6 @@ function M.format(entry, vim_item)
   }
   local src_name = entry.source.name
   local cmp_item = entry.completion_item or {}
-  local strength = ""
   local is_multiline = false
 
   -- Show filetype icons for path source
@@ -60,15 +33,11 @@ function M.format(entry, vim_item)
 
   ---@diagnostic disable-next-line: param-type-mismatch
   local kinds = icons.cmp_kinds or {}
-  local strength_icon = get_prediction_strength_kind_icon(strength)
-  local kind_icon = strength_icon
-    or kinds[vim_item.kind]
-    or icons.cmp_kinds[is_multiline and "MultiLine" or "SingleLine"]
+  local kind_icon = kinds[vim_item.kind] or icons.cmp_kinds[is_multiline and "MultiLine" or "SingleLine"]
 
   vim_item.kind = kind_icon .. " "
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
   vim_item.menu = vim.tbl_contains(vim.tbl_keys(src_icons), src_name) and src_icons[src_name] .. " " or vim_item.menu
-  vim_item.menu_hl_group = get_menu_hl_group_by(src_name)
 
   return vim_item
 end
