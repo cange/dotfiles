@@ -5,14 +5,6 @@ local pal = theme.pal
 local config = wezterm.config_builder()
 local font = wezterm.font({ family = "JetBrainsMono Nerd Font", scale = 1 })
 local bg_base = pal.bg0
-local bg_presets = {
-  BLURRY = {
-    theme.hex2rgba(bg_base, 72),
-    theme.hex2rgba(bg_base, 80),
-    theme.hex2rgba(bg_base, 96),
-  },
-  OPAQUE = { bg_base },
-}
 
 config = {
   color_scheme = theme.color_scheme,
@@ -33,7 +25,11 @@ config = {
   window_background_gradient = {
     orientation = "Vertical",
     noise = 40,
-    colors = bg_presets.BLURRY,
+    colors = {
+      theme.hex2rgba(bg_base, 72),
+      theme.hex2rgba(bg_base, 80),
+      theme.hex2rgba(bg_base, 96),
+    },
   },
   window_decorations = "INTEGRATED_BUTTONS|RESIZE",
   window_frame = {
@@ -42,8 +38,8 @@ config = {
     inactive_titlebar_bg = pal.bg0,
   },
   inactive_pane_hsb = {
-    saturation = 0.9,
-    brightness = 0.6,
+    -- saturation = 0.9,
+    -- brightness = 0.6,
   },
 
   -- Spacing
