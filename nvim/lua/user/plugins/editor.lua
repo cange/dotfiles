@@ -149,7 +149,8 @@ return {
         { "<leader>c", group = "Code", icon = icons.ui.Code },
         { "<leader>e", group = "Editor", icon = icons.ui.Neovim },
         { "<leader>g", group = "Git", icon = icons.git.Branch },
-        { "<leader>a", group = "AI", icon = icons.ui.Creation },
+        { "<leader>a", group = "AI", icon = icons.ui.Creation, mode = { "n", "v" } },
+        { "<leader>d", group = "Diff", icon = icons.ui.Diff, mode = { "n", "v" } },
         { "<leader>q", group = "Session" },
         { "<leader>s", group = "Search", icon = icons.ui.Search },
         { "<leader>t", group = "Troubleshooting", icon = icons.ui.Stethoscope },
@@ -305,5 +306,13 @@ return {
 
   { -- diff two separate blocks of text
     "AndrewRadev/linediff.vim",
+    event = { "CursorMoved" },
+    keys = {
+      { "<leader>dd", ":Linediff<CR>", desc = "Line diff", mode = { "v" } },
+      { "<leader>da", ":LinediffAdd<CR>", desc = "Add line diff", mode = { "v" } },
+      { "<leader>dl", ":LinediffLast<CR>", desc = "Last line diff", mode = { "v" } },
+      { "<leader>dr", ":LinediffReset<CR>", desc = "Reset line diff", mode = { "n", "v" } },
+      { "<leader>ds", ":LinediffShow<CR>", desc = "Show line diff", mode = { "n", "v" } },
+    },
   },
 }

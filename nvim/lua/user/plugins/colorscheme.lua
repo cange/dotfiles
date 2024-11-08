@@ -26,6 +26,7 @@ local function update_highlights()
 
     -- Window
     FloatBorder = { fg = pal.bg0, bg = pal.bg0 },
+    FloatInput = { fg = pal.fg1, bg = pal.bg1 },
     FloatTitle = { fg = pal.fg3, bg = pal.bg0 },
     NormalFloat = { fg = pal.fg1, bg = pal.bg0 },
 

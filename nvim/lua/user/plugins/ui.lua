@@ -45,6 +45,13 @@ return {
     "stevearc/dressing.nvim",
     lazy = true,
     event = { "VimEnter" },
+    opts = {
+      input = {
+        win_options = {
+          winhighlight = "NormalFloat:FloatInput",
+        },
+      },
+    },
   },
 
   { -- Distraction-free coding

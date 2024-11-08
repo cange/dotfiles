@@ -21,6 +21,7 @@ M.ui = {
   Code                = "", -- nf-cod-code
   Creation            = "󰙴", -- nf-md-creation,
   Database            = "", -- nf-cod-database
+  Diff                = "", -- nf-cod-diff
   Dot                 = "", -- nf-cod-circle
   DotFill             = "", -- nf-cot-circle_fill
   Edit                = "", -- nf-cod-edit
