@@ -19,72 +19,85 @@ end
 local function update_highlights()
   local pal, spec = get_palette()
   local highlights = {
-    CursorLine = { bg = pal.bg2 }, -- more subtle
-    Folded = { bg = nil, fg = pal.bg4 }, -- reduces folding noise
-    NonText = { fg = pal.bg2 }, -- subtle virtual/column line
+    -- common
+    Folded = { link = "Comment" }, -- reduces folding noise
 
-    -- Window
-    FloatBorder = { fg = pal.bg0, bg = pal.bg0 },
-    FloatInput = { fg = pal.fg1, bg = pal.bg1 },
-    FloatTitle = { fg = pal.fg3, bg = pal.bg0 },
-    NormalFloat = { fg = pal.fg1, bg = pal.bg0 },
+    -- WhichKey
+    WhichKey = { link = "@markup.link" },
+    WhichkeyBorder = { link = "FloatBorder" },
+    WhichKeyDesc = { link = "Comment" },
+    WhichKeyIcon = { link = "Comment" },
 
-    -- SymboleOutline
-    FocusedSymbol = { bold = true },
-    -- NormalTelescope
+    -- Telescope
     TelescopeBorder = { link = "FloatBorder" },
     TelescopeMatching = { link = "MatchParen" },
     TelescopePreviewTitle = { link = "FloatTitle" },
     TelescopePromptBorder = { link = "FloatBorder" },
-    TelescopePromptCounter = { fg = pal.fg3 },
-    TelescopePromptNormal = { fg = pal.fg2, bg = pal.bg1 },
-    TelescopePromptTitle = { link = "FloatTitle" },
-    TelescopeResultsNormal = { fg = pal.fg2, bg = pal.bg0 },
-    TelescopeSelection = { fg = pal.fg2, bg = pal.sel0 },
-    TelescopeSelectionCaret = { fg = pal.fg1, bg = pal.sel0 },
-    TelescopeSelectionNormal = { link = "FloatBorder" },
-    TelescopeTitle = { link = "FloatTitle" },
-    -- NvimTree
-    NvimTreeFolderArrowClosed = { fg = pal.fg3 },
-    NvimTreeFolderArrowOpen = { fg = pal.fg3 },
-    NvimTreeGitRenamed = { fg = pal.magenta.base },
-    NvimTreeIndentMarker = { fg = pal.bg2 },
-    NvimTreeWindowPicker = { fg = pal.fg0, bg = pal.sel1 },
-    -- indent-blankline
-    MiniIndentscopeSymbol = { fg = pal.green.dim },
-    -- completion
-    CmpGhostText = { fg = pal.fg3, italic = true },
-    CmpItemAbbr = { fg = pal.fg2 },
-    CmpItemAbbrMatch = { link = "TelescopeMatching" },
-
-    -- misc
-    WhichkeyBorder = { link = "FloatBorder" },
-    LspInlayHint = { fg = pal.comment, bg = nil, italic = true },
-
-    -- parentheses highlighting
-    RainbowDelimiterRed = { fg = blend(spec.syntax.bracket, pal.red.dim, 0.75) },
-    RainbowDelimiterYellow = { fg = blend(spec.syntax.bracket, pal.yellow.dim, 0.75) },
-    RainbowDelimiterBlue = { fg = blend(spec.syntax.bracket, pal.blue.dim, 0.75) },
-    RainbowDelimiterOrange = { fg = blend(spec.syntax.bracket, pal.orange.dim, 0.75) },
-    RainbowDelimiterGreen = { fg = blend(spec.syntax.bracket, pal.green.dim, 0.75) },
-    RainbowDelimiterViolet = { fg = blend(spec.syntax.bracket, pal.magenta.dim, 0.75) },
-    RainbowDelimiterCyan = { fg = blend(spec.syntax.bracket, pal.cyan.dim, 0.75) },
-    -- lualine - keep opaque
-    lualine_c_normal = { fg = pal.fg2, bg = pal.bg0 },
-    lualine_x_copilot_status_normal = { link = "lualine_c_normal" },
-    lualine_x_git_blame_line_normal = { fg = pal.comment, bg = pal.bg0 },
-
-    -- WhichKey
-    WhichKey = { link = "@markup.link" },
-    WhichKeyDesc = { link = "Comment" },
-    WhichKeyIcon = { link = "Comment" },
   }
+
+  --  dark theme tweaks
+  if vim.o.background == "dark" then
+    highlights = vim.tbl_extend("force", highlights, {
+      -- common
+      NonText = { fg = pal.bg2 }, -- subtle virtual/column line
+      CursorLine = { bg = pal.bg1 }, -- subtle
+      Folded = { bg = nil, fg = pal.bg4 }, -- reduces folding noise
+
+      -- misc
+      LspInlayHint = { fg = pal.comment, bg = nil, italic = true },
+
+      -- parentheses highlighting
+      RainbowDelimiterRed = { fg = blend(spec.syntax.bracket, pal.red.dim, 0.75) },
+      RainbowDelimiterYellow = { fg = blend(spec.syntax.bracket, pal.yellow.dim, 0.75) },
+      RainbowDelimiterBlue = { fg = blend(spec.syntax.bracket, pal.blue.dim, 0.75) },
+      RainbowDelimiterOrange = { fg = blend(spec.syntax.bracket, pal.orange.dim, 0.75) },
+      RainbowDelimiterGreen = { fg = blend(spec.syntax.bracket, pal.green.dim, 0.75) },
+      RainbowDelimiterViolet = { fg = blend(spec.syntax.bracket, pal.magenta.dim, 0.75) },
+      RainbowDelimiterCyan = { fg = blend(spec.syntax.bracket, pal.cyan.dim, 0.75) },
+
+      -- Window
+      FloatBorder = { fg = pal.bg0, bg = pal.bg0 },
+      FloatInput = { fg = pal.fg1, bg = pal.bg1 },
+      FloatTitle = { fg = pal.fg3, bg = pal.bg0 },
+      NormalFloat = { fg = pal.fg1, bg = pal.bg0 },
+
+      -- SymboleOutline
+      FocusedSymbol = { bold = true },
+      -- NormalTelescope
+      TelescopePromptCounter = { fg = pal.fg3 },
+      TelescopePromptNormal = { fg = pal.fg2, bg = pal.bg1 },
+      TelescopePromptTitle = { link = "FloatTitle" },
+      TelescopeResultsNormal = { fg = pal.fg2, bg = pal.bg0 },
+      TelescopeSelection = { fg = pal.fg2, bg = pal.sel0 },
+      TelescopeSelectionCaret = { fg = pal.fg1, bg = pal.sel0 },
+      TelescopeSelectionNormal = { link = "FloatBorder" },
+      TelescopeTitle = { link = "FloatTitle" },
+
+      -- NvimTree
+      NvimTreeFolderArrowClosed = { fg = pal.fg3 },
+      NvimTreeFolderArrowOpen = { fg = pal.fg3 },
+      NvimTreeGitRenamed = { fg = pal.magenta.base },
+      NvimTreeIndentMarker = { fg = pal.bg2 },
+      NvimTreeWindowPicker = { fg = pal.fg0, bg = pal.sel1 },
+      -- indent-blankline
+      MiniIndentscopeSymbol = { fg = pal.green.dim },
+      -- completion
+      CmpGhostText = { fg = pal.fg3, italic = true },
+      CmpItemAbbr = { fg = pal.fg2 },
+      CmpItemAbbrMatch = { link = "TelescopeMatching" },
+
+      -- lualine - keep opaque
+      lualine_c_normal = { fg = pal.fg2, bg = pal.bg0 },
+      lualine_x_copilot_status_normal = { link = "lualine_c_normal" },
+      lualine_x_git_blame_line_normal = { fg = pal.comment, bg = pal.bg0 },
+    })
+  end
 
   User.set_highlights(highlights)
 end
 
 local theme_modes = {
-  light = "dayfox",
+  light = "github_light_hight_contrast",
   dark = "terafox",
 }
 
@@ -113,12 +126,20 @@ return {
   {
     "EdenEast/nightfox.nvim", -- colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
-    dependencies = { "f-person/auto-dark-mode.nvim" },
+    dependencies = {
+      "f-person/auto-dark-mode.nvim",
+      {
+        "projekt0n/github-nvim-theme",
+        name = "github-theme",
+        lazy = false,
+        config = function() require("github-theme").setup({}) end,
+      },
+    },
     opts = { options = { transparent = true } },
     init = function()
       local auto_mode = require("auto-dark-mode")
       local silent = true
-      update_colorscheme("dark", silent)
+      update_colorscheme(vim.o.background or "dark", silent)
 
       auto_mode.setup({
         set_dark_mode = function()

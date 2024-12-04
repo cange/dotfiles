@@ -1,6 +1,10 @@
 M = {}
 
 local function is_dark() return require("wezterm").gui.get_appearance():find("Dark") end
+local color_schemes = {
+  dark = "terafox",
+  light = "Github (base16)",
+}
 
 ---@param hex string
 ---@param alpha? number [0 - 0.9, 1 - 100]
@@ -16,7 +20,8 @@ function M.hex2rgba(hex, alpha)
   return string.format("rgba(%s, %s, %s, %s)", rgba.r, rgba.g, rgba.b, rgba.a)
 end
 
--- dynamic color assignment
+-- dynamic color assign
+
 M.color_scheme = is_dark() and "terafox" or "dayfox"
 
 ---Mocks Neovim's API since some endpoints are required by nightfox.nvim
@@ -36,6 +41,33 @@ local ok, palette = pcall(require, "nightfox.palette")
 if not ok then error("[nightfox.palette] not found! Please symlink the nightfox repo to your runtimepath") end
 
 M.pal = palette.load(M.color_scheme)
+
+if not is_dark() then
+  -- custom higer contrast theme
+  M.pal = { --  Github https://wezfurlong.org/wezterm/colorschemes/g/index.html#github
+    fg0 = "#3e3e3e",
+    fg1 = "#3f3f3f",
+    fg2 = "#535353",
+    fg3 = "#6f6f6f",
+    bg0 = "#f4f4f4",
+    bg1 = "#f1f1f1",
+    bg2 = "#fafafa",
+    bg3 = "#fcfcfc",
+    bg4 = "#fefefe",
+    sel0 = "#a9c1e2",
+    sel1 = "#c1d5f8",
+
+    black = { base = "#3e3e3e", light = "#666666" },
+    red = { base = "#970b16", light = "#de0000" },
+    green = { base = "#07962a", light = "#87d5a2" },
+    yellow = { base = "#f8eec7", light = "#f1d007" },
+    blue = { base = "#003e8a", light = "#2e6cba" },
+    magenta = { base = "#e94691", light = "#ffa29f" },
+    cyan = { base = "#89d1ec", light = "#1cfafe" },
+    white = { base = "#ffffff", light = "#ffffff" },
+  }
+end
+
 M.transparent = M.hex2rgba("#0000000", 0)
 
 local Color = require("nightfox.lib.color")

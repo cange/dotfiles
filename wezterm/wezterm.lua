@@ -37,10 +37,6 @@ config = {
     active_titlebar_bg = theme.transparent,
     inactive_titlebar_bg = pal.bg0,
   },
-  inactive_pane_hsb = {
-    -- saturation = 0.9,
-    -- brightness = 0.6,
-  },
 
   -- Spacing
   window_padding = {
