@@ -1,4 +1,5 @@
-(($ + commands[npm])) && {
+#  avoid withspacing `$ + commands` use `$+commands` otherwise it raise error
+(($+commands[npm])) && {
   command rm -f "${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
 
   _npm_completion() {
