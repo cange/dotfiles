@@ -300,6 +300,8 @@ return {
         { "red", "magenta", "yellow", "cyan", "lime", "purple", "pink" },
         { "solid", "dashed", "dotted", "double", "none", "groove", "ridge", "inset", "outset" },
         { "left", "right" },
+        { "up", "down", "only" },
+        { "desktop", "tablet", "mobile" },
       },
     },
   },

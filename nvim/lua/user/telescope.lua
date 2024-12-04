@@ -47,7 +47,7 @@ end
 
 function M.browse_nvim()
   builtin.find_files({
-    cwd = "~/.config/nvim",
+    cwd = vim.fn.stdpath("config"),
     previewer = false,
     prompt_title = icon.ui.Neovim .. " Neovim",
   })

@@ -8,10 +8,7 @@ end
 local M = require("lualine.component"):extend()
 
 ---@enum GitBlameLineConfig
-local config = {
-  icon = "",
-  color = User.get_hl_hex("Comment", "fg"),
-}
+local config = {}
 
 function M:init(opts)
   config = vim.tbl_extend("force", config, opts)

@@ -33,7 +33,7 @@ return {
         },
         sections = {
           lualine_a = {
-            { "mode", fmt = function(str) return str:sub(1, 1) end },
+            -- { "mode", fmt = function(str) return str:sub(1, 1) end },
           },
           lualine_b = {},
           lualine_c = {
@@ -73,27 +73,12 @@ return {
             },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             { "inlay_hints", exclude_filetypes = exclude_filetypes },
-            {
-              "format_clients",
-              exclude_filetypes = exclude_filetypes,
-              separator = "",
-            },
-            { "lsp_clients", exclude_filetypes = exclude_filetypes, separator = "" },
-            {
-              "copilot_status",
-              padding = { left = 1, right = 2 },
-            },
-            {
-              "progress",
-              padding = { left = 1, right = 0 },
-              separator = "",
-            },
-            {
-              "location",
-              padding = { left = 1, right = 0 },
-              separator = "",
-            },
-            { "encoding" },
+            { "format_clients", exclude_filetypes = exclude_filetypes, separator = "" },
+            { "lsp_clients", exclude_filetypes = exclude_filetypes, padding = { left = 1, right = 2 } },
+            -- { "copilot_status", padding = { left = 1, right = 2 }, },
+            { "encoding", separator = "" },
+            { "location", padding = { left = 1, right = 0 }, separator = "" },
+            { "progress", padding = { left = 1, right = 0 }, separator = "" },
           },
           lualine_y = {},
           lualine_z = {},
