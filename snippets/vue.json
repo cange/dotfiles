@@ -1,10 +1,10 @@
 {
-  "Component Skeleton": {
-    "prefix": "<script><template>",
+  "script - Component skeleton": {
+    "prefix": "<script><template><style>",
     "body": [
       "<script setup lang=\"ts\">\n$0\n</script>\n",
-      "<template>\n$1\n</template>\n",
-      "<style scoped>\n$2\n</style>"
+      "<template>\n\n</template>\n",
+      "<style scoped>\n\n</style>"
     ]
   },
   "template block": {
@@ -14,18 +14,6 @@
   "script block": {
     "prefix": "<script>",
     "body": "<script ${1:setup }lang=\"ts\">\n${0}\n</script>"
-  },
-  "script - Component Name": {
-    "prefix": "<script>",
-    "body": "<script lang=\"ts\">\nexport default { name: '$1' }\n</script>"
-  },
-  "Component Skeleton v2": {
-    "prefix": "<template> v2",
-    "body": [
-      "<script lang=\"ts\">\nexport default {\n\t$0\n}\n</script>\n",
-      "<template>\n$1\n</template>\n",
-      "<style scoped>\n$2\n</style>"
-    ]
   },
   "i18n-t - Interpolation": {
     "prefix": "<i18n-t>",
