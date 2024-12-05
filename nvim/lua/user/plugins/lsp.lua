@@ -47,6 +47,7 @@ return {
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
 
       local server_configs = {
+        astro = {},
         cssls = {
           settings = {
             css = { lint = { unknownAtRules = "ignore" } },
