@@ -1,21 +1,11 @@
 -- Reloads this file whenever a 'json' file saved in snippet directory to
 -- enable change immediately
-local ns = "[user.cmp.init]"
 local cmp_ok, cmp = pcall(require, "cmp")
 local luasnip_ok, luasnip = pcall(require, "luasnip")
 local cmp_utils_ok, cmp_utils = pcall(require, "user.cmp.utils")
-if not cmp_ok then
-  print(ns, '"cmp" not found')
-  return
-end
-if not luasnip_ok then
-  Notify:warn('"luasnip" not found', { title = ns })
-  return
-end
-if not cmp_utils_ok then
-  Notify:warn('"user.cmp.utils" not found', { title = ns })
-  return
-end
+if not cmp_ok then error('"cmp" not found') end
+if not luasnip_ok then error('"luasnip" not found') end
+if not cmp_utils_ok then error('"user.cmp.utils" not found') end
 
 local mapping = {
   -- items

@@ -5,5 +5,6 @@ vim.filetype.add({
   },
   filename = {
     [".visabletemplaterc"] = "yaml",
+    ["gitconfig"] = "gitconfig",
   },
 })

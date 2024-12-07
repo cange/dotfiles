@@ -133,12 +133,10 @@ return {
     { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<CR>",         desc = "within File" },
     { "<leader>f",  "<cmd>Telescope find_files<CR>",                        desc = "for Files" },
     { "<leader>p",  "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },
-    { "<leader>en", "<cmd>Telescope notify<CR>",                            desc = "Show notifications", },
     { "<leader>ec", "<cmd>Telescope colorscheme<CR>",                       desc = "Change colorscheme" },
     { "<leader>gB", "<cmd>Telescope git_branches<CR>",                      desc = "Checkout branch" },
     { "<leader>gC", "<cmd>Telescope git_commits<CR>",                       desc = "Checkout commit" },
     { "<leader>go", "<cmd>Telescope git_status<CR>",                        desc = "Open changed file" },
-
     { "<leader>sb", "<cmd>Telescope buffers<CR>",                           desc = "Buffers" },
     { "<leader>sB", '<cmd>lua R("user.telescope").file_browser()<CR>',      desc = "In current directory" },
     { "<leader>sC", "<cmd>Telescope commands<CR>",                          desc = "Commands" },

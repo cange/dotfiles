@@ -111,7 +111,9 @@ local function update_colorscheme(mode, silent)
   local theme = theme_modes[mode]
   vim.cmd("colorscheme " .. theme)
 
-  if silent == false then vim.schedule(function() Notify:info(mode .. " / " .. theme, "Changed colorscheme") end) end
+  if silent == false then
+    vim.schedule(function() Notify.info(mode .. " / " .. theme, { title = "Changed colorscheme" }) end)
+  end
 
   vim.schedule(function() update_highlights() end) -- schedule enforces the update after the colorscheme change
 end

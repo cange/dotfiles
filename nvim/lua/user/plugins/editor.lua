@@ -97,7 +97,7 @@ return {
           "<leader>A",
           function()
             harpoon:list():add()
-            Notify:info("Bookmark added!", "[harpoon]")
+            Notify.info("Bookmark added!", { title = "Harpoon" })
           end,
           desc = "Add bookmark",
          },
@@ -223,7 +223,7 @@ return {
       -- If you want insert `(` after select function or method item
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       local ok, cmp = pcall(require, "cmp")
-      if not ok then return end
+      if not ok then error('"cmp" not found') end
 
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
@@ -249,7 +249,7 @@ return {
         "<localleader>m",
         function()
           local method = require("peek").is_open() and "close" or "open"
-          Notify:info(method, "Markdown Preview")
+          Notify.info(method, { title = "Markdown Preview" })
           require("peek")[method]()
         end,
         desc = "Toggle Markdown Preview",

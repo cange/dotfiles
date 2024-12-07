@@ -8,7 +8,7 @@
 	rebase = true
 
 [fetch]
-	prune = true # deletes outdated remote references
+	prune = true ; deletes outdated remote references
 
 [pager]
 	color = true
@@ -17,43 +17,24 @@
 	color = auto
 
 [apply]
-	whitespace = fix # detects whitespace errors when applying a patch
+	whitespace = fix ; detects whitespace errors when applying a patch
 
 [core]
-	# Use custom `.gitignore` and `.gitattributes`
+  ; Use custom `.gitignore` and `.gitattributes`
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
-	# Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
-	# whitespace = space-before-tab,indent-with-non-tab,trailing-space
+	; Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
+	; whitespace = space-before-tab,indent-with-non-tab,trailing-space
 	editor = nvim
 	pager = delta
 
 [interactive]
 	diffFilter = delta --color-only
 
-[delta] # diff tool https://github.com/dandavison/delta
-	# use `delta --show-config` to see all available options
+[delta] ; diff tool https://github.com/dandavison/delta
+	; use `delta --show-config` to see all available options
 	line-numbers = true # show line numbers
-	file-added-label          = 
-	file-modified-label       = 
-	file-removed-label        = 
-	file-renamed-label        = 
-	line-numbers-zero-style   = brightblack
-	file-style                = brightblack
-	line-numbers-left-format  = {nm:^4} # hides item by empty whitespace
-	line-numbers-right-format = {np:^4} # hides item by empty whitespace
-	navigate = true # use n and N to move between diff sections
-	minus-style                   = syntax "#352d2e"
-	minus-non-emph-style          = syntax "#352d2e"
-	minus-emph-style              = reverse "#e85c51"
-	minus-empty-line-marker-style = normal "#352d2e"
-	line-numbers-minus-style      = "#e85c51"
-	plus-style                    = syntax "#24383a"
-	plus-non-emph-style           = syntax "#24383a"
-	plus-emph-style               = reverse "#7aa4a1"
-	plus-empty-line-marker-style  = normal "#24383a"
-	line-numbers-plus-style       = "#7aa4a1"
-  tabs = 2
+	tabs = 2
   syntax-theme = base16
 
 [delta "interactive"]
@@ -64,13 +45,11 @@
 	commit-style = raw
 	file-style = omit
 	hunk-header-decoration-style = blue box
-	hunk-header-file-style = red
-	hunk-header-line-number-style = 28
 	hunk-header-style = file line-number syntax
 
 [merge]
-	conflictstyle = zdiff3 # even cleaner output than diff3
-	log = true # summaries of merged commits in newly created merge commit messages
+	conflictstyle = zdiff3 ; even cleaner output than diff3
+	log = true ; summaries of merged commits in newly created merge commit messages
 
 [diff]
 	colorMoved = default
@@ -81,7 +60,7 @@
 [branch]
 	sort = -committerdate
 
-# Use `origin` as the default remote on the `main` branch in all cases
+; Use `origin` as the default remote on the `main` branch in all cases
 [branch "main"]
 	remote = origin
 	merge = refs/heads/main
@@ -89,6 +68,6 @@
 [init]
 	defaultBranch = main
 
-# remember last conflict resolution
+; remember last conflict resolution
 [rerere]
 	enabled = true

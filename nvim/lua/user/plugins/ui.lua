@@ -1,6 +1,69 @@
 local icons = require("user.icons")
 
 return {
+  { -- A collection of small convenience plugins
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      bigfile = { enabled = true },
+      notify = { enabled = true },
+      notifier = {
+        enabled = true,
+        icons = {
+          error = icons.diagnostics.Error,
+          warn = icons.diagnostics.Warn,
+          info = icons.diagnostics.Info,
+          debug = icons.ui.Bug,
+          trace = icons.ui.Edit,
+        },
+        top_down = false,
+      },
+      bufdelete = { enabled = true },
+      lazygit = { enabled = true },
+    },
+    keys = function()
+      local Snacks = require("snacks")
+      local toggler = Snacks.toggle
+      return {
+        { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+        { "<leader>cd", function() toggler.diagnostics():toggle() end, desc = "Toggle diagnostic inline text" },
+        { "<leader>ci", function() toggler.inlay_hints():toggle() end, desc = "Toggle inlay hints" },
+        { "<leader>eh", function() Snacks.notifier.show_history() end, desc = "Show notfication" },
+        { "<leader>en", function() toggler.line_number():toggle() end, desc = "Toggle line numbers" },
+        { "<leader>n", function() toggler.option("relativenumber"):toggle() end, desc = "Toggle relative number" },
+        { "<leader>es", function() toggler.option("spell"):toggle() end, desc = "Toggle spelling" },
+        { "<leader>ew", function() toggler.option("wrap"):toggle() end, desc = "Toggle wrap" },
+        { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Current File History" },
+        { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+      }
+    end,
+    init = function()
+      local Snacks = require("snacks")
+
+      -- notifications
+      Notify = Snacks.notify
+      Notify._info = Notify.info
+      ---@diagnostic disable-next-line: duplicate-set-field
+      Notify.info = function(msg, opts)
+        opts = opts or {}
+        local title = opts.title and type(opts.title) == "string" and opts.title or ""
+        opts.title = "user-config"
+        Notify._info(string.format("[%s]: %s", title or "", msg), opts)
+      end
+
+      -- debug
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          -- Setup some globals for debugging (lazy-loaded)
+          _G.dd = function(...) Snacks.debug.inspect(...) end
+          vim.print = _G.dd -- Override print to use snacks for `:=` command
+        end,
+      })
+    end,
+  },
+
   -- advanced colorcolumn
   { "lukas-reineke/virt-column.nvim", opts = { char = icons.ui.LineThin } },
 
@@ -16,29 +79,6 @@ return {
         },
       })
     end,
-  },
-
-  { -- popover notification
-    "rcarriga/nvim-notify",
-    lazy = true,
-    config = function()
-      -- NOTE: needs to be delayed to apply background_colour
-      require("notify").setup({
-        level = User.get_config("log.level"),
-        icons = {
-          ERROR = icons.diagnostics.Error,
-          WARN = icons.diagnostics.Warn,
-          INFO = icons.diagnostics.Info,
-          DEBUG = icons.ui.Bug,
-          TRACE = icons.ui.Edit,
-        },
-        background_colour = "#000000",
-        render = "compact",
-        timeout = 3000,
-        top_down = false,
-      })
-    end,
-    init = function() vim.notify = require("notify") end,
   },
 
   { -- Improve the built-in vim.ui interfaces with telescope, fzf, etc

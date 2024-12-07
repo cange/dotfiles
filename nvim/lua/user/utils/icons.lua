@@ -1,10 +1,6 @@
 local M = {}
-local ns = "[user.utils.icons]"
 local ok, icons = pcall(require, "user.icons")
-if not ok then
-  error(ns .. ' "user.icons" not found!')
-  return ""
-end
+if not ok then error('"user.icons" not found!') end
 
 local user_icons = {}
 ---@param origin_filetype string

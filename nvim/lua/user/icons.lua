@@ -46,6 +46,7 @@ M.ui = {
   SplitVertical       = "", -- nf-cod-split_horizontal
   Tab                 = "", -- nf-oct-tab
   Time                = "", -- nf-oct-stopwatch
+  Trace               = " ",-- nf-fa-route
   Workspace           = "", -- nf-oct-briefcase
   -- shapes
   TriangleLeft        = "", -- nf-ple-lower_left_triangle

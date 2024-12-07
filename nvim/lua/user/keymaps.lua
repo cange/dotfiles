@@ -1,8 +1,5 @@
 local function help_under_cursor() vim.cmd("help " .. (vim.bo.filetype == "lua" and vim.fn.expand("<cword>") or "")) end
 local replace_under_cursor = [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]]
-local toggle_inlay_hints = function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 })) end
-local toggle_relative_number = function() vim.o.rnu = not vim.o.rnu end
-local toggle_spelling = function() vim.o.spell = not vim.o.spell end
 
 local keymaps = {
   { "<F1>", help_under_cursor, { desc = "Help for keyword under cursor" } },
@@ -41,9 +38,6 @@ local keymaps = {
   { "<S-Tab>", "<gv", { desc = "Indent: right" }, { "v" } },
 
   -- others
-  { "<leader>eS", toggle_spelling, { desc = "Toggle spelling" } },
-  { "<leader>ci", toggle_inlay_hints, { desc = "Toggle inlay hints" } },
-  { "<leader>n", toggle_relative_number, { desc = "Toggle relative number" } },
   { "<leader>w", "<cmd>w!<CR>", { desc = "Save file" } },
   { "<localleader>a", "gg<S-v>G", { desc = "Select all content" } },
   { "<localleader>r", replace_under_cursor, { desc = "Replace under cursor" } },

@@ -3,10 +3,7 @@
 
 ---@type _, { status: { data: copilot_status_notification_data } }
 local ok, api = pcall(require, "copilot.api")
-if not ok then
-  error('[lualine.components.copilot_status] "copilot.api" not found')
-  return
-end
+if not ok then error('[lualine.components.copilot_status] "copilot.api" not found') end
 local icos = require("user.icons")
 
 local M = require("lualine.component"):extend()

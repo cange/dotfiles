@@ -1,8 +1,5 @@
 local ok, conform = pcall(require, "conform")
-if not ok then
-  error('[lualine.components.format_status] "conform" not found')
-  return
-end
+if not ok then error('[lualine.components.format_status] "conform" not found') end
 
 local M = require("lualine.component"):extend()
 local debug = false

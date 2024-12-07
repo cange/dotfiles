@@ -8,10 +8,7 @@ function M.pick(kind)
   return function()
     local actions = require("CopilotChat.actions")
     local items = actions[kind .. "_actions"]()
-    if not items then
-      User:warn("No " .. kind .. " found on the current line", { title = "[CopilotChat]" })
-      return
-    end
+    if not items then error("No '" .. kind .. "' found on the current line") end
     require("CopilotChat.integrations.telescope").pick(items)
   end
 end
