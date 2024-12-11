@@ -112,14 +112,6 @@ return {
         lsp_declarations = lsp_opts,
         lsp_definitions = lsp_opts,
         lsp_references = lsp_opts,
-        live_grep = {
-          theme = "ivy",
-          mappings = {
-            i = {
-              ["<C-f>"] = require("user.telescope").file_extension_filter_input,
-            },
-          },
-        },
         oldfiles = ivy_opts,
         quickfix = default_opts,
       },
@@ -134,7 +126,7 @@ return {
   end,
   -- stylua: ignore start
   keys = {
-    { "<localleader>/", "<cmd>lua R('user.telescope').live_grep()<CR>",     desc = "within Files" },
+    { "<localleader>/",  require('user.telescope').custom_live_grep,        desc = "within Files" },
     { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<CR>",         desc = "within File" },
     { "<leader>f",  "<cmd>Telescope find_files<CR>",                        desc = "for Files" },
     { "<leader>p",  "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },

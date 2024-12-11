@@ -5,7 +5,7 @@
 -- Define autocommands with Lua APIs
 -- See: h:api-autocmd, h:augroup
 local autocmd = vim.api.nvim_create_autocmd
-local group_id = vim.api.nvim_create_augroup("UserSetup", { clear = true })
+local group_id = vim.api.nvim_create_augroup("user-setup", { clear = true })
 
 autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
   group = group_id,
@@ -33,11 +33,3 @@ autocmd("TextYankPost", {
   group = group_id,
   callback = function() vim.highlight.on_yank({ higroup = "Cursor" }) end,
 })
-
-local is_in_project = true
-autocmd({ "BufRead" }, {
-  group = group_id,
-  callback = function() is_in_project = false end,
-})
-
--- Show project picker on startup

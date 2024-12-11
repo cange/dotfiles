@@ -53,6 +53,14 @@
 ---@field diff user.SpecDiff
 ---@field git user.SpecGit
 
+---@class user.DebugPalette
+---@field blue user.Shade
+---@field cyan user.Shade
+---@field green user.Shade
+---@field magenta user.Shade
+---@field red user.Shade
+---@field yellow user.Shade
+
 ---@class user.SpecSyntax
 ---@field bracket string Brackets and Punctuation
 ---@field builtin0 string Builtin variable

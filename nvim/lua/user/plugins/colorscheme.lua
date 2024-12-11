@@ -2,12 +2,20 @@ local modes = {
   light = "github_light_high_contrast",
   dark = "terafox",
 }
----@return user.Palette, user.Spec
+---@return user.Palette, user.Spec, user.DebugPalette
 local function get_palette()
   local curr_colorscheme = vim.g.colors_name
   local colorscheme = curr_colorscheme ~= nil and curr_colorscheme or User.get_config("ui.colorscheme")
+  local debug = {
+    blue = { base = "#0000dd", dim = "#000088", bright = "#0000ff" },
+    cyan = { base = "#00dddd", dim = "#008888", bright = "#00ffff" },
+    green = { base = "#00dd00", dim = "#00a000", bright = "#00ff00" },
+    magenta = { base = "#dd00dd", dim = "#880088", bright = "#ff00ff" },
+    red = { base = "#dd0000", dim = "#880000", bright = "#ff0000" },
+    yellow = { base = "#dddd00", dim = "#888800", bright = "#ffff00" },
+  }
 
-  return require("nightfox.palette").load(colorscheme), require("nightfox.spec").load(colorscheme)
+  return require("nightfox.palette").load(colorscheme), require("nightfox.spec").load(colorscheme), debug
 end
 
 ---Returns a new color that a linear blend between two colors
@@ -21,7 +29,7 @@ local function blend(base_color, blend_color, factor)
 end
 
 local function update_highlights()
-  local pal, spec = get_palette()
+  local pal, spec, debug = get_palette()
   local highlights = {
     -- common
     Folded = { link = "Comment" }, -- reduces folding noise
@@ -33,10 +41,13 @@ local function update_highlights()
     WhichKeyIcon = { link = "Comment" },
 
     -- Telescope
+    TelescopeNormal = { link = "UserNormal" },
     TelescopeBorder = { link = "FloatBorder" },
     TelescopeMatching = { link = "MatchParen" },
     TelescopePreviewTitle = { link = "FloatTitle" },
     TelescopePromptBorder = { link = "FloatBorder" },
+    TelescopeSelectionNormal = { link = "FloatBorder" },
+    TelescopeTitle = { link = "FloatTitle" },
   }
 
   --  dark theme tweaks
@@ -46,7 +57,7 @@ local function update_highlights()
       NonText = { fg = pal.bg2 }, -- subtle virtual/column line
       CursorLine = { bg = pal.bg1 }, -- subtle
       Folded = { bg = nil, fg = pal.bg4 }, -- reduces folding noise
-
+      UserNormal = { bg = pal.bg1 },
       -- misc
       LspInlayHint = { fg = pal.comment, bg = nil, italic = true },
 
@@ -78,8 +89,6 @@ local function update_highlights()
       TelescopeResultsNormal = { fg = pal.fg2, bg = pal.bg0 },
       TelescopeSelection = { fg = pal.fg2, bg = pal.sel0 },
       TelescopeSelectionCaret = { fg = pal.fg1, bg = pal.sel0 },
-      TelescopeSelectionNormal = { link = "FloatBorder" },
-      TelescopeTitle = { link = "FloatTitle" },
 
       -- NvimTree
       NvimTreeFolderArrowClosed = { fg = pal.fg3 },
