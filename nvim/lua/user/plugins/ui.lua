@@ -8,6 +8,7 @@ return {
     opts = {
       bigfile = { enabled = true },
       notify = { enabled = true },
+      indent = { enabled = true, animate = { enabled = false } },
       notifier = {
         enabled = true,
         icons = {
@@ -26,6 +27,8 @@ return {
       local Snacks = require("snacks")
       local toggler = Snacks.toggle
       return {
+        { "<leader>z", function() Snacks.zen.zoom() end, desc = "Toggle Zen" },
+        { "<localleader>z", function() Snacks.dim() end, desc = "Toggle Dimming" },
         { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
         { "<leader>cd", function() toggler.diagnostics():toggle() end, desc = "Toggle diagnostic inline text" },
         { "<leader>ci", function() toggler.inlay_hints():toggle() end, desc = "Toggle inlay hints" },
@@ -67,20 +70,6 @@ return {
   -- advanced colorcolumn
   { "lukas-reineke/virt-column.nvim", opts = { char = icons.ui.LineThin } },
 
-  { -- indentation scope lines
-    "echasnovski/mini.indentscope",
-    version = "*",
-    config = function()
-      require("mini.indentscope").setup({
-        symbol = icons.ui.LineLeftThin,
-        draw = {
-          delay = 0,
-          animation = require("mini.indentscope").gen_animation.none(),
-        },
-      })
-    end,
-  },
-
   { -- Improve the built-in vim.ui interfaces with telescope, fzf, etc
     "stevearc/dressing.nvim",
     lazy = true,
@@ -91,23 +80,6 @@ return {
           winhighlight = "NormalFloat:FloatInput",
         },
       },
-    },
-  },
-
-  { -- Distraction-free coding
-    "folke/zen-mode.nvim",
-    dependencies = "folke/twilight.nvim", -- dimmer
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      window = {
-        width = 1,
-        height = 1,
-      },
-    },
-    keys = {
-      { "<localleader>z", "<cmd>ZenMode<CR><cmd>TwilighEnable<CR>", desc = "Toggle Zen Focus Mode" },
-      { "<leader>z", "<cmd>ZenMode<CR><cmd>TwilightDisable<CR>", desc = "Toggle Zen Mode" },
     },
   },
 

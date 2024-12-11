@@ -46,6 +46,10 @@ local function update_highlights()
       -- misc
       LspInlayHint = { fg = pal.comment, bg = nil, italic = true },
 
+      -- Snacks
+      SnacksNotifierHistory = { link = "UserNormal" },
+      SnacksIndentScope = { fg = pal.green.dim },
+
       -- parentheses highlighting
       RainbowDelimiterRed = { fg = blend(spec.syntax.bracket, pal.red.dim, 0.75) },
       RainbowDelimiterYellow = { fg = blend(spec.syntax.bracket, pal.yellow.dim, 0.75) },
@@ -79,8 +83,7 @@ local function update_highlights()
       NvimTreeGitRenamed = { fg = pal.magenta.base },
       NvimTreeIndentMarker = { fg = pal.bg2 },
       NvimTreeWindowPicker = { fg = pal.fg0, bg = pal.sel1 },
-      -- indent-blankline
-      MiniIndentscopeSymbol = { fg = pal.green.dim },
+
       -- completion
       CmpGhostText = { fg = pal.fg3, italic = true },
       CmpItemAbbr = { fg = pal.fg2 },

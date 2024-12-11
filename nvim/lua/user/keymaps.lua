@@ -41,8 +41,16 @@ local keymaps = {
   { "<leader>w", "<cmd>w!<CR>", { desc = "Save file" } },
   { "<localleader>a", "gg<S-v>G", { desc = "Select all content" } },
   { "<localleader>r", replace_under_cursor, { desc = "Replace under cursor" } },
-  { "<localleader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" } },
-  { "<localleader><localleader>x", "<cmd>source %<CR>", { desc = "Execute the current file" } },
+  {
+    "<localleader>x",
+    "<cmd>.lua<CR><cmd>lua Notify.info('executed', { title = 'Current line' })<CR>",
+    { desc = "Execute the current line" },
+  },
+  {
+    "<localleader><localleader>x",
+    "<cmd>source %<CR><cmd>lua Notify.info('executed', { title = vim.fn.expand('%:t') })<CR>",
+    { desc = "Execute the current file" },
+  },
   { "<localleader>S", ":sort<CR>gv=gv", { desc = "Sort selected lines" }, { "v" } },
 }
 
