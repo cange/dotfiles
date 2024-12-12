@@ -15,7 +15,7 @@ local options = {
   title = true, -- Update terminal window title
 
   -- UI - command prompt
-  showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
+  showmode = true, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
   spelllang = { "en_us", "de" }, -- spellchecking will be done for these languages
 

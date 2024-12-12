@@ -57,8 +57,8 @@ return {
       { "<leader>ah", M.pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
       { "<leader>ao", "<cmd>CopilotChatOptimize<CR>", desc = "Optimise (CopilotChat)", mode = { "n", "v" } },
       { "<leader>at", "<cmd>CopilotChatTests<CR>", desc = "Tests (CopilotChat)", mode = { "n", "v" } },
-      { "<leader>aX", "<cmd>CopilotChatReset<CR>", desc = "Clear (CopilotChat)", mode = { "n", "v" } },
-      { "<leader>ax", "<cmd>CopilotChatExplain<CR>", desc = "Explain (CopilotChat)", mode = { "n", "v" } },
+      { "<leader>ax", "<cmd>CopilotChatReset<CR>", desc = "Clear (CopilotChat)", mode = { "n", "v" } },
+      { "<leader>aX", "<cmd>CopilotChatExplain<CR>", desc = "Explain (CopilotChat)", mode = { "n", "v" } },
       {
         "<leader>aq",
         function()

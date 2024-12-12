@@ -75,6 +75,7 @@ return {
         ["ui-select"] = { --https://github.com/nvim-telescope/telescope-ui-select.nvim#telescope-setup-and-configuration
           require("telescope.themes").get_cursor(),
         },
+        fzf = {},
         project = default_opts,
         undo = {
           layout_config = { preview_width = 0.7 },
@@ -91,7 +92,11 @@ return {
       },
       pickers = {
         buffers = default_opts,
-        colorscheme = { enable_preview = true, theme = "dropdown" },
+        colorscheme = {
+          enable_preview = true,
+          previewer = false,
+          theme = "dropdown",
+        },
         current_buffer_fuzzy_find = ivy_opts,
         highlights = ivy_opts,
         find_files = {

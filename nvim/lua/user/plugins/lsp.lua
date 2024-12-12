@@ -131,7 +131,7 @@ return {
             },
             javascript = {
               inlayHints = {
-                includeInlayParameterNameHints = "all", --'none' | 'literals' | 'all';
+                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
                 includeInlayParameterNameHintsWhenArgumentMatchesName = true,
                 includeInlayFunctionParameterTypeHints = true,
                 includeInlayVariableTypeHints = true,

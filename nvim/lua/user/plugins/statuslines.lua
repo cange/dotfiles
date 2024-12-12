@@ -74,7 +74,7 @@ return {
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             { "inlay_hints", exclude_filetypes = exclude_filetypes },
             { "format_clients", exclude_filetypes = exclude_filetypes, separator = "" },
-            { "lsp_clients", exclude_filetypes = exclude_filetypes, padding = { left = 1, right = 2 } },
+            { "lsp_clients", exclude_filetypes = exclude_filetypes, padding = { left = 1, right = 2 }, separator = "" },
             -- { "copilot_status", padding = { left = 1, right = 2 }, },
             { "encoding", separator = "" },
             { "location", padding = { left = 1, right = 0 }, separator = "" },

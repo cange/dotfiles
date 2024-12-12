@@ -84,8 +84,8 @@ function M.browse_test_files()
   local file_base_name = vim.fn.expand("%:t:r")
 
   builtin.find_files({
-    prompt_title = icon.ui.Beaker .. " tests associated with file",
-    find_command = { "rg", "--files", "--iglob", file_base_name .. "{.,_}{spec,test}.{js,ts,rb,lua}" },
+    prompt_title = icon.ui.Beaker .. " Find Files (associated test files)",
+    find_command = { "rg", "--files", "--iglob", file_base_name .. "{.,_}{spec,test,stories}.{js,ts,rb,lua}" },
   })
 end
 

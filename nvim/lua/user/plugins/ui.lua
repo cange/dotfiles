@@ -29,7 +29,7 @@ return {
         { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
         { "<leader>cd", function() toggler.diagnostics():toggle() end, desc = "Toggle diagnostic inline text" },
         { "<leader>ci", function() toggler.inlay_hints():toggle() end, desc = "Toggle inlay hints" },
-        { "<leader>eh", function() Snacks.notifier.show_history() end, desc = "Show notfication" },
+        { "<leader>eN", function() Snacks.notifier.show_history() end, desc = "Show notfication" },
         { "<leader>en", function() toggler.line_number():toggle() end, desc = "Toggle line numbers" },
         { "<leader>n", function() toggler.option("relativenumber"):toggle() end, desc = "Toggle relative number" },
         { "<leader>es", function() toggler.option("spell"):toggle() end, desc = "Toggle spelling" },
