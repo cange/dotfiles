@@ -1,13 +1,14 @@
 -- inspired by https://alexplescan.com/posts/2024/08/10/wezterm/https://alexplescan.com/posts/2024/08/10/wezterm/
 local wezterm = require("wezterm")
 local theme = require("user.theme")
-local pal = theme.pal
 local config = wezterm.config_builder()
 local font = wezterm.font({ family = "JetBrainsMono Nerd Font", scale = 1 })
-local bg_base = pal.bg0
 
+local color_scheme = theme.color_scheme()
+local pal = theme.fetch_palette()
 config = {
-  color_scheme = theme.color_scheme,
+  automatically_reload_config = true,
+  color_scheme = color_scheme,
   scrollback_lines = 10000,
 
   -- keys
@@ -26,9 +27,9 @@ config = {
     orientation = "Vertical",
     noise = 40,
     colors = {
-      theme.hex2rgba(bg_base, 72),
-      theme.hex2rgba(bg_base, 80),
-      theme.hex2rgba(bg_base, 96),
+      theme.hex2rgba(theme.bg_base, 64),
+      theme.hex2rgba(theme.bg_base, 72),
+      theme.hex2rgba(theme.bg_base, 96),
     },
   },
   window_decorations = "INTEGRATED_BUTTONS|RESIZE",
@@ -94,10 +95,11 @@ end)
 -- Status bar
 -- Name of the current workspace | Hostname
 wezterm.on("update-status", function(window)
+  theme.fetch_palette()
   local fmt = " %s  %s  "
   local content = {
     { Background = { Color = theme.transparent } },
-    { Foreground = { Color = pal.fg3 } },
+    { Foreground = { Color = theme.pal.comment } },
     { Text = string.format(fmt, wezterm.nerdfonts.oct_codespaces, get_dir_name(window:active_workspace())) },
     { Text = string.format(fmt, wezterm.nerdfonts.oct_clock, wezterm.strftime("%a, %e. %b %H:%M")) },
   }
@@ -113,7 +115,10 @@ if not ok then
   -- run git clone https://github.com/danielcopper/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
 end
 
-wezterm.on("window-config-reloaded", function(win)
+local mux = wezterm.mux
+wezterm.on("gui-startup", function(cmd)
+  local _, _, window = mux.spawn_window(cmd or {})
+  local win = window:gui_window()
   wezterm.log_info("Startup restore session!", win)
   session_manager.restore_state(win)
 end)

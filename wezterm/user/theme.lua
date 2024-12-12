@@ -1,10 +1,12 @@
 M = {}
 
-local function is_dark() return require("wezterm").gui.get_appearance():find("Dark") end
-local color_schemes = {
+local modes = {
+  light = "dawnfox",
   dark = "terafox",
-  light = "Github (base16)",
 }
+
+local wezterm = require("wezterm")
+local function is_dark() return wezterm.gui.get_appearance() == "Dark" end
 
 ---@param hex string
 ---@param alpha? number [0 - 0.9, 1 - 100]
@@ -22,8 +24,6 @@ end
 
 -- dynamic color assign
 
-M.color_scheme = is_dark() and "terafox" or "dayfox"
-
 ---Mocks Neovim's API since some endpoints are required by nightfox.nvim
 local function neovim_polyfill()
   ---@diagnostic disable-next-line: lowercase-global
@@ -40,37 +40,13 @@ neovim_polyfill()
 local ok, palette = pcall(require, "nightfox.palette")
 if not ok then error("[nightfox.palette] not found! Please symlink the nightfox repo to your runtimepath") end
 
-M.pal = palette.load(M.color_scheme)
-
-if not is_dark() then
-  -- custom higer contrast theme
-  M.pal = { --  Github https://wezfurlong.org/wezterm/colorschemes/g/index.html#github
-    fg0 = "#3e3e3e",
-    fg1 = "#3f3f3f",
-    fg2 = "#535353",
-    fg3 = "#6f6f6f",
-    bg0 = "#f4f4f4",
-    bg1 = "#f1f1f1",
-    bg2 = "#fafafa",
-    bg3 = "#fcfcfc",
-    bg4 = "#fefefe",
-    sel0 = "#a9c1e2",
-    sel1 = "#c1d5f8",
-
-    black = { base = "#3e3e3e", light = "#666666" },
-    red = { base = "#970b16", light = "#de0000" },
-    green = { base = "#07962a", light = "#87d5a2" },
-    yellow = { base = "#f8eec7", light = "#f1d007" },
-    blue = { base = "#003e8a", light = "#2e6cba" },
-    magenta = { base = "#e94691", light = "#ffa29f" },
-    cyan = { base = "#89d1ec", light = "#1cfafe" },
-    white = { base = "#ffffff", light = "#ffffff" },
-  }
-end
-
+M.color_scheme = function() return is_dark() and modes.dark or modes.light end
+M.pal = palette.load(M.color_scheme())
+M.bg_base = is_dark() and M.pal.bg0 or M.pal.white.base
 M.transparent = M.hex2rgba("#0000000", 0)
 
 local Color = require("nightfox.lib.color")
+
 ---@param color string
 ---@param accent string
 ---@param factor? number
@@ -79,7 +55,7 @@ local function blend(color, accent, factor) return Color(color):blend(Color(acce
 
 ---@param name string
 ---@param active boolean
----@return string # accent
+---@return string, string # fg, accent
 local function define_accent_color(name, active)
   local pal = M.pal
   local names = {
@@ -87,37 +63,46 @@ local function define_accent_color(name, active)
     frontend = "#f7df1e",
     routing = "#f7df1e",
   }
-  local fg = pal.fg0
-  for pattern, accent in pairs(names) do
-    if name:find(pattern) then fg = accent end
+  local fg = pal.bg1
+  local accent = pal.sel1
+  for pattern, color in pairs(names) do
+    if name:find(pattern) then accent = blend(fg, color, active and 1 or 0.5) end
   end
-  return blend(fg, pal.bg4, active and 0.3 or 0.7)
+  return fg, accent
+end
+function M.fetch_palette()
+  M.pal = palette.load(M.color_scheme())
+  return M.pal
 end
 
 ---@param content string
 ---@param index number
 ---@param active boolean
 function M.render_tab(content, index, active)
+  -- NOTE: ensure current color scheme palette is loaded
+  M.fetch_palette()
   local icons = {
-    -- begin = require("wezterm").nerdfonts.ple_left_half_circle_thick,
-    -- ["end"] = require("wezterm").nerdfonts.ple_right_half_circle_thick,
+    first = wezterm.nerdfonts.ple_left_half_circle_thick,
+    last = wezterm.nerdfonts.ple_right_half_circle_thick,
     dot = "■",
   }
 
-  local accent = define_accent_color(content, active)
-  return require("wezterm").format({
+  local fg, accent = define_accent_color(content, active)
+  local bg = active and accent or M.transparent
+  -- wezterm.log_info("-color_scheme:", M.color_scheme(), "-dark:", is_dark(), "-bg", bg)
+  return wezterm.format({
     -- start
     { Background = { Color = M.transparent } },
-    { Foreground = { Color = accent } },
-    -- { Text = icons.begin },
+    { Foreground = { Color = bg } },
+    { Text = active and icons.first or " " },
     --- content
-    -- { Background = { Color = accent } },
-    -- { Foreground = { Color = fg } },
-    { Text = string.format(" %s %s", active and icons.dot or index, content) },
+    { Background = { Color = bg } },
+    { Foreground = { Color = active and fg or accent } },
+    { Text = string.format("%s %s", active and icons.dot or index, content) },
     -- end
-    -- { Background = { Color = M.transparent } },
-    -- { Foreground = { Color = accent } },
-    -- { Text = icons.end },
+    { Background = { Color = M.transparent } },
+    { Foreground = { Color = bg } },
+    { Text = active and icons.last or " " },
   })
 end
 

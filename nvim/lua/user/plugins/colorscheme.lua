@@ -1,3 +1,7 @@
+local modes = {
+  light = "github_light_high_contrast",
+  dark = "terafox",
+}
 ---@return user.Palette, user.Spec
 local function get_palette()
   local curr_colorscheme = vim.g.colors_name
@@ -99,11 +103,6 @@ local function update_highlights()
   User.set_highlights(highlights)
 end
 
-local theme_modes = {
-  light = "github_light_hight_contrast",
-  dark = "terafox",
-}
-
 ---@param mode? '"dark"'|'"light"'|nil
 ---@param silent? boolean
 local function update_colorscheme(mode, silent)
@@ -111,7 +110,7 @@ local function update_colorscheme(mode, silent)
   mode = mode ~= nil and mode or vim.o.background
   if not mode then return end
   vim.opt.background = mode
-  local theme = theme_modes[mode]
+  local theme = modes[mode]
   vim.cmd("colorscheme " .. theme)
 
   if silent == false then
