@@ -6,6 +6,7 @@ local modes = {
 }
 
 local wezterm = require("wezterm")
+local nf = wezterm.nerdfonts
 local function is_dark() return wezterm.gui.get_appearance() == "Dark" end
 
 ---@param hex string
@@ -42,7 +43,7 @@ if not ok then error("[nightfox.palette] not found! Please symlink the nightfox 
 
 M.color_scheme = function() return is_dark() and modes.dark or modes.light end
 M.pal = palette.load(M.color_scheme())
-M.bg_base = is_dark() and M.pal.bg0 or M.pal.white.base
+M.bg_base = is_dark() and M.pal.bg0 or "#ffffff"
 M.transparent = M.hex2rgba("#0000000", 0)
 
 local Color = require("nightfox.lib.color")
@@ -54,22 +55,29 @@ local Color = require("nightfox.lib.color")
 local function blend(color, accent, factor) return Color(color):blend(Color(accent), factor or 0.5):to_css() end
 
 ---@param name string
----@param active boolean
----@return string, string # fg, accent
-local function define_accent_color(name, active)
+---@return string, string, string # base, accent, icon
+local function define_accent_color(name)
   local pal = M.pal
-  local names = {
-    vue = "#42b883",
-    frontend = "#f7df1e",
-    routing = "#f7df1e",
+  local presets = {
+    ["#f0db4f"] = { "request", "routing", "tracking", { icon = nf.md_language_javascript } },
+    ["#42b883"] = { "vue", "frontend", { icon = nf.md_vuejs } },
   }
-  local fg = pal.bg1
-  local accent = pal.sel1
-  for pattern, color in pairs(names) do
-    if name:find(pattern) then accent = blend(fg, color, active and 1 or 0.5) end
+
+  local base = pal.bg0
+  local accent = pal.bg4
+  local icon = nf.oct_file_directory_open_fill
+  for color, patterns in pairs(presets) do
+    for _, pattern in ipairs(patterns) do
+      if type(pattern) == "string" and name:find(pattern) then
+        accent = blend(base, color, 0.8)
+        icon = patterns[#patterns].icon or icon
+        break
+      end
+    end
   end
-  return fg, accent
+  return base, accent, icon
 end
+
 function M.fetch_palette()
   M.pal = palette.load(M.color_scheme())
   return M.pal
@@ -79,15 +87,14 @@ end
 ---@param index number
 ---@param active boolean
 function M.render_tab(content, index, active)
-  -- NOTE: ensure current color scheme palette is loaded
+  -- NOTE: ensure current color scheme pal
   M.fetch_palette()
   local icons = {
-    first = wezterm.nerdfonts.ple_left_half_circle_thick,
-    last = wezterm.nerdfonts.ple_right_half_circle_thick,
-    dot = "■",
+    first = nf.ple_left_half_circle_thick,
+    last = nf.ple_right_half_circle_thick,
   }
 
-  local fg, accent = define_accent_color(content, active)
+  local contra, accent, icon = define_accent_color(content)
   local bg = active and accent or M.transparent
   -- wezterm.log_info("-color_scheme:", M.color_scheme(), "-dark:", is_dark(), "-bg", bg)
   return wezterm.format({
@@ -97,8 +104,8 @@ function M.render_tab(content, index, active)
     { Text = active and icons.first or " " },
     --- content
     { Background = { Color = bg } },
-    { Foreground = { Color = active and fg or accent } },
-    { Text = string.format("%s %s", active and icons.dot or index, content) },
+    { Foreground = { Color = active and contra or accent } },
+    { Text = string.format("%s %s", active and icon or index, content) },
     -- end
     { Background = { Color = M.transparent } },
     { Foreground = { Color = bg } },

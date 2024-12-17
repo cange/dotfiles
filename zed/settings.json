@@ -18,8 +18,14 @@
   "theme": {
     "mode": "system",
     "dark": "Terafox",
-    "light": "Github Light"
+    "light": "Github Light High Contrast"
   },
+
+  // The default font size for text in the editor
+  "buffer_font_size": 13,
+  // The default font size for text in the UI
+  "ui_font_size": 13,
+
   "ui_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "terminal": {

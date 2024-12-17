@@ -27,9 +27,9 @@ config = {
     orientation = "Vertical",
     noise = 40,
     colors = {
-      theme.hex2rgba(theme.bg_base, 64),
-      theme.hex2rgba(theme.bg_base, 72),
-      theme.hex2rgba(theme.bg_base, 96),
+      theme.hex2rgba(theme.bg_base, 76),
+      theme.hex2rgba(theme.bg_base, 84),
+      theme.hex2rgba(theme.bg_base, 92),
     },
   },
   window_decorations = "INTEGRATED_BUTTONS|RESIZE",
