@@ -52,6 +52,26 @@ local keymaps = {
     { desc = "Execute the current file" },
   },
   { "<localleader>S", ":sort<CR>gv=gv", { desc = "Sort selected lines" }, { "v" } },
+  { "<ESC><ESC>", "<C-\\><C-n>", { desc = "Escape nvim terminal mode" }, { "t" } },
+  {
+    "<localleader>d",
+    function()
+      vim.cmd.new()
+      vim.cmd.term()
+      vim.cmd.wincmd("J")
+      vim.api.nvim_win_set_height(0, 10)
+    end,
+    { desc = "Terminal (horizontal)" },
+  },
+  {
+    "<localleader>D",
+    function()
+      vim.cmd.vnew()
+      vim.cmd.term()
+      vim.cmd.wincmd("L")
+    end,
+    { desc = "Terminal (vertical)" },
+  },
 }
 
 for _, map in pairs(keymaps) do

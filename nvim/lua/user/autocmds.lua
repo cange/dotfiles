@@ -33,3 +33,12 @@ autocmd("TextYankPost", {
   group = group_id,
   callback = function() vim.highlight.on_yank({ higroup = "Cursor" }) end,
 })
+
+autocmd("TermOpen", {
+  desc = "Clean inner editor terminal",
+  group = group_id,
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+  end,
+})

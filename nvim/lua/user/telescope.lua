@@ -39,7 +39,7 @@ function M.custom_live_grep(opts)
   local finder = finders.new_async_job({
     command_generator = function(prompt)
       if not prompt or prompt == "" then return nil end
-      local pieces = vim.split(prompt, " ")
+      local pieces = vim.split(prompt, "  ")
 
       local args = { "rg" }
       if pieces[1] then
