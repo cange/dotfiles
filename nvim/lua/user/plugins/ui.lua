@@ -7,8 +7,10 @@ return {
     lazy = false,
     opts = {
       bigfile = { enabled = true },
-      notify = { enabled = true },
-      indent = { enabled = true, animate = { enabled = false } },
+      dim = { animate = { enabled = false } },
+      indent = { animate = { enabled = false } },
+      input = { enabled = true },
+      lazygit = { theme = { activeBorderColor = { fg = "String", bold = true } } },
       notifier = {
         enabled = true,
         icons = {
@@ -20,8 +22,8 @@ return {
         },
         top_down = false,
       },
-      bufdelete = { enabled = true },
-      lazygit = { enabled = true },
+      notify = { enabled = true },
+      scroll = { enabled = true },
     },
     keys = function()
       local Snacks = require("snacks")
@@ -60,6 +62,7 @@ return {
         pattern = "VeryLazy",
         callback = function()
           -- Setup some globals for debugging (lazy-loaded)
+          ---@diagnostic disable-next-line: duplicate-set-field
           _G.dd = function(...) Snacks.debug.inspect(...) end
           vim.print = _G.dd -- Override print to use snacks for `:=` command
         end,
@@ -69,19 +72,6 @@ return {
 
   -- advanced colorcolumn
   { "lukas-reineke/virt-column.nvim", opts = { char = icons.ui.LineThin } },
-
-  { -- Improve the built-in vim.ui interfaces with telescope, fzf, etc
-    "stevearc/dressing.nvim",
-    lazy = true,
-    event = { "VimEnter" },
-    opts = {
-      input = {
-        win_options = {
-          winhighlight = "NormalFloat:FloatInput",
-        },
-      },
-    },
-  },
 
   { -- font icon set
     "nvim-tree/nvim-web-devicons",

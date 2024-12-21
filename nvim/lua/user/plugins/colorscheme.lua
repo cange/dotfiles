@@ -61,9 +61,17 @@ local function update_highlights()
       -- misc
       LspInlayHint = { fg = pal.comment, bg = nil, italic = true },
 
+      -- Window
+      FloatBorder = { fg = pal.bg0, bg = pal.bg0 },
+      FloatInput = { fg = pal.fg1, bg = pal.bg2 },
+      FloatTitle = { fg = pal.fg3, bg = pal.bg0 },
+      NormalFloat = { fg = pal.fg1, bg = pal.bg0 },
+
       -- Snacks
       SnacksNotifierHistory = { link = "UserNormal" },
       SnacksIndentScope = { fg = pal.green.dim },
+      SnacksInputBorder = { fg = pal.fg3, bg = pal.bg0 },
+      SnacksInputNormal = { link = "UserNormal" },
 
       -- parentheses highlighting
       RainbowDelimiterRed = { fg = blend(spec.syntax.bracket, pal.red.dim, 0.75) },
@@ -73,12 +81,6 @@ local function update_highlights()
       RainbowDelimiterGreen = { fg = blend(spec.syntax.bracket, pal.green.dim, 0.75) },
       RainbowDelimiterViolet = { fg = blend(spec.syntax.bracket, pal.magenta.dim, 0.75) },
       RainbowDelimiterCyan = { fg = blend(spec.syntax.bracket, pal.cyan.dim, 0.75) },
-
-      -- Window
-      FloatBorder = { fg = pal.bg0, bg = pal.bg0 },
-      FloatInput = { fg = pal.fg1, bg = pal.bg1 },
-      FloatTitle = { fg = pal.fg3, bg = pal.bg0 },
-      NormalFloat = { fg = pal.fg1, bg = pal.bg0 },
 
       -- SymboleOutline
       FocusedSymbol = { bold = true },

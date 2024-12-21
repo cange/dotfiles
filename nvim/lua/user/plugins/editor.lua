@@ -7,7 +7,10 @@ return {
     keys = {
       { "<leader>\\", "<cmd>NvimTreeToggle<CR>", desc = "File Tree Explorer" },
     },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "folke/snacks.nvim",
+    },
     opts = {
       live_filter = {
         prefix = icons.ui.Search .. "  ",
@@ -68,6 +71,21 @@ return {
       User.set_highlights({
         NvimTreeGitDirtyIcon = { link = "GitSignsChange" },
         NvimTreeGitNewIcon = { link = "GitSignsAdd" },
+      })
+
+      -- https://github.com/folke/snacks.nvim/blob/main/docs/rename.md#nvim-tree
+      local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "NvimTreeSetup",
+        callback = function()
+          local events = require("nvim-tree.api").events
+          events.subscribe(events.Event.NodeRenamed, function(data)
+            if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+              data = data
+              require("snacks").rename.on_rename_file(data.old_name, data.new_name)
+            end
+          end)
+        end,
       })
     end,
   },
@@ -268,12 +286,6 @@ return {
       { "R", function() require("flash").treesitter_search() end, desc = "Treesitter Search", mode = { "o", "x" } },
       { "<c-s>", function() require("flash").toggle() end, desc = "Toggle Flash Search", mode = "c" },
     },
-  },
-
-  { -- smooth scrolling
-    "karb94/neoscroll.nvim",
-    event = "VeryLazy",
-    config = true,
   },
 
   { -- Hex color highlighter

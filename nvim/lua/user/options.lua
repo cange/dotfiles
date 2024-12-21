@@ -3,6 +3,7 @@ local options = {
   timeoutlen = 300, -- max delay until execute command of a key sequence
   list = true, -- show hidden characters
   updatetime = 50, -- faster completion (4000ms default), delays and poor user experience
+  conceallevel = 2, -- hides quotes e.g. JSON "foo" -> foo
 
   -- UI
   cursorline = true, -- highlight the current line
@@ -15,7 +16,7 @@ local options = {
   title = true, -- Update terminal window title
 
   -- UI - command prompt
-  showmode = true, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
+  showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
   spelllang = { "en_us", "de" }, -- spellchecking will be done for these languages
 
