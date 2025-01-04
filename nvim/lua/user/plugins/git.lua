@@ -1,11 +1,10 @@
-local icons = require("user.icons")
-local line_format = "<author>, <author_time:%d. %b %Y> " .. icons.ui.Note .. " <summary>"
+local line_format = "<author>, <author_time:%d. %b %Y> " .. Icon.ui.Note .. " <summary>"
 local signs = {
-  add = { text = icons.ui.LineLeft },
-  change = { text = icons.ui.LineLeft },
-  delete = { text = icons.ui.LineLower },
-  changedelete = { text = icons.git.Diff },
-  topdelete = { text = icons.ui.LineUpper },
+  add = { text = Icon.ui.LineLeft },
+  change = { text = Icon.ui.LineLeft },
+  delete = { text = Icon.ui.LineLower },
+  changedelete = { text = Icon.git.Diff },
+  topdelete = { text = Icon.ui.LineUpper },
 }
 
 return {

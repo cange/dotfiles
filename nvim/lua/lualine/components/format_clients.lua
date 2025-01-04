@@ -16,8 +16,8 @@ end
 
 function M:init(opts)
   local state_icons = {
-    active = require("user.icons").ui.CheckAll,
-    inactive = require("user.icons").ui.EyeClosed,
+    active = Icon.ui.CheckAll,
+    inactive = Icon.ui.EyeClosed,
   }
   M.super.init(self, opts)
   M.list_services =

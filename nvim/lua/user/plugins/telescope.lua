@@ -1,5 +1,3 @@
-local icons = require("user.icons")
-
 return {
   -- Fuzzy Finder
   "nvim-telescope/telescope.nvim", -- fuzzy finder over lists
@@ -65,9 +63,9 @@ return {
             ["<M-p>"] = action_layout.toggle_preview,
           },
         },
-        prompt_prefix = " " .. icons.ui.Search .. "  ",
+        prompt_prefix = " " .. Icon.ui.Search .. "  ",
         scroll_strategy = "cycle",
-        selection_caret = " " .. icons.ui.ChevronRight .. "  ",
+        selection_caret = " " .. Icon.ui.ChevronRight .. "  ",
         sorting_strategy = "ascending",
         winblend = vim.opt.winblend:get(),
       },
@@ -75,11 +73,16 @@ return {
         ["ui-select"] = { --https://github.com/nvim-telescope/telescope-ui-select.nvim#telescope-setup-and-configuration
           require("telescope.themes").get_cursor(),
         },
+        file_browser = vim.tbl_extend("keep", default_opts, {
+          cwd = vim.fn.expand("%:p:h"),
+          path = "%:p:h",
+          prompt_title = "Current Directory",
+        }),
         fzf = {},
         project = default_opts,
         undo = {
           layout_config = { preview_width = 0.7 },
-          entry_format = "$ID   " .. icons.ui.Time .. " $TIME",
+          entry_format = "$ID   " .. Icon.ui.Time .. " $TIME",
           mappings = {
             i = {
               ["<CR>"] = require("telescope-undo.actions").restore,
@@ -112,30 +115,32 @@ return {
         lsp_declarations = lsp_opts,
         lsp_definitions = lsp_opts,
         lsp_references = lsp_opts,
-        oldfiles = ivy_opts,
+        oldfiles = vim.tbl_extend("keep", ivy_opts, { only_cwd = true }),
         quickfix = default_opts,
       },
     })
 
     -- extensions
+    telescope.load_extension("file_browser")
     telescope.load_extension("fzf")
-    telescope.load_extension("project")
     telescope.load_extension("lazy")
+    telescope.load_extension("project")
     telescope.load_extension("ui-select")
     telescope.load_extension("undo")
   end,
   -- stylua: ignore start
   keys = {
-    { "<localleader>/",  require('user.telescope').custom_live_grep,        desc = "within Files" },
+    { "<localleader>/", '<cmd>lua R("user.telescope").custom_live_grep()<CR>', desc = "within Files" },
+    { "<localleader>t", '<cmd>lua R("user.telescope").browse_test_files()<CR>', desc = "Associated test files" },
     { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<CR>",         desc = "within File" },
     { "<leader>f",  "<cmd>Telescope find_files<CR>",                        desc = "for Files" },
     { "<leader>p",  "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },
-    { "<leader>ec", "<cmd>Telescope colorscheme<CR>",                       desc = "Change colorscheme" },
+    { "<leader>,c", "<cmd>Telescope colorscheme<CR>",                       desc = "Change colorscheme" },
     { "<leader>gB", "<cmd>Telescope git_branches<CR>",                      desc = "Checkout branch" },
     { "<leader>gC", "<cmd>Telescope git_commits<CR>",                       desc = "Checkout commit" },
     { "<leader>go", "<cmd>Telescope git_status<CR>",                        desc = "Open changed file" },
     { "<leader>sB", "<cmd>Telescope buffers<CR>",                           desc = "Buffers" },
-    { "<leader>sb", '<cmd>lua R("user.telescope").file_browser()<CR>',      desc = "In current directory" },
+    { "<leader>sb", "<cmd>Telescope file_browser<CR>",                      desc = "Current directory" },
     { "<leader>sC", "<cmd>Telescope commands<CR>",                          desc = "Commands" },
     { "<leader>sH", '<cmd>Telescope highlights<CR>',                        desc = "Highlights" },
     { "<leader>sh", "<cmd>Telescope help_tags<CR>",                         desc = "Nvim help" },
@@ -145,7 +150,6 @@ return {
     { "<leader>sr", "<cmd>Telescope oldfiles<CR>",                          desc = "Recently opened files" },
     { "<leader>sS", '<cmd>lua R("user.telescope").browse_snippets()<CR>',   desc = "Edit snippets" },
     { "<leader>ss", "<cmd>Telescope lsp_document_symbols<CR>",              desc = "Show symbols" },
-    { "<localleader>t", '<cmd>lua R("user.telescope").browse_test_files()<CR>', desc = "Associated test files" },
     { "<leader>st", "<cmd>TodoTelescope<CR>",                               desc = "Todo comments" },
     { "<leader>su", "<cmd>Telescope undo<CR>",                              desc = "Undo tree" },
     { "<leader>sW", '<cmd>lua R("user.telescope").browse_workspace()<CR>',  desc = "Current workspace" },

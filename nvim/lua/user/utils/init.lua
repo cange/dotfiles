@@ -2,7 +2,6 @@ local ns = "[user.utils]"
 
 local M = {}
 
-M.get_icon = require("user.utils.icons").get_icon -- 2nd
 M.get_service_icons = require("user.utils.icons").get_service_icons
 
 ---Get certain config attributes

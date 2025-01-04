@@ -1,4 +1,3 @@
-local icons = require("user.icons")
 local strUtil = require("user.utils.string")
 local exclude_filetypes = {
   "",
@@ -27,7 +26,7 @@ return {
       return {
         options = {
           globalstatus = true,
-          component_separators = { left = icons.ui.Pipe, right = icons.ui.Pipe },
+          component_separators = { left = Icon.ui.Pipe, right = Icon.ui.Pipe },
           section_separators = { left = "", right = "" },
           theme = custom_theme,
         },
@@ -45,18 +44,18 @@ return {
             },
             {
               "branch",
-              icon = icons.git.Branch,
+              icon = Icon.git.Branch,
               on_click = function() vim.cmd("Telescope git_branches") end,
               padding = { left = 0, right = 1 },
-              separator = icons.ui.Pipe,
+              separator = Icon.ui.Pipe,
             },
             {
               "diagnostics",
               symbols = {
-                error = icons.diagnostics.Error .. " ",
-                warn = icons.diagnostics.Warn .. " ",
-                info = icons.diagnostics.Info .. " ",
-                hint = icons.diagnostics.Hint .. " ",
+                error = Icon.diagnostics.Error .. " ",
+                warn = Icon.diagnostics.Warn .. " ",
+                info = Icon.diagnostics.Info .. " ",
+                hint = Icon.diagnostics.Hint .. " ",
               },
             },
           },
@@ -64,12 +63,12 @@ return {
             {
               "git_blame_line",
               padding = { right = 1 },
-              icon = icons.git.Commit,
+              icon = Icon.git.Commit,
               fmt = function(name)
                 local w = vim.o.columns
                 return strUtil.truncate(name, w > 172 and 80 or w > 112 and 48 or w > 92 and 24 or 0)
               end,
-              separator = icons.ui.Pipe,
+              separator = Icon.ui.Pipe,
             },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             { "inlay_hints", exclude_filetypes = exclude_filetypes },
@@ -98,8 +97,8 @@ return {
     config = function()
       require("barbecue").setup({
         symbols = {
-          modified = icons.ui.DotFill,
-          separator = icons.ui.ChevronRight,
+          modified = Icon.ui.DotFill,
+          separator = Icon.ui.ChevronRight,
         },
         show_modified = true,
         exclude_filetypes = exclude_filetypes,

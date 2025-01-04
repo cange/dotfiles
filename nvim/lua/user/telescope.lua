@@ -1,7 +1,6 @@
-local ok, telescope = pcall(require, "telescope")
+local ok, _ = pcall(require, "telescope")
 if not ok then error('"telescope" not found') end
 local builtin = require("telescope.builtin")
-local icon = require("user.icons")
 
 local M = {}
 
@@ -14,7 +13,8 @@ function M.custom_live_grep(opts)
   ---Ask for a file extension and filtering by it
   ---@param prompt_bufnr number
   local function file_extension_filter_input(prompt_bufnr)
-    vim.ui.input({ default = "*.", prompt = icon.ui.Filter .. " files via Regex" }, function(glob_input)
+    opts = { default = "*.", prompt = "Files via Regex", icon = Icon.ui.Filter }
+    local on_confirm = function(glob_input)
       if not glob_input then return end
 
       require("telescope.actions").close(prompt_bufnr)
@@ -23,7 +23,9 @@ function M.custom_live_grep(opts)
         glob_pattern = glob_input,
         default_text = require("telescope.actions.state").get_current_line(),
       })
-    end)
+    end
+
+    require("snacks").input.input(opts, on_confirm) -- see: vim.ui.input
   end
 
   opts = opts or {}
@@ -102,7 +104,7 @@ function M.browse_nvim()
   builtin.find_files({
     cwd = vim.fn.stdpath("config"),
     previewer = false,
-    prompt_title = icon.ui.Neovim .. " Neovim",
+    prompt_title = Icon.ui.Neovim .. " Neovim",
   })
 end
 
@@ -110,7 +112,7 @@ function M.browse_snippets()
   builtin.find_files({
     cwd = "~/.config/snippets",
     previewer = true,
-    prompt_title = icon.ui.Library .. " Snippets",
+    prompt_title = Icon.ui.Library .. " Snippets",
   })
 end
 
@@ -120,7 +122,7 @@ function M.diagnostics_log()
     initial_mode = "normal",
     no_listed = true, -- if true, shows only listed buffers
     previewer = false,
-    prompt_title = icon.ui.Stethoscope .. " Diagnostics Log",
+    prompt_title = Icon.ui.Stethoscope .. " Diagnostics Log",
   }))
 end
 
@@ -128,7 +130,7 @@ function M.browse_workspace()
   builtin.find_files({
     cwd = "~/workspace/",
     hidden = true,
-    prompt_title = icon.documents.Briefcase .. " Workspace",
+    prompt_title = Icon.documents.Briefcase .. " Workspace",
     shorten_path = false,
   })
 end
@@ -137,33 +139,8 @@ function M.browse_test_files()
   local file_base_name = vim.fn.expand("%:t:r")
 
   builtin.find_files({
-    prompt_title = icon.ui.Beaker .. " Find Files (associated test files)",
+    prompt_title = Icon.ui.Beaker .. " Find Files (associated test files)",
     find_command = { "rg", "--files", "--iglob", file_base_name .. "{.,_}{spec,test,stories}.{js,ts,rb,lua}" },
-  })
-end
-
-function M.file_browser()
-  local path = "%:p:h"
-  telescope.extensions.file_browser.file_browser({
-    cwd = vim.fn.expand(path),
-    path = path,
-    attach_mappings = function(prompt_bufnr, keymap)
-      local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-      local modify_cwd = function(new_cwd)
-        local finder = current_picker.finder
-
-        finder.path = new_cwd
-        finder.files = true
-        current_picker:refresh(false, { reset_prompt = true })
-      end
-
-      -- navigate up in dir tree
-      keymap("i", "-", function() modify_cwd(current_picker.cwd .. "/..") end)
-      -- up to user root
-      keymap("i", "~", function() modify_cwd(vim.fn.expand("~")) end)
-
-      return true
-    end,
   })
 end
 

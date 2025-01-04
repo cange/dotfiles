@@ -4,7 +4,6 @@ return {
     event = "InsertEnter",
     lazy = true,
     dependencies = {
-      "L3MON4D3/LuaSnip", -- snippets
       "saadparwaiz1/cmp_luasnip", -- snippet completions
       "hrsh7th/cmp-buffer", -- source for buffer words
       "hrsh7th/cmp-cmdline", -- cmdline completions
@@ -16,7 +15,6 @@ return {
     config = function()
       local cmp = require("cmp")
       local max_count = 16
-      require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.fn.expand("~/.config/snippets") })
 
       cmp.setup(require("user.cmp").opts)
 
@@ -37,5 +35,11 @@ return {
         }),
       })
     end,
+  },
+
+  { -- snippets
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    init = function() require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.fn.expand("~/.config/snippets") }) end,
   },
 }

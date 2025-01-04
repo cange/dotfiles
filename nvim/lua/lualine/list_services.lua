@@ -3,9 +3,9 @@ local strUtil = require("user.utils.string")
 local M = {}
 M.__index = M
 local default_state_icons = {
-  active = require("user.icons").ui.CheckAll,
-  inactive = require("user.icons").ui.EyeClosed,
-  minimized = require("user.icons").ui.Eye,
+  active = Icon.ui.CheckAll,
+  inactive = Icon.ui.EyeClosed,
+  minimized = Icon.ui.Eye,
 }
 
 --- Provides a list of services which are can be displayed by icons

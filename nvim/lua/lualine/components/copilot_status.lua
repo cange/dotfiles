@@ -4,16 +4,15 @@
 ---@type _, { status: { data: copilot_status_notification_data } }
 local ok, api = pcall(require, "copilot.api")
 if not ok then error('[lualine.components.copilot_status] "copilot.api" not found') end
-local icos = require("user.icons")
 
 local M = require("lualine.component"):extend()
 local refresh_count = 1
 
 -- NOTE: function wrappers enables spinner animation
 local icons = {
-  [""] = function() return icos.plugin.CopilotError end,
-  ["Normal"] = function() return icos.plugin.Copilot end,
-  ["Warning"] = function() return icos.plugin.CopilotWarning end,
+  [""] = function() return Icon.plugin.CopilotError end,
+  ["Normal"] = function() return Icon.plugin.Copilot end,
+  ["Warning"] = function() return Icon.plugin.CopilotWarning end,
   ["InProgress"] = function() return require("user.utils.spinner").icon(refresh_count) end,
 }
 local colors = {

@@ -1,5 +1,3 @@
-local icons = require("user.icons")
-
 return {
   { -- A collection of small convenience plugins
     "folke/snacks.nvim",
@@ -14,11 +12,11 @@ return {
       notifier = {
         enabled = true,
         icons = {
-          error = icons.diagnostics.Error,
-          warn = icons.diagnostics.Warn,
-          info = icons.diagnostics.Info,
-          debug = icons.ui.Bug,
-          trace = icons.ui.Edit,
+          error = Icon.diagnostics.Error,
+          warn = Icon.diagnostics.Warn,
+          info = Icon.diagnostics.Info,
+          debug = Icon.ui.Bug,
+          trace = Icon.ui.Edit,
         },
         top_down = false,
       },
@@ -33,12 +31,11 @@ return {
         { "<localleader>z", function() Snacks.dim() end, desc = "Toggle Dimming" },
         { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
         { "<leader>cd", function() toggler.diagnostics():toggle() end, desc = "Toggle diagnostic inline text" },
-        { "<leader>ci", function() toggler.inlay_hints():toggle() end, desc = "Toggle inlay hints" },
-        { "<leader>eN", function() Snacks.notifier.show_history() end, desc = "Show notfication" },
-        { "<leader>en", function() toggler.line_number():toggle() end, desc = "Toggle line numbers" },
-        { "<leader>n", function() toggler.option("relativenumber"):toggle() end, desc = "Toggle relative number" },
-        { "<leader>es", function() toggler.option("spell"):toggle() end, desc = "Toggle spelling" },
-        { "<leader>ew", function() toggler.option("wrap"):toggle() end, desc = "Toggle wrap" },
+        { "<leader>en", function() Snacks.notifier.show_history() end, desc = "Show notfication" },
+        { "<leader>,N", function() toggler.line_number():toggle() end, desc = "Toggle line numbers" },
+        { "<leader>,n", function() toggler.option("relativenumber"):toggle() end, desc = "Toggle relative number" },
+        { "<leader>,s", function() toggler.option("spell"):toggle() end, desc = "Toggle spelling" },
+        { "<leader>,w", function() toggler.option("wrap"):toggle() end, desc = "Toggle wrap" },
         { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Current File History" },
         { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
       }
@@ -71,7 +68,7 @@ return {
   },
 
   -- advanced colorcolumn
-  { "lukas-reineke/virt-column.nvim", opts = { char = icons.ui.LineThin } },
+  { "lukas-reineke/virt-column.nvim", opts = { char = Icon.ui.LineThin } },
 
   { -- font icon set
     "nvim-tree/nvim-web-devicons",
@@ -89,12 +86,12 @@ return {
       use_diagnostic_signs = true,
       icons = {
         indent = {
-          fold_open = icons.ui.ChevronDown,
-          fold_closed = icons.ui.ChevronRight,
+          fold_open = Icon.ui.ChevronDown,
+          fold_closed = Icon.ui.ChevronRight,
         },
-        folder_closed = icons.documents.Folder,
-        folder_open = icons.documents.OpenFolder,
-        kinds = icons.cmp_kinds,
+        folder_closed = Icon.documents.Folder,
+        folder_open = Icon.documents.OpenFolder,
+        kinds = Icon.cmp_kinds,
       },
     },
     config = function(_, opts)

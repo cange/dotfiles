@@ -25,8 +25,13 @@ M.keymaps = {
   { "<leader>ca", vim.lsp.buf.code_action,                          desc = "Code Actions" },
   { "<leader>cr", "<cmd>LspRestart;<CR>",                           desc = "LSP Restart"  },
   { "<leader>e4", "<cmd>LspInfo<CR>",                               desc = "LSP info"  },
-  { "<leader>el", toggle_format_on_save,                            desc = "Toggle Format on Save"  },
+  { "<leader>,l", toggle_format_on_save,                            desc = "Toggle Format on Save"  },
   { "<leader>r", vim.lsp.buf.rename,                                desc = "Rename Symbol" },
+  {
+    "<leader>ci",
+    function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 })) end,
+    desc = "Toggle inlay hints",
+  },
   { "[d", vim.diagnostic.goto_prev,                                 desc = "Prev Diagnostic" },
   { "]d", vim.diagnostic.goto_next,                                 desc = "Next Diagnostic" },
   { "gD", "<cmd>Telescope lsp_type_definitions<CR>",                desc = "Find Type Definition" },
@@ -57,7 +62,7 @@ M.server_config = {
 local function define_sign_icons()
   local signs = {}
   ---@diagnostic disable-next-line: param-type-mismatch
-  for type, icon in pairs(require("user.icons").diagnostics) do
+  for type, icon in pairs(Icon.diagnostics) do
     local hl = "DiagnosticSign" .. type
     table.insert(signs, { name = hl, text = icon })
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

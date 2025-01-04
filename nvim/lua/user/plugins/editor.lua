@@ -1,5 +1,3 @@
-local icons = require("user.icons")
-
 return {
   { -- File explorer
     "nvim-tree/nvim-tree.lua",
@@ -13,7 +11,7 @@ return {
     },
     opts = {
       live_filter = {
-        prefix = icons.ui.Search .. "  ",
+        prefix = Icon.ui.Search .. "  ",
       },
       -- project plugin related
       sync_root_with_cwd = true,
@@ -30,32 +28,32 @@ return {
         icons = {
           git_placement = "after",
           show = { folder = false },
-          symlink_arrow = " " .. icons.documents.SymlinkFile .. " ",
+          symlink_arrow = " " .. Icon.documents.SymlinkFile .. " ",
           glyphs = {
-            default = icons.documents.File,
-            bookmark = icons.ui.Bookmark,
-            symlink = icons.documents.SymlinkFile,
+            default = Icon.documents.File,
+            bookmark = Icon.ui.Bookmark,
+            symlink = Icon.documents.SymlinkFile,
             folder = {
-              arrow_closed = icons.ui.ChevronRight,
-              arrow_open = icons.ui.ChevronDown,
-              default = icons.documents.Folder,
-              empty = icons.documents.EmptyFolder,
-              empty_open = icons.documents.EmptyOpenFolder,
-              open = icons.documents.OpenFolder,
-              symlink = icons.documents.SymlinkFolder,
-              symlink_open = icons.documents.SymlinkFolder,
+              arrow_closed = Icon.ui.ChevronRight,
+              arrow_open = Icon.ui.ChevronDown,
+              default = Icon.documents.Folder,
+              empty = Icon.documents.EmptyFolder,
+              empty_open = Icon.documents.EmptyOpenFolder,
+              open = Icon.documents.OpenFolder,
+              symlink = Icon.documents.SymlinkFolder,
+              symlink_open = Icon.documents.SymlinkFolder,
             },
-            git = icons.git_states,
+            git = Icon.git_states,
           },
         },
       },
       diagnostics = {
         enable = true,
         icons = {
-          error = icons.diagnostics.Error,
-          warning = icons.diagnostics.Warn,
-          hint = icons.diagnostics.Hint,
-          info = icons.diagnostics.Info,
+          error = Icon.diagnostics.Error,
+          warning = Icon.diagnostics.Warn,
+          hint = Icon.diagnostics.Hint,
+          info = Icon.diagnostics.Info,
         },
       },
     },
@@ -150,9 +148,11 @@ return {
     event = "VeryLazy",
     opts = {
       preset = "modern",
+
       icons = {
+        mappings = false,
         breadcrumb = "",
-        group = icons.ui.ChevronRight .. " ",
+        group = Icon.ui.ChevronRight .. " ",
         separator = "",
         colors = false,
       },
@@ -163,20 +163,21 @@ return {
       wk.setup(opts)
       wk.add({
         -- groups
-        { "<leader>b", group = "Buffers", icon = icons.documents.File },
-        { "<leader>c", group = "Code", icon = icons.ui.Code },
-        { "<leader>e", group = "Editor", icon = icons.ui.Neovim },
-        { "<leader>g", group = "Git", icon = icons.git.Branch },
-        { "<leader>a", group = "AI", icon = icons.ui.Creation, mode = { "n", "v" } },
-        { "<leader>d", group = "Diff", icon = icons.ui.Diff, mode = { "n", "v" } },
+        { "<leader>b", group = "Buffers" },
+        { "<leader>c", group = "Code" },
+        { "<leader>e", group = "Editor" },
+        { "<leader>,", group = "Settings" },
+        { "<leader>g", group = "Git" },
+        { "<leader>a", group = "AI", mode = { "n", "v" } },
+        { "<leader>d", group = "Diff", mode = { "n", "v" } },
         { "<leader>q", group = "Session" },
-        { "<leader>s", group = "Search", icon = icons.ui.Search },
-        { "<leader>t", group = "Troubleshooting", icon = icons.ui.Stethoscope },
-        { "<localleader>c", group = "Copilot", icon = icons.plugin.Copilot },
-        { "g", group = "Code/LSP", icon = icons.ui.Code },
+        { "<leader>s", group = "Search" },
+        { "<leader>t", group = "Troubleshooting" },
+        { "<localleader>c", group = "Copilot" },
+        { "g", group = "Code/LSP" },
         -- direct keymaps
-        { "<leader>-", "<C-W>s", desc = "Split horizontal", icon = icons.ui.SplitHorizontal },
-        { "<leader>|", "<C-W>v", desc = "Split vertical", icon = icons.ui.SplitVertical },
+        { "<leader>-", "<C-W>s", desc = "Split horizontal" },
+        { "<leader>|", "<C-W>v", desc = "Split vertical" },
       })
     end,
   },
@@ -185,7 +186,7 @@ return {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
-      filetypes_denylist = { "NvimTree" },
+      filetypes_denylist = { "NvimTree", "snacks_input" },
     },
     config = function(_, opts) require("illuminate").configure(opts) end,
   },

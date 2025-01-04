@@ -1,4 +1,3 @@
-local icons = require("user.icons")
 -- inspired by https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/coding/copilot-chat.lua
 
 local M = {}
@@ -30,8 +29,8 @@ return {
         auto_insert_mode = true,
         chat_autocomplete = true, -- Enable chat autocompletion (when disabled, requires manual `mappings.complete` trigger)
         show_help = true,
-        question_header = string.format("%s %s ", icons.ui.Person, user),
-        answer_header = string.format("%s Copilot ", icons.plugin.Copilot),
+        question_header = string.format("%s %s ", Icon.ui.Person, user),
+        answer_header = string.format("%s Copilot ", Icon.plugin.Copilot),
         window = {
           width = 0.4,
         },

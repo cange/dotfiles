@@ -1,17 +1,15 @@
-local icons = require("user.icons")
-
 local M = {}
 
 ---@see cmp.FormattingConfig
 function M.format(entry, vim_item)
   local maxwidth = 80
   local src_icons = {
-    buffer = icons.ui.Database,
-    copilot = icons.plugin.Copilot,
-    luasnip = icons.ui.Library,
-    nvim_lsp = icons.ui.Globe,
-    nvim_lua = icons.extensions.Lua,
-    path = icons.ui.Path,
+    buffer = Icon.ui.Database,
+    copilot = Icon.plugin.Copilot,
+    luasnip = Icon.ui.Library,
+    nvim_lsp = Icon.ui.Globe,
+    nvim_lua = Icon.extensions.Lua,
+    path = Icon.ui.Path,
   }
   local src_name = entry.source.name
   local cmp_item = entry.completion_item or {}
@@ -32,8 +30,8 @@ function M.format(entry, vim_item)
   end
 
   ---@diagnostic disable-next-line: param-type-mismatch
-  local kinds = icons.cmp_kinds or {}
-  local kind_icon = kinds[vim_item.kind] or icons.cmp_kinds[is_multiline and "MultiLine" or "SingleLine"]
+  local kinds = Icon.cmp_kinds or {}
+  local kind_icon = kinds[vim_item.kind] or Icon.cmp_kinds[is_multiline and "MultiLine" or "SingleLine"]
 
   vim_item.kind = kind_icon .. " "
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)

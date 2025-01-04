@@ -1,5 +1,3 @@
-local icons = require("user.icons")
-
 return {
   { -- managing & installing LSP servers, linters & formatters
     "williamboman/mason.nvim",
@@ -11,9 +9,9 @@ return {
       ui = {
         border = User.get_config("ui.border"),
         icons = {
-          package_installed = icons.ui.Check,
-          package_pending = icons.ui.Sync,
-          package_uninstalled = icons.ui.Close,
+          package_installed = Icon.ui.Check,
+          package_pending = Icon.ui.Sync,
+          package_uninstalled = Icon.ui.Close,
         },
       },
       log_level = vim.log.levels.INFO,
@@ -201,7 +199,7 @@ return {
   { -- Extensible UI notifications and LSP progress messages.
     "j-hui/fidget.nvim",
     opts = {
-      progress = { display = { done_icon = icons.ui.Check } },
+      progress = { display = { done_icon = Icon.ui.Check } },
       notification = { window = { winblend = 0 } },
     },
   },
