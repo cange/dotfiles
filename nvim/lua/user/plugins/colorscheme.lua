@@ -70,8 +70,9 @@ local function update_highlights()
       -- Snacks
       SnacksNotifierHistory = { link = "UserNormal" },
       SnacksIndentScope = { fg = pal.green.dim },
-      SnacksInputBorder = { fg = pal.fg3, bg = pal.bg0 },
+      SnacksInputBorder = { link = "FloatBorder" },
       SnacksInputNormal = { link = "UserNormal" },
+      SnacksInputTitle = { link = "FloatTitle" },
 
       -- parentheses highlighting
       RainbowDelimiterRed = { fg = blend(spec.syntax.bracket, pal.red.dim, 0.75) },
