@@ -42,13 +42,13 @@ return {
           FixTypeErrors = {
             prompt = "> /COPILOT_GENERATE\n\nThere are type declaration problems in my code."
               .. "\n\t - Rewrite the code to show it with the bug fixed."
-              .. "\n\t - Use all :buffers to as assistants context"
+              .. "\n\t - Use all #files as assistant context"
               .. "\n\t - Explain the made changes",
           },
           Tests = {
             prompt = "> /COPILOT_GENERATE\n\nPlease generate tests for my code."
               .. "\n\t - Assume **Vitest** it is installed and the API methods are globally available and does not need to import."
-              .. "\n\t - Use all :buffers to as assistants context"
+              .. "\n\t - Use all #files as assistant context"
               .. "\n\t - Use **Vitest** instead of Jest as test runner."
               .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
               .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible.",
