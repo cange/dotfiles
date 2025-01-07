@@ -1,5 +1,4 @@
 # ZSH custom config (without oh-my-zsh)
-#
 # credits to:
 # - https://github.com/ChristianChiarulli/Machfiles/tree/master/zsh
 # - https://github.com/andrew8088/dotfiles/tree/main/zsh
@@ -15,12 +14,12 @@ export DOTFILES=$HOME/dotfiles/
 # --- caching
 export ZSH_COMPDUMP="$HOME/.cache"
 mkdir -p $ZSH_COMPDUMP
-# changing ---
+# caching ---
 
 source "$Z_CONFIG_DIR/helpers.zsh"
 
 # --- secrets
-# Source secrets first since other servcies could depend on it
+# Source secrets first since other services could depend on it
 _source_if_exists "$HOME/.config/secrets/zsh"
 # secrets ---
 
@@ -37,50 +36,84 @@ fi
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
   fpath+=("$(brew --prefix)/share/zsh/site-functions") # append completions
-  autoload -Uz compinit && compinit
+  autoload -Uz compinit
+  compinit -C # `-C` skip recompiling dump file if it hasn't changed
 fi
 # Homebrew Setup ---
 
 # === Order #2 Plugins
 
-_add_plugin "zsh-users/zsh-autosuggestions"
-_add_plugin "zsh-users/zsh-syntax-highlighting"
+# Lazy load plugins
+autoload -Uz add-zsh-hook
 
-# --- completions
-_add_plugin "zsh-users/zsh-completions"
-# ZSH https://github.com/zsh-users/zsh-completions
-fpath=("$Z_CONFIG_DIR/plugins/zsh-completions/src" $fpath)
-# completions ---
+# Load zsh-autosuggestions only when typing
+add-zsh-hook precmd zsh-autosuggestions-load
+zsh-autosuggestions-load() {
+  source "$Z_CONFIG_DIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+}
+
+# Load zsh-syntax-highlighting only when typing
+add-zsh-hook precmd zsh-syntax-highlighting-load
+zsh-syntax-highlighting-load() {
+  source "$Z_CONFIG_DIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+}
+
+# --- ssh
+if [[ -n "$HOME/.ssh/id_dsa" ]]; then
+  export SSH_KEY_PATH="~/.ssh/id_dsa"
+
+  # add my ssh information
+  ssh-add
+fi
+# ssh ---
+#
+_source_if_exists "$Z_CONFIG_DIR/aliases.docker.zsh"
 
 # --- prompt theme
 # disable Apples for terminal app (ANSI characters)
 eval "$(starship init zsh)"
 # prompt theme ---
 
-# --- z navigation config
-autoload -U compinit && compinit
-eval "$(zoxide init zsh)"
-zstyle ":completion:*" menu select # prettify z menu
-# z navigation config ---
+# === Order #3 Asynchronous initialization
 
-# === Order #3 additional files
+# Ensure zsh-async is installed and sourced
+if [[ -f "$Z_CONFIG_DIR/plugins/zsh-async/async.zsh" ]]; then
+  source "$Z_CONFIG_DIR/plugins/zsh-async/async.zsh"
+else
+  echo "zsh-async not found. Please install it."
+fi
 
-_source_if_exists "$Z_CONFIG_DIR/aliases.git.zsh"
-_source_if_exists "$Z_CONFIG_DIR/aliases.yarn.zsh"
-_source_if_exists "$Z_CONFIG_DIR/aliases.docker.zsh"
-_source_if_exists "$Z_CONFIG_DIR/aliases.npm.zsh"
-_source_if_exists "$Z_CONFIG_DIR/aliases.pnpm.zsh"
-_source_if_exists "$Z_CONFIG_DIR/aliases.zsh"
-_source_if_exists "$Z_CONFIG_DIR/exports.zsh"
-_source_if_exists "$Z_CONFIG_DIR/fzf.zsh"
-_source_if_exists "$Z_CONFIG_DIR/history.zsh"
+_add_plugin "mafredri/zsh-async"
+
+autoload -Uz async
+async_init
+async_start_worker init_worker -n
+
+async_register_callback init_worker init_plugins
+# Load non-critical plugins and configurations asynchronously
+init_plugins() {
+  _add_plugin "zsh-users/zsh-completions"
+  fpath=("$Z_CONFIG_DIR/plugins/zsh-completions/src" $fpath)
+
+  # --- z navigation config
+  eval "$(zoxide init zsh)"
+  zstyle ":completion:*" menu select # prettify z menu
+  # z navigation config ---
+
+  _source_if_exists "$Z_CONFIG_DIR/aliases.zsh"
+  _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
+
+  # --- Docker plugin
+  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
+  # prettify docker menu
+  zstyle ":completion:*:*:docker:*" option-stacking yes
+  zstyle ":completion:*:*:docker-*:*" option-stacking yes
+  # Docker plugin ---
+}
+
+async_job init_worker
+# Order #3 Asynchronous initialization ===
 
 # precmd() { # --- refresh on touch
 # }
-
-# --- Docker plugin
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
-# prettify docker menu
-zstyle ":completion:*:*:docker:*" option-stacking yes
-zstyle ":completion:*:*:docker-*:*" option-stacking yes
-# Docker plugin ---
+#

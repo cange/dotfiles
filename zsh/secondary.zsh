@@ -46,15 +46,6 @@ if [[ -s "$HOME/.bun" ]]; then
 fi
 # bun ---
 
-# --- ssh
-if [[ -n "$HOME/.ssh/id_dsa" ]]; then
-  export SSH_KEY_PATH="~/.ssh/id_dsa"
-
-  # add my ssh information
-  ssh-add
-fi
-# ssh ---
-
 # --- asdf
 # enable asdf package managers
 # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
@@ -84,3 +75,50 @@ if [[ -f "$HOME/.asdf/shims/node" ]]; then
   export PATH="$HOME/.asdf/shims/node:$PATH"
 fi
 # node/npx ---
+#
+
+#
+# --- fzf
+# see https://github.com/mrnugget/dotfiles/blob/master/zshrc#L496
+_source_if_exists "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+_source_if_exists "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+if type fzf &>/dev/null; then
+  # Theme: Nightfox/Style: terafox
+  # https://github.com/EdenEast/nightfox.nvim/tree/main/extra/terafox
+  # https://minsw.github.io/fzf-color-picker/
+  export FZF_DEFAULT_OPTS='--color=fg:#e6eaea,bg:-1,hl:#d78b6c --color=fg+:#eaeeee,bg+:#293e40,hl+:#fda47f --color=info:#5a93aa,prompt:#a1cdd8,pointer:#e6eaea --color=marker:#587b7b,spinner:#1d3337,header:#5a93aa'
+
+  if type fd &>/dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
+    export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden --exclude=.git'
+    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --exclude=.git"
+
+    if type bat &>/dev/null; then
+      export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
+    else
+      echo "bat is not installed, skipping FZF_CTRL_T_OPTS"
+    fi
+  else
+    echo "fd is not installed, skipping FZF_DEFAULT_COMMAND"
+  fi
+fi
+# fzf ---
+#
+
+#
+# --- History Configuration - https://www.soberkoder.com/better-zsh-history/
+export HISTDUP=erase             # Erase duplicates in the history file
+export HISTFILE=~/.zsh_history   # path/location of the history file
+export HISTSIZE=1000000000       # number of commands that are loaded into memory
+export SAVEHIST=1000000000       # number of commands that are stored
+export HISTTIMEFORMAT="[%F %T] " # Timestamp format for history
+export HISTCONTROL=ignoreboth    # Ignore duplicates and commands starting with a space
+
+setopt APPEND_HISTORY       # Append history to the history file
+setopt INC_APPEND_HISTORY   # Immediately append to the history file, not just when the shell exits
+setopt SHARE_HISTORY        # Share history across terminals
+setopt EXTENDED_HISTORY     # Save timestamp of command
+setopt HIST_FIND_NO_DUPS    # Do not display duplicates in the history list
+setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate
+# History Configuration ---
