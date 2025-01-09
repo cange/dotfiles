@@ -15,6 +15,7 @@ end
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    event = "VeryLazy",
     branch = "main",
     dependencies = {
       { "zbirenbaum/copilot.lua" },
@@ -25,9 +26,9 @@ return {
       local user = vim.env.USER or "User"
       user = user:sub(1, 1):upper() .. user:sub(2)
       return {
-        context = "buffer", -- Default context to use, 'buffers', 'buffer' or none (can be specified manually in prompt via @).
+        context = "buffer",
         auto_insert_mode = true,
-        chat_autocomplete = true, -- Enable chat autocompletion (when disabled, requires manual `mappings.complete` trigger)
+        chat_autocomplete = true,
         show_help = true,
         question_header = string.format("%s %s ", Icon.ui.Person, user),
         answer_header = string.format("%s Copilot ", Icon.plugin.Copilot),
@@ -49,7 +50,7 @@ return {
             prompt = "> /COPILOT_GENERATE\n\nPlease generate tests for my code."
               .. "\n\t - Assume **Vitest** it is installed and the API methods are globally available and does not need to import."
               .. "\n\t - Use all #files as assistant context"
-              .. "\n\t - Use **Vitest** instead of Jest as test runner."
+              .. "\n\t - Use **Vitest** instead of Jest as test runner if not other already defined."
               .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
               .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible.",
           },
@@ -84,7 +85,6 @@ return {
           vim.opt_local.number = false
         end,
       })
-      -- prevents error: .../CopilotChat/ui/overlay ... already exists
       vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
         group = vim.api.nvim_create_augroup("close_chat_before_closing", { clear = true }),
         desc = "Close chat before closing editor",
@@ -97,7 +97,6 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
-    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       suggestion = {

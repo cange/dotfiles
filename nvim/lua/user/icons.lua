@@ -89,7 +89,7 @@ M.documents = {
 }
 M.sets = {
   batteries           = "󰂎 󰁺 󰁻 󰁼 󰁽 󰁾 󰂀 󰂁 󰂂 󰁹", -- nf-md-battery_[outline|10-90|]
-  dots                = "⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏" , -- U+2800 to U+28FF
+  spinner             = "⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏", -- U+2800 to U+28FF
 }
 M.git = {
   Add                 = "", -- nf-oct-diff_added,

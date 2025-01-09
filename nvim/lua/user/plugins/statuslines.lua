@@ -13,11 +13,11 @@ local exclude_filetypes = {
 return {
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
     dependencies = {
       "EdenEast/nightfox.nvim",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
+      "AndreM222/copilot-lualine",
     },
     opts = function()
       local custom_theme = require("lualine.themes.terafox")
@@ -72,14 +72,22 @@ return {
             },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             { "inlay_hints", exclude_filetypes = exclude_filetypes },
+          },
+          lualine_y = {
             { "format_clients", exclude_filetypes = exclude_filetypes, separator = "" },
             { "lsp_clients", exclude_filetypes = exclude_filetypes, padding = { left = 1, right = 2 }, separator = "" },
-            -- { "copilot_status", padding = { left = 1, right = 2 }, },
+            {
+              "copilot",
+              symbols = {
+                padding = { left = 0, right = 0 },
+                separator = "",
+                spinners = vim.split(Icon.sets.spinner, " "),
+              },
+            },
             { "encoding", separator = "" },
-            { "location", padding = { left = 1, right = 0 }, separator = "" },
+            { "location", padding = { left = 0, right = 0 }, separator = "" },
             { "progress", padding = { left = 1, right = 0 }, separator = "" },
           },
-          lualine_y = {},
           lualine_z = {},
         },
       }

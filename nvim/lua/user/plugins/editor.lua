@@ -303,6 +303,7 @@ return {
 
   { -- Toggle booleans and common string values eg. true/false, endable/disable, etc
     "nat-418/boole.nvim",
+    event = "VeryLazy",
     opts = {
       mappings = {
         increment = "<C-a>",
