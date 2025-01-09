@@ -230,7 +230,4 @@ run = ['layout floating', 'move-node-to-workspace 4']
 # https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
 1 = ['C34H89x', 'main']
-2 = ['C34H89x', 'main']
-# 3 = [3, 'main']
-# 4 = [3, 'main']
-5 = [3, 'main']
+2 = ['.*(1)', 'C34H89x', 'main']
