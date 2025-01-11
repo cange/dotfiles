@@ -29,6 +29,7 @@ return {
           component_separators = { left = Icon.ui.Pipe, right = Icon.ui.Pipe },
           section_separators = { left = "", right = "" },
           theme = custom_theme,
+          disabled_filetypes = exclude_filetypes,
         },
         sections = {
           lualine_a = {
@@ -71,18 +72,16 @@ return {
               separator = Icon.ui.Pipe,
             },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
-            { "inlay_hints", exclude_filetypes = exclude_filetypes },
+            { "inlay_hints" },
           },
           lualine_y = {
-            { "format_clients", exclude_filetypes = exclude_filetypes, separator = "" },
-            { "lsp_clients", exclude_filetypes = exclude_filetypes, padding = { left = 1, right = 2 }, separator = "" },
+            { "format_clients", separator = "" },
+            { "lsp_clients", padding = { left = 1, right = 2 }, separator = "" },
             {
               "copilot",
-              symbols = {
-                padding = { left = 0, right = 0 },
-                separator = "",
-                spinners = vim.split(Icon.sets.spinner, " "),
-              },
+              separator = "",
+              padding = { left = 0, right = 0 },
+              symbols = { spinners = vim.split(Icon.sets.spinner, " ") },
             },
             { "encoding", separator = "" },
             { "location", padding = { left = 0, right = 0 }, separator = "" },
