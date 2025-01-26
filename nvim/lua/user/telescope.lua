@@ -135,12 +135,13 @@ function M.browse_workspace()
   })
 end
 
-function M.browse_test_files()
-  local file_base_name = vim.fn.expand("%:t:r")
+function M.browse_associated_files()
+  local file_name = vim.fn.expand("%:t:r")
+  if file_name:find("%.") then file_name = file_name:match("^(.-)%.") end -- strip to origin name e.g. foo.bar => foo
 
   builtin.find_files({
-    prompt_title = Icon.ui.Beaker .. " Find Files (associated test files)",
-    find_command = { "rg", "--files", "--iglob", file_base_name .. "{.,_}{spec,test,stories}.{js,ts,rb,lua}" },
+    prompt_title = Icon.ui.Beaker .. " Find Files (associated files)",
+    find_command = { "rg", "--files", "--iglob", file_name .. ".*" },
   })
 end
 

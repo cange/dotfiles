@@ -131,7 +131,7 @@ return {
   -- stylua: ignore start
   keys = {
     { "<localleader>/", '<cmd>lua R("user.telescope").custom_live_grep()<CR>', desc = "within Files" },
-    { "<localleader>t", '<cmd>lua R("user.telescope").browse_test_files()<CR>', desc = "Associated test files" },
+    { "<leader>sa", '<cmd>lua R("user.telescope").browse_associated_files()<CR>', desc = "Associated files" },
     { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<CR>",         desc = "within File" },
     { "<leader>f",  "<cmd>Telescope find_files<CR>",                        desc = "for Files" },
     { "<leader>p",  "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },
