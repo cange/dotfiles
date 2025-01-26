@@ -40,7 +40,7 @@
     "body": ".attributes('$0')"
   },
   "vue wrapper debug": {
-    "prefix": "logdebug",
+    "prefix": "lgd",
     "body": "console.log(`--- $1$2.html(): %o`, ${1:wrapper}$2.html())"
   },
   "expect.arraytContaining": {

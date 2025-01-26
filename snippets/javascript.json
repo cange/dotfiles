@@ -54,11 +54,11 @@
     "body": "new Array($1).fill().$0"
   },
   "console.log(": {
-    "prefix": "log",
+    "prefix": "lg",
     "body": "console.log($1)"
   },
   "console.table(": {
-    "prefix": "logtable",
+    "prefix": "lgtable",
     "body": "console.table($1)"
   },
   "import local": {
