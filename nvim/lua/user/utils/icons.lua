@@ -51,8 +51,6 @@ local presets = {
     cterm_color = "24",
     name = "Cypress",
   },
-  eslint = { name = "Eslintrc" },
-  prettier = { name = "PrettierConfig" },
   stylelint = {
     icon = icons.extensions.Stylelint,
     color = "#d0d0d0",
@@ -79,16 +77,8 @@ end
 
 local function redefine_icons()
   set_rc_file_icons("babel", { "", ".json", ".js", ".cjs", ".mjs", ".cts" }, { ".json", ".js", ".cjs", ".mjs", ".cts" })
-  set_rc_file_icons("eslint", { "", ".json", ".js", ".cjs", ".yaml", ".yml" }, { ".js", ".cjs", ".mjs" })
-  set_rc_file_icons(
-    "prettier",
-    { "", ".json", ".js", ".cjs", ".mjs", ".yaml", ".yml", ".json5", ".toml" },
-    { ".js", ".cjs", ".mjs" }
-  )
-
   set_rc_file_icons("stylelint", { "", ".json", ".js", ".cjs", ".mjs", ".yaml", ".yml" }, { ".js", ".cjs", ".mjs" })
 
-  set_icon_by_filetype("node_modules", ".nvmrc")
   set_icon_by_filetype("vue", "vue", nil, presets.vue)
   set_icon_by_filetype("yarn", ".yarn", { "", "rc.yml" }, presets.yarn)
   set_icon_by_filetype("yarn", "yarn.lock", nil, presets.yarn)
@@ -97,11 +87,7 @@ local function redefine_icons()
     set_icon_by_filetype(ext, "nuxt.config." .. ext, nil, presets.nuxt)
     set_icon_by_filetype(ext, "stories." .. ext, nil, presets.storybook)
     set_icon_by_filetype(ext, "cypress.config", { ".js", ".cjs", ".mjs", ".ts" }, presets.cypress)
-  end
-
-  -- rare file types
-  for _, filename in pairs({ ".tool-versions", ".visabletemplaterc", "links.prop" }) do
-    set_icon_by_filetype("yaml", filename, nil, { name = "Config" })
+    set_icon_by_filetype(ext, "cy." .. ext, nil, presets.cypress)
   end
 
   require("nvim-web-devicons").set_icon(user_icons)
@@ -129,7 +115,7 @@ function M.get_service_icons()
     lua_ls = grep_icon("lua"),
     markdownlint = grep_icon("md"),
     prettier = grep_icon(".prettierrc"),
-    prettierd = grep_icon(".prettierrc") .. "+",
+    prettierd = grep_icon(".prettierrc") .. "d",
     rubocop = grep_icon("rb"),
     ruby_lsp = grep_icon("rb"),
     stylelint = grep_icon(".stylelint"),
