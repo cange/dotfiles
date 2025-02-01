@@ -1,0 +1,2 @@
+$DOTFILES/posting/config.yaml=$HOME/.config/posting/config.yaml
+$DOTFILES/posting/theme.yaml=$HOME/.local/share/posting/themes/terafox.yaml
