@@ -8,14 +8,27 @@ local errors=()
 local logs=()
 local is_verbose=0
 local is_uninstall=0
+declare -A tool_colors
 
 # --- helpers ---
+# helpers ---
 source "${dotfiles}/zsh/helpers.zsh"
 function warn() {     printf "%s %s\n" "$(_chalk "yellow" "▲")" "$1" }
 function error () {   printf "%s %s\n" "$(_chalk "red"    "✕")" "$1" }
 function info() {     printf "%s %s\n" "$(_chalk "blue"   "ℹ︎")" "$1" }
 function log() {      printf "%s %s\n" "$(_chalk "bold"   "⇒")" "$1" }
 function success () { printf "%s %s\n" "$(_chalk "green"  "✓")" "$1" }
+
+# Generate a unique color for each tool name
+function define_tool_color() {
+  local name=$1
+  if [[ -z ${tool_colors[$name]} ]]; then
+    local colors=("blue" "cyan" "green" "yellow" "magenta" "red")
+    local color_index=$(((${#tool_colors[@]} % ${#colors[@]}) + 1))
+    tool_colors[$name]=${colors[$color_index]}
+  fi
+}
+
 
 # realpath polyfil for macos M1+
 function realpath_polyfill() {
@@ -35,7 +48,6 @@ function realpath_polyfill() {
 #
 function execute_brewfile() {
   local brewfile=$1
-  local tool_name=$(basename $(dirname "$brewfile"))
 
   if [[ $is_uninstall == 1 ]]; then
     info "Uninstall packages of $(_chalk "cyan" "$brewfile")"
@@ -92,11 +104,13 @@ function execute_symlink() {
   local dest=$2
   local tool_name=$3
   local dest_dir=$(dirname $dest)
+  define_tool_color "$tool_name"
+  local color=${tool_colors[$tool_name]}
 
   if [[ $is_uninstall == 1 ]]; then
     if [[ -e $dest ]]; then
       command rm "$dest"
-      logs+=("remove $(_chalk "bold" "$tool_name") symlink $(_chalk "cyan" "$dest") ✂︎-> ")
+      logs+=("remove $(_chalk "$color" "$tool_name") symlink $(_chalk "cyan" "$dest") ✂︎-> ")
     else
       errors+=("$(_chalk "bold" "unlink:") No such file or directory $(_chalk "cyan" "$dest")")
     fi
@@ -104,7 +118,7 @@ function execute_symlink() {
     if [[ -d "$dest_dir" ]]; then
       command mkdir -p "$dest_dir"
       command ln -nsf "$src" "$dest"
-      logs+=("create $(_chalk "bold" "$tool_name") symlink $(_chalk "cyan" "$dest") -> $(_chalk "cyan" "$src")")
+      logs+=("create $(_chalk "$color" "$tool_name") symlink $(_chalk "cyan" "$dest") -> $(_chalk "cyan" "$src")")
     else
       errors+=("symlink: No such file or directory $(_chalk "cyan" "$dest_dir")")
     fi
