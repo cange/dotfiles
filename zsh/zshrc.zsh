@@ -1,3 +1,7 @@
+# Enable profiling - needs to be at start of file
+# zmodload zsh/zprof
+
+# =============================================================================
 # ZSH custom config (without oh-my-zsh)
 # credits to:
 # - https://github.com/ChristianChiarulli/Machfiles/tree/master/zsh
@@ -76,13 +80,8 @@ eval "$(starship init zsh)"
 
 # === Order #3 Asynchronous initialization
 
-# Ensure zsh-async is installed and sourced
-if [[ -f "$Z_CONFIG_DIR/plugins/zsh-async/async.zsh" ]]; then
-  source "$Z_CONFIG_DIR/plugins/zsh-async/async.zsh"
-else
-  echo "zsh-async not found. Please install it."
-fi
-
+# init zsh-async
+_source_if_exists "$Z_CONFIG_DIR/plugins/zsh-async/async.zsh"
 _add_plugin "mafredri/zsh-async"
 
 autoload -Uz async
@@ -117,3 +116,12 @@ async_job init_worker
 # precmd() { # --- refresh on touch
 # }
 #
+
+# --- posting request TUI
+_source_if_exists "$HOME/.local/bin/env"
+# posting request TUI ---
+#
+
+# =============================================================================
+# profiling results - needs to be at end of file
+# zprof
