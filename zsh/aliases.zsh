@@ -101,12 +101,24 @@ function git_main_branch() {
   echo master
 }
 
-# use fzf prompt to switch to a branch
+# use fzf prompt to switch to a branch (including remote branches)
 function git_switch_branch() {
-  local branch=$(git branch --all | fzf --prompt="Switch branch: " --height=~50% --layout=reverse --border --exit-0)
+  local branch=$(git branch --all | fzf --prompt=" switch 󰄾 " --height=~50% --layout=reverse --border --exit-0)
   if [[ -n $branch ]]; then
-    git switch $(echo $branch | sed 's/.* //')
+    git switch $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
   fi
+}
+
+#  git log browser with fzf
+function git_log_browse() {
+  git log --graph --color=always \
+    --format="%C(auto)%h%d %s %C(green)%C(blue)%cr" "$@" |
+    fzf --ansi --no-sort --layout=reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
 }
 
 # --- Aliases ---
@@ -117,14 +129,11 @@ alias g='git'
 alias ga='git add'
 # --- branch
 alias gb='git branch'
-alias gba='git branch --all'
-alias gbs='git_switch_branch'
+alias gba='git_switch_branch'
 #
 alias gcl='git clone --recurse-submodules'
-alias gclean='git clean --interactive -d'
 alias gcp='git cherry-pick'
 alias gd='git diff'
-alias grm='git rm'
 # --- checkout
 alias gcb='git checkout -b'
 alias gcm='git checkout $(git_main_branch)'
@@ -142,11 +151,11 @@ alias gl='git pull --prune'
 alias grb='git rebase'
 alias grbm='git rebase $(git_main_branch)'
 # --- logging
-alias glg="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
+alias glg="git_log_browse"
 alias glgg='git log --graph --decorate --all'
 # ---- push
 alias gp='git push'
-alias gpfl='git push --force-with-lease' # safer than --force
+alias gpf='git push --force-with-lease' # safer than --force
 # --- status
 alias gst='git status'
 # --- stash
@@ -187,14 +196,14 @@ alias npmr="npm run"
 alias npmup="npm update"
 
 # individual commands
-alias npmb="npm run build"
-alias npmd="npm run dev"
-alias npmds="npm run docs:serve"
-alias npmf="npm run format"
-alias npmln="npm run lint"
-alias npmt="npm test"
-alias npmtc="npm run typecheck"
-alias npmtw="npm run test:watch"
+alias nb="npm run build"
+alias nd="npm run dev"
+alias nds="npm run docs:serve"
+alias nf="npm run format"
+alias nln="npm run lint"
+alias nt="npm test"
+alias ntc="npm run typecheck"
+alias ntw="npm run test:watch"
 
 npm_toggle_install_uninstall() {
   # Look up to the previous 2 history commands

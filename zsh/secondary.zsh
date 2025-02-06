@@ -59,15 +59,6 @@ if [[ -f "$(brew --prefix asdf)/libexec/asdf.sh" ]]; then
 fi
 # asdf ---
 
-# --- yarn
-# https://classic.yarnpkg.com/lang/en/docs/cli/global/
-if [[ -f "$HOME/.asdf/shims/npm" ]]; then
-  # echo "----$(yarn global bin)"
-  export PATH="$(yarn global bin):$PATH"
-else
-  print "yarn not found"
-fi
-# yarn ---
 #
 # --- node/npx
 if [[ -f "$HOME/.asdf/shims/node" ]]; then
@@ -75,6 +66,17 @@ if [[ -f "$HOME/.asdf/shims/node" ]]; then
   export PATH="$HOME/.asdf/shims/node:$PATH"
 fi
 # node/npx ---
+#
+
+# --- yarn
+# https://classic.yarnpkg.com/lang/en/docs/cli/global/
+if [[ -f "$HOME/.asdf/shims/npm" ]]; then
+  if [[ $(yarn --version) == 1* ]]; then
+    # echo "Yarn v1 detected, using 'yarn global bin' setup"
+    export PATH="$(yarn global bin):$PATH"
+  fi
+fi
+# yarn ---
 #
 
 #
