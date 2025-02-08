@@ -61,6 +61,10 @@
   },
   "prop: outline debug": {
     "prefix": "out",
-    "body": "outline: ${1:magenta} 1px ${2|dotted,dashed,solid|};$0"
+    "body": "outline: $0magenta 1px dotted;"
+  },
+  "truncate": {
+    "prefix": "truncate",
+    "body": "overflow: hidden;\ntext-overflow: ellipsis;\nwhite-space: nowrap;"
   }
 }

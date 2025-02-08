@@ -45,19 +45,19 @@
   },
   "expect.arraytContaining": {
     "prefix": "arrayContaining",
-    "body": "expect.arrayContaining([$1])$0"
+    "body": "expect.arrayContaining($1)$0"
   },
   "expect.objectContaining": {
     "prefix": "objectContaining",
-    "body": "expect.objectContaining({${1|{},|}})$0"
+    "body": "expect.objectContaining($1)$0"
   },
   "expect.stringContaining": {
     "prefix": "stringContaining",
-    "body": "expect.stringContaining('$1')$0"
+    "body": "expect.stringContaining($1)$0"
   },
   "expect.stringMatching": {
     "prefix": "stringMatching",
-    "body": "expect.stringMatching(/$1/)$0"
+    "body": "expect.stringMatching($1)$0"
   },
   "toBeTruthy": {
     "prefix": "toBeTrue",

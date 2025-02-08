@@ -7,7 +7,7 @@ function M.pick(kind)
   return function()
     local actions = require("CopilotChat.actions")
     local items = actions[kind .. "_actions"]()
-    if not items then error("No '" .. kind .. "' found on the current line") end
+    if not items then return vim.notify("No '" .. kind .. "' found on the current line", vim.log.levels.WARN) end
     require("CopilotChat.integrations.telescope").pick(items)
   end
 end
@@ -23,8 +23,7 @@ return {
     },
     cmd = "CopilotChat",
     opts = function()
-      local user = vim.env.USER or "User"
-      user = user:sub(1, 1):upper() .. user:sub(2)
+      local user = (vim.env.USER or "User"):gsub("^%l", string.upper)
       return {
         context = "buffer",
         auto_insert_mode = true,
@@ -40,6 +39,11 @@ return {
           return select.visual(source) or select.buffer(source)
         end,
         prompts = {
+          Commit = {
+            prompt = "> #git:staged"
+              .. "\n\nWrite conventional commit message for the change with commitizen convention."
+              .. "\n\nKeep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.",
+          },
           FixTypeErrors = {
             prompt = "> /COPILOT_GENERATE\n\nThere are type declaration problems in my code."
               .. "\n\t - Rewrite the code to show it with the bug fixed."
@@ -78,15 +82,17 @@ return {
       -- stylua: ignore end
     },
     init = function()
+      local group = vim.api.nvim_create_augroup("copilot_chat", { clear = true })
       vim.api.nvim_create_autocmd("BufEnter", {
+        group = group,
         pattern = "copilot-chat",
         callback = function()
-          vim.opt_local.relativenumber = false
           vim.opt_local.number = false
+          vim.opt_local.relativenumber = false
         end,
       })
-      vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
-        group = vim.api.nvim_create_augroup("close_chat_before_closing", { clear = true }),
+      vim.api.nvim_create_autocmd("VimLeavePre", {
+        group = group,
         desc = "Close chat before closing editor",
         command = "CopilotChatClose",
       })
