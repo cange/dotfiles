@@ -40,8 +40,7 @@ fi
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
   fpath+=("$(brew --prefix)/share/zsh/site-functions") # append completions
-  autoload -Uz compinit
-  compinit -C # `-C` skip recompiling dump file if it hasn't changed
+  autoload -Uz compinit && compinit -C                 # `-C` skip recompiling dump file if it hasn't changed
 fi
 # Homebrew Setup ---
 

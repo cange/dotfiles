@@ -49,24 +49,14 @@ fi
 # --- asdf
 # enable asdf package managers
 # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
-if [[ -f "$(brew --prefix asdf)/libexec/asdf.sh" ]]; then
-  source "$(brew --prefix asdf)/libexec/asdf.sh"
-  # append completions
-  fpath=("$ASDF_DIR/completions" $fpath)
-  # reinitialise completions with ZSH's compinit
-  autoload -Uz compinit && compinit
-  export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
-fi
-# asdf ---
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
-#
-# --- node/npx
-if [[ -f "$HOME/.asdf/shims/node" ]]; then
-  # enables executable for www.fork.dev
-  export PATH="$HOME/.asdf/shims/node:$PATH"
-fi
-# node/npx ---
-#
+# append completions to fpath
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit -C # `-C` skip recompiling dump file if it hasn't changed
+export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
+# asdf ---
 
 # --- yarn
 # https://classic.yarnpkg.com/lang/en/docs/cli/global/
