@@ -146,6 +146,7 @@ return {
         },
         volar = { -- vue
           -- NOTE: not needed to configure if using @vue/typescript-plugin
+          -- but required for CSS support in single file components
         },
         jsonls = {
           settings = {

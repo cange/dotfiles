@@ -104,6 +104,7 @@ return {
 
   { -- testing toggle util
     "cange/specto.nvim",
+    version = "v0.3.1",
     lazy = false,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = "nvim-treesitter/nvim-treesitter",
@@ -123,8 +124,9 @@ return {
       },
     },
     keys = {
-      { "<LocalLeader>o", "<cmd>Specto toggle only<CR>", desc = "Toggle Only test block" },
-      { "<LocalLeader>s", "<cmd>Specto toggle skip<CR>", desc = "Toggle Skip test block" },
+      { "<LocalLeader>o", "<cmd>Specto toggle only<CR>", desc = "Toggle [only] test" },
+      { "<LocalLeader>s", "<cmd>Specto toggle skip<CR>", desc = "Toggle [skip] test" },
+      { "<LocalLeader>t", "<cmd>Specto toggle todo<CR>", desc = "Toggle [todo] test" },
     },
   },
 }

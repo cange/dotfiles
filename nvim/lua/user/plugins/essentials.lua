@@ -2,6 +2,7 @@ return {
   { -- A collection of small convenience plugins
     "folke/snacks.nvim",
     priority = 1000,
+    version = "v2.22.0",
     lazy = false,
     opts = {
       bigfile = { enabled = true },
@@ -21,7 +22,7 @@ return {
         top_down = false,
       },
       notify = { enabled = true },
-      scroll = { enabled = true },
+      statuscolumn = {},
     },
     keys = function()
       local Snacks = require("snacks")

@@ -29,7 +29,6 @@ return {
           component_separators = { left = Icon.ui.Pipe, right = Icon.ui.Pipe },
           section_separators = { left = "", right = "" },
           theme = custom_theme,
-          disabled_filetypes = exclude_filetypes,
         },
         sections = {
           lualine_a = {
@@ -48,7 +47,16 @@ return {
               icon = Icon.git.Branch,
               on_click = function() vim.cmd("Telescope git_branches") end,
               padding = { left = 0, right = 1 },
-              separator = Icon.ui.Pipe,
+            },
+            {
+              "filename",
+              path = 1,
+              symbols = {
+                modified = Icon.ui.DotFill,
+                newfile = Icon.documents.NewFile,
+                readonly = Icon.ui.lock,
+                unnamed = Icon.documents.File,
+              },
             },
             {
               "diagnostics",

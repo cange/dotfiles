@@ -25,12 +25,13 @@ return {
     opts = function()
       local user = (vim.env.USER or "User"):gsub("^%l", string.upper)
       return {
-        context = "buffer",
+        answer_header = string.format("%s Copilot ", Icon.plugin.Copilot),
         auto_insert_mode = true,
         chat_autocomplete = true,
-        show_help = true,
+        context = "buffer",
+        model = "claude-3.5-sonnet",
         question_header = string.format("%s %s ", Icon.ui.Person, user),
-        answer_header = string.format("%s Copilot ", Icon.plugin.Copilot),
+        show_help = true,
         window = {
           width = 0.4,
         },
@@ -47,13 +48,13 @@ return {
           FixTypeErrors = {
             prompt = "> /COPILOT_GENERATE\n\nThere are type declaration problems in my code."
               .. "\n\t - Rewrite the code to show it with the bug fixed."
-              .. "\n\t - Use all #files as assistant context"
+              .. "\n\t - Use all #buffers as assistant context"
               .. "\n\t - Explain the made changes",
           },
           Tests = {
             prompt = "> /COPILOT_GENERATE\n\nPlease generate tests for my code."
               .. "\n\t - Assume **Vitest** it is installed and the API methods are globally available and does not need to import."
-              .. "\n\t - Use all #files as assistant context"
+              .. "\n\t - Use all #buffers as assistant context"
               .. "\n\t - Use **Vitest** instead of Jest as test runner if not other already defined."
               .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
               .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible.",
