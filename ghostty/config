@@ -2,8 +2,6 @@ theme = light:AtomOneLight,dark:terafox
 
 background-blur-radius = 40
 background-opacity = 0.84
-# 0f1c1e aims for dark
-background = 0f1c1e
 
 window-colorspace = display-p3
 window-padding-x = 8
