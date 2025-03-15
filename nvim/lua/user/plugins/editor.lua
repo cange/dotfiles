@@ -88,6 +88,27 @@ return {
     end,
   },
 
+  {
+    "stevearc/oil.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = function()
+      return {
+        { "<localleader>-", require("oil").toggle_float, desc = "Open parent directory" },
+      }
+    end,
+    opts = {
+      columns = { "icon" },
+      view_options = {
+        show_hidden = true,
+      },
+      float = {
+        padding = 4,
+        max_width = 0.6,
+        max_height = 0.6,
+      },
+    },
+  },
+
   { -- bookmark buffers
     "ThePrimeagen/harpoon",
     event = "VeryLazy",
@@ -311,7 +332,7 @@ return {
       },
       additions = {
         { "flex", "block", "inline-flex", "inline-block", "inline", "none" },
-        { "red", "magenta", "yellow", "cyan", "lime", "purple", "pink" },
+        { "red", "magenta", "cyan", "yellowgreen", "lime", "purple", "pink" },
         { "solid", "dashed", "dotted", "double", "none", "groove", "ridge", "inset", "outset" },
         { "left", "right" },
         { "up", "down", "only" },

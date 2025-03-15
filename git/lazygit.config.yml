@@ -10,6 +10,25 @@ gui:
       - reverse
     unstagedChangesColor:
       - magenta
+    searchingActiveBorderColor:
+      - yellow
+      - bold
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - black
+    defaultFgColor:
+      - white
+    cherryPickedCommitFgColor:
+      - blue
+    cherryPickedCommitBgColor:
+      - cyan
+    optionsTextColor:
+      - blue
+os:
+  editPreset: "nvim-remote"
+
 git:
   paging:
     colorArg: always
