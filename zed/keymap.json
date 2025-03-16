@@ -9,10 +9,8 @@
 
       // ", /": "vim::Search",
       // travel next/prev
-      "] d ": "editor::GoToDiagnostic",
-      "[ d ": "editor::GoToPrevDiagnostic",
       "] g": "editor::GoToHunk",
-      "[ g": "editor::GoToPrevHunk"
+      "[ g": "editor::GoToPreviousHunk"
     }
   },
   {
