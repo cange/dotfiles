@@ -14,22 +14,25 @@ function _docker_compose_init_detection() {
     if [[ ! -e "Dockerfile" ]]; then return 0; fi
 
     local files=("docker-compose.yml" "docker-compose.yaml" "compose.yml" "compose.yaml")
-    local count=$1
+    local found=0
 
-    if [[ $count -gt ${#files[@]} && -z $COMPOSE_FILE ]]; then
+    # Check if any of the compose files exist
+    for file in "${files[@]}"; do
+      if [[ -e "$file" ]]; then
+        unset COMPOSE_FILE
+        log "File detected! Unset"
+        found=1
+        break
+      fi
+    done
+
+    # If no files found and COMPOSE_FILE is empty, reset to initial value
+    if [[ $found -eq 0 && -z $COMPOSE_FILE ]]; then
       export COMPOSE_FILE=$init_compose_file
       log "No local file detected! Reset to default"
-      return 0
     fi
 
-    if [[ -e "${files[$count]}" ]]; then
-      unset COMPOSE_FILE
-      log "File detected! Unset"
-      return 0
-    else
-      _docker_compose_detect_file $((count + 1))
-      return 0
-    fi
+    return 0
   }
 
   _docker_compose_detect_file 0
