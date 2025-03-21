@@ -7,6 +7,13 @@ alias lg='lazygit'
 alias ld='lazydocker'
 # tools ---
 
+# --- network
+# List all listening network ports for current user
+alias ports='lsof -i -P | grep LISTEN'
+# List all listening network ports system-wide (requires sudo)
+alias portsall='sudo lsof -i -P | grep LISTEN'
+# network ---
+
 #--- nvim switchers
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-kick="NVIM_APPNAME=kickstart nvim"
