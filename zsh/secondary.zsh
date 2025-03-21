@@ -58,17 +58,6 @@ autoload -Uz compinit && compinit -C # `-C` skip recompiling dump file if it has
 export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
 # asdf ---
 
-# --- yarn
-# https://classic.yarnpkg.com/lang/en/docs/cli/global/
-if [[ -f "$HOME/.asdf/shims/npm" ]]; then
-  if [[ $(yarn --version) == 1* ]]; then
-    # echo "Yarn v1 detected, using 'yarn global bin' setup"
-    export PATH="$(yarn global bin):$PATH"
-  fi
-fi
-# yarn ---
-#
-
 #
 # --- fzf
 # see https://github.com/mrnugget/dotfiles/blob/master/zshrc#L496
