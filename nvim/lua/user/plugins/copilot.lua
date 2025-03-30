@@ -12,6 +12,40 @@ function M.pick(kind)
   end
 end
 
+local function prompts()
+  local context_check = "\n\t - Check for context given files #files:.**/**/*/.mdc"
+  return {
+    Commit = {
+      prompt = "> #git:staged"
+        .. context_check
+        .. "\n\t - Write conventional commit message for the change with commitizen convention."
+        .. "\n\t - Keep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.",
+    },
+    FixTypeErrors = {
+      prompt = "> /COPILOT_GENERATE\n\nThere are type declaration problems in my code."
+        .. context_check
+        .. "\n\t - Rewrite the code to show it with the bug fixed."
+        .. "\n\t - Use all #buffers as assistant context"
+        .. "\n\t - Explain the made changes",
+    },
+    Tests = {
+      prompt = "> /COPILOT_GENERATE\n\nPlease generate tests for my code."
+        .. context_check
+        .. "\n\t - Assume **Vitest** is installed and the API methods are globally available and does not need to import."
+        .. "\n\t - Use all #buffers as assistant context"
+        .. "\n\t - Use **Vitest** instead of Jest as test runner if not other already defined."
+        .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
+        .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible.",
+    },
+    Review = {
+      prompt = "Review the selected code." .. context_check .. "\n\t - Ignore line length limitations",
+    },
+    Translate = {
+      prompt = "> /COPILOT_GENERATE" .. context_check .. "\n\nTranslate all Chinese wording to English in this file.",
+    },
+  }
+end
+
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
@@ -39,27 +73,7 @@ return {
           local select = require("CopilotChat.select")
           return select.visual(source) or select.buffer(source)
         end,
-        prompts = {
-          Commit = {
-            prompt = "> #git:staged"
-              .. "\n\nWrite conventional commit message for the change with commitizen convention."
-              .. "\n\nKeep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.",
-          },
-          FixTypeErrors = {
-            prompt = "> /COPILOT_GENERATE\n\nThere are type declaration problems in my code."
-              .. "\n\t - Rewrite the code to show it with the bug fixed."
-              .. "\n\t - Use all #buffers as assistant context"
-              .. "\n\t - Explain the made changes",
-          },
-          Tests = {
-            prompt = "> /COPILOT_GENERATE\n\nPlease generate tests for my code."
-              .. "\n\t - Assume **Vitest** it is installed and the API methods are globally available and does not need to import."
-              .. "\n\t - Use all #buffers as assistant context"
-              .. "\n\t - Use **Vitest** instead of Jest as test runner if not other already defined."
-              .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
-              .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible.",
-          },
-        },
+        prompts = prompts(),
       }
     end,
     keys = {
@@ -111,8 +125,8 @@ return {
         auto_refresh = true,
         keymap = {
           accept = "<C-CR>",
-          next = "<C-.>", -- Ctrl + >
-          prev = "<C-,>", -- Ctrl + <
+          next = "<C-.>", -- Ctrl + .
+          prev = "<C-,>", -- Ctrl + ,
           dismiss = "<C-c>",
         },
       },
