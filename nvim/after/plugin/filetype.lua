@@ -9,8 +9,3 @@ vim.filetype.add({
     ["gitconfig"] = "gitconfig",
   },
 })
-
-if vim.bo.filetype then
-  -- disabled overwelming diagnostic noise in markdown
-  vim.diagnostic.config({ virtual_text = false })
-end

@@ -1,9 +1,9 @@
 return {
-  log = {
-    level = "info",
-  },
   lsp = {
-    diagnostic_virtual_text = true,
+    ---@type vim.diagnostic.Opts.VirtualText
+    diagnostic_virtual_text = {
+      current_line = true,
+    },
     format_on_save = true,
   },
   ui = {
