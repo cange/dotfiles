@@ -10,7 +10,9 @@
       // ", /": "vim::Search",
       // travel next/prev
       "] g": "editor::GoToHunk",
-      "[ g": "editor::GoToPreviousHunk"
+      "[ g": "editor::GoToPreviousHunk",
+      // terminal
+      ", d": "workspace::NewTerminal"
     }
   },
   {
@@ -59,7 +61,7 @@
     "context": "Editor || Terminal",
     "bindings": {
       "cmd-]": "pane::ActivateNextItem",
-      "cmd-[": "pane::ActivatePrevItem",
+      "cmd-[": "pane::ActivatePreviousItem",
       "cmd-shift-enter": "workspace::ToggleZoom"
     }
   },

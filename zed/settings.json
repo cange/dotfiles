@@ -7,6 +7,14 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "assistant": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-latest"
+    },
+    "version": "2"
+  },
+  "icon_theme": "JetBrains Icons Dark",
   "features": {
     "edit_prediction_provider": "copilot"
   },
@@ -18,11 +26,7 @@
   },
 
   "current_line_highlight": "line",
-  "theme": {
-    "mode": "system",
-    "dark": "Terafox",
-    "light": "Github Light High Contrast"
-  },
+  "theme": "Terafox",
 
   "ui_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_family": "JetBrainsMono Nerd Font",
@@ -35,12 +39,12 @@
 
   "vim_mode": true,
   "vim": {
+    "highlight_on_yank_duration": 200,
     "use_multiline_find": true,
     "use_smartcase_find": true
   },
 
   "tabs": { "file_icons": true },
-  "relative_line_numbers": true,
 
   // The number of lines to keep above/below the cursor when scrolling.
   "vertical_scroll_margin": 8,
