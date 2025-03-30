@@ -104,11 +104,6 @@ local function update_highlights()
       CmpGhostText = { fg = pal.fg3, italic = true },
       CmpItemAbbr = { fg = pal.fg2 },
       CmpItemAbbrMatch = { link = "TelescopeMatching" },
-
-      -- lualine - keep opaque
-      lualine_c_normal = { fg = pal.fg2, bg = pal.bg0 },
-      lualine_x_copilot_status_normal = { link = "lualine_c_normal" },
-      lualine_x_git_blame_line_normal = { fg = pal.comment, bg = pal.bg0 },
     })
   end
 

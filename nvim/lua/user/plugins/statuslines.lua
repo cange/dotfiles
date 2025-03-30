@@ -68,6 +68,7 @@ return {
               },
             },
           },
+          lualine_y = {},
           lualine_x = {
             {
               "git_blame_line",
@@ -81,8 +82,6 @@ return {
             },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             { "inlay_hints" },
-          },
-          lualine_y = {
             { "format_clients", separator = "" },
             { "lsp_clients", padding = { left = 1, right = 2 }, separator = "" },
             {
