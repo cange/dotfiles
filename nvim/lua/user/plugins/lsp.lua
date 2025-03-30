@@ -183,15 +183,6 @@ return {
         ensure_installed = vim.tbl_keys(server_configs),
         automatic_installation = true,
       })
-
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = User.get_config("ui.border"),
-        title = "Hover",
-      })
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = User.get_config("ui.border"),
-        title = "Signature Help",
-      })
     end,
     -- stylua: ignore
     keys = require("user.lsp").keymaps,
