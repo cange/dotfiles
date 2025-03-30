@@ -8,6 +8,12 @@ local keymaps = {
   { "]b", "<cmd>bnext<CR>", { desc = "Next Buffer" } },
   { "p", '"_dP', { desc = "Clipboard: keep content" }, { "v" } },
 
+  -- Scrolling
+  { "<C-u>", "<C-u>zz", { desc = "Scroll full page up centered" } },
+  { "<C-f>", "<C-f>zz", { desc = "Scroll full page down centered" } },
+  { "<C-b>", "<C-b>zz", { desc = "Scroll half page up centered" } },
+  { "<C-d>", "<C-d>zz", { desc = "Scroll half page down centered" } },
+
   -- Moving lines up and down
   { "<M-down>", ":move .+1<CR>==", { desc = "Line move: down" } },
   { "<M-up>", ":move .-2<CR>==", { desc = "Line move: up" } },
