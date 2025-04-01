@@ -110,7 +110,14 @@ return {
         },
         git_branches = default_opts,
         grep_string = ivy_opts,
-        help_tags = ivy_opts,
+        help_tags = {
+          theme = "ivy",
+          mappings = {
+            i = {
+              ["<CR>"] = actions.select_vertical,
+            },
+          },
+        },
         keymaps = ivy_opts,
         lsp_declarations = lsp_opts,
         lsp_definitions = lsp_opts,
