@@ -12,6 +12,7 @@ return {
       lazygit = { theme = { activeBorderColor = { fg = "String", bold = true } } },
       notifier = {
         enabled = true,
+        style = "minimal",
         icons = {
           error = Icon.diagnostics.Error,
           warn = Icon.diagnostics.Warn,
@@ -66,6 +67,21 @@ return {
         end,
       })
     end,
+  },
+
+  { -- lazy.nvim
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      cmdline = {
+        format = {
+          cmdline = { icon = Icon.ui.ChevronRight },
+          search_up = { icon = Icon.ui.Search },
+          search_down = { icon = Icon.ui.Search },
+        },
+      },
+    },
+    dependencies = { "MunifTanjim/nui.nvim" },
   },
 
   -- advanced colorcolumn

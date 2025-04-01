@@ -5,27 +5,6 @@ gui:
   nerdFontsVersion: "3"
   spinner:
     frames: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
-  theme:
-    selectedLineBgColor:
-      - reverse
-    unstagedChangesColor:
-      - magenta
-    searchingActiveBorderColor:
-      - yellow
-      - bold
-    activeBorderColor:
-      - green
-      - bold
-    inactiveBorderColor:
-      - black
-    defaultFgColor:
-      - white
-    cherryPickedCommitFgColor:
-      - blue
-    cherryPickedCommitBgColor:
-      - cyan
-    optionsTextColor:
-      - blue
 os:
   editPreset: "nvim-remote"
 

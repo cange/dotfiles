@@ -41,20 +41,4 @@ return {
     },
     --- stylua: ignore end
   },
-
-  { --
-    "kdheepak/lazygit.nvim",
-    lazy = true,
-    dependencies = "nvim-lua/plenary.nvim",
-    keys = {
-      { "<leader>gg", "<cmd>LazyGit<CR>", desc = "Lazygit" },
-    },
-    config = function()
-      vim.g.lazygit_floating_window_border_chars = { " ", " ", " ", " ", " ", " ", " ", " " } -- no borders
-      User.set_highlights({
-        LazyGitBorder = { link = "FloatBorder" },
-        LazyGitFloat = { link = "NormalFloat" },
-      })
-    end,
-  },
 }
