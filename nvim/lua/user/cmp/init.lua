@@ -100,9 +100,9 @@ M.opts = {
   experimental = { ghost_text = { hl_group = "CmpGhostText" } },
   formatting = {
     fields = { -- order within a menu item
-      "menu",
-      "abbr",
       "kind",
+      "abbr",
+      "menu",
     },
     format = cmp_utils.format,
   },
