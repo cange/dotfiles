@@ -69,21 +69,6 @@ return {
     end,
   },
 
-  { -- lazy.nvim
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      cmdline = {
-        format = {
-          cmdline = { icon = Icon.ui.ChevronRight },
-          search_up = { icon = Icon.ui.Search },
-          search_down = { icon = Icon.ui.Search },
-        },
-      },
-    },
-    dependencies = { "MunifTanjim/nui.nvim" },
-  },
-
   -- advanced colorcolumn
   { "lukas-reineke/virt-column.nvim", opts = { char = Icon.ui.LineThin } },
 
