@@ -17,7 +17,7 @@ function M:init(opts)
   local state_icons = { inactive = Icon.ui.EyeClosed }
   M.super.init(self, opts)
   M.list_services = require("lualine.list_services"):new(
-    " ",
+    require("user.icons").ui.Server,
     User.get_service_icons(),
     state_icons,
     get_active_services,

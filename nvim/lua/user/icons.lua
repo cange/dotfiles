@@ -40,6 +40,7 @@ M.ui = {
   Person              = "", -- nf-oct-person
   Plus                = "", -- nf-doc-plus
   Search              = "", -- nf-cod-search
+  Server              = "", -- nf-cod-server_environment
   Stethoscope         = "󰓙", -- nf-md-stethoscope
   Sync                = "", -- nf-cod-sync
   SplitHorizontal     = "", -- nf-cod-split_vertical

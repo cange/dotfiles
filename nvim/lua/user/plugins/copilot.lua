@@ -69,7 +69,7 @@ return {
       local user = (vim.env.USER or "User"):gsub("^%l", string.upper)
       local model = "claude-3.7-sonnet"
       return {
-        answer_header = string.format("%s Copilot — %s", Icon.plugin.Copilot, model),
+        answer_header = string.format("%s Copilot — %s ", Icon.plugin.Copilot, model),
         auto_insert_mode = true,
         chat_autocomplete = true,
         context = "buffer",
@@ -95,23 +95,10 @@ return {
     end,
     keys = {
       -- stylua: ignore start
-      { "<leader>aa", M.pick("prompt"), desc = "Code Actions (CopilotChat)", mode = { "n", "v" } },
-      { "<leader>ac", "<cmd>CopilotChatToggle<CR>", desc = "Toggle (CopilotChat)", mode = { "n", "v" } },
-      { "<leader>ah", M.pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
-      { "<leader>ao", "<cmd>CopilotChatOptimize<CR>", desc = "Optimise (CopilotChat)", mode = { "n", "v" } },
-      { "<leader>at", "<cmd>CopilotChatTests<CR>", desc = "Tests (CopilotChat)", mode = { "n", "v" } },
-      { "<leader>ax", "<cmd>CopilotChatReset<CR>", desc = "Clear (CopilotChat)", mode = { "n", "v" } },
-      { "<leader>aX", "<cmd>CopilotChatExplain<CR>", desc = "Explain (CopilotChat)", mode = { "n", "v" } },
-      {
-        "<leader>aq",
-        function()
-          local input = vim.fn.input("Quick Chat: ")
-          if input ~= "" then require("CopilotChat").ask(input) end
-        end,
-        desc = "Quick Chat (CopilotChat)",
-        mode = { "n", "v" },
-      },
-      -- stylua: ignore end
+      { "<leader>Aa", M.pick("prompt"), desc = "copilot chat: Code Actions", mode = { "n", "v" } },
+      { "<leader>Ac", "<cmd>CopilotChatToggle<CR>", desc = "copilot chat: Toggle", mode = { "n", "v" } },
+      { "<leader>Ax", "<cmd>CopilotChatReset<CR>", desc = "copilot chat: Clear", mode = { "n", "v" } },
+      { "<leader>Am", "<cmd>CopilotChatModels<CR>", desc = "copilot chat: Switch Models", mode = { "n", "v" } },
     },
     init = function()
       local group = vim.api.nvim_create_augroup("copilot_chat", { clear = true })
@@ -159,14 +146,14 @@ return {
     keys = function()
       -- stylua: ignore start
       return {
-        { "<leader>aR", "<cmd>Copilot panel refresh<CR>", desc = "Refresh panel (Copilot)" },
-        { "<leader>ap", "<cmd>Copilot panel<CR>",         desc = "Toggle panel (Copilot)" },
-        { "<leader>aP", "<cmd>Copilot panel accept<CR>",  desc = "Accept panel (Copilot)" },
-        { "<leader>as", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "Toggle suggestion (Copilot)" },
-        { "<leader>aS", "<cmd>Copilot status<CR>",        desc = "Copilot status" },
-        { "<leader>at", "<cmd>Copilot toggle<CR>",        desc = "Toggle (Copilot)" },
-        { "[p", '<cmd>Copilot panel jump_prev<CR>',       desc = "Prev panel (Copilot)" },
-        { "]p", '<cmd>Copilot panel jump_next<CR>',       desc = "Next panel (Copilot)" },
+        { "<leader>AR", "<cmd>Copilot panel refresh<CR>", desc = "copilot: Refresh panel" },
+        { "<leader>Ap", "<cmd>Copilot panel<CR>",         desc = "copilot: Toggle panel" },
+        { "<leader>AP", "<cmd>Copilot panel accept<CR>",  desc = "copilot: Accept panel" },
+        { "<leader>As", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "copilot: Toggle suggestion" },
+        { "<leader>AS", "<cmd>Copilot status<CR>",        desc = "copilot: status" },
+        { "<leader>At", "<cmd>Copilot toggle<CR>",        desc = "copilot: Toggle" },
+        { "[p", '<cmd>Copilot panel jump_prev<CR>',       desc = "copilot: Prev panel" },
+        { "]p", '<cmd>Copilot panel jump_next<CR>',       desc = "copilot: Next panel" },
       }
       -- stylua: ignore end
     end,
