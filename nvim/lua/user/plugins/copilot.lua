@@ -13,36 +13,40 @@ function M.pick(kind)
 end
 
 local function prompts()
-  local context_check = "\n\t - Check for context given files #files:.**/**/*/.mdc"
+  local context_check = "\n\t - Check for context given files #files:*.mdc"
+    .. "\n\t - Confirm when context file has been found"
+
   return {
-    Commit = {
-      prompt = "> #git:staged"
-        .. context_check
-        .. "\n\t - Write conventional commit message for the change with commitizen convention."
-        .. "\n\t - Keep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.",
-    },
-    FixTypeErrors = {
-      prompt = "> /COPILOT_GENERATE\n\nThere are type declaration problems in my code."
-        .. context_check
-        .. "\n\t - Rewrite the code to show it with the bug fixed."
-        .. "\n\t - Use all #buffers as assistant context"
-        .. "\n\t - Explain the made changes",
-    },
-    Tests = {
-      prompt = "> /COPILOT_GENERATE\n\nPlease generate tests for my code."
-        .. context_check
-        .. "\n\t - Assume **Vitest** is installed and the API methods are globally available and does not need to import."
-        .. "\n\t - Use all #buffers as assistant context"
-        .. "\n\t - Use **Vitest** instead of Jest as test runner if not other already defined."
-        .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
-        .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible.",
-    },
-    Review = {
-      prompt = "Review the selected code." .. context_check .. "\n\t - Ignore line length limitations",
-    },
-    Translate = {
-      prompt = "> /COPILOT_GENERATE" .. context_check .. "\n\nTranslate all Chinese wording to English in this file.",
-    },
+    Commit = "> #git:staged\n\nPlease write a conventional commit message for the change with commitizen convention."
+      .. "\n\t - Keep the title under 50 characters and wrap message at 72 characters."
+      .. "\n\t - Format as a gitcommit code block.",
+    Tests = "> /COPILOT_GENERATE\n\nPlease explain how the selected code works, then generate unit tests for it."
+      .. context_check
+      .. "\n\t - Assume **Vitest** is installed and the API methods are globally available and does not need to import."
+      .. "\n\t - Use all #buffers as assistant context"
+      .. "\n\t - Use **Vitest** instead of Jest as test runner if not other already defined."
+      .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
+      .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible.",
+    Review = "Please review the following code and provide suggestions for improvement."
+      .. context_check
+      .. "\n\t - Ignore line length limitations",
+
+    -- stylua: ignore start
+    -- Code related prompts
+    FixCode       = "> /COPILOT_GENERATE\n\nPlease fix the following code to make it work as intended.",
+    FixError      = "> /COPILOT_GENERATE\n\nPlease explain the error in the following text and provide a solution.",
+    FixTypeError  = "> /COPILOT_GENERATE\n\nPlease fix the type declaration problems in my code.",
+    Explain       = "> /COPILOT_GENERATE\n\nPlease explain how the following code works.",
+    Refactor      = "> /COPILOT_GENERATE\n\nPlease refactor the following code to improve its clarity and readability.",
+    BetterNamings = "Please provide better names for the following variables and functions.",
+    Documentation = "Please provide documentation for the following code.",
+    -- Text related prompts
+    Concise       = "> /COPILOT_GENERATE\n\nPlease rewrite the following text to make it more concise.",
+    Spelling      = "> /COPILOT_GENERATE\n\nPlease correct any grammar and spelling errors in the following text.",
+    Summarize     = "> /COPILOT_GENERATE\n\nPlease summarize the following text.",
+    Translate     = "> /COPILOT_GENERATE\n\nPlease translate all Chinese wording to English in this file.",
+    Wording       = "> /COPILOT_GENERATE\n\nPlease improve the grammar and wording of the following text.",
+    -- stylua: ignore end
   }
 end
 
@@ -74,6 +78,13 @@ return {
           return select.visual(source) or select.buffer(source)
         end,
         prompts = prompts(),
+        mappings = {
+          -- Use tab for completion
+          complete = {
+            detail = "Use @<Tab> or /<Tab> for options.",
+            insert = "<Tab>",
+          },
+        },
       }
     end,
     keys = {
