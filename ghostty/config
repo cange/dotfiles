@@ -14,3 +14,7 @@ mouse-hide-while-typing = true
 copy-on-select = clipboard
 
 macos-titlebar-style = hidden
+
+# keybinds
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+quick-terminal-position = right
