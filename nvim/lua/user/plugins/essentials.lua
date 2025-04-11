@@ -2,7 +2,7 @@ return {
   { -- A collection of small convenience plugins
     "folke/snacks.nvim",
     priority = 1000,
-    version = "v2.22.0",
+    version = "v2.*",
     lazy = false,
     opts = {
       bigfile = { enabled = true },
@@ -11,7 +11,6 @@ return {
       input = { enabled = true },
       lazygit = { theme = { activeBorderColor = { fg = "String", bold = true } } },
       notifier = {
-        enabled = true,
         style = "minimal",
         icons = {
           error = Icon.diagnostics.Error,
@@ -21,6 +20,7 @@ return {
           trace = Icon.ui.Edit,
         },
         top_down = false,
+        margin = { top = 0, right = 1, bottom = 1 },
       },
       notify = { enabled = true },
       statuscolumn = {},
