@@ -1,10 +1,6 @@
 # User configuration
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/bin:/sbin:$PATH"
 
-# --- Homebrew - must come after general $PATH setup
-export PATH="/opt/homebrew/bin:$PATH"
-# Homebrew ---
-
 # One may need to manually set your language environment
 export LANG=en_US.UTF-8
 
