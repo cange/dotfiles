@@ -246,6 +246,13 @@ return {
     },
   },
 
+  { -- autoclose and autorename html tags
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    opts = {},
+  },
+
   { -- close brackets, quotes etc
     "windwp/nvim-autopairs",
     lazy = true,
@@ -253,6 +260,7 @@ return {
     config = function()
       require("nvim-autopairs").setup({
         check_ts = true, -- enable Tree-Sitter
+        disable_filetype = { "markdown" },
         ts_config = {
           lua = { "string" }, -- it will not add a pair on that treesitter node
           javascript = { "template_string" },
@@ -293,6 +301,18 @@ return {
           require("peek")[method]()
         end,
         desc = "Toggle Markdown Preview",
+      },
+    },
+  },
+
+  { -- improve viewing Markdown files
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      heading = {
+        backgrounds = {}, -- disable
       },
     },
   },

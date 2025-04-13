@@ -62,13 +62,6 @@ return {
     main = "nvim-treesitter.configs",
   },
 
-  { -- autoclose and autorename html tags
-    "windwp/nvim-ts-autotag",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    config = function() require("nvim-ts-autotag").setup() end,
-  },
-
   {
     -- contextual comment in embedded language files like Vue.JS
     "JoosepAlviste/nvim-ts-context-commentstring",
@@ -84,23 +77,6 @@ return {
     end,
   },
 
-  {
-    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      highlight = {
-        "RainbowDelimiterRed",
-        "RainbowDelimiterYellow",
-        "RainbowDelimiterBlue",
-        "RainbowDelimiterOrange",
-        "RainbowDelimiterGreen",
-        "RainbowDelimiterViolet",
-        "RainbowDelimiterCyan",
-      },
-      blacklist = { "vue" },
-    },
-    config = function(_, opts) require("rainbow-delimiters.setup").setup(opts) end,
-  },
 
   { -- testing toggle util
     "cange/specto.nvim",
