@@ -1,14 +1,24 @@
 [include]
-	path = ~/.config/secrets/gitconfig
+	path = ~/.gitcredentials
+
+[commit]
+	gpgsign = true ; Automatically sign commits
+	verbose = true ; Show diff in commit message editor
+
+[tag]
+	gpgSign = true
+	sort = version:refname ; sort order: version sorting
 
 [push]
-	default = simple
+	default = simple ; push current branch to upstream with same name
+	autoSetupRemote = true ; set upstream on push if not configured automatically
 
 [pull]
 	rebase = true
 
 [fetch]
 	prune = true ; deletes outdated remote references
+	pruneTags = true ; deletes outdated tags remote references
 
 [pager]
 	color = true
@@ -20,22 +30,21 @@
 	whitespace = fix ; detects whitespace errors when applying a patch
 
 [core]
-  ; Use custom `.gitignore` and `.gitattributes`
-	excludesfile = ~/.gitignore
-	attributesfile = ~/.gitattributes
+	excludesfile = $HOME/.gitignore ; default `.gitignore`
 	; Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
 	; whitespace = space-before-tab,indent-with-non-tab,trailing-space
-	editor = nvim
+	editor = vim
 	pager = delta
+	autocrlf = input ; Line ending: convert CRLF->LF on commit, LF->LF on checkout
 
 [interactive]
 	diffFilter = delta --color-only
 
 [delta] ; diff tool https://github.com/dandavison/delta
 	; use `delta --show-config` to see all available options
-	line-numbers = true # show line numbers
+	line-numbers = true ; show line numbers
 	tabs = 2
-  syntax-theme = base16
+	syntax-theme = base16
 
 [delta "interactive"]
 	keep-plus-minus-markers = false
@@ -52,22 +61,17 @@
 	log = true ; summaries of merged commits in newly created merge commit messages
 
 [diff]
-	colorMoved = default
+	renames = true ; Enable rename detection by default
 
 [column]
-	ui = auto
+	ui = auto ; enable column layout
 
 [branch]
-	sort = -committerdate
-
-; Use `origin` as the default remote on the `main` branch in all cases
-[branch "main"]
-	remote = origin
-	merge = refs/heads/main
+	sort = -committerdate ; sort order: most recent first
 
 [init]
 	defaultBranch = main
 
-; remember last conflict resolution
 [rerere]
-	enabled = true
+	autoupdate = true ; Automatically stage files resolved by rerere
+	enabled = true ; remember last conflict resolution
