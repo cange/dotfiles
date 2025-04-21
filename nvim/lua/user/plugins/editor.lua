@@ -203,15 +203,6 @@ return {
     end,
   },
 
-  { -- Highlight the word under the cursor
-    "RRethy/vim-illuminate",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      filetypes_denylist = { "NvimTree", "snacks_input" },
-    },
-    config = function(_, opts) require("illuminate").configure(opts) end,
-  },
-
   -- multi search and replace
   { "mg979/vim-visual-multi", event = "VeryLazy" },
 
@@ -314,6 +305,7 @@ return {
       heading = {
         backgrounds = {}, -- disable
       },
+      latex = { enabled = false }, -- avoids this warnings
     },
   },
 

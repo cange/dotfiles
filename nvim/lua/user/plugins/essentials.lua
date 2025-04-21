@@ -24,6 +24,7 @@ return {
       },
       notify = { enabled = true },
       statuscolumn = {},
+      words = {},
     },
     keys = function()
       local Snacks = require("snacks")
