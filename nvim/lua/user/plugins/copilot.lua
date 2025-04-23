@@ -19,7 +19,9 @@ local function prompts()
   return {
     Commit = "> #git:staged\n\nPlease write a conventional commit message for the change with commitizen convention."
       .. "\n\t - Keep the title under 50 characters and wrap message at 72 characters."
-      .. "\n\t - Format as a gitcommit code block.",
+      .. "\n\t - Format as a gitcommit code block."
+      .. "\n\t - Add additional a message only when it provides meaningful context."
+      .. "\n\t - Keep any additional messages concise.",
     Tests = "> /COPILOT_GENERATE\n\nPlease explain how the selected code works, then generate unit tests for it."
       .. context_check
       .. "\n\t - Assume **Vitest** is installed and the API methods are globally available and does not need to import."
@@ -30,6 +32,9 @@ local function prompts()
     Review = "Please review the following code and provide suggestions for improvement."
       .. context_check
       .. "\n\t - Ignore line length limitations",
+    VueConvert = "> /COPILOT_GENERATE\n\nPlease convert the Vue.js component to composition API."
+      .. "\n\t - Use `<script setup>` notation over `setup()`"
+      .. "\n\t - Use TypeScript as base language`",
 
     -- stylua: ignore start
     -- Code related prompts
@@ -62,12 +67,13 @@ return {
     cmd = "CopilotChat",
     opts = function()
       local user = (vim.env.USER or "User"):gsub("^%l", string.upper)
+      local model = "claude-3.7-sonnet"
       return {
-        answer_header = string.format("%s Copilot ", Icon.plugin.Copilot),
+        answer_header = string.format("%s Copilot — %s", Icon.plugin.Copilot, model),
         auto_insert_mode = true,
         chat_autocomplete = true,
         context = "buffer",
-        model = "claude-3.5-sonnet",
+        model = model,
         question_header = string.format("%s %s ", Icon.ui.Person, user),
         show_help = true,
         window = {
