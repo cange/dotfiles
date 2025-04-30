@@ -48,17 +48,27 @@ local function update_highlights()
     TelescopePromptBorder = { link = "FloatBorder" },
     TelescopeSelectionNormal = { link = "FloatBorder" },
     TelescopeTitle = { link = "FloatTitle" },
+
+    -- DropBar statusline
+    DropBarIconUISeparator = { link = "WinBarNC" },
+    DropBarKindFile = { link = "Normal" },
+    DropBarMenuCurrentContext = { link = "TelescopeNormal" },
+    DropBarMenuHoverEntry = { link = "TelescopeSelection" },
   }
 
   --  dark theme tweaks
   if vim.o.background == "dark" then
     highlights = vim.tbl_extend("force", highlights, {
       -- common
-      NonText = { fg = pal.bg2 }, -- subtle virtual/column line
       CursorLine = { bg = pal.bg1 }, -- subtle
       Folded = { bg = nil, fg = pal.bg4 }, -- reduces folding noise
+      NonText = { fg = pal.bg2 }, -- subtle virtual/column line
       UserNormal = { bg = pal.bg1 },
+      WinBar = { fg = pal.sel1 },
+      WinBarNC = { fg = pal.sel0 },
+
       -- misc
+      DropBarKindFile = { fg = pal.fg2 },
       LspInlayHint = { fg = pal.comment, bg = nil, italic = true },
 
       -- Window
@@ -73,15 +83,6 @@ local function update_highlights()
       SnacksInputBorder = { link = "FloatBorder" },
       SnacksInputNormal = { link = "UserNormal" },
       SnacksInputTitle = { link = "FloatTitle" },
-
-      -- parentheses highlighting
-      RainbowDelimiterRed = { fg = blend(spec.syntax.bracket, pal.red.dim, 0.75) },
-      RainbowDelimiterYellow = { fg = blend(spec.syntax.bracket, pal.yellow.dim, 0.75) },
-      RainbowDelimiterBlue = { fg = blend(spec.syntax.bracket, pal.blue.dim, 0.75) },
-      RainbowDelimiterOrange = { fg = blend(spec.syntax.bracket, pal.orange.dim, 0.75) },
-      RainbowDelimiterGreen = { fg = blend(spec.syntax.bracket, pal.green.dim, 0.75) },
-      RainbowDelimiterViolet = { fg = blend(spec.syntax.bracket, pal.magenta.dim, 0.75) },
-      RainbowDelimiterCyan = { fg = blend(spec.syntax.bracket, pal.cyan.dim, 0.75) },
 
       -- SymboleOutline
       FocusedSymbol = { bold = true },

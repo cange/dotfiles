@@ -119,7 +119,10 @@ function M.get_service_icons()
     rubocop = grep_icon("rb"),
     ruby_lsp = grep_icon("rb"),
     stylelint = grep_icon(".stylelint"),
+    stylua = grep_icon("lua"),
+    superhtml = grep_icon("html"),
     tailwindcss = grep_icon("tailwind.config.js"),
+    trim_whitespace = "󱁐",
     ts_ls = grep_icon("ts"),
     volar = grep_icon("vue"),
   }

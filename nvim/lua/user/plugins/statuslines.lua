@@ -1,14 +1,4 @@
 local strUtil = require("user.utils.string")
-local exclude_filetypes = {
-  "",
-  "NvimTree",
-  "TelescopePrompt",
-  "gitcommit",
-  "harpoon",
-  "help",
-  "lazy",
-  "mason",
-}
 
 return {
   {
@@ -47,16 +37,6 @@ return {
               icon = Icon.git.Branch,
               on_click = function() vim.cmd("Telescope git_branches") end,
               padding = { left = 0, right = 1 },
-            },
-            {
-              "filename",
-              path = 1,
-              symbols = {
-                modified = Icon.ui.DotFill,
-                newfile = Icon.documents.NewFile,
-                readonly = Icon.ui.lock,
-                unnamed = Icon.documents.File,
-              },
             },
             {
               "diagnostics",
@@ -101,34 +81,10 @@ return {
   },
 
   { -- winbar with LSP context symbols
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("barbecue").setup({
-        symbols = {
-          modified = Icon.ui.DotFill,
-          separator = Icon.ui.ChevronRight,
-        },
-        show_modified = true,
-        exclude_filetypes = exclude_filetypes,
-        create_autocmd = false, -- prevent barbecue from updating itself automatically
-      })
-      -- Gain better performance when moving the cursor around
-      vim.api.nvim_create_autocmd({
-        "WinResized",
-        "BufWinEnter",
-        "CursorHold",
-        "InsertLeave",
-        "BufModifiedSet", -- if `show_modified` to `true`
-      }, {
-        group = vim.api.nvim_create_augroup("barbecue.updater", {}),
-        callback = function() require("barbecue.ui").update() end,
-      })
-    end,
+    "Bekaboo/dropbar.nvim",
+    dependencies = { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    opts = { icons = { kinds = { symbols = { Folder = "" } } } },
+    event = "BufEnter",
+    keys = function() return { { "<leader>;", require("dropbar.api").pick, desc = "Pick symbols in winbar" } } end,
   },
 }

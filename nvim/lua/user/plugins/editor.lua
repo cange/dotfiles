@@ -304,6 +304,7 @@ return {
     opts = {
       heading = {
         backgrounds = {}, -- disable
+        icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
       },
       latex = { enabled = false }, -- avoids this warnings
     },

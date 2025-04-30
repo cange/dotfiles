@@ -35,6 +35,8 @@ function M.custom_live_grep(opts)
       ["l"] = "*.lua",
       ["v"] = "*.vue",
       ["s"] = "*.{spec,stories}.{js,ts}",
+      ["js"] = "*.{js,ts}",
+      ["vjs"] = "*.{js,ts,vue}",
     }
   opts.pattern = opts.pattern or "%s"
 

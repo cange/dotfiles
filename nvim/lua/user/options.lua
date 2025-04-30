@@ -18,7 +18,7 @@ local options = {
   -- UI - command prompt
   showmode = false, -- don't show mode message like, -- INSERT, -- since statusline 'lualine' is is doing it
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
-  spelllang = { "en_us", "de" }, -- spellchecking will be done for these languages
+  spelllang = { "en_us" }, -- spellchecking will be done for these languages
 
   -- backup handling
   backup = false, -- creates a backup file
