@@ -1,5 +1,5 @@
 return {
-  { -- Avante
+  {
     "yetone/avante.nvim",
     event = "VeryLazy",
     version = false, -- NOTE: Never set this value to "*"! Never!
@@ -36,6 +36,18 @@ return {
         provider = "telescope",
         provider_opts = {},
       },
+      -- The system_prompt type supports both a string and a function that
+      -- returns a string. Using a function here allows dynamically updating the
+      -- prompt with mcphub
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        if not hub then return end
+        return hub:get_active_servers_prompt()
+      end,
+      -- The custom_tools type supports both a list and a function that returns
+      -- a list. Using a function here prevents requiring mcphub before it's
+      -- loaded
+      custom_tools = function() return { require("mcphub.extensions.avante").mcp_tool() } end,
     },
     config = function(_, opts)
       require("avante").setup(opts)
@@ -56,33 +68,21 @@ return {
   {
     "ravitemer/mcphub.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
+      "nvim-lua/plenary.nvim",
+      "yetone/avante.nvim",
     },
-    -- uncomment the following line to load hub lazily
-    --cmd = "MCPHub",  -- lazy load
-    build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
-    -- uncomment this if you don't want mcp-hub to be available globally or can't use -g
-    -- build = "bundled_build.lua",  -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
-    config = function() require("mcphub").setup() end,
-  },
-
-  {
-    "ravitemer/mcphub.nvim",
-    enabled = false,
-    dependencies = { "nvim-lua/plenary.nvim" },
-    cmd = "MCPHub", -- lazily start the hub when `MCPHub` is called
-    build = "bun add -g mcp-hub@latest", -- Installs required mcp-hub npm module
-    opts = {
-      -- Required options
-      port = 6969, -- Port for MCP Hub server
-      config = vim.fn.expand("~/.config/nvim/mcpservers.json"), -- Absolute path to config file
-
-      log = {
-        level = vim.log.levels.WARN,
-        to_file = false,
-        file_path = nil,
-        prefix = "MCPHub",
-      },
-    },
+    build = "bundled_build.lua", -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
+    config = function()
+      require("mcphub").setup({
+        port = 6969, -- Port for MCP Hub server
+        config = vim.fn.expand("~/.config/nvim/mcpservers.json"), -- Absolute path to config file
+        use_bundled_binary = true, -- Use the bundled binary
+        extensions = {
+          avante = {
+            make_slash_commands = true, -- make /slash commands from MCP server prompts
+          },
+        },
+      })
+    end,
   },
 }

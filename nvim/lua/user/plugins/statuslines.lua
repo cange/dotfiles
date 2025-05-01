@@ -70,6 +70,7 @@ return {
               padding = { left = 0, right = 0 },
               symbols = { spinners = vim.split(Icon.sets.spinner, " ") },
             },
+            { require("mcphub.extensions.lualine") },
             { "encoding", separator = "" },
             { "location", padding = { left = 0, right = 0 }, separator = "" },
             { "progress", padding = { left = 1, right = 0 }, separator = "" },
