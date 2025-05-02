@@ -5,13 +5,15 @@ return {
     lazy = true,
     event = { "BufWritePost", "TextChanged" },
     opts = {
+      css = { "stylelint" },
+      html = { "markuplint" },
       json = { "jsonlint" },
       markdown = { "markdownlint" },
       ruby = { "rubocop" },
-      yaml = { "yamllint" },
-      -- css
-      css = { "stylelint" },
       scss = { "stylelint" },
+      svg = { "markuplint" },
+      xml = { "markuplint" },
+      yaml = { "yamllint" },
       -- js
       javascript = { "eslint" },
       typescript = { "eslint" },

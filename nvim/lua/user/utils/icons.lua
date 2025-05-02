@@ -114,6 +114,7 @@ function M.get_service_icons()
     jsonls = grep_icon("json"),
     lua_ls = grep_icon("lua"),
     markdownlint = grep_icon("md"),
+    markuplint = grep_icon("html"),
     prettier = grep_icon(".prettierrc"),
     prettierd = grep_icon(".prettierrc") .. "d",
     rubocop = grep_icon("rb"),

@@ -21,8 +21,8 @@ return {
     config = function(_, opts)
       require("mason").setup(opts)
       -- loads formatter and linter
-      local linter = { "eslint", "jsonlint", "markdownlint", "rubocop", "stylelint", "yamllint" }
-      local formatter = { "prettier", "rubocop", "shfmt", "stylua", "xmlformatter" }
+      local linter = { "eslint", "jsonlint", "markdownlint", "markuplint", "rubocop", "stylelint", "yamllint" }
+      local formatter = { "prettier", "rubocop", "shfmt", "stylua", "superhtml" }
       require("mason-tool-installer").setup({
         ensure_installed = vim.tbl_extend("force", linter, formatter),
         auto_update = true,
@@ -58,7 +58,6 @@ return {
           root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
         },
         html = {},
-        lemminx = {}, -- xml, xsd, xsl, xslt, svg
         ruby_lsp = {},
         tailwindcss = {},
         lua_ls = {

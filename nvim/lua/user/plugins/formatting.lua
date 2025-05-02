@@ -7,21 +7,20 @@ return {
   cmd = { "ConformInfo" },
   opts = {
     formatters_by_ft = {
+      bash = { "shfmt" },
+      css = prettier_preset,
+      html = { "superhtml" },
       json = prettier_preset,
       jsonc = prettier_preset,
       lua = { "stylua" },
-      html = prettier_preset,
-      svg = prettier_preset,
       markdown = prettier_preset,
-      yaml = prettier_preset,
       ruby = { "rubocop" },
-      -- shell scripts
-      zsh = { "shfmt" },
-      shell = { "shfmt" },
-      bash = { "shfmt" },
-      -- css
-      css = prettier_preset,
       scss = prettier_preset,
+      shell = { "shfmt" },
+      svg = { "superhtml" },
+      yaml = prettier_preset,
+      zsh = { "shfmt" },
+      xml = { "superhtml" },
       -- js
       javascript = prettier_preset,
       javascriptreact = prettier_preset,
@@ -29,7 +28,6 @@ return {
       typescript = prettier_preset,
       typescriptreact = prettier_preset,
       vue = prettier_preset,
-      xml = prettier_preset,
       ["_"] = { "trim_whitespace" },
     },
   },
