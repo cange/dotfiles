@@ -43,7 +43,21 @@ return {
       local mason_registry = require("mason-registry")
       local lspconfig = require("lspconfig")
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
-
+      local ts_ls_settings = {
+        inlayHints = {
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        },
+        implementationsCodeLens = { enabled = true },
+        referencesCodeLens = { enabled = true },
+        suggestionActions = { enabled = true },
+      }
       local server_configs = {
         astro = {},
         cssls = {
@@ -114,30 +128,8 @@ return {
             "vue",
           },
           settings = {
-            typescript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all", --'none' | 'literals' | 'all';
-                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-            javascript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
+            typescript = ts_ls_settings,
+            javascript = ts_ls_settings,
           },
           -- prevent ts_ls and denols are attached to current buffer
           root_dir = lspconfig.util.root_pattern("package.json"),
@@ -146,6 +138,15 @@ return {
         volar = { -- vue
           -- NOTE: not needed to configure if using @vue/typescript-plugin
           -- but required for CSS support in single file components
+          -- and
+          -- silents: `Client volar quit with exit code 1 and signal 0...`
+          init_options = {
+            typescript = {
+              tsdk = mason_registry.get_package("typescript-language-server"):get_install_path()
+                .. "/node_modules/typescript/lib",
+            },
+          },
+          filetypes = { "vue" },
         },
         jsonls = {
           settings = {
