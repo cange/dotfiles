@@ -85,17 +85,24 @@ fi
 
 #
 # --- History Configuration - https://www.soberkoder.com/better-zsh-history/
-export HISTDUP=erase             # Erase duplicates in the history file
-export HISTFILE=~/.zsh_history   # path/location of the history file
-export HISTSIZE=1000000000       # number of commands that are loaded into memory
-export SAVEHIST=1000000000       # number of commands that are stored
-export HISTTIMEFORMAT="[%F %T] " # Timestamp format for history
-export HISTCONTROL=ignoreboth    # Ignore duplicates and commands starting with a space
+export HISTFILE=~/.zsh_history # Path/location of the history file
+export HISTSIZE=1000000000     # Number of commands loaded into memory
+export SAVEHIST=1000000000     # Number of commands stored in the history file
 
-setopt APPEND_HISTORY       # Append history to the history file
-setopt INC_APPEND_HISTORY   # Immediately append to the history file, not just when the shell exits
-setopt SHARE_HISTORY        # Share history across terminals
-setopt EXTENDED_HISTORY     # Save timestamp of command
-setopt HIST_FIND_NO_DUPS    # Do not display duplicates in the history list
-setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate
+# Timestamp format for history (for extended_history)
+export HISTTIMEFORMAT="[%F %T] "
+
+# History Options
+setopt EXTENDED_HISTORY       # Save timestamp and duration of command
+setopt SHARE_HISTORY          # Share history across multiple zsh sessions
+setopt APPEND_HISTORY         # Append to history file
+setopt INC_APPEND_HISTORY     # Add commands as they are typed, not at shell exit
+setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first
+setopt HIST_IGNORE_DUPS       # Don't record if same as previous command
+setopt HIST_IGNORE_ALL_DUPS   # Delete old recorded entry if new entry is a duplicate
+setopt HIST_FIND_NO_DUPS      # Do not display duplicates when searching
+setopt HIST_IGNORE_SPACE      # Don't record commands starting with a space
+setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks before recording
+setopt HIST_VERIFY            # Show command with history expansion before running it
+setopt HIST_SAVE_NO_DUPS      # Don't write duplicate entries in the history file
 # History Configuration ---
