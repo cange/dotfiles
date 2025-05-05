@@ -62,13 +62,13 @@ local function update_highlights()
       -- common
       CursorLine = { bg = pal.bg1 }, -- subtle
       Folded = { bg = nil, fg = pal.bg4 }, -- reduces folding noise
-      NonText = { fg = pal.bg2 }, -- subtle virtual/column line
+      NonText = { fg = pal.bg4 }, -- subtle virtual/column line
       UserNormal = { bg = pal.bg1 },
-      WinBar = { fg = pal.sel1 },
-      WinBarNC = { fg = pal.sel0 },
+      WinBar = { fg = pal.fg2 },
+      WinBarNC = { fg = pal.comment },
 
       -- misc
-      DropBarKindFile = { fg = pal.fg2 },
+      DropBarKindFile = { fg = pal.fg1, bold = true },
       LspInlayHint = { fg = pal.comment, bg = nil, italic = true },
 
       -- Window

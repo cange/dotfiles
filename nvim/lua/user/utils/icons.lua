@@ -31,6 +31,12 @@ local presets = {
     cterm_color = "198",
     name = "Storybook",
   },
+  css = {
+    icon = icons.extensions.Css,
+    color = "#662f9a",
+    cterm_color = "55",
+    name = "CSS",
+  },
   vue = {
     color = "#42b883",
     cterm_color = "29",
@@ -79,6 +85,7 @@ local function redefine_icons()
   set_rc_file_icons("babel", { "", ".json", ".js", ".cjs", ".mjs", ".cts" }, { ".json", ".js", ".cjs", ".mjs", ".cts" })
   set_rc_file_icons("stylelint", { "", ".json", ".js", ".cjs", ".mjs", ".yaml", ".yml" }, { ".js", ".cjs", ".mjs" })
 
+  set_icon_by_filetype("css", "css", nil, presets.css)
   set_icon_by_filetype("vue", "vue", nil, presets.vue)
   set_icon_by_filetype("yarn", ".yarn", { "", "rc.yml" }, presets.yarn)
   set_icon_by_filetype("yarn", "yarn.lock", nil, presets.yarn)

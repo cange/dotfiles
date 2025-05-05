@@ -20,9 +20,6 @@ return {
         enable = true,
         update_root = true,
       },
-      view = {
-        -- side = "right",
-      },
       renderer = {
         indent_markers = { enable = true },
         icons = {

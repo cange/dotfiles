@@ -60,9 +60,13 @@ return {
               end,
               separator = Icon.ui.Pipe,
             },
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+            {
+              require("lazy.status").updates,
+              cond = require("lazy.status").has_updates,
+              on_click = function() vim.cmd("Lazy") end,
+            },
             { "inlay_hints" },
-            { "format_clients", separator = "" },
+            { "format_clients", separator = "", on_click = function() vim.cmd("ConformInfo") end },
             { "lsp_clients", padding = { left = 1, right = 2 }, separator = "" },
             {
               "copilot",
@@ -70,7 +74,11 @@ return {
               padding = { left = 0, right = 0 },
               symbols = { spinners = vim.split(Icon.sets.spinner, " ") },
             },
-            { require("mcphub.extensions.lualine") },
+            {
+              require("mcphub.extensions.lualine"),
+              padding = { left = 1, right = 0 },
+              on_click = function() vim.cmd("MCPHub") end,
+            },
             { "encoding", separator = "" },
             { "location", padding = { left = 0, right = 0 }, separator = "" },
             { "progress", padding = { left = 1, right = 0 }, separator = "" },

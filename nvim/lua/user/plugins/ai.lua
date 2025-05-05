@@ -3,9 +3,7 @@ return {
     "yetone/avante.nvim",
     event = "VeryLazy",
     version = false, -- NOTE: Never set this value to "*"! Never!
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "stevearc/dressing.nvim",
@@ -72,17 +70,17 @@ return {
       "yetone/avante.nvim",
     },
     build = "bundled_build.lua", -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
-    config = function()
-      require("mcphub").setup({
-        port = 6969, -- Port for MCP Hub server
-        config = vim.fn.expand("~/.config/nvim/mcpservers.json"), -- Absolute path to config file
-        use_bundled_binary = true, -- Use the bundled binary
-        extensions = {
-          avante = {
-            make_slash_commands = true, -- make /slash commands from MCP server prompts
-          },
+    opts = {
+      port = 6969, -- Port for MCP Hub server
+      config = vim.fn.expand("~/.config/nvim/mcpservers.json"), -- Absolute path to config file
+      use_bundled_binary = true, -- Use the bundled binary
+      extensions = {
+        avante = {
+          make_slash_commands = true, -- make /slash commands from MCP server prompts
         },
-      })
-    end,
+      },
+      ui = { window = { border = "none" } },
+    },
+    keys = { { "<leader>e5", "<cmd>MCPHub<CR>", desc = "Show MCPHub" } },
   },
 }

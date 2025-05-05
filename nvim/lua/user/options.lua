@@ -72,8 +72,6 @@ vim.opt.fillchars:append({
   eob = " ",
   fold = " ",
   foldsep = " ",
-  -- foldopen = "",
-  -- foldclose = "",
 })
 
 -- Basic Keymaps
