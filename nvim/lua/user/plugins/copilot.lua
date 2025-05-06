@@ -95,10 +95,10 @@ return {
     end,
     keys = {
       -- stylua: ignore start
-      { "<leader>Aa", M.pick("prompt"), desc = "copilot chat: Code Actions", mode = { "n", "v" } },
-      { "<leader>Ac", "<cmd>CopilotChatToggle<CR>", desc = "copilot chat: Toggle", mode = { "n", "v" } },
-      { "<leader>Ax", "<cmd>CopilotChatReset<CR>", desc = "copilot chat: Clear", mode = { "n", "v" } },
-      { "<leader>Am", "<cmd>CopilotChatModels<CR>", desc = "copilot chat: Switch Models", mode = { "n", "v" } },
+      { "<leader>aca", M.pick("prompt"), desc = "copilot chat: Code Actions", mode = { "n", "v" } },
+      { "<leader>acc", "<cmd>CopilotChatToggle<CR>", desc = "copilot chat: Toggle", mode = { "n", "v" } },
+      { "<leader>acx", "<cmd>CopilotChatReset<CR>", desc = "copilot chat: Clear", mode = { "n", "v" } },
+      { "<leader>acm", "<cmd>CopilotChatModels<CR>", desc = "copilot chat: Switch Models" },
     },
     init = function()
       local group = vim.api.nvim_create_augroup("copilot_chat", { clear = true })
@@ -146,12 +146,12 @@ return {
     keys = function()
       -- stylua: ignore start
       return {
-        { "<leader>AR", "<cmd>Copilot panel refresh<CR>", desc = "copilot: Refresh panel" },
-        { "<leader>Ap", "<cmd>Copilot panel<CR>",         desc = "copilot: Toggle panel" },
-        { "<leader>AP", "<cmd>Copilot panel accept<CR>",  desc = "copilot: Accept panel" },
-        { "<leader>As", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "copilot: Toggle suggestion" },
-        { "<leader>AS", "<cmd>Copilot status<CR>",        desc = "copilot: status" },
-        { "<leader>At", "<cmd>Copilot toggle<CR>",        desc = "copilot: Toggle" },
+        { "<leader>acR", "<cmd>Copilot panel refresh<CR>", desc = "copilot: Refresh panel" },
+        { "<leader>acp", "<cmd>Copilot panel<CR>",         desc = "copilot: Toggle panel" },
+        { "<leader>acP", "<cmd>Copilot panel accept<CR>",  desc = "copilot: Accept panel" },
+        { "<leader>acs", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "copilot: Toggle suggestion" },
+        { "<leader>acS", "<cmd>Copilot status<CR>",        desc = "copilot: status" },
+        { "<leader>act", "<cmd>Copilot toggle<CR>",        desc = "copilot: Toggle" },
         { "[p", '<cmd>Copilot panel jump_prev<CR>',       desc = "copilot: Prev panel" },
         { "]p", '<cmd>Copilot panel jump_next<CR>',       desc = "copilot: Next panel" },
       }

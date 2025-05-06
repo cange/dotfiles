@@ -60,6 +60,7 @@ return {
     end,
     keys = {
       { "<leader>ax", "<cmd>AvanteClear<CR>", desc = "avante: Clear", mode = { "n", "v" } },
+      { "<leader>am", "<cmd>AvanteModels<CR>", desc = "avante: Switch model" },
     },
   },
 

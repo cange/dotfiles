@@ -187,6 +187,7 @@ return {
         { "<leader>,", group = "Settings" },
         { "<leader>g", group = "Git" },
         { "<leader>a", group = "AI", mode = { "n", "v" } },
+        { "<leader>ac", group = "CopilotChat", mode = { "n", "v" } },
         { "<leader>d", group = "Diff", mode = { "n", "v" } },
         { "<leader>q", group = "Session" },
         { "<leader>s", group = "Search" },
