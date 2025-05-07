@@ -11,7 +11,6 @@ return {
       input = { enabled = true },
       lazygit = { theme = { activeBorderColor = { fg = "String", bold = true } } },
       notifier = {
-        style = "minimal",
         icons = {
           error = Icon.diagnostics.Error,
           warn = Icon.diagnostics.Warn,
@@ -19,8 +18,6 @@ return {
           debug = Icon.ui.Bug,
           trace = Icon.ui.Edit,
         },
-        top_down = false,
-        margin = { top = 0, right = 1, bottom = 1 },
       },
       notify = { enabled = true },
       statuscolumn = {},
