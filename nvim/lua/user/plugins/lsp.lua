@@ -1,6 +1,74 @@
+local user_lsp = {}
+
+--- Gets a path to a package in the Mason registry.
+--- Prefer this to `get_package`, since the package might not always be
+--- available yet and trigger errors.
+---@param pkg string
+---@param path? string
+function user_lsp.get_pkg_path(pkg, path)
+  pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
+  local uv = vim.uv
+  local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
+  path = path or ""
+  local ret = root .. "/packages/" .. pkg .. path
+  if not uv.fs_stat(ret) then
+    local msg = ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(
+      pkg,
+      path
+    )
+    vim.notify(msg, vim.log.levels.DEBUG, { title = "Mason" })
+  end
+  return ret
+end
+
+user_lsp.ts_ls_settings = {
+  inlayHints = {
+    includeInlayEnumMemberValueHints = true,
+    includeInlayFunctionLikeReturnTypeHints = true,
+    includeInlayFunctionParameterTypeHints = true,
+    includeInlayParameterNameHints = "all",
+    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+    includeInlayPropertyDeclarationTypeHints = true,
+    includeInlayVariableTypeHints = true,
+    includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+  },
+  implementationsCodeLens = { enabled = true },
+  referencesCodeLens = { enabled = true },
+  suggestionActions = { enabled = true },
+}
+
+-- Hybrid mode configuration (Requires @vue/language-server version ^2.0.0)
+user_lsp.vue = {
+  ts_ls = {
+    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+    init_options = {
+      plugins = {
+        {
+          -- NOTE:  vue/volar setup with hybridMode:
+          -- The Vue Language Server exclusively manages the CSS/HTML sections.
+          -- As a result, you must run @vue/language-server in conjunction
+          -- with a TypeScript server that employs @vue/typescript-plugin.
+          -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vue-support
+          name = "@vue/typescript-plugin",
+          location = user_lsp.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
+          languages = { "vue" },
+        },
+      },
+    },
+  },
+  volar = {
+    init_options = {
+      typescript = {
+        -- volar needs to know the typescript SDK location
+        tsdk = user_lsp.get_pkg_path("typescript-language-server", "/node_modules/typescript/lib"),
+      },
+    },
+  },
+}
+
 return {
   { -- managing & installing LSP servers, linters & formatters
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     dependencies = {
       "neovim/nvim-lspconfig",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -36,28 +104,13 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "b0o/SchemaStore.nvim",
-      "williamboman/mason-lspconfig.nvim", -- auto install main LSPs
-      "williamboman/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
+      "mason-org/mason.nvim",
     },
     config = function()
-      local mason_registry = require("mason-registry")
       local lspconfig = require("lspconfig")
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
-      local ts_ls_settings = {
-        inlayHints = {
-          includeInlayEnumMemberValueHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayParameterNameHints = "all",
-          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayVariableTypeHints = true,
-          includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-        },
-        implementationsCodeLens = { enabled = true },
-        referencesCodeLens = { enabled = true },
-        suggestionActions = { enabled = true },
-      }
+
       local server_configs = {
         astro = {},
         cssls = {
@@ -89,65 +142,24 @@ return {
             },
           },
         },
-        ts_ls = { -- javascript, typescript, etc.
+        -- javascript, typescript, etc.
+        ts_ls = vim.tbl_deep_extend("force", {
           -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ts_ls
           init_options = {
             preferences = { disableSuggestions = true },
             completions = { completeFunctionCalls = true },
-            plugins = {
-              { -- vue setup with hybridMode:
-                -- https://github.com/vuejs/language-tools/blob/master/README.md#hybrid-mode-configuration-requires-vuelanguage-server-version-200
-                -- NOTE: It is crucial to ensure that @vue/typescript-plugin and volar are of identical versions.
-                -- check `npm list -g`
-                -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vue-support
-                name = "@vue/typescript-plugin",
-                location = mason_registry.get_package("vue-language-server"):get_install_path()
-                  .. "/node_modules/@vue/language-server",
-                languages = {
-                  "javascript",
-                  "javascript.jsx",
-                  "javascriptreact",
-                  "json",
-                  "typescript",
-                  "typescript.tsx",
-                  "typescriptreact",
-                  "vue",
-                },
-              },
-            },
           },
           -- filetypes is extended here to include Vue SFC
-          filetypes = {
-            "javascript",
-            "javascript.jsx",
-            "javascriptreact",
-            "json",
-            "typescript",
-            "typescript.tsx",
-            "typescriptreact",
-            "vue",
-          },
+          -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
           settings = {
-            typescript = ts_ls_settings,
-            javascript = ts_ls_settings,
+            typescript = user_lsp.ts_ls_settings,
+            javascript = user_lsp.ts_ls_settings,
           },
           -- prevent ts_ls and denols are attached to current buffer
           root_dir = lspconfig.util.root_pattern("package.json"),
-          single_file_support = false,
-        },
-        volar = { -- vue
-          -- NOTE: not needed to configure if using @vue/typescript-plugin
-          -- but required for CSS support in single file components
-          -- and
-          -- silents: `Client volar quit with exit code 1 and signal 0...`
-          init_options = {
-            typescript = {
-              tsdk = mason_registry.get_package("typescript-language-server"):get_install_path()
-                .. "/node_modules/typescript/lib",
-            },
-          },
-          filetypes = { "vue" },
-        },
+          -- single_file_support = false, // TODO: why SFC false
+        }, user_lsp.vue.ts_ls),
+        volar = user_lsp.vue.volar,
         jsonls = {
           settings = {
             json = {
@@ -173,15 +185,17 @@ return {
       }
       local default_config = require("user.lsp").server_config
 
-      for server, server_config in pairs(server_configs) do
-        local config = vim.tbl_deep_extend("force", default_config, server_config)
-        require("lspconfig")[server].setup(config)
+      for server, config in pairs(server_configs) do
+        local server_config = vim.tbl_deep_extend("force", default_config, config)
+        -- TODO: figure out how native vim.lsp.config works (using it does not
+        -- allow renaming etc.)
+        --vim.lsp.config(server, server_config)
+        lspconfig[server].setup(server_config)
       end
 
       require("user.lsp").update_diagnostics()
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(server_configs),
-        automatic_installation = true,
       })
     end,
     -- stylua: ignore
