@@ -150,7 +150,6 @@ alias gsw='git switch'
 alias gswm='git switch $(git_main_branch)'
 # --- commits
 alias gc='git commit --verbose'
-alias gcmsg='git commit --message'
 # --- fetching
 alias gf='git fetch'
 alias gl='git pull --prune'
@@ -164,7 +163,7 @@ alias glgg='git log --graph --decorate --all'
 alias gp='git push'
 alias gpf='git push --force-with-lease' # safer than --force
 # --- status
-alias gst='git status'
+alias gs='git status --short'
 # --- stash
 alias gsta='git stash save'
 alias gstl='git stash list'
