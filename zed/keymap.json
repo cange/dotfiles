@@ -54,6 +54,13 @@
   {
     "context": "ProjectPanel || Editor",
     "bindings": {
+      "space g b": "git::Switch",
+      "space g c": "git::GenerateCommitMessage",
+      "space g r": "git::Restore",
+      "space g R": "git::RestoreFile",
+      "space g S": "git::StageFile",
+      "space g s": "git::ToggleStaged",
+      "space p": "projects::OpenRecent",
       "space space": "pane::AlternateFile"
     }
   },

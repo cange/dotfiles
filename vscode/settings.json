@@ -52,7 +52,7 @@
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["<leader>", "d"],
+      "before": ["<Leader>", "d"],
       "after": ["d", "d"]
     },
     {
@@ -77,5 +77,15 @@
   "material-icon-theme.activeIconPack": "vue",
   "material-icon-theme.files.color": "#587b7b",
   "material-icon-theme.folders.color": "#587b7b",
-  "material-icon-theme.folders.theme": "none"
+  "material-icon-theme.folders.theme": "none",
+  "mcp": {
+    "servers": {
+      "my-mcp-server-859f2ac4": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp@latest"]
+      }
+    }
+  },
+  "workbench.activityBar.location": "hidden"
 }

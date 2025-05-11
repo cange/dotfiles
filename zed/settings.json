@@ -7,14 +7,29 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "assistant": {
+  "agent": {
+    "model_parameters": [],
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
+      "provider": "ollama",
+      "model": "qwen3:8b"
     },
     "version": "2"
   },
-  "icon_theme": "JetBrains Icons Dark",
+  "context_servers": {
+    "mcp-server-context7": {
+      "tools": {
+        "resolve-library-id": true,
+        "get-library-docs": true
+      }
+    },
+    "mcp-server-github": {
+      "settings": {
+        "github_personal_access_token": "$GITHUB_TOKEN"
+      }
+    }
+  },
+
+  "icon_theme": "Colored Zed Icons Theme Light",
   "features": {
     "edit_prediction_provider": "copilot"
   },
