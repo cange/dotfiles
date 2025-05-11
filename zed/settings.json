@@ -7,11 +7,11 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "agent": {
-    "model_parameters": [],
+  "assistant": {
+    "default_profile": "ask",
     "default_model": {
-      "provider": "ollama",
-      "model": "qwen3:8b"
+      "provider": "copilot_chat",
+      "model": "claude-3-7-sonnet"
     },
     "version": "2"
   },
