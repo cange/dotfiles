@@ -23,7 +23,7 @@ return {
       vue = { "eslint", "stylelint" },
     },
     keys = {
-      { "<leader>l", "<cmd>lua R('lint').try_lint()<CR>", desc = "Trigger linting for current file" },
+      { "<Leader>l", "<cmd>lua R('lint').try_lint()<CR>", desc = "Trigger linting for current file" },
     },
     config = function(_, opts)
       local lint = require("lint")

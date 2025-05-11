@@ -3,7 +3,7 @@ local replace_under_cursor = [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left
 
 local keymaps = {
   { "<F1>", help_under_cursor, { desc = "Help for keyword under cursor" } },
-  { "<leader><leader>", "<C-^>", { desc = "Toggle between previous buffer" } },
+  { "<Leader><Leader>", "<C-^>", { desc = "Toggle between previous buffer" } },
   { "[b", "<cmd>bprev<CR>", { desc = "Prev Buffer" } },
   { "]b", "<cmd>bnext<CR>", { desc = "Next Buffer" } },
   { "p", '"_dP', { desc = "Clipboard: keep content" }, { "v" } },
@@ -44,23 +44,25 @@ local keymaps = {
   { "<S-Tab>", "<gv", { desc = "Indent: right" }, { "v" } },
 
   -- others
-  { "<leader>w", "<cmd>w!<CR>", { desc = "Save file" } },
-  { "<localleader>a", "gg<S-v>G", { desc = "Select all content" } },
-  { "<localleader>r", replace_under_cursor, { desc = "Replace under cursor" } },
+  { "<Leader>w", "<cmd>w!<CR>", { desc = "Save file" } },
+  { "<LocalLeader>wo", "<cmd>only<CR>", { desc = "Close all windows except current" } },
+  { "<LocalLeader>a", "gg<S-v>G", { desc = "Select all content" } },
+  { "<LocalLeader>a", "gg<S-v>G", { desc = "Select all content" } },
+  { "<LocalLeader>r", replace_under_cursor, { desc = "Replace under cursor" } },
   {
-    "<localleader>x",
+    "<LocalLeader>x",
     "<cmd>.lua<CR><cmd>lua Notify.info('executed', { title = 'Current line' })<CR>",
     { desc = "Execute the current line" },
   },
   {
-    "<localleader><localleader>x",
+    "<LocalLeader><LocalLeader>x",
     "<cmd>source %<CR><cmd>lua Notify.info('executed', { title = vim.fn.expand('%:t') })<CR>",
     { desc = "Execute the current file" },
   },
-  { "<localleader>S", ":sort<CR>gv=gv", { desc = "Sort selected lines" }, { "v" } },
+  { "<LocalLeader>S", ":sort<CR>gv=gv", { desc = "Sort selected lines" }, { "v" } },
   { "<ESC><ESC>", "<C-\\><C-n>", { desc = "Escape nvim terminal mode" }, { "t" } },
   {
-    "<localleader>d",
+    "<LocalLeader>d",
     function()
       vim.cmd.new()
       vim.cmd.term()
@@ -70,7 +72,7 @@ local keymaps = {
     { desc = "Terminal (horizontal)" },
   },
   {
-    "<localleader>D",
+    "<LocalLeader>D",
     function()
       vim.cmd.vnew()
       vim.cmd.term()

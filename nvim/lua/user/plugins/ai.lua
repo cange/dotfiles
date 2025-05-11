@@ -59,8 +59,8 @@ return {
       })
     end,
     keys = {
-      { "<leader>ax", "<cmd>AvanteClear<CR>", desc = "avante: Clear", mode = { "n", "v" } },
-      { "<leader>am", "<cmd>AvanteModels<CR>", desc = "avante: Switch model" },
+      { "<Leader>ax", "<cmd>AvanteClear<CR>", desc = "avante: Clear", mode = { "n", "v" } },
+      { "<Leader>am", "<cmd>AvanteModels<CR>", desc = "avante: Switch model" },
     },
   },
 
@@ -82,6 +82,6 @@ return {
       },
       ui = { window = { border = "none" } },
     },
-    keys = { { "<leader>e5", "<cmd>MCPHub<CR>", desc = "Show MCPHub" } },
+    keys = { { "<Leader>e5", "<cmd>MCPHub<CR>", desc = "Show MCPHub" } },
   },
 }

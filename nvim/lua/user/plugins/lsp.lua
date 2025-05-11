@@ -17,7 +17,7 @@ return {
       log_level = vim.log.levels.INFO,
       max_concurrent_installers = 4,
     },
-    keys = { { "<leader>e2", "<cmd>Mason<CR>", desc = "Mason info" } },
+    keys = { { "<Leader>e2", "<cmd>Mason<CR>", desc = "Mason info" } },
     config = function(_, opts)
       require("mason").setup(opts)
       -- loads formatter and linter

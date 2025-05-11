@@ -20,13 +20,13 @@ local M = {}
 
 -- stylua: ignore start
 M.keymaps = {
-  { "<leader>ca", vim.lsp.buf.code_action,                          desc = "Code Actions" },
-  { "<leader>cr", "<cmd>LspRestart;<CR>",                           desc = "LSP Restart"  },
-  { "<leader>e4", "<cmd>LspInfo<CR>",                               desc = "LSP info"  },
-  { "<leader>,l", toggle_format_on_save,                            desc = "Toggle Format on Save"  },
-  { "<leader>r", vim.lsp.buf.rename,                                desc = "Rename Symbol" },
+  { "<Leader>ca", vim.lsp.buf.code_action,                          desc = "Code Actions" },
+  { "<Leader>cr", "<cmd>LspRestart;<CR>",                           desc = "LSP Restart"  },
+  { "<Leader>e4", "<cmd>LspInfo<CR>",                               desc = "LSP info"  },
+  { "<Leader>,l", toggle_format_on_save,                            desc = "Toggle Format on Save"  },
+  { "<Leader>r", vim.lsp.buf.rename,                                desc = "Rename Symbol" },
   {
-    "<leader>ci",
+    "<Leader>ci",
     function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 })) end,
     desc = "Toggle inlay hints",
   },

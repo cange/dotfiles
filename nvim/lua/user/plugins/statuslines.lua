@@ -94,6 +94,6 @@ return {
     dependencies = { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     opts = { icons = { kinds = { symbols = { Folder = "" } } } },
     event = "BufEnter",
-    keys = function() return { { "<leader>;", require("dropbar.api").pick, desc = "Pick symbols in winbar" } } end,
+    keys = function() return { { "<Leader>;", require("dropbar.api").pick, desc = "Pick symbols in winbar" } } end,
   },
 }

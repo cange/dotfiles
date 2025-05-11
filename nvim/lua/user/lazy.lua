@@ -14,7 +14,7 @@ if not vim.uv.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
-vim.keymap.set("n", "<leader>e1", "<cmd>Lazy show<CR>", { desc = "Plugin info" })
+vim.keymap.set("n", "<Leader>e1", "<cmd>Lazy show<CR>", { desc = "Plugin info" })
 
 require("lazy").setup("user.plugins", {
   checker = {

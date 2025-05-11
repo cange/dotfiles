@@ -36,8 +36,8 @@ return {
     require("user.lsp").update_format_on_save()
   end,
   keys = {
-    { "<leader>e3", "<cmd>ConformInfo<CR>", desc = "Formatter info" },
-    { "<localleader>f", '<cmd>lua require("conform").format({ async = true })<CR>', desc = "Format" },
+    { "<Leader>e3", "<cmd>ConformInfo<CR>", desc = "Formatter info" },
+    { "<LocalLeader>f", '<cmd>lua require("conform").format({ async = true })<CR>', desc = "Format" },
   },
 
   init = function()

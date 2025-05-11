@@ -3,7 +3,7 @@ return {
     "nvim-tree/nvim-tree.lua",
     lazy = false,
     keys = {
-      { "<leader>\\", "<cmd>NvimTreeToggle<CR>", desc = "File Tree Explorer" },
+      { "<Leader>\\", "<cmd>NvimTreeToggle<CR>", desc = "File Tree Explorer" },
     },
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -90,7 +90,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = function()
       return {
-        { "<localleader>-", require("oil").toggle_float, desc = "Open parent directory" },
+        { "<LocalLeader>-", require("oil").toggle_float, desc = "Open parent directory" },
       }
     end,
     opts = {
@@ -128,15 +128,15 @@ return {
       -- stylua: ignore start
       return {
         {
-          "<leader>A",
+          "<Leader>A",
           function()
             harpoon:list():add()
             Notify.info("Bookmark added!", { title = "Harpoon" })
           end,
           desc = "Add bookmark",
          },
-        { "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show bookmarks" },
-        { "<leader>sm", "<cmd>Telescope harpoon marks<CR>",                         desc = "Search bookmarks" },
+        { "<Leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show bookmarks" },
+        { "<Leader>sm", "<cmd>Telescope harpoon marks<CR>",                         desc = "Search bookmarks" },
         { "[m", function() harpoon:list():prev() end,                               desc = "Prev bookmark" },
         { "]m", function() harpoon:list():next() end,                               desc = "Next bookmark" },
       }
@@ -153,10 +153,10 @@ return {
       pre_save = function() require("nvim-tree.api").tree.close() end,
     },
     keys = {
-      { "<leader>qr", function() require("persistence").load({ last = true }) end, desc = "Recent Session" },
-      { "<leader>qs", function() require("persistence").save() end, desc = "Save session" },
-      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
-      { "<leader>qS", function() require("persistence").select() end, desc = "Select a session" },
+      { "<Leader>qr", function() require("persistence").load({ last = true }) end, desc = "Recent Session" },
+      { "<Leader>qs", function() require("persistence").save() end, desc = "Save session" },
+      { "<Leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+      { "<Leader>qS", function() require("persistence").select() end, desc = "Select a session" },
     },
     init = function() require("persistence").load() end,
   },
@@ -181,22 +181,22 @@ return {
       wk.setup(opts)
       wk.add({
         -- groups
-        { "<leader>b", group = "Buffers" },
-        { "<leader>c", group = "Code" },
-        { "<leader>e", group = "Editor" },
-        { "<leader>,", group = "Settings" },
-        { "<leader>g", group = "Git" },
-        { "<leader>a", group = "AI", mode = { "n", "v" } },
-        { "<leader>ac", group = "CopilotChat", mode = { "n", "v" } },
-        { "<leader>d", group = "Diff", mode = { "n", "v" } },
-        { "<leader>q", group = "Session" },
-        { "<leader>s", group = "Search" },
-        { "<leader>t", group = "Troubleshooting" },
-        { "<localleader>c", group = "Copilot" },
+        { "<Leader>b", group = "Buffers" },
+        { "<Leader>c", group = "Code" },
+        { "<Leader>e", group = "Editor" },
+        { "<Leader>,", group = "Settings" },
+        { "<Leader>g", group = "Git" },
+        { "<Leader>a", group = "AI", mode = { "n", "v" } },
+        { "<Leader>ac", group = "CopilotChat", mode = { "n", "v" } },
+        { "<Leader>d", group = "Diff", mode = { "n", "v" } },
+        { "<Leader>q", group = "Session" },
+        { "<Leader>s", group = "Search" },
+        { "<Leader>t", group = "Troubleshooting" },
+        { "<LocalLeader>c", group = "Copilot" },
         { "g", group = "Code/LSP" },
         -- direct keymaps
-        { "<leader>-", "<C-W>s", desc = "Split horizontal" },
-        { "<leader>|", "<C-W>v", desc = "Split vertical" },
+        { "<Leader>-", "<C-W>s", desc = "Split horizontal" },
+        { "<Leader>|", "<C-W>v", desc = "Split vertical" },
       })
     end,
   },
@@ -283,7 +283,7 @@ return {
     },
     keys = {
       {
-        "<localleader>m",
+        "<LocalLeader>m",
         function()
           local method = require("peek").is_open() and "close" or "open"
           Notify.info(method, { title = "Markdown Preview" })
@@ -329,7 +329,7 @@ return {
       exclude_filetypes = { "lazy" },
     },
     keys = {
-      { "<leader>ct", "<cmd>HighlightColors Toggle<CR>", desc = "Toggle Highlight Colors" },
+      { "<Leader>ct", "<cmd>HighlightColors Toggle<CR>", desc = "Toggle Highlight Colors" },
     },
   },
 
@@ -356,11 +356,11 @@ return {
     "AndrewRadev/linediff.vim",
     event = { "CursorMoved" },
     keys = {
-      { "<leader>dd", ":Linediff<CR>", desc = "Line diff", mode = { "v" } },
-      { "<leader>da", ":LinediffAdd<CR>", desc = "Add line diff", mode = { "v" } },
-      { "<leader>dl", ":LinediffLast<CR>", desc = "Last line diff", mode = { "v" } },
-      { "<leader>dr", ":LinediffReset<CR>", desc = "Reset line diff", mode = { "n", "v" } },
-      { "<leader>ds", ":LinediffShow<CR>", desc = "Show line diff", mode = { "n", "v" } },
+      { "<Leader>dd", ":Linediff<CR>", desc = "Line diff", mode = { "v" } },
+      { "<Leader>da", ":LinediffAdd<CR>", desc = "Add line diff", mode = { "v" } },
+      { "<Leader>dl", ":LinediffLast<CR>", desc = "Last line diff", mode = { "v" } },
+      { "<Leader>dr", ":LinediffReset<CR>", desc = "Reset line diff", mode = { "n", "v" } },
+      { "<Leader>ds", ":LinediffShow<CR>", desc = "Show line diff", mode = { "n", "v" } },
     },
   },
 }

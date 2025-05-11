@@ -27,17 +27,17 @@ return {
       local Snacks = require("snacks")
       local toggler = Snacks.toggle
       return {
-        { "<leader>z", function() Snacks.zen.zoom() end, desc = "Toggle Zen" },
-        { "<localleader>z", function() Snacks.dim() end, desc = "Toggle Dimming" },
-        { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-        { "<leader>cd", function() toggler.diagnostics():toggle() end, desc = "Toggle diagnostic inline text" },
-        { "<leader>en", function() Snacks.notifier.show_history() end, desc = "Show notfication" },
-        { "<leader>,N", function() toggler.line_number():toggle() end, desc = "Toggle line numbers" },
-        { "<leader>,n", function() toggler.option("relativenumber"):toggle() end, desc = "Toggle relative number" },
-        { "<leader>,s", function() toggler.option("spell"):toggle() end, desc = "Toggle spelling" },
-        { "<leader>,w", function() toggler.option("wrap"):toggle() end, desc = "Toggle wrap" },
-        { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Current File History" },
-        { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+        { "<Leader>z", function() Snacks.zen.zoom() end, desc = "Toggle Zen" },
+        { "<LocalLeader>z", function() Snacks.dim() end, desc = "Toggle Dimming" },
+        { "<Leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+        { "<Leader>cd", function() toggler.diagnostics():toggle() end, desc = "Toggle diagnostic inline text" },
+        { "<Leader>en", function() Snacks.notifier.show_history() end, desc = "Show notfication" },
+        { "<Leader>,N", function() toggler.line_number():toggle() end, desc = "Toggle line numbers" },
+        { "<Leader>,n", function() toggler.option("relativenumber"):toggle() end, desc = "Toggle relative number" },
+        { "<Leader>,s", function() toggler.option("spell"):toggle() end, desc = "Toggle spelling" },
+        { "<Leader>,w", function() toggler.option("wrap"):toggle() end, desc = "Toggle wrap" },
+        { "<Leader>gf", function() Snacks.lazygit.log_file() end, desc = "Current File History" },
+        { "<Leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
       }
     end,
     init = function()
@@ -105,13 +105,13 @@ return {
     end,
     keys = {
       {
-        "<leader>tl",
+        "<Leader>tl",
         "<cmd>Trouble lsp toggle focus=false win.position=right<CR>",
         desc = "LSP Definitions / references / ...",
       },
-      { "<leader>ts", "<cmd>Trouble symbols toggle focus=false<CR>", desc = "Symbols" },
-      { "<leader>tX", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer Diagnostics" },
-      { "<leader>tx", "<cmd>Trouble diagnostics toggle<CR>", desc = "Diagnostics" },
+      { "<Leader>ts", "<cmd>Trouble symbols toggle focus=false<CR>", desc = "Symbols" },
+      { "<Leader>tX", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer Diagnostics" },
+      { "<Leader>tx", "<cmd>Trouble diagnostics toggle<CR>", desc = "Diagnostics" },
     },
   },
 }
