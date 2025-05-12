@@ -8,6 +8,11 @@ local default_state_icons = {
   minimized = Icon.ui.Eye,
 }
 
+local highlights = {
+  active = "Normal",
+  inactive = "Comment",
+}
+
 --- Provides a list of services which are can be displayed by icons
 ---@param label string|nil
 ---@param service_icons string[]
@@ -31,7 +36,7 @@ function M:new(label, service_icons, state_icons, get_data, config, debug)
   }, self)
 end
 
----@param data table
+---@param data string[]
 ---@return string
 function M:formatter(data)
   local store = {}
@@ -43,9 +48,10 @@ function M:formatter(data)
   local output = vim.o.columns > 100 and #store > 0 and table.concat(store, " ") or ""
   if vim.tbl_contains(self.config.exclude_filetypes or {}, vim.bo.filetype) then return "" end
 
-  local name = self.label or self.state_icons[self:get_state()]
+  local status_icon, status_hl = self:get_status_display()
   output = #output == 0 and self.state_icons["minimized"] or output
-  return string.format("%s %s", name, output)
+  -- Format with highlight
+  return string.format("%%#%s#%s%%*", status_hl, status_icon .. " " .. output .. " ")
 end
 
 ---@param new_state boolean
@@ -53,6 +59,12 @@ function M:set_state(new_state) self.state = new_state end
 
 ---@return "active" | "inactive"
 function M:get_state() return self.state and "active" or "inactive" end
+
+-- Get appropriate status icon and highlight
+function M:get_status_display()
+  local name_or_icon = self.label or self.state_icons[self:get_state()]
+  return name_or_icon, highlights[self:get_state()]
+end
 
 local log = require("plenary.log").new({ plugin = "lualine.list_services" })
 log.level = "debug"
@@ -69,7 +81,7 @@ function M:log(msg, meta)
 end
 
 ---Provides a function to cache the result of a function
----@return string[]
+---@return string
 function M:cached_status()
   local ft = vim.fn.expand("%:e")
   ft = ft ~= "" and ft or not self.before_ft and self.before_ft or "none"

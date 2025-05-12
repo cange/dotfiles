@@ -66,12 +66,18 @@ return {
               on_click = function() vim.cmd("Lazy") end,
             },
             { "inlay_hints" },
-            { "format_clients", separator = "", on_click = function() vim.cmd("ConformInfo") end },
-            { "lsp_clients", padding = { left = 1, right = 2 }, separator = "" },
+            {
+              "format_clients",
+              separator = "",
+              padding = { left = 1, right = 0 },
+              on_click = function() vim.cmd("ConformInfo") end,
+            },
+            { "lsp_clients", padding = { left = 1, right = 0 } },
             {
               "copilot",
+              on_click = function() vim.cmd("Copilot status") end,
+              padding = { left = 1, right = 0 },
               separator = "",
-              padding = { left = 0, right = 0 },
               symbols = { spinners = vim.split(Icon.sets.spinner, " ") },
             },
             {

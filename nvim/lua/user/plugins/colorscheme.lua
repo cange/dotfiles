@@ -62,7 +62,6 @@ local function update_highlights()
       -- common
       CursorLine = { bg = pal.bg1 }, -- subtle
       Folded = { bg = nil, fg = pal.bg4 }, -- reduces folding noise
-      NonText = { fg = pal.bg4 }, -- subtle virtual/column line
       UserNormal = { bg = pal.bg1 },
       WinBar = { fg = pal.fg2 },
       WinBarNC = { fg = pal.comment },
