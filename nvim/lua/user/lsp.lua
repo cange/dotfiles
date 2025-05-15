@@ -1,6 +1,8 @@
 local cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_ok then error('"cmp_nvim_lsp" not found') end
 
+local M = {}
+
 ---@return table
 local function capabilities()
   local caps = cmp_nvim_lsp.default_capabilities()
@@ -16,28 +18,39 @@ local function toggle_format_on_save()
   require("user.lsp").update_format_on_save()
 end
 
-local M = {}
+M._diagnostics = { virtual_types = { TEXT = "virtual_text", LINE = "virtual_lines" } }
+
+local function toggle_diagnostics_virtual_type()
+  local types = M._diagnostics.virtual_types
+  local current_type = vim.g.user_diagnostics_virtual_type or User.get_config("lsp.diagnostics.virtual_type")
+  local new_state = current_type ~= types.TEXT and types.TEXT or types.LINE
+  Notify.info(new_state, { title = "Change diagnostic inline text" })
+  vim.g.user_diagnostics_virtual_type = new_state
+  require("user.lsp").update_diagnostics()
+end
+
 
 -- stylua: ignore start
 M.keymaps = {
-  { "<Leader>ca", vim.lsp.buf.code_action,                          desc = "Code Actions" },
-  { "<Leader>cr", "<cmd>LspRestart;<CR>",                           desc = "LSP Restart"  },
-  { "<Leader>e4", "<cmd>LspInfo<CR>",                               desc = "LSP info"  },
-  { "<Leader>,l", toggle_format_on_save,                            desc = "Toggle Format on Save"  },
-  { "<Leader>r", vim.lsp.buf.rename,                                desc = "Rename Symbol" },
+  { "<Leader>ca", vim.lsp.buf.code_action,           desc = "Code Actions" },
+  { "<Leader>cr", "<cmd>LspRestart;<CR>",            desc = "LSP Restart"  },
+  { "<Leader>e4", "<cmd>LspInfo<CR>",                desc = "LSP info"  },
+  { "<Leader>,l", toggle_format_on_save,             desc = "Toggle Format on Save"  },
+  { "<Leader>tc", toggle_diagnostics_virtual_type,   desc = "Toggle diagnostic inline text"  },
+  { "<Leader>r", vim.lsp.buf.rename,                 desc = "Rename Symbol" },
   {
     "<Leader>ci",
     function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 })) end,
     desc = "Toggle inlay hints",
   },
 
-  { "gd", "<cmd>Telescope lsp_definitions<CR>",                     desc = "Go to Definition" },
-  { "gD", vim.lsp.buf.declaration,                                  desc = "Go to Declaration" },
-  { "gI",  "<cmd>Telescope lsp_implementations<CR>",                desc = "Find Implementation" },
+  { "gd", "<cmd>Telescope lsp_definitions<CR>",      desc = "Go to Definition" },
+  { "gD", vim.lsp.buf.declaration,                   desc = "Go to Declaration" },
+  { "gI",  "<cmd>Telescope lsp_implementations<CR>", desc = "Find Implementation" },
 
   -- default overrides
-  { "gO", "<cmd>Telescope lsp_document_symbols<CR>",                desc = "Find Symbol in current buffer" },
-  { "grr", "<cmd>Telescope lsp_references<CR>",                     desc = "Find All References" },
+  { "gO", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Find Symbol in current buffer" },
+  { "grr", "<cmd>Telescope lsp_references<CR>",      desc = "Find All References" },
 }
 -- stylua: ignore end
 
@@ -54,6 +67,11 @@ M.server_config = {
 }
 
 function M.update_diagnostics()
+  local type = M._diagnostics.virtual_types
+  vim.g.user_diagnostics_virtual_type = vim.g.user_diagnostics_virtual_type
+    or User.get_config("lsp.diagnostics.virtual_type")
+  local virtual_type = vim.g.user_diagnostics_virtual_type
+
   vim.diagnostic.config({
     float = {
       source = "if_many", -- Or "always"
@@ -66,7 +84,8 @@ function M.update_diagnostics()
         [vim.diagnostic.severity.INFO] = Icon.diagnostics.Info,
       },
     },
-    virtual_text = { current_line = true },
+    virtual_text = virtual_type == type.TEXT and { current_line = true } or false,
+    virtual_lines = virtual_type ~= type.TEXT,
   })
 end
 
