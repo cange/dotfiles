@@ -40,26 +40,27 @@ user_lsp.ts_ls_settings = {
 -- Hybrid mode configuration (Requires @vue/language-server version ^2.0.0)
 user_lsp.vue = {
   ts_ls = {
-    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+    filetypes = { "typescript", "javascript", "vue" },
     init_options = {
       plugins = {
         {
-          -- NOTE:  vue/volar setup with hybridMode:
+          -- NOTE: vue_ls setup with hybridMode:
           -- The Vue Language Server exclusively manages the CSS/HTML sections.
           -- As a result, you must run @vue/language-server in conjunction
           -- with a TypeScript server that employs @vue/typescript-plugin.
           -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vue-support
           name = "@vue/typescript-plugin",
           location = user_lsp.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
-          languages = { "vue" },
+          -- location = user_lsp.get_pkg_path("vue-language-server", "/node_modules/@vue/typescript-plugin"),
+          languages = { "javascript", "typescript", "vue" },
         },
       },
     },
   },
-  volar = {
+  vue_ls = {
     init_options = {
       typescript = {
-        -- volar needs to know the typescript SDK location
+        -- vue_ls needs to know the typescript SDK location
         tsdk = user_lsp.get_pkg_path("typescript-language-server", "/node_modules/typescript/lib"),
       },
     },
@@ -119,11 +120,11 @@ return {
             scss = { lint = { unknownAtRules = "ignore" } },
           },
         },
-        denols = {
-          -- prevent ts_ls and denols are attached to current buffer
-          -- https://docs.deno.com/runtime/getting_started/setup_your_environment/
-          root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-        },
+        -- denols = {
+        --   -- prevent ts_ls and denols are attached to current buffer
+        --   -- https://docs.deno.com/runtime/getting_started/setup_your_environment/
+        --   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+        -- },
         html = {},
         ruby_lsp = {},
         tailwindcss = {},
@@ -159,7 +160,7 @@ return {
           root_dir = lspconfig.util.root_pattern("package.json"),
           -- single_file_support = false, // TODO: why SFC false
         }, user_lsp.vue.ts_ls),
-        volar = user_lsp.vue.volar,
+        vue_ls = user_lsp.vue.vue_ls,
         jsonls = {
           settings = {
             json = {
@@ -189,7 +190,8 @@ return {
         local server_config = vim.tbl_deep_extend("force", default_config, config)
         -- TODO: figure out how native vim.lsp.config works (using it does not
         -- allow renaming etc.)
-        --vim.lsp.config(server, server_config)
+        -- vim.lsp.config(server, server_config)
+        -- vim.lsp.enable(server)
         lspconfig[server].setup(server_config)
       end
 
