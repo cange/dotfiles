@@ -13,9 +13,6 @@ function M.pick(kind)
 end
 
 local function prompts()
-  local context_check = "\n\t - Check for context given files #files:*.mdc"
-    .. "\n\t - Confirm when context file has been found"
-
   return {
     Commit = "> #git:staged\n\nPlease write a conventional commit message for the change with commitizen convention."
       .. "\n\t - Keep the title under 50 characters and wrap message at 72 characters."
@@ -23,14 +20,12 @@ local function prompts()
       .. "\n\t - Add additional a message only when it provides meaningful context."
       .. "\n\t - Keep any additional messages concise.",
     Tests = "> /COPILOT_GENERATE\n\nPlease explain how the selected code works, then generate unit tests for it."
-      .. context_check
       .. "\n\t - Assume **Vitest** is installed and the API methods are globally available and does not need to import."
       .. "\n\t - Use all #buffers as assistant context"
       .. "\n\t - Use **Vitest** instead of Jest as test runner if not other already defined."
       .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
       .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible.",
     Review = "Please review the following code and provide suggestions for improvement."
-      .. context_check
       .. "\n\t - Ignore line length limitations",
     VueConvert = "> /COPILOT_GENERATE\n\nPlease convert the Vue.js component to composition API."
       .. "\n\t - Use `<script setup>` notation over `setup()`"

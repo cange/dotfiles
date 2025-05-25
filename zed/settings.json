@@ -7,11 +7,13 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "assistant": {
-    "default_profile": "ask",
+  "agent": {
+    "single_file_review": true,
+    "always_allow_tool_actions": false,
+    "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-3-7-sonnet"
+      "model": "claude-3.7-sonnet"
     },
     "version": "2"
   },
@@ -29,7 +31,7 @@
     }
   },
 
-  "icon_theme": "Colored Zed Icons Theme Light",
+  "icon_theme": "Colored Zed Icons Theme Dark",
   "features": {
     "edit_prediction_provider": "copilot"
   },

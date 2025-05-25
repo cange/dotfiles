@@ -1,16 +1,21 @@
 local sources = {
   "bash",
+  "cmake",
   "css",
+  "csv",
   "diff",
   "dockerfile",
-  "elixir",
   "gitignore",
   "html",
+  "java",
   "javascript",
   "jsdoc",
   "json",
-  "luadoc",
+  "jsonc",
+  "json5",
+  "kotlin",
   "lua",
+  "luadoc",
   "make",
   "markdown",
   "markdown_inline",
@@ -21,6 +26,7 @@ local sources = {
   "rust",
   "scss",
   "svelte",
+  "slim",
   "toml",
   "tsx",
   "typescript",
@@ -28,38 +34,34 @@ local sources = {
   "vue",
   "xml",
   "yaml",
+  "zig",
 }
 
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    branch = "main",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-    opts = {
-      ensure_installed = sources, -- A list of parser names, or "all"
-      textobjects = {
-        select = {
-          enable = true,
-          -- lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ["ac"] = { query = "@class.outer", desc = "Outer class" },
-            ["ic"] = { query = "@class.inner", desc = "Inner class" },
-            ["af"] = { query = "@function.outer", desc = "Outer function" },
-            ["if"] = { query = "@function.inner", desc = "Inner function" },
-          },
-        },
-      },
-      context_commentstring = {
-        enable_autocmd = false, -- enable commentstring support, when false
-      },
-      highlight = { enable = true },
-      indent = { enable = true }, -- Indentation based on treesitter for the = operator
-    },
-    main = "nvim-treesitter.configs",
+    config = function()
+      require("nvim-treesitter").install(sources)
+      for _, filetype in pairs(sources) do
+        -- enable features by filetype
+        -- https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#supported-features
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = { filetype },
+          callback = function()
+            -- indentation
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            -- highlighting
+            vim.treesitter.start()
+            -- folding
+            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          end,
+        })
+      end
+    end,
   },
 
   {
@@ -76,7 +78,6 @@ return {
       end
     end,
   },
-
 
   { -- testing toggle util
     "cange/specto.nvim",
