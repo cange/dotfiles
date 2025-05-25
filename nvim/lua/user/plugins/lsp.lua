@@ -1,22 +1,18 @@
 local user_lsp = {}
-
---- Gets a path to a package in the Mason registry.
 --- Prefer this to `get_package`, since the package might not always be
 --- available yet and trigger errors.
 ---@param pkg string
----@param path? string
+---@param path string
 local function get_pkg_path(pkg, path)
   pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
-  local uv = vim.uv
   local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
-  local pkg_path = root .. "/packages/" .. pkg .. "/node_modules/" .. (path or "")
+  local pkg_path = root .. "/packages/" .. pkg .. "/" .. path
 
-  if not uv.fs_stat(pkg_path) then
-    local msg = ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(
-      pkg,
-      path
+  if not vim.loop.fs_stat(pkg_path) then
+    Notify.info(
+      ("Package path not found for **%s**:\n- `%s`\nForce update the package."):format(pkg, path),
+      { title = "LSP: get_pkg_path" }
     )
-    vim.notify(msg, vim.log.levels.DEBUG, { title = "Mason" })
   end
   return pkg_path
 end
@@ -79,7 +75,6 @@ return {
       "mason-org/mason.nvim",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
 
       local server_configs = {
@@ -90,11 +85,6 @@ return {
             scss = { lint = { unknownAtRules = "ignore" } },
           },
         },
-        -- denols = {
-        --   -- prevent ts_ls and denols are attached to current buffer
-        --   -- https://docs.deno.com/runtime/getting_started/setup_your_environment/
-        --   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-        -- },
         html = {},
         ruby_lsp = {},
         tailwindcss = {},
@@ -120,13 +110,11 @@ return {
             completions = { completeFunctionCalls = true },
             plugins = {
               {
-                -- NOTE: vue_ls setup with hybridMode:
-                -- The Vue Language Server exclusively manages the CSS/HTML sections.
-                -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vue-support
+                -- NOTE: vue_ls hybrid mode: ON
                 name = "@vue/typescript-plugin",
                 location = get_pkg_path(
                   "vue-language-server",
-                  "@vue/language-server/node_modules/@vue/typescript-plugin"
+                  "node_modules/@vue/language-server/node_modules/@vue/typescript-plugin"
                 ),
                 languages = { "javascript", "typescript", "vue" },
               },
@@ -141,38 +129,14 @@ return {
             "typescript.tsx",
             "vue",
           },
-          -- filetypes is extended here to include Vue SFC
           settings = {
             typescript = user_lsp.ts_ls_settings,
             javascript = user_lsp.ts_ls_settings,
           },
-          -- prevent ts_ls and denols are attached to current buffer
-          root_dir = lspconfig.util.root_pattern("package.json"),
-          single_file_support = false, -- TODO: why SFC false
         },
         vue_ls = {
-          filetypes = {
-            "javascript",
-            "javascriptreact",
-            "javascript.jsx",
-            "typescript",
-            "typescriptreact",
-            "typescript.tsx",
-            "vue",
-          },
-          init_options = {
-            typescript = {
-              -- vue_ls needs to know the typescript SDK location
-              tsdk = get_pkg_path("typescript-language-server", "typescript/lib"),
-            },
-            ---use a global TypeScript Server installation
-            vue = {
-              -- leverage ts_ls config
-              hybridMode = false,
-            },
-          },
+          -- vue_ls hybrid mode: ON (handled by ts_ls)
         },
-
         jsonls = {
           settings = {
             json = {
@@ -200,11 +164,8 @@ return {
 
       for server, config in pairs(server_configs) do
         local server_config = vim.tbl_deep_extend("force", default_config, config)
-        -- TODO: figure out how native vim.lsp.config works (using it does not
-        -- allow renaming etc.)
         vim.lsp.config(server, server_config)
         vim.lsp.enable(server)
-        -- lspconfig[server].setup(server_config)
       end
 
       require("user.lsp").update_diagnostics()
@@ -223,6 +184,4 @@ return {
       notification = { window = { winblend = 0 } },
     },
   },
-
-  "slim-template/vim-slim",
 }

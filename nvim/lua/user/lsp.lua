@@ -29,28 +29,38 @@ local function toggle_diagnostics_virtual_type()
   require("user.lsp").update_diagnostics()
 end
 
+local function lsp_restart_all()
+  local bufnr = vim.api.nvim_get_current_buf()
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+    local blacklist = { "copilot" }
+    if client.attached_buffers[bufnr] and not vim.tbl_contains(blacklist, client.name) then
+      vim.cmd("LspRestart " .. client.name)
+    end
+  end
+end
 
 -- stylua: ignore start
 M.keymaps = {
-  { "<Leader>ca", vim.lsp.buf.code_action,           desc = "Code Actions" },
-  { "<Leader>cr", "<cmd>LspRestart;<CR>",            desc = "LSP Restart"  },
   { "<Leader>e4", "<cmd>LspInfo<CR>",                desc = "LSP info"  },
   { "<Leader>,l", toggle_format_on_save,             desc = "Toggle Format on Save"  },
   { "<Leader>tc", toggle_diagnostics_virtual_type,   desc = "Toggle diagnostic inline text"  },
-  { "<Leader>r", vim.lsp.buf.rename,                 desc = "Rename Symbol" },
   {
     "<Leader>ci",
     function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 })) end,
     desc = "Toggle inlay hints",
   },
 
-  { "gd", "<cmd>Telescope lsp_definitions<CR>",      desc = "Go to Definition" },
-  { "gD", vim.lsp.buf.declaration,                   desc = "Go to Declaration" },
-  { "gI",  "<cmd>Telescope lsp_implementations<CR>", desc = "Find Implementation" },
+  { "gd", "<cmd>Telescope lsp_definitions<CR>",       desc = "Go to Definition" },
+  { "gD", vim.lsp.buf.declaration,                    desc = "Go to Declaration" },
+  { "gR", lsp_restart_all,                            desc = "Restart all LSP Clients"  },
 
   -- default overrides
-  { "gO", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Find Symbol in current buffer" },
-  { "grr", "<cmd>Telescope lsp_references<CR>",      desc = "Find All References" },
+  { "grn", vim.lsp.buf.rename,                        desc = "Rename Symbol" },
+  { "gra", vim.lsp.buf.code_action,                   desc = "Code Actions" },
+  { "grr", "<cmd>Telescope lsp_references<CR>",       desc = "Find All References" },
+  { "gri", "<cmd>Telescope lsp_implementations<CR>",  desc = "Find Implementation" },
+  { "gO",  "<cmd>Telescope lsp_document_symbols<CR>", desc = "Lists all symbols" },
+  { "<C-s>", vim.lsp.buf.signature_help,              desc = "Show signature" },
 }
 -- stylua: ignore end
 
