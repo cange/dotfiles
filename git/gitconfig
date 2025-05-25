@@ -14,6 +14,7 @@
 	autoSetupRemote = true ; set upstream on push if not configured automatically
 
 [pull]
+	prune = true ; deletes outdated remote references
 	rebase = true
 
 [fetch]

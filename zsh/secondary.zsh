@@ -20,20 +20,6 @@ if [[ -e $(which bat) ]]; then
 fi
 # bat ---
 
-# Environment variables set everywhere
-# https://manpages.debian.org/bullseye-backports/man-db/man.1.en.html#ENVIRONMENT
-export EDITOR="nvim"
-export VISIUAL="nvim"
-export TERMINAL="wezterm"
-export BROWSER="firefox-developer-edition"
-
-# --- pnpm
-if [[ -s "$HOME/Library/pnpm" ]]; then
-  export PNPM_HOME="$HOME/Library/pnpm"
-  export PATH="$PNPM_HOME:$PATH"
-fi
-# pnpm ---
-
 # --- bun
 if [[ -s "$HOME/.bun" ]]; then
   export BUN_INSTALL="$HOME/.bun"
@@ -85,24 +71,24 @@ fi
 
 #
 # --- History Configuration - https://www.soberkoder.com/better-zsh-history/
-export HISTFILE=~/.zsh_history # Path/location of the history file
-export HISTSIZE=1000000000     # Number of commands loaded into memory
-export SAVEHIST=1000000000     # Number of commands stored in the history file
+export HISTFILE="$HOME/.zsh_history" # Path/location of the history file
+export HISTSIZE=1000000000           # Number of commands loaded into memory
+export SAVEHIST="$HISTSIZE"          # Number of commands stored in the history file
 
 # Timestamp format for history (for extended_history)
 export HISTTIMEFORMAT="[%F %T] "
 
 # History Options
-setopt EXTENDED_HISTORY       # Save timestamp and duration of command
-setopt SHARE_HISTORY          # Share history across multiple zsh sessions
-setopt APPEND_HISTORY         # Append to history file
-setopt INC_APPEND_HISTORY     # Add commands as they are typed, not at shell exit
-setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first
-setopt HIST_IGNORE_DUPS       # Don't record if same as previous command
-setopt HIST_IGNORE_ALL_DUPS   # Delete old recorded entry if new entry is a duplicate
-setopt HIST_FIND_NO_DUPS      # Do not display duplicates when searching
-setopt HIST_IGNORE_SPACE      # Don't record commands starting with a space
-setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks before recording
-setopt HIST_VERIFY            # Show command with history expansion before running it
-setopt HIST_SAVE_NO_DUPS      # Don't write duplicate entries in the history file
+setopt EXTENDED_HISTORY        # Save timestamp and duration of command
+setopt SHARE_HISTORY           # Share history across multiple zsh sessions
+setopt APPEND_HISTORY          # Append to history file
+setopt INC_APPEND_HISTORY_TIME # Add commands as they are typed, not at shell exit with timestamp
+setopt HIST_EXPIRE_DUPS_FIRST  # Expire duplicate entries first
+setopt HIST_IGNORE_DUPS        # Don't record if same as previous command
+setopt HIST_IGNORE_ALL_DUPS    # Delete old recorded entry if new entry is a duplicate
+setopt HIST_FIND_NO_DUPS       # Do not display duplicates when searching
+setopt HIST_IGNORE_SPACE       # Don't record commands starting with a space
+setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording
+setopt HIST_VERIFY             # Show command with history expansion before running it
+setopt HIST_SAVE_NO_DUPS       # Don't write duplicate entries in the history file
 # History Configuration ---
