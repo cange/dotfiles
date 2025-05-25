@@ -22,8 +22,8 @@
   "workbench.startupEditor": "none",
 
   // formatter
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false,
 
   "[css]": { "editor.defaultFormatter": "stylelint.vscode-stylelint" },
   "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
@@ -80,12 +80,14 @@
   "material-icon-theme.folders.theme": "none",
   "mcp": {
     "servers": {
-      "my-mcp-server-859f2ac4": {
+      "Context7": {
         "type": "stdio",
         "command": "npx",
         "args": ["-y", "@upstash/context7-mcp@latest"]
       }
     }
   },
-  "workbench.activityBar.location": "hidden"
+  "workbench.activityBar.location": "hidden",
+  "chat.mcp.discovery.enabled": true,
+  "editor.formatOnType": false
 }
