@@ -5,20 +5,20 @@ local user_lsp = {}
 --- available yet and trigger errors.
 ---@param pkg string
 ---@param path? string
-function user_lsp.get_pkg_path(pkg, path)
+local function get_pkg_path(pkg, path)
   pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
   local uv = vim.uv
   local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
-  path = path or ""
-  local ret = root .. "/packages/" .. pkg .. path
-  if not uv.fs_stat(ret) then
+  local pkg_path = root .. "/packages/" .. pkg .. "/node_modules/" .. (path or "")
+
+  if not uv.fs_stat(pkg_path) then
     local msg = ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(
       pkg,
       path
     )
     vim.notify(msg, vim.log.levels.DEBUG, { title = "Mason" })
   end
-  return ret
+  return pkg_path
 end
 
 user_lsp.ts_ls_settings = {
@@ -35,36 +35,6 @@ user_lsp.ts_ls_settings = {
   implementationsCodeLens = { enabled = true },
   referencesCodeLens = { enabled = true },
   suggestionActions = { enabled = true },
-}
-
--- Hybrid mode configuration (Requires @vue/language-server version ^2.0.0)
-user_lsp.vue = {
-  ts_ls = {
-    filetypes = { "typescript", "javascript", "vue" },
-    init_options = {
-      plugins = {
-        {
-          -- NOTE: vue_ls setup with hybridMode:
-          -- The Vue Language Server exclusively manages the CSS/HTML sections.
-          -- As a result, you must run @vue/language-server in conjunction
-          -- with a TypeScript server that employs @vue/typescript-plugin.
-          -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vue-support
-          name = "@vue/typescript-plugin",
-          location = user_lsp.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
-          -- location = user_lsp.get_pkg_path("vue-language-server", "/node_modules/@vue/typescript-plugin"),
-          languages = { "javascript", "typescript", "vue" },
-        },
-      },
-    },
-  },
-  vue_ls = {
-    init_options = {
-      typescript = {
-        -- vue_ls needs to know the typescript SDK location
-        tsdk = user_lsp.get_pkg_path("typescript-language-server", "/node_modules/typescript/lib"),
-      },
-    },
-  },
 }
 
 return {
@@ -144,23 +114,65 @@ return {
           },
         },
         -- javascript, typescript, etc.
-        ts_ls = vim.tbl_deep_extend("force", {
-          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ts_ls
+        ts_ls = {
           init_options = {
             preferences = { disableSuggestions = true },
             completions = { completeFunctionCalls = true },
+            plugins = {
+              {
+                -- NOTE: vue_ls setup with hybridMode:
+                -- The Vue Language Server exclusively manages the CSS/HTML sections.
+                -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vue-support
+                name = "@vue/typescript-plugin",
+                location = get_pkg_path(
+                  "vue-language-server",
+                  "@vue/language-server/node_modules/@vue/typescript-plugin"
+                ),
+                languages = { "javascript", "typescript", "vue" },
+              },
+            },
+          },
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+            "vue",
           },
           -- filetypes is extended here to include Vue SFC
-          -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
           settings = {
             typescript = user_lsp.ts_ls_settings,
             javascript = user_lsp.ts_ls_settings,
           },
           -- prevent ts_ls and denols are attached to current buffer
           root_dir = lspconfig.util.root_pattern("package.json"),
-          -- single_file_support = false, // TODO: why SFC false
-        }, user_lsp.vue.ts_ls),
-        vue_ls = user_lsp.vue.vue_ls,
+          single_file_support = false, -- TODO: why SFC false
+        },
+        vue_ls = {
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+            "vue",
+          },
+          init_options = {
+            typescript = {
+              -- vue_ls needs to know the typescript SDK location
+              tsdk = get_pkg_path("typescript-language-server", "typescript/lib"),
+            },
+            ---use a global TypeScript Server installation
+            vue = {
+              -- leverage ts_ls config
+              hybridMode = false,
+            },
+          },
+        },
+
         jsonls = {
           settings = {
             json = {
@@ -190,9 +202,9 @@ return {
         local server_config = vim.tbl_deep_extend("force", default_config, config)
         -- TODO: figure out how native vim.lsp.config works (using it does not
         -- allow renaming etc.)
-        -- vim.lsp.config(server, server_config)
-        -- vim.lsp.enable(server)
-        lspconfig[server].setup(server_config)
+        vim.lsp.config(server, server_config)
+        vim.lsp.enable(server)
+        -- lspconfig[server].setup(server_config)
       end
 
       require("user.lsp").update_diagnostics()
