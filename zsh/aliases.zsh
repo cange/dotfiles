@@ -1,11 +1,12 @@
 setopt pushdminus
 
-# --- tools
-alias vim='nvim'
+# --- Programms
+alias e="$EDITOR"
+alias E="sudo -e"
 alias gui='fork .'
 alias lg='lazygit'
 alias ld='lazydocker'
-# tools ---
+# Programms ---
 
 # --- network
 # List all listening network ports for current user
@@ -44,8 +45,6 @@ alias k='clear'
 
 # --- grep output
 alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
 # grep output ---
 #
 # --- cd
@@ -59,10 +58,9 @@ alias -- -='cd -'
 # cd ---
 #
 # --- lists
-alias l='eza  --long --all --icons'                        # 'ls -lah'
-alias la='eza --long --all --icons --git'                  # 'ls -Alh'
-alias lt='eza --long --all --icons --git --tree --level=1' # list tree
-alias ll='eza --long --icons'                              # 'ls -lh'
+alias l='eza  --long --all --group-directories-first --icons' # 'ls -lah'
+alias la='eza --long --all --group-directories-first --git'   # 'ls -Alh'
+alias ll='eza --long'                                         # 'ls -lh'
 alias ls='ls -G'
 # lists ---
 #
@@ -145,14 +143,11 @@ alias gd='git diff'
 alias gcb='git checkout -b'
 alias gcm='git checkout $(git_main_branch)'
 alias gco='git checkout'
-# --- switch
-alias gsw='git switch'
-alias gswm='git switch $(git_main_branch)'
 # --- commits
 alias gc='git commit --verbose'
 # --- fetching
 alias gf='git fetch'
-alias gl='git pull --prune'
+alias gl='git pull'
 # --- merge/rebase
 alias grb='git rebase'
 alias grbm='git rebase $(git_main_branch)'

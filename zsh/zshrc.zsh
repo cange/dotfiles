@@ -116,11 +116,6 @@ async_job init_worker
 # }
 #
 
-# --- posting request TUI
-_source_if_exists "$HOME/.local/bin/env"
-# posting request TUI ---
-#
-
 # =============================================================================
 # profiling results - needs to be at end of file
 # zprof

@@ -1,8 +1,8 @@
 return {
   lsp = {
     ---@type vim.diagnostic.Opts.VirtualText
-    diagnostic_virtual_text = {
-      current_line = true,
+    diagnostics = {
+      virtual_type = "virtual_text", -- 'virtual_text' | 'virtual_lines'
     },
     format_on_save = true,
   },

@@ -1,24 +1,20 @@
 local user_lsp = {}
-
---- Gets a path to a package in the Mason registry.
 --- Prefer this to `get_package`, since the package might not always be
 --- available yet and trigger errors.
 ---@param pkg string
----@param path? string
-function user_lsp.get_pkg_path(pkg, path)
+---@param path string
+local function get_pkg_path(pkg, path)
   pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
-  local uv = vim.uv
   local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
-  path = path or ""
-  local ret = root .. "/packages/" .. pkg .. path
-  if not uv.fs_stat(ret) then
-    local msg = ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(
-      pkg,
-      path
+  local pkg_path = root .. "/packages/" .. pkg .. "/" .. path
+
+  if not vim.loop.fs_stat(pkg_path) then
+    Notify.info(
+      ("Package path not found for **%s**:\n- `%s`\nForce update the package."):format(pkg, path),
+      { title = "LSP: get_pkg_path" }
     )
-    vim.notify(msg, vim.log.levels.DEBUG, { title = "Mason" })
   end
-  return ret
+  return pkg_path
 end
 
 user_lsp.ts_ls_settings = {
@@ -35,35 +31,6 @@ user_lsp.ts_ls_settings = {
   implementationsCodeLens = { enabled = true },
   referencesCodeLens = { enabled = true },
   suggestionActions = { enabled = true },
-}
-
--- Hybrid mode configuration (Requires @vue/language-server version ^2.0.0)
-user_lsp.vue = {
-  ts_ls = {
-    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-    init_options = {
-      plugins = {
-        {
-          -- NOTE:  vue/volar setup with hybridMode:
-          -- The Vue Language Server exclusively manages the CSS/HTML sections.
-          -- As a result, you must run @vue/language-server in conjunction
-          -- with a TypeScript server that employs @vue/typescript-plugin.
-          -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vue-support
-          name = "@vue/typescript-plugin",
-          location = user_lsp.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
-          languages = { "vue" },
-        },
-      },
-    },
-  },
-  volar = {
-    init_options = {
-      typescript = {
-        -- volar needs to know the typescript SDK location
-        tsdk = user_lsp.get_pkg_path("typescript-language-server", "/node_modules/typescript/lib"),
-      },
-    },
-  },
 }
 
 return {
@@ -108,7 +75,6 @@ return {
       "mason-org/mason.nvim",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
 
       local server_configs = {
@@ -118,11 +84,6 @@ return {
             css = { lint = { unknownAtRules = "ignore" } },
             scss = { lint = { unknownAtRules = "ignore" } },
           },
-        },
-        denols = {
-          -- prevent ts_ls and denols are attached to current buffer
-          -- https://docs.deno.com/runtime/getting_started/setup_your_environment/
-          root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
         },
         html = {},
         ruby_lsp = {},
@@ -143,23 +104,39 @@ return {
           },
         },
         -- javascript, typescript, etc.
-        ts_ls = vim.tbl_deep_extend("force", {
-          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ts_ls
+        ts_ls = {
           init_options = {
             preferences = { disableSuggestions = true },
             completions = { completeFunctionCalls = true },
+            plugins = {
+              {
+                -- NOTE: vue_ls hybrid mode: ON
+                name = "@vue/typescript-plugin",
+                location = get_pkg_path(
+                  "vue-language-server",
+                  "node_modules/@vue/language-server/node_modules/@vue/typescript-plugin"
+                ),
+                languages = { "javascript", "typescript", "vue" },
+              },
+            },
           },
-          -- filetypes is extended here to include Vue SFC
-          -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+            "vue",
+          },
           settings = {
             typescript = user_lsp.ts_ls_settings,
             javascript = user_lsp.ts_ls_settings,
           },
-          -- prevent ts_ls and denols are attached to current buffer
-          root_dir = lspconfig.util.root_pattern("package.json"),
-          -- single_file_support = false, // TODO: why SFC false
-        }, user_lsp.vue.ts_ls),
-        volar = user_lsp.vue.volar,
+        },
+        vue_ls = {
+          -- vue_ls hybrid mode: ON (handled by ts_ls)
+        },
         jsonls = {
           settings = {
             json = {
@@ -187,10 +164,8 @@ return {
 
       for server, config in pairs(server_configs) do
         local server_config = vim.tbl_deep_extend("force", default_config, config)
-        -- TODO: figure out how native vim.lsp.config works (using it does not
-        -- allow renaming etc.)
-        --vim.lsp.config(server, server_config)
-        lspconfig[server].setup(server_config)
+        vim.lsp.config(server, server_config)
+        vim.lsp.enable(server)
       end
 
       require("user.lsp").update_diagnostics()
@@ -209,6 +184,4 @@ return {
       notification = { window = { winblend = 0 } },
     },
   },
-
-  "slim-template/vim-slim",
 }

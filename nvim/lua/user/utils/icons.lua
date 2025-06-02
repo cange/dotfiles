@@ -132,7 +132,7 @@ function M.get_service_icons()
     tailwindcss = grep_icon("tailwind.config.js"),
     trim_whitespace = "󱁐",
     ts_ls = grep_icon("ts"),
-    volar = grep_icon("vue"),
+    vue_ls = grep_icon("vue"),
   }
 end
 
