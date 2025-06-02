@@ -206,7 +206,7 @@ run = "move-node-to-workspace 2"
 
 [[on-window-detected]]
 if.app-id = 'com.DanPristupov.Fork'
-run = ['layout floating', 'move-node-to-workspace 4']
+run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
@@ -222,6 +222,10 @@ run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.zscaler.zscaler'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.intellij.ce'
 run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
@@ -242,5 +246,7 @@ run = ['layout floating', 'move-node-to-workspace 4']
 
 # https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-1 = ['C34H89x', 'main']
-2 = ['.*(1)','DELL.*', 'C34H89x', 'main']
+  1 = ['C34H89x', 'main']
+  2 = ['dell.*\(2\)', 'C34H89x', 'main' ]
+  3 = ['dell.*\(1\)', 'main' ]
+  4 = ['dell.*\(1\)', 'C34H89x', 'main' ]
