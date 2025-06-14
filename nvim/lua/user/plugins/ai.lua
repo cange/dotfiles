@@ -6,13 +6,14 @@ return {
     build = "make",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
       "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
       "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "folke/snacks.nvim", -- for input provider snacks
       "nvim-tree/nvim-web-devicons",
-      { "zbirenbaum/copilot.lua" },
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
       {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = { file_types = { "markdown", "Avante" } },
@@ -22,12 +23,14 @@ return {
     opts = {
       ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
       provider = "copilot",
-      copilot = {
-        model = "claude-3.7-sonnet",
-      },
-      ollama = {
-        endpoint = "http://127.0.0.1:11434", -- Note that there is no /v1 at the end.
-        model = "qwen3:8b",
+      providers = {
+        copilot = {
+          model = "claude-3.7-sonnet",
+        },
+        ollama = {
+          endpoint = "http://127.0.0.1:11434", -- Note that there is no /v1 at the end.
+          model = "qwen3:8b",
+        },
       },
       windows = { width = 50 },
       file_selector = {
@@ -39,13 +42,24 @@ return {
       -- prompt with mcphub
       system_prompt = function()
         local hub = require("mcphub").get_hub_instance()
-        if not hub then return end
-        return hub:get_active_servers_prompt()
+        return hub and hub:get_active_servers_prompt() or ""
       end,
       -- The custom_tools type supports both a list and a function that returns
       -- a list. Using a function here prevents requiring mcphub before it's
       -- loaded
       custom_tools = function() return { require("mcphub.extensions.avante").mcp_tool() } end,
+      disabled_tools = {
+        "list_files", -- Built-in file operations
+        "search_files",
+        "read_file",
+        "create_file",
+        "rename_file",
+        "delete_file",
+        "create_dir",
+        "rename_dir",
+        "delete_dir",
+        "bash", -- Built-in terminal access
+      },
     },
     config = function(_, opts)
       require("avante").setup(opts)
@@ -81,6 +95,8 @@ return {
         },
       },
       ui = { window = { border = "none" } },
+      -- This sets vim.g.mcphub_auto_approve to true by default (can also be toggled from the HUB UI with `ga`)
+      auto_approve = true,
     },
     keys = { { "<Leader>e5", "<cmd>MCPHub<CR>", desc = "Show MCPHub" } },
   },
