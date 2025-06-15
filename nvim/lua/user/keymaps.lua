@@ -45,6 +45,7 @@ local keymaps = {
 
   -- others
   { "<Leader>w", "<cmd>w!<CR>", { desc = "Save file" } },
+  { "<Leader>bc", "<cmd>%bdelete|e#<CR>", { desc = "Close other buffers" } },
   { "<LocalLeader>wo", "<cmd>only<CR>", { desc = "Close all windows except current" } },
   { "<LocalLeader>a", "gg<S-v>G", { desc = "Select all content" } },
   { "<LocalLeader>a", "gg<S-v>G", { desc = "Select all content" } },
