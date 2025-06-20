@@ -5,6 +5,12 @@ gui:
   nerdFontsVersion: "3"
   spinner:
     frames: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+  branchColorPatterns:
+    "^depfu/": "cyan"
+    "^feat/": "green"
+    "^fix/": "yellow"
+    "^refactor/": "magenta"
+    '^\w+-\d+': "green" # '<any-text>-<some-number>' like foo-123
 os:
   editPreset: "nvim-remote"
 
