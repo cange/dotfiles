@@ -46,6 +46,7 @@ return {
                 info = Icon.diagnostics.Info .. " ",
                 hint = Icon.diagnostics.Hint .. " ",
               },
+              on_click = function() vim.cmd("Trouble diagnostics toggle filter.buf=0") end,
             },
           },
           lualine_y = {},

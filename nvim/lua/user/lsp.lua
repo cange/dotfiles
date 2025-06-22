@@ -43,9 +43,9 @@ end
 M.keymaps = {
   { "<Leader>e4", "<cmd>LspInfo<CR>",                desc = "LSP info"  },
   { "<Leader>,l", toggle_format_on_save,             desc = "Toggle Format on Save"  },
-  { "<Leader>tc", toggle_diagnostics_virtual_type,   desc = "Toggle diagnostic inline text"  },
+  { "<Leader>dD", toggle_diagnostics_virtual_type,   desc = "[diag] Toggle type"  },
   {
-    "<Leader>ci",
+    "<Leader>di",
     function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 })) end,
     desc = "Toggle inlay hints",
   },

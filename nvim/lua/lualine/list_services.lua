@@ -9,8 +9,8 @@ local default_state_icons = {
 }
 
 local highlights = {
-  active = "Normal",
-  inactive = "Comment",
+  active = "lualine_c_normal",
+  inactive = "lualine_c_inactive",
 }
 
 --- Provides a list of services which are can be displayed by icons
