@@ -31,9 +31,13 @@
     "prefix": "<template v-slot>",
     "body": "<template v-slot:$1>\n\t$2\n</template>"
   },
-  "watch v3": {
+  "watch": {
     "prefix": "watch",
     "body": "watch(\n\t() => ${1:prop},\n\t() => ${2:handler},\n\t{ immediate: ${3:true} }\n)"
+  },
+  "computed": {
+    "prefix": "computed",
+    "body": "computed(() => $1)"
   },
   "defineEmits": {
     "prefix": "emits",
@@ -42,5 +46,9 @@
   "defineProps": {
     "prefix": "props",
     "body": "const props = defineProps<{\n${1:key}: ${2:type}\n}>()"
+  },
+  "withDefaults": {
+    "prefix": "default props",
+    "body": "interface Props {\n\t$1\n}\nconst props = withDefaults(defineProps<Props>(), {\n\t$0\n})"
   }
 }

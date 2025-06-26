@@ -11,6 +11,10 @@
     "prefix": "@usedt",
     "body": "@$use '@visable-dev/design-tokens/dist/tokens' as *;\n$2"
   },
+  "@import - design-tokens": {
+    "prefix": "@import tokens",
+    "body": "@$use '@visable-dev/design-tokens/dist/tokens' as *;\n$2"
+  },
   "@group - SassDoc": {
     "prefix": "@group",
     "body": "////\n/// @group $1\n////"

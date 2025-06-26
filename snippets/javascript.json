@@ -1,4 +1,22 @@
 {
+  "Pinia store skeleton": {
+    "prefix": "store",
+    "body": [
+      "import { defineStore } from 'pinia';",
+      "interface State {",
+      "  ${3}",
+      "}",
+      "export const use${1}Store = defineStore('${2}', {",
+      "  state: (): State => ({",
+      "  ${3}",
+      "  }),",
+      "  actions: {",
+      "  },",
+      "  getters: {",
+      "  }",
+      "});"
+    ]
+  },
   "lint block": {
     "prefix": "lint-disable … */",
     "body": ["/* eslint-disable $1 */", "$2", "/* eslint-enable $1 */"]
