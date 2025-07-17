@@ -32,9 +32,9 @@ function user.format(entry, vim_item)
   local kinds = Icon.cmp_kinds or {}
   local kind_icon = kinds[vim_item.kind] or Icon.cmp_kinds[is_multiline and "MultiLine" or "SingleLine"]
 
-  vim_item.kind = kind_icon .. " "
+  vim_item.kind = kind_icon
   vim_item.abbr = vim_item.abbr:sub(1, maxwidth)
-  vim_item.menu = vim.tbl_contains(vim.tbl_keys(src_icons), src_name) and src_icons[src_name] .. " " or vim_item.menu
+  vim_item.menu = vim.tbl_contains(vim.tbl_keys(src_icons), src_name) and src_icons[src_name] or vim_item.menu
 
   return vim_item
 end
@@ -83,6 +83,44 @@ function user.mapping(cmp, luasnip)
       fallback()
     end, { "i", "s" }),
   }
+end
+
+local better_vue = {
+  is_in_start_tag = function()
+    local node = vim.treesitter.get_node()
+    if not node then return false end
+    local node_to_check = { "start_tag", "self_closing_tag", "directive_attribute" }
+    return vim.tbl_contains(node_to_check, node:type())
+  end,
+
+  on_menu_closed = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    vim.b[bufnr]._vue_ts_cached_is_in_start_tag = nil
+  end,
+}
+
+better_vue.sources_entry_filter = function(entry, ctx)
+  -- better vue support https://github.com/vuejs/language-tools/discussions/4495
+  -- Use a buffer-local variable to cache the result of the Treesitter check
+  local bufnr = ctx.bufnr
+  local cached_is_in_start_tag = vim.b[bufnr]._vue_ts_cached_is_in_start_tag
+
+  if cached_is_in_start_tag == nil then vim.b[bufnr]._vue_ts_cached_is_in_start_tag = better_vue.is_in_start_tag() end
+
+  -- If not in start tag, return true
+  if vim.b[bufnr]._vue_ts_cached_is_in_start_tag == false then return true end
+  if ctx.filetype ~= "vue" then return true end
+
+  local cursor_before_line = ctx.cursor_before_line
+  local label = entry.completion_item.label
+
+  if cursor_before_line:sub(-1) == "@" then
+    return label:match("^@")
+  elseif cursor_before_line:sub(-1) == ":" then
+    return label:match("^:") and not label:match("^:on%-")
+  else
+    return true
+  end
 end
 
 return {
@@ -140,7 +178,11 @@ return {
           ["<up>"] = mapping.select_prev_item,
         },
         sources = cmp.config.sources({
-          { name = "nvim_lsp", max_item_count = 10 },
+          {
+            name = "nvim_lsp",
+            max_item_count = 10,
+            entry_filter = better_vue.sources_entry_filter,
+          },
           { name = "luasnip" },
           { name = "copilot" },
           { name = "path" },
@@ -153,18 +195,15 @@ return {
         experimental = { ghost_text = { hl_group = "CmpGhostText" } },
         formatting = {
           fields = { -- order within a menu item
-            "kind",
             "abbr",
+            "kind",
             "menu",
           },
           format = user.format,
         },
-        window = {
-          completion = {
-            col_offset = -3, -- align abbr text with kind icons in prefix
-          },
-        },
       })
+
+      cmp.event:on("menu_closed", better_vue.on_menu_closed)
 
       -- https://github.com/hrsh7th/cmp-cmdline
       cmp.setup.cmdline("/", {
