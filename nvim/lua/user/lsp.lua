@@ -3,14 +3,6 @@ if not cmp_ok then error('"cmp_nvim_lsp" not found') end
 
 local M = {}
 
----@return table
-local function capabilities()
-  local caps = cmp_nvim_lsp.default_capabilities()
-  caps.textDocument.completion.completionItem.snippetSupport = true
-
-  return caps
-end
-
 local function toggle_format_on_save()
   local new_state = not User.get_config("lsp.format_on_save")
   Notify.info(new_state and "enabled" or "disabled", { title = "Auto format on save" })
@@ -63,6 +55,14 @@ M.keymaps = {
   { "<C-s>", vim.lsp.buf.signature_help,              desc = "Show signature" },
 }
 -- stylua: ignore end
+
+---@return table
+local function capabilities()
+  local caps = cmp_nvim_lsp.default_capabilities()
+  caps.textDocument.completion.completionItem.snippetSupport = true
+
+  return caps
+end
 
 M.server_config = {
   on_attach = function(_, bufnr)

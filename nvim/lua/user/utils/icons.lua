@@ -133,6 +133,7 @@ function M.get_service_icons()
     trim_whitespace = "󱁐",
     ts_ls = grep_icon("ts"),
     vue_ls = grep_icon("vue"),
+    vtsls = "󰛦",
   }
 end
 

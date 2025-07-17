@@ -9,9 +9,9 @@ local function get_pkg_path(pkg, path)
   local pkg_path = root .. "/packages/" .. pkg .. "/" .. path
 
   if not vim.loop.fs_stat(pkg_path) then
-    Notify.info(
+    vim.notify(
       ("Package path not found for **%s**:\n- `%s`\nForce update the package."):format(pkg, path),
-      { title = "LSP: get_pkg_path" }
+      vim.log.levels.INFO
     )
   end
   return pkg_path
@@ -76,8 +76,8 @@ return {
     },
     config = function()
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
-
-      local server_configs = {
+      local default_config = require("user.lsp").server_config
+      local servers = {
         astro = {},
         cssls = {
           settings = {
@@ -86,6 +86,7 @@ return {
           },
         },
         html = {},
+        eslint = {},
         ruby_lsp = {},
         tailwindcss = {},
         lua_ls = {
@@ -108,34 +109,59 @@ return {
           init_options = {
             preferences = { disableSuggestions = true },
             completions = { completeFunctionCalls = true },
-            plugins = {
-              {
-                -- NOTE: vue_ls hybrid mode: ON
-                name = "@vue/typescript-plugin",
-                location = get_pkg_path(
-                  "vue-language-server",
-                  "node_modules/@vue/language-server/node_modules/@vue/typescript-plugin"
-                ),
-                languages = { "javascript", "typescript", "vue" },
-              },
-            },
-          },
-          filetypes = {
-            "javascript",
-            "javascriptreact",
-            "javascript.jsx",
-            "typescript",
-            "typescriptreact",
-            "typescript.tsx",
-            "vue",
           },
           settings = {
             typescript = user_lsp.ts_ls_settings,
             javascript = user_lsp.ts_ls_settings,
           },
         },
+        vtsls = {
+          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vtsls
+          settings = {
+            vtsls = {
+              tsserver = {
+                globalPlugins = {
+                  {
+                    name = "@vue/typescript-plugin",
+                    location = get_pkg_path("vue-language-server", "node_modules/@vue/language-server"),
+                    languages = { "vue" },
+                    configNamespace = "typescript",
+                  },
+                },
+              },
+            },
+          },
+          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+        },
         vue_ls = {
-          -- vue_ls hybrid mode: ON (handled by ts_ls)
+          on_init = function(client)
+            client.handlers["tsserver/request"] = function(_, result, context)
+              local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+              if #clients == 0 then
+                vim.notify(
+                  "Could not find `vtsls` lsp client, `vue_ls` would not work without it.",
+                  vim.log.levels.ERROR
+                )
+                return
+              end
+              local ts_client = clients[1]
+
+              local param = unpack(result)
+              local id, command, payload = unpack(param)
+              ts_client:exec_cmd({
+                title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+                command = "typescript.tsserverRequest",
+                arguments = {
+                  command,
+                  payload,
+                },
+              }, { bufnr = context.bufnr }, function(_, r)
+                local response_data = { { id, r.body } }
+                ---@diagnostic disable-next-line: param-type-mismatch
+                client:notify("tsserver/response", response_data)
+              end)
+            end
+          end,
         },
         jsonls = {
           settings = {
@@ -160,18 +186,14 @@ return {
           },
         },
       }
-      local default_config = require("user.lsp").server_config
-
-      for server, config in pairs(server_configs) do
+      for server, config in pairs(servers) do
         local server_config = vim.tbl_deep_extend("force", default_config, config)
         vim.lsp.config(server, server_config)
         vim.lsp.enable(server)
       end
 
       require("user.lsp").update_diagnostics()
-      require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(server_configs),
-      })
+      require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
     end,
     -- stylua: ignore
     keys = require("user.lsp").keymaps,
