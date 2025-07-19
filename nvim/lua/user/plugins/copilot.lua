@@ -25,12 +25,15 @@ local function prompts()
       .. "\n\t - Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)"
       .. "\n\t - Use `beforeEach`-method to reduce redundancies, if possible."
       .. "\n\t - Use behaviour tests of properties / keys tests. So, test the outcome not the internal API."
+      .. "\n\t - Use 'actions', 'getters' and 'state' describe blocks to separate these types from each other, when it is a pinia store to test"
       .. "\n\t - Use context7",
     Review = "Please review the following code and provide suggestions for improvement."
       .. "\n\t - Ignore line length limitations",
     VueConvert = "> /COPILOT_GENERATE\n\nPlease convert the Vue.js component to composition API."
       .. "\n\t - Use `<script setup>` notation over `setup()`"
-      .. "\n\t - Use TypeScript as base language`",
+      .. "\n\t - Use TypeScript as base language"
+      .. "\n\t - Use the order: script, template, style blocks to structure a component"
+      .. "\n\t - Convert all non-english comments into English language",
 
     -- stylua: ignore start
     -- Code related prompts
@@ -63,7 +66,7 @@ return {
     cmd = "CopilotChat",
     opts = function()
       local user = (vim.env.USER or "User"):gsub("^%l", string.upper)
-      local model = "claude-3.7-sonnet"
+      local model = "claude-sonnet-4"
       return {
         answer_header = string.format("%s Copilot — %s ", Icon.plugin.Copilot, model),
         auto_insert_mode = true,
@@ -91,10 +94,10 @@ return {
     end,
     keys = {
       -- stylua: ignore start
-      { "<Leader>aca", M.pick("prompt"), desc = "copilot chat: Code Actions", mode = { "n", "v" } },
-      { "<Leader>acc", "<cmd>CopilotChatToggle<CR>", desc = "copilot chat: Toggle", mode = { "n", "v" } },
-      { "<Leader>acx", "<cmd>CopilotChatReset<CR>", desc = "copilot chat: Clear", mode = { "n", "v" } },
-      { "<Leader>acm", "<cmd>CopilotChatModels<CR>", desc = "copilot chat: Switch Models" },
+      { "<Leader>aa", M.pick("prompt"), desc = "copilot chat: Code Actions", mode = { "n", "v" } },
+      { "<Leader>ac", "<cmd>CopilotChatToggle<CR>", desc = "copilot chat: Toggle", mode = { "n", "v" } },
+      { "<Leader>ax", "<cmd>CopilotChatReset<CR>", desc = "copilot chat: Clear", mode = { "n", "v" } },
+      { "<Leader>am", "<cmd>CopilotChatModels<CR>", desc = "copilot chat: Switch Models" },
     },
     init = function()
       local group = vim.api.nvim_create_augroup("copilot_chat", { clear = true })

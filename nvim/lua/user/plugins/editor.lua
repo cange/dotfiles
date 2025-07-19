@@ -294,20 +294,6 @@ return {
     },
   },
 
-  { -- improve viewing Markdown files
-    "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {
-      heading = {
-        backgrounds = {}, -- disable
-        icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
-      },
-      latex = { enabled = false }, -- avoids this warnings
-    },
-  },
-
   { -- search jump to any vertical/horizontal location
     "folke/flash.nvim",
     event = "VeryLazy",

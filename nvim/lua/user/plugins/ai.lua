@@ -14,18 +14,14 @@ return {
       "folke/snacks.nvim", -- for input provider snacks
       "nvim-tree/nvim-web-devicons",
       "zbirenbaum/copilot.lua", -- for providers='copilot'
-      {
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = { file_types = { "markdown", "Avante" } },
-        ft = { "markdown", "Avante" },
-      },
     },
     opts = {
       ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
       provider = "copilot",
       providers = {
         copilot = {
-          model = "claude-3.7-sonnet",
+          model = "claude-sonnet-4",
+          -- model = "gpt-4.1",
         },
         ollama = {
           endpoint = "http://127.0.0.1:11434", -- Note that there is no /v1 at the end.
@@ -73,8 +69,8 @@ return {
       })
     end,
     keys = {
-      { "<Leader>ax", "<cmd>AvanteClear<CR>", desc = "avante: Clear", mode = { "n", "v" } },
-      { "<Leader>am", "<cmd>AvanteModels<CR>", desc = "avante: Switch model" },
+      { "<LocalLeader>Ax", "<cmd>AvanteClear<CR>", desc = "avante: Clear", mode = { "n", "v" } },
+      { "<LocalLeader>Am", "<cmd>AvanteModels<CR>", desc = "avante: Switch model" },
     },
   },
 
