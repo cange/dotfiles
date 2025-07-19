@@ -80,11 +80,9 @@ return {
       "nvim-lua/plenary.nvim",
       "yetone/avante.nvim",
     },
-    build = "bundled_build.lua", -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
+    build = "bundled_build.lua", -- Bundles `mcp-hub` binary along with the neovim plugin
     opts = {
-      port = 6969, -- Port for MCP Hub server
-      config = vim.fn.expand("~/.config/nvim/mcpservers.json"), -- Absolute path to config file
-      use_bundled_binary = true, -- Use the bundled binary
+      use_bundled_binary = true, -- Use local `mcp-hub` binary
       extensions = {
         avante = {
           make_slash_commands = true, -- make /slash commands from MCP server prompts
@@ -94,6 +92,9 @@ return {
       -- This sets vim.g.mcphub_auto_approve to true by default (can also be toggled from the HUB UI with `ga`)
       auto_approve = true,
     },
-    keys = { { "<Leader>e5", "<cmd>MCPHub<CR>", desc = "Show MCPHub" } },
+    config = function(_, opts) require("mcphub").setup(opts) end,
+    -- FIXME: solve issue of raising error when :MCPHub has beeb called or by
+    -- this keys config
+    -- keys = { { "<Leader>e5", "<cmd>MCPHub<CR>", desc = "Show MCPHub" } },
   },
 }

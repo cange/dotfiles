@@ -12,6 +12,7 @@ M.ui = {
   Beaker              = "", -- nf-cod-beaker
   Book                = "", -- nf-cod-book
   Bookmark            = "", -- nf-cod-bookmark
+  Broadcast           = "󱜠", -- nf-md-broadcast
   Bug                 = "", -- nf-cod-bug
   Check               = "", -- nf-cod-check
   CheckAll            = "", -- nf-cod-check_all
@@ -26,6 +27,7 @@ M.ui = {
   DotFill             = "", -- nf-cot-circle_fill
   Edit                = "", -- nf-cod-edit
   Ellipsis            = "", -- nf-oct-ellipsis
+  Error               = "", -- nf-cod-error
   Eye                 = "", -- nf-cod-eye
   EyeClosed           = "", -- nf-cod-eye_closed
   Filter              = "", -- nf-cod-filter
@@ -66,7 +68,6 @@ M.plugin = {
   CopilotError        = "", -- nf-oct-copilot_error
   CopilotWarning      = "", -- nf-oct-copilot_warning
   Harpoon             = '⇁', -- U+21C1
-  Tabnine             = "⌬", -- U+232C
 }
 M.extensions = {
   Babelrc             = "󰨥", -- nf-md-babel
@@ -90,6 +91,7 @@ M.documents = {
   SymlinkFolder       = "", -- nf-oct-file_submodule
 }
 M.sets = {
+  arc                 = "◜ ◠ ◝ ◞ ◡ ◟", -- U+256D-F,257D U+2312
   batteries           = "󰂎 󰁺 󰁻 󰁼 󰁽 󰁾 󰂀 󰂁 󰂂 󰁹", -- nf-md-battery_[outline|10-90|]
   spinner             = "⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏", -- U+2800 to U+28FF
 }
@@ -113,7 +115,7 @@ M.git_states = {
   ignored             = M.git.Ignore,
 }
 M.diagnostics = {
-  Error               = "", -- nf-oct-stop
+  Error               = M.ui.Error,
   Warn                = "", -- nf-oct-alert
   Info                = "", -- nf-oct-info
   Hint                = "", -- nf-oct-light_bulb

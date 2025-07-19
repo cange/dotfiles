@@ -1,0 +1,56 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--interactive",
+        "--rm",
+        "--name",
+        "mcp-context7",
+        "context7-mcp"
+      ],
+      "autoApprove": [],
+      "disabled": false,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "fetch": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--interactive",
+        "--rm",
+        "--name",
+        "mcp-fetch",
+        "mcp/fetch"
+      ],
+      "disabled": false
+    },
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--interactive",
+        "--rm",
+        "--name",
+        "mcp-github",
+        "--env",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "disabled": false,
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN"
+      }
+    }
+  },
+  "nativeMCPServers": {
+    "mcphub": {
+      "disabled": false
+    },
+    "neovim": {
+      "disabled": false
+    }
+  }
+}

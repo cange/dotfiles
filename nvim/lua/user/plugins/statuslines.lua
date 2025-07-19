@@ -82,7 +82,7 @@ return {
               symbols = { spinners = vim.split(Icon.sets.spinner, " ") },
             },
             {
-              require("mcphub.extensions.lualine"),
+              "mcphub",
               padding = { left = 1, right = 0 },
               on_click = function() vim.cmd("MCPHub") end,
             },

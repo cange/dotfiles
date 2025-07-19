@@ -1,5 +1,5 @@
 ---@diagnostic disable-next-line: param-type-mismatch
-local icons = vim.split(Icon.sets.spinner, " ")
+local icons = vim.split(Icon.sets.arc, " ")
 local icon_len = #icons
 
 local M = {}

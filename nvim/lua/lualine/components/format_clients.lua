@@ -15,18 +15,16 @@ local function get_active_services()
 end
 
 function M:init(opts)
-  local state_icons = {
-    active = Icon.ui.CheckAll,
-    inactive = Icon.ui.EyeClosed,
-  }
+  local state_icons = { active = Icon.ui.CheckAll }
   M.super.init(self, opts)
-  M.list_services =
-    require("lualine.list_services"):new(nil, User.get_service_icons(), state_icons, get_active_services, opts, debug)
+  M.service =
+    require("lualine.user.component"):new(nil, User.get_service_icons(), state_icons, get_active_services, opts, debug)
 end
 
 function M:update_status()
-  M.list_services:set_state(User.get_config("lsp.format_on_save"))
-  return M.list_services:cached_status()
+  local states = M.service.states
+  M.service:set_state(User.get_config("lsp.format_on_save") and states.ACTIVE or states.INACTIVE)
+  return M.service:cached_status()
 end
 
 return M

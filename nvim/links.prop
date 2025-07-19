@@ -1,1 +1,2 @@
 $DOTFILES/nvim=$HOME/.config/nvim
+$DOTFILES/nvim/mcphub-servers.json=$HOME/.config/mcphub/servers.json

@@ -14,18 +14,17 @@ local function get_active_services()
 end
 
 function M:init(opts)
-  local state_icons = { inactive = Icon.ui.EyeClosed }
   M.super.init(self, opts)
-  M.list_services = require("lualine.list_services"):new(
-    require("user.icons").ui.Server,
+  M.service = require("lualine.user.component"):new(
+    Icon.ui.Server,
     User.get_service_icons(),
-    state_icons,
+    {},
     get_active_services,
     opts,
     debug
   )
 end
 
-function M:update_status() return M.list_services:cached_status() end
+function M:update_status() return M.service:cached_status() end
 
 return M
