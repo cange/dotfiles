@@ -4,9 +4,8 @@ function user.format(entry, vim_item)
   local maxwidth = 80
   local src_icons = {
     buffer = Icon.ui.Database,
-    copilot = Icon.plugin.Copilot,
     luasnip = Icon.ui.Library,
-    nvim_lsp = Icon.ui.Globe,
+    nvim_lsp = Icon.ui.Server,
     nvim_lua = Icon.extensions.Lua,
     path = Icon.ui.Path,
   }
@@ -22,10 +21,6 @@ function user.format(entry, vim_item)
       vim_item.kind_hl_group = hl_group
       return vim_item
     end
-  end
-
-  if src_name == "copilot" then
-    is_multiline = ((cmp_item.documentation or {}).value or ""):find(".*\n.+\n.+\n") ~= nil
   end
 
   ---@diagnostic disable-next-line: param-type-mismatch
@@ -178,13 +173,12 @@ return {
           ["<up>"] = mapping.select_prev_item,
         },
         sources = cmp.config.sources({
+          { name = "luasnip" },
           {
             name = "nvim_lsp",
             max_item_count = 10,
             entry_filter = better_vue.sources_entry_filter,
           },
-          { name = "luasnip" },
-          { name = "copilot" },
           { name = "path" },
           { name = "nerdfont" },
           { name = "buffer" },
@@ -195,11 +189,16 @@ return {
         experimental = { ghost_text = { hl_group = "CmpGhostText" } },
         formatting = {
           fields = { -- order within a menu item
-            "abbr",
             "kind",
+            "abbr",
             "menu",
           },
           format = user.format,
+        },
+        window = {
+          completion = {
+            col_offset = -2, -- align abbr text with kind icons in prefix
+          },
         },
       })
 
