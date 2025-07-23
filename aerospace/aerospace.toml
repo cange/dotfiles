@@ -99,6 +99,9 @@ alt-k = 'focus up'
 alt-l = 'focus right'
 
 alt-f = 'fullscreen'
+# Toggle windows in and out of the tiling layout/floating
+# See: https://nikitabobko.github.io/AeroSpace/commands#default-root-container-layout
+alt-shift-f = 'layout floating tiling'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
@@ -118,6 +121,9 @@ alt-4 = 'workspace 4'
 alt-5 = 'workspace 5'
 alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 0'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -127,6 +133,9 @@ alt-shift-4 = 'move-node-to-workspace 4'
 alt-shift-5 = 'move-node-to-workspace 5'
 alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 0'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -146,7 +155,6 @@ alt-shift-semicolon = 'mode service'
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
-f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
 alt-shift-h = ['join-with left', 'mode main']
@@ -165,48 +173,23 @@ run = "move-node-to-workspace 1"
 if.app-id = 'com.mitchellh.ghostty'
 run = "move-node-to-workspace 1"
 
-[[on-window-detected]]
-if.app-id = 'org.mozilla.firefoxdeveloperedition'
-if.window-title-regex-substring = 'Picture-in-Picture'
-run = 'layout floating'
-check-further-callbacks = true
-
 # Firefox
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefoxdeveloperedition'
 if.window-title-regex-substring = 'Picture-in-Picture'
-run = 'layout floating'
+run = ['layout floating',  'move-node-to-workspace 3']
 check-further-callbacks = true
-
-[[on-window-detected]]
-if.app-id = 'org.mozilla.firefoxdeveloperedition'
-run = "move-node-to-workspace 2"
-
-# Zen Browser
-[[on-window-detected]]
-if.app-id = 'org.mozilla.com.zen.browser'
-if.window-title-regex-substring = 'Picture-in-Picture'
-run = 'layout floating'
-check-further-callbacks = true
-
-[[on-window-detected]]
-if.app-id = 'org.mozilla.com.zen.browser'
-run = "move-node-to-workspace 2"
 
 # Chrome Browser
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
 if.window-title-regex-substring = 'Picture in Picture'
-run = 'layout floating'
+run = ['layout floating',  'move-node-to-workspace 3']
 check-further-callbacks = true
 
 [[on-window-detected]]
-if.app-id = 'com.google.Chrome'
-run = "move-node-to-workspace 2"
-
-[[on-window-detected]]
 if.app-id = 'com.DanPristupov.Fork'
-run = 'move-node-to-workspace 4'
+run = ["layout floating", "move-node-to-workspace 4"]
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
@@ -214,7 +197,7 @@ run = "move-node-to-workspace 5"
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = 'move-node-to-workspace 6'
+run = ["layout floating", "move-node-to-workspace 6"]
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
