@@ -1,0 +1,6 @@
+{
+  "type union": {
+    "prefix": "tunion",
+    "body": "type $1 = (typeof $2)[keyof typeof $2]"
+  }
+}

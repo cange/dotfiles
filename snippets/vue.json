@@ -33,7 +33,7 @@
   },
   "watch": {
     "prefix": "watch",
-    "body": "watch(\n\t() => ${1:prop},\n\t() => ${2:handler},\n\t{ immediate: ${3:true} }\n)"
+    "body": "watch(\n\t() => $1,\n\t() => $2,\n\t{ immediate: ${3:true} }\n)"
   },
   "computed": {
     "prefix": "computed",

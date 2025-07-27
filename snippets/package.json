@@ -20,6 +20,14 @@
       },
       {
         "language": [
+          "svelte",
+          "typescript",
+          "vue"
+        ],
+        "path": "./typescript.json"
+      },
+      {
+        "language": [
           "html",
           "javascript",
           "svelte",

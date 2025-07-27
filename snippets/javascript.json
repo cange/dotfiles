@@ -71,17 +71,21 @@
     "prefix": "times Array(…",
     "body": "new Array($1).fill().$0"
   },
-  "console.log(": {
-    "prefix": "lg",
+  "console.log": {
+    "prefix": "lgg",
     "body": "console.log($1)"
   },
-  "console.table(": {
-    "prefix": "lgtable",
+  "console.log('[fn]',{ obj })": {
+    "prefix": "lg",
+    "body": "console.log('[$1]', { $2 })"
+  },
+  "console.table": {
+    "prefix": "ltable",
     "body": "console.table($1)"
   },
-  "import local": {
-    "prefix": "import local",
-    "body": "import ${1:componentName} from './$1'"
+  "function name() { }": {
+    "prefix": "fn",
+    "body": "function $1($2) {\n\t$3\n}"
   },
   "querySelector": {
     "prefix": ".querySelector(…",
