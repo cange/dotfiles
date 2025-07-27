@@ -101,6 +101,10 @@ init_plugins() {
   _source_if_exists "$Z_CONFIG_DIR/aliases.zsh"
   _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
 
+  # --- Angular
+  source <(ng completion script) # CLI autocompletion.
+  # Angular ---
+
   # --- Docker plugin
   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
   # prettify docker menu

@@ -1,6 +1,27 @@
+local function update_format_on_save()
+  local ok, conform = pcall(require, "conform")
+  if not ok then error('formatting: could not found "conform"') end
+  local opts = { format_on_save = nil }
+  if User.get_config("lsp.format_on_save") then
+    opts = {
+      format_on_save = {
+        lsp_fallback = true,
+        timeout_ms = 1000,
+      },
+    }
+  end
+  conform.setup(opts)
+end
+
+local function toggle_format_on_save()
+  local new_state = not User.get_config("lsp.format_on_save")
+  Notify.info(new_state and "enabled" or "disabled", { title = "Auto format on save" })
+  User.set_config("lsp.format_on_save", new_state)
+  update_format_on_save()
+end
+
 -- NOTE: formatter installation handled via mason
 local prettier_preset = { "prettier", stop_after_first = true }
-
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
@@ -33,13 +54,13 @@ return {
   },
   config = function(_, opts)
     require("conform").setup(opts)
-    require("user.lsp").update_format_on_save()
+    update_format_on_save()
   end,
   keys = {
     { "<Leader>e3", "<cmd>ConformInfo<CR>", desc = "Formatter info" },
     { "<LocalLeader>f", '<cmd>lua require("conform").format({ async = true })<CR>', desc = "Format" },
+    { "<Leader><LocalLeader>f", toggle_format_on_save, desc = "Toggle Format on Save" },
   },
-
   init = function()
     -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

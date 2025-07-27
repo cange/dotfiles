@@ -128,12 +128,14 @@ function M.get_service_icons()
     ruby_lsp = grep_icon("rb"),
     stylelint = grep_icon(".stylelint"),
     stylua = grep_icon("lua"),
-    superhtml = grep_icon("html"),
+    superhtml = "s" .. grep_icon("html"),
+    html = grep_icon("html"),
     tailwindcss = grep_icon("tailwind.config.js"),
     trim_whitespace = "󱁐",
     ts_ls = grep_icon("ts"),
     vue_ls = grep_icon("vue"),
-    vtsls = "󰛦",
+    vtsls = "󰛦", -- nf-md-language_typescripts
+    angularls = "󰚲", -- nf-md-angular
   }
 end
 

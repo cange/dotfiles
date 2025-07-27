@@ -1,4 +1,3 @@
-local user_lsp = {}
 --- Prefer this to `get_package`, since the package might not always be
 --- available yet and trigger errors.
 ---@param pkg string
@@ -16,7 +15,7 @@ local function get_pkg_path(pkg, path)
   end
   return pkg_path
 end
-
+local user_lsp = {}
 user_lsp.ts_ls_settings = {
   inlayHints = {
     includeInlayEnumMemberValueHints = true,
@@ -59,7 +58,7 @@ return {
       local linter = { "eslint", "jsonlint", "markdownlint", "markuplint", "rubocop", "stylelint", "yamllint" }
       local formatter = { "prettier", "rubocop", "shfmt", "stylua", "superhtml" }
       require("mason-tool-installer").setup({
-        ensure_installed = vim.tbl_extend("force", linter, formatter),
+        ensure_installed = vim.tbl_extend("force", {}, linter, formatter),
         auto_update = true,
       })
     end,
@@ -73,10 +72,11 @@ return {
       "b0o/SchemaStore.nvim",
       "mason-org/mason-lspconfig.nvim",
       "mason-org/mason.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
-      local default_config = require("user.lsp").server_config
+
       local servers = {
         cssls = {
           settings = {
@@ -87,7 +87,6 @@ return {
         html = {},
         eslint = {},
         ruby_lsp = {},
-        tailwindcss = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -105,6 +104,8 @@ return {
         },
         -- javascript, typescript, etc.
         ts_ls = {
+          -- ensure that workspace config files are used
+          root_dir = require("lspconfig").util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git"),
           init_options = {
             preferences = { disableSuggestions = true },
             completions = { completeFunctionCalls = true },
@@ -132,36 +133,7 @@ return {
           },
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
         },
-        vue_ls = {
-          on_init = function(client)
-            client.handlers["tsserver/request"] = function(_, result, context)
-              local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
-              if #clients == 0 then
-                vim.notify(
-                  "Could not find `vtsls` lsp client, `vue_ls` would not work without it.",
-                  vim.log.levels.ERROR
-                )
-                return
-              end
-              local ts_client = clients[1]
-
-              local param = unpack(result)
-              local id, command, payload = unpack(param)
-              ts_client:exec_cmd({
-                title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
-                command = "typescript.tsserverRequest",
-                arguments = {
-                  command,
-                  payload,
-                },
-              }, { bufnr = context.bufnr }, function(_, r)
-                local response_data = { { id, r.body } }
-                ---@diagnostic disable-next-line: param-type-mismatch
-                client:notify("tsserver/response", response_data)
-              end)
-            end
-          end,
-        },
+        vue_ls = {},
         jsonls = {
           settings = {
             json = {
@@ -185,9 +157,14 @@ return {
           },
         },
       }
-      for server, config in pairs(servers) do
-        local server_config = vim.tbl_deep_extend("force", default_config, config)
-        vim.lsp.config(server, server_config)
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+      for server, cfg in pairs(servers) do
+        cfg.on_attach = require("user.lsp").set_keymaps
+        cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
+        vim.lsp.config(server, cfg)
         vim.lsp.enable(server)
       end
 
