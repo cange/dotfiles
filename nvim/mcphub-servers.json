@@ -1,7 +1,6 @@
 {
   "mcpServers": {
     "context7": {
-      "command": "docker",
       "args": [
         "run",
         "--interactive",
@@ -10,13 +9,20 @@
         "mcp-context7",
         "context7-mcp"
       ],
-      "autoApprove": [],
+      "autoApprove": [
+        "get-library-docs",
+        "resolve-library-id"
+      ],
+      "command": "docker",
+      "custom_instructions": {
+        "disabled": false
+      },
       "disabled": false,
+      "disabled_tools": [],
       "timeout": 60,
       "transportType": "stdio"
     },
     "fetch": {
-      "command": "docker",
       "args": [
         "run",
         "--interactive",
@@ -25,10 +31,10 @@
         "mcp-fetch",
         "mcp/fetch"
       ],
+      "command": "docker",
       "disabled": false
     },
     "github": {
-      "command": "docker",
       "args": [
         "run",
         "--interactive",
@@ -39,6 +45,7 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "ghcr.io/github/github-mcp-server"
       ],
+      "command": "docker",
       "disabled": false,
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN"
