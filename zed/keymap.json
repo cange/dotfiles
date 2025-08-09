@@ -1,6 +1,6 @@
 [
   {
-    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu && !AgentPanel",
     "bindings": {
       "space n": "editor::ToggleLineNumbers",
       "space \\": "workspace::ToggleLeftDock",
@@ -16,29 +16,31 @@
     }
   },
   {
-    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu && !AgentPanel",
     "bindings": {
       ", a": "editor::SelectAll",
       "space c a": "editor::ToggleCodeActions",
       "space c d": "diagnostics::ToggleWarnings",
       "space r": "editor::Rename",
       "space s s": "outline::Toggle",
-      "g r": "editor::FindAllReferences",
       "g i": "editor::GoToImplementation"
     }
   },
   {
-    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu && !AgentPanel",
     "bindings": {
-      ", S": "editor::SortLinesCaseInsensitive"
+      ", S": "editor::SortLinesCaseInsensitive",
+      "n": "editor::SelectNext",
+      "q": "editor::FindNextMatch"
     }
   },
   {
-    "context": "Editor && vim_mode == insert && !VimWaiting && !menu",
+    "context": "Editor && vim_mode == insert && !VimWaiting && !menu && !AgentPanel",
     "bindings": {
       "j j": "vim::NormalBefore"
     }
   },
+
   {
     "context": "ProjectPanel",
     "bindings": {
@@ -52,8 +54,9 @@
   },
 
   {
-    "context": "ProjectPanel || Editor",
+    "context": "!AgentPanel || ProjectPanel || Editor",
     "bindings": {
+      "space a a": "agent::ToggleFocus",
       "space g b": "git::Switch",
       "space g c": "git::GenerateCommitMessage",
       "space g r": "git::Restore",
@@ -72,5 +75,11 @@
       "cmd-shift-enter": "workspace::ToggleZoom"
     }
   },
-  { "context": "Terminal", "bindings": { "cmd-d": "workspace::NewTerminal" } }
+  { "context": "Terminal", "bindings": { "cmd-d": "workspace::NewTerminal" } },
+  {
+    "context": "(vim_mode == helix_normal && !menu)",
+    "bindings": {
+      "g r": null
+    }
+  }
 ]

@@ -78,16 +78,11 @@
   "material-icon-theme.files.color": "#587b7b",
   "material-icon-theme.folders.color": "#587b7b",
   "material-icon-theme.folders.theme": "none",
-  "mcp": {
-    "servers": {
-      "Context7": {
-        "type": "stdio",
-        "command": "npx",
-        "args": ["-y", "@upstash/context7-mcp@latest"]
-      }
-    }
-  },
   "workbench.activityBar.location": "hidden",
   "chat.mcp.discovery.enabled": true,
-  "editor.formatOnType": false
+  "editor.formatOnType": false,
+  "screencastMode.keyboardOptions": {
+    "showKeys": false
+  },
+  "github.copilot.nextEditSuggestions.enabled": true
 }
