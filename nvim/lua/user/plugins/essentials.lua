@@ -52,7 +52,7 @@ return {
         opts = opts or {}
         local title = opts.title and type(opts.title) == "string" and opts.title or ""
         opts.title = "user-config"
-        Notify._info(string.format("[%s]: %s", title or "", msg), opts)
+        Notify._info(("[%s]: %s"):format(title or "", msg), opts)
       end
 
       -- debug

@@ -60,11 +60,44 @@ autocmd("LspAttach", {
         { desc = "Find Implementation", noremap = true, silent = true, buffer = args.buf }
       )
     end
-    -- TODO: use either native support (see ↓) or 3rd party (blink.nvim)
-    -- when native: How are other sources such paths, snippets etc. are support
-    -- if client:supports_method("textDocument/completion") then
-    --   -- vim.print("[LSP] supports completions", client.id)
-    --   vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-    -- end
+  end,
+})
+
+-- Custom LSP progress https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#-examples
+local progress_table = vim.defaulttable()
+autocmd("LspProgress", {
+  desc = "LSP progress notifications",
+  group = group_id,
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    local value = ev.data.params.value
+    if not client or type(value) ~= "table" then return end
+    local progress = progress_table[client.id]
+
+    for i = 1, #progress + 1 do
+      if i == #progress + 1 or progress[i].token == ev.data.params.token then
+        progress[i] = {
+          token = ev.data.params.token,
+          msg = ("[%3d%%] %s%s"):format(
+            value.kind == "end" and 100 or value.percentage or 100,
+            value.title or "",
+            value.message and (" **%s**"):format(value.message) or ""
+          ),
+          done = value.kind == "end",
+        }
+        break
+      end
+    end
+
+    local msg = {}
+    progress_table[client.id] = vim.tbl_filter(function(v) return table.insert(msg, v.msg) or not v.done end, progress)
+
+    vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
+      id = "lsp_progress",
+      title = client.name,
+      opts = function(notif)
+        notif.icon = #progress_table[client.id] == 0 and Icon.ui.Check or require("user.utils.spinner").icon()
+      end,
+    })
   end,
 })

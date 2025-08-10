@@ -5,12 +5,11 @@ function user.format(entry, vim_item)
   local src_icons = {
     buffer = Icon.ui.Database,
     luasnip = Icon.ui.Library,
-    nvim_lsp = Icon.ui.Server,
+    nvim_lsp = Icon.plugin.LSP,
     nvim_lua = Icon.extensions.Lua,
     path = Icon.ui.Path,
   }
   local src_name = entry.source.name
-  local cmp_item = entry.completion_item or {}
   local is_multiline = false
 
   -- Show filetype icons for path source

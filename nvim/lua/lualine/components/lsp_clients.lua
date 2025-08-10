@@ -16,7 +16,7 @@ end
 function M:init(opts)
   M.super.init(self, opts)
   M.service = require("lualine.user.component"):new(
-    Icon.ui.Server,
+    Icon.plugin.LSP,
     User.get_service_icons(),
     {},
     get_active_services,

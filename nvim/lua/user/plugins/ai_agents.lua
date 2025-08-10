@@ -93,8 +93,8 @@ return {
         title = Icon.plugin.Copilot .. " AI Assistant",
       },
       headers = {
-        user = string.format("%s %s: ", Icon.ui.Person, user),
-        assistant = string.format("%s Copilot — %s ", Icon.plugin.Copilot, model),
+        user = ("%s %s: "):format(Icon.ui.Person, user),
+        assistant = ("%s Copilot — %s "):format(Icon.plugin.Copilot, model),
       },
     },
     keys = {

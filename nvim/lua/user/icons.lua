@@ -68,6 +68,7 @@ M.plugin = {
   CopilotError        = "", -- nf-oct-copilot_error
   CopilotWarning      = "", -- nf-oct-copilot_warning
   Harpoon             = '⇁', -- U+21C1
+  LSP                 = M.ui.Server
 }
 M.extensions = {
   Babelrc             = "󰨥", -- nf-md-babel
@@ -91,7 +92,6 @@ M.documents = {
   SymlinkFolder       = "", -- nf-oct-file_submodule
 }
 M.sets = {
-  arc                 = "◜ ◠ ◝ ◞ ◡ ◟", -- U+256D-F,257D U+2312
   batteries           = "󰂎 󰁺 󰁻 󰁼 󰁽 󰁾 󰂀 󰂁 󰂂 󰁹", -- nf-md-battery_[outline|10-90|]
   spinner             = "⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏", -- U+2800 to U+28FF
 }

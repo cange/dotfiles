@@ -21,7 +21,7 @@ local function set_icon_by_filetype(origin_filetype, filename, extensions, prese
   for _, ext in pairs(extensions or { "" }) do
     local fname = filename .. ext
     user_icons[fname] = vim.tbl_extend("force", fallback, preset or {})
-    -- print(string.format("[%s] %s", fname, vim.inspect(user_icons[fname])):gsub("\n", " "))
+    -- print(("[%s] %s"):format(fname, vim.inspect(user_icons[fname])):gsub("\n", " "))
   end
 end
 ---@type user.DevIconsPreset[]

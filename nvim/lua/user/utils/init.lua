@@ -80,7 +80,7 @@ function M.get_hl_hex(name, key)
     PF("%s %q in %q hl group not found -inspect %q -value %q", ns, key, name, vim.inspect(hl), value)
   end
 
-  output[key] = string.format("#%06x", value)
+  output[key] = ("#%06x"):format(value)
   return output
 end
 

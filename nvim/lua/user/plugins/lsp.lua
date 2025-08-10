@@ -175,16 +175,4 @@ return {
     keys = require("user.lsp").keymaps,
   },
 
-  { -- Extensible UI notifications and LSP progress messages.
-    "j-hui/fidget.nvim",
-    opts = {
-      progress = {
-        display = {
-          done_icon = Icon.ui.Check,
-          progress_icon = { "arc" },
-        },
-      },
-      notification = { window = { winblend = 0 } },
-    },
-  },
 }

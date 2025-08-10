@@ -84,9 +84,7 @@ end
 
 function M:log(msg, meta)
   if self.debug then
-    log.debug(
-      string.format("[%s] %s -msg: %s -meta: %s", self.count, self.label, msg, vim.inspect(meta):gsub("\n", " "))
-    )
+    log.debug(("[%s] %s -msg: %s -meta: %s"):format(self.count, self.label, msg, vim.inspect(meta):gsub("\n", " ")))
     self.count = self.count + 1
   end
 end
@@ -105,7 +103,7 @@ function M:formatter(data)
   local status_icon, status_hl = self:get_status_display()
   output = #output == 0 and self.state_map.minimized.icon or output
   -- Format with highlight
-  return string.format("%%#%s#%s%%*", status_hl, status_icon .. " " .. output .. " ")
+  return ("%%#%s#%s%%*"):format(status_hl, status_icon .. " " .. output .. " ")
 end
 
 function M:set_state(new_state) self.state = new_state end
