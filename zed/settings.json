@@ -59,7 +59,7 @@
   "current_line_highlight": "line",
 
   "ui_font_family": "JetBrainsMono Nerd Font",
-  "ui_font_size": 13,
+  "ui_font_size": 14,
   "buffer_font_size": 14,
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "terminal": {
@@ -79,8 +79,14 @@
 
   // The number of lines to keep above/below the cursor when scrolling.
   "vertical_scroll_margin": 8,
+  "scrollbar": { "show": "auto" },
+  "minimap": {
+    "show": "never",
+    "thumb": "always",
+    "thumb_border": "left_open",
+    "current_line_highlight": null
+  },
 
-  "scrollbar": { "show": "never" },
   "tab_size": 2,
 
   "project_panel": {

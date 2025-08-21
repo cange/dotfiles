@@ -3,27 +3,30 @@
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu && !AgentPanel",
     "bindings": {
       "space n": "editor::ToggleLineNumbers",
-      "space \\": "workspace::ToggleLeftDock",
-      "space w": "workspace::Save",
-      "space f": "file_finder::Toggle",
-
-      // ", /": "vim::Search",
-      // travel next/prev
       "] g": "editor::GoToHunk",
       "[ g": "editor::GoToPreviousHunk",
-      // terminal
-      ", d": "workspace::NewTerminal"
+      "] b": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePreviousItem"
     }
   },
   {
-    "context": "Editor && vim_mode == normal && !VimWaiting && !menu && !AgentPanel",
+    "context": "Workspace && vim_mode != insert && !VimWaiting && !menu && !AgentPanel",
+    "bindings": {
+      "space \\": "workspace::ToggleLeftDock",
+      "space w": "workspace::Save",
+      "space f": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor && vim_mode != insert && !VimWaiting && !menu && !AgentPanel",
     "bindings": {
       ", a": "editor::SelectAll",
-      "space c a": "editor::ToggleCodeActions",
-      "space c d": "diagnostics::ToggleWarnings",
-      "space r": "editor::Rename",
+      "g i": "editor::GoToImplementation",
+      "g r a": "editor::ToggleCodeActions",
+      "g r n": "editor::Rename",
+      "space d d": "diagnostics::ToggleWarnings",
       "space s s": "outline::Toggle",
-      "g i": "editor::GoToImplementation"
+      ", r": "buffer_search::Deploy"
     }
   },
   {
@@ -31,16 +34,41 @@
     "bindings": {
       ", S": "editor::SortLinesCaseInsensitive",
       "n": "editor::SelectNext",
-      "q": "editor::FindNextMatch"
+      "q": "editor::FindNextMatch",
+      "alt-down": "editor::MoveLineDown",
+      "alt-up": "editor::MoveLineUp",
+      "j": "editor::MoveLineDown",
+      "k": "editor::MoveLineUp"
     }
   },
   {
-    "context": "Editor && vim_mode == insert && !VimWaiting && !menu && !AgentPanel",
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu && !AgentPanel",
     "bindings": {
-      "j j": "vim::NormalBefore"
+      "alt-down": "editor::MoveLineDown",
+      "alt-up": "editor::MoveLineUp",
+      "w left": "workspace::ActivatePaneLeft",
+      "w down": "workspace::ActivatePaneDown",
+      "w up": "workspace::ActivatePaneUp",
+      "w right": "workspace::ActivatePaneRight",
+      "w h": "workspace::ActivatePaneLeft",
+      "w j": "workspace::ActivatePaneDown",
+      "w k": "workspace::ActivatePaneUp",
+      "w l": "workspace::ActivatePaneRight"
     }
   },
-
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "space space": "pane::AlternateFile"
+    }
+  },
+  {
+    "context": "Editor && !menu",
+    "bindings": {
+      ", w o": "workspace::CloseInactiveTabsAndPanes",
+      ", d": "workspace::NewTerminal"
+    }
+  },
   {
     "context": "ProjectPanel",
     "bindings": {
@@ -52,7 +80,6 @@
       "cmd-x": "project_panel::Cut"
     }
   },
-
   {
     "context": "!AgentPanel || ProjectPanel || Editor",
     "bindings": {
@@ -63,8 +90,7 @@
       "space g R": "git::RestoreFile",
       "space g S": "git::StageFile",
       "space g s": "git::ToggleStaged",
-      "space p": "projects::OpenRecent",
-      "space space": "pane::AlternateFile"
+      "space p": "projects::OpenRecent"
     }
   },
   {
@@ -72,10 +98,29 @@
     "bindings": {
       "cmd-]": "pane::ActivateNextItem",
       "cmd-[": "pane::ActivatePreviousItem",
-      "cmd-shift-enter": "workspace::ToggleZoom"
+      "cmd-shift-enter": "workspace::ToggleZoom",
+      "ctrl-w k": "workspace::SwapPaneUp",
+      "ctrl-w j": "workspace::SwapPaneDown",
+      "ctrl-w h": "workspace::SwapPaneLeft",
+      "ctrl-w l": "workspace::SwapPaneRight"
     }
   },
-  { "context": "Terminal", "bindings": { "cmd-d": "workspace::NewTerminal" } },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-d": "workspace::NewTerminal",
+      "escape escape": "workspace::ToggleZoom"
+    }
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown"
+    }
+  },
   {
     "context": "(vim_mode == helix_normal && !menu)",
     "bindings": {
