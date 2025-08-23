@@ -56,7 +56,7 @@ return {
       require("mason").setup(opts)
       -- loads formatter and linter
       local linter = { "eslint", "jsonlint", "markdownlint", "markuplint", "rubocop", "stylelint", "yamllint" }
-      local formatter = { "prettier", "rubocop", "shfmt", "stylua", "superhtml" }
+      local formatter = { "prettier", "rubocop", "shfmt", "stylua", "html" }
       require("mason-tool-installer").setup({
         ensure_installed = vim.tbl_extend("force", {}, linter, formatter),
         auto_update = true,
@@ -78,15 +78,15 @@ return {
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
 
       local servers = {
+        angularls = {},
         cssls = {
           settings = {
             css = { lint = { unknownAtRules = "ignore" } },
             scss = { lint = { unknownAtRules = "ignore" } },
           },
         },
-        html = {},
         eslint = {},
-        ruby_lsp = {},
+        html = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -102,6 +102,7 @@ return {
             },
           },
         },
+        ruby_lsp = {},
         -- javascript, typescript, etc.
         ts_ls = {
           -- ensure that workspace config files are used
@@ -159,6 +160,8 @@ return {
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
+      --Enable (broadcasting) snippet capability for completion
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
       for server, cfg in pairs(servers) do
@@ -174,5 +177,4 @@ return {
     -- stylua: ignore
     keys = require("user.lsp").keymaps,
   },
-
 }

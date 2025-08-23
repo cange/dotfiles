@@ -30,7 +30,7 @@ return {
     formatters_by_ft = {
       bash = { "shfmt" },
       css = prettier_preset,
-      html = { "superhtml" },
+      html = { "html" },
       json = prettier_preset,
       jsonc = prettier_preset,
       lua = { "stylua" },
@@ -38,10 +38,10 @@ return {
       ruby = { "rubocop" },
       scss = prettier_preset,
       shell = { "shfmt" },
-      svg = { "superhtml" },
+      svg = { "html" },
       yaml = prettier_preset,
       zsh = { "shfmt" },
-      xml = { "superhtml" },
+      xml = { "html" },
       -- js
       javascript = prettier_preset,
       javascriptreact = prettier_preset,
@@ -58,7 +58,7 @@ return {
   end,
   keys = {
     { "<Leader>e3", "<cmd>ConformInfo<CR>", desc = "Formatter info" },
-    { "<LocalLeader>f", '<cmd>lua require("conform").format({ async = true })<CR>', desc = "Format" },
+    { "<leader>F", '<cmd>lua require("conform").format({ async = true })<CR>', desc = "Format" },
     { "<Leader><LocalLeader>f", toggle_format_on_save, desc = "Toggle Format on Save" },
   },
   init = function()
