@@ -152,6 +152,7 @@ return {
     { "<Leader>sH", '<cmd>Telescope highlights<CR>',                        desc = "Highlights" },
     { "<Leader>sh", "<cmd>Telescope help_tags<CR>",                         desc = "Nvim help" },
     { "<Leader>sk", "<cmd>Telescope keymaps<CR>",                           desc = "Keybindings" },
+    { "<Leader>sm", '<cmd>lua R("telescope.builtin").marks(require("telescope.themes").get_ivy())<CR>', desc = "Marks" },
     { "<Leader>sn", '<cmd>lua R("user.telescope").browse_nvim()<CR>',       desc = "Nvim config" },
     { "<Leader>sR", "<cmd>Telescope registers<CR>",                         desc = "Register values" },
     { "<Leader>sr", "<cmd>Telescope oldfiles<CR>",                          desc = "Recently opened files" },

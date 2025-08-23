@@ -127,16 +127,8 @@ return {
       local harpoon = require("harpoon")
       -- stylua: ignore start
       return {
-        {
-          "<Leader>A",
-          function()
-            harpoon:list():add()
-            Notify.info("Bookmark added!", { title = "Harpoon" })
-          end,
-          desc = "Add bookmark",
-         },
+        { "<Leader>A", function() harpoon:list():add(); Notify.info("Bookmark added!", { title = "Harpoon" }) end, desc = "Add bookmark", },
         { "<Leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Show bookmarks" },
-        { "<Leader>sm", "<cmd>Telescope harpoon marks<CR>",                         desc = "Search bookmarks" },
         { "[m", function() harpoon:list():prev() end,                               desc = "Prev bookmark" },
         { "]m", function() harpoon:list():next() end,                               desc = "Next bookmark" },
       }
