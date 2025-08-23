@@ -128,6 +128,7 @@ return {
       "hrsh7th/cmp-buffer", -- source for buffer words
       "hrsh7th/cmp-cmdline", -- cmdline completions
       "hrsh7th/cmp-nvim-lsp", -- source for neovim’s built-in LSP
+      "hrsh7th/cmp-nvim-lsp-signature-help", -- displaying function signatures
       "hrsh7th/cmp-nvim-lua", -- Neovim's Lua API
       "hrsh7th/cmp-path", -- path completions
       "chrisgrieser/cmp-nerdfont",
@@ -148,39 +149,36 @@ return {
           ["<C-]>"] = mapping.select_next_snippet_choice,
           ["<C-h>"] = mapping.select_prev_snippet_choice,
           ["<C-l>"] = mapping.select_next_snippet_choice,
-          ["<C-a>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-x>"] = cmp.mapping.scroll_docs(4),
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = mapping.apply_item_and_select_next,
-          -- Accept currently selected item. Set `select` to `false` to only confirm
-          -- explicitly selected items.
-          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<C-CR>"] = mapping.apply_item_and_select_next,
+          -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<S-CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            -- Accept currently selected item. Set `select` to `false` to only
-            -- confirm explicitly selected items.
-            select = true,
-          }),
+          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+          ["<S-CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
           ["<ESC>"] = function(fallback)
             cmp.abort()
             fallback()
           end,
           ["<Tab>"] = mapping.select_next_item,
-          ["<down>"] = mapping.select_next_item,
           ["<S-Tab>"] = mapping.select_prev_item,
+          ["<down>"] = mapping.select_next_item,
           ["<up>"] = mapping.select_prev_item,
         },
         sources = cmp.config.sources({
-          { name = "luasnip" },
+          { name = "luasnip", priority = 1 },
           {
             name = "nvim_lsp",
+            priority = 2,
             max_item_count = 10,
             entry_filter = better_vue.sources_entry_filter,
           },
-          { name = "path" },
-          { name = "nerdfont" },
-          { name = "buffer" },
+          { name = "buffer", priority = 3 },
+          { name = "path", priority = 4 },
+          { name = "nvim_lsp_signature_help" },
+          { name = "nerdfont", priority = 99 },
         }),
         snippet = {
           expand = function(args) require("luasnip").lsp_expand(args.body) end,
