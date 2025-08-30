@@ -1,0 +1,92 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [".github/copilot-instructions.md"],
+  "mcp": {
+    "context7": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "--interactive",
+        "--rm",
+        "--name",
+        "mcp-context7",
+        "context7-mcp"
+      ],
+      "enabled": true
+    },
+    "fetch": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "--interactive",
+        "--rm",
+        "--name",
+        "mcp-fetch",
+        "mcp/fetch"
+      ]
+    },
+    "github": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "--interactive",
+        "--rm",
+        "--name",
+        "mcp-github",
+        "--env",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "environment": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN"
+      }
+    }
+  },
+  "agent": {
+    "better-naming": {
+      "description": "Suggests better names for variables and more",
+      "mode": "subagent",
+      "prompt": "Please provide better names for the following variables and functions",
+      "temperature": 0.1,
+      "tools": { "write": false, "edit": false }
+    },
+    "code-review": {
+      "description": "Reviews code for best practices and potential issues",
+      "mode": "subagent",
+      "prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
+      "temperature": 0.1,
+      "tools": { "write": false, "edit": false }
+    },
+    "document": {
+      "description": "Write code documentation",
+      "mode": "subagent",
+      "prompt": "Please provide documentation for the following code.",
+      "temperature": 0.1,
+      "tools": { "write": true, "edit": true }
+    },
+    "refactor": {
+      "description": "Reviews code and refactors according the reviews finding",
+      "mode": "primary",
+      "prompt": "Please @code-review and refactor code according to the findings from the review",
+      "temperature": 0.1,
+      "tools": { "write": true, "edit": true }
+    },
+    "wording": {
+      "description": "Improve wording",
+      "mode": "subagent",
+      "prompt": "Please improve the grammar and wording of the following text.",
+      "temperature": 0.1,
+      "tools": { "write": false, "edit": false }
+    },
+    "translate": {
+      "description": "Translate to English",
+      "mode": "subagent",
+      "prompt": "Please translate all non-english wording into English.",
+      "temperature": 0.1,
+      "tools": { "write": true, "edit": true }
+    }
+  }
+}
