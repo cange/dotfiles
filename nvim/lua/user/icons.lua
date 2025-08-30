@@ -76,7 +76,6 @@ M.extensions = {
   Nuxt                = "󱄆", -- nf-md-nuxt
   Stylelint           = "", -- nf-seti-stylelint
   Yarn                = "", -- nf-seti-yarn
-  Css                 = "", -- nf-custom-css 
 }
 M.documents = {
   Briefcase           = "", -- nf-oct-briefcase

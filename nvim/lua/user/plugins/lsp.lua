@@ -33,37 +33,6 @@ user_lsp.ts_ls_settings = {
 }
 
 return {
-  { -- managing & installing LSP servers, linters & formatters
-    "mason-org/mason.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-    },
-    opts = {
-      ui = {
-        border = User.get_config("ui.border"),
-        icons = {
-          package_installed = Icon.ui.Check,
-          package_pending = Icon.ui.Sync,
-          package_uninstalled = Icon.ui.Close,
-        },
-      },
-      log_level = vim.log.levels.INFO,
-      max_concurrent_installers = 4,
-    },
-    keys = { { "<Leader>e2", "<cmd>Mason<CR>", desc = "Mason info" } },
-    config = function(_, opts)
-      require("mason").setup(opts)
-      -- loads formatter and linter
-      local linter = { "eslint", "jsonlint", "markdownlint", "markuplint", "rubocop", "stylelint", "yamllint" }
-      local formatter = { "prettier", "rubocop", "shfmt", "stylua", "html" }
-      require("mason-tool-installer").setup({
-        ensure_installed = vim.tbl_extend("force", {}, linter, formatter),
-        auto_update = true,
-      })
-    end,
-  },
-
   {
     "neovim/nvim-lspconfig",
     lazy = true,
@@ -79,14 +48,12 @@ return {
 
       local servers = {
         angularls = {},
-        cssls = {
-          settings = {
-            css = { lint = { unknownAtRules = "ignore" } },
-            scss = { lint = { unknownAtRules = "ignore" } },
-          },
-        },
+        cssls = {},
+        css_variables = { filetypes = { "css", "scss", "vue" } },
+        -- denols = {},
         eslint = {},
         html = {},
+        markdown_oxide = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -176,5 +143,36 @@ return {
     end,
     -- stylua: ignore
     keys = require("user.lsp").keymaps,
+  },
+
+  { -- managing & installing LSP servers, linters & formatters
+    "mason-org/mason.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
+    opts = {
+      ui = {
+        border = User.get_config("ui.border"),
+        icons = {
+          package_installed = Icon.ui.Check,
+          package_pending = Icon.ui.Sync,
+          package_uninstalled = Icon.ui.Close,
+        },
+      },
+      log_level = vim.log.levels.INFO,
+      max_concurrent_installers = 4,
+    },
+    keys = { { "<Leader>e2", "<cmd>Mason<CR>", desc = "Mason info" } },
+    config = function(_, opts)
+      require("mason").setup(opts)
+      -- loads formatter and linter
+      local linter = { "eslint", "jsonlint", "markdown_oxide", "markuplint", "rubocop", "stylelint", "yamllint" }
+      local formatter = { "prettier", "rubocop", "shfmt", "stylua", "html" }
+      require("mason-tool-installer").setup({
+        ensure_installed = vim.tbl_extend("force", {}, linter, formatter),
+        auto_update = true,
+      })
+    end,
   },
 }

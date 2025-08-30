@@ -138,4 +138,4 @@
 ---@field icon? string Path of an icon shape
 ---@field color? string Hex color value
 ---@field cterm_color? string
----@field name string
+---@field name? string
