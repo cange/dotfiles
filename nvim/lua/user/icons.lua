@@ -32,7 +32,7 @@ M.ui = {
   EyeClosed           = "", -- nf-cod-eye_closed
   Filter              = "", -- nf-cod-filter
   Globe               = "", -- nf-cod-globe
-  Lock                = "", -- nf-cod-lock
+  Lock                = "", -- nf-oct-lock
   Multiline           = "", -- nf-cod-word_wrap
   Library             = "", -- nf-cod-library
   Neovim              = "", -- nf-linux-neovim
@@ -53,7 +53,7 @@ M.ui = {
   Workspace           = "", -- nf-oct-briefcase
   -- shapes
   TriangleLeft        = "", -- nf-ple-lower_left_triangle
-  TriangleRight       = "", -- nf-ple-upper_right_trangleRight 
+  TriangleRight       = "", -- nf-ple-upper_right_triangle 
   HalfCircleLeft      = "", -- nf-ple-left_half_circle_thick 
   HalfCircleRight     = "", -- nf-ple-right_half_circle_thick
   LineLeft            = "▎", -- U+258E 

@@ -118,6 +118,17 @@ function M.browse_snippets()
   })
 end
 
+function M.browse_buffers()
+  builtin.buffers({
+    show_all_buffers = false,
+    ignore_current_buffer = true,
+    only_cwd = true,
+    initial_mode = "normal",
+    sort_lastused = true,
+    sort_mru = true,
+  })
+end
+
 function M.diagnostics_log()
   builtin.diagnostics(require("telescope.themes").get_ivy({
     bufnr = 0,

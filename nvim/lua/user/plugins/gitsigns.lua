@@ -26,9 +26,6 @@ return {
     keys = {
       { "[g", "<cmd>Gitsigns prev_hunk<CR>",                                    desc = "Pre Git hunk" },
       { "]g", "<cmd>Gitsigns next_hunk<CR>",                                    desc = "Next Git hunk" },
-      { "<Leader>gB", "<cmd>Telescope git_branches<CR>",                        desc = "Checkout branch" },
-      { "<Leader>gC", "<cmd>Telescope git_commits<CR>",                         desc = "Checkout commit" },
-      { "<Leader>go", "<cmd>Telescope git_status<CR>",                          desc = "Open changed file" },
       { "<Leader>gI", '<cmd>lua R("gitsigns").blame_line({ full = true })<CR>', desc = "Commit full info" },
       { "<Leader>gR", "<cmd>Gitsigns reset_buffer<CR>",                         desc = "Reset file" },
       { "<Leader>gS", "<cmd>Gitsigns stage_buffer<CR>",                         desc = "Stage file" },

@@ -99,10 +99,11 @@ return {
     },
     keys = {
       { "<Leader>ac", "<cmd>CopilotChatToggle<CR>", desc = "Toggle [copilot chat]", mode = { "n", "v" } },
+      { "<Leader>af", "<cmd>CopilotChatFix<cr>", desc = "Fix Diagnostic [copilot chat]", mode = { "n", "v" } },
       { "<Leader>am", "<cmd>CopilotChatModels<CR>", desc = "Switch Models [copilot chat]" },
       { "<Leader>ap", "<cmd>CopilotChatPrompts<CR>", desc = "Prompt [copilot chat]", mode = { "n", "v" } },
-      { "<Leader>as", "<cmd>CopilotChatStop<CR>", desc = "Stop [copilot chat]", mode = { "n", "v" } },
-      { "<Leader>ax", "<cmd>CopilotChatReset<CR>", desc = " Clear [copilot chat]", mode = { "n", "v" } },
+      { "<Leader>ah", "<cmd>CopilotChatStop<CR>", desc = "Stop [copilot chat]", mode = { "n", "v" } },
+      { "<Leader>ax", "<cmd>CopilotChatReset<CR>", desc = "Clear [copilot chat]", mode = { "n", "v" } },
     },
     config = function(_, opts)
       local select = require("CopilotChat.select")

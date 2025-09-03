@@ -1,73 +1,4 @@
 return {
-  { -- A collection of small convenience plugins
-    "folke/snacks.nvim",
-    priority = 1000,
-    version = "v2.*",
-    lazy = false,
-    opts = {
-      bigfile = { enabled = true },
-      dim = { animate = { enabled = false } },
-      indent = { animate = { enabled = false } },
-      input = { enabled = true },
-      lazygit = { theme = { activeBorderColor = { fg = "String", bold = true } } },
-      notifier = {
-        icons = {
-          error = Icon.diagnostics.Error,
-          warn = Icon.diagnostics.Warn,
-          info = Icon.diagnostics.Info,
-          debug = Icon.ui.Bug,
-          trace = Icon.ui.Edit,
-        },
-      },
-      notify = { enabled = true },
-      statuscolumn = {},
-      words = {},
-    },
-    keys = function()
-      local Snacks = require("snacks")
-      local toggler = Snacks.toggle
-      return {
-        { "<Leader>z", function() Snacks.zen.zoom() end, desc = "Toggle Zen" },
-        { "<LocalLeader>z", function() Snacks.dim() end, desc = "Toggle Dimming" },
-        { "<Leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-        { "<Leader>dd", function() toggler.diagnostics():toggle() end, desc = "[diag] Toggle highlighting" },
-        { "<Leader>en", function() Snacks.notifier.show_history() end, desc = "Show notfication" },
-        { "<Leader>em", function() Snacks.notifier.hide() end, desc = "Muted notfication" },
-        { "<Leader>,N", function() toggler.line_number():toggle() end, desc = "Toggle line numbers" },
-        { "<Leader>,n", function() toggler.option("relativenumber"):toggle() end, desc = "Toggle relative number" },
-        { "<Leader>,s", function() toggler.option("spell"):toggle() end, desc = "Toggle spelling" },
-        { "<Leader>,w", function() toggler.option("wrap"):toggle() end, desc = "Toggle wrap" },
-        { "<Leader>gf", function() Snacks.lazygit.log_file() end, desc = "Current File History" },
-        { "<Leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-      }
-    end,
-    init = function()
-      local Snacks = require("snacks")
-
-      -- notifications
-      Notify = Snacks.notify
-      Notify._info = Notify.info
-      ---@diagnostic disable-next-line: duplicate-set-field
-      Notify.info = function(msg, opts)
-        opts = opts or {}
-        local title = opts.title and type(opts.title) == "string" and opts.title or ""
-        opts.title = "user-config"
-        Notify._info(("[%s]: %s"):format(title or "", msg), opts)
-      end
-
-      -- debug
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "VeryLazy",
-        callback = function()
-          -- Setup some globals for debugging (lazy-loaded)
-          ---@diagnostic disable-next-line: duplicate-set-field
-          _G.dd = function(...) Snacks.debug.inspect(...) end
-          vim.print = _G.dd -- Override print to use snacks for `:=` command
-        end,
-      })
-    end,
-  },
-
   -- advanced colorcolumn
   { "lukas-reineke/virt-column.nvim", opts = { char = Icon.ui.LineThin } },
 
@@ -113,6 +44,185 @@ return {
       { "<Leader>ts", "<cmd>Trouble symbols toggle focus=false<CR>", desc = "Symbols" },
       { "<Leader>dt", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "[diag] Buffer panel" },
       { "<Leader>dT", "<cmd>Trouble diagnostics toggle<CR>", desc = "[diag] All panel" },
+    },
+  },
+
+  -- multi search and replace
+  { "mg979/vim-visual-multi", event = "VeryLazy" },
+
+  { -- allows to surround sections parentheses, brackets, quotes, XML tags, and more
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = function(_, opts) require("nvim-surround").setup(opts) end,
+  },
+
+  { -- highlight TODO, FIXME, etc in comments
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      keywords = {
+        FIX = { icon = "" },
+        NOTE = { icon = "" },
+        TODO = { icon = "" },
+      },
+    },
+  },
+
+  { -- text case converter (camel case, etc.,
+    "johmsalas/text-case.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("textcase").setup()
+      require("telescope").load_extension("textcase")
+    end,
+    keys = {
+      { "cc", "<cmd>TextCaseOpenTelescopeQuickChange<CR>", desc = "Change Case", mode = { "v", "n" } },
+    },
+  },
+
+  { -- autoclose and autorename html tags
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    opts = {},
+  },
+
+  { -- close brackets, quotes etc
+    "windwp/nvim-autopairs",
+    lazy = true,
+    event = { "InsertEnter" },
+    config = function()
+      require("nvim-autopairs").setup({
+        check_ts = true, -- enable Tree-Sitter
+        disable_filetype = { "markdown" },
+        ts_config = {
+          lua = { "string" }, -- it will not add a pair on that treesitter node
+          javascript = { "template_string" },
+        },
+      })
+
+      -- make autopairs and completion work together
+      -- If you want insert `(` after select function or method item
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      local ok, cmp = pcall(require, "cmp")
+      if not ok then error('"cmp" not found') end
+
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    end,
+  },
+
+  { -- Markdown preview
+    "toppair/peek.nvim",
+    event = "InsertEnter",
+    build = "deno task --quiet build:fast",
+    opts = { -- https://github.com/toppair/peek.nvim
+      auto_load = true, -- whether to automatically load preview when entering another markdown buffer
+      close_on_bdelete = true, -- close preview window on buffer delete
+      syntax = true, -- enable syntax highlighting, affects performance
+      theme = "dark", -- 'dark' or 'light'
+      update_on_change = true,
+      app = "browser", -- open in target 'webview', 'browser'
+      -- relevant if update_on_change is true
+      throttle_at = 200000, -- start throttling when file exceeds this amount of bytes in size
+      throttle_time = "auto", -- minimum amount of time in milliseconds that has to pass before starting new render
+    },
+    keys = {
+      {
+        "<LocalLeader>m",
+        function()
+          local method = require("peek").is_open() and "close" or "open"
+          Notify.info(method, { title = "Markdown Preview" })
+          require("peek")[method]()
+        end,
+        desc = "Toggle Markdown Preview",
+      },
+    },
+  },
+
+  { -- search jump to any vertical/horizontal location
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      { "s", function() require("flash").jump() end, desc = "Flash", mode = { "n", "o", "x" } },
+      { "S", function() require("flash").treesitter() end, desc = "Flash Treesitter", mode = { "n", "o", "x" } },
+      { "r", function() require("flash").remote() end, desc = "Remote Flash", mode = "o" },
+      { "R", function() require("flash").treesitter_search() end, desc = "Treesitter Search", mode = { "o", "x" } },
+      { "<c-s>", function() require("flash").toggle() end, desc = "Toggle Flash Search", mode = "c" },
+    },
+  },
+
+  { -- Hex color highlighter
+    "brenoprata10/nvim-highlight-colors",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      enable_tailwind = true,
+      exclude_filetypes = { "lazy" },
+    },
+    keys = {
+      { "<Leader>ct", "<cmd>HighlightColors Toggle<CR>", desc = "Toggle Highlight Colors" },
+    },
+  },
+
+  { -- Toggle booleans and common string values eg. true/false, endable/disable, etc
+    "nat-418/boole.nvim",
+    event = "VeryLazy",
+    opts = {
+      mappings = {
+        increment = "<C-a>",
+        decrement = "<C-x>",
+      },
+      additions = {
+        { "flex", "block", "inline-flex", "inline-block", "inline", "none" },
+        { "red", "magenta", "cyan", "yellowgreen", "lime", "purple", "pink" },
+        { "solid", "dashed", "dotted", "double", "none", "groove", "ridge", "inset", "outset" },
+        { "left", "right" },
+        { "up", "down", "only" },
+        { "desktop", "tablet", "mobile" },
+      },
+    },
+  },
+
+  { -- diff two separate blocks of text
+    "AndrewRadev/linediff.vim",
+    event = { "CursorMoved" },
+    keys = {
+      { "<Leader>dl", ":Linediff<CR>", desc = "[diff] Line", mode = { "v" } },
+      { "<Leader>da", ":LinediffAdd<CR>", desc = "[diff] Add line", mode = { "v" } },
+      { "<Leader>dL", ":LinediffLast<CR>", desc = "[diff] Last line", mode = { "v" } },
+      { "<Leader>dr", ":LinediffReset<CR>", desc = "[diff] Reset line", mode = { "n", "v" } },
+      { "<Leader>ds", ":LinediffShow<CR>", desc = "[diff] Show line", mode = { "n", "v" } },
+    },
+  },
+
+  { -- testing toggle util
+    "cange/specto.nvim",
+    lazy = false,
+    version = "v0.4.*",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    opts = {
+      exclude = {
+        filetypes = {
+          "",
+          "NvimTree",
+          "TelescopePrompt",
+          "gitcommit",
+          "markdown",
+          "harpoon",
+          "help",
+          "lazy",
+          "mason",
+        },
+      },
+    },
+    keys = {
+      { "<LocalLeader>o", "<cmd>Specto toggle only<CR>", desc = "Toggle [only] test" },
+      { "<LocalLeader>s", "<cmd>Specto toggle skip<CR>", desc = "Toggle [skip] test" },
+      { "<LocalLeader>t", "<cmd>Specto toggle todo<CR>", desc = "Toggle [todo] test" },
+      { "[t", "<cmd>Specto jump prev<CR>", desc = "Go to previous test toggle" },
+      { "]t", "<cmd>Specto jump next<CR>", desc = "Go to next test toggle" },
     },
   },
 }

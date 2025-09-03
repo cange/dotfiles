@@ -1,9 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-  "diagnostics.globals": ["vim", "P", "Cange", "ignore"],
+  "diagnostics.globals": ["vim", "P", "User", "ignore"],
   "diagnostics.disable": [
     "duplicate-doc-alias",
     "unused-argument-self",
-    "duplicate-doc-field"
+    "duplicate-doc-field",
+    "undefined-field"
   ]
 }

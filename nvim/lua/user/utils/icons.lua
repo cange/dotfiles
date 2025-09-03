@@ -102,6 +102,3 @@ function M.get_service_icons()
 end
 
 return M
---#region Types
-
---#endregion

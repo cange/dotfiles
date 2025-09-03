@@ -22,10 +22,11 @@ local keymaps = {
   { "j", ":move'>+<CR>='[gv", { desc = "Line move: down" }, { "v" } },
   { "k", ":move-2<CR>='[gv", { desc = "Line move: up" }, { "v" } },
 
-  { "<C-M-left>", "<C-W>5<", { desc = "Resize left" } },
-  { "<C-M-down>", "<C-W>-", { desc = "Resize down" } },
-  { "<C-M-up>", "<C-W>+", { desc = "Resize up" } },
-  { "<C-M-right>", "<C-W>5>", { desc = "Resize right" } },
+  { "<C-M-left>", "<C-W>5<", { desc = "Resize left window" } },
+  { "<C-M-down>", "<C-W>-", { desc = "Resize down window" } },
+  { "<C-M-up>", "<C-W>+", { desc = "Resize up window" } },
+  { "<C-M-right>", "<C-W>5>", { desc = "Resize right window" } },
+  { "<leader>=", ":wincmd =<CR>", { desc = "Equalize windows" } },
 
   -- Window movements
   { "w<left>", "<C-w>h", { desc = "Switch to left" } },
