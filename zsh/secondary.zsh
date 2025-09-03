@@ -21,12 +21,14 @@ fi
 # bat ---
 
 # --- bun
-if [[ -s "$HOME/.bun" ]]; then
+if [[ -d "$HOME/.bun" ]]; then
   export BUN_INSTALL="$HOME/.bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
-  source "$HOME/.bun/_bun"
 fi
-# bun ---
+
+fpath=("$HOME/.zfunc" $fpath)
+autoload -Uz compinit && compinit -C-
+# --- bun
 
 # --- asdf
 # enable asdf package managers

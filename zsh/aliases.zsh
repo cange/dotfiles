@@ -281,7 +281,7 @@ alias ygu="yarn global upgrade"
 # see: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/yarn/yarn.plugin.zsh
 alias pn="pnpm"
 alias pni="pnpm install"
-alias pnid="pnpm add --dev"
+alias pnid="pnpm add -D"
 alias pnb="pnpm build"
 alias pnbd="pnpm build:dev"
 alias pncc="pnpm cache clean"
