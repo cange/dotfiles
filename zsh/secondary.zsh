@@ -4,8 +4,8 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/bin:/sbin:$PATH"
 # One may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# To link Rubies to Homebrew's OpenSSL 1.1
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+# To link Rubies to Homebrew's OpenSSL 3 / ruby neeed to be installed/compiled with the exact version
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
 # --- Git GPG key setup
 # https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key

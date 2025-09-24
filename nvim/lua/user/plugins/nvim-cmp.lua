@@ -132,6 +132,7 @@ return {
       "hrsh7th/cmp-nvim-lua", -- Neovim's Lua API
       "hrsh7th/cmp-path", -- path completions
       "chrisgrieser/cmp-nerdfont",
+      "windwp/nvim-autopairs",
     },
     config = function()
       local cmp = require("cmp")
@@ -200,6 +201,9 @@ return {
       })
 
       cmp.event:on("menu_closed", better_vue.on_menu_closed)
+
+      -- If you want insert `(` after select function or method item
+      cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 
       -- https://github.com/hrsh7th/cmp-cmdline
       cmp.setup.cmdline("/", {

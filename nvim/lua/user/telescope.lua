@@ -110,6 +110,13 @@ function M.browse_nvim()
   })
 end
 
+function M.browse_obsidian(target_dir)
+  builtin.find_files({
+    cwd = "~/Dropbox/Apps/Obsidian/" .. target_dir,
+    prompt_title = "Obsidian",
+  })
+end
+
 function M.browse_snippets()
   builtin.find_files({
     cwd = "~/.config/snippets",
@@ -152,9 +159,20 @@ function M.browse_associated_files()
   local file_name = vim.fn.expand("%:t:r")
   if file_name:find("%.") then file_name = file_name:match("^(.-)%.") end -- strip to origin name e.g. foo.bar => foo
 
+  -- Rails detection
+  local is_rails = vim.fn.filereadable("Gemfile") == 1
+  local base_name = file_name:gsub("_controller$", ""):gsub("_spec$", ""):gsub("_test$", "")
+  -- stylua: ignore start
+  local patterns = is_rails and { "**/" .. base_name .. "*", "**/" .. base_name .. "s*", --[[plural]] "**/" .. base_name .. "_*", "**/" .. file_name .. "*", } or { file_name .. "*.*" }
+
+  local find_command = { "rg", "--files" }
+  for _, pattern in ipairs(patterns) do
+    vim.list_extend(find_command, { "--iglob", pattern })
+  end
+
   builtin.find_files({
     prompt_title = Icon.ui.Beaker .. " Find Files (associated files)",
-    find_command = { "rg", "--files", "--iglob", file_name .. ".*" },
+    find_command = find_command,
   })
 end
 

@@ -21,3 +21,13 @@ cask "nordpass"
 cask "raycast"
 # Music streaming service
 cask "spotify"
+
+### Ruby stack ================================================================
+# Cryptography and SSL/TLS Toolkit
+cask "openssl@3"
+# GNU multiple precision arithmetic library
+cask "libyaml"
+# Safe, concurrent, practical language
+cask "gmp"
+# YAML Parser
+cask "rust"

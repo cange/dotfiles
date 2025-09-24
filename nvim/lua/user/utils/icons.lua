@@ -75,29 +75,36 @@ function M.get_service_icons()
   redefine_icons() -- ensure all icons are set
 
   return {
+    angularls = "󰚲", -- nf-md-angular
+    css_variables = "", -- nf-dev-css3
     cssls = grep_icon("css"),
-    css_variables = grep_icon("css"),
+    deno_ls = "", -- nf-dev-denojs
     eslint = grep_icon(".eslintrc"),
+    html = grep_icon("html"),
     jsonlint = grep_icon("json"),
     jsonls = grep_icon("json"),
     lua_ls = grep_icon("lua"),
+    markdown_oxide = " ", -- nf-cod-markdown
     markdownlint = grep_icon("md"),
-    markdown_oxide = "ox" .. grep_icon("md"),
     markuplint = grep_icon("html"),
     prettier = grep_icon(".prettierrc"),
     prettierd = grep_icon(".prettierrc") .. " d",
-    rubocop = grep_icon("rb"),
-    ruby_lsp = grep_icon("rb"),
     stylelint = grep_icon(".stylelint"),
+    stylelint_lsp = presets.stylelint.icon,
     stylua = grep_icon("lua"),
     superhtml = "s" .. grep_icon("html"),
-    html = grep_icon("html"),
     tailwindcss = grep_icon("tailwind.config.js"),
     trim_whitespace = "󱁐",
     ts_ls = grep_icon("ts"),
-    vue_ls = grep_icon("vue"),
     vtsls = "󰛦", -- nf-md-language_typescripts
-    angularls = "󰚲", -- nf-md-angular
+    vue_ls = grep_icon("vue"),
+    -- ruby/rails
+    erb_format = "", -- nf-cod-ruby
+    standardrb = "", -- nf-oct-ruby
+    herb_ls = "󰌪", -- nf-md-leaf - herb=rails lsp support
+    rubocop = grep_icon("rb"),
+    ruby_lsp = grep_icon("rb"),
+    stimulus_ls = "󰫏 ", -- nf-md-language_ruby_on_rails
   }
 end
 

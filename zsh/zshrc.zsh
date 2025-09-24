@@ -31,7 +31,8 @@ _source_if_exists "$HOME/.config/secrets/zsh"
 
 # --- Homebrew Setup
 if [[ $(uname -p) == "arm" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)" # M1+ Mac
+  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH" # Ensure Homebrew paths come first
+  eval "$(/opt/homebrew/bin/brew shellenv)"                # M1+ Mac
 else
   eval "$(/usr/local/bin/brew shellenv)" # Intel Mac
 fi
