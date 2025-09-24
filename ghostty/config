@@ -1,10 +1,10 @@
-theme = light:AtomOneLight,dark:terafox
+theme = light:Atom One Light,dark:terafox
 
 background-blur-radius = 40
 background-opacity = 0.84
 
 window-colorspace = display-p3
-window-padding-x = 8
+window-padding-x = 4
 window-padding-y = 4,2
 window-padding-balance = true
 window-padding-color = background

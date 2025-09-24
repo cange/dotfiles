@@ -12,7 +12,10 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+  # https://github.com/FelixKratz/JankyBorders?tab=readme-ov-file#bootstrap-with-aerospace
+  'exec-and-forget borders active_color=0xffcbd9d8 inactive_color=0x00000000 width=4.0'
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -189,7 +192,7 @@ check-further-callbacks = true
 
 [[on-window-detected]]
 if.app-id = 'com.DanPristupov.Fork'
-run = ["layout floating", "move-node-to-workspace 4"]
+run = ["move-node-to-workspace 4"]
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
@@ -233,3 +236,4 @@ run = ['layout floating', 'move-node-to-workspace 4']
   2 = ['dell.*\(2\)', 'C34H89x', 'main' ]
   3 = ['dell.*\(1\)', 'main' ]
   4 = ['dell.*\(1\)', 'C34H89x', 'main' ]
+
