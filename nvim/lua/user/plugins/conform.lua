@@ -28,6 +28,7 @@ return {
   cmd = { "ConformInfo" },
   opts = {
     formatters_by_ft = {
+
       bash = { "shfmt" },
       css = prettier_preset,
       html = { "html" },
@@ -35,13 +36,15 @@ return {
       jsonc = prettier_preset,
       lua = { "stylua" },
       markdown = prettier_preset,
-      ruby = { "rubocop" },
       scss = prettier_preset,
       shell = { "shfmt" },
       svg = { "html" },
+      xml = { "html" },
       yaml = prettier_preset,
       zsh = { "shfmt" },
-      xml = { "html" },
+      -- ruby/rails
+      eruby = { "html" },
+      ruby = { "rubocop" },
       -- js
       javascript = prettier_preset,
       javascriptreact = prettier_preset,

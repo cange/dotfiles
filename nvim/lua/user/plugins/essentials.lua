@@ -85,7 +85,11 @@ return {
     "windwp/nvim-ts-autotag",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = "nvim-treesitter/nvim-treesitter",
-    opts = {},
+    opts = {
+      aliases = {
+        ["eruby"] = "html",
+      },
+    },
   },
 
   { -- close brackets, quotes etc
@@ -101,14 +105,6 @@ return {
           javascript = { "template_string" },
         },
       })
-
-      -- make autopairs and completion work together
-      -- If you want insert `(` after select function or method item
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      local ok, cmp = pcall(require, "cmp")
-      if not ok then error('"cmp" not found') end
-
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
 

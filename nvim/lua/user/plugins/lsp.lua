@@ -47,13 +47,6 @@ return {
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
 
       local servers = {
-        -- angularls = {},
-        cssls = {},
-        css_variables = { filetypes = { "css", "scss", "vue" } },
-        -- denols = {},
-        eslint = {},
-        html = {},
-        markdown_oxide = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -69,8 +62,20 @@ return {
             },
           },
         },
+
+        -- CSS
+        stylelint_lsp = {},
+        cssls = {},
+        css_variables = { filetypes = { "css", "scss", "vue", "eruby" } },
+
+        -- ruby
+        herb_ls = {},
         ruby_lsp = {},
-        -- javascript, typescript, etc.
+        stimulus_ls = {},
+
+        -- JavaScript / TypeScript, etc.
+        -- angularls = {},
+        -- denols = {},
         ts_ls = {
           -- ensure that workspace config files are used
           root_dir = require("lspconfig").util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git"),
@@ -102,6 +107,11 @@ return {
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
         },
         vue_ls = {},
+
+        -- misc
+        eslint = {},
+        html = {},
+        markdown_oxide = {},
         jsonls = {
           settings = {
             json = {
@@ -167,8 +177,8 @@ return {
     config = function(_, opts)
       require("mason").setup(opts)
       -- loads formatter and linter
-      local linter = { "eslint", "jsonlint", "markdown_oxide", "markuplint", "rubocop", "stylelint", "yamllint" }
-      local formatter = { "prettier", "rubocop", "shfmt", "stylua", "html" }
+      local linter = { "eslint", "jsonlint", "markdown_oxide", "markuplint", "stylelint", "yamllint" }
+      local formatter = { "prettier", "shfmt", "stylua", "html" }
       require("mason-tool-installer").setup({
         ensure_installed = vim.tbl_extend("force", {}, linter, formatter),
         auto_update = true,

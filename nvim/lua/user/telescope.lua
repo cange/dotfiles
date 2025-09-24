@@ -110,6 +110,13 @@ function M.browse_nvim()
   })
 end
 
+function M.browse_obsidian(target_dir)
+  builtin.find_files({
+    cwd = "~/Dropbox/Apps/Obsidian/" .. target_dir,
+    prompt_title = "Obsidian",
+  })
+end
+
 function M.browse_snippets()
   builtin.find_files({
     cwd = "~/.config/snippets",
@@ -148,13 +155,42 @@ function M.browse_workspace()
   })
 end
 
+---@param file_name string
+---@return nil|table
+local function get_rails_browse_files_config(file_name)
+  local is_rails = vim.fn.filereadable("Gemfile") == 1
+  if not is_rails then return nil end
+
+  local current_dir = vim.fn.expand("%:h:t")
+  local is_erb = vim.bo.filetype == "eruby"
+ -- stylua: ignore start
+  local search_name = (is_rails and is_erb and current_dir ~= "." and current_dir ~= "layouts") and current_dir or file_name
+  local base_name = search_name:gsub("_controller$", ""):gsub("_spec$", ""):gsub("_test$", "")
+  local patterns = {
+    "**/" .. base_name .. "*",
+    "**/" .. base_name .. "s*", -- plural
+    "**/" .. base_name .. "_*",
+    "**/" .. search_name .. "*",
+    "**/views/" .. base_name .. "/*",
+  }
+
+  return patterns
+end
+
 function M.browse_associated_files()
   local file_name = vim.fn.expand("%:t:r")
   if file_name:find("%.") then file_name = file_name:match("^(.-)%.") end -- strip to origin name e.g. foo.bar => foo
+  local rails_patterns = get_rails_browse_files_config(file_name)
+  local patterns = rails_patterns and rails_patterns or { file_name .. "*.*" }
+
+  local find_command = { "rg", "--files" }
+  for _, pattern in ipairs(patterns) do
+    vim.list_extend(find_command, { "--iglob", pattern })
+  end
 
   builtin.find_files({
     prompt_title = Icon.ui.Beaker .. " Find Files (associated files)",
-    find_command = { "rg", "--files", "--iglob", file_name .. ".*" },
+    find_command = find_command,
   })
 end
 

@@ -9,11 +9,11 @@ return {
       html = { "markuplint" },
       json = { "jsonlint" },
       markdown = { "markdownlint" },
-      ruby = { "rubocop" },
       scss = { "stylelint" },
       svg = { "markuplint" },
       xml = { "markuplint" },
       yaml = { "yamllint" },
+      ruby = { "rubocop" },
       -- js
       javascript = { "eslint" },
       typescript = { "eslint" },
