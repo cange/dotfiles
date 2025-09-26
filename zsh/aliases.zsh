@@ -173,18 +173,24 @@ alias gstp='git stash pop'
 #
 # --- npm
 if command -v npm &>/dev/null; then
-  command rm -f "${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
-
-  _npm_completion() {
-    local si=$IFS
-    compadd -- $(COMP_CWORD=$((CURRENT - 1)) \
-      COMP_LINE=$BUFFER \
-      COMP_POINT=0 \
-      npm completion -- "${words[@]}" \
-      2>/dev/null)
-    IFS=$si
+  # Lazy load npm completion
+  _npm_completion_lazy() {
+    unfunction $0
+    command rm -f "${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
+    
+    _npm_completion() {
+      local si=$IFS
+      compadd -- $(COMP_CWORD=$((CURRENT - 1)) \
+        COMP_LINE=$BUFFER \
+        COMP_POINT=0 \
+        npm completion -- "${words[@]}" \
+        2>/dev/null)
+      IFS=$si
+    }
+    compdef _npm_completion npm
+    _npm_completion "$@"
   }
-  compdef _npm_completion npm
+  compdef _npm_completion_lazy npm
 fi
 
 # Check which npm modules are outdated

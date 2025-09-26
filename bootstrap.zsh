@@ -11,13 +11,7 @@ local is_uninstall=0
 declare -A tool_colors
 
 # --- helpers ---
-# helpers ---
 source "${dotfiles}/zsh/helpers.zsh"
-function warn() {     printf "%s %s\n" "$(_chalk "yellow" "▲")" "$1" }
-function error () {   printf "%s %s\n" "$(_chalk "red"    "✕")" "$1" }
-function info() {     printf "%s %s\n" "$(_chalk "blue"   "ℹ︎")" "$1" }
-function log() {      printf "%s %s\n" "$(_chalk "bold"   "⇒")" "$1" }
-function success () { printf "%s %s\n" "$(_chalk "green"  "✓")" "$1" }
 
 # Generate a unique color for each tool name
 function define_tool_color() {
@@ -28,7 +22,6 @@ function define_tool_color() {
     tool_colors[$name]=${colors[$color_index]}
   fi
 }
-
 
 # realpath polyfil for macos M1+
 function realpath_polyfill() {
@@ -50,13 +43,13 @@ function execute_brewfile() {
   local brewfile=$1
 
   if [[ $is_uninstall == 1 ]]; then
-    info "Uninstall packages of $(_chalk "cyan" "$brewfile")"
+    _info "Uninstall packages of $(_chalk "cyan" "$brewfile")"
   else
-    info "Install packages for $(_chalk "cyan" "$brewfile")";
+    _info "Install packages for $(_chalk "cyan" "$brewfile")"
   fi
 
   if [[ ! -f $brewfile ]]; then
-    warn "Brewfile not found at the specified path: $brewfile"
+    _warn "Brewfile not found at the specified path: $brewfile"
     echo ""
     return 1
   fi
@@ -68,19 +61,21 @@ function execute_brewfile() {
         local package brew_cmd
         local cmd="uninstall"
 
-        if [[ $line == cask\ * ]]; then opts+=" --cask";
-        elif [[ $line == tap\ * ]]; then cmd="untap";
+        if [[ $line == cask\ * ]]; then
+          opts+=" --cask"
+        elif [[ $line == tap\ * ]]; then
+          cmd="untap"
         fi
         package=$(echo $line | cut -d ' ' -f 2 | cut -d "," -f 1)
         brew_cmd="brew ${cmd}${opts} ${package}"
 
-        log "$brew_cmd"
+        _log "$brew_cmd"
         $(eval echo "$brew_cmd")
       fi
     done
   else
     local brew_cmd="brew bundle${opts} --file=$brewfile"
-    log "$brew_cmd"
+    _log "$brew_cmd"
     $(eval echo "$brew_cmd")
   fi
   echo ""
@@ -88,7 +83,7 @@ function execute_brewfile() {
 
 function find_brewfiles() {
   if ! command -v brew >/dev/null 2>&1; then
-    warn "Homebrew is not installed. Check out https://docs.brew.sh/Installation"
+    _warn "Homebrew is not installed. Check out https://docs.brew.sh/Installation"
     return 1
   fi
 
@@ -115,13 +110,11 @@ function execute_symlink() {
       errors+=("$(_chalk "bold" "unlink:") No such file or directory $(_chalk "cyan" "$dest")")
     fi
   else
-    if [[ -d "$dest_dir" ]]; then
+    if [[ ! -d "$dest_dir" ]]; then
       command mkdir -p "$dest_dir"
-      command ln -nsf "$src" "$dest"
-      logs+=("create $(_chalk "$color" "$tool_name") symlink $(_chalk "cyan" "$dest") -> $(_chalk "cyan" "$src")")
-    else
-      errors+=("symlink: No such file or directory $(_chalk "cyan" "$dest_dir")")
     fi
+    command ln -nsf "$src" "$dest"
+    logs+=("create $(_chalk "$color" "$tool_name") symlink $(_chalk "cyan" "$dest") -> $(_chalk "cyan" "$src")")
   fi
 }
 
@@ -137,22 +130,22 @@ function find_symlinks() {
 }
 
 function log_summary() {
-  info "A total of $(_chalk "bold" "${#logs[@]}") symlinks have been updated:"
+  _info "A total of $(_chalk "bold" "${#logs[@]}") symlinks have been updated:"
   for msg in "${logs[@]}"; do
-    log $msg
+    _log $msg
   done
   echo ""
-  success "Successfully completed."
+  _success "Successfully completed."
   logs=() # reset
 }
 
 function error_summary() {
-  info "Errors occurred during installation:"
+  _info "Errors occurred during installation:"
   for msg in "${errors[@]}"; do
-    log $msg
+    _log $msg
   done
   echo ""
-  error "Completed with $(_chalk "bold" "${#errors[@]}") errors!" >&2
+  _error "Completed with $(_chalk "bold" "${#errors[@]}") errors!" >&2
   errors=() # reset
   exit 1
 }
@@ -172,29 +165,29 @@ function perform_install() {
   local brew_selected=0
   local link_selected=0
 
-  while (( $# > 0 )); do
+  while (($# > 0)); do
     case "$1" in
-      --brew)
-        brew_selected=1
-        all_selected=0
-        shift
-        ;;
-      --link)
-        link_selected=1
-        all_selected=0
-        shift
-        ;;
-      --verbose)
-        is_verbose=1
-        shift
-        ;;
-      *)
-        all_selected=0
-        info "Unknown option: $(_chalk "yellow" $1)"
-        echo ""
-        help
-        exit 1
-        ;;
+    --brew)
+      brew_selected=1
+      all_selected=0
+      shift
+      ;;
+    --link)
+      link_selected=1
+      all_selected=0
+      shift
+      ;;
+    --verbose)
+      is_verbose=1
+      shift
+      ;;
+    *)
+      all_selected=0
+      info "Unknown option: $(_chalk "yellow" $1)"
+      echo ""
+      help
+      exit 1
+      ;;
     esac
   done
   [[ $brew_selected == 1 ]] || [[ $all_selected == 1 ]] && find_brewfiles
@@ -205,7 +198,7 @@ function perform_install() {
 # --- interface ---
 #
 function help {
-echo "$(_chalk "bold" "Usage:") $script_name <command> [options]
+  echo "$(_chalk "bold" "Usage:") $script_name <command> [options]
 Handles the setup of the dotfile configuration.
 
 $(_chalk "bold" "Commands:")
@@ -221,20 +214,20 @@ $(_chalk "bold" "Options:")
 }
 # Main script logic
 case "$1" in
-  install)
-    shift
-    is_uninstall=0
-    perform_install "$@"
-    ;;
-  uninstall)
-    shift
-    is_uninstall=1
-    perform_install "$@"
-    ;;
-  *)
-    info "Unknown command: $(_chalk "yellow" $1)"
-    echo ""
-    help
-    exit 1
-    ;;
+install)
+  shift
+  is_uninstall=0
+  perform_install "$@"
+  ;;
+uninstall)
+  shift
+  is_uninstall=1
+  perform_install "$@"
+  ;;
+*)
+  info "Unknown command: $(_chalk "yellow" $1)"
+  echo ""
+  help
+  exit 1
+  ;;
 esac
