@@ -1,5 +1,8 @@
 # User configuration
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/bin:/sbin:$PATH"
+# Add system paths if not already present (homebrew should come first)
+_add_to_path "/usr/local/bin"
+_add_to_path "/usr/local/sbin"
+_add_to_path "/usr/sbin"
 
 # One may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -23,30 +26,25 @@ fi
 # --- bun
 if [[ -d "$HOME/.bun" ]]; then
   export BUN_INSTALL="$HOME/.bun"
-  export PATH="$BUN_INSTALL/bin:$PATH"
+  _add_to_path "$BUN_INSTALL/bin"
+  # Add bun completions to fpath if directory exists
+  [[ -d "$HOME/.zfunc" ]] && fpath=("$HOME/.zfunc" $fpath)
 fi
-
-fpath=("$HOME/.zfunc" $fpath)
-autoload -Uz compinit && compinit -C-
 # --- bun
 
 # --- asdf
 # enable asdf package managers
 # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+_add_to_path "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
 
 # append completions to fpath
 fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
-# initialise completions with ZSH's compinit
-autoload -Uz compinit && compinit -C # `-C` skip recompiling dump file if it hasn't changed
+# Note: compinit is handled centrally in zshrc.zsh
 export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
 # asdf ---
 
-#
-# --- fzf
-# see https://github.com/mrnugget/dotfiles/blob/master/zshrc#L496
-_source_if_exists "$(brew --prefix)/opt/fzf/shell/completion.zsh"
-_source_if_exists "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+# --- fzf (lazy load key bindings)
+# Set up fzf environment and theme immediately (lightweight)
 if type fzf &>/dev/null; then
   # Theme: Nightfox/Style: terafox
   # https://github.com/EdenEast/nightfox.nvim/tree/main/extra/terafox
@@ -61,12 +59,30 @@ if type fzf &>/dev/null; then
 
     if type bat &>/dev/null; then
       export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
-    else
-      echo "bat is not installed, skipping FZF_CTRL_T_OPTS"
     fi
-  else
-    echo "fd is not installed, skipping FZF_DEFAULT_COMMAND"
   fi
+
+  # Function to properly load fzf bindings when needed
+  _load_fzf_bindings() {
+    # Remove this temporary function
+    unfunction _load_fzf_bindings
+    
+    # Source the real fzf files
+    local brew_prefix="$(brew --prefix)"
+    _source_if_exists "$brew_prefix/opt/fzf/shell/completion.zsh"
+    _source_if_exists "$brew_prefix/opt/fzf/shell/key-bindings.zsh"
+    
+    # Execute the widget that was originally requested
+    case $KEYS in
+      $'\C-t') zle fzf-file-widget ;;
+      $'\C-r') zle fzf-history-widget ;;
+    esac
+  }
+  
+  # Create temporary widget and bind keys
+  zle -N _load_fzf_bindings
+  bindkey '^T' _load_fzf_bindings  # fzf-file-widget
+  bindkey '^R' _load_fzf_bindings  # fzf-history-widget
 fi
 # fzf ---
 #
