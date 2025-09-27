@@ -9,8 +9,6 @@
         "run",
         "--interactive",
         "--rm",
-        "--name",
-        "mcp-context7",
         "context7-mcp"
       ],
       "enabled": true
@@ -22,8 +20,6 @@
         "run",
         "--interactive",
         "--rm",
-        "--name",
-        "mcp-fetch",
         "mcp/fetch"
       ]
     },
@@ -34,8 +30,6 @@
         "run",
         "--interactive",
         "--rm",
-        "--name",
-        "mcp-github",
         "--env",
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "ghcr.io/github/github-mcp-server"
@@ -50,7 +44,7 @@
       "description": "Suggests better names for variables and more",
       "mode": "subagent",
       "prompt": "Please provide better names for the following variables and functions",
-      "temperature": 0.1,
+      "temperature": 0.2,
       "tools": { "write": false, "edit": false }
     },
     "code-review": {
@@ -69,8 +63,15 @@
     },
     "refactor": {
       "description": "Reviews code and refactors according the reviews finding",
-      "mode": "primary",
+      "mode": "subagent",
       "prompt": "Please @code-review and refactor code according to the findings from the review",
+      "temperature": 0.1,
+      "tools": { "write": true, "edit": true }
+    },
+    "conflict": {
+      "description": "Resolve git conflicts",
+      "mode": "subagent",
+      "prompt": "Please resolve the current git conflict. Consider reviewing the git history to solve the issue",
       "temperature": 0.1,
       "tools": { "write": true, "edit": true }
     },
