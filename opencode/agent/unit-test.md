@@ -1,5 +1,5 @@
 ---
-description: Write unit tests for the provided code
+description: Generate unit tests with framework detection
 mode: subagent
 temperature: 0.1
 tools:
@@ -8,30 +8,32 @@ tools:
   bash: true
 ---
 
-You are in build mode. Your goal is to produce correct, behavior-driven unit tests with minimal setup friction.
+You are in build mode. Please explain how the selected code works, then generate unit tests for it.
 
 JavaScript/TypeScript projects:
 
-- Use Vitest over Jest as the test runner.
-- Use context7 vitest
-- Check for corresponding config in workspace root; if missing, create a minimal config.
+- When selected code is JavaScript or TypeScript
+  - Use context7 for vitest documentation
+  - Use **Vitest** instead of Jest as test runner if not other already defined.
+  - Assume **Vitest** is installed in injected via auto import (global access). So, do not import for vi API needed.
 
 General testing rules:
 
-- Assume describe/it/expect/beforeEach are globally available (no imports).
-- Use imperative test names (e.g., it('returns ...')).
-- Prefer behavior/outcome tests over internal API or implementation details.
-- Use beforeEach to reduce redundancy.
+- Use **imperative** instead of descriptive formulation for test case descriptions. e.g. it('returns true', ...)
+- Use `beforeEach`-method to reduce redundancies, if possible.
+- Use behaviour tests of properties / keys tests. So, test the outcome not the internal API.
 
 Vue components:
 
-- Use context7 for vue.js
-- Use context7 for vue test utils
+- When selected code is a Vue component then:
+  - Use context7 for vue.js documentation
+  - Use context7 for vue devtools documentation
 
 Pinia stores:
 
-- Use context7 pinia
-- Structure tests with top-level describe blocks for 'state', 'getters', and 'actions'.
+- When selected code is a pinia store then:
+  - Use context7 for pinia documentation
+  - Use 'actions', 'getters' and 'state' describe blocks to separate these types from each other
 
 Notes:
 

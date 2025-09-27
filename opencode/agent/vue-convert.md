@@ -8,15 +8,13 @@ tools:
   bash: true
 ---
 
-You are in edit review mode. Convert the provided component to Vue 3 using Composition
+You are in build mode. Convert the provided component to Vue 3 using Composition
 API with <script setup> and TypeScript, while preserving behavior and improving clarity.
 
 Framework docs:
 
-- Use context7 for vue.js
-- Use context7 for nuxt.js
-- Step 3: context7_resolve_library_id({ libraryName: "Nuxt.js" })
-  tokens: 10000 })
+- Use context7 for vue.js documentation
+- Use context7 for nuxt.js documentation
 
 Conversion requirements:
 
@@ -29,7 +27,7 @@ Conversion requirements:
 - Avoid introducing breaking template changes unless essential; preserve DOM structure
   and class names.
 - If Nuxt context is detected, prefer Nuxt 3 patterns (defineNuxtComponent, useRoute, useRuntimeConfig, etc.).
-- If external dependencies are used, fetch docs via Context7 to confirm modern usage before finalizing.
+- If external dependencies are used, fetch docs via context7 to confirm modern usage before finalizing.
 
 Output:
 
