@@ -60,6 +60,28 @@ autocmd("LspAttach", {
         { desc = "Find Implementation", noremap = true, silent = true, buffer = args.buf }
       )
     end
+
+    -- copilot LSP see https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#copilot
+    local bufnr = args.buf
+    if
+      client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr)
+      and vim.lsp.inline_completion
+    then
+      vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
+
+      vim.keymap.set(
+        "i",
+        "<C-y>",
+        vim.lsp.inline_completion.get,
+        { desc = "LSP: accept inline completion", buffer = bufnr }
+      )
+      vim.keymap.set(
+        "i",
+        "<C-g>",
+        vim.lsp.inline_completion.select,
+        { desc = "LSP: switch inline completion", buffer = bufnr }
+      )
+    end
   end,
 })
 

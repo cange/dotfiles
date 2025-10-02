@@ -62,6 +62,7 @@ return {
             },
           },
         },
+        copilot = {},
 
         -- CSS
         stylelint_lsp = {},
@@ -74,8 +75,6 @@ return {
         stimulus_ls = {},
 
         -- JavaScript / TypeScript, etc.
-        -- angularls = {},
-        -- denols = {},
         ts_ls = {
           -- ensure that workspace config files are used
           root_dir = require("lspconfig").util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git"),

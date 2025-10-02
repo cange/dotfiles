@@ -61,17 +61,21 @@ return {
         padding = { left = 1, right = 0 },
         on_click = function() vim.cmd("ConformInfo") end,
       }
-      local copilot = {
-        "copilot",
-        on_click = function() vim.cmd("Copilot status") end,
-        padding = { left = 1, right = 0 },
+      local sidekick = {
+        function() return " " end,
         separator = "",
-        symbols = { spinners = vim.split(Icon.sets.spinner, " ") },
-      }
-      local mcphub = {
-        "mcphub",
-        padding = { left = 1, right = 0 },
-        on_click = function() vim.cmd("MCPHub") end,
+        color = function()
+          local status = require("sidekick.status").get()
+          if status then
+            return status.kind == "Error" and "DiagnosticError"
+              or status.busy and "DiagnosticWarn"
+              or "lualine_c_normal"
+          end
+        end,
+        cond = function()
+          local status = require("sidekick.status")
+          return status.get() ~= nil
+        end,
       }
 
       return {
@@ -101,8 +105,7 @@ return {
             { "inlay_hints" },
             format_clients,
             { "lsp_clients", padding = { left = 1, right = 0 } },
-            copilot,
-            mcphub,
+            sidekick,
           },
           lualine_y = {
             { "encoding", separator = "" },
