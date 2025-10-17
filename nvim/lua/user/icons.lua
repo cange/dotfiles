@@ -67,7 +67,6 @@ M.plugin = {
   Copilot             = "", -- nf-oct-copilot
   CopilotError        = "", -- nf-oct-copilot_error
   CopilotWarning      = "", -- nf-oct-copilot_warning
-  Harpoon             = '⇁', -- U+21C1
   LSP                 = M.ui.Server
 }
 M.extensions = {

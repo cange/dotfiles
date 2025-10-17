@@ -4,7 +4,6 @@ return {
   event = "VeryLazy",
   dependencies = {
     "BurntSushi/ripgrep", -- telescope live grep suggestions
-    "ThePrimeagen/harpoon", -- bookmark buffers
     "nvim-lua/plenary.nvim", -- common lua functions - https://github.com/nvim-lua/plenary.nvim
     "nvim-telescope/telescope-file-browser.nvim", -- browser extension
     "nvim-telescope/telescope-project.nvim", -- switch between projects

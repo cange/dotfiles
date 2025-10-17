@@ -206,7 +206,6 @@ return {
           "TelescopePrompt",
           "gitcommit",
           "markdown",
-          "harpoon",
           "help",
           "lazy",
           "mason",
