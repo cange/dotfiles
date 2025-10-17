@@ -2,26 +2,33 @@
   "$schema": "https://opencode.ai/config.json",
   "instructions": [".github/copilot-instructions.md"],
   "mcp": {
-    "context7": {
+    "brave-search": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-brave-search"],
+      "environment": {
+        "BRAVE_API_KEY": "$BRAVE_BROWSER_SEARCH_API_KEY"
+      },
+      "enabled": true
+    },
+    "chrome-devtools": {
       "type": "local",
       "command": [
-        "docker",
-        "run",
-        "--interactive",
-        "--rm",
-        "context7-mcp"
+        "npx",
+        "chrome-devtools-mcp@latest",
+        "--executablePath",
+        "/Users/Angermann/Applications/Chromium.app/Contents/MacOS/Chromium"
       ],
+      "enabled": false
+    },
+    "context7": {
+      "type": "local",
+      "command": ["docker", "run", "--interactive", "--rm", "context7-mcp"],
       "enabled": true
     },
     "fetch": {
       "type": "local",
-      "command": [
-        "docker",
-        "run",
-        "--interactive",
-        "--rm",
-        "mcp/fetch"
-      ]
+      "command": ["docker", "run", "--interactive", "--rm", "mcp/fetch"],
+      "enabled": true
     },
     "github": {
       "type": "local",
@@ -36,58 +43,8 @@
       ],
       "environment": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN"
-      }
-    }
-  },
-  "agent": {
-    "better-naming": {
-      "description": "Suggests better names for variables and more",
-      "mode": "subagent",
-      "prompt": "Please provide better names for the following variables and functions",
-      "temperature": 0.2,
-      "tools": { "write": false, "edit": false }
-    },
-    "code-review": {
-      "description": "Reviews code for best practices and potential issues",
-      "mode": "subagent",
-      "prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
-      "temperature": 0.1,
-      "tools": { "write": false, "edit": false }
-    },
-    "document": {
-      "description": "Write code documentation",
-      "mode": "subagent",
-      "prompt": "Please provide documentation for the following code.",
-      "temperature": 0.1,
-      "tools": { "write": true, "edit": true }
-    },
-    "refactor": {
-      "description": "Reviews code and refactors according the reviews finding",
-      "mode": "subagent",
-      "prompt": "Please @code-review and refactor code according to the findings from the review",
-      "temperature": 0.1,
-      "tools": { "write": true, "edit": true }
-    },
-    "conflict": {
-      "description": "Resolve git conflicts",
-      "mode": "subagent",
-      "prompt": "Please resolve the current git conflict. Consider reviewing the git history to solve the issue",
-      "temperature": 0.1,
-      "tools": { "write": true, "edit": true }
-    },
-    "wording": {
-      "description": "Improve wording",
-      "mode": "subagent",
-      "prompt": "Please improve the grammar and wording of the following text.",
-      "temperature": 0.1,
-      "tools": { "write": false, "edit": false }
-    },
-    "translate": {
-      "description": "Translate to English",
-      "mode": "subagent",
-      "prompt": "Please translate all non-english wording into English.",
-      "temperature": 0.1,
-      "tools": { "write": true, "edit": true }
+      },
+      "enabled": false
     }
   }
 }

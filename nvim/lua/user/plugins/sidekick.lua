@@ -1,7 +1,7 @@
 return {
   "folke/sidekick.nvim",
   opts = {
-    -- cli = { mux = { enabled = false } },
+    cli = { win = { split = { width = 0 } } },
   },
   keys = function()
     local cli = require("sidekick.cli")
