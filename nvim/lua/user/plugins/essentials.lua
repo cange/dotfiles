@@ -145,7 +145,7 @@ return {
       { "S", function() require("flash").treesitter() end, desc = "Flash Treesitter", mode = { "n", "o", "x" } },
       { "r", function() require("flash").remote() end, desc = "Remote Flash", mode = "o" },
       { "R", function() require("flash").treesitter_search() end, desc = "Treesitter Search", mode = { "o", "x" } },
-      { "<c-s>", function() require("flash").toggle() end, desc = "Toggle Flash Search", mode = "c" },
+      { "<LocalLeader>f", function() require("flash").toggle() end, desc = "Toggle Flash Search", mode = "c" },
     },
   },
 
@@ -176,6 +176,7 @@ return {
         { "left", "right" },
         { "up", "down", "only" },
         { "desktop", "tablet", "mobile" },
+        { "const", "let" },
       },
     },
   },
@@ -184,18 +185,19 @@ return {
     "AndrewRadev/linediff.vim",
     event = { "CursorMoved" },
     keys = {
-      { "<Leader>dl", ":Linediff<CR>", desc = "[diff] Line", mode = { "v" } },
-      { "<Leader>da", ":LinediffAdd<CR>", desc = "[diff] Add line", mode = { "v" } },
-      { "<Leader>dL", ":LinediffLast<CR>", desc = "[diff] Last line", mode = { "v" } },
-      { "<Leader>dr", ":LinediffReset<CR>", desc = "[diff] Reset line", mode = { "n", "v" } },
-      { "<Leader>ds", ":LinediffShow<CR>", desc = "[diff] Show line", mode = { "n", "v" } },
+      -- stylua: ignore start
+      { "<Leader>dl", "<cmd>Linediff<CR>",      desc = "[diff] Line", mode = { "v" } },
+      { "<Leader>da", "<cmd>LinediffAdd<CR>",   desc = "[diff] Add line", mode = { "v" } },
+      { "<Leader>dL", "<cmd>LinediffLast<CR>",  desc = "[diff] Last line", mode = { "v" } },
+      { "<Leader>dr", "<cmd>LinediffReset<CR>", desc = "[diff] Reset line", mode = { "n", "v" } },
+      { "<Leader>ds", "<cmd>LinediffShow<CR>",  desc = "[diff] Show line", mode = { "n", "v" } },
+      -- stylua: ignore end
     },
   },
 
   { -- testing toggle util
     "cange/specto.nvim",
     lazy = false,
-    version = "v0.4.*",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -213,11 +215,13 @@ return {
       },
     },
     keys = {
-      { "<LocalLeader>o", "<cmd>Specto toggle only<CR>", desc = "Toggle [only] test" },
-      { "<LocalLeader>s", "<cmd>Specto toggle skip<CR>", desc = "Toggle [skip] test" },
-      { "<LocalLeader>t", "<cmd>Specto toggle todo<CR>", desc = "Toggle [todo] test" },
-      { "[t", "<cmd>Specto jump prev<CR>", desc = "Go to previous test toggle" },
-      { "]t", "<cmd>Specto jump next<CR>", desc = "Go to next test toggle" },
+      -- stylua: ignore start
+      { "<LocalLeader>o", "<cmd>Specto toggle only<CR>", desc = "[specto] Toggle only" },
+      { "<LocalLeader>s", "<cmd>Specto toggle skip<CR>", desc = "[specto] Toggle skip" },
+      { "<LocalLeader>t", "<cmd>Specto toggle todo<CR>", desc = "[specto] Toggle todo" },
+      { "[t", "<cmd>Specto jump prev<CR>",               desc = "[specto] Goto prev toggle" },
+      { "]t", "<cmd>Specto jump next<CR>",               desc = "[specto] Goto next toggle" },
+      -- stylua: ignore end
     },
   },
 }
