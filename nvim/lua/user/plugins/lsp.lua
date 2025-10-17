@@ -180,7 +180,7 @@ return {
       local linter = { "eslint", "jsonlint", "markdown_oxide", "markuplint", "stylelint", "yamllint" }
       local formatter = { "prettier", "shfmt", "stylua", "html" }
       require("mason-tool-installer").setup({
-        ensure_installed = vim.tbl_extend("force", {}, linter, formatter),
+        ensure_installed = vim.list_extend(vim.list_extend({}, linter), formatter),
         auto_update = true,
       })
     end,
