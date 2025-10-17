@@ -4,6 +4,17 @@
   "contributes": {
     "snippets": [
       {
+        "language": "eruby",
+        "path": "./eruby.json"
+      },
+      {
+        "language": [
+          "ruby",
+          "slim"
+        ],
+        "path": "./ruby.json"
+      },
+      {
         "language": [
           "html",
           "javascript",
@@ -20,14 +31,16 @@
       },
       {
         "language": [
+          "javascript",
+          "javascriptreact",
           "svelte",
-          "typescript",
           "vue"
         ],
         "path": "./typescript.json"
       },
       {
         "language": [
+          "eruby",
           "html",
           "javascript",
           "svelte",
@@ -58,6 +71,7 @@
       },
       {
         "language": [
+          "eruby",
           "scss",
           "css",
           "vue"
@@ -69,14 +83,6 @@
           "scss"
         ],
         "path": "./scss.json"
-      },
-      {
-        "language": [
-          "slim",
-          "eruby",
-          "ruby"
-        ],
-        "path": "./ruby.json"
       },
       {
         "language": [

@@ -1,6 +1,6 @@
 {
   "prettier-ignore": {
-    "prefix": "lintpr",
+    "prefix": "prettier",
     "description": "exclude the next node",
     "body": "<!-- prettier-ignore -->"
   },

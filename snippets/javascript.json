@@ -21,7 +21,7 @@
     "prefix": "lint-disable … */",
     "body": ["/* eslint-disable $1 */", "$2", "/* eslint-enable $1 */"]
   },
-  "disable prettier block": {
+  "disable lint prettier block": {
     "prefix": "lint prettier/prettier */",
     "body": [
       "/* eslint-disable prettier/prettier */",
@@ -29,8 +29,12 @@
       "/* eslint-enable prettier/prettier */"
     ]
   },
+  "disable prettier block": {
+    "prefix": "prettier block",
+    "body": ["// prettier-ignore-start", "$2", "// prettier-ignore-end"]
+  },
   "prettier-ignore": {
-    "prefix": "lintpr",
+    "prefix": "prettier",
     "description": "exclude the next node",
     "body": "// prettier-ignore"
   },
