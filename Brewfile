@@ -31,3 +31,7 @@ cask "libyaml"
 cask "gmp"
 # YAML Parser
 cask "rust"
+# Object-relational database system
+cask "postgresql"
+# User interface to the TELNET protocol
+cask "telnet"
