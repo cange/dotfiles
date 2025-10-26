@@ -149,6 +149,8 @@ return {
     },
   },
 
+  { "folke/lazydev.nvim", opts = {} }, -- improves working in neovim/lua env
+
   { -- Hex color highlighter
     "brenoprata10/nvim-highlight-colors",
     event = { "BufReadPost", "BufNewFile" },

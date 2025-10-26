@@ -110,13 +110,6 @@ function M.browse_nvim()
   })
 end
 
-function M.browse_obsidian(target_dir)
-  builtin.find_files({
-    cwd = "~/Dropbox/Apps/Obsidian/" .. target_dir,
-    prompt_title = "Obsidian",
-  })
-end
-
 function M.browse_snippets()
   builtin.find_files({
     cwd = "~/.config/snippets",
@@ -130,7 +123,6 @@ function M.browse_buffers()
     show_all_buffers = false,
     ignore_current_buffer = true,
     only_cwd = true,
-    initial_mode = "normal",
     sort_lastused = true,
     sort_mru = true,
   })

@@ -133,6 +133,7 @@ return {
       "hrsh7th/cmp-path", -- path completions
       "chrisgrieser/cmp-nerdfont",
       "windwp/nvim-autopairs",
+      { "antosha417/nvim-lsp-file-operations", config = true }, -- updates file import path on file rename
     },
     config = function()
       local cmp = require("cmp")
