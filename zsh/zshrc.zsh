@@ -156,6 +156,11 @@ if [[ -f "$HOME/.ssh/id_ed25519" ]]; then
 fi
 # ssh ---
 
+# --- Flutter
+# https://docs.flutter.dev/install/manual
+_add_to_path "$HOME/.config/flutter/bin"
+# Flutter ---
+
 # =============================================================================
 # profiling results - needs to be at end of file
 # zprof
