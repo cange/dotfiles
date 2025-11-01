@@ -105,6 +105,7 @@ function M.get_service_icons()
     rubocop = grep_icon("rb"),
     ruby_lsp = grep_icon("rb"),
     stimulus_ls = "󰫏 ", -- nf-md-language_ruby_on_rails
+    emmet_language_server = "", -- :nf-cod-code
   }
 end
 

@@ -16,18 +16,6 @@ autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
   end,
 })
 
-autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
-  group = group_id,
-  pattern = ".env.*",
-  callback = function() vim.bo.filetype = "sh" end,
-})
-
-autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
-  group = group_id,
-  pattern = "*.mdx",
-  callback = function() vim.bo.filetype = "jsx" end,
-})
-
 autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
   group = group_id,
