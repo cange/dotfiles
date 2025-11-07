@@ -1,22 +1,18 @@
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
----
 gui:
   commitHashLength: 2
   nerdFontsVersion: "3"
   spinner:
     frames: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
   branchColorPatterns:
-    "^depfu/": "cyan"
-    "^feat/": "green"
+    "^feat/": "blue"
     "^fix/": "yellow"
     "^refactor/": "magenta"
     '^\w+-\d+': "green" # '<any-text>-<some-number>' like foo-123
 os:
   editPreset: "nvim-remote"
-
 git:
-  paging:
-    colorArg: always
-    pager: delta --paging=never --syntax-theme base16 --line-numbers
-
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never --syntax-theme base16 --line-numbers
   overrideGpg: true
