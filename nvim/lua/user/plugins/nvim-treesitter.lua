@@ -3,6 +3,7 @@ local sources = {
   "cmake",
   "css",
   "csv",
+  "comment",
   "diff",
   "dockerfile",
   "gitignore",
@@ -19,6 +20,8 @@ local sources = {
   "make",
   "markdown",
   "markdown_inline",
+  "mermaid",
+  "nginx",
   "python",
   "query",
   "regex",
@@ -26,7 +29,6 @@ local sources = {
   "rust",
   "scss",
   "svelte",
-  "slim",
   "toml",
   "tsx",
   "typescript",
@@ -61,6 +63,43 @@ return {
           end,
         })
       end
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    branch = "main", -- needed for nvim-treesitter's `main` branch
+    opts = {
+      select = {
+        -- Automatically jump forward to textobj
+        lookahead = true,
+      },
+    },
+    -- this is a sentence. without it i can't live?
+    keys = function()
+      local select = require("nvim-treesitter-textobjects.select").select_textobject
+      local move = require("nvim-treesitter-textobjects.move")
+      return {
+        -- select
+        { "af", function() select("@function.outer", "textobjects") end, desc = "outer func", mode = { "x", "o" } },
+        { "if", function() select("@function.inner", "textobjects") end, desc = "inner func", mode = { "x", "o" } },
+        { "ac", function() select("@class.outer", "textobjects") end, desc = "outer class", mode = { "o", "x" } },
+        { "ic", function() select("@class.inner", "textobjects") end, desc = "inner class", mode = { "x", "o" } },
+        -- move
+        {
+          "]f",
+          function() move.goto_next_start("@function.outer", "textobjects") end,
+          desc = "next outer func",
+          mode = { "n", "x", "o" },
+        },
+        {
+          "[f",
+          function() move.goto_previous_start("@function.outer", "textobjects") end,
+          desc = "previous outer func",
+          mode = { "n", "x", "o" },
+        },
+      }
     end,
   },
 
