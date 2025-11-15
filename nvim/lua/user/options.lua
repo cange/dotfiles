@@ -86,7 +86,7 @@ vim.g.maplocalleader = ","
 if vim.fn.has("mac") == 1 then
   vim.opt.clipboard:append({ "unnamedplus" })
 elseif vim.fn.has("unix") == 1 then
-  print("[user.options] system clipboard for linux is not configure yet")
+  vim.opt.clipboard:prepend({ "unnamed", "unnamedplus" })
 elseif vim.fn.has("win32") == 1 then
   vim.opt.clipboard:prepend({ "unnamed", "unnamedplus" })
 end
