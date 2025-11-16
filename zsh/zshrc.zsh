@@ -114,8 +114,10 @@ load_heavy_tools() {
   # Load tools that are expensive but not immediately needed
 
   # --- z navigation config (defer zoxide)
-  eval "$(zoxide init zsh)"
-  zstyle ":completion:*" menu select # prettify z menu
+  if command -v zoxide &>/dev/null; then
+    eval "$(zoxide init zsh)"
+    zstyle ":completion:*" menu select # prettify z menu
+  fi
   # z navigation config ---
 
   # --- Angular (defer CLI completion)
@@ -149,10 +151,10 @@ load_completions() {
   autoload -Uz compinit && compinit -d "$ZSH_COMPDUMP"
 }
 
-# Start async jobs
-async_job heavy_tools
-async_job aliases_worker
-async_job completions_worker
+# Start async jobs with their respective callback functions
+async_job heavy_tools load_heavy_tools
+async_job aliases_worker load_aliases
+async_job completions_worker load_completions
 
 # --- ssh (keep synchronous as it may be needed immediately)
 if [[ -f "$HOME/.ssh/id_ed25519" ]]; then
