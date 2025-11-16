@@ -8,7 +8,10 @@ _add_to_path "/usr/sbin"
 export LANG=en_US.UTF-8
 
 # To link Rubies to Homebrew's OpenSSL 3 / ruby neeed to be installed/compiled with the exact version
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+if type brew &>/dev/null; then
+  # TODO: add condition for ruby detection. Show message if not
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+fi
 
 # --- Git GPG key setup
 # https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
@@ -62,27 +65,14 @@ if type fzf &>/dev/null; then
     fi
   fi
 
-  # Function to properly load fzf bindings when needed
-  _load_fzf_bindings() {
-    # Remove this temporary function
-    unfunction _load_fzf_bindings
-    
-    # Source the real fzf files
-    local brew_prefix="$(brew --prefix)"
-    _source_if_exists "$brew_prefix/opt/fzf/shell/completion.zsh"
-    _source_if_exists "$brew_prefix/opt/fzf/shell/key-bindings.zsh"
-    
-    # Execute the widget that was originally requested
-    case $KEYS in
-      $'\C-t') zle fzf-file-widget ;;
-      $'\C-r') zle fzf-history-widget ;;
-    esac
-  }
-  
-  # Create temporary widget and bind keys
-  zle -N _load_fzf_bindings
-  bindkey '^T' _load_fzf_bindings  # fzf-file-widget
-  bindkey '^R' _load_fzf_bindings  # fzf-history-widget
+  local fzf_share="/usr/share/fzf" # Linux
+  if [[ $(uname -s) == 'Darwin' ]]; then
+    fzf_share="$(brew --prefix)/opt/fzf/shell" # MacOS
+  fi
+
+  # key-bindings for CTRL+R and CTRL+T
+  _source_if_exists "$fzf_share/completion.zsh"
+  _source_if_exists "$fzf_share/key-bindings.zsh"
 fi
 # fzf ---
 #
