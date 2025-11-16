@@ -8,8 +8,7 @@ _add_to_path "/usr/sbin"
 export LANG=en_US.UTF-8
 
 # To link Rubies to Homebrew's OpenSSL 3 / ruby neeed to be installed/compiled with the exact version
-if type brew &>/dev/null; then
-  # TODO: add condition for ruby detection. Show message if not
+if [[ $(uname -s) == 'Darwin' ]]; then
   export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 fi
 
