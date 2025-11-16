@@ -1,5 +1,11 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Increase command timeout to prevent git timeout warnings during shell initialization
+# Default is 500ms, but async workers can cause resource contention
+# For macOS: 1000ms is usually sufficient
+# For Arch Linux (omarchy): may need 1500-2000ms depending on disk I/O
+command_timeout = 1000
+
 # multiple lines layout
 # xxx.on.xxx.................................................................xxx
 # > _
