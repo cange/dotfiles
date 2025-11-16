@@ -30,13 +30,14 @@ _source_if_exists "$HOME/.config/secrets/zsh"
 # === Order #1 - Critical Path Setup
 
 # --- Homebrew Setup (ARM/M1+ only)
+# Add Homebrew paths first (needed for macOS, no-op on Linux if paths don't exist)
+_add_to_path "/opt/homebrew/bin"
+_add_to_path "/opt/homebrew/sbin"
+
 # To make Homebrew's completions available
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
-  _add_to_path "/opt/homebrew/bin"
-  _add_to_path "/opt/homebrew/sbin"
-  eval "$(/opt/homebrew/bin/brew shellenv)" # M1+ Mac
-
+  eval "$(brew shellenv)" # Use brew from PATH instead of hardcoded path
   fpath+=("$(brew --prefix)/share/zsh/site-functions") # append completions
 fi
 # Homebrew Setup ---
