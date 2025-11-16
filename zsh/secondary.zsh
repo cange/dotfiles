@@ -18,10 +18,13 @@ export GPG_TTY="$(tty)"
 # Git GPG key setup ---
 
 # --- bat file previewer
-if [[ -e $(which bat) ]]; then
+if command -v bat &>/dev/null; then
   # https://github.com/sharkdp/bat
   export BAT_STYLE="changes"
-  alias cat="bat --paging=never --style=changes --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo base16 || echo GitHub)"
+  # use base16 theme to match Nightfox/Terafox color scheme
+  export BAT_THEME="base16"
+
+  alias cat='bat --paging=never --style=changes --theme=base16'
 fi
 # bat ---
 
@@ -31,7 +34,10 @@ if [[ -d "$HOME/.bun" ]]; then
   _add_to_path "$BUN_INSTALL/bin"
   # Add bun completions to fpath if directory exists
   [[ -d "$HOME/.zfunc" ]] && fpath=("$HOME/.zfunc" $fpath)
+  # bun completions
+  # [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 fi
+
 # --- bun
 
 # --- asdf
