@@ -40,9 +40,7 @@ fi
 
 # --- bun
 
-# --- asdf
-# enable asdf package managers
-# https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
+# --- asdf - enable package managers - https://asdf-vm.com/guide/getting-started.html
 _add_to_path "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
 
 # append completions to fpath
@@ -50,6 +48,12 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 # Note: compinit is handled centrally in zshrc.zsh
 export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
 # asdf ---
+
+# --- mise - enable package managers - https://mise.run/zsh
+if command -v mise &> /dev/null; then
+  eval "$($HOME/.local/bin/mise activate zsh)"
+fi
+# mise ---
 
 # --- fzf (lazy load key bindings)
 # Set up fzf environment and theme immediately (lightweight)
