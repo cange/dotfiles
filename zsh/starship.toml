@@ -1,5 +1,9 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Increase command timeout to prevent git timeout warnings during shell initialization
+# Default is 500ms, but async workers can cause resource contention
+command_timeout = 1000
+
 # multiple lines layout
 # xxx.on.xxx.................................................................xxx
 # > _

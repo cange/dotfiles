@@ -8,7 +8,9 @@ _add_to_path "/usr/sbin"
 export LANG=en_US.UTF-8
 
 # To link Rubies to Homebrew's OpenSSL 3 / ruby neeed to be installed/compiled with the exact version
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+if [[ $(uname -s) == 'Darwin' ]]; then
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+fi
 
 # --- Git GPG key setup
 # https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
@@ -16,10 +18,13 @@ export GPG_TTY="$(tty)"
 # Git GPG key setup ---
 
 # --- bat file previewer
-if [[ -e $(which bat) ]]; then
+if command -v bat &>/dev/null; then
   # https://github.com/sharkdp/bat
   export BAT_STYLE="changes"
-  alias cat="bat --paging=never --style=changes --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo base16 || echo GitHub)"
+  # use base16 theme to match Nightfox/Terafox color scheme
+  export BAT_THEME="base16"
+
+  alias cat='bat --paging=never --style=changes --theme=base16'
 fi
 # bat ---
 
@@ -29,12 +34,13 @@ if [[ -d "$HOME/.bun" ]]; then
   _add_to_path "$BUN_INSTALL/bin"
   # Add bun completions to fpath if directory exists
   [[ -d "$HOME/.zfunc" ]] && fpath=("$HOME/.zfunc" $fpath)
+  # bun completions
+  # [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 fi
+
 # --- bun
 
-# --- asdf
-# enable asdf package managers
-# https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
+# --- asdf - enable package managers - https://asdf-vm.com/guide/getting-started.html
 _add_to_path "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
 
 # append completions to fpath
@@ -42,6 +48,12 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 # Note: compinit is handled centrally in zshrc.zsh
 export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
 # asdf ---
+
+# --- mise - enable package managers - https://mise.run/zsh
+if command -v mise &> /dev/null; then
+  eval "$($HOME/.local/bin/mise activate zsh)"
+fi
+# mise ---
 
 # --- fzf (lazy load key bindings)
 # Set up fzf environment and theme immediately (lightweight)
@@ -62,27 +74,14 @@ if type fzf &>/dev/null; then
     fi
   fi
 
-  # Function to properly load fzf bindings when needed
-  _load_fzf_bindings() {
-    # Remove this temporary function
-    unfunction _load_fzf_bindings
-    
-    # Source the real fzf files
-    local brew_prefix="$(brew --prefix)"
-    _source_if_exists "$brew_prefix/opt/fzf/shell/completion.zsh"
-    _source_if_exists "$brew_prefix/opt/fzf/shell/key-bindings.zsh"
-    
-    # Execute the widget that was originally requested
-    case $KEYS in
-      $'\C-t') zle fzf-file-widget ;;
-      $'\C-r') zle fzf-history-widget ;;
-    esac
-  }
-  
-  # Create temporary widget and bind keys
-  zle -N _load_fzf_bindings
-  bindkey '^T' _load_fzf_bindings  # fzf-file-widget
-  bindkey '^R' _load_fzf_bindings  # fzf-history-widget
+  local fzf_share="/usr/share/fzf" # Linux
+  if [[ $(uname -s) == 'Darwin' ]]; then
+    fzf_share="$(brew --prefix)/opt/fzf/shell" # MacOS
+  fi
+
+  # key-bindings for CTRL+R and CTRL+T
+  _source_if_exists "$fzf_share/completion.zsh"
+  _source_if_exists "$fzf_share/key-bindings.zsh"
 fi
 # fzf ---
 #

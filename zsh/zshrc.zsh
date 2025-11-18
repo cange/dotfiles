@@ -30,13 +30,14 @@ _source_if_exists "$HOME/.config/secrets/zsh"
 # === Order #1 - Critical Path Setup
 
 # --- Homebrew Setup (ARM/M1+ only)
+# Add Homebrew paths first (needed for macOS, no-op on Linux if paths don't exist)
 _add_to_path "/opt/homebrew/bin"
 _add_to_path "/opt/homebrew/sbin"
-eval "$(/opt/homebrew/bin/brew shellenv)" # M1+ Mac
 
 # To make Homebrew's completions available
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
+  eval "$(brew shellenv)" # Use brew from PATH instead of hardcoded path
   fpath+=("$(brew --prefix)/share/zsh/site-functions") # append completions
 fi
 # Homebrew Setup ---
@@ -51,9 +52,13 @@ _needs_completion_rebuild() {
   [[ ! -f "$compdump_file" ]] && return 0
 
   # Get modification times (seconds since epoch)
-  local zsh_config_mtime=$(stat -f %m "$zsh_config_dir" 2>/dev/null || echo 0)
-  local compdump_mtime=$(stat -f %m "$compdump_file" 2>/dev/null || echo 0)
-
+  if [[ $(uname -s) == 'Linux' ]]; then
+    local zsh_config_mtime=$(stat -c %Y "$zsh_config_dir" 2>/dev/null || echo 0)
+    local compdump_mtime=$(stat -c %Y "$compdump_file" 2>/dev/null || echo 0)
+  else # MacOS
+    local zsh_config_mtime=$(stat -f %m "$zsh_config_dir" 2>/dev/null || echo 0)
+    local compdump_mtime=$(stat -f %m "$compdump_file" 2>/dev/null || echo 0)
+  fi
   # Return 0 (true) if config is newer than cache, 1 (false) otherwise
   [[ $zsh_config_mtime -gt $compdump_mtime ]]
 }
@@ -77,6 +82,8 @@ zsh-syntax-highlighting-lazy-load() {
   unset -f $0
   source "$Z_CONFIG_DIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 }
+
+autoload -Uz add-zsh-hook
 add-zsh-hook preexec zsh-syntax-highlighting-lazy-load
 
 # --- Essential startup only
@@ -86,12 +93,15 @@ eval "$(starship init zsh)"
 
 # === Order #3 - Asynchronous initialization (Defer everything else)
 
+_source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
 # init zsh-async
 _source_if_exists "$Z_CONFIG_DIR/plugins/zsh-async/async.zsh"
 _add_plugin "mafredri/zsh-async"
 _add_plugin "zsh-users/zsh-syntax-highlighting"
 
 autoload -Uz async
+
+
 async_init
 
 # Create separate workers for different types of tasks
@@ -105,8 +115,10 @@ load_heavy_tools() {
   # Load tools that are expensive but not immediately needed
 
   # --- z navigation config (defer zoxide)
-  eval "$(zoxide init zsh)"
-  zstyle ":completion:*" menu select # prettify z menu
+  if command -v zoxide &>/dev/null; then
+    eval "$(zoxide init zsh)"
+    zstyle ":completion:*" menu select # prettify z menu
+  fi
   # z navigation config ---
 
   # --- Angular (defer CLI completion)
@@ -114,9 +126,6 @@ load_heavy_tools() {
     source <(ng completion script) # CLI autocompletion.
   fi
   # Angular ---
-
-  # Load secondary config (asdf, fzf, bun, etc.)
-  _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
 
   # --- Docker plugin (defer docker completions)
   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
@@ -143,10 +152,10 @@ load_completions() {
   autoload -Uz compinit && compinit -d "$ZSH_COMPDUMP"
 }
 
-# Start async jobs
-async_job heavy_tools
-async_job aliases_worker
-async_job completions_worker
+# Start async jobs with their respective callback functions
+async_job heavy_tools load_heavy_tools
+async_job aliases_worker load_aliases
+async_job completions_worker load_completions
 
 # --- ssh (keep synchronous as it may be needed immediately)
 if [[ -f "$HOME/.ssh/id_ed25519" ]]; then
