@@ -17,8 +17,12 @@ macos-titlebar-style = hidden
 
 # keybinds
 keybind = global:super+grave_accent=toggle_quick_terminal
-keybind = global:super+d=new_split:right
-keybind = global:super+shift+d=new_split:down
+
+# redefine splits across OSs (unbind+bind again)
+keybind = super+d=unbind
+keybind = super+shift+d=unbind
+keybind = super+d=new_split:right
+keybind = super+shift+d=new_split:down
 
 #
 # MacOS / Linux alignments
