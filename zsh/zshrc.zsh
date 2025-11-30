@@ -36,9 +36,14 @@ _add_to_path "/opt/homebrew/sbin"
 
 # To make Homebrew's completions available
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-if type brew &>/dev/null; then
-  eval "$(brew shellenv)" # Use brew from PATH instead of hardcoded path
-  fpath+=("$(brew --prefix)/share/zsh/site-functions") # append completions
+# Note: brew shellenv is slow (~100-300ms), so we manually set the essentials
+if [[ -d "/opt/homebrew" ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew"
+  export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+  export HOMEBREW_REPOSITORY="/opt/homebrew"
+  fpath+=("/opt/homebrew/share/zsh/site-functions")
+  # HOMEBREW_SHELLENV_PREFIX is set for compatibility
+  export HOMEBREW_SHELLENV_PREFIX="/opt/homebrew"
 fi
 # Homebrew Setup ---
 
@@ -72,7 +77,7 @@ else
 fi
 # Essential completions setup ---
 
-# === Order #2 - Essential Plugins
+# === Order #2 - Essential Plugins & Prompt
 
 # Simple plugin loading - much cleaner!
 _source_if_exists "$Z_CONFIG_DIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -91,71 +96,33 @@ add-zsh-hook preexec zsh-syntax-highlighting-lazy-load
 eval "$(starship init zsh)"
 # ---
 
-# === Order #3 - Asynchronous initialization (Defer everything else)
+# === Order #3 - Critical tools (needed immediately)
 
-_source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
-# init zsh-async
-_source_if_exists "$Z_CONFIG_DIR/plugins/zsh-async/async.zsh"
-_add_plugin "mafredri/zsh-async"
-_add_plugin "zsh-users/zsh-syntax-highlighting"
+# --- asdf - enable package managers (must load before aliases/commands)
+# https://asdf-vm.com/guide/getting-started.html
+_add_to_path "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
+# asdf ---
 
-autoload -Uz async
+# --- mise - enable package managers (must load before aliases/commands)
+# https://mise.run/zsh
+if command -v mise &> /dev/null; then
+  eval "$($HOME/.local/bin/mise activate zsh)"
+fi
+# mise ---
 
+# --- z navigation config (needed by cd alias)
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+# z navigation config ---
 
-async_init
+# === Order #4 - Load aliases immediately (needed for user interaction)
+_source_if_exists "$Z_CONFIG_DIR/aliases.zsh"
+_source_if_exists "$Z_CONFIG_DIR/aliases.docker.zsh"
 
-# Create separate workers for different types of tasks
-async_start_worker heavy_tools -n
-async_start_worker aliases_worker -n
-async_start_worker completions_worker -n
-
-# Callback for heavy tools
-async_register_callback heavy_tools load_heavy_tools
-load_heavy_tools() {
-  # Load tools that are expensive but not immediately needed
-
-  # --- z navigation config (defer zoxide)
-  if command -v zoxide &>/dev/null; then
-    eval "$(zoxide init zsh)"
-    zstyle ":completion:*" menu select # prettify z menu
-  fi
-  # z navigation config ---
-
-  # --- Angular (defer CLI completion)
-  if command -v ng &>/dev/null; then
-    source <(ng completion script) # CLI autocompletion.
-  fi
-  # Angular ---
-
-  # --- Docker plugin (defer docker completions)
-  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker#settings
-  # prettify docker menu
-  zstyle ":completion:*:*:docker:*" option-stacking yes
-  zstyle ":completion:*:*:docker-*:*" option-stacking yes
-  # Docker plugin ---
-}
-
-# Callback for aliases
-async_register_callback aliases_worker load_aliases
-load_aliases() {
-  _source_if_exists "$Z_CONFIG_DIR/aliases.zsh"
-  _source_if_exists "$Z_CONFIG_DIR/aliases.docker.zsh"
-}
-
-# Callback for additional completions
-async_register_callback completions_worker load_completions
-load_completions() {
-  _add_plugin "zsh-users/zsh-completions"
-  _add_plugin "zsh-users/zsh-autosuggestions"
-  fpath=("$Z_CONFIG_DIR/plugins/zsh-completions/src" $fpath)
-  # Rebuild completions cache after adding new completions
-  autoload -Uz compinit && compinit -d "$ZSH_COMPDUMP"
-}
-
-# Start async jobs with their respective callback functions
-async_job heavy_tools load_heavy_tools
-async_job aliases_worker load_aliases
-async_job completions_worker load_completions
+# === Order #5 - Immediate setup (needed for basic functionality)
 
 # --- ssh (keep synchronous as it may be needed immediately)
 if [[ -f "$HOME/.ssh/id_ed25519" ]]; then
@@ -169,6 +136,27 @@ fi
 # https://docs.flutter.dev/install/manual
 _add_to_path "$HOME/.config/flutter/bin"
 # Flutter ---
+
+# === Order #6 - Asynchronous initialization (Defer non-critical secondary.zsh parts)
+
+# Defer loading of secondary.zsh - contains operations that can wait:
+# - fzf setup with brew --prefix calls
+# - bat configuration
+# - bun setup
+# - history configuration
+# Note: asdf/mise are loaded synchronously above since they're critical for tool versions
+{
+  _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
+  
+  # After secondary loads, set up heavy tools
+  if command -v ng &>/dev/null; then
+    source <(ng completion script)
+  fi
+  
+  # Docker completion styles
+  zstyle ":completion:*:*:docker:*" option-stacking yes
+  zstyle ":completion:*:*:docker-*:*" option-stacking yes
+} &!
 
 # =============================================================================
 # profiling results - needs to be at end of file
