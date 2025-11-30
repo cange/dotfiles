@@ -12,8 +12,8 @@
     "body": "<template>\n$1\n</template>\n"
   },
   "pre block debug": {
-    "prefix": "<pre>",
-    "body": "<pre>$1: {{ $1 }}</pre>\n"
+    "prefix": "pre - tag",
+    "body": "<pre class=\"debug\">$1: {{ $1 }}</pre>\n"
   },
   "script block": {
     "prefix": "<script>",
@@ -48,7 +48,7 @@
     "body": "const props = defineProps<{\n${1:key}: ${2:type}\n}>()"
   },
   "withDefaults": {
-    "prefix": "default props",
+    "prefix": "props - default",
     "body": "interface Props {\n\t$1\n}\nconst props = withDefaults(defineProps<Props>(), {\n\t$0\n})"
   }
 }
