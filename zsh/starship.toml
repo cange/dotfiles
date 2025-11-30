@@ -81,6 +81,7 @@ deleted_style = "bright-red"
 
 [bun]
 symbol = " "
+style = "yellow"
 format = ' [$symbol()]($style)$version'
 
 [deno]

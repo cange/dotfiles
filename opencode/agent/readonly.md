@@ -1,5 +1,7 @@
 ---
+description: Read-only analysis with vision support for documentation
 model: google/gemini-2.5-flash-lite
+mode: primary
 tools:
   read: true
   edit: false

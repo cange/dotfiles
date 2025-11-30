@@ -6,6 +6,8 @@ alias E="sudo -e"
 alias gui='fork .'
 alias lg='lazygit'
 alias ld='lazydocker'
+alias oc='opencode'
+
 # Programms ---
 
 # --- network
@@ -177,7 +179,7 @@ if command -v npm &>/dev/null; then
   _npm_completion_lazy() {
     unfunction $0
     command rm -f "${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
-    
+
     _npm_completion() {
       local si=$IFS
       compadd -- $(COMP_CWORD=$((CURRENT - 1)) \

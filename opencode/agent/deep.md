@@ -1,5 +1,7 @@
 ---
-model: github-copilot/claude-sonnet-4.5
+description: Deep analysis with vision support for complex problems
+model: google/gemini-2.5-pro
+mode: primary
 tools:
   read: true
   edit: true

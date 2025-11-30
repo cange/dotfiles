@@ -1,5 +1,7 @@
 ---
+description: Fast responses with vision support for images
 model: google/gemini-2.5-flash
+mode: primary
 tools:
   read: true
   edit: true

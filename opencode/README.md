@@ -6,9 +6,14 @@
 
 #### Agents (Switch with `opencode --agent <name>` or Tab key)
 
-- **quick**: `google/gemini-2.5-flash` - Simple edits, fixes (free, fast)
-- **deep**: `github-copilot/claude-sonnet-4.5` - Complex analysis, refactoring
-- **readonly**: `google/gemini-2.5-flash-lite` - Code explanations only (no edits)
+- **quick**: `google/gemini-2.5-flash` - Simple edits, fixes (free, fast, **vision support**)
+- **deep**: `google/gemini-2.5-pro` - Complex analysis, refactoring (**vision support**)
+- **readonly**: `google/gemini-2.5-flash-lite` - Code explanations only (no edits, **vision support**)
+
+**All three agents support image/vision capabilities.** You can:
+- Drag and drop images into OpenCode terminal
+- Reference images with `@image.png` syntax
+- Paste screenshots directly (terminal-dependent)
 
 #### Custom Commands
 
