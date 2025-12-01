@@ -9,7 +9,8 @@ export LANG=en_US.UTF-8
 
 # To link Rubies to Homebrew's OpenSSL 3 / ruby neeed to be installed/compiled with the exact version
 if [[ $(uname -s) == 'Darwin' ]]; then
-  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+  # Use hardcoded path to avoid slow brew --prefix call
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@3"
 fi
 
 # --- Git GPG key setup
@@ -40,22 +41,9 @@ fi
 
 # --- bun
 
-# --- asdf - enable package managers - https://asdf-vm.com/guide/getting-started.html
-_add_to_path "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+# Note: asdf/mise are loaded in zshrc.zsh before this file
 
-# append completions to fpath
-fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
-# Note: compinit is handled centrally in zshrc.zsh
-export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
-# asdf ---
-
-# --- mise - enable package managers - https://mise.run/zsh
-if command -v mise &> /dev/null; then
-  eval "$($HOME/.local/bin/mise activate zsh)"
-fi
-# mise ---
-
-# --- fzf (lazy load key bindings)
+# --- fzf
 # Set up fzf environment and theme immediately (lightweight)
 if type fzf &>/dev/null; then
   # Theme: Nightfox/Style: terafox
@@ -76,7 +64,8 @@ if type fzf &>/dev/null; then
 
   local fzf_share="/usr/share/fzf" # Linux
   if [[ $(uname -s) == 'Darwin' ]]; then
-    fzf_share="$(brew --prefix)/opt/fzf/shell" # MacOS
+    # Use hardcoded path to avoid slow brew --prefix call
+    fzf_share="/opt/homebrew/opt/fzf/shell" # MacOS
   fi
 
   # key-bindings for CTRL+R and CTRL+T

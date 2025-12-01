@@ -118,33 +118,6 @@ if command -v zoxide &>/dev/null; then
 fi
 # z navigation config ---
 
-# --- fzf setup (needed for key bindings CTRL+R, CTRL+T)
-if command -v fzf &>/dev/null; then
-  # Theme: Nightfox/Style: terafox
-  export FZF_DEFAULT_OPTS='--color=fg:#e6eaea,bg:-1,hl:#d78b6c --color=fg+:#eaeeee,bg+:#293e40,hl+:#fda47f --color=info:#5a93aa,prompt:#a1cdd8,pointer:#e6eaea --color=marker:#587b7b,spinner:#1d3337,header:#5a93aa'
-
-  if command -v fd &>/dev/null; then
-    export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
-    export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden --exclude=.git'
-    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --exclude=.git"
-
-    if command -v bat &>/dev/null; then
-      export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
-    fi
-  fi
-
-  # key-bindings for CTRL+R and CTRL+T (avoid slow brew --prefix)
-  local fzf_share="/usr/share/fzf" # Linux default
-  if [[ $(uname -s) == 'Darwin' ]]; then
-    fzf_share="/opt/homebrew/opt/fzf/shell" # MacOS - use hardcoded path to avoid brew --prefix
-  fi
-
-  _source_if_exists "$fzf_share/completion.zsh"
-  _source_if_exists "$fzf_share/key-bindings.zsh"
-fi
-# fzf setup ---
-
 # === Order #4 - Load aliases immediately (needed for user interaction)
 _source_if_exists "$Z_CONFIG_DIR/aliases.zsh"
 _source_if_exists "$Z_CONFIG_DIR/aliases.docker.zsh"
@@ -164,17 +137,21 @@ fi
 _add_to_path "$HOME/.config/flutter/bin"
 # Flutter ---
 
-# === Order #6 - Asynchronous initialization (Defer non-critical secondary.zsh parts)
+# === Order #6 - Load secondary configuration synchronously
 
-# Defer loading of secondary.zsh - contains operations that can wait:
+# Load secondary.zsh - contains:
+# - fzf setup with key bindings (CTRL+R, CTRL+T)
 # - bat configuration
 # - bun setup
 # - history configuration
-# Note: asdf/mise/fzf are loaded synchronously above since they're critical for immediate use
+# Note: asdf/mise are loaded above since they need to be in PATH before secondary runs
+_source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
+
+# === Order #7 - Asynchronous initialization (Defer heavy tools)
+
+# Load heavy tools in background
 {
-  _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
-  
-  # After secondary loads, set up heavy tools
+  # Angular CLI completions (slow)
   if command -v ng &>/dev/null; then
     source <(ng completion script)
   fi
