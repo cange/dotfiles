@@ -41,7 +41,7 @@ fi
 
 # --- bun
 
-# Note: asdf/mise are loaded in zshrc.zsh before this file
+# Note: mise is loaded in zshrc.zsh before this file
 
 # --- fzf
 # Set up fzf environment and theme immediately (lightweight)

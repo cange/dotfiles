@@ -98,17 +98,10 @@ eval "$(starship init zsh)"
 
 # === Order #3 - Critical tools (needed immediately)
 
-# --- asdf - enable package managers (must load before aliases/commands)
-# https://asdf-vm.com/guide/getting-started.html
-_add_to_path "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
-fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
-export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
-# asdf ---
-
 # --- mise - enable package managers (must load before aliases/commands)
-# https://mise.run/zsh
+# https://mise.jdx.dev/
 if command -v mise &> /dev/null; then
-  eval "$($HOME/.local/bin/mise activate zsh)"
+  eval "$(mise activate zsh)"
 fi
 # mise ---
 
@@ -144,7 +137,7 @@ _add_to_path "$HOME/.config/flutter/bin"
 # - bat configuration
 # - bun setup
 # - history configuration
-# Note: asdf/mise are loaded above since they need to be in PATH before secondary runs
+# Note: mise is loaded above since it needs to be in PATH before secondary runs
 _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
 
 # === Order #7 - Asynchronous initialization (Defer heavy tools)
