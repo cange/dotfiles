@@ -10,7 +10,7 @@ tools:
   list: true
   glob: true
   grep: true
-  task: false
+  task: true
   webfetch: true
 mcp:
   - context7
@@ -57,10 +57,9 @@ tests.
 
 ## Pinia Stores
 
-- When selected code is a pinia store then:
-  - Use context7 for pinia documentation
-  - Use 'actions', 'getters' and 'state' describe blocks to separate these types
-    from each other
+- When the task involves a Pinia store:
+  - Delegate the task immediately by using the `task` tool with `subagent_type: "unit-test-pinia"`.
+  - Do not attempt to write Pinia tests directly in this agent.
 
 ## Notes
 
