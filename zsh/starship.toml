@@ -106,6 +106,9 @@ format = ' [$symbol()]($style)$version'
 symbol = " "
 format = ' [$symbol()]($style)$version'
 
+[java]
+format = ' [$symbol]($style)$version'
+
 [lua]
 symbol = " "
 format = ' [$symbol()]($style)$version'

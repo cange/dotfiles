@@ -1,9 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/asdf,homebrew,macos,vim,zsh
 # Edit at https://www.toptal.com/developers/gitignore?templates=asdf,homebrew,macos,vim,zsh
 
-### asdf ###
-/.tool-versions
-
 ### Homebrew ###
 Brewfile.lock.json
 
@@ -101,4 +98,3 @@ zsdoc/data
 
 # https://github.com/folke/lazy.nvim
 lazy-lock.json
-asdf/.tool-versions

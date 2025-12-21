@@ -6,6 +6,8 @@ brew "bat"
 brew "cloc"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
 # Modern replacement for 'ls'
 brew "eza"
 # Simple, fast and user-friendly alternative to find
