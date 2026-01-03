@@ -16,7 +16,7 @@
         "npx",
         "chrome-devtools-mcp@latest",
         "--executablePath",
-        "$HOME/Applications/Chromium.app/Contents/MacOS/Chromium"
+        "/snap/bin/chromium"
       ],
       "enabled": false
     },
