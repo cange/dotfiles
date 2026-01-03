@@ -87,7 +87,7 @@ vim.g.maplocalleader = ","
 if vim.fn.has("mac") == 1 then
   vim.opt.clipboard:append({ "unnamedplus" })
 elseif vim.fn.has("unix") == 1 then
-  vim.opt.clipboard:prepend({ "unnamed", "unnamedplus" })
+  vim.opt.clipboard:prepend({ "unnamedplus" })
 elseif vim.fn.has("win32") == 1 then
   vim.opt.clipboard:prepend({ "unnamed", "unnamedplus" })
 end
