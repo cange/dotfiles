@@ -1,5 +1,7 @@
 theme = light:Atom One Light,dark:Terafox
 
+font-size = 10
+
 background-blur-radius = 40
 background-opacity = 0.84
 
@@ -12,8 +14,6 @@ window-padding-color = background
 # behaviour
 mouse-hide-while-typing = true
 copy-on-select = clipboard
-
-macos-titlebar-style = hidden
 
 # keybinds
 keybind = global:super+grave_accent=toggle_quick_terminal
@@ -37,6 +37,12 @@ keybind = super+ctrl+arrow_down=resize_split:down,64
 keybind = super+ctrl+arrow_left=resize_split:left,64
 keybind = super+ctrl+arrow_right=resize_split:right,64
 keybind = super+ctrl+arrow_up=resize_split:up,64
+#
+# decorations
+macos-titlebar-style = hidden
+window-decoration = none
+
+keybind = super+shift+t=toggle_window_decorations
 #
 # fullscreen
 keybind = ctrl+enter=unbind

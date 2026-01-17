@@ -28,23 +28,36 @@ _source_if_exists "$HOME/.config/secrets/zsh"
 # secrets ---
 
 # === Order #1 - Critical Path Setup
-
-# --- Homebrew Setup (ARM/M1+ only)
-# Add Homebrew paths first (needed for macOS, no-op on Linux if paths don't exist)
-_add_to_path "/opt/homebrew/bin"
-_add_to_path "/opt/homebrew/sbin"
-
 # To make Homebrew's completions available
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 # Note: brew shellenv is slow (~100-300ms), so we manually set the essentials
-if [[ -d "/opt/homebrew" ]]; then
-  export HOMEBREW_PREFIX="/opt/homebrew"
-  export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
-  export HOMEBREW_REPOSITORY="/opt/homebrew"
-  fpath+=("/opt/homebrew/share/zsh/site-functions")
-  # HOMEBREW_SHELLENV_PREFIX is set for compatibility
-  export HOMEBREW_SHELLENV_PREFIX="/opt/homebrew"
-fi
+_setup_homebrew() {
+  local homebrew_root=0
+
+  if [[ $(uname -s) == 'Darwin' ]]; then
+    homebrew_root='/opt/homebrew'
+  elif [[ $(uname -s) == 'Linux' ]]; then
+    homebrew_root='/home/linuxbrew/.linuxbrew'
+  fi
+
+  if [[ -d $homebrew_root ]]; then
+    # --- Homebrew Setup (ARM/M1+ only)
+    # Add Homebrew paths first (needed for macOS, no-op on Linux if paths don't exist)
+    _add_to_path "$homebrew_root/bin"
+    _add_to_path "$homebrew_root/sbin"
+
+    export HOMEBREW_PREFIX="$homebrew_root"
+    export HOMEBREW_CELLAR="$homebrew_root/Cellar"
+    export HOMEBREW_REPOSITORY="$homebrew_root"
+    # HOMEBREW_SHELLENV_PREFIX is set for compatibility
+    export HOMEBREW_SHELLENV_PREFIX="$homebrew_root"
+
+    fpath+=("$homebrew_root/share/zsh/site-functions")
+
+    eval "$($homebrew_root/bin/brew shellenv)"
+  fi
+}
+_setup_homebrew
 # Homebrew Setup ---
 
 # Function to check if zsh completion cache needs regeneration
@@ -85,7 +98,7 @@ _source_if_exists "$Z_CONFIG_DIR/plugins/zsh-autosuggestions/zsh-autosuggestions
 # True lazy loading for syntax highlighting - load on first edit
 zsh-syntax-highlighting-lazy-load() {
   unset -f $0
-  source "$Z_CONFIG_DIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  _source_if_exists "$Z_CONFIG_DIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 }
 
 autoload -Uz add-zsh-hook
@@ -148,7 +161,7 @@ _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
   if command -v ng &>/dev/null; then
     source <(ng completion script)
   fi
-  
+
   # Docker completion styles
   zstyle ":completion:*:*:docker:*" option-stacking yes
   zstyle ":completion:*:*:docker-*:*" option-stacking yes
