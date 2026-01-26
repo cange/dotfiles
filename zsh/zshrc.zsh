@@ -34,6 +34,9 @@ _source_if_exists "$HOME/.config/secrets/zsh"
 _add_to_path "/opt/homebrew/bin"
 _add_to_path "/opt/homebrew/sbin"
 
+# --- Local binaries (cursor-agent, etc.)
+_add_to_path "$HOME/.local/bin"
+
 # To make Homebrew's completions available
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 # Note: brew shellenv is slow (~100-300ms), so we manually set the essentials
@@ -104,6 +107,11 @@ if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
 fi
 # mise ---
+
+# --- pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+_add_to_path "$PNPM_HOME"
+# pnpm ---
 
 # --- z navigation config (needed by cd alias)
 if command -v zoxide &>/dev/null; then
