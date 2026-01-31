@@ -98,3 +98,4 @@ zsdoc/data
 
 # https://github.com/folke/lazy.nvim
 lazy-lock.json
+.sisyphus/

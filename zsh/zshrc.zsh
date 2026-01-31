@@ -160,3 +160,6 @@ _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
 # =============================================================================
 # profiling results - needs to be at end of file
 # zprof
+
+# Added by Antigravity
+export PATH="/Users/Angermann/.antigravity/antigravity/bin:$PATH"
