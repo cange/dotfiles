@@ -1,6 +1,6 @@
 # OpenCode
 
-AI-assisted development setup using [OpenCode](https://opencode.ai) with [oh-my-opencode](https://github.com/code-yeongyu/oh-my-opencode) orchestrator.
+## Configuration Modes
 
 ## Quick Reference
 
