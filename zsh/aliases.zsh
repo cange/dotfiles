@@ -6,9 +6,22 @@ alias E="sudo -e"
 alias gui='fork .'
 alias lg='lazygit'
 alias ld='lazydocker'
-alias oc='opencode'
-
 # Programms ---
+
+#--- opencode switchers
+# OpenCode work/personal separation
+function opencode_select() {
+  items=("work" "personal")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt="Select opencode config " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  fi
+  ln -sf "${DOTFILES}opencode/oh-my-opencode-${config}.json" ~/.config/opencode/oh-my-opencode.json && opencode
+}
+alias oc='opencode_select'
+# opencode switchers ---
+#
 
 # --- network
 # List all listening network ports for current user
