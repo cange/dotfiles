@@ -17,7 +17,7 @@
       "model": "github-copilot/gpt-5.4-mini"
     },
     "multimodal-looker": {
-      "model": "github-copilot/gemini-3-flash-preview"
+      "model": "github-copilot/gemini-3-1-flash-preview"
     },
     "prometheus": {
       "model": "github-copilot/claude-opus-4.6",
@@ -55,7 +55,7 @@
       "variant": "max"
     },
     "quick": {
-      "model": "github-copilot/claude-haiku-4.5"
+      "model": "github-copilot/claude-haiku-4.6"
     },
     "unspecified-low": {
       "model": "github-copilot/claude-sonnet-4.6"
@@ -64,7 +64,7 @@
       "model": "github-copilot/claude-sonnet-4.6"
     },
     "writing": {
-      "model": "github-copilot/gemini-3-flash-preview"
+      "model": "github-copilot/gemini-3-1-flash-preview"
     },
     "deep": {
       "model": "github-copilot/gpt-5.3-codex",
