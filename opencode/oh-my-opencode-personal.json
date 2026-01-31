@@ -1,0 +1,69 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "google/antigravity-claude-sonnet-4-5"
+    },
+    "oracle": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max"
+    },
+    "librarian": {
+      "model": "google/antigravity-claude-sonnet-4-5"
+    },
+    "explore": {
+      "model": "google/antigravity-gemini-3-flash"
+    },
+    "multimodal-looker": {
+      "model": "google/antigravity-gemini-3-flash"
+    },
+    "prometheus": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max"
+    },
+    "metis": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max"
+    },
+    "momus": {
+      "model": "google/antigravity-claude-sonnet-4-5-thinking",
+      "variant": "max"
+    },
+    "atlas": {
+      "model": "google/antigravity-claude-sonnet-4-5"
+    },
+    "hephaestus": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "medium"
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "google/antigravity-gemini-3-pro"
+    },
+    "ultrabrain": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max"
+    },
+    "artistry": {
+      "model": "google/antigravity-gemini-3-pro",
+      "variant": "max"
+    },
+    "quick": {
+      "model": "google/antigravity-gemini-3-flash"
+    },
+    "unspecified-low": {
+      "model": "google/antigravity-gemini-3-flash"
+    },
+    "unspecified-high": {
+      "model": "google/antigravity-claude-sonnet-4-5"
+    },
+    "writing": {
+      "model": "google/antigravity-gemini-3-flash"
+    },
+    "deep": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "medium"
+    }
+  }
+}
