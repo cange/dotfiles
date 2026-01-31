@@ -2,6 +2,14 @@
   "$schema": "https://opencode.ai/config.json",
   "instructions": [".github/copilot-instructions.md"],
   "mcp": {
+    "brave-search": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-brave-search"],
+      "environment": {
+        "BRAVE_API_KEY": "$BRAVE_BROWSER_SEARCH_API_KEY"
+      },
+      "enabled": true
+    },
     "chrome-devtools": {
       "type": "local",
       "command": [
