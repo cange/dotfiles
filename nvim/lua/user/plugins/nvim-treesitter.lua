@@ -43,7 +43,6 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    branch = "main",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
@@ -54,12 +53,13 @@ return {
         vim.api.nvim_create_autocmd("FileType", {
           pattern = { filetype },
           callback = function()
-            -- indentation
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-            -- highlighting
+            -- syntax highlighting, provided by Neovim
             vim.treesitter.start()
-            -- folding
+            -- folds, provided by Neovim
             vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+            vim.wo.foldmethod = "expr"
+            -- indentation, provided by nvim-treesitter
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
           end,
         })
       end
