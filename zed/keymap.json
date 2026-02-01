@@ -3,18 +3,13 @@
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu && !AgentPanel",
     "bindings": {
       "space n": "editor::ToggleLineNumbers",
+      "space f": "file_finder::Toggle",
+      "space \\": "workspace::ToggleLeftDock",
+      "space w": "workspace::Save",
       "] g": "editor::GoToHunk",
       "[ g": "editor::GoToPreviousHunk",
       "] b": "pane::ActivateNextItem",
       "[ b": "pane::ActivatePreviousItem"
-    }
-  },
-  {
-    "context": "Workspace && vim_mode != insert && !VimWaiting && !menu && !AgentPanel",
-    "bindings": {
-      "space \\": "workspace::ToggleLeftDock",
-      "space w": "workspace::Save",
-      "space f": "file_finder::Toggle"
     }
   },
   {
@@ -77,11 +72,12 @@
       "cmd-c": "project_panel::Copy",
       "cmd-p": "project_panel::Paste",
       "cmd-d": "project_panel::Delete",
-      "cmd-x": "project_panel::Cut"
+      "cmd-x": "project_panel::Cut",
+      "space \\": "workspace::ToggleLeftDock"
     }
   },
   {
-    "context": "!AgentPanel || ProjectPanel || Editor",
+    "context": "(ProjectPanel || Editor) && (!AgentPanel && !BufferSearchBar)",
     "bindings": {
       "space a a": "agent::ToggleFocus",
       "space g b": "git::Switch",
@@ -122,7 +118,7 @@
     }
   },
   {
-    "context": "(vim_mode == helix_normal && !menu)",
+    "context": "vim_mode == helix_normal && !menu",
     "bindings": {
       "g r": null
     }
