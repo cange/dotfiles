@@ -11,10 +11,6 @@
     "prefix": "<template>",
     "body": "<template>\n$1\n</template>\n"
   },
-  "pre block debug": {
-    "prefix": "pre - tag",
-    "body": "<pre class=\"debug\">$1: {{ $1 }}</pre>\n"
-  },
   "script block": {
     "prefix": "<script>",
     "body": "<script ${1:setup }lang=\"ts\">\n${0}\n</script>"
