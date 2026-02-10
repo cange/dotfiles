@@ -12,10 +12,10 @@
       "model": "google/antigravity-claude-sonnet-4-5"
     },
     "explore": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "google/antigravity-gemini-3-1-flash"
     },
     "multimodal-looker": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "google/antigravity-gemini-3-1-flash"
     },
     "prometheus": {
       "model": "google/antigravity-claude-opus-4-5-thinking",
@@ -26,7 +26,7 @@
       "variant": "max"
     },
     "momus": {
-      "model": "google/antigravity-claude-sonnet-4-5-thinking",
+      "model": "google/antigravity-claude-sonnet-4-4-thinking",
       "variant": "max"
     },
     "atlas": {
@@ -39,27 +39,27 @@
   },
   "categories": {
     "visual-engineering": {
-      "model": "google/antigravity-gemini-3-pro"
+      "model": "google/antigravity-gemini-3-1-pro"
     },
     "ultrabrain": {
       "model": "google/antigravity-claude-opus-4-5-thinking",
       "variant": "max"
     },
     "artistry": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-gemini-3-1-pro",
       "variant": "max"
     },
     "quick": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "google/antigravity-gemini-3-1-flash"
     },
     "unspecified-low": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "google/antigravity-gemini-3-1-flash"
     },
     "unspecified-high": {
       "model": "google/antigravity-claude-sonnet-4-5"
     },
     "writing": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "google/antigravity-gemini-3-1-flash"
     },
     "deep": {
       "model": "google/antigravity-claude-opus-4-5-thinking",
