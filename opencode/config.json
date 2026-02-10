@@ -2,14 +2,6 @@
   "$schema": "https://opencode.ai/config.json",
   "instructions": [".github/copilot-instructions.md"],
   "mcp": {
-    "brave-search": {
-      "type": "local",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-brave-search"],
-      "environment": {
-        "BRAVE_API_KEY": "$BRAVE_BROWSER_SEARCH_API_KEY"
-      },
-      "enabled": true
-    },
     "chrome-devtools": {
       "type": "local",
       "command": [
@@ -18,7 +10,7 @@
         "--executablePath",
         "$HOME/Applications/Chromium.app/Contents/MacOS/Chromium"
       ],
-      "enabled": true
+      "enabled": false
     },
     "context7": {
       "type": "local",
@@ -45,9 +37,17 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN"
       },
       "enabled": true
+    },
+    "HubSpotDev": {
+      "type": "local",
+      "command": ["hs", "mcp", "start", "--ai-agent", "opencode"]
+    },
+    "nuxt": {
+      "type": "remote",
+      "url": "https://nuxt.com/mcp",
+      "enabled": false
     }
   },
-  "plugin": ["oh-my-opencode@3.3.2", "opencode-antigravity-auth@1.4.6"],
   "provider": {
     "google": {
       "name": "Google",
@@ -156,5 +156,5 @@
       }
     }
   },
-  "plugin": ["oh-my-opencode@latest", "opencode-antigravity-auth@1.4.3"]
+  "plugin": ["oh-my-opencode@3.5.3", "opencode-antigravity-auth@1.6.0"]
 }

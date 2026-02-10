@@ -13,7 +13,7 @@ tools:
   task: false
   webfetch: true
 mcp:
-  - brave-search
+  - websearch
   - context7
 ---
 
