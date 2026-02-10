@@ -47,7 +47,7 @@
       "enabled": true
     }
   },
-  "plugin": ["oh-my-opencode@3.3.2", "opencode-antigravity-auth@1.4.6"],
+  "plugin": ["oh-my-opencode@3.3.2", "opencode-antigravity-auth@1.5.0"],
   "provider": {
     "google": {
       "name": "Google",
@@ -156,5 +156,5 @@
       }
     }
   },
-  "plugin": ["oh-my-opencode@latest", "opencode-antigravity-auth@1.4.3"]
+  "plugin": ["oh-my-opencode@latest", "opencode-antigravity-auth@1.4.6"]
 }
