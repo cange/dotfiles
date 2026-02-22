@@ -148,7 +148,7 @@ function M.browse_workspace()
 end
 
 ---@param file_name string
----@return nil|table
+---@return nil | table
 local function get_rails_browse_files_config(file_name)
   local is_rails = vim.fn.filereadable("Gemfile") == 1
   if not is_rails then return nil end
