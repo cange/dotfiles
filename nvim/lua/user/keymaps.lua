@@ -23,10 +23,10 @@ local keymaps = {
   { "j",                ":move'>+<CR>='[gv",    { desc = "Line move: down" }, { "v" } },
   { "k",                ":move-2<CR>='[gv",     { desc = "Line move: up" }, { "v" } },
 
-  { "<C-M-left>",       "<C-W>5<",              { desc = "Resize left window" } },
+  { "<C-M-=>",          "<C-W>5<",              { desc = "Resize left window" } },
   { "<C-M-down>",       "<C-W>-",               { desc = "Resize down window" } },
   { "<C-M-up>",         "<C-W>+",               { desc = "Resize up window" } },
-  { "<C-M-right>",      "<C-W>5>",              { desc = "Resize right window" } },
+  { "<C-M-->",          "<C-W>5>",              { desc = "Resize right window" } },
   { "<leader>=",        ":wincmd =<CR>",        { desc = "Equalize windows" } },
 
   -- Window movements
@@ -49,7 +49,7 @@ local keymaps = {
   { "<S-Tab>",          "<gv",                  { desc = "Indent: right" }, { "v" } },
 
   -- others
-  { "<Leader>bc",       "<cmd>%bdelete|e#<CR>", { desc = "Close other buffers" } },
+  { "<Leader>bD",       "<cmd>%bdelete|e#<CR>", { desc = "Close other buffers" } },
   { "<Leader>w",        "<cmd>w!<CR>",          { desc = "Save file" } },
   { "<LocalLeader>wo",  "<cmd>only<CR>",        { desc = "Close all windows except current" } },
   { "<LocalLeader>a",   "gg<S-v>G",             { desc = "Select all content" } },
