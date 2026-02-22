@@ -7,19 +7,36 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "theme": "Terafox - blurred",
+  "agent_servers": {
+    "github-copilot": {
+      "type": "registry",
+    },
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "theme": "Terafox - opaque",
   "icon_theme": "Material Icon Theme",
 
   "agent": {
+    "favorite_models": [
+      {
+        "provider": "google",
+        "model": "gemini-3-pro-preview",
+      },
+      {
+        "provider": "google",
+        "model": "gemini-3-flash-preview",
+      },
+    ],
     "single_file_review": true,
     "always_allow_tool_actions": true,
     "default_profile": "write",
     "default_model": {
-      "provider": "google",
-      "model": "gemini-2.5-flash",
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4.5",
     },
-  },
-  "agent_buffer_font_size": 13.0,
+    "agent_buffer_font_size": 13.0,
   },
 
   "vim_mode": true,
@@ -30,13 +47,22 @@
 
   "context_servers": {
     "mcp-server-context7": {
+      "source": "extension",
       "enabled": true,
       "settings": {},
     },
     "mcp-server-github": {
+      "source": "extension",
       "enabled": true,
       "settings": {
         "github_personal_access_token": "$GITHUB_TOKEN",
+      },
+      "nuxt": {
+        "source": "custom",
+        "enabled": true,
+        "command": "npx",
+        "args": ["mcp-remote", "https://nuxt.com/mcp"],
+        "env": {},
       },
     },
   },

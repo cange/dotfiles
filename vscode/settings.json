@@ -79,10 +79,18 @@
   "material-icon-theme.folders.color": "#587b7b",
   "material-icon-theme.folders.theme": "none",
   "workbench.activityBar.location": "hidden",
-  "chat.mcp.discovery.enabled": true,
+  "chat.mcp.discovery.enabled": {
+    "claude-desktop": true,
+    "windsurf": true,
+    "cursor-global": true,
+    "cursor-workspace": true
+  },
   "editor.formatOnType": false,
   "screencastMode.keyboardOptions": {
     "showKeys": false
   },
-  "github.copilot.nextEditSuggestions.enabled": true
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "chat.mcp.gallery.enabled": true,
+  "liveshare.connectionMode": "relay",
+  "docker.extension.enableComposeLanguageServer": false
 }
