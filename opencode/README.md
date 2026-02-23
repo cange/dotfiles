@@ -22,3 +22,6 @@ ln -sf "$DOTFILES/opencode/oh-my-opencode-personal.json" ~/.config/opencode/oh-m
 ```
 
 See [oh-my-opencode.json](./oh-my-opencode-personal.json) for configuration examples.
+
+Both oh-my-opencode configs favours local Docker `context7` over builtin
+version, due better control reason reasons.

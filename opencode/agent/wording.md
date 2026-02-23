@@ -1,6 +1,7 @@
 ---
 description: Improve wording
 mode: subagent
+category: quick
 temperature: 0.1
 tools:
   read: true
