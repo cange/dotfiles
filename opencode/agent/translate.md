@@ -1,5 +1,6 @@
 ---
 description: Translate to English
+category: quick
 mode: subagent
 temperature: 0.1
 tools:

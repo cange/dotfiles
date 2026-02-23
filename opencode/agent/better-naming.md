@@ -1,6 +1,7 @@
 ---
 description: Suggests better names for variables and more
 mode: subagent
+category: quick
 temperature: 0.2
 tools:
   read: true

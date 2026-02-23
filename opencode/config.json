@@ -36,15 +36,21 @@
       "environment": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN"
       },
-      "enabled": true
+      "enabled": false
     },
-    "HubSpotDev": {
+    "hubspot": {
       "type": "local",
-      "command": ["hs", "mcp", "start", "--ai-agent", "opencode"]
+      "command": ["hs", "mcp", "start", "--ai-agent", "gemini"],
+      "enabled": false
     },
     "nuxt": {
       "type": "remote",
       "url": "https://nuxt.com/mcp",
+      "enabled": false
+    },
+    "rails-mcp-server": {
+      "type": "local",
+      "command": ["$HOME/.local/share/mise/shims/rails-mcp-server"],
       "enabled": false
     }
   },
