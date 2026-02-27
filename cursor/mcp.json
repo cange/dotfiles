@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "Context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {}
+    },
+    "Sentry": {
+      "url": "https://mcp.sentry.dev/mcp",
+      "headers": {}
+    },
+    "Chrome DevTools": {
+      "command": "npx chrome-devtools-mcp@latest",
+      "env": {},
+      "args": []
+    },
+		"Nuxt": {
+			"type": "http",
+			"url": "https://nuxt.com/mcp"
+		},
+    "HubSpot": {
+      "command": "hs",
+      "args": [
+        "mcp",
+        "start",
+        "--ai-agent",
+        "cursor"
+      ]
+    }
+  }
+}

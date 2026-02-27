@@ -3,28 +3,28 @@
   // Navigation
   {
     "key": "w left",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)",
+    "when": "vim.mode == 'Normal' && editorTextFocus",
     "command": "workbench.action.navigateLeft"
   },
   {
     "key": "w right",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)",
+    "when": "vim.mode == 'Normal' && editorTextFocus",
     "command": "workbench.action.navigateRight"
   },
   {
     "key": "w up",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)",
+    "when": "vim.mode == 'Normal' && editorTextFocus",
     "command": "workbench.action.navigateUp"
   },
   {
     "key": "w down",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)",
+    "when": "vim.mode == 'Normal' && editorTextFocus",
     "command": "workbench.action.navigateDown"
   },
 
   {
     "key": "space b",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)",
+    "when": "vim.mode == 'Normal' && editorTextFocus",
     "command": "workbench.action.showAllEditors"
   },
   {
