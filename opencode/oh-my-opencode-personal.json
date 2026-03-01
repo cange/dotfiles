@@ -3,14 +3,14 @@
   "disabled_mcps": ["context7"],
   "agents": {
     "sisyphus": {
-      "model": "google/antigravity-claude-sonnet-4-5"
+      "model": "google/antigravity-claude-sonnet-4-6"
     },
     "oracle": {
-      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "model": "google/antigravity-claude-opus-4-6-thinking",
       "variant": "max"
     },
     "librarian": {
-      "model": "google/antigravity-claude-sonnet-4-5"
+      "model": "google/antigravity-claude-sonnet-4-6"
     },
     "explore": {
       "model": "google/antigravity-gemini-3-1-flash"
@@ -19,22 +19,22 @@
       "model": "google/antigravity-gemini-3-1-flash"
     },
     "prometheus": {
-      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "model": "google/antigravity-claude-opus-4-6-thinking",
       "variant": "max"
     },
     "metis": {
-      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "model": "google/antigravity-claude-opus-4-6-thinking",
       "variant": "max"
     },
     "momus": {
-      "model": "google/antigravity-claude-sonnet-4-5-thinking",
+      "model": "google/antigravity-claude-sonnet-4-6-thinking",
       "variant": "max"
     },
     "atlas": {
-      "model": "google/antigravity-claude-sonnet-4-5"
+      "model": "google/antigravity-claude-sonnet-4-6"
     },
     "hephaestus": {
-      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "model": "google/antigravity-claude-opus-4-6-thinking",
       "variant": "medium"
     }
   },
@@ -43,7 +43,7 @@
       "model": "google/antigravity-gemini-3-1-pro"
     },
     "ultrabrain": {
-      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "model": "google/antigravity-claude-opus-4-6-thinking",
       "variant": "max"
     },
     "artistry": {
@@ -57,13 +57,13 @@
       "model": "google/antigravity-gemini-3-1-flash"
     },
     "unspecified-high": {
-      "model": "google/antigravity-claude-sonnet-4-5"
+      "model": "google/antigravity-claude-sonnet-4-6"
     },
     "writing": {
       "model": "google/antigravity-gemini-3-1-flash"
     },
     "deep": {
-      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "model": "google/antigravity-claude-opus-4-6-thinking",
       "variant": "medium"
     }
   }
