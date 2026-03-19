@@ -65,9 +65,10 @@ return {
         copilot = {},
 
         -- CSS
-        stylelint_lsp = {},
-        cssls = {},
         css_variables = { filetypes = { "css", "scss", "vue", "eruby" } },
+        cssls = {},
+        stylelint_lsp = {},
+        tailwindcss = {},
 
         -- ruby
         herb_ls = {},
