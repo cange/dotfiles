@@ -46,23 +46,19 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
-      require("nvim-treesitter").install(sources)
-      for _, filetype in pairs(sources) do
-        -- enable features by filetype
-        -- https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#supported-features
-        vim.api.nvim_create_autocmd("FileType", {
-          pattern = { filetype },
-          callback = function()
-            -- syntax highlighting, provided by Neovim
-            vim.treesitter.start()
-            -- folds, provided by Neovim
-            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-            vim.wo.foldmethod = "expr"
-            -- indentation, provided by nvim-treesitter
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end,
-        })
-      end
+      -- see https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#supported-features
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = sources,
+        callback = function()
+          -- enable Neovim's syntax highlighting
+          vim.treesitter.start()
+          -- enable Neovim's treesitter-based folding
+          vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          vim.wo[0][0].foldmethod = "expr"
+          -- enable plugin's treesitter-based indentation
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
     end,
   },
 
