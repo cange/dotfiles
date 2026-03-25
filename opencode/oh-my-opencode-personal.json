@@ -1,6 +1,5 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-  "disabled_mcps": ["context7"],
   "agents": {
     "sisyphus": {
       "model": "google/antigravity-claude-sonnet-4-6"
