@@ -11,9 +11,5 @@
   "prettier-ignore-attribute key": {
     "prefix": "lintprattrk",
     "body": "<!-- prettier-ignore-attribute ($keyword) -->"
-  },
-  "pre block debug": {
-    "prefix": "ptag",
-    "body": "<pre class=\"debug\">$1: {{ $1 }}</pre>\n"
   }
 }
