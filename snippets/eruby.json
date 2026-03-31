@@ -70,5 +70,13 @@
     "prefix": ["lt"],
     "body": ["<%= link_to $1, $2 %>"],
     "description": "link_to helper"
+  },
+  "pre block debug": {
+    "prefix": "ptag",
+    "body": "<pre class=\"debug\">$1: <%= $1 %></pre>\n"
+  },
+  "app-icon": {
+    "prefix": "icon <app-icon>",
+    "body": "<app-icon name=\"$1\"$0></app-icon>"
   }
 }

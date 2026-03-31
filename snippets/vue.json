@@ -46,5 +46,9 @@
   "withDefaults": {
     "prefix": "props - default",
     "body": "interface Props {\n\t$1\n}\nconst props = withDefaults(defineProps<Props>(), {\n\t$0\n})"
+  },
+  "pre block debug": {
+    "prefix": "ptag",
+    "body": "<pre class=\"debug\">$1: {{ $1 }}</pre>\n"
   }
 }
