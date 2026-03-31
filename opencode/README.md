@@ -15,10 +15,10 @@ Switch between work and personal provider configs:
 
 ```bash
 # Work (GitHub Copilot)
-ln -sf "$DOTFILES/opencode/oh-my-opencode-work.json" ~/.config/opencode/oh-my-opencode.json && opencode
+ln -sf "$DOTFILES/opencode/oh-my-opencode-github.json" ~/.config/opencode/oh-my-opencode.json && opencode
 
 # Personal (Google Antigravity)
-ln -sf "$DOTFILES/opencode/oh-my-opencode-personal.json" ~/.config/opencode/oh-my-opencode.json && opencode
+ln -sf "$DOTFILES/opencode/oh-my-opencode-antigravity.json" ~/.config/opencode/oh-my-opencode.json && opencode
 ```
 
 See [oh-my-opencode.json](./oh-my-opencode-personal.json) for configuration examples.

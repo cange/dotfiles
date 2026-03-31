@@ -11,7 +11,7 @@ alias ld='lazydocker'
 #--- opencode switchers
 # OpenCode work/personal separation
 function opencode_select() {
-  items=("work" "personal")
+  items=("github" "antigravity")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt="Select opencode config " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"

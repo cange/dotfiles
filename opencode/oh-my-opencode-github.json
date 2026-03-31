@@ -6,15 +6,15 @@
       "variant": "max"
     },
     "hephaestus": {
-      "model": "github-copilot/gpt-5.2-codex",
+      "model": "github-copilot/gpt-5.3-codex",
       "variant": "medium"
     },
     "oracle": {
-      "model": "github-copilot/gpt-5.2",
+      "model": "github-copilot/gpt-5.4",
       "variant": "high"
     },
     "explore": {
-      "model": "github-copilot/gpt-5-mini"
+      "model": "github-copilot/gpt-5.4-mini"
     },
     "multimodal-looker": {
       "model": "github-copilot/gemini-3-flash-preview"
@@ -28,7 +28,7 @@
       "variant": "max"
     },
     "momus": {
-      "model": "github-copilot/gpt-5.2",
+      "model": "github-copilot/gpt-5.4",
       "variant": "medium"
     },
     "atlas": {
@@ -43,15 +43,15 @@
   },
   "categories": {
     "visual-engineering": {
-      "model": "github-copilot/gemini-3-pro-preview",
+      "model": "github-copilot/gemini-3.1-pro-preview",
       "variant": "high"
     },
     "ultrabrain": {
-      "model": "github-copilot/gpt-5.2-codex",
+      "model": "github-copilot/gpt-5.3-codex",
       "variant": "xhigh"
     },
     "artistry": {
-      "model": "github-copilot/gemini-3-pro-preview",
+      "model": "github-copilot/gemini-3.1-pro-preview",
       "variant": "max"
     },
     "quick": {
@@ -67,7 +67,7 @@
       "model": "github-copilot/gemini-3-flash-preview"
     },
     "deep": {
-      "model": "github-copilot/gpt-5.2-codex",
+      "model": "github-copilot/gpt-5.3-codex",
       "variant": "medium"
     }
   }
