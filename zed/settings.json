@@ -7,6 +7,9 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "edit_predictions": {
+    "provider": "copilot",
+  },
   "agent_servers": {
     "github-copilot": {
       "type": "registry",
@@ -15,10 +18,13 @@
       "type": "registry",
     },
   },
-  "theme": "Terafox - opaque",
+  "theme": "Terafox - blurred",
   "icon_theme": "Material Icon Theme",
 
   "agent": {
+    "tool_permissions": {
+      "default": "allow",
+    },
     "favorite_models": [
       {
         "provider": "google",
@@ -30,7 +36,6 @@
       },
     ],
     "single_file_review": true,
-    "always_allow_tool_actions": true,
     "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
@@ -47,12 +52,10 @@
 
   "context_servers": {
     "mcp-server-context7": {
-      "source": "extension",
       "enabled": true,
       "settings": {},
     },
     "mcp-server-github": {
-      "source": "extension",
       "enabled": true,
       "settings": {
         "github_personal_access_token": "$GITHUB_TOKEN",
@@ -77,8 +80,6 @@
     "coloring": "indent_aware",
     "background_coloring": "disabled",
   },
-
-  "features": { "edit_prediction_provider": "copilot" },
   "auto_update_extensions": { "colorizer": false },
   "telemetry": { "metrics": false },
 
@@ -118,6 +119,4 @@
   "git_panel": { "button": true },
   "notification_panel": { "button": false },
   "search": { "button": false },
-  //   }
-  // }
 }

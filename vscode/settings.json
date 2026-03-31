@@ -92,5 +92,6 @@
   "github.copilot.nextEditSuggestions.enabled": true,
   "chat.mcp.gallery.enabled": true,
   "liveshare.connectionMode": "relay",
-  "docker.extension.enableComposeLanguageServer": false
+  "docker.extension.enableComposeLanguageServer": false,
+  "chat.viewSessions.orientation": "stacked"
 }
