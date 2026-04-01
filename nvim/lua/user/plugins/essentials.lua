@@ -74,6 +74,7 @@ return {
         FIX = { icon = "" },
         NOTE = { icon = "" },
         TODO = { icon = "" },
+        WORKAROUND = { color = "hint" },
       },
     },
   },
@@ -94,12 +95,6 @@ return {
   { -- autoclose and autorename html tags
     "windwp/nvim-ts-autotag",
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    opts = {
-      aliases = {
-        ["eruby"] = "html",
-      },
-    },
   },
 
   { -- close brackets, quotes etc

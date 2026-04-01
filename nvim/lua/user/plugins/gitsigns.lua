@@ -22,8 +22,8 @@ return {
         virt_text = false, -- hide inline to preserve to show in statusline
       },
     },
-    -- stylua: ignore start
     keys = {
+      -- stylua: ignore start
       { "[g", "<cmd>Gitsigns prev_hunk<CR>",                                    desc = "Pre Git hunk" },
       { "]g", "<cmd>Gitsigns next_hunk<CR>",                                    desc = "Next Git hunk" },
       { "<Leader>gI", '<cmd>lua R("gitsigns").blame_line({ full = true })<CR>', desc = "Commit full info" },
@@ -31,11 +31,11 @@ return {
       { "<Leader>gS", "<cmd>Gitsigns stage_buffer<CR>",                         desc = "Stage file" },
       { "<Leader>gi", "<cmd>Gitsigns blame_line<CR>",                           desc = "Commit info" },
       { "<Leader>gl", "<cmd>Gitsigns toggle_current_line_blame<CR>",            desc = "Line blame" },
-      { "<Leader>gp", "<cmd>Gitsigns preview_hunk<CR>",                         desc = "Preview hunk" },
+      { "<Leader>gp", "<cmd>Gitsigns preview_hunk_inline<CR>",                  desc = "Preview hunk" },
       { "<Leader>gr", "<cmd>Gitsigns reset_hunk<CR>",                           desc = "Reset hunk" },
       { "<Leader>gs", "<cmd>Gitsigns stage_hunk<CR>",                           desc = "Stage hunk" },
       { "<Leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>",                      desc = "Undo stage hunk" },
+      --- stylua: ignore end
     },
-    --- stylua: ignore end
   },
 }

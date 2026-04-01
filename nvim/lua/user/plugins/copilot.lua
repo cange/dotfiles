@@ -42,7 +42,7 @@ return {
       },
       build = "make tiktoken",
       opts = function()
-        local model = "claude-sonnet-4.5"
+        local model = "claude-opus-4.6"
         return {
           prompts = {
             Concise = { prompt = "Please rewrite the following text to make it more concise." },

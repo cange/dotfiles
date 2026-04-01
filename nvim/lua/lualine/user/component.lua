@@ -118,7 +118,7 @@ function M:get_status_display()
 end
 
 function M:cached_status()
-  local ft = vim.fn.expand("%:e")
+  local ft = vim.bo.filetype
   local data = {}
   ---@type 'cache'|'cached'|'refresh'
   local type = nil
