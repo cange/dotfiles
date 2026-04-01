@@ -176,10 +176,22 @@ return {
     keys = { { "<Leader>e2", "<cmd>Mason<CR>", desc = "Mason info" } },
     config = function(_, opts)
       require("mason").setup(opts)
-      -- loads formatter and linter
-      local linter = { "eslint", "jsonlint", "markdown_oxide", "markuplint", "stylelint", "yamllint" }
-      local formatter = { "prettier", "shfmt", "stylua", "html" }
+      local linter = {
+        "eslint",
+        "jsonlint",
+        "markdown_oxide",
+        "markuplint",
+        "stylelint",
+        "yamllint",
+      }
+      local formatter = {
+        "prettier",
+        "shfmt",
+        "stylua",
+        "html",
+      }
       require("mason-tool-installer").setup({
+        -- loads formatter and linter
         ensure_installed = vim.list_extend(vim.list_extend({}, linter), formatter),
         auto_update = true,
       })

@@ -32,10 +32,12 @@ function M.custom_live_grep(opts)
   opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
   opts.shortcuts = opts.shortcuts
     or {
-      ["l"] = "*.lua",
-      ["v"] = "*.vue",
-      ["s"] = "*.{spec,stories}.{js,ts}",
+      ["erb"] = "*.erb",
       ["js"] = "*.{js,ts}",
+      ["l"] = "*.lua",
+      ["rb"] = "*.{rb,erb,rake}",
+      ["s"] = "*.{spec,s tories}.{js,ts}",
+      ["v"] = "*.vue",
       ["vjs"] = "*.{js,ts,vue}",
     }
   opts.pattern = opts.pattern or "%s"

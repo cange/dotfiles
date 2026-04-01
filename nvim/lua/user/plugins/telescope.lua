@@ -142,8 +142,8 @@ return {
     { "<Leader>f",  "<cmd>Telescope find_files<CR>",                        desc = "Find Files" },
     { "<Leader>p",  "<cmd>Telescope project<CR>",                           desc = "Switch workspace" },
     { "<Leader>,c", "<cmd>Telescope colorscheme<CR>",                       desc = "Change colorscheme" },
-
-    { "<Leader>gb", "<cmd>Telescope git_branches<CR>",                      desc = "Checkout branch" },
+    -- git
+    { "<Leader>sB", "<cmd>Telescope git_branches<CR>",                      desc = "Checkout branch" },
     { "<Leader>gc", "<cmd>Telescope git_commits<CR>",                       desc = "Checkout commit" },
     { "<Leader>go", "<cmd>Telescope git_status<CR>",                        desc = "Open changed file" },
 
