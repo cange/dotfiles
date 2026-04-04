@@ -33,10 +33,13 @@ keybind = super+ctrl+shift+arrow_left=unbind
 keybind = super+ctrl+shift+arrow_right=unbind
 keybind = super+ctrl+shift+arrow_up=unbind
 #
-keybind = super+ctrl+arrow_down=resize_split:down,64
-keybind = super+ctrl+arrow_left=resize_split:left,64
-keybind = super+ctrl+arrow_right=resize_split:right,64
-keybind = super+ctrl+arrow_up=resize_split:up,64
+keybind = ghostty/arrow_up=resize_split:up,64
+keybind = ghostty/arrow_down=resize_split:down,64
+keybind = ghostty/arrow_left=resize_split:left,64
+keybind = ghostty/arrow_right=resize_split:right,64
+keybind = ghostty/escape=deactivate_key_table
+keybind = ghostty/catch_all=ignore
+keybind = ctrl+g=activate_key_table:ghostty
 #
 # fullscreen
 keybind = ctrl+enter=unbind
