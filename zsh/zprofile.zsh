@@ -1,7 +1,7 @@
 # --- Programs
-export EDITOR='nvim'
+export EDITOR="nvim"
+export VISUAL="zed --wait"
 export TERMINAL="ghostty"
 export BROWSER="firefox-developer-edition"
-export PAGER='bat'
-export VISUAL="${EDITOR}"
+export PAGER="bat"
 # Programs ---
