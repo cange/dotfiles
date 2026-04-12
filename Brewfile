@@ -9,8 +9,8 @@ cask "firefox-developer-edition"
 cask "flycut"
 # Tools to protect your emails and files
 cask "gpg-suite"
-# Utility to hide menu bar item
-cask "hiddenbar"
+# Menu bar manager to hide menu bar item
+cask "thaw"
 # Menu bar calendar
 cask "itsycal"
 # Password manager app
