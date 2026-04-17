@@ -13,18 +13,10 @@
       "env": {},
       "args": []
     },
-		"Nuxt": {
-			"type": "http",
-			"url": "https://nuxt.com/mcp"
-		},
-    "HubSpot": {
-      "command": "hs",
-      "args": [
-        "mcp",
-        "start",
-        "--ai-agent",
-        "cursor"
-      ]
+    "Nuxt": {
+      "type": "http",
+      "url": "https://nuxt.com/mcp"
     }
   }
 }
+

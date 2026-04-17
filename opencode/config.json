@@ -38,11 +38,6 @@
       },
       "enabled": false
     },
-    "hubspot": {
-      "type": "local",
-      "command": ["hs", "mcp", "start", "--ai-agent", "gemini"],
-      "enabled": false
-    },
     "nuxt": {
       "type": "remote",
       "url": "https://nuxt.com/mcp",
