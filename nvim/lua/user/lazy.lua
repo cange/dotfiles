@@ -22,4 +22,5 @@ require("lazy").setup("user.plugins", {
     enabled = true, -- automatically check for plugin updates
   },
   change_detection = { notify = false },
+  rocks = { enabled = false }, -- surpress luarocks 5.1 incompatibily warning on :checkhealth
 })

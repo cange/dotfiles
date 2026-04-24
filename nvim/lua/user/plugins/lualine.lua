@@ -7,12 +7,10 @@ return {
       "EdenEast/nightfox.nvim",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
-      "AndreM222/copilot-lualine",
+      require("user.copilot").lualine_dependencies,
     },
     opts = function()
       local custom_theme = require("lualine.themes.terafox")
-      -- set the bg of lualine_c section to non-transparent
-      local mode = { "mode", fmt = function(str) return str:sub(1, 1) end }
       local workspace = {
         "workspace",
         on_click = function() vim.cmd("Telescope project") end,
@@ -61,13 +59,6 @@ return {
         padding = { left = 1, right = 0 },
         on_click = function() vim.cmd("ConformInfo") end,
       }
-      local copilot = {
-        "copilot",
-        on_click = function() vim.cmd("Copilot status") end,
-        padding = { left = 1, right = 0 },
-        separator = "",
-        symbols = { spinners = vim.split(Icon.sets.spinner, " ") },
-      }
 
       return {
         options = {
@@ -96,7 +87,7 @@ return {
             { "inlay_hints" },
             format_clients,
             { "lsp_clients", padding = { left = 1, right = 0 } },
-            copilot,
+            require("user.copilot").lualine_component,
           },
           lualine_y = {
             { "encoding", separator = "" },

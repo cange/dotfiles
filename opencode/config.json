@@ -43,10 +43,11 @@
       "url": "https://nuxt.com/mcp",
       "enabled": false
     },
-    "rails-mcp-server": {
-      "type": "local",
-      "command": ["$HOME/.local/share/mise/shims/rails-mcp-server"],
+    "app-rails-mcp": {
+      "type": "remote",
+      "url": "http://localhost:6029/mcp/sse",
       "enabled": false
     }
-  }
+  },
+  "plugin": ["oh-my-openagent@latest"]
 }

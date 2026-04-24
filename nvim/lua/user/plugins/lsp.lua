@@ -62,7 +62,6 @@ return {
             },
           },
         },
-        copilot = {},
 
         -- CSS
         css_variables = { filetypes = { "css", "scss", "vue", "eruby" } },
@@ -135,6 +134,7 @@ return {
           },
         },
       }
+      servers = vim.tbl_extend("keep", servers, require("user.copilot").lsp_servers)
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       --Enable (broadcasting) snippet capability for completion

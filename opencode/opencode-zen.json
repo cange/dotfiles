@@ -1,0 +1,196 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "opencode/kimi-k2.5",
+      "fallback_models": [
+        {
+          "model": "opencode/glm-5.1"
+        }
+      ],
+      "ultrawork": { "model": "anthropic/claude-opus-4-6", "variant": "max" }
+    },
+    "hephaestus": {
+      "model": "opencode/gpt-5.4",
+      "variant": "medium",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "hight"
+        }
+      ]
+    },
+    "oracle": {
+      "model": "opencode/gpt-5.4",
+      "variant": "high",
+      "fallback_models": [
+        {
+          "model": "opencode/gemini-3.1-pro",
+          "variant": "high"
+        },
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "max"
+        }
+      ]
+    },
+    "explore": {
+      "model": "opencode/gpt-5.4-mini",
+      "fallback_models": [
+        {
+          "model": "opencode/grok-code-fast-1"
+        }
+      ]
+    },
+    "multimodal-looker": {
+      "model": "opencode/gpt-5.4-nano",
+      "variant": "medium",
+      "fallback_models": [
+        {
+          "model": "opencode/minimax-m2.7"
+        }
+      ]
+    },
+    "prometheus": {
+      "model": "opencode/kimi-k2.5",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "max"
+        },
+        {
+          "model": "opencode/gemini-3.1-pro"
+        }
+      ]
+    },
+    "metis": {
+      "model": "opencode/gpt-5.4",
+      "variant": "high",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "max"
+        }
+      ]
+    },
+    "momus": {
+      "model": "opencode/gpt-5.4",
+      "variant": "xhigh",
+      "fallback_models": [
+        {
+          "model": "opencode/gemini-3.1-pro"
+        },
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "max"
+        }
+      ]
+    },
+    "atlas": {
+      "model": "opencode/gpt-5.4",
+      "variant": "medium",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-sonnet-4-6"
+        }
+      ]
+    },
+    "sisyphus-junior": {
+      "model": "opencode/gpt-5.4",
+      "variant": "medium",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-sonnet-4-6"
+        }
+      ]
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "opencode/gemini-3.1-pro",
+      "variant": "high",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "max"
+        }
+      ]
+    },
+    "ultrabrain": {
+      "model": "opencode/gpt-5.4",
+      "variant": "xhigh",
+      "fallback_models": [
+        {
+          "model": "opencode/gemini-3.1-pro",
+          "variant": "high"
+        },
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "max"
+        }
+      ]
+    },
+    "deep": {
+      "model": "opencode/gpt-5.4",
+      "variant": "medium",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "max"
+        },
+        {
+          "model": "opencode/gemini-3.1-pro",
+          "variant": "high"
+        }
+      ]
+    },
+    "artistry": {
+      "model": "opencode/gemini-3.1-pro",
+      "variant": "high",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "max"
+        },
+        {
+          "model": "opencode/gpt-5.4"
+        }
+      ]
+    },
+    "quick": {
+      "model": "opencode/gpt-5.4-mini",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-haiku-4-5"
+        },
+        {
+          "model": "opencode/gemini-3-flash"
+        }
+      ]
+    },
+    "unspecified-low": {
+      "model": "opencode/gemini-3-flash",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-sonnet-4-6"
+        }
+      ]
+    },
+    "unspecified-high": {
+      "model": "opencode/gemini-3-flash",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-sonnet-4-6"
+        }
+      ]
+    },
+    "writing": {
+      "model": "opencode/gemini-3-flash",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-sonnet-4-6"
+        }
+      ]
+    }
+  }
+}
