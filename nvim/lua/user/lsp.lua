@@ -14,10 +14,8 @@ end
 local function restart_all_clients()
   local bufnr = vim.api.nvim_get_current_buf()
   for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
-    local blacklist = { "copilot" }
-    if client.attached_buffers[bufnr] and not vim.tbl_contains(blacklist, client.name) then
-      vim.cmd("LspRestart " .. client.name)
-    end
+    local blacklisted = vim.tbl_contains({ "copilot" }, client.name)
+    if client.attached_buffers[bufnr] and not blacklisted then vim.cmd("LspRestart " .. client.name) end
   end
 end
 

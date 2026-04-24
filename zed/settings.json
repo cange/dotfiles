@@ -7,8 +7,11 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "outline_panel": {
+    "dock": "right",
+  },
   "edit_predictions": {
-    "provider": "copilot",
+    "provider": "zed",
   },
   "agent_servers": {
     "github-copilot": {
@@ -22,6 +25,7 @@
   "icon_theme": "Material Icon Theme",
 
   "agent": {
+    "dock": "left",
     "tool_permissions": {
       "default": "allow",
     },
@@ -39,7 +43,7 @@
     "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4.5",
+      "model": "gpt-4o",
     },
     "agent_buffer_font_size": 13.0,
   },
@@ -112,11 +116,11 @@
   },
   "tab_size": 2,
   "project_panel": {
+    "dock": "left",
     "folder_icons": false,
     "indent_size": 16,
   },
-  "collaboration_panel": { "button": false },
-  "git_panel": { "button": true },
-  "notification_panel": { "button": false },
+  "collaboration_panel": { "dock": "right", "button": false },
+  "git_panel": { "tree_view": true, "dock": "right", "button": true },
   "search": { "button": false },
 }

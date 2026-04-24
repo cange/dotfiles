@@ -63,12 +63,11 @@ M.ui = {
   LineUpper           = "▔", -- U+2581 
   Pipe                = "|", -- U+007C
 }
-M.plugin = {
-  Copilot             = "", -- nf-oct-copilot
-  CopilotError        = "", -- nf-oct-copilot_error
-  CopilotWarning      = "", -- nf-oct-copilot_warning
-  LSP                 = M.ui.Server
-}
+
+M.plugin = vim.tbl_extend('keep',{
+  LSP = M.ui.Server
+}, require('user.copilot').icons)
+
 M.extensions = {
   Babelrc             = "󰨥", -- nf-md-babel
   Lua                 = "", -- nf-seti-lua

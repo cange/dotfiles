@@ -9,6 +9,17 @@ alias ld='lazydocker'
 alias oc='opencode'
 # Programms ---
 
+#--- opencode switchers
+# OpenCode work/personal separation
+function opencode_select() {
+  items=("opencode-zen" "github-copilot")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt="Select opencode config " --height=~50% --layout=reverse --border --exit-0)
+  ln -sf "${DOTFILES}opencode/${config}.json" ~/.config/opencode/oh-my-openagent.json && opencode
+}
+alias oc='opencode_select'
+# opencode switchers ---
+#
+
 # --- network
 # List all listening network ports for current user
 alias ports='lsof -i -P | grep LISTEN'
