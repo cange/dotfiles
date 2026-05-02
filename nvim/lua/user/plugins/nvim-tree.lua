@@ -23,7 +23,7 @@ return { -- File explorer
     renderer = {
       indent_markers = { enable = true },
       icons = {
-        git_placement = "after",
+        git_placement = "signcolumn",
         show = { folder = false },
         symlink_arrow = " " .. Icon.documents.SymlinkFile .. " ",
         glyphs = {
