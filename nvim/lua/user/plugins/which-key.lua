@@ -16,7 +16,7 @@ return { -- keymaps
     local wk = require("which-key")
 
     wk.setup(opts)
-    wk.add(vim.tbl_extend("keep", {
+    wk.add({
       -- groups
       { "<Leader>b", group = "Buffers" },
       { "<Leader>c", group = "Code" },
@@ -32,6 +32,6 @@ return { -- keymaps
       -- direct keymaps
       { "<Leader>-", "<C-W>s", desc = "Split horizontal" },
       { "<Leader>|", "<C-W>v", desc = "Split vertical" },
-    }, require("user.copilot").which_key))
+    })
   end,
 }

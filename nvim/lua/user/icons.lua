@@ -64,9 +64,9 @@ M.ui = {
   Pipe                = "|", -- U+007C
 }
 
-M.plugin = vim.tbl_extend('keep',{
+M.plugin = {
   LSP = M.ui.Server
-}, require('user.copilot').icons)
+}
 
 M.extensions = {
   Babelrc             = "󰨥", -- nf-md-babel
