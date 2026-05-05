@@ -7,7 +7,6 @@ return {
       "EdenEast/nightfox.nvim",
       "folke/lazy.nvim",
       "nvim-tree/nvim-web-devicons",
-      require("user.copilot").lualine_dependencies,
     },
     opts = function()
       local custom_theme = require("lualine.themes.terafox")
@@ -87,7 +86,6 @@ return {
             { "inlay_hints" },
             format_clients,
             { "lsp_clients", padding = { left = 1, right = 0 } },
-            require("user.copilot").lualine_component,
           },
           lualine_y = {
             { "encoding", separator = "" },
