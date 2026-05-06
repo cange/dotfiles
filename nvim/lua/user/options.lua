@@ -4,6 +4,7 @@ local options = {
   list = true, -- show hidden characters
   updatetime = 50, -- faster completion (4000ms default), delays and poor user experience
   conceallevel = 2, -- hides quotes e.g. JSON "foo" -> foo
+  fixeol = true, -- ensure final newline on save
 
   -- UI
   cursorline = true, -- highlight the current line

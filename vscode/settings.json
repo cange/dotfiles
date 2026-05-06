@@ -93,5 +93,7 @@
   "chat.mcp.gallery.enabled": true,
   "liveshare.connectionMode": "relay",
   "docker.extension.enableComposeLanguageServer": false,
-  "chat.viewSessions.orientation": "stacked"
+  "chat.viewSessions.orientation": "stacked",
+  "files.insertFinalNewline": true,
+  "notebook.insertFinalNewline": true
 }

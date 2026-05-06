@@ -87,9 +87,7 @@
   "auto_update_extensions": { "colorizer": false },
   "telemetry": { "metrics": false },
 
-  // Removes any lines containing only whitespace at the end of the file and
-  // ensures just one newline at the end.
-  "ensure_final_newline_on_save": false,
+  "ensure_final_newline_on_save": true,
   "current_line_highlight": "line",
 
   "buffer_font_family": "JetBrainsMono Nerd Font",

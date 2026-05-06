@@ -88,22 +88,22 @@
   // Coding
   {
     "key": "shift-k",
-    "when": "vim.mode == 'Normal' && editorTextFocus",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
     "command": "editor.action.showHover"
   },
   {
     "key": "space c a",
-    "when": "vim.mode == 'Normal' && editorTextFocus",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
     "command": "editor.action.codeAction"
   },
   {
     "key": "space r",
-    "when": "vim.mode == 'Normal' && editorTextFocus",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
     "command": "editor.action.rename"
   },
   {
     "key": "space s s",
-    "when": "vim.mode == 'Normal' && editorTextFocus",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
     "command": "workbench.action.gotoSymbol"
   },
   {
@@ -125,6 +125,11 @@
     "key": "g r",
     "when": "editorTextFocus && vim.mode == 'Normal'",
     "command": "editor.action.goToReferences"
+  },
+  {
+    "key": "g c",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "command": "editor.action.commentLine"
   },
 
   // File Explorer
