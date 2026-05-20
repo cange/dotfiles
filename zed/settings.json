@@ -7,6 +7,16 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "language_models": {
+    "opencode": {
+      "show_go_models": false,
+    },
+  },
+  "languages": {
+    "Lua": {
+      "auto_indent": "syntax_aware",
+    },
+  },
   "outline_panel": {
     "dock": "right",
   },
@@ -33,17 +43,24 @@
       {
         "provider": "google",
         "model": "gemini-3-pro-preview",
+        "enable_thinking": true,
       },
       {
         "provider": "google",
         "model": "gemini-3-flash-preview",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "opencode",
+        "model": "zen/claude-sonnet-4-5",
+        "enable_thinking": true,
       },
     ],
     "single_file_review": true,
     "default_profile": "write",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o",
+      "provider": "opencode",
+      "model": "free/big-pickle",
     },
     "agent_buffer_font_size": 13.0,
   },
