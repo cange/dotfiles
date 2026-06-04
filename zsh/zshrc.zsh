@@ -103,7 +103,7 @@ eval "$(starship init zsh)"
 
 # --- mise - enable package managers (must load before aliases/commands)
 # https://mise.jdx.dev/
-if command -v mise &> /dev/null; then
+if command -v mise &>/dev/null; then
   eval "$(mise activate zsh)"
 fi
 # mise ---
@@ -151,7 +151,7 @@ _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
   if command -v ng &>/dev/null; then
     source <(ng completion script)
   fi
-  
+
   # Docker completion styles
   zstyle ":completion:*:*:docker:*" option-stacking yes
   zstyle ":completion:*:*:docker-*:*" option-stacking yes
