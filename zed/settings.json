@@ -7,27 +7,83 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "hard_tabs": false,
+  "tab_bar": {
+    "show": true
+  },
+  "semantic_tokens": "off",
+  "ui_font_weight": 300.0,
+  "buffer_font_weight": 300.0,
+  "toolbar": {
+    "agent_review": true,
+    "selections_menu": true,
+    "quick_actions": false,
+    "breadcrumbs": false
+  },
+  "title_bar": {
+    "show_branch_status_icon": false
+  },
+  "status_bar": {
+    "show_active_file": true,
+    "line_endings_button": false
+  },
+  "format_on_save": "off",
+  "inlay_hints": {
+    "enabled": false
+  },
+  "tab_size": 2,
+  "buffer_line_height": {
+    "custom": 1.2999999523162842
+  },
   "language_models": {
+    "lmstudio": {
+      "api_url": "http://localhost:1234/api/v1/"
+    },
     "opencode": {
-      "show_go_models": false,
+      "show_zen_models": false,
+      "show_free_models": true,
+      "show_go_models": true,
     },
   },
   "languages": {
+    "Python": {
+      "always_treat_brackets_as_autoclosed": true,
+      "tab_size": 2,
+      "language_servers": [
+        // Enable ty, disable basedpyright, and enable all
+        // other registered language servers (ruff, pylsp, pyright).
+        // "!ty",
+        "basedpyright",
+      ]
+    },
     "Lua": {
       "auto_indent": "syntax_aware",
     },
   },
-  "outline_panel": {
+  "lsp": {
+    "basedpyright": {
+      "binary": {
+        "path": "/opt/homebrew/bin/basedpyright-langserver",
+        "arguments": ["--stdio"]
+      }
+    }
+  },
+ "outline_panel": {
     "dock": "right",
   },
   "edit_predictions": {
     "provider": "zed",
   },
-  "theme": "Terafox - blurred (dev)",
+  "theme": "Terafox - blurred",
   "icon_theme": "Material Icon Theme",
 
   // Agents
   "agent": {
+    "inline_assistant_model": {
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "enable_thinking": false
+    },
     "dock": "left",
     "tool_permissions": {
       "default": "allow",
@@ -36,24 +92,30 @@
       {
         "provider": "google",
         "model": "gemini-3-pro-preview",
-        "enable_thinking": true,
+        "enable_thinking": true
       },
       {
         "provider": "google",
         "model": "gemini-3-flash-preview",
-        "enable_thinking": false,
+        "enable_thinking": false
       },
       {
         "provider": "opencode",
         "model": "zen/claude-sonnet-4-5",
-        "enable_thinking": true,
+        "enable_thinking": true
       },
+      {
+        "provider": "lmstudio",
+        "model": "qwen2.5-coder-1.5b-instruct",
+        "enable_thinking": false
+      }
     ],
     "single_file_review": true,
     "default_profile": "write",
     "default_model": {
-      "provider": "opencode",
-      "model": "free/big-pickle",
+      "enable_thinking": true,
+      "provider": "google",
+      "model": "gemini-2.5-flash-lite",
     },
   },
   "agent_servers": {
@@ -68,6 +130,7 @@
 
   "vim_mode": true,
   "vim": {
+    "toggle_relative_line_numbers": false,
     "highlight_on_yank_duration": 200,
     "use_smartcase_find": true,
   },
@@ -102,7 +165,8 @@
     "coloring": "indent_aware",
     "background_coloring": "disabled",
   },
-  "auto_update_extensions": { "colorizer": false },
+  "auto_update_extensions": { "nvim-nightfox": false,
+                              "colorizer": false },
   "telemetry": { "metrics": false },
 
   "ensure_final_newline_on_save": true,
@@ -113,13 +177,15 @@
   "ui_font_family": "JetBrainsMono Nerd Font",
   "ui_font_size": 13,
   "terminal": {
+    "font_weight": 300.0,
     "font_family": "JetBrainsMono Nerd Font",
   },
 
   // Character counts at which to show wrap guides in the editor.
   "wrap_guides": [80, 120],
 
-  "tabs": { "file_icons": true },
+  "tabs": { "git_status": true,
+            "file_icons": true },
 
   // The number of lines to keep above/below the cursor when scrolling.
   "vertical_scroll_margin": 8,
@@ -136,6 +202,6 @@
     "indent_size": 16,
   },
   "collaboration_panel": { "dock": "right", "button": false },
-  "git_panel": { "tree_view": true, "dock": "right", "button": true },
-  "search": { "button": false },
+  "git_panel": { "tree_view": false, "dock": "right", "button": true },
+  "search": { "button": true },
 }

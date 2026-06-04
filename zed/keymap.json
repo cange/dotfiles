@@ -6,6 +6,7 @@
       "space f": "file_finder::Toggle",
       "space \\": "project_panel::ToggleFocus",
       "space w": "workspace::Save",
+      "space s s": "outline::Toggle",
       "] g": "editor::GoToHunk",
       "[ g": "editor::GoToPreviousHunk",
       "] b": "pane::ActivateNextItem",
@@ -15,12 +16,12 @@
   {
     "context": "Editor && vim_mode != insert && (!VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
     "bindings": {
-      ", a": "editor::SelectAll",
       "g i": "editor::GoToImplementation",
       "g r a": "editor::ToggleCodeActions",
       "g r n": "editor::Rename",
-      "space s s": "outline::Toggle",
-      ", r": "buffer_search::Deploy",
+      ", a": "editor::SelectAll",
+      ", m": "markdown::OpenFollowingPreview",
+      ", r": "buffer_search::Deploy"
     },
   },
   {
@@ -115,11 +116,22 @@
     },
   },
   {
+    "context": "ProjectPanel",
+    "bindings": {
+      "space \\": "project_panel::Toggle",
+    },
+  },
+  {
     "context": "Terminal",
     "bindings": {
       "cmd-d": "workspace::NewTerminal",
       "escape escape": "workspace::ToggleZoom",
       "ctrl-w up": "terminal_panel::Toggle",
     },
+  },
+  {
+    "bindings": {
+      "alt-cmd-i": "dev::OpenHighlightsTreeView"
+    }
   },
 ]
