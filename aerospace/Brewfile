@@ -2,3 +2,4 @@
 cask "nikitabobko/tap/aerospace"
 # JankyBorders is a lightweight window border system for macOS
 cask "FelixKratz/tap/borders"
+brew install borders

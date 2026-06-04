@@ -23,17 +23,10 @@
   "edit_predictions": {
     "provider": "zed",
   },
-  "agent_servers": {
-    "github-copilot": {
-      "type": "registry",
-    },
-    "opencode": {
-      "type": "registry",
-    },
-  },
-  "theme": "Terafox - blurred",
+  "theme": "Terafox - blurred (dev)",
   "icon_theme": "Material Icon Theme",
 
+  // Agents
   "agent": {
     "dock": "left",
     "tool_permissions": {
@@ -62,8 +55,16 @@
       "provider": "opencode",
       "model": "free/big-pickle",
     },
-    "agent_buffer_font_size": 13.0,
   },
+  "agent_servers": {
+    "github-copilot": {
+      "type": "registry",
+    },
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "agent_buffer_font_size": 13.0,
 
   "vim_mode": true,
   "vim": {
@@ -108,9 +109,9 @@
   "current_line_highlight": "line",
 
   "buffer_font_family": "JetBrainsMono Nerd Font",
-  "buffer_font_size": 14.0,
+  "buffer_font_size": 13,
   "ui_font_family": "JetBrainsMono Nerd Font",
-  "ui_font_size": 14.0,
+  "ui_font_size": 13,
   "terminal": {
     "font_family": "JetBrainsMono Nerd Font",
   },
@@ -129,7 +130,6 @@
     "thumb_border": "left_open",
     "current_line_highlight": null,
   },
-  "tab_size": 2,
   "project_panel": {
     "dock": "left",
     "folder_icons": false,
