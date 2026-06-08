@@ -2,14 +2,6 @@
   "$schema": "https://opencode.ai/config.json",
   "instructions": [".github/copilot-instructions.md"],
   "mcp": {
-    "brave-search": {
-      "type": "local",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-brave-search"],
-      "environment": {
-        "BRAVE_API_KEY": "$BRAVE_BROWSER_SEARCH_API_KEY"
-      },
-      "enabled": true
-    },
     "chrome-devtools": {
       "type": "local",
       "command": [
@@ -64,7 +56,7 @@
       "name": "LM Studio",
       "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "http://127.0.0.1:1234/v1"
+        "baseURL": "http://192.168.69.40:1234/v1"
       },
       "models": {
         "gemma-4-26b-a4b-qat": {
