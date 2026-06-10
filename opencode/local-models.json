@@ -1,0 +1,172 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "lmstudio/google/gemma-4-12b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/kimi-k2.5"
+        }
+      ]
+    },
+    "hephaestus": {
+      "model": "lmstudio/google/gemma-4-12b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4",
+          "variant": "medium"
+        }
+      ]
+    },
+    "oracle": {
+      "model": "lmstudio/google/gemma-4-12b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4",
+          "variant": "high"
+        },
+        {
+          "model": "opencode/claude-opus-4-6",
+          "variant": "max"
+        }
+      ]
+    },
+    "explore": {
+      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4-mini"
+        }
+      ]
+    },
+    "multimodal-looker": {
+      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4-nano",
+          "variant": "medium"
+        }
+      ]
+    },
+    "prometheus": {
+      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/kimi-k2.5"
+        }
+      ]
+    },
+    "metis": {
+      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4",
+          "variant": "high"
+        }
+      ]
+    },
+    "momus": {
+      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4",
+          "variant": "xhigh"
+        },
+        {
+          "model": "opencode/gemini-3.1-pro"
+        }
+      ]
+    },
+    "atlas": {
+      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4",
+          "variant": "medium"
+        }
+      ]
+    },
+    "sisyphus-junior": {
+      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4",
+          "variant": "medium"
+        }
+      ]
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gemini-3.1-pro",
+          "variant": "high"
+        }
+      ]
+    },
+    "ultrabrain": {
+      "model": "lmstudio/google/gemma-4-12b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4",
+          "variant": "xhigh"
+        }
+      ]
+    },
+    "deep": {
+      "model": "lmstudio/google/gemma-4-12b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4",
+          "variant": "medium"
+        }
+      ]
+    },
+    "artistry": {
+      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gemini-3.1-pro",
+          "variant": "high"
+        }
+      ]
+    },
+    "quick": {
+      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4-mini"
+        }
+      ]
+    },
+    "unspecified-low": {
+      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/claude-haiku-4-5"
+        }
+      ]
+    },
+    "unspecified-high": {
+      "model": "lmstudio/google/gemma-4-12b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gemini-3.1-pro"
+        },
+        {
+          "model": "opencode/claude-sonnet-4-6"
+        }
+      ]
+    },
+    "writing": {
+      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gemini-3-flash"
+        }
+      ]
+    }
+  }
+}

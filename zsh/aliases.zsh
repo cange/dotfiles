@@ -12,7 +12,7 @@ alias oc='opencode'
 #--- opencode switchers
 # OpenCode work/personal separation
 function opencode_select() {
-  items=("opencode-zen" "github-copilot")
+  items=("local-models" "opencode-zen")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt="Select opencode config " --height=~50% --layout=reverse --border --exit-0)
   ln -sf "${DOTFILES}opencode/${config}.json" ~/.config/opencode/oh-my-openagent.json && opencode
 }
