@@ -58,6 +58,9 @@ return {
         padding = { left = 1, right = 0 },
         on_click = function() vim.cmd("ConformInfo") end,
       }
+      local minuet_completion = { -- https://github.com/milanglacier/minuet-ai.nvim#lualine
+        require("minuet.lualine"),
+      }
 
       return {
         options = {
@@ -83,6 +86,7 @@ return {
               cond = require("lazy.status").has_updates,
               on_click = function() vim.cmd("Lazy") end,
             },
+            minuet_completion,
             { "inlay_hints" },
             format_clients,
             { "lsp_clients", padding = { left = 1, right = 0 } },
