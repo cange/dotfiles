@@ -1,0 +1,26 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "build": {
+      "model": "lmstudio/google/gemma-4-12b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/kimi-k2.5"
+        }
+      ]
+    },
+    "plan": {
+      "model": "lmstudio/google/gemma-4-12b-qat",
+      "fallback_models": [
+        {
+          "model": "opencode/gpt-5.4",
+          "variant": "medium"
+        }
+      ]
+    },
+    "code-reviewer": {
+      "mode": "subagent",
+      "model": "lmstudio/google/gemma-4-12b-qat"
+    }
+  }
+}

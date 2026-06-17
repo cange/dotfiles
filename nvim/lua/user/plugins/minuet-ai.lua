@@ -12,9 +12,9 @@ local provider_option = {
     },
   },
   LM_STUDIO = {
-    api_key = "TERM", -- no key required
-    end_point = "http://127.0.0.1:1234/v1/chat/completions",
     model = "google/gemma-4-e2b-qat",
+    end_point = "http://127.0.0.1:1234/v1/chat/completions",
+    api_key = "TERM", -- no key required
     name = "LM Studio",
     optional = {
       max_tokens = 56,
@@ -29,8 +29,20 @@ return {
   dependencies = { "hrsh7th/nvim-cmp" },
   event = "BufReadPre",
   opts = {
-    -- provider
-    provider = "openai_compatible",
+    -- The request timeout, measured in seconds. When streaming is enabled
+    -- (stream = true), setting a shorter request_timeout allows for faster
+    -- retrieval of completion items, albeit potentially incomplete.
+    -- Conversely, with streaming disabled (stream = false), a timeout
+    -- occurring before the LLM returns results will yield no completion items.
+    request_timeout = 1, -- seconds
+    throttle = 300, -- only send the request every x milliseconds, use 0 to disable throttle.
+    debounce = 400, -- debounce the request in x milliseconds, set to 0 to disable debounce
+    -- The number of completion items encoded as part of the prompt for the
+    -- chat LLM. For FIM model, this is the number of requests to send. It's
+    -- important to note that when 'add_single_line_entry' is set to true, the
+    -- actual number of returned items may exceed this value. Additionally, the
+    -- LLM cannot guarantee the exact number of completion items specified, as
+    -- this parameter serves only as a prompt guideline.
     n_completions = 1, -- recommend for local model for resource saving
     -- I recommend beginning with a small context window size and incrementally
     -- expanding it, depending on your local computing power. A context window
@@ -38,6 +50,8 @@ return {
     -- power. Once you have a reliable estimate of your local computing power,
     -- you should adjust the context window to a larger value.
     context_window = 512,
+    -- provider
+    provider = "openai_compatible",
     provider_options = {
       openai_compatible = provider_option.LM_STUDIO,
     },

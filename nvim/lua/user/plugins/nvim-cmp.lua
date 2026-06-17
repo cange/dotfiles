@@ -8,6 +8,7 @@ function user.format(entry, vim_item)
     nvim_lsp = Icon.plugin.LSP,
     nvim_lua = Icon.extensions.Lua,
     path = Icon.ui.Path,
+    minuet = "minuet-ai",
   }
   local src_name = entry.source.name
   local is_multiline = false
@@ -169,8 +170,17 @@ return {
           ["<down>"] = mapping.select_next_item,
           ["<up>"] = mapping.select_prev_item,
         },
+
+        performance = {
+          -- It is recommended to increase the timeout duration due to
+          -- the typically slower response speed of LLMs compared to
+          -- other completion sources. This is not needed when you only
+          -- need manual completion.
+          fetching_timeout = 2000,
+        },
         sources = cmp.config.sources({
           { name = "luasnip", priority = 1 },
+          { name = "minuet" },
           {
             name = "nvim_lsp",
             priority = 2,

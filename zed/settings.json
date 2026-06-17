@@ -113,9 +113,9 @@
     "single_file_review": true,
     "default_profile": "write",
     "default_model": {
-      "enable_thinking": true,
-      "provider": "google",
-      "model": "gemini-2.5-flash-lite",
+      "enable_thinking": false,
+      "provider": "opencode",
+      "model": "go/kimi-k2.6",
     },
   },
   "agent_servers": {
