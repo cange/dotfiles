@@ -20,3 +20,5 @@ brew "ripgrep"
 brew "rmlint"
 # Developer targeted fonts with a high number of glyphs
 cask "font-jetbrains-mono-nerd-font"
+# Binary installation for rust projects for tree-sitter
+brew "cargo-binstall"
