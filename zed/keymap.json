@@ -1,12 +1,21 @@
 [
   {
-    "context": "Editor && (vim_mode == normal || vim_mode == visual) && (!VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
+    "context": "ProjectPanel || (Editor && vim_mode == normal || vim_mode == visual) && (!VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
     "bindings": {
-      "space n": "editor::ToggleLineNumbers",
+      "space \\": "project_panel::Toggle",
+      "space a a": "agent::Toggle",
       "space f": "file_finder::Toggle",
-      "space \\": "project_panel::ToggleFocus",
-      "space w": "workspace::Save",
+      "space g b": "git::Switch",
+      "space g c": "git::GenerateCommitMessage",
+      "space g r": "git::Restore",
+      "space g R": "git::RestoreFile",
+      "space g S": "git::StageFile",
+      "space g s": "git::ToggleStaged",
+      "space n": "editor::ToggleLineNumbers",
+      "space p": "projects::OpenRecent",
       "space s s": "outline::Toggle",
+      "space space": "pane::AlternateFile",
+      "space w": "workspace::Save",
       "] g": "editor::GoToHunk",
       "[ g": "editor::GoToPreviousHunk",
       "] b": "pane::ActivateNextItem",
@@ -21,7 +30,7 @@
       "g r n": "editor::Rename",
       ", a": "editor::SelectAll",
       ", m": "markdown::OpenFollowingPreview",
-      ", r": "buffer_search::Deploy"
+      ", r": "buffer_search::Deploy",
     },
   },
   {
@@ -61,12 +70,6 @@
     },
   },
   {
-    "context": "VimControl && !menu",
-    "bindings": {
-      "space space": "pane::AlternateFile",
-    },
-  },
-  {
     "context": "Editor && !menu",
     "bindings": {
       ", w o": "workspace::CloseInactiveTabsAndPanes",
@@ -82,19 +85,6 @@
       "cmd-p": "project_panel::Paste",
       "cmd-d": "project_panel::Delete",
       "cmd-x": "project_panel::Cut",
-    },
-  },
-  {
-    "context": "(ProjectPanel || Editor) && (!AgentPanel && !BufferSearchBar)",
-    "bindings": {
-      "space a a": "agent::Toggle",
-      "space g b": "git::Switch",
-      "space g c": "git::GenerateCommitMessage",
-      "space g r": "git::Restore",
-      "space g R": "git::RestoreFile",
-      "space g S": "git::StageFile",
-      "space g s": "git::ToggleStaged",
-      "space p": "projects::OpenRecent",
     },
   },
   {
@@ -116,12 +106,6 @@
     },
   },
   {
-    "context": "ProjectPanel",
-    "bindings": {
-      "space \\": "project_panel::Toggle",
-    },
-  },
-  {
     "context": "Terminal",
     "bindings": {
       "cmd-d": "workspace::NewTerminal",
@@ -131,7 +115,7 @@
   },
   {
     "bindings": {
-      "alt-cmd-i": "dev::OpenHighlightsTreeView"
-    }
+      "alt-cmd-i": "dev::OpenHighlightsTreeView",
+    },
   },
 ]
