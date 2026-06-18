@@ -34,12 +34,11 @@ user_lsp.ts_ls_settings = {
 
 return {
   {
-    "neovim/nvim-lspconfig",
+    "mason-org/mason-lspconfig.nvim",
     lazy = true,
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "b0o/SchemaStore.nvim",
-      "mason-org/mason-lspconfig.nvim",
       "mason-org/mason.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
@@ -66,7 +65,6 @@ return {
         -- CSS
         css_variables = { filetypes = { "css", "scss", "vue", "eruby" } },
         cssls = {},
-        stylelint_lsp = {},
         tailwindcss = {},
 
         -- ruby
@@ -76,8 +74,6 @@ return {
 
         -- JavaScript / TypeScript, etc.
         ts_ls = {
-          -- ensure that workspace config files are used
-          root_dir = require("lspconfig").util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git"),
           init_options = {
             preferences = { disableSuggestions = true },
             completions = { completeFunctionCalls = true },
@@ -157,7 +153,6 @@ return {
   { -- managing & installing LSP servers, linters & formatters
     "mason-org/mason.nvim",
     dependencies = {
-      "neovim/nvim-lspconfig",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     opts = {
