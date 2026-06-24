@@ -27,7 +27,7 @@
     "show_active_file": true,
     "line_endings_button": false
   },
-  "format_on_save": "off",
+  "format_on_save": "on",
   "inlay_hints": {
     "enabled": false
   },
@@ -40,7 +40,7 @@
       "api_url": "http://localhost:1234/api/v1/"
     },
     "opencode": {
-      "show_zen_models": false,
+      "show_zen_models": true,
       "show_free_models": true,
       "show_go_models": true,
     },
@@ -69,53 +69,39 @@
     }
   },
  "outline_panel": {
-    "dock": "right",
+    "dock": "left",
   },
   "edit_predictions": {
     "provider": "zed",
   },
-  "theme": "Terafox - blurred",
+  "theme": "Terafox - opaque",
   "icon_theme": "Material Icon Theme",
 
   // Agents
   "agent": {
+    "dock": "right",
+    "single_file_review": true,
     "inline_assistant_model": {
-      "provider": "google",
-      "model": "gemini-3.1-flash-lite",
-      "enable_thinking": false
-    },
-    "dock": "left",
-    "tool_permissions": {
-      "default": "allow",
+      "provider": "lmstudio",
+      "model": "google/gemma-4-e4b-it-qat",
+      "enable_thinking": false,
     },
     "favorite_models": [
       {
-        "provider": "google",
-        "model": "gemini-3-pro-preview",
-        "enable_thinking": true
-      },
-      {
-        "provider": "google",
-        "model": "gemini-3-flash-preview",
-        "enable_thinking": false
-      },
-      {
-        "provider": "opencode",
-        "model": "zen/claude-sonnet-4-5",
-        "enable_thinking": true
+        "provider": "lmstudio",
+        "model": "google/gemma-4-12b-qat",
+        "enable_thinking": true,
       },
       {
         "provider": "lmstudio",
-        "model": "qwen2.5-coder-1.5b-instruct",
-        "enable_thinking": false
+        "model": "google/gemma-4-e4b-it-qat",
+        "enable_thinking": true,
       }
     ],
-    "single_file_review": true,
-    "default_profile": "write",
     "default_model": {
+      "provider": "lmstudio",
+      "model": "google/gemma-4-12b-qat",
       "enable_thinking": true,
-      "provider": "google",
-      "model": "gemini-2.5-flash-lite",
     },
   },
   "agent_servers": {
@@ -145,19 +131,9 @@
       "settings": {
         "github_personal_access_token": "$GITHUB_TOKEN",
       },
-      "nuxt": {
-        "source": "custom",
-        "enabled": true,
-        "command": "npx",
-        "args": ["mcp-remote", "https://nuxt.com/mcp"],
-        "env": {},
-      },
     },
   },
 
-  // "profiles": {
-  //   "default": {},
-  //   "user": {
   "indent_guides": {
     "enabled": true,
     "line_width": 1,
@@ -165,8 +141,6 @@
     "coloring": "indent_aware",
     "background_coloring": "disabled",
   },
-  "auto_update_extensions": { "nvim-nightfox": false,
-                              "colorizer": false },
   "telemetry": { "metrics": false },
 
   "ensure_final_newline_on_save": true,
@@ -184,24 +158,18 @@
   // Character counts at which to show wrap guides in the editor.
   "wrap_guides": [80, 120],
 
-  "tabs": { "git_status": true,
-            "file_icons": true },
-
   // The number of lines to keep above/below the cursor when scrolling.
   "vertical_scroll_margin": 8,
   "scrollbar": { "show": "auto" },
   "minimap": {
     "show": "never",
-    "thumb": "always",
-    "thumb_border": "left_open",
-    "current_line_highlight": null,
   },
   "project_panel": {
     "dock": "left",
     "folder_icons": false,
     "indent_size": 16,
   },
-  "collaboration_panel": { "dock": "right", "button": false },
-  "git_panel": { "tree_view": false, "dock": "right", "button": true },
+  "collaboration_panel": { "dock": "left", "button": false },
+  "git_panel": { "tree_view": false, "dock": "left", "button": true },
   "search": { "button": true },
 }

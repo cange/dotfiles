@@ -1,37 +1,3 @@
---- Prefer this to `get_package`, since the package might not always be
---- available yet and trigger errors.
----@param pkg string
----@param path string
-local function get_pkg_path(pkg, path)
-  pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
-  local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
-  local pkg_path = root .. "/packages/" .. pkg .. "/" .. path
-
-  if not vim.loop.fs_stat(pkg_path) then
-    vim.notify(
-      ("Package path not found for **%s**:\n- `%s`\nForce update the package."):format(pkg, path),
-      vim.log.levels.INFO
-    )
-  end
-  return pkg_path
-end
-local user_lsp = {}
-user_lsp.ts_ls_settings = {
-  inlayHints = {
-    includeInlayEnumMemberValueHints = true,
-    includeInlayFunctionLikeReturnTypeHints = true,
-    includeInlayFunctionParameterTypeHints = true,
-    includeInlayParameterNameHints = "all",
-    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-    includeInlayPropertyDeclarationTypeHints = true,
-    includeInlayVariableTypeHints = true,
-    includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-  },
-  implementationsCodeLens = { enabled = true },
-  referencesCodeLens = { enabled = true },
-  suggestionActions = { enabled = true },
-}
-
 return {
   {
     "mason-org/mason-lspconfig.nvim",
@@ -46,22 +12,8 @@ return {
       vim.g.markdown_fenced_languages = { "ts=typescript" } -- appropriately highlight codefences returned from denols,
 
       local servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              runtime = { version = "LuaJIT" },
-              workspace = {
-                library = {
-                  -- Make the server aware of Neovim runtime files
-                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                  [vim.fn.stdpath("config") .. "/lua"] = true,
-                },
-              },
-              telemetry = { enable = false },
-            },
-          },
-        },
-
+        -- see also /lsp/
+        lua_ls = {}, --[[ see lsp/]]
         -- CSS
         css_variables = { filetypes = { "css", "scss", "vue", "eruby" } },
         cssls = {},
@@ -73,62 +25,16 @@ return {
         stimulus_ls = {},
 
         -- JavaScript / TypeScript, etc.
-        ts_ls = {
-          init_options = {
-            preferences = { disableSuggestions = true },
-            completions = { completeFunctionCalls = true },
-          },
-          settings = {
-            typescript = user_lsp.ts_ls_settings,
-            javascript = user_lsp.ts_ls_settings,
-          },
-        },
-        vtsls = {
-          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vtsls
-          settings = {
-            vtsls = {
-              tsserver = {
-                globalPlugins = {
-                  {
-                    name = "@vue/typescript-plugin",
-                    location = get_pkg_path("vue-language-server", "node_modules/@vue/language-server"),
-                    languages = { "vue" },
-                    configNamespace = "typescript",
-                  },
-                },
-              },
-            },
-          },
-          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-        },
+        vtsls = {},--[[ see lsp/]]
+        ts_ls = {}, --[[ see lsp/]]
         vue_ls = {},
 
         -- misc
         eslint = {},
         html = {},
         markdown_oxide = {},
-        jsonls = {
-          settings = {
-            json = {
-              schemas = require("schemastore").json.schemas(),
-              validate = { enable = true },
-            },
-          },
-        },
-        yamlls = {
-          settings = {
-            yaml = {
-              schemaStore = {
-                -- You must disable built-in schemaStore support if you want to use
-                -- this plugin and its advanced options like `ignore`.
-                enable = false,
-                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-                url = "",
-              },
-              schemas = require("schemastore").yaml.schemas(),
-            },
-          },
-        },
+        jsonls = {}, --[[ see lsp/]]
+        yamlls = {}, --[[ see lsp/]]
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
