@@ -23,12 +23,35 @@ local provider_option = {
     },
   },
 }
+local enable_filetypes = { "lua", "javascript", "typescript", "runy", "eruby", "html", "css" }
+local ignore_filetypes = { "NvimTree", "snacks_terminal", "TelescopePrompt" }
+
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+  pattern = ignore_filetypes,
+  callback = function()
+    local keys = { "<C-p>", "<C-e>", "<C-c>" }
+    for _, key in ipairs(keys) do
+      pcall(vim.keymap.del, key, { mode = "n", silent = true })
+      pcall(vim.keymap.del, key, { mode = "i", silent = true })
+    end
+  end,
+})
 
 return {
   "milanglacier/minuet-ai.nvim",
   dependencies = { "hrsh7th/nvim-cmp" },
   event = "BufReadPre",
   opts = {
+    lsp = {
+      disabled_ft = ignore_filetypes,
+      completion = {
+        -- Filetypes excluded from autotriggering. Useful when `enabled_auto_trigger_ft` = { '*' }
+        disabled_auto_trigger_ft = ignore_filetypes,
+      },
+      inline_completion = {
+        disabled_auto_trigger_ft = ignore_filetypes,
+      },
+    },
     -- provider
     provider = "openai_compatible",
     n_completions = 1, -- recommend for local model for resource saving
@@ -57,12 +80,8 @@ return {
     },
     -- ui
     virtualtext = {
-      auto_trigger_ft = { "*" },
-      auto_trigger_ignore_ft = {
-        "NvimTree",
-        "snacks_terminal",
-        "TelescopePrompt",
-      },
+      auto_trigger_ft = { "lua", "javascript", "typescript", "ruby", "eruby", "html", "css" },
+      auto_trigger_ignore_ft = ignore_filetypes,
       keymap = {
         -- accept whole completion
         accept = "<Tab>",
