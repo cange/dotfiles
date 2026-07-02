@@ -206,7 +206,7 @@ return {
     "cange/specto.nvim",
     lazy = false,
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = "nvim-treesitter/nvim-treesitter",
+    dependencies = "neovim-treesitter/nvim-treesitter",
     opts = {
       exclude = {
         filetypes = {

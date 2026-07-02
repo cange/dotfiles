@@ -1,12 +1,8 @@
-tap "homebrew/services"
-# Enable Windows-like alt-tab
-cask "alt-tab"
+# tap "homebrew/brew" # deprected homebrew/services
 # Client for the Dropbox cloud storage service
 cask "dropbox"
 # Web browser
-cask "firefox-developer-edition"
-# Clipboard manager for developers
-cask "flycut"
+cask "firefox@developer-edition"
 # Tools to protect your emails and files
 cask "gpg-suite"
 # Menu bar manager to hide menu bar item
@@ -21,6 +17,8 @@ cask "nordpass"
 cask "raycast"
 # Music streaming service
 cask "spotify"
+# Polyglot runtime manager (asdf rust clone)
+brew mise
 
 ### Ruby stack ================================================================
 # Cryptography and SSL/TLS Toolkit
@@ -33,5 +31,3 @@ cask "gmp"
 cask "rust"
 # Object-relational database system
 cask "postgresql"
-# User interface to the TELNET protocol
-cask "telnet"

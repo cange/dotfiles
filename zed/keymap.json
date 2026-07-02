@@ -21,7 +21,7 @@
       "g r n": "editor::Rename",
       ", a": "editor::SelectAll",
       ", m": "markdown::OpenFollowingPreview",
-      ", r": "buffer_search::Deploy"
+      ", r": "buffer_search::Deploy",
     },
   },
   {
@@ -131,7 +131,7 @@
   },
   {
     "bindings": {
-      "alt-cmd-i": "dev::OpenHighlightsTreeView"
-    }
-  },
+      "alt-cmd-i": "dev::OpenHighlightsTreeView",
+    },
+  }
 ]
