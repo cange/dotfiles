@@ -1,6 +1,6 @@
 [
   {
-    "context": "Editor && (vim_mode == normal || vim_mode == visual) && (!VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && (!FileFinder && !VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
     "bindings": {
       "space n": "editor::ToggleLineNumbers",
       "space f": "file_finder::Toggle",
@@ -14,7 +14,7 @@
     },
   },
   {
-    "context": "Editor && vim_mode != insert && (!VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
+    "context": "Editor && vim_mode != insert && (!FileFinder && !VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
     "bindings": {
       "g i": "editor::GoToImplementation",
       "g r a": "editor::ToggleCodeActions",
@@ -25,7 +25,7 @@
     },
   },
   {
-    "context": "Editor && vim_mode == visual && (!VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
+    "context": "Editor && vim_mode == visual && (!FileFinder && !VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
     "bindings": {
       ", S": "editor::SortLinesCaseInsensitive",
       "n": "editor::SelectNext",
@@ -37,7 +37,7 @@
     },
   },
   {
-    "context": "Editor && vim_mode == normal && (!VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
+    "context": "Editor && vim_mode == normal && (!FileFinder && !VimWaiting && !menu && !AgentPanel && !BufferSearchBar && !ProjectSearchBar)",
     "bindings": {
       "alt-down": "editor::MoveLineDown",
       "alt-up": "editor::MoveLineUp",
@@ -67,13 +67,6 @@
     },
   },
   {
-    "context": "Editor && !menu",
-    "bindings": {
-      ", w o": "workspace::CloseInactiveTabsAndPanes",
-      ", d": "workspace::NewTerminal",
-    },
-  },
-  {
     "context": "ProjectPanel",
     "bindings": {
       "cmd-r": "project_panel::Rename",
@@ -85,7 +78,7 @@
     },
   },
   {
-    "context": "(ProjectPanel || Editor) && (!AgentPanel && !BufferSearchBar)",
+    "context": "(ProjectPanel || Editor) && vim_mode != insert && !FileFinder",
     "bindings": {
       "space a a": "agent::Toggle",
       "space g b": "git::Switch",
@@ -133,5 +126,5 @@
     "bindings": {
       "alt-cmd-i": "dev::OpenHighlightsTreeView",
     },
-  }
+  },
 ]
