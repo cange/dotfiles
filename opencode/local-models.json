@@ -5,12 +5,14 @@
       "model": "lmstudio/google/gemma-4-12b-qat",
       "fallback_models": [
         {
+          "variant": "max",
           "model": "opencode/kimi-k2.5"
         }
       ]
     },
     "hephaestus": {
       "model": "lmstudio/google/gemma-4-12b-qat",
+      "variant": "medium",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4",
@@ -20,6 +22,7 @@
     },
     "oracle": {
       "model": "lmstudio/google/gemma-4-12b-qat",
+      "variant": "high",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4",
@@ -31,8 +34,32 @@
         }
       ]
     },
+    "librarian": {
+      "model": "lmstudio/google/gemma-4-e4b",
+      "variant": "high",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m3"
+        },
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    },
+    "quick-search": {
+      "model": "lmstudio/google/gemma-4-e4b",
+      "variant": "high",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m3"
+        },
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    },
     "explore": {
-      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "model": "lmstudio/google/gemma-4-e4b",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4-mini"
@@ -40,7 +67,8 @@
       ]
     },
     "multimodal-looker": {
-      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "model": "lmstudio/google/gemma-4-e4b",
+      "variant": "medium",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4-nano",
@@ -49,7 +77,8 @@
       ]
     },
     "prometheus": {
-      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "model": "lmstudio/google/gemma-4-12b-qat",
+      "variant": "max",
       "fallback_models": [
         {
           "model": "opencode/kimi-k2.5"
@@ -57,7 +86,7 @@
       ]
     },
     "metis": {
-      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "model": "lmstudio/google/gemma-4-e4b",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4",
@@ -66,7 +95,8 @@
       ]
     },
     "momus": {
-      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "model": "lmstudio/google/gemma-4-e4b",
+      "variant": "xhigh",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4",
@@ -78,7 +108,7 @@
       ]
     },
     "atlas": {
-      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "model": "lmstudio/google/gemma-4-e4b",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4",
@@ -87,7 +117,7 @@
       ]
     },
     "sisyphus-junior": {
-      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "model": "lmstudio/google/gemma-4-e4b",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4",
@@ -98,7 +128,8 @@
   },
   "categories": {
     "visual-engineering": {
-      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "model": "lmstudio/google/gemma-4-e4b",
+      "variant": "high",
       "fallback_models": [
         {
           "model": "opencode/gemini-3.1-pro",
@@ -108,6 +139,7 @@
     },
     "ultrabrain": {
       "model": "lmstudio/google/gemma-4-12b-qat",
+      "variant": "xhigh",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4",
@@ -117,6 +149,7 @@
     },
     "deep": {
       "model": "lmstudio/google/gemma-4-12b-qat",
+      "variant": "medium",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4",
@@ -125,7 +158,8 @@
       ]
     },
     "artistry": {
-      "model": "lmstudio/google/gemma-4-e4b-qat",
+      "model": "lmstudio/google/gemma-4-e4b",
+      "variant": "high",
       "fallback_models": [
         {
           "model": "opencode/gemini-3.1-pro",
@@ -134,7 +168,7 @@
       ]
     },
     "quick": {
-      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "model": "lmstudio/google/gemma-4-e2b",
       "fallback_models": [
         {
           "model": "opencode/gpt-5.4-mini"
@@ -142,7 +176,7 @@
       ]
     },
     "unspecified-low": {
-      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "model": "lmstudio/google/gemma-4-e2b",
       "fallback_models": [
         {
           "model": "opencode/claude-haiku-4-5"
@@ -161,7 +195,7 @@
       ]
     },
     "writing": {
-      "model": "lmstudio/google/gemma-4-e2b-qat",
+      "model": "lmstudio/google/gemma-4-e2b",
       "fallback_models": [
         {
           "model": "opencode/gemini-3-flash"

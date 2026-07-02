@@ -14,7 +14,13 @@
     },
     "context7": {
       "type": "local",
-      "command": ["docker", "run", "--interactive", "--rm", "context7-mcp"],
+      "command": [
+        "npx",
+        "-y",
+        "@upstash/context7-mcp",
+        "--api-key",
+        "$CONTEXT7_LICENSE_KEY"
+      ],
       "enabled": true
     },
     "fetch": {
@@ -59,24 +65,17 @@
       },
       "models": {
         "google/gemma-4-12b-qat": {
-          "name": "Gemma 4 12B QAT",
+          "name": "Gemma 4 12B",
           "limit": {
             "context": 98304,
             "output": 24576
           }
         },
-        "google/gemma-4-e4b-qat": {
-          "name": "Gemma 4 E4B QAT",
+        "google/gemma-4-e4b": {
+          "name": "Gemma 4 E4B",
           "limit": {
-            "context": 16384,
-            "output": 4096
-          }
-        },
-        "google/gemma-4-e2b-qat": {
-          "name": "Gemma 4 E2B QAT",
-          "limit": {
-            "context": 8192,
-            "output": 2048
+            "context": 16192,
+            "output": 8192
           }
         }
       }

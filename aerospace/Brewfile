@@ -1,7 +1,10 @@
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
 # JankyBorders is a lightweight window border system for macOS
-cask "FelixKratz/tap/borders"
-brew install borders
+cask "felixkratz/formulae"
+# trust "felixkratz/formulae"
+# brew borders
+# brew services start borders
 # Convert your caps lock key or any of your modifier keys to the hyper key
-brew install hyperkey
+cask hyperkey
+brew hyperkey

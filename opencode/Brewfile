@@ -1,2 +1,4 @@
 # AI coding agent, built for the terminal.
-brew install anomalyco/tap/opencode
+brew "anomalyco/tap/opencode"
+# Discover, download, and run local LLMs
+cask lm-studio

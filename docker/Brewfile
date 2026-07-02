@@ -1,6 +1,7 @@
 # A simple terminal UI for docker, written in Go
-brew "jesseduffield/lazydocker/lazydocker"
+# brew "jesseduffield/lazydocker/lazydocker"
+brew "lazydocker"
 # App to build and share containerized applications and microservices
-cask "docker"
+cask "docker-desktop"
 # Isolated development environments using Docker
 brew "docker-compose"

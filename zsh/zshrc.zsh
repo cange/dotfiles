@@ -83,12 +83,12 @@ fi
 # === Order #2 - Essential Plugins & Prompt
 
 # Simple plugin loading - much cleaner!
-_source_if_exists "$Z_CONFIG_DIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+_add_plugin "zsh-users/zsh-autosuggestions"
 
 # True lazy loading for syntax highlighting - load on first edit
 zsh-syntax-highlighting-lazy-load() {
   unset -f $0
-  source "$Z_CONFIG_DIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  _add_plugin "zsh-users/zsh-syntax-highlighting"
 }
 
 autoload -Uz add-zsh-hook
@@ -155,7 +155,7 @@ _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
   # Docker completion styles
   zstyle ":completion:*:*:docker:*" option-stacking yes
   zstyle ":completion:*:*:docker-*:*" option-stacking yes
-} &!
+} &|
 
 # =============================================================================
 # profiling results - needs to be at end of file
