@@ -101,7 +101,7 @@ local function update_highlights()
       NvimTreeWindowPicker = { fg = pal.fg0, bg = pal.sel1 },
 
       -- completion
-      CmpGhostText = { fg = pal.fg3, italic = true },
+      CmpGhostText = { fg = pal.bg0, bg = pal.bg4, italic = true },
       CmpItemAbbr = { fg = pal.fg2 },
       CmpItemAbbrMatch = { link = "TelescopeMatching" },
     })
