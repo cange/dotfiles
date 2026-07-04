@@ -55,31 +55,32 @@
       "enabled": false
     }
   },
-  "model": "lmstudio/google/gemma-4-12b-qat",
+  "model": "lmstudio/gemma-4-26b-a4b-qat",
   "provider": {
     "lmstudio": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "LM Studio",
+      "npm": "@ai-sdk/openai-compatible",
       "options": {
         "baseURL": "http://127.0.0.1:1234/v1"
       },
       "models": {
-        "google/gemma-4-12b-qat": {
-          "name": "Gemma 4 12B",
-          "limit": {
-            "context": 98304,
-            "output": 24576
-          }
+        "gemma-4-26b-a4b-qat": {
+          "name": "Gemma 4 26B A4B"
         },
-        "google/gemma-4-e4b": {
-          "name": "Gemma 4 E4B",
-          "limit": {
-            "context": 16192,
-            "output": 8192
-          }
+        "gemma-4-12b-qat": {
+          "name": "Gemma 4 12B"
+        },
+        "gemma-4-e4b": {
+          "name": "Gemma 4 E4B"
+        },
+        "gemma-4-e4b-it-qat": {
+          "name": "Gemma 4 E4B IT"
+        },
+        "qwen3.5-9b-deepseek-v4-flash": {
+          "name": "Qwen3.5 9B Flash"
         }
       }
     }
   },
-  "plugin": ["oh-my-openagent@latest"]
+  "plugin": []
 }
