@@ -84,7 +84,6 @@ function M.get_service_icons()
     jsonlint = grep_icon("json"),
     jsonls = grep_icon("json"),
     lua_ls = grep_icon("lua"),
-    emmylua_ls = "e" .. grep_icon("lua"),
     markdown_oxide = " ", -- nf-cod-markdown
     markdownlint = grep_icon("md"),
     markuplint = grep_icon("html"),
@@ -99,6 +98,7 @@ function M.get_service_icons()
     ts_ls = grep_icon("ts"),
     vtsls = "󰛦", -- nf-md-language_typescripts
     vue_ls = grep_icon("vue"),
+    yamlls = grep_icon("yaml"),
     -- ruby/rails
     erb_format = "", -- nf-cod-ruby
     standardrb = "", -- nf-oct-ruby

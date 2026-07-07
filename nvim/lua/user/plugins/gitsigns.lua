@@ -31,7 +31,7 @@ return {
       { "<Leader>gS", "<cmd>Gitsigns stage_buffer<CR>",                         desc = "Stage file" },
       { "<Leader>gi", "<cmd>Gitsigns blame_line<CR>",                           desc = "Commit info" },
       { "<Leader>gl", "<cmd>Gitsigns toggle_current_line_blame<CR>",            desc = "Line blame" },
-      { "<Leader>gp", "<cmd>Gitsigns preview_hunk_inline<CR>",                  desc = "Preview hunk" },
+      { "<Leader>gp", "<cmd>Gitsigns preview_hunk<CR>",                         desc = "Preview hunk" },
       { "<Leader>gr", "<cmd>Gitsigns reset_hunk<CR>",                           desc = "Reset hunk" },
       { "<Leader>gs", "<cmd>Gitsigns stage_hunk<CR>",                           desc = "Stage hunk" },
       { "<Leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>",                      desc = "Undo stage hunk" },

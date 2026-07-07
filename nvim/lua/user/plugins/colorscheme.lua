@@ -94,6 +94,7 @@ local function update_highlights()
       TelescopeSelectionCaret = { fg = pal.fg1, bg = pal.sel0 },
 
       -- NvimTree
+      NvimTreeNormal = { bg = pal.bg1 },
       NvimTreeFolderArrowClosed = { fg = pal.fg3 },
       NvimTreeFolderArrowOpen = { fg = pal.fg3 },
       NvimTreeGitRenamed = { fg = pal.magenta.base },

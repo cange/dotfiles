@@ -15,12 +15,12 @@ return {
       yaml = { "yamllint" },
       ruby = { "rubocop" },
       -- js
-      javascript = { "eslint" },
-      typescript = { "eslint" },
-      javascriptreact = { "eslint" },
-      typescriptreact = { "eslint" },
-      svelte = { "eslint" },
-      vue = { "eslint", "stylelint" },
+      javascript = { "eslint_d" },
+      typescript = { "eslint_d" },
+      javascriptreact = { "eslint_d" },
+      typescriptreact = { "eslint_d" },
+      svelte = { "eslint_d" },
+      vue = { "eslint_d", "stylelint" },
     },
     keys = {
       { "<Leader>l", "<cmd>lua R('lint').try_lint()<CR>", desc = "Trigger linting for current file" },

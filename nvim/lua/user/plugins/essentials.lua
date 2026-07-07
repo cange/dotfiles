@@ -207,6 +207,7 @@ return {
     lazy = false,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = "neovim-treesitter/nvim-treesitter",
+    ---@type specto.Config
     opts = {
       exclude = {
         filetypes = {

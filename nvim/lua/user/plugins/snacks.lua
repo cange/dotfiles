@@ -2,8 +2,8 @@ return {
   { -- A collection of small convenience plugins
     "folke/snacks.nvim",
     priority = 1000,
-    version = "v2.*",
     lazy = false,
+    ---@type snacks.Config
     opts = {
       bigfile = { enabled = true },
       dim = { animate = { enabled = false } },
@@ -29,7 +29,6 @@ return {
       return {
         { "<Leader>z", function() Snacks.zen.zoom() end, desc = "Toggle Zen" },
         { "<LocalLeader>z", function() Snacks.dim() end, desc = "Toggle Dimming" },
-        { "<Leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
         { "<Leader>dd", function() toggler.diagnostics():toggle() end, desc = "[diag] Toggle highlighting" },
         { "<Leader>en", function() Snacks.notifier.show_history() end, desc = "Show notfication" },
         { "<Leader>em", function() Snacks.notifier.hide() end, desc = "Muted notfication" },

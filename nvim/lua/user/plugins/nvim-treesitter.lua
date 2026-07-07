@@ -1,18 +1,21 @@
 local sources = {
   "bash",
   "cmake",
+  "comment",
   "css",
   "csv",
-  "comment",
   "diff",
   "dockerfile",
+  "ecma", -- JS/TS support
   "gitignore",
   "html",
+  "html_tags",
   "java",
   "javascript",
   "jsdoc",
   "json",
   "json5",
+  "jsx", -- JS support
   "kotlin",
   "lua",
   "luadoc",
@@ -29,6 +32,7 @@ local sources = {
   "scss",
   "svelte",
   "toml",
+  "tsv", -- CSV support
   "tsx",
   "typescript",
   "vimdoc",
@@ -44,7 +48,7 @@ return {
     dependencies = { "neovim-treesitter/treesitter-parser-registry" },
     lazy = false,
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "FileType", "BufEnter", "BufReadPost", "BufNewFile" },
     config = function()
       require("nvim-treesitter").install(sources)
       -- see https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#supported-features

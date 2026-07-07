@@ -19,7 +19,7 @@ autocmd({ "BufEnter", "BufNewFile", "BufRead" }, {
 autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
   group = group_id,
-  callback = function() vim.highlight.on_yank({ higroup = "Cursor" }) end,
+  callback = function() vim.hl.on_yank({ higroup = "Cursor" }) end,
 })
 
 autocmd("TermOpen", {

@@ -227,6 +227,7 @@ return {
 
   { -- snippets
     "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
     lazy = true,
     init = function() require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.fn.expand("~/.config/snippets") }) end,
   },

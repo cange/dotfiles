@@ -49,7 +49,9 @@ local keymaps = {
   { "<S-Tab>",          "<gv",                  { desc = "Indent: right" }, { "v" } },
 
   -- others
-  { "<Leader>bD",       "<cmd>%bdelete|e#<CR>", { desc = "Close other buffers" } },
+  { "<Leader>bD",       "<cmd>%bdelete|e#<CR>", { desc = "[buffer] Close others" } },
+  { "<Leader>ba",       "<cmd>%bdelete<CR>",    { desc = "[buffer] Close all" } },
+  { "<leader>bd",       "<cmd>bdelete<CR>",     { desc = "[buffer] Close current" } },
   { "<Leader>w",        "<cmd>w!<CR>",          { desc = "Save file" } },
   { "<LocalLeader>wo",  "<cmd>only<CR>",        { desc = "Close all windows except current" } },
   { "<LocalLeader>a",   "gg<S-v>G",             { desc = "Select all content" } },

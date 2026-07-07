@@ -9,6 +9,7 @@ return { -- File explorer
     "nvim-tree/nvim-web-devicons",
     "folke/snacks.nvim",
   },
+  ---@type nvim_tree.config
   opts = {
     live_filter = {
       prefix = Icon.ui.Search .. "  ",
@@ -18,7 +19,9 @@ return { -- File explorer
     respect_buf_cwd = true,
     update_focused_file = {
       enable = true,
-      update_root = true,
+      update_root = {
+        enable = true,
+      },
     },
     renderer = {
       indent_markers = { enable = true },
@@ -52,6 +55,9 @@ return { -- File explorer
         hint = Icon.diagnostics.Hint,
         info = Icon.diagnostics.Info,
       },
+    },
+    view = {
+      side = "right",
     },
   },
   config = function(_, opts)
