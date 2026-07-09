@@ -31,16 +31,11 @@ _source_if_exists "$HOME/.config/secrets/zsh"
 
 # --- Homebrew Setup (ARM/M1+ only)
 # Add Homebrew paths first (needed for macOS, no-op on Linux if paths don't exist)
-_add_to_path "/opt/homebrew/bin"
-_add_to_path "/opt/homebrew/sbin"
-
-# --- Local binaries (cursor-agent, etc.)
-_add_to_path "$HOME/.local/bin"
-
 # To make Homebrew's completions available
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 # Note: brew shellenv is slow (~100-300ms), so we manually set the essentials
 if [[ -d "/opt/homebrew" ]]; then
+  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
   export HOMEBREW_PREFIX="/opt/homebrew"
   export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
   export HOMEBREW_REPOSITORY="/opt/homebrew"
@@ -49,6 +44,9 @@ if [[ -d "/opt/homebrew" ]]; then
   export HOMEBREW_SHELLENV_PREFIX="/opt/homebrew"
 fi
 # Homebrew Setup ---
+
+# --- Local binaries (cursor-agent, etc.)
+_add_to_path "$HOME/.local/bin"
 
 # Function to check if zsh completion cache needs regeneration
 # Compares modification times using stat instead of slow find operation
