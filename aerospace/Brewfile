@@ -3,8 +3,5 @@ cask "nikitabobko/tap/aerospace"
 # JankyBorders is a lightweight window border system for macOS
 cask "felixkratz/formulae"
 # trust "felixkratz/formulae"
-# brew borders
+brew "borders"
 # brew services start borders
-# Convert your caps lock key or any of your modifier keys to the hyper key
-cask hyperkey
-brew hyperkey

@@ -1,4 +1,4 @@
 # AI coding agent, built for the terminal.
 brew "anomalyco/tap/opencode"
 # Discover, download, and run local LLMs
-cask lm-studio
+cask "lm-studio"

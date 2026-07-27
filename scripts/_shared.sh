@@ -1,11 +1,11 @@
 #!/bin/zsh
 
 # --- config ---
-cd "$(dirname "$0")/.."
-local dotfiles="$(pwd -P)/dotfiles"
-local script_name=$(basename "$0")
+# Resolve the root directory
+local dotfiles="$(cd "$(dirname "${(%):-%N}")/.." && pwd)"
 local errors=()
 local logs=()
+# Global state
 local is_verbose=0
 local is_uninstall=0
 declare -A tool_colors
@@ -18,12 +18,12 @@ function define_tool_color() {
   local name=$1
   if [[ -z ${tool_colors[$name]} ]]; then
     local colors=("blue" "cyan" "green" "yellow" "magenta" "red")
-    local color_index=$(((${#tool_colors[@]} % ${#colors[@]}) + 1))
+    local color_index=$((${#tool_colors[@]} % ${#colors[@]} + 1))
     tool_colors[$name]=${colors[$color_index]}
   fi
 }
 
-# realpath polyfil for macos M1+
+# realpath polyfill for macos M1+
 function realpath_polyfill() {
   local path="$1"
   local dir base
@@ -38,45 +38,50 @@ function realpath_polyfill() {
 # helpers ---
 
 # --- homebrew/brewfile ---
-#
 function execute_brewfile() {
-  local brewfile=$1
+  local brewfile="$1"
 
-  if [[ $is_uninstall == 1 ]]; then
+  if [[ $is_uninstall -eq 1 ]]; then
     _info "Uninstall packages of $(_chalk "cyan" "$brewfile")"
   else
     _info "Install packages for $(_chalk "cyan" "$brewfile")"
   fi
 
-  if [[ ! -f $brewfile ]]; then
+  if [[ ! -f "$brewfile" ]]; then
     _warn "Brewfile not found at the specified path: $brewfile"
     echo ""
     return 1
   fi
 
-  local opts=$([[ $is_verbose == 1 ]] && echo " --verbose" || echo " --quiet")
-  if [[ $is_uninstall == 1 ]]; then
-    cat "$brewfile" | while read line; do
-      if [[ $line =~ ^(brew|cask|tap)\ * ]]; then
+  local opts=()
+  if [[ $is_verbose -eq 1 ]]; then
+    opts=(--verbose)
+  else
+    opts=(--quiet)
+  fi
+
+  if [[ $is_uninstall -eq 1 ]]; then
+    while IFS= read line; do
+      if [[ "$line" =~ ^(brew|cask|tap)\ * ]]; then
         local package brew_cmd
         local cmd="uninstall"
 
-        if [[ $line == cask\ * ]]; then
-          opts+=" --cask"
-        elif [[ $line == tap\ * ]]; then
+        if [[ "$line" == cask\ * ]]; then
+          opts+=(--cask)
+        elif [[ "$line" == tap\ * ]]; then
           cmd="untap"
         fi
-        package=$(echo $line | cut -d ' ' -f 2 | cut -d "," -f 1)
-        brew_cmd="brew ${cmd}${opts} ${package}"
 
-        _log "$brew_cmd"
-        $(eval echo "$brew_cmd")
+        package=$(echo "$line" | cut -d ' ' -f 2 | cut -d "," -f 1)
+
+        _log "Executing: brew ${cmd} ${opts[*]} ${package}"
+        brew "${cmd}" "${opts[@]}" "${package}"
       fi
-    done
+    done <"$brewfile" # <-- Direct file read to prevent subshell issues
   else
-    local brew_cmd="brew bundle${opts} --file=$brewfile"
+    local brew_cmd="brew bundle ${opts[@]} --file=$brewfile"
     _log "$brew_cmd"
-    $(eval echo "$brew_cmd")
+    brew bundle ${opts[@]} --file="$brewfile"
   fi
   echo ""
 }
@@ -88,22 +93,21 @@ function find_brewfiles() {
   fi
 
   find -H "$dotfiles" -maxdepth 2 -name 'Brewfile' | while read brewfile; do
-    execute_brewfile $brewfile
+    execute_brewfile "$brewfile"
   done
 }
 
 # --- Symlinks ---
-#
 function execute_symlink() {
-  local src=$1
-  local dest=$2
-  local tool_name=$3
-  local dest_dir=$(dirname $dest)
+  local src="$1"
+  local dest="$2"
+  local tool_name="$3"
+  local dest_dir=$(dirname "$dest")
   define_tool_color "$tool_name"
   local color=${tool_colors[$tool_name]}
 
-  if [[ $is_uninstall == 1 ]]; then
-    if [[ -e $dest ]]; then
+  if [[ $is_uninstall -eq 1 ]]; then
+    if [[ -e "$dest" ]]; then
       command rm "$dest"
       logs+=("remove $(_chalk "$color" "$tool_name") symlink $(_chalk "cyan" "$dest") ✂︎-> ")
     else
@@ -130,19 +134,20 @@ function find_symlinks() {
 }
 
 function log_summary() {
-  _info "A total of $(_chalk "bold" "${#logs[@]}") symlinks have been updated:"
-  for msg in "${logs[@]}"; do
-    _log $msg
-  done
-  echo ""
-  _success "Successfully completed."
+  _info "A total of $(_chalk "bold" "${#logs[@]}") symlinks have been updated."
+  if [[ $is_verbose -eq 1 ]]; then
+    for msg in "${logs[@]}"; do
+      _log "$msg"
+    done
+  fi
   logs=() # reset
+  _success "Successfully completed."
 }
 
 function error_summary() {
   _info "Errors occurred during installation:"
   for msg in "${errors[@]}"; do
-    _log $msg
+    _log "$msg"
   done
   echo ""
   _error "Completed with $(_chalk "bold" "${#errors[@]}") errors!" >&2
@@ -167,17 +172,17 @@ function perform_install() {
 
   while (($# > 0)); do
     case "$1" in
-    --brew)
+    brew)
       brew_selected=1
       all_selected=0
       shift
       ;;
-    --link)
+    link)
       link_selected=1
       all_selected=0
       shift
       ;;
-    --verbose)
+    --verbose|-v)
       is_verbose=1
       shift
       ;;
@@ -190,44 +195,26 @@ function perform_install() {
       ;;
     esac
   done
-  [[ $brew_selected == 1 ]] || [[ $all_selected == 1 ]] && find_brewfiles
-  [[ $link_selected == 1 ]] || [[ $all_selected == 1 ]] && find_symlinks
+
+  [[ $brew_selected -eq 1 ]] || [[ $all_selected -eq 1 ]] && find_brewfiles
+  [[ $link_selected -eq 1 ]] || [[ $all_selected -eq 1 ]] && find_symlinks
   summary_report
 }
 
-# --- interface ---
-#
-function help {
-  echo "$(_chalk "bold" "Usage:") $script_name <command> [options]
-Handles the setup of the dotfile configuration.
-
-$(_chalk "bold" "Commands:")
-\tinstall   \tInstalls package dependencies via Homebrew
-\tuninstall \tUninstalls package dependencies via Homebrew
-
-$(_chalk "bold" "Options:")
-\t--brew    \tRuns Homebrew un-/install processes
-\t--link    \tRuns file symlinking processes
-\t--verbose \tMake some output more verbose
-\t--help    \tPrint help
-"
-}
-# Main script logic
-case "$1" in
-install)
-  shift
-  is_uninstall=0
-  perform_install "$@"
-  ;;
-uninstall)
-  shift
-  is_uninstall=1
-  perform_install "$@"
-  ;;
-*)
-  info "Unknown command: $(_chalk "yellow" $1)"
+function help() {
+  echo "$(_chalk "bold" "Usage:") <command> [options]"
+  echo "Handles the setup of the dotfile configuration."
   echo ""
-  help
-  exit 1
-  ;;
-esac
+  echo "$(_chalk "bold" "Commands:")"
+  if [[ $is_uninstall -eq 1 ]]; then
+    echo "  brew            Uninstall packages via Homebrew"
+    echo "  link            Remove file symlinks"
+  else
+    echo "  brew            Install package dependencies via Homebrew"
+    echo "  link            Create file symlinks"
+  fi
+  echo ""
+  echo "$(_chalk "bold" "Options:")"
+  echo "  -v, --verbose   Enable verbose output"
+  echo "  -h, --help      Print help"
+}
