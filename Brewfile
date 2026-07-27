@@ -18,7 +18,7 @@ cask "raycast"
 # Music streaming service
 cask "spotify"
 # Polyglot runtime manager (asdf rust clone)
-brew mise
+brew "mise"
 
 ### Ruby stack ================================================================
 # Cryptography and SSL/TLS Toolkit
