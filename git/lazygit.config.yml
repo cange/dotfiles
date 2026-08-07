@@ -12,7 +12,7 @@ gui:
 os:
   editPreset: "nvim-remote"
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never --syntax-theme base16 --line-numbers
+      command: delta --paging=never --syntax-theme base16 --line-numbers
   overrideGpg: true
