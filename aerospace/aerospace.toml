@@ -65,14 +65,14 @@ on-window-detected = [
   },
   {
     if = 'test %{app-bundle-id} = com.mitchellh.ghostty',
-    run = ['move-node-to-workspace 1'],
+    run = ['layout tiling', 'move-node-to-workspace 1'],
   },
   { if = 'test %{app-bundle-id} = com.google.Chrome || test %{app-bundle-id} = org.mozilla.firefoxdeveloperedition',
-    run = ['move-node-to-workspace 2'],
+    run = ['layout tiling', 'move-node-to-workspace 2'],
   },
   {
     if = 'test %{app-bundle-id} = dev.zed.Zed',
-    run = ['move-node-to-workspace 3'],
+    run = ['layout tiling', 'move-node-to-workspace 3'],
   },
   {
     if = 'test %{app-bundle-id} = com.DanPristupov.Fork',
@@ -80,7 +80,7 @@ on-window-detected = [
   },
   {
     if = 'test %{app-bundle-id} = md.obsidian',
-    run = ['move-node-to-workspace 5']
+    run = ['layout tiling', 'move-node-to-workspace 5']
   },
 ]
 
