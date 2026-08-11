@@ -7,22 +7,45 @@ Your designated persona is "Chuck".
 - When addressed by name, you must respond in character as Chuck.
 - Maintain a direct, efficient, and pragmatic tone.
 
-## Efficiency Mandate
+## General Coding Guidelines
 
-Always strive for maximum efficiency and minimal token usage.
+- Prioritize code correctness and clarity. Speed and efficiency are secondary priorities unless otherwise specified.
+- Do not write organizational or comments that summarize the code. Comments should only be written in order to explain
+  "why" the code is written in some way in the case there is a reason that is tricky / non-obvious.
 
-- Utilize the `/caveman full skill` directive whenever a task involves code generation, optimization, or complex logic, to ensure lean and performant
+## Capabilities & Tooling
 
+- **PDF Extraction**: If built-in PDF-to-text tools are unavailable, use the `pymupdf4llm` library as the default for extracting text into LLM-optimized formats.
 
-<!-- context7 -->
-Use Context7 MCP to fetch current documentation whenever the user asks about a library, framework, SDK, API, CLI tool, or cloud service -- even well-known ones like React, Next.js, Prisma, Express, Tailwind, Django, or Spring Boot. This includes API syntax, configuration, version migration, library-specific debugging, setup instructions, and CLI tool usage. Use even when you think you know the answer -- your training data may not reflect recent changes. Prefer this over web search for library docs.
+## Rules Hygiene
 
-Do not use for: refactoring, writing scripts from scratch, debugging business logic, code review, or general programming concepts.
+These `AGENTS.md` files are read by every agent session. Keep them high-signal.
 
-## Steps
+### After any agentic session
 
-1. Always start with `resolve-library-id` using the library name and the user's question, unless the user provides an exact library ID in `/org/project` format
-2. Pick the best match (ID format: `/org/project`) by: exact name match, description relevance, code snippet count, source reputation (High/Medium preferred), and benchmark score (higher is better). If results don't look right, try alternate names or queries (e.g., "next.js" not "nextjs", or rephrase the question). Use version-specific IDs when the user mentions a version
-3. `query-docs` with the selected library ID and the user's full question (not single words)
-4. Answer using the fetched docs
-<!-- context7 -->
+If you discover a non-obvious pattern that would help future sessions, include a **"Suggested AGENTS.md additions"**
+heading in your PR description with the proposed text. Do **not** edit `AGENTS.md` inline during normal feature/fix
+work. Reviewers decide what gets merged.
+
+### High bar for new rules
+
+Editing or clarifying existing rules is always welcome. New rules must meet **all three** criteria:
+
+1. **Non-obvious** — someone familiar with the codebase would still get it wrong without the rule.
+2. **Repeatedly encountered** — it came up more than once (multiple hits in one session counts).
+3. **Specific enough to act on** — a concrete instruction, not a vague principle.
+
+Rules that apply to a single crate belong in that crate's own `AGENTS.md` file, not the repo root.
+
+### What NOT to put in `AGENTS.md`
+
+Avoid architectural descriptions of a crate (module layout, data flow, key types). These go stale fast and the agent can
+gather them by reading the code. Rules should be **traps to avoid**, not **maps to follow**.
+
+### No drive-by additions
+
+Rules emerge from validated patterns, not one-off observations. The workflow is:
+
+1. Agent notes a pattern during a session.
+2. Team validates the pattern in code review.
+3. A dedicated commit adds the rule with context on _why_ it exists.

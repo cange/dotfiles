@@ -14,7 +14,7 @@ tools:
   task: false
   webfetch: true
 mcp:
-  - fetch
+  - exa
   - context7
   - grep_app
 ---
