@@ -4,7 +4,7 @@
     "bindings": {
       "space n": "editor::ToggleLineNumbers",
       "space f": "file_finder::Toggle",
-      "space \\": "project_panel::ToggleFocus",
+      "space \\": "project_panel::Toggle",
       "space w": "workspace::Save",
       "space s s": "outline::Toggle",
       "] g": "editor::GoToHunk",
@@ -75,6 +75,7 @@
       "cmd-p": "project_panel::Paste",
       "cmd-d": "project_panel::Delete",
       "cmd-x": "project_panel::Cut",
+      "space \\": "project_panel::Toggle",
     },
   },
   {
@@ -88,6 +89,7 @@
       "space g S": "git::StageFile",
       "space g s": "git::ToggleStaged",
       "space p": "projects::OpenRecent",
+      "shift-i": "project_panel::ToggleHideHidden"
     },
   },
   {
@@ -109,12 +111,6 @@
     },
   },
   {
-    "context": "ProjectPanel",
-    "bindings": {
-      "space \\": "project_panel::Toggle",
-    },
-  },
-  {
     "context": "Terminal",
     "bindings": {
       "cmd-d": "workspace::NewTerminal",
@@ -126,5 +122,5 @@
     "bindings": {
       "alt-cmd-i": "dev::OpenHighlightsTreeView",
     },
-  },
+  }
 ]

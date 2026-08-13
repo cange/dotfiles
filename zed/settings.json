@@ -62,14 +62,14 @@
       "auto_indent": "syntax_aware",
     },
   },
-  "theme": "Terafox - blurred (dev)",
+  "theme": "Terafox - blurred",
   "icon_theme": "Material Icon Theme",
 
   // Agents
   "agent": {
     "dock": "left",
     "enable_feedback": true,
-    "default_profile": "ask",
+    "default_profile": "write",
     "inline_assistant_model": {
       "provider": "lmstudio",
       "model": "gemma-4-e4b",
