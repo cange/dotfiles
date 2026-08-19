@@ -34,15 +34,32 @@ _source_if_exists "$HOME/.config/secrets/zsh"
 # To make Homebrew's completions available
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 # Note: brew shellenv is slow (~100-300ms), so we manually set the essentials
-if [[ -d "/opt/homebrew" ]]; then
-  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-  export HOMEBREW_PREFIX="/opt/homebrew"
-  export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
-  export HOMEBREW_REPOSITORY="/opt/homebrew"
-  fpath+=("/opt/homebrew/share/zsh/site-functions")
-  # HOMEBREW_SHELLENV_PREFIX is set for compatibility
-  export HOMEBREW_SHELLENV_PREFIX="/opt/homebrew"
-fi
+_setup_homebrew() {
+  local homebrew_root=0
+
+  if [[ $(uname -s) == 'Darwin' ]]; then
+    homebrew_root='/opt/homebrew'
+  elif [[ $(uname -s) == 'Linux' ]]; then
+    homebrew_root='/home/linuxbrew/.linuxbrew'
+  fi
+
+  if [[ -d $homebrew_root ]]; then
+    # --- Homebrew Setup (ARM/M1+ only)
+    # Add Homebrew paths first (needed for macOS, no-op on Linux if paths don't exist)
+
+    export PATH="$homebrew_root/bin:$homebrew_root:$PATH"
+    export HOMEBREW_PREFIX="$homebrew_root"
+    export HOMEBREW_CELLAR="$homebrew_root/Cellar"
+    export HOMEBREW_REPOSITORY="$homebrew_root"
+    # HOMEBREW_SHELLENV_PREFIX is set for compatibility
+    export HOMEBREW_SHELLENV_PREFIX="$homebrew_root"
+
+    fpath+=("$homebrew_root/share/zsh/site-functions")
+
+    eval "$($homebrew_root/bin/brew shellenv)"
+  fi
+}
+_setup_homebrew
 # Homebrew Setup ---
 
 # --- Local binaries (cursor-agent, etc.)
@@ -158,3 +175,6 @@ _source_if_exists "$Z_CONFIG_DIR/secondary.zsh"
 # =============================================================================
 # profiling results - needs to be at end of file
 # zprof
+
+# Added by Antigravity
+export PATH="/Users/Angermann/.antigravity/antigravity/bin:$PATH"
