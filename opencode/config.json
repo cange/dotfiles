@@ -48,15 +48,6 @@
         "ghcr.io/github/github-mcp-server"
       ],
       "enabled": false
-    },
-    "grep_app": {
-      "type": "local",
-      "command": [
-        "/Users/cange/workspace/mcps/grep_app_mcp/run.sh",
-        "stdio",
-        "prod"
-      ],
-      "enabled": true
     }
   },
   "model": "lmstudio/gemma-4-26b-a4b-qat",
