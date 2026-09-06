@@ -6,7 +6,6 @@ vim.filetype.add({
     mdx = "jsx", -- MDX files
   },
   filename = {
-    [".visabletemplaterc"] = "yaml",
     ["gitconfig"] = "gitconfig",
     [".gitcredentials"] = "gitconfig",
   },

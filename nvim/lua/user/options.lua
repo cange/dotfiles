@@ -41,7 +41,8 @@ local options = {
   -- indentation
   autoindent = false, -- auto indent on copy paste
   breakindent = true, -- indentation when wrapping text
-  colorcolumn = { "80", "120" }, -- highlight optimal end line¬
+  colorcolumn = "+0", -- highlight optimal end line¬
+  textwidth = 120, -- linebreak text after whitespace
   formatoptions = "cjnqort", -- line wrap logic
   smartindent = true, -- make indenting smarter again
   swapfile = false, -- creates a swapfile
