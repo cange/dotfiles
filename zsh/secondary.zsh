@@ -62,7 +62,7 @@ if type fzf &>/dev/null; then
     fi
   fi
 
-  local fzf_share="/usr/share/fzf" # Linux
+  local fzf_share="/usr/share/doc/fzf/examples" # Linux
   if [[ $(uname -s) == 'Darwin' ]]; then
     # Use hardcoded path to avoid slow brew --prefix call
     fzf_share="/opt/homebrew/opt/fzf/shell" # MacOS

@@ -6,7 +6,6 @@ alias E="sudo -e"
 alias gui='fork .'
 alias lg='lazygit'
 alias ld='lazydocker'
-alias oc='opencode'
 # Programms ---
 
 #--- opencode switchers

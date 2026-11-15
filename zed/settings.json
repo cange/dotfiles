@@ -62,7 +62,7 @@
       "auto_indent": "syntax_aware",
     },
   },
-  "theme": "Terafox - blurred",
+  "theme": "Terafox - opaque",
   "icon_theme": "Material Icon Theme",
 
   // Agents
